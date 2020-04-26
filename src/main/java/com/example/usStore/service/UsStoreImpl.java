@@ -85,7 +85,7 @@ public class UsStoreImpl implements UsStoreFacade {
 		return categoryDao.getCategoryList();
 	}
 
-	public Category getCategory(String categoryId) {
+	public Category getCategory(int categoryId) {
 		return categoryDao.getCategory(categoryId);
 	}
 
@@ -97,24 +97,23 @@ public class UsStoreImpl implements UsStoreFacade {
 		return productDao.searchProductList(keywords);
 	}
 
-	public Product getProduct(String productId) {
-		return productDao.getProduct(productId);
-	}
-
-	public List<Item> getItemListByProduct(String productId) {
-		return itemDao.getItemListByProduct(productId);
-	}
-
-	public Item getItem(String itemId) {
+	/*
+	 * public Product getProduct(int productId) { return
+	 * productDao.getProduct(productId); }
+	 * 
+	 * public List<Item> getItemListByProduct(int productId) { return
+	 * itemDao.getItemListByProduct(productId); }
+	 */
+	public Item getItem(int itemId) {
 		return itemDao.getItem(itemId);
 	}
 
-	public boolean isItemInStock(String itemId) {
+	public boolean isItemInStock(int itemId) {
 		return itemDao.isItemInStock(itemId);
 	}
 
 	public void insertOrder(Order order) {
-		itemDao.updateQuantity(order);	    
+		//itemDao.updateQuantity(order);	    
 		orderDao.insertOrder(order);
 	}
 	
@@ -124,5 +123,35 @@ public class UsStoreImpl implements UsStoreFacade {
 
 	public List<Order> getOrdersByUsername(String username) {
 		return orderDao.getOrdersByUsername(username);
+	}
+
+	@Override
+	public Category getCategory(String categoryId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Product getProduct(String productId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Item> getItemListByProduct(String productId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Item getItem(String itemId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean isItemInStock(String itemId) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }
