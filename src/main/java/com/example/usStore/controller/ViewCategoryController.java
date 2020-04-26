@@ -21,11 +21,11 @@ import com.example.usStore.service.UsStoreFacade;
 @Controller
 @SessionAttributes({"category", "productList"})
 public class ViewCategoryController { 
-	private UsStoreFacade petStore;
+	private UsStoreFacade usStore;
 
 	@Autowired
-	public void setPetStore(UsStoreFacade petStore) {
-		this.petStore = petStore;
+	public void setusStore(UsStoreFacade usStore) {
+		this.usStore = usStore;
 	}
 	
 	@RequestMapping("/shop/viewCategory.do")
@@ -33,8 +33,8 @@ public class ViewCategoryController {
 			@RequestParam("categoryId") String categoryId,
 			ModelMap model
 			) throws Exception {
-		Category category = this.petStore.getCategory(categoryId);
-		PagedListHolder<Product> productList = new PagedListHolder<Product>(this.petStore.getProductListByCategory(categoryId));
+		Category category = this.usStore.getCategory(categoryId);
+		PagedListHolder<Product> productList = new PagedListHolder<Product>(this.usStore.getProductListByCategory(categoryId));
 		productList.setPageSize(4);
 		model.put("category", category);
 		model.put("productList", productList);
