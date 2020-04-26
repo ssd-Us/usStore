@@ -7,8 +7,8 @@ public class Item implements Serializable {
   /* Private Fields */
   private int itemId;			 //(PK) String- > int
   private String supplierId;	 //(FK)
-  private String listPrice; 	 //정가(원래)
-  private String unitCost; 		 //단가(세일)
+  private int listPrice; 	 //정가(원래)
+  private int unitCost; 		 //단가(세일)
   private String title; 		 //제목
   private String description; 	 //내용
   private int viewCount; 		 //조회수
@@ -20,11 +20,11 @@ public class Item implements Serializable {
   public String getSupplierId() { return supplierId; }
   public void setSupplierId(String supplierId) { this.supplierId = supplierId; }
 
-  public String getListPrice() { return listPrice; }
-  public void setListPrice(String listPrice) { this.listPrice = listPrice; }
+  public int getListPrice() { return listPrice; }
+  public void setListPrice(int listPrice) { this.listPrice = listPrice; }
 
-  public String getUnitCost() { return unitCost; }
-  public void setUnitCost(String unitCost) { this.unitCost = unitCost; }
+  public int getUnitCost() { return unitCost; }
+  public void setUnitCost(int unitCost) { this.unitCost = unitCost; }
 
   public String getTitle() { return title; }
   public void setTitle(String title) { this.title = title; }
