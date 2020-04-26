@@ -45,7 +45,7 @@ import com.example.usStore.domain.*;
  */
 @Service
 @Transactional
-public class PetStoreImpl implements PetStoreFacade { 
+public class UsStoreImpl implements UsStoreFacade { 
 	@Autowired
 	private AccountDao accountDao;
 	@Autowired

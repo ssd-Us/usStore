@@ -10,7 +10,7 @@ import com.example.usStore.domain.*;
  * @author Juergen Hoeller
  * @since 30.11.2003
  */
-public interface PetStoreFacade {
+public interface UsStoreFacade {
 
 	Account getAccount(String username);
 
