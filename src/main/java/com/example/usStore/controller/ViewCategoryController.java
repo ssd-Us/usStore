@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import com.example.usStore.domain.Category;
 import com.example.usStore.domain.Product;
-import com.example.usStore.service.PetStoreFacade;
+import com.example.usStore.service.UsStoreFacade;
 
 /**
  * @author Juergen Hoeller
@@ -21,10 +21,10 @@ import com.example.usStore.service.PetStoreFacade;
 @Controller
 @SessionAttributes({"category", "productList"})
 public class ViewCategoryController { 
-	private PetStoreFacade petStore;
+	private UsStoreFacade petStore;
 
 	@Autowired
-	public void setPetStore(PetStoreFacade petStore) {
+	public void setPetStore(UsStoreFacade petStore) {
 		this.petStore = petStore;
 	}
 	
