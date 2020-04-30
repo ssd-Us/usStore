@@ -17,8 +17,8 @@
               </tr>
               <tr>
                 <td>
-                  <a href="<c:url value="/shop/viewCategory.do?categoryId=FISH"/>">
-                     <img border="0" src="../images/fish_icon.gif" /></a>
+                  <a href="<c:url value="/shop/viewCategory.do?categoryId=item"/>">
+                     <p>item (handmade)</p>
                 </td>
               </tr>
 <!--               <tr> -->
