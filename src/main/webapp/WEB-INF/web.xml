@@ -4,5 +4,41 @@
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee 
 						http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" 
 	id="WebApp_ID" version="4.0">
+	
   <display-name>Archetype Created Web Application</display-name>
+    <display-name>UsStore</display-name>
+  <description> 2020-01 Sofeware System Development (01-04) UsStore </description>
+
+  <context-param>
+    <param-name>webAppRootKey</param-name>
+    <param-value>usStore.root</param-value>
+  </context-param>
+  <context-param>
+    <param-name>log4jConfigLocation</param-name>
+    <param-value>classpath:log4j.properties</param-value>
+  </context-param>
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>
+       	classpath:applicationContext.xml
+      	classpath:dataAccessContext-mybatis.xml 
+	</param-value>
+  </context-param>
+  
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+  
+  <servlet>
+    <servlet-name>usStore</servlet-name>
+    <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>usStore</servlet-name>
+    <url-pattern>*.do</url-pattern>
+  </servlet-mapping>  
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+  </welcome-file-list>
 </web-app>
