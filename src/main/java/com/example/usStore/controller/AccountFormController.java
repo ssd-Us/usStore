@@ -52,7 +52,7 @@ public class AccountFormController {
 			(UserSession) WebUtils.getSessionAttribute(request, "userSession");
 		if (userSession != null) {	// edit an existing account
 			return new AccountForm(
-				usStore.getAccount(userSession.getAccount().getUsername()));
+				usStore.getAccount(userSession.getAccount().getName()));
 		}
 		else {	// create a new account
 			return new AccountForm();
@@ -82,11 +82,7 @@ public class AccountFormController {
 
 		if (request.getParameter("account.listOption") == null) {
 			accountForm.getAccount().setListOption(false);
-		}
-		if (request.getParameter("account.bannerOption") == null) {
-			accountForm.getAccount().setBannerOption(false);
-		}
-		
+		}	
 		validator.validate(accountForm, result);
 		
 		if (result.hasErrors()) return formViewName;
@@ -105,11 +101,7 @@ public class AccountFormController {
 		}
 		
 		UserSession userSession = new UserSession(
-			usStore.getAccount(accountForm.getAccount().getUsername()));
-		PagedListHolder<Product> myList = new PagedListHolder<Product>(
-			usStore.getProductListByCategory(accountForm.getAccount().getFavouriteCategoryId()));
-		myList.setPageSize(4);
-		userSession.setMyList(myList);
+			usStore.getAccount(accountForm.getAccount().getName()));
 		session.setAttribute("userSession", userSession);
 		return successViewName;  
 	}

@@ -4,14 +4,14 @@ import java.util.List;
 
 import org.springframework.dao.DataAccessException;
 
-import com.example.usStore.domain.Order;
+import com.example.usStore.domain.Orders;
 
 public interface OrderDao {
 
-  List<Order> getOrdersByUsername(String username) throws DataAccessException;
+  List<Orders> getOrdersByUsername(String username) throws DataAccessException;
 
-  Order getOrder(int orderId) throws DataAccessException;
+  Orders getOrder(int orderId) throws DataAccessException;
 
-  void insertOrder(Order order) throws DataAccessException;
+  void insertOrder(Orders order) throws DataAccessException;
 
 }

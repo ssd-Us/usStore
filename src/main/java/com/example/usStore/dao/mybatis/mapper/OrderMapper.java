@@ -18,20 +18,20 @@ package com.example.usStore.dao.mybatis.mapper;
 
 import java.util.List;
 
-import com.example.usStore.domain.Order;
+import com.example.usStore.domain.Orders;
 
 /**
  * @author Eduardo Macarron
  */
 public interface OrderMapper {
 
-  List<Order> getOrdersByUsername(String username);
+  List<Orders> getOrdersByUsername(String username);
 
-  Order getOrder(int orderId);
+  Orders getOrder(int orderId);
   
-  void insertOrder(Order order);
+  void insertOrder(Orders order);
   
-  void insertOrderStatus(Order order);
+  void insertOrderStatus(Orders order);
 
-  int msSqlServerInsertOrder(Order order);
+  int msSqlServerInsertOrder(Orders order);
 }

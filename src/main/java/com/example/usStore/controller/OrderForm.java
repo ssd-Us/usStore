@@ -2,7 +2,7 @@ package com.example.usStore.controller;
 
 import java.io.Serializable;
 
-import com.example.usStore.domain.Order;
+import com.example.usStore.domain.Orders;
 
 /**
  * @author Juergen Hoeller
@@ -11,11 +11,11 @@ import com.example.usStore.domain.Order;
 @SuppressWarnings("serial")
 public class OrderForm implements Serializable {
 
-	private final Order order = new Order();
+	private final Orders order = new Orders();
 	private boolean shippingAddressRequired = false;
 	private boolean shippingAddressProvided = false;
 
-	public Order getOrder() {
+	public Orders getOrder() {
 		return order;
 	}
 

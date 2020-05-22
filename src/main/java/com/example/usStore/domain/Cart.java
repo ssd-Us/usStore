@@ -74,7 +74,7 @@ public class Cart implements Serializable {
     while (items.hasNext()) {
       CartItem cartItem = (CartItem) items.next();
       Item item = cartItem.getItem();
-      int listPrice = item.getListPrice();
+      int listPrice = item.getUnitCost();
       int quantity = cartItem.getQuantity();
       subTotal += listPrice * quantity;
     }

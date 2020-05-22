@@ -2,7 +2,7 @@ package com.example.usStore.service;
 
 import java.util.List;
 
-import com.example.usStore.domain.Order;
+import com.example.usStore.domain.Orders;
 
 /**
  * Separate OrderService interface, implemented by OrderServiceImpl. * 
@@ -19,7 +19,7 @@ import com.example.usStore.domain.Order;
 //@WebService(name = "OrderService") 
 public interface OrderService {
 
-	Order getOrder(int orderId);
-	public List<Order> getOrdersByUsername(String username);
+	Orders getOrder(int orderId);
+	public List<Orders> getOrdersByUsername(String username);
 
 }

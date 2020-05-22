@@ -15,6 +15,8 @@ public interface UsStoreFacade {
 	Account getAccount(String username);
 
 	Account getAccount(String username, String password);
+	
+	String getStatus(String userId);
 
 	void insertAccount(Account account);
 
@@ -42,10 +44,10 @@ public interface UsStoreFacade {
 	boolean isItemInStock(String itemId);
 
 
-	void insertOrder(Order order);
+	void insertOrder(Orders order);
 
-	Order getOrder(int orderId);
+	Orders getOrder(int orderId);
 
-	List<Order> getOrdersByUsername(String username);
+	List<Orders> getOrdersByUsername(String username);
 
 }

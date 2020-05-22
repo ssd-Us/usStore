@@ -10,7 +10,8 @@ public class CartItem implements Serializable {
   private Item item;
   private int quantity;
   private boolean inStock;
-
+  private int orderId;
+  
   /* JavaBeans Properties */
 
   public boolean isInStock() { return inStock; }
@@ -26,14 +27,22 @@ public class CartItem implements Serializable {
     this.quantity = quantity;
   }
 
-	public double getTotalPrice() {
+  public int getOrderId() {
+	return orderId;
+  }
+	
+  public void setOrderId(int orderId) {
+	this.orderId = orderId;
+  }
+	
+  public double getTotalPrice() {
 		if (item != null) {
-			return item.getListPrice() * quantity;
+			return item.getUnitCost() * quantity;
 		}
 		else {
 			return 0;
 		}
-	}
+  }
 
   /* Public methods */
 

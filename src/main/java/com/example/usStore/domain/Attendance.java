@@ -7,8 +7,9 @@ import java.util.Date;
  * */
 public class Attendance {
 	
-	private Date attendance_date;	// 출석체크한 날짜
 	private String user_id; 		// 출석체크한 사용자 ID
+	private int catId;				//(FK) 카테고리 아이디 
+	private Date attendance_date;	// 출석체크한 날짜
 	
 	// 기본 생성자
 	public Attendance() {
@@ -28,4 +29,13 @@ public class Attendance {
 	public void setUser_id(String user_id) {
 		this.user_id = user_id;
 	}
+
+	public int getCatId() {
+		return catId;
+	}
+
+	public void setCatId(int catId) {
+		this.catId = catId;
+	}
+	
 }

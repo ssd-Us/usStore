@@ -5,10 +5,11 @@ import java.util.List;
 import org.springframework.dao.DataAccessException;
 
 import com.example.usStore.domain.Auction;
-import com.example.usStore.domain.Item;
 
 public interface AuctionDao {
 	List<Auction> getAuctionList() throws DataAccessException;
+	
+	Auction getAuctionItem(int itemId) throws DataAccessException;
 	
 	public void insertAuction(Auction auction) throws DataAccessException;
 	  

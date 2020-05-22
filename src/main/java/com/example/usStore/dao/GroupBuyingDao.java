@@ -1,10 +1,16 @@
 package com.example.usStore.dao;
 
+import java.util.List;
+
 import org.springframework.dao.DataAccessException;
 
 import com.example.usStore.domain.GroupBuying;
 
 public interface GroupBuyingDao {
+	
+	List<GroupBuying> getGroupBuyingList() throws DataAccessException;
+	
+	GroupBuying getGroupBuyingItem(int itemId) throws DataAccessException;
 	
 	public void insertGroupBuying(GroupBuying GroupBuying) throws DataAccessException;
 	  

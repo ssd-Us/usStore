@@ -9,7 +9,7 @@ public class Quiz {
 	private String question;	// 퀴즈 질문
 	private String answer;		// 퀴즈 답
 	private String hint;		// 퀴즈에 대한 힌트
-	
+	private int catId; 		//(FK) 카테고리 아이디
 	// 기본 생성자
 	public Quiz() {
 		
@@ -40,4 +40,13 @@ public class Quiz {
 	public void setHint(String hint) {
 		this.hint = hint;
 	}
+
+	public int getCatId() {
+		return catId;
+	}
+
+	public void setCatId(int catId) {
+		this.catId = catId;
+	}
+	
 }

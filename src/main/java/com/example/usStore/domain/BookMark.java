@@ -4,9 +4,9 @@ package com.example.usStore.domain;
  * Mypage Function - BookMark
  * */
 public class BookMark {
-
-	private String user_id;		// BookMark를 설정한 유저의 Id
+	
 	private String item_id;		// 유저가 BookMark를 설정한 아이템의 Id
+	private String user_id;		// BookMark를 설정한 유저의 Id
 	
 	// 기본 생성자
 	public BookMark() {
