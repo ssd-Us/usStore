@@ -12,7 +12,7 @@ import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 
 import com.example.usStore.domain.Account;
-import com.example.usStore.domain.Order;
+import com.example.usStore.domain.Orders;
 
 /**
  * AOP advice that sends confirmation email after order has been submitted
@@ -51,8 +51,8 @@ public class SendOrderConfirmationEmailAdvice implements AfterReturningAdvice, I
 	}
 
 	public void afterReturning(Object returnValue, Method m, Object[] args, Object target) throws Throwable {
-		Order order = (Order) args[0];
-		Account account = ((UsStoreFacade) target).getAccount(order.getUsername());
+		Orders order = (Orders) args[0];
+		Account account = ((UsStoreFacade) target).getAccount(order.getShipToName());
 
 		// don't do anything if email address is not set
 		if (account.getEmail() == null || account.getEmail().length() == 0) {
@@ -60,7 +60,7 @@ public class SendOrderConfirmationEmailAdvice implements AfterReturningAdvice, I
 		}
 
 		StringBuffer text = new StringBuffer();
-		text.append("Dear ").append(account.getFirstName()).append(' ').append(account.getLastName());
+		text.append("Dear ").append(account.getName()).append(' ');
 		text.append(", thank your for your order from JPetStore. Please note that your order number is ");
 		text.append(order.getOrderId());
 
