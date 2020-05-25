@@ -17,8 +17,26 @@
               </tr>
               <tr>
                 <td>
-                  <a href="<c:url value="/shop/viewCategory.do?categoryId=item"/>">
-                     <p>item (handmade)</p>
+                  <a href="<c:url value="/shop/viewCategory.do?catId=0"/>"> <!-- Product -->
+                  <p>Product</p>
+                </td>
+                <td>
+	                <select>
+	                  	<option value="0"><a href="<c:url value="/shop/viewProduct.do?productId=0"/>">스토어</a></option>
+	                  	<option value="1"><a href="<c:url value="/shop/viewProduct.do?productId=1"/>">공동구매</a></option>
+	                  	<option value="2"><a href="<c:url value="/shop/viewProduct.do?productId=2"/>">중고거래</a></option>
+	                  	<option value="3"><a href="<c:url value="/shop/viewProduct.do?productId=3"/>">경매</a></option>
+	                </select>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                    <a href="<c:url value="/shop/viewCategory.do?catId=1"/>"> <!-- Event -->
+                     <p>Event</p>
+                  	<select>
+                  		<option value="2"><a href="<c:url value="/shop/viewEvent.do?catId=2"/>">퀴즈</option>
+                  		<option value="3"><a href="<c:url value="/shop/viewEvent.do?catId=3"/>">출석체크</option>
+                  	</select>
                 </td>
               </tr>
 <!--               <tr> -->
