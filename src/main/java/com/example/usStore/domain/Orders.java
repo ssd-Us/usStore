@@ -31,6 +31,7 @@ public class Orders implements Serializable {
   private String billZip;
   private String billCountry;
   private String billToName;
+  private String status;
 
   /* JavaBeans Properties */
 	public int getOrderId() { return orderId;}
@@ -125,50 +126,56 @@ public class Orders implements Serializable {
 
 	private List<LineItem> lineItems = new ArrayList<LineItem>();
 
+	public String getStatus() { return status; }
+
+	public void setStatus(String status) { this.status = status; }
   
-  
-  /* Public Methods */
 
-  public void initOrder(Account account, Cart cart, String status) { //여기서 status는 OrderStatus테이블에서 가져옴 
-    userId = account.getUserId();
-    orderDate = new Date();
+	
+/* Public Methods */
 
-    shipToName = account.getName();
-    shipAddress1 = account.getAddress1();
-    shipAddress2 = account.getAddress2();
-    shipCity = account.getCity();
-    shipZip = account.getZip();
-    shipCountry = account.getCountry();
 
-    billToName = account.getName();
-    billAddress1 = account.getAddress1();
-    billAddress2 = account.getAddress2();
-    billCity = account.getCity();
-    billZip = account.getZip();
-    billCountry = account.getCountry();
 
-    totalPrice = cart.getSubTotal();
+	public void initOrder(Account account, Cart cart, String status) { //여기서 status는 OrderStatus테이블에서 가져옴 
+	    userId = account.getUserId();
+	    orderDate = new Date();
+	
+	    shipToName = account.getName();
+	    shipAddress1 = account.getAddress1();
+	    shipAddress2 = account.getAddress2();
+	    shipCity = account.getCity();
+	    shipZip = account.getZip();
+	    shipCountry = account.getCountry();
+	
+	    billToName = account.getName();
+	    billAddress1 = account.getAddress1();
+	    billAddress2 = account.getAddress2();
+	    billCity = account.getCity();
+	    billZip = account.getZip();
+	    billCountry = account.getCountry();
+	
+	    totalPrice = cart.getSubTotal();
+	
+	    creditCard = "999 9999 9999 9999";
+	    expiryDate = "12/03";
+	    cardType = "Visa";
+	    courier = "UPS";
+	    locale = "CA";
+	    status = "P";
+	
+	    Iterator<CartItem> i = cart.getAllCartItems();
+	    while (i.hasNext()) {
+	      CartItem cartItem = (CartItem) i.next();
+	      addLineItem(cartItem);
+	    }
+	  }
 
-    creditCard = "999 9999 9999 9999";
-    expiryDate = "12/03";
-    cardType = "Visa";
-    courier = "UPS";
-    locale = "CA";
-    status = "P";
-
-    Iterator<CartItem> i = cart.getAllCartItems();
-    while (i.hasNext()) {
-      CartItem cartItem = (CartItem) i.next();
-      addLineItem(cartItem);
-    }
-  }
-
-  public void addLineItem(CartItem cartItem) {
-    LineItem lineItem = new LineItem(lineItems.size() + 1, cartItem);
-    addLineItem(lineItem);
-  }
-
-  public void addLineItem(LineItem lineItem) {
-    lineItems.add(lineItem);
-  }
+	public void addLineItem(CartItem cartItem) {
+	    LineItem lineItem = new LineItem(lineItems.size() + 1, cartItem);
+	    addLineItem(lineItem);
+	  }
+	
+	public void addLineItem(LineItem lineItem) {
+	    lineItems.add(lineItem);
+	  }
 }
