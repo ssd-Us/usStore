@@ -35,13 +35,13 @@ public class MybatisSecondHandDao implements SecondHandDao{
 	}
 
 	@Override
-	public void delteSecondHand(SecondHand secondHand) throws DataAccessException {
+	public void updateSecondHand(SecondHand secondHand) throws DataAccessException {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void updateSecondHand(SecondHand secondHand) throws DataAccessException {
+	public void delteSecondHand(int itemId) throws DataAccessException {
 		// TODO Auto-generated method stub
 		
 	}
