@@ -21,6 +21,7 @@
     FROM ITEM I, HANDMADE H
     WHERE H.ITEMID = I.ITEMID AND I.PRODUCTID = #{value}
   </select>
+  
 
   <select id="getHandMade" resultType="HandMade">
     SELECT
