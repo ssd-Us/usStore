@@ -10,19 +10,29 @@
   
 	<insert id="insertGroupBuying" parameterType="GroupBuying">
     INSERT INTO GroupBuying
-      (ITEMID, DISCOUNT, LISTPRICE, TIME)
+      (ITEMID, UNITCOST, TITLE, DESCRIPTION, VIEWCOUNT, SUPPID, 
+      TAGID, QTY, USERID, PRODUCTID, DISCOUNT, LISTPRICE, TIME)
     VALUES
-      (#{itemId}, #{discount}, #{listPrice}, #{time})
+      (#{itemId}, #{unitCost}, #{title}, #{description}, #{viewCount}, 
+      #{suppId}, #{tagId}, #{quantity}, #{userId}, #{productId},#{discount}, #{listPrice}, #{time})
   </insert>
-  
-	<delete id="deleteGroupBuying" parameterType="Integer">
-	   DELETE FROM delteGroupBuying
-		 WHERE ITEMID = #{itemId}
-	</delete>
 	
 	<update id="updateGroupBuying" parameterType="GroupBuying">
 		UPDATE GroupBuying
-		SET DISCOUNT = #{discount}, LISTPRICE = #{listPrice}, TIME = #{time}
+		SET 
+			ITEMID = #{itemId}, 
+		  	UNITCOST = #{unitCost}, 
+		  	TITLE = #{title}, 
+		  	DESCRIPTION = #{description}, 
+		  	VIEWCOUNT = #{viewCount}, 
+		  	SUPPID = #{suppId}, 
+		  	TAGID = #{tagId}, 
+		  	QTY = #{quantity}, 
+		  	USERID = #{userId}, 
+		  	PRODUCTID = #{productId},
+			DISCOUNT = #{discount}, 
+			LISTPRICE = #{listPrice}, 
+			TIME = #{time}
 		WHERE ITEMID = #{itemId};
 	</update>
 	
