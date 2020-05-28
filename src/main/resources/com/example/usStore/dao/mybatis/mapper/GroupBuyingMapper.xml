@@ -2,5 +2,48 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.usStore.dao.mybatis.mapper.GroupBuyingMapper">
   <cache />
+   <delete id="deleteItem" parameterType="String">
+     DELETE ITEM
+     FROM ITEM
+     WHERE ITEMID = #{itemId}
+  </delete>
+  
+	<insert id="insertGroupBuying" parameterType="GroupBuying">
+    INSERT INTO GroupBuying
+      (ITEMID, DISCOUNT, LISTPRICE, TIME)
+    VALUES
+      (#{itemId}, #{discount}, #{listPrice}, #{time})
+  </insert>
+  
+	<delete id="deleteGroupBuying" parameterType="Integer">
+	   DELETE FROM delteGroupBuying
+		 WHERE ITEMID = #{itemId}
+	</delete>
+	
+	<update id="updateGroupBuying" parameterType="GroupBuying">
+		UPDATE GroupBuying
+		SET DISCOUNT = #{discount}, LISTPRICE = #{listPrice}, TIME = #{time}
+		WHERE ITEMID = #{itemId};
+	</update>
+	
+	<select id="getGroupBuyingById" parameterType="String" resultType="GroupBuying">
+	    SELECT *
+	    FROM GroupBuying
+		WHERE ITEMID = #{itemId};
+	</select>
 
+	<!-- //모든 공동구매 리스트 가져오는 메소드
+	List<GroupBuying> getGroupBuyingList() throws DataAccessException;-->
+	<select id="getGroupBuyingList" parameterType="String" resultType="GroupBuying">
+	    SELECT *
+	    FROM GroupBuying;
+	</select>
+	
+	<!-- //공동구매 할인 계산 메소드
+	public void calculateDiscount(GroupBuying GroupBuying) throws DataAccessException;	//할인율 계산 -->
+	<update id="calculateDiscount" parameterType="GroupBuying">
+		UPDATE GroupBuying
+		SET DISCOUNT = #{(unitCost - discount) / unitCost}	<!-- 할인율 계산식 -->
+		WHERE ITEMID = #{itemId};
+	</update>
 </mapper>

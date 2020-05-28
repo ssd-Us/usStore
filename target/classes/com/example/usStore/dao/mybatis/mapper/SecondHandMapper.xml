@@ -32,4 +32,5 @@
 		FROM ITEM
 		WHERE ITEMID=#{itemId}
 	</delete>
+	
 </mapper>
