@@ -21,11 +21,11 @@
 	</select>
 	
 	<update id="updateSecondHand" parameterType="SecondHand">
-    UPDATE SecondHand SET
-      LISTPRICE = #{listPrice},
-      DISCOUNT = #{discount}
-    WHERE itemId = #{itemId}
-  </update>
+	    UPDATE SecondHand SET
+	      LISTPRICE = #{listPrice},
+	      DISCOUNT = #{discount}
+	    WHERE itemId = #{itemId}
+  	</update>
   
 	<delete id="deleteItem">
 		DELETE ITEM
