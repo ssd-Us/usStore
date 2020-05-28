@@ -2,5 +2,65 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.usStore.dao.mybatis.mapper.AuctionMapper">
   <cache />
-
+  <select id="getAuctionList" resultType="List">
+    SELECT
+      I.ITEMID,
+      I.UNITCOST,
+      I.TITLE,
+      I.DESCRIPTION,
+      I.VIEWCOUNT,
+      I.SUPPID,
+      I.TAGID,
+      I.QTY,
+      I.USERID,
+      I.PRODUCTID,
+      A.AUCTIONSTATE,
+      A.TIME,
+      A.STARTPRICE,
+      A.BIDPRICE
+    FROM AUCTION A, ITEM I
+    WHERE A.ITEMID = I.ITEMID
+  </select>
+  
+  <insert id="insertAuction" parameterType="AUCTION">
+     INSERT INTO AUCTION
+     	(ITEMID, AUCTIONSTATE, TIME, STARTPRICE, BIDPRICE)
+     VALUES 
+     	(#{itemId}, #{auctionState}, #{time}, #{startPrice}, #{bidPrice})
+  </insert>
+  
+  
+  <delete id="deleteItem" parameterType="String">
+     DELETE ITEM
+     FROM ITEM
+     WHERE ITEMID = #{itemId}
+  </delete>
+  
+  
+  <update id="updateAuction" parameterType="AUCTION">
+     UPDATE AUCTION 
+     SET ITEMID = "#{itemID}", AUCTIONSTATE = "#{auctionState}", TIME = "#{time}", STARTPRICE = "#{startPrice}", BIDPRICE = "#{bidPrice}"
+  </update>
+  
+  
+  <select id="getAuctionById" parameterType="int">
+  	SELECT
+      I.ITEMID,
+      I.UNITCOST,
+      I.TITLE,
+      I.DESCRIPTION,
+      I.VIEWCOUNT,
+      I.SUPPID,
+      I.TAGID,
+      I.QTY,
+      I.USERID,
+      I.PRODUCTID,
+      A.AUCTIONSTATE,
+      A.TIME,
+      A.STARTPRICE,
+      A.BIDPRICE
+    FROM AUCTION A, ITEM I
+    WHERE A.ITEMID = I.ITEMID
+    	AND I.ITEMID = "#{itemId}" 
+  </select>
 </mapper>
