@@ -6,15 +6,12 @@ import com.example.usStore.domain.BookMark;
 
 public interface BookMarkDao {
 
-	// »ç¿ëÀÚÀÇ ºÏ¸¶Å© ¸®½ºÆ®¸¦ °¡Á®¿À´Â ¸Ş¼Òµå
-	List<BookMark> getBookMarkList() throws DataAccessException;
-	
-	// ºÏ¸¶Å© Ãß°¡ ¸Ş¼Òµå
+	// ì‚¬ìš©ìì˜ ë¶ë§ˆí¬ ë¦¬ìŠ¤íŠ¸ë¥¼ ê°€ì ¸ì˜¤ëŠ” ë©”ì†Œë“œ
+	List<BookMark> getBookMarkList(String userId) throws DataAccessException;
+
+	// ë¶ë§ˆí¬ ì¶”ê°€ ë©”ì†Œë“œ
 	void insertBookMark(BookMark bookMark) throws DataAccessException;
 
-	// ºÏ¸¶Å© ¸®½ºÆ® º¯°æ½Ã º¯°æ³»¿ë Àû¿ëÇÏ´Â ¸Ş¼Òµå
-	void updateBookMark(BookMark bookMark) throws DataAccessException;
-
-	// ºÏ¸¶Å© »èÁ¦ ¸Ş¼Òµå
-	void deleteBookMark(BookMark bookMark) throws DataAccessException;
+	// ë¶ë§ˆí¬ ì‚­ì œ ë©”ì†Œë“œ
+	void deleteBookMark(String itemId) throws DataAccessException;
 }

@@ -6,9 +6,9 @@ import com.example.usStore.domain.Attendance;
 
 public interface AttendanceDao {
 
-	// ´Şº°·Î ¸Å°³º¯¼ö·Î Àü´Ş¹ŞÀº »ç¿ëÀÚ°¡ Ãâ¼®Ã¼Å©¸¦ ÇÑ ³¯Â¥µéÀÇ ¸®½ºÆ®¸¦ ¹Ş¾Æ¿À´Â ¸Ş¼Òµå
+	// ë‹¬ë³„ë¡œ ë§¤ê°œë³€ìˆ˜ë¡œ ì „ë‹¬ë°›ì€ ì‚¬ìš©ìê°€ ì¶œì„ì²´í¬ë¥¼ í•œ ë‚ ì§œë“¤ì˜ ë¦¬ìŠ¤íŠ¸ë¥¼ ë°›ì•„ì˜¤ëŠ” ë©”ì†Œë“œ
 	List<Attendance> getAttendanceList(String user_id) throws DataAccessException;
 	
-	// »ç¿ëÀÚ°¡ Ãâ¼®Ã¼Å©¸¦ ÇÏ¸é ½ÇÇàµÇ´Â ¸Ş¼Òµå. DB¿¡ Ãâ¼®Ã¼Å© ³¯Â¥¿Í »ç¿ëÀÚ id ÀÔ·Â
+	// ì‚¬ìš©ìê°€ ì¶œì„ì²´í¬ë¥¼ í•˜ë©´ ì‹¤í–‰ë˜ëŠ” ë©”ì†Œë“œ. DBì— ì¶œì„ì²´í¬ ë‚ ì§œì™€ ì‚¬ìš©ì id ì…ë ¥
 	void insertAttendance(Attendance attendance) throws DataAccessException;
 }

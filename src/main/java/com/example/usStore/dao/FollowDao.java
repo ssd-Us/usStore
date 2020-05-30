@@ -6,21 +6,21 @@ import com.example.usStore.domain.Follow;
 
 public interface FollowDao {
 
-	// »ç¿ëÀÚÀÇ ÀüÃ¼ ÆÈ·ÎÀ× Á¤º¸¸¦ °¡Á®¿À´Â ¸Ş¼Òµå
-	List<Follow> getFollowingList(String user_id) throws DataAccessException;
-	
-	// »ç¿ëÀÚÀÇ ÀüÃ¼ ÆÈ·Î¿ö Á¤º¸¸¦ °¡Á®¿À´Â ¸Ş¼Òµå
-	List<Follow> getFollowerList(String user_id) throws DataAccessException;
-	
-	// ÆÈ·ÎÀ× Ãß°¡ ¸Ş¼Òµå
+	// ì‚¬ìš©ìì˜ ì „ì²´ íŒ”ë¡œì‰ ì •ë³´ë¥¼ ê°€ì ¸ì˜¤ëŠ” ë©”ì†Œë“œ
+	List<Follow> getFollowingList(String userId) throws DataAccessException;
+
+	// ì‚¬ìš©ìì˜ ì „ì²´ íŒ”ë¡œì›Œ ì •ë³´ë¥¼ ê°€ì ¸ì˜¤ëŠ” ë©”ì†Œë“œ
+	List<Follow> getFollowerList(String userId) throws DataAccessException;
+
+	// íŒ”ë¡œì‰ ì¶”ê°€ ë©”ì†Œë“œ
 	void insertFollow(Follow follow) throws DataAccessException;
 
-	// »b·ÎÀ× »èÁ¦ ¸Ş¼Òµå
-	void deleteFollow(Follow follow) throws DataAccessException;
-	
-	// ³ª¸¦ ÆÈ·ÎÀ×ÇÏ´Â »ç¿ëÀÚÀÎÁö ¾Ë·ÁÁÖ´Â ¸Ş¼Òµå
-	boolean isYourFollower (String follower_id) throws DataAccessException;
-	
-	// ³»°¡ ÆÈ·ÎÀ×ÇÏ´Â »ç¿ëÀÚÀÎÁö ¾Ë·ÁÁÖ´Â ¸Ş¼Òµå 
-	boolean isYourFollowing (String following_id) throws DataAccessException;
+	// íŒ”ë¡œì‰ ì‚­ì œ ë©”ì†Œë“œ
+	void deleteFollow(int following) throws DataAccessException;
+
+	// ë‚˜ë¥¼ íŒ”ë¡œì‰í•˜ëŠ” ì‚¬ìš©ìì¸ì§€ ì•Œë ¤ì£¼ëŠ” ë©”ì†Œë“œ
+	boolean isYourFollower (String follower) throws DataAccessException;
+
+	// ë‚´ê°€ íŒ”ë¡œì‰í•˜ëŠ” ì‚¬ìš©ìì¸ì§€ ì•Œë ¤ì£¼ëŠ” ë©”ì†Œë“œ 
+	boolean isYourFollowing (String following) throws DataAccessException;
 }
