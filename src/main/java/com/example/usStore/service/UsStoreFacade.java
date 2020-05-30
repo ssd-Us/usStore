@@ -12,18 +12,15 @@ import com.example.usStore.domain.*;
  */
 public interface UsStoreFacade {
 
-	Account getAccount(String username);
+	Account getAccountByUsername(String username);
 
-	Account getAccount(String username, String password);
+	Account getAccountByUsernameAndPassword(String username, String password);
 	
 	String getStatus(String userId);
 
 	void insertAccount(Account account);
 
 	void updateAccount(Account account);
-
-	List<String> getUsernameList();
-
 
 	List<Category> getCategoryList();
 

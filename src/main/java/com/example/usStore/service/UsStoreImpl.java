@@ -28,12 +28,12 @@ public class UsStoreImpl implements UsStoreFacade {
 	@Autowired
 	private OrderDao orderDao;
 
-	public Account getAccount(String username) {
-		return accountDao.getAccount(username);
+	public Account getAccountByUsername(String username) {
+		return accountDao.getAccountByUsername(username);
 	}
 
-	public Account getAccount(String username, String password) {
-		return accountDao.getAccount(username, password);
+	public Account getAccountByUsernameAndPassword(String username, String password) {
+		return accountDao.getAccountByUsernameAndPassword(username, password);
 	}
 
 	public void insertAccount(Account account) {
@@ -42,10 +42,6 @@ public class UsStoreImpl implements UsStoreFacade {
 
 	public void updateAccount(Account account) {
 		accountDao.updateAccount(account);
-	}
-
-	public List<String> getUsernameList() {
-		return accountDao.getUsernameList();
 	}
 
 	public List<Category> getCategoryList() {
