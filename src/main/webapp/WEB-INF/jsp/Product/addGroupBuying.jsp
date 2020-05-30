@@ -24,8 +24,9 @@
 
 	<form:form modelAttribute="item" method="post" action="step3">
 	
-	할인율: <form:input type="text" path="discount" value="${discount}"/>
-	<form:errors path="discount"/> <br>
+	<%-- 할인율: <form:input type="text" path="discount" value="${discount}"/>
+	<form:errors path="discount"/> <br> 
+	컨트롤러에서 할인율 계산하여 자동으로 세션에 추가하도록!--%>
 	
 	판매가: <form:input type="text" path="listPrice" value="${listPrice}" />
 	<form:errors path="listPrice"/> <br>
