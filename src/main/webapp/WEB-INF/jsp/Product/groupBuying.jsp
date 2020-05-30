@@ -41,7 +41,8 @@
    		</c:forEach>
 </table>
 <br/>
-<a href="<c:url value='product/register/step1'><c:param name="productId" value="${gb.productId}"/>
+<a href="<c:url value='product/register/step1'>	<!-- 로그인 여부 인터셉터로 이동 -->
+	<c:param name="productId" value="${item.productId}"/>	<!-- 판매 카테고리 param 전달, 해당 판매 입력폼으로 이동  -->
 </c:url>">공동구매 게시글 추가하기</a><p/>
 </body>
 </html>
