@@ -13,19 +13,18 @@
 </head>
 <body>
 	<spring:hasBindErrors name="item" />
-
 	<form:form modelAttribute="item" method="post" action="step2/${item.productId}">
 	
 	제목: <form:input type="text" path="title" value="${title}"/>
 	<form:errors path="title"/> <br>
 	
-	내용: <form:textarea type="text" path="description" value="${description}" />
+	내용: <form:textarea path="description" value="${description}" />
 	<form:errors path="description"/> <br>
 	
-	가격: <form:input path="unitCost" value="${unitCost}"/>
+	정가: <form:input type="text" path="unitCost"  value="${unitCost}"/>
 	<form:errors path="unitCost"/> <br>
 	
-	수량: <form:input path="qty" value="${qty}"/>
+	수량: <form:input type="text" path="qty" value="${qty}"/>
 	<form:errors path="qty"/> <br>
 	
 	태그: <form:textarea path="tag" value="${tag}"/>
