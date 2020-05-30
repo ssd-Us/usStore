@@ -83,7 +83,7 @@
    		<tr>
    			<td>
    				<del>정가 : ${gb.unitCost} 원</del> <br>
-   				공동구매가 : <ins>${gb.listPrice}</ins>&nbsp;<font color=red>${gb.discount}%</font> <br>
+   				공동구매가 : <ins>${gb.listPrice} 원</ins>&nbsp;<font color=red>${gb.discount}%</font> <br>
    				수량 : ${gb.qty}
    			</td>
    		</tr>
