@@ -112,5 +112,16 @@
    			</td> --%>
    		</tr>
    	</table>
+   	<br><br>
+
+	<a href="<c:url value='/editItem'>	<!-- 로그인 여부  && 게시자 확인 인터셉터로 이동 -->
+		<c:param name="itemId" value="${item.itemId}"/>
+		<c:param name="suppId" value="${item.suppId}"/>
+	</c:url>">[게시물 수정하기]</a> &nbsp;
+	
+	<a href="<c:url value='/deleteItem'> <!-- 로그인 여부  && 게시자 확인 인터셉터로 이동 -->
+		<c:param name="itemId" value="${item.itemId}"/>
+		<c:param name="suppId" value="${item.suppId}"/>
+	</c:url>">[게시물 삭제하기]</a><p/>
 </body>
 </html>
