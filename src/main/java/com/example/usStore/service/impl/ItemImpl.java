@@ -41,13 +41,6 @@ public class ItemImpl implements ItemFacade {
 	}
 
 	@Override
-	// 이거 수정해야됨.
-	public void deleteItem(int itemId) {
-		// TODO Auto-generated method stub
-		handMadeDao.deleteItem(itemId);
-	}
-
-	@Override
 	public void updateHandMade(HandMade handmade) {
 		// TODO Auto-generated method stub
 		handMadeDao.updateHandMade(handmade);
@@ -220,6 +213,12 @@ public class ItemImpl implements ItemFacade {
 	public void deleteTag(int tagId) {
 		// TODO Auto-generated method stub
 		tagDao.deleteTag(tagId);
+	}
+
+	@Override
+	public void deleteItem(int itemId, int productId) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }
