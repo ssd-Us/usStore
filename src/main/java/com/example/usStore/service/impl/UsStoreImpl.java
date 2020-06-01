@@ -11,8 +11,7 @@ import com.example.usStore.service.facade.UsStoreFacade;
 @Service
 @Transactional
 public class UsStoreImpl implements UsStoreFacade { 
-	@Autowired
-	private AccountDao accountDao;
+	
 	@Autowired
 	private CategoryDao categoryDao;
 	@Autowired
@@ -25,108 +24,21 @@ public class UsStoreImpl implements UsStoreFacade {
 	private SecondHandDao secondHandDao;
 	@Autowired
 	private AuctionDao auctionDao;
-	
+	@Autowired
+	private AccountDao accountDao;
 	@Autowired
 	private OrderDao orderDao;
 
+	@Override
 	public Account getAccountByUsername(String username) {
+		// TODO Auto-generated method stub
 		return accountDao.getAccountByUsername(username);
 	}
 
+	@Override
 	public Account getAccountByUsernameAndPassword(String username, String password) {
+		// TODO Auto-generated method stub
 		return accountDao.getAccountByUsernameAndPassword(username, password);
-	}
-
-	public void insertAccount(Account account) {
-		accountDao.insertAccount(account);
-	}
-
-	public void updateAccount(Account account) {
-		accountDao.updateAccount(account);
-	}
-
-	public List<Category> getCategoryList() {
-		return categoryDao.getCategoryList();
-	}
-
-	public Category getCategory(int categoryId) {
-		return categoryDao.getCategory(categoryId);
-	}
-
-	public List<Product> getProductListByCategory(String categoryId) {
-		return productDao.getProductListByCategory(categoryId);
-	}
-
-	public List<Product> searchProductList(String keywords) {
-		return productDao.searchProductList(keywords);
-	}
-
-	/*
-	 * public Product getProduct(int productId) { return
-	 * productDao.getProduct(productId); }
-	 * 
-	 * public List<Item> getItemListByProduct(int productId) { return
-	 * itemDao.getItemListByProduct(productId); }
-	 */
-	
-	public SecondHand getSecondHandItem(int itemId) {
-		return secondHandDao.getSecondHandItem(itemId);
-	}
-	
-	public Auction getAuctionItem(int itemId) {
-		return auctionDao.getAuctionItem(itemId);
-	}
-	
-	public GroupBuying getGroupBuyingItem(int itemId) {
-		return groupBuyingDao.getGroupBuyingItem(itemId);
-	}
-
-	/*
-	 * public boolean isItemInStock(int itemId) { return
-	 * itemDao.isItemInStock(itemId); }
-	 */
-
-	public void insertOrder(Orders order) {
-		//itemDao.updateQuantity(order);	    
-		orderDao.insertOrder(order);
-	}
-	
-	public Orders getOrder(int orderId) {
-		return orderDao.getOrder(orderId);
-	}
-
-	public List<Orders> getOrdersByUsername(String username) {
-		return orderDao.getOrdersByUsername(username);
-	}
-
-	@Override
-	public Category getCategory(String categoryId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Product getProduct(String productId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Item> getItemListByProduct(String productId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Item getItem(String itemId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean isItemInStock(String itemId) {
-		// TODO Auto-generated method stub
-		return false;
 	}
 
 	@Override
@@ -134,4 +46,97 @@ public class UsStoreImpl implements UsStoreFacade {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public void insertAccount(Account account) {
+		// TODO Auto-generated method stub
+		accountDao.insertAccount(account);
+	}
+
+	@Override
+	public void updateAccount(Account account) {
+		// TODO Auto-generated method stub
+		accountDao.updateAccount(account);
+	}
+
+	@Override
+	public List<Category> getCategoryList() {
+		// TODO Auto-generated method stub
+		return categoryDao.getCategoryList();
+	}
+
+	@Override
+	public Category getCategory(int categoryId) {
+		// TODO Auto-generated method stub
+		return categoryDao.getCategory(categoryId);
+	}
+
+	@Override
+	public List<Product> getProductListByCategory(int categoryId) {
+		// TODO Auto-generated method stub
+		return productDao.getProductListByCategory(categoryId);
+	}
+
+	@Override
+	public List<Product> searchProductList(String keywords) {
+		// TODO Auto-generated method stub
+		return productDao.searchProductList(keywords);
+	}
+
+	@Override
+	public Product getProduct(int productId) {
+		// TODO Auto-generated method stub
+		 return productDao.getProduct(productId);
+	}
+
+	@Override
+	public List<Orders> getOrdersByUserId(String userId) {
+		// TODO Auto-generated method stub
+		return orderDao.getOrdersByUserId(userId);
+	}
+
+	@Override
+	public List<Orders> getOrdersByUsername(String username) {
+		// TODO Auto-generated method stub
+		return orderDao.getOrdersByUsername(username);
+	}
+
+	@Override
+	public Orders getOrder(int orderId) {
+		// TODO Auto-generated method stub
+		return orderDao.getOrder(orderId);
+	}
+
+	@Override
+	public void insertOrder(Orders order) {
+		//itemDao.updateQuantity(order);	    
+		orderDao.insertOrder(order);
+	}
+ 
+//	public List<Item> getItemListByProduct(int productId) { 
+//		switch(productId) {
+//			// groupbuying
+//			case 0:
+//				return groupBuyingDao.getGroupBuyingList();
+//				break;
+//			// auction
+//			case 1:
+//				return itemDao.getItemListByProduct(productId);
+//				break;
+//			// secondHand
+//			case 2:
+//				return itemDao.getItemListByProduct(productId);
+//				break;
+//			// handMade
+//			case 3:
+//				return itemDao.getItemListByProduct(productId);
+//				break;
+//		}
+//		
+//	}
+//	 
+//	public boolean isItemInStock(int itemId, int productId) { 
+//		return itemDao.isItemInStock(itemId);
+//	}
+	 
 }

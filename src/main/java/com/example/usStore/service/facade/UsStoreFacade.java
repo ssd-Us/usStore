@@ -4,14 +4,16 @@ import java.util.List;
 
 import com.example.usStore.domain.*;
 
-/**
- * usStore's central business interface.
- *
- * @author Juergen Hoeller
- * @since 30.11.2003
- */
+/*
+ * UsStoreFacade
+ * 
+ * Account / Orders / Category / Product
+ * */
 public interface UsStoreFacade {
 
+	/////////////////////////////////////////////////////////////////////////
+	/* Account */
+	/////////////////////////////////////////////////////////////////////////
 	Account getAccountByUsername(String username);
 
 	Account getAccountByUsernameAndPassword(String username, String password);
@@ -22,29 +24,31 @@ public interface UsStoreFacade {
 
 	void updateAccount(Account account);
 
+	/////////////////////////////////////////////////////////////////////////
+	/* Category */
+	/////////////////////////////////////////////////////////////////////////
 	List<Category> getCategoryList();
 
-	Category getCategory(String categoryId);
+	Category getCategory(int categoryId);
 	
-
-	List<Product> getProductListByCategory(String categoryId);
+	/////////////////////////////////////////////////////////////////////////
+	/* Product */
+	/////////////////////////////////////////////////////////////////////////
+	List<Product> getProductListByCategory(int categoryId);
 
 	List<Product> searchProductList(String keywords);
 
-	Product getProduct(String productId);
+	Product getProduct(int productId);
 
 
-	List<Item> getItemListByProduct(String productId);
-
-	Item getItem(String itemId);
-
-	boolean isItemInStock(String itemId);
-
-
-	void insertOrder(Orders order);
-
-	Orders getOrder(int orderId);
-
+	/////////////////////////////////////////////////////////////////////////
+	/* Orders */
+	/////////////////////////////////////////////////////////////////////////
+	List<Orders> getOrdersByUserId(String userId);
+	
 	List<Orders> getOrdersByUsername(String username);
 
+	Orders getOrder(int orderId);
+	
+	void insertOrder(Orders order);
 }
