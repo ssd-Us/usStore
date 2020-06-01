@@ -2,6 +2,9 @@ package com.example.usStore.domain;
 
 import java.io.Serializable;
 
+/*
+ * UsStore - Product Domain Class
+ * */
 @SuppressWarnings("serial")
 public class Product implements Serializable {
 
@@ -9,15 +12,15 @@ public class Product implements Serializable {
 
   private String productId;
   private String name;
-  private String categoryId;
+  private String catId;
 
   /* JavaBeans Properties */
 
   public String getProductId() { return productId; }
   public void setProductId(String productId) { this.productId = productId.trim(); }
 
-  public String getCategoryId() { return categoryId; }
-  public void setCategoryId(String categoryId) { this.categoryId = categoryId; }
+  public String getcatId() { return catId; }
+  public void setcatId(String catId) { this.catId = catId; }
 
   public String getName() { return name; }
   public void setName(String name) { this.name = name; }

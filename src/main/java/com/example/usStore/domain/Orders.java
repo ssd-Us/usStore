@@ -6,6 +6,9 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
+/*
+ * UsStore - Order Domain Class
+ * */
 @SuppressWarnings("serial")
 public class Orders implements Serializable {
 
@@ -19,18 +22,18 @@ public class Orders implements Serializable {
   private String cardType;
   private String locale;
   private Date orderDate;
-  private String shipAddress1;
-  private String shipAddress2;
+  private String shipAddr1;
+  private String shipAddr2;
   private String shipCity;
   private String shipZip;
   private String shipCountry;
-  private String shipToName;
-  private String billAddress1;
-  private String billAddress2;
+  private String shipToUsername;
+  private String billAddr1;
+  private String billAddr2;
   private String billCity;
   private String billZip;
   private String billCountry;
-  private String billToName;
+  private String billToUsername;
   private String status;
 
   /* JavaBeans Properties */
@@ -70,13 +73,13 @@ public class Orders implements Serializable {
 	
 	public void setOrderDate(Date orderDate) {this.orderDate = orderDate;}
 	
-	public String getShipAddress1() {return shipAddress1;}
+	public String getshipAddr1() {return shipAddr1;}
 	
-	public void setShipAddress1(String shipAddress1) {this.shipAddress1 = shipAddress1;}
+	public void setshipAddr1(String shipAddr1) {this.shipAddr1 = shipAddr1;}
 	
-	public String getShipAddress2() {return shipAddress2;}
+	public String getshipAddr2() {return shipAddr2;}
 	
-	public void setShipAddress2(String shipAddress2) {this.shipAddress2 = shipAddress2;}
+	public void setshipAddr2(String shipAddr2) {this.shipAddr2 = shipAddr2;}
 	
 	public String getShipCity() {return shipCity;}
 	
@@ -91,21 +94,21 @@ public class Orders implements Serializable {
 	public void setShipCountry(String shipCountry) {this.shipCountry = shipCountry;}
 	
 	
-	public String getShipToName() {return shipToName;}
+	public String getshipToUsername() {return shipToUsername;}
 
-	public void setShipToName(String shipToName) {this.shipToName = shipToName;}
+	public void setshipToUsername(String shipToUsername) {this.shipToUsername = shipToUsername;}
 
-	public String getBillToName() {return billToName;}
+	public String getbillToUsername() {return billToUsername;}
 
-	public void setBillToName(String billToName) {this.billToName = billToName;}
+	public void setbillToUsername(String billToUsername) {this.billToUsername = billToUsername;}
 
-	public String getBillAddress1() {return billAddress1;}
+	public String getbillAddr1() {return billAddr1;}
 	
-	public void setBillAddress1(String billAddress1) {this.billAddress1 = billAddress1;}
+	public void setbillAddr1(String billAddr1) {this.billAddr1 = billAddr1;}
 	
-	public String getBillAddress2() {return billAddress2;}
+	public String getbillAddr2() {return billAddr2;}
 	
-	public void setBillAddress2(String billAddress2) {this.billAddress2 = billAddress2;	}
+	public void setbillAddr2(String billAddr2) {this.billAddr2 = billAddr2;	}
 	
 	public String getBillCity() {	return billCity;}
 	
@@ -136,20 +139,20 @@ public class Orders implements Serializable {
 
 
 
-	public void initOrder(Account account, Cart cart, String status) { //¿©±â¼­ status´Â OrderStatusÅ×ÀÌºí¿¡¼­ °¡Á®¿È 
+	public void initOrder(Account account, Cart cart, String status) { //ï¿½ï¿½ï¿½â¼­ statusï¿½ï¿½ OrderStatusï¿½ï¿½ï¿½Ìºï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
 	    userId = account.getUserId();
 	    orderDate = new Date();
 	
-	    shipToName = account.getName();
-	    shipAddress1 = account.getAddress1();
-	    shipAddress2 = account.getAddress2();
+	    shipToUsername = account.getUsername();
+	    shipAddr1 = account.getAddress1();
+	    shipAddr2 = account.getAddress2();
 	    shipCity = account.getCity();
 	    shipZip = account.getZip();
 	    shipCountry = account.getCountry();
 	
-	    billToName = account.getName();
-	    billAddress1 = account.getAddress1();
-	    billAddress2 = account.getAddress2();
+	    billToUsername = account.getUsername();
+	    billAddr1 = account.getAddress1();
+	    billAddr2 = account.getAddress2();
 	    billCity = account.getCity();
 	    billZip = account.getZip();
 	    billCountry = account.getCountry();

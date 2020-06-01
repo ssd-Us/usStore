@@ -2,7 +2,9 @@ package com.example.usStore.domain;
 
 import java.io.Serializable;
 
-
+/*
+ * Account Domain Class
+ * */
 @SuppressWarnings("serial")
 public class Account implements Serializable {
 
@@ -10,7 +12,7 @@ public class Account implements Serializable {
     private String userId;
     private String password;
     private String email;
-    private String name; 
+    private String username; 
     private String address1;
     private String address2;
     private String city;
@@ -41,11 +43,11 @@ public class Account implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getName() {
-		return name;
+	public String getUsername() {
+		return username;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 	public String getAddress1() {
 		return address1;
@@ -107,10 +109,9 @@ public class Account implements Serializable {
 	public void setUnniversity(String unniversity) {
 		this.unniversity = unniversity;
 	}
+	
+	// ??
 	public void setListOption(boolean b) {
 		// TODO Auto-generated method stub
-		
 	}
-
-
 }
