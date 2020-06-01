@@ -18,7 +18,7 @@ public interface AuctionDao {
 	public void insertAuction(Auction auction) throws DataAccessException;
 	 
 	// delete Auction
-	public void deleteAuction(int itemId) throws DataAccessException;
+	public void deleteItem(int itemId) throws DataAccessException;
 	  
 	// update Auction
 	public void updateAuction(Auction auction) throws DataAccessException;

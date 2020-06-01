@@ -6,12 +6,12 @@ import com.example.usStore.domain.Quiz;
 
 public interface QuizDao {
 
-	// ÀüÃ¼ ÄûÁî ¸®½ºÆ® ¹İÈ¯ÇÏ´Â ¸Ş¼Òµå
+	// ì „ì²´ í€´ì¦ˆ ë¦¬ìŠ¤íŠ¸ ë°˜í™˜í•˜ëŠ” ë©”ì†Œë“œ
 	List<Quiz> getQuizList() throws DataAccessException;
-	
-	// ÄûÁî ¸®½ºÆ® Áß ·£´ıÀ¸·Î ÇÏ³ªÀÇ ÄûÁî¸¦ »Ì¾Æ ¹İÈ¯ÇÏ´Â ¸Ş¼Òµå
+
+	// í€´ì¦ˆ ë¦¬ìŠ¤íŠ¸ ì¤‘ ëœë¤ìœ¼ë¡œ í•˜ë‚˜ì˜ í€´ì¦ˆë¥¼ ë½‘ì•„ ë°˜í™˜í•˜ëŠ” ë©”ì†Œë“œ
 	Quiz getRandomQuiz(List<Quiz> quizList) throws DataAccessException;
-	
-	// »ç¿ëÀÚ°¡ ÀÔ·ÂÇÑ °ªÀÌ Á¤´äÀÎÁö ÆÇº°ÇÏ´Â ¸Ş¼Òµå
-	boolean isCorrect(String quiz_id, String answer) throws DataAccessException;
+
+	// ì‚¬ìš©ìê°€ ì…ë ¥í•œ ê°’ì´ ì •ë‹µì¸ì§€ íŒë³„í•˜ëŠ” ë©”ì†Œë“œ
+	boolean isCorrect(String quizId, String answer) throws DataAccessException;
 }
