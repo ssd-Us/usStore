@@ -8,6 +8,12 @@ import com.example.usStore.dao.*;
 import com.example.usStore.domain.*;
 import com.example.usStore.service.facade.UsStoreFacade;
 
+/*
+ * UsStoreImpl
+ * 
+ * Account / Orders / Category / Product
+ * */
+
 @Service
 @Transactional
 public class UsStoreImpl implements UsStoreFacade { 
