@@ -52,7 +52,7 @@ public class AccountFormController {
 			(UserSession) WebUtils.getSessionAttribute(request, "userSession");
 		if (userSession != null) {	// edit an existing account
 			return new AccountForm(
-				usStore.getAccount(userSession.getAccount().getName()));
+				usStore.getAccountByUsername(userSession.getAccount().getName()));
 		}
 		else {	// create a new account
 			return new AccountForm();
@@ -101,7 +101,7 @@ public class AccountFormController {
 		}
 		
 		UserSession userSession = new UserSession(
-			usStore.getAccount(accountForm.getAccount().getName()));
+			usStore.getAccountByUsername(accountForm.getAccount().getName()));
 		session.setAttribute("userSession", userSession);
 		return successViewName;  
 	}

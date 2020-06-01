@@ -36,7 +36,7 @@ public class SignonController {
 			@RequestParam("password") String password,
 			@RequestParam(value="forwardAction", required=false) String forwardAction,
 			Model model) throws Exception {
-		Account account = usStore.getAccount(username, password);
+		Account account = usStore.getAccountByUsernameAndPassword(username, password);
 		if (account == null) {
 			return new ModelAndView("Error", "message", 
 					"Invalid username or password.  Signon failed.");

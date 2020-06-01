@@ -8,7 +8,7 @@ public class Auction extends Item implements Serializable {
 	/* Private Fields */
 	private int itemId;
 	private String auctionState;
-	private Date time;
+	private Date deadLine;
 	private int startPrice;
 	private int bidPrice;
 	
@@ -19,8 +19,8 @@ public class Auction extends Item implements Serializable {
 	public String getAuctionState() { return auctionState; }
 	public void setAuctionState(String auctionState) { this.auctionState = auctionState; }
 	
-	public Date getTime() { return time; }
-	public void setTime(Date time) { this.time = time; }
+	public Date getDeadLine() { return deadLine; }
+	public void setDeadLine(Date deadLine) { this.deadLine = deadLine; }
 	
 	public int getStartPrice() { return startPrice; }
 	public void setStartPrice(int startPrice) { this.startPrice = startPrice; }
@@ -31,7 +31,7 @@ public class Auction extends Item implements Serializable {
 	
 	/* Public Methods */
 	public String toString() {
-		return "[»óÇ° : " + getItemId() + "]";
-				//"ÆÇ¸ÅÀÚ - " + getSupplier() + ", ³«ÂûÀÚ - " + getBidder();
+		return "[ï¿½ï¿½Ç° : " + getItemId() + "]";
+				//"ï¿½Ç¸ï¿½ï¿½ï¿½ - " + getSupplier() + ", ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ - " + getBidder();
 	}
 }
