@@ -17,21 +17,21 @@ import com.example.usStore.service.facade.UsStoreFacade;
 @Controller
 public class ViewItemController { 
 
-	private UsStoreFacade petStore;
+	private UsStoreFacade usStore;
 
 	@Autowired
-	public void setPetStore(UsStoreFacade petStore) {
-		this.petStore = petStore;
+	public void setusStore(UsStoreFacade usStore) {
+		this.usStore = usStore;
 	}
 
-	@RequestMapping("/shop/viewItem.do")
-	public String handleRequest(
-			@RequestParam("itemId") String itemId,
-			ModelMap model) throws Exception {
-		Item item = this.petStore.getItem(itemId);
-		model.put("item", item);
-		//.put("product", item.getProduct());
-		return "Item";
-	}
+//	@RequestMapping("/shop/viewItem.do")
+//	public String handleRequest(
+//			@RequestParam("itemId") int itemId,
+//			ModelMap model) throws Exception {
+//		Item item = this.usStore.getItem(itemId);
+//		model.put("item", item);
+//		//.put("product", item.getProduct());
+//		return "Item";
+//	}
 
 }

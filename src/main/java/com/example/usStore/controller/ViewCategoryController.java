@@ -33,11 +33,11 @@ public class ViewCategoryController {
 			@RequestParam("categoryId") String categoryId,
 			ModelMap model
 			) throws Exception {
-		Category category = this.usStore.getCategory(categoryId);
-		PagedListHolder<Product> productList = new PagedListHolder<Product>(this.usStore.getProductListByCategory(categoryId));
-		productList.setPageSize(4);
-		model.put("category", category);
-		model.put("productList", productList);
+//		Category category = this.usStore.getCategory(categoryId);
+//		PagedListHolder<Product> productList = new PagedListHolder<Product>(this.usStore.getProductListByCategory(categoryId));
+//		productList.setPageSize(4);
+//		model.put("category", category);
+//		model.put("productList", productList);
 		return "Category";
 	}
 

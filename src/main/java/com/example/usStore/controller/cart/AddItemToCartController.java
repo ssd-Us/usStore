@@ -34,7 +34,7 @@ public class AddItemToCartController {
 	
 	@RequestMapping("/shop/addItemToCart.do")
 	public ModelAndView handleRequest(
-			@RequestParam("workingItemId") String workingItemId,
+			@RequestParam("workingItemId") int workingItemId,
 			@ModelAttribute("sessionCart") Cart cart 
 			) throws Exception {
 		if (cart.containsItemId(workingItemId)) {
@@ -44,9 +44,11 @@ public class AddItemToCartController {
 			// isInStock is a "real-time" property that must be updated
 			// every time an item is added to the cart, even if other
 			// item details are cached.
-			boolean isInStock = this.usStore.isItemInStock(workingItemId);
-			Item item = this.usStore.getItem(workingItemId);
-			cart.addItem(item, isInStock);
+			
+			// 없는 함수라 필요하다면 만들어야함
+//			boolean isInStock = this.usStore.isItemInStock(workingItemId);
+//			Item item = this.usStore.getItem(workingItemId);
+//			cart.addItem(item, isInStock);
 		}
 		return new ModelAndView("Cart", "cart", cart);
 	}

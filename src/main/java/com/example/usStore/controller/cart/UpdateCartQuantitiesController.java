@@ -28,9 +28,9 @@ public class UpdateCartQuantitiesController {
 		Iterator<CartItem> cartItems = cart.getAllCartItems();
 		while (cartItems.hasNext()) {
 			CartItem cartItem = (CartItem) cartItems.next();
-			String itemId = Integer.toString(cartItem.getItem().getItemId());
+			int itemId = cartItem.getItem().getItemId();
 			try {
-				int quantity = Integer.parseInt(request.getParameter(itemId));
+				int quantity = Integer.parseInt(request.getParameter(String.valueOf(itemId)));
 				cart.setQuantityByItemId(itemId, quantity);
 				if (quantity < 1) {
 					cartItems.remove();
