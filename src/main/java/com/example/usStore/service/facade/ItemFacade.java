@@ -22,7 +22,7 @@ public interface ItemFacade {
 	/////////////////////////////////////////////////////////////////////////
 	public void insertHandMade(HandMade handmade);
 	  
-	public void deleteItem(int itemId);
+	public void deleteItem(int itemId, int productId);
 	  
 	public void updateHandMade(HandMade handmade);
 	
@@ -93,4 +93,5 @@ public interface ItemFacade {
 	void updateTag(Tag tag);	
 
 	void deleteTag(int tagId);	
+	
 }
