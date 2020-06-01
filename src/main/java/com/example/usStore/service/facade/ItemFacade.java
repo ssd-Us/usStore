@@ -1,0 +1,5 @@
+package com.example.usStore.service.facade;
+
+public interface ItemFacade {
+
+}

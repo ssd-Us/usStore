@@ -1,4 +1,4 @@
-package com.example.usStore.service;
+package com.example.usStore.service.impl;
 
 import java.util.List;
 
@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.usStore.dao.OrderDao;
 import com.example.usStore.domain.Orders;
+import com.example.usStore.service.OrderService;
 
 /**
  * @author Chang-Sup Park

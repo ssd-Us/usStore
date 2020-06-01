@@ -13,6 +13,7 @@ import org.springframework.mail.SimpleMailMessage;
 
 import com.example.usStore.domain.Account;
 import com.example.usStore.domain.Orders;
+import com.example.usStore.service.facade.UsStoreFacade;
 
 /**
  * AOP advice that sends confirmation email after order has been submitted

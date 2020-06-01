@@ -1,4 +1,4 @@
-package com.example.usStore.service;
+package com.example.usStore.service.facade;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.example.usStore.service;
+package com.example.usStore.service.impl;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.example.usStore.dao.*;
 import com.example.usStore.domain.*;
+import com.example.usStore.service.facade.UsStoreFacade;
 
 @Service
 @Transactional
