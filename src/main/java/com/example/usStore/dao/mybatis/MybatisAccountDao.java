@@ -42,4 +42,6 @@ public class MybatisAccountDao implements AccountDao {
 			accountMapper.updateSignon(account);
 		}
 	}
+	
+	
 }

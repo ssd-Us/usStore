@@ -25,8 +25,8 @@ public interface GroupBuyingDao {
 	
 
 	// 아이템 아이디로 해당 공동구매 객체 가져오는 메소드 
-	public void joinGroupBuying(GroupBuying GroupBuying) throws DataAccessException; //�������� ����
+	public void joinGroupBuying(GroupBuying GroupBuying) throws DataAccessException;
 	
 	// 공동구매 가격 조정 메소드
-	public void calculateDiscount(GroupBuying GroupBuying) throws DataAccessException;	//������ ���
+	public void calculateDiscount(GroupBuying GroupBuying) throws DataAccessException;
 }

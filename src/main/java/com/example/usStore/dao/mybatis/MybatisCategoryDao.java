@@ -16,14 +16,10 @@ public class MybatisCategoryDao implements CategoryDao {
 	public List<Category> getCategoryList() throws DataAccessException {
 		return categoryMapper.getCategoryList();
 	}
-
-	public Category getCategory(String categoryId) throws DataAccessException {
-		return categoryMapper.getCategory(categoryId);
-	}
-
+	
 	@Override
 	public Category getCategory(int categoryId) throws DataAccessException {
 		// TODO Auto-generated method stub
-		return null;
+		return categoryMapper.getCategory(categoryId);
 	}
 }
