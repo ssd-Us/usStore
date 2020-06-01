@@ -21,33 +21,51 @@ public class MyBatisHandMadeDao implements HandMadeDao{
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-	@Override
-	public HandMade getHandMadeItem(int itemId) throws DataAccessException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean isHandMade(int itemId) throws DataAccessException {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
+	
 	@Override
 	public void insertHandMade(HandMade handmade) throws DataAccessException {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	@Override
+	public void updateHandMade(HandMade handmade) throws DataAccessException {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	@Override
+	public boolean isItemInStock(int itemId) throws DataAccessException {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 	@Override
-	public void delteHandMade(HandMade handmade) throws DataAccessException {
+	public HandMade getHandMadeById(int itemId) throws DataAccessException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<HandMade> getHandMadeListByProductId(int productId) throws DataAccessException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void updateQuantity(int qty, int itemId) throws DataAccessException {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void updateHandMade(HandMade handmade) throws DataAccessException {
+	public int getQuantity(int itemId) throws DataAccessException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void deleteItem(int itemId) throws DataAccessException {
 		// TODO Auto-generated method stub
 		
 	}

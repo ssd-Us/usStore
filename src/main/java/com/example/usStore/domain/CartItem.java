@@ -2,52 +2,65 @@ package com.example.usStore.domain;
 
 import java.io.Serializable;
 
+/*
+ * UsStore - CartItem Domain Class
+ * */
 @SuppressWarnings("serial")
 public class CartItem implements Serializable {
 
-  /* Private Fields */
+	/* Private Fields */
 
-  private Item item;
-  private int quantity;
-  private boolean inStock;
-  private int orderId;
-  
-  /* JavaBeans Properties */
+	private Item item;
+	private int quantity;
+	private boolean inStock;
+	private int orderId;
 
-  public boolean isInStock() { return inStock; }
-  public void setInStock(boolean inStock) { this.inStock = inStock; }
+	/* JavaBeans Properties */
 
-  public Item getItem() { return item; }
-  public void setItem(Item item) {
-    this.item = item;
-  }
+	public boolean isInStock() {
+		return inStock;
+	}
 
-  public int getQuantity() { return quantity; }
-  public void setQuantity(int quantity) {
-    this.quantity = quantity;
-  }
+	public void setInStock(boolean inStock) {
+		this.inStock = inStock;
+	}
 
-  public int getOrderId() {
-	return orderId;
-  }
-	
-  public void setOrderId(int orderId) {
-	this.orderId = orderId;
-  }
-	
-  public double getTotalPrice() {
+	public Item getItem() {
+		return item;
+	}
+
+	public void setItem(Item item) {
+		this.item = item;
+	}
+
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+
+	public int getOrderId() {
+		return orderId;
+	}
+
+	public void setOrderId(int orderId) {
+		this.orderId = orderId;
+	}
+
+	public double getTotalPrice() {
 		if (item != null) {
 			return item.getUnitCost() * quantity;
-		}
-		else {
+		} else {
 			return 0;
 		}
-  }
+	}
 
-  /* Public methods */
+	/* Public methods */
 
-  public void incrementQuantity() {
-    quantity++;
-  }
+	public void incrementQuantity() {
+		quantity++;
+	}
 
 }

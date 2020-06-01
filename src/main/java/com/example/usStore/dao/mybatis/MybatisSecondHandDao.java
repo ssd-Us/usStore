@@ -41,9 +41,8 @@ public class MybatisSecondHandDao implements SecondHandDao{
 	}
 
 	@Override
-	public void delteSecondHand(int itemId) throws DataAccessException {
+	public void deleteItem(int itemId) throws DataAccessException {
 		// TODO Auto-generated method stub
 		
 	}
-
 }

@@ -33,13 +33,7 @@ public class MybatisGroupBuyingDao implements GroupBuyingDao{
 		// TODO Auto-generated method stub
 		
 	}
-
-	@Override
-	public void delteGroupBuying(GroupBuying GroupBuying) throws DataAccessException {
-		// TODO Auto-generated method stub
-		
-	}
-
+	
 	@Override
 	public void updateGroupBuying(GroupBuying GroupBuying) throws DataAccessException {
 		// TODO Auto-generated method stub
@@ -58,6 +52,10 @@ public class MybatisGroupBuyingDao implements GroupBuyingDao{
 		
 	}
 	
-	
+	@Override
+	public void deleteItem(int itemId) throws DataAccessException {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

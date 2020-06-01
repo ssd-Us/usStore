@@ -9,11 +9,11 @@ import com.example.usStore.domain.Item;
 public interface HandMadeMapper {
 	  void updateHandMadeQuantity(Map<String, Object> param);
 
-	  int getHandMadeQuantity(String itemId);
+	  int getHandMadeQuantity(int itemId);
 
-	  List<HandMade> getHandMadeItemListByProduct(String productId);
+	  List<HandMade> getHandMadeItemListByProduct(int productId);
 
-	  Item getHandMadeItem(String itemId);
+	  Item getHandMadeItem(int itemId);
 	  
-	  boolean isHandMadeItemInStock(String itemId);	
+	  boolean isHandMadeItemInStock(int itemId);	
 }

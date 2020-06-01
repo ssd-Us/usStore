@@ -2,11 +2,14 @@ package com.example.usStore.domain;
 
 import java.io.Serializable;
 
+/*
+ * Mypage, Item - Tag Domain Class
+ * */
 @SuppressWarnings("serial")
 public class Tag  implements Serializable {
 	/* Private Fields */
-	private int tagId; //(PK)
-	private int itemId; //(PK) Item ±âº»Å° ÂüÁ¶
+	private int tagId; 			// Sequence
+	private int itemId; 		// (FK) itemId
 	private String tagName;
 	
 	/* JavaBeans Properties */
@@ -21,6 +24,6 @@ public class Tag  implements Serializable {
 	
 	/* Public Methods */
 	public String toString() {
-		return "ÅÂ±× : " + getTagId() +  " - " + getTagName();
+		return "ï¿½Â±ï¿½ : " + getTagId() +  " - " + getTagName();
 	}
 }

@@ -9,11 +9,11 @@ import com.example.usStore.domain.Item;
 public interface SecondHandMapper {
 	  void updateSecondHandQuantity(Map<String, Object> param);
 
-	  int getSecondHandQuantity(String itemId);
+	  int getSecondHandQuantity(int itemId);
 
-	  List<SecondHand> getSecondHandItemListByProduct(String productId);
+	  List<SecondHand> getSecondHandItemListByProduct(int productId);
 
-	  Item getSecondHandItem(String itemId);
+	  Item getSecondHandItem(int itemId);
 	  
-	  boolean isSecondHandItemInStock(String itemId);	
+	  boolean isSecondHandItemInStock(int itemId);	
 }

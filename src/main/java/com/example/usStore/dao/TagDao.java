@@ -8,17 +8,24 @@ import com.example.usStore.domain.Tag;
 
 
 public interface TagDao {
+	//ì•„ì´í…œ ì•„ì´ë””ë¡œ íƒœê·¸ ê°ì²´ ì°¾ê¸°
 	List<Tag> getTagList () throws DataAccessException;
 
-	Tag getTagByTagId(int tagId) throws DataAccessException;	//ÅÂ±× ¾ÆÀÌµğ·Î ÅÂ±× °´Ã¼ Ã£±â
-	
-	Tag getTagByItemId(int itemId) throws DataAccessException;	//¾ÆÀÌÅÛ ¾ÆÀÌµğ·Î ÅÂ±× °´Ã¼ Ã£±â
-	
-	Tag getTagByTagName(String tagName) throws DataAccessException;	//ÅÂ±× ÀÌ¸§À¸·Î ÅÂ±× °´Ã¼ Ã£±â(°Ë»ö ±â´É¿¡ ÀÌ¿ë?)
+	// íƒœê·¸ ì´ë¦„ìœ¼ë¡œ íƒœê·¸ ê°ì²´ ì°¾ê¸°(ê²€ìƒ‰ ê¸°ëŠ¥ì— ì´ìš©?)
+	Tag getTagByTagId(int tagId) throws DataAccessException;
 
-	void insertTag(Tag tag) throws DataAccessException;	//ÅÂ±× °´Ã¼ »ğÀÔ
-	
-	void updateTag(Tag tag) throws DataAccessException;	//ÅÂ±× °´Ã¼ ¼öÁ¤
-	
-	void deleteTag(Tag tag) throws DataAccessException;	//ÅÂ±× °´Ã¼ »èÁ¦	
+	// itemIdë¡œ íƒœê·¸ ê°ì²´ ì°¾ê¸°
+	Tag getTagByItemId(int itemId) throws DataAccessException;	
+
+	// tagNameìœ¼ë¡œ íƒœê·¸ ê°ì²´ ì°¾ê¸°
+	Tag getTagByTagName(String tagName) throws DataAccessException;	
+
+	//íƒœê·¸ ê°ì²´ ì‚½ì…
+	void insertTag(Tag tag) throws DataAccessException;
+
+	//íƒœê·¸ ê°ì²´ ìˆ˜ì •
+	void updateTag(Tag tag) throws DataAccessException;	
+
+	//íƒœê·¸ ê°ì²´ ì‚­ì œ	
+	void deleteTag(int tagId) throws DataAccessException;	
 }

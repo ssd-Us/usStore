@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import com.example.usStore.domain.Category;
 import com.example.usStore.domain.Product;
-import com.example.usStore.service.UsStoreFacade;
+import com.example.usStore.service.facade.UsStoreFacade;
 
 /**
  * @author Juergen Hoeller
@@ -33,11 +33,11 @@ public class ViewCategoryController {
 			@RequestParam("categoryId") String categoryId,
 			ModelMap model
 			) throws Exception {
-		Category category = this.usStore.getCategory(categoryId);
-		PagedListHolder<Product> productList = new PagedListHolder<Product>(this.usStore.getProductListByCategory(categoryId));
-		productList.setPageSize(4);
-		model.put("category", category);
-		model.put("productList", productList);
+//		Category category = this.usStore.getCategory(categoryId);
+//		PagedListHolder<Product> productList = new PagedListHolder<Product>(this.usStore.getProductListByCategory(categoryId));
+//		productList.setPageSize(4);
+//		model.put("category", category);
+//		model.put("productList", productList);
 		return "Category";
 	}
 

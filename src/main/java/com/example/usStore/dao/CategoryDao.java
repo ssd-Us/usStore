@@ -8,7 +8,9 @@ import com.example.usStore.domain.Category;
 
 public interface CategoryDao {
 
+	// select Category
 	List<Category> getCategoryList() throws DataAccessException;
 
+	// catId를 받아 Category 가져오기
 	Category getCategory(int categoryId) throws DataAccessException;	//String -> int
 }

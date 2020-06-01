@@ -10,12 +10,12 @@ public interface AuctionMapper {
 	
 	  void updateInventoryQuantity(Map<String, Object> param);
 
-	  int getInventoryQuantity(String itemId);
+	  int getInventoryQuantity(int itemId);
 
-	  List<Auction> getAuctionItemListByProduct(String productId);
+	  List<Auction> getAuctionItemListByProduct(int productId);
 
-	  Item getAuctionItem(String itemId);
+	  Item getAuctionItem(int itemId);
 	  
-	  boolean isAuctionItemInStock(String itemId);	
+	  boolean isAuctionItemInStock(int itemId);	
 
 }

@@ -2,19 +2,20 @@ package com.example.usStore.domain;
 
 import java.io.Serializable;
 
+/*
+ * Item Domain Class
+ * */
 @SuppressWarnings("serial")
 public class Item implements Serializable {
   /* Private Fields */
-  private int itemId;			 //(PK) String- > int
-  private String supplierId;	 //(FK) ÆÇ¸ÅÀÚ ¾ÆÀÌµð
-  private int unitCost; 		 //´Ü°¡(¼¼ÀÏ)
-  private String title; 		 //Á¦¸ñ
-  private String description; 	 //³»¿ë
-  private int viewCount; 		 //Á¶È¸¼ö
-  private int tagId;	 		 //(FK) ÅÂ±×¾ÆÀÌµð 
-  private int quantity;			 //Àç°í
-  private String userId;		 //(FK) ±¸¸ÅÀÚ ¾ÆÀÌµð
-  private int productId;      	 //(FK) °øµ¿±¸¸Å/Áß°í°Å·¡/°æ¸Å/¼ö°ø¿¹ÆÇ¸Å ±¸ºÐ  
+  private int itemId;			//(PK) String- > int
+  private String suppId;	 	//(FK) userId
+  private int unitCost;			// ì •ê°€
+  private String title;			// ì œëª©
+  private String description;	// ì„¤ëª…
+  private int viewCount; 		// ì¡°íšŒìˆ˜
+  private int qty;			 	// ìž¬ê³ 
+  private int productId;      	//(FK) productId
   
   /* JavaBeans Properties */
   public int getItemId() {
@@ -25,12 +26,12 @@ public class Item implements Serializable {
 	this.itemId = itemId;
   }
 
-  public String getSupplierId() {
-	return supplierId;
+  public String getsuppId() {
+	return suppId;
   }
 
-  public void setSupplierId(String supplierId) {
-	this.supplierId = supplierId;
+  public void setsuppId(String suppId) {
+	this.suppId = suppId;
   }
 
   public int getUnitCost() {
@@ -65,30 +66,14 @@ public class Item implements Serializable {
 	this.viewCount = viewCount;
   }
 
-  public int getTagId() {
-	return tagId;
+  public int getqty() {
+	return qty;
   }
 
-  public void setTagId(int tagId) {
-	this.tagId = tagId;
+  public void setqty(int qty) {
+	this.qty = qty;
   }
-
-  public int getQuantity() {
-	return quantity;
-  }
-
-  public void setQuantity(int quantity) {
-	this.quantity = quantity;
-  }
-
-  public String getUserId() {
-	return userId;
-  }
-
-  public void setUserId(String userId) {
-	this.userId = userId;
-  }
-
+  
   public int getProductId() {
 	return productId;
   }
@@ -100,7 +85,7 @@ public class Item implements Serializable {
  
   /* Public Methods */
   public String toString() {
-    return "Á¦Ç° : " + getItemId() + ", ÆÇ¸ÅÀÚ : " + getSupplierId().trim();
+    return "ï¿½ï¿½Ç° : " + getItemId() + ", ï¿½Ç¸ï¿½ï¿½ï¿½ : " + getsuppId().trim();
   }
 
 }

@@ -1,27 +1,30 @@
 package com.example.usStore.domain;
 
+import java.io.Serializable;
+
 /*
- * 키워드 알림 테이블 Domain Class
+ * UsStore - KeyAlarm Domain Class
  * */
-public class KeyAlarm {
+@SuppressWarnings("serial")
+public class KeyAlarm implements Serializable {
 
 	// variable
-	private int KeyAlarm_id;  // 키워드 알람 고유 아이디
-	private String user_id;   // 키워드를 설정한 계정의 아이디
-	private String keyword;   // 키워드
+	private int keyAlarmId;  // Sequence
+	private String userId;   // (FK) userId
+	private String keyword;	 // Keyword for Alarm
 	
 	// setter & getter
-	public int getKeyAlarm_id() {
-		return KeyAlarm_id;
+	public int getkeyAlarmId() {
+		return keyAlarmId;
 	}
-	public void setKeyAlarm_id(int keyAlarm_id) {
-		KeyAlarm_id = keyAlarm_id;
+	public void setkeyAlarmId(int keyAlarmId) {
+		this.keyAlarmId = keyAlarmId;
 	}
-	public String getUser_id() {
-		return user_id;
+	public String getuserId() {
+		return userId;
 	}
-	public void setUser_id(String user_id) {
-		this.user_id = user_id;
+	public void setuserId(String userId) {
+		this.userId = userId;
 	}
 	public String getKeyword() {
 		return keyword;

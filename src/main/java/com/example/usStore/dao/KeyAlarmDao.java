@@ -8,12 +8,12 @@ import com.example.usStore.domain.KeyAlarm;
 
 public interface KeyAlarmDao {
 
-	// Å°¿öµå Ãß°¡ÇÏ±â
+	// í‚¤ì›Œë“œ ì¶”ê°€í•˜ê¸°
 	void insertKeyAlarm(KeyAlarm keyAlarm) throws DataAccessException;
 	
-	// Å°¿öµå »èÁ¦ÇÏ±â
-	void deleteKeyAlarm(String KeyAlarm_id) throws DataAccessException;
+	// í‚¤ì›Œë“œ ì‚­ì œí•˜ê¸°
+	void deleteKeyAlarm(String KeyAlarmId) throws DataAccessException;
 	
-	// ¸Å°³º¯¼ö·Î Àü´Ş¹ŞÀº °èÁ¤ÀÌ ¼³Á¤ÇÑ Å°¿öµå ¸ñ·Ï È®ÀÎÇÏ±â
-	List<KeyAlarm> ListKeyAlarm(String account_id) throws DataAccessException;
+	// ë§¤ê°œë³€ìˆ˜ë¡œ ì „ë‹¬ë°›ì€ ê³„ì •ì´ ì„¤ì •í•œ í‚¤ì›Œë“œ ëª©ë¡ í™•ì¸í•˜ê¸°
+	List<KeyAlarm> ListKeyAlarm(String userId) throws DataAccessException;
 }

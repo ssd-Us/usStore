@@ -1,13 +1,16 @@
 package com.example.usStore.domain;
 
+import java.io.Serializable;
+
 /*
- * Mypage Function - Follow
+ * Mypage - Follow Domain Class
  * */
-public class Follow {
-	private String follower; 	// 다른 사용자를 팔로우하려는 사용자의 id
-	private String following;	// 사용자가 팔로잉하려는 다른 사용자의 id
+@SuppressWarnings("serial")
+public class Follow  implements Serializable {
+	private String follower; 	// (FK) userId
+	private String following;	// (FK) userId
 	
-	// 기본 생성자
+	// Constructor
 	public Follow() {
 		
 	}

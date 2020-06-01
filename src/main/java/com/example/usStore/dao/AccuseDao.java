@@ -7,9 +7,9 @@ import com.example.usStore.domain.Accuse;
 
 public interface AccuseDao {
 
-	// ½Å°íÇÏ±â
+	// ì‹ ê³ í•˜ê¸°
 	void insertAccuse(Accuse accuse) throws DataAccessException;
 	
-	// ÇØ´ç À¯Àú º° ½Å°í ´çÇÑ È½¼ö ¹Þ¾Æ¿À±â
+	// í•´ë‹¹ ìœ ì € ë³„ ì‹ ê³  ë‹¹í•œ íšŸìˆ˜ ë°›ì•„ì˜¤ê¸°
 	int countAccuse(Account account) throws DataAccessException;
 }

@@ -50,10 +50,10 @@
 	</select>
 	
 	<!-- //공동구매 할인 계산 메소드
-	public void calculateDiscount(GroupBuying GroupBuying) throws DataAccessException;	//할인율 계산 -->
-	<update id="calculateDiscount" parameterType="GroupBuying">
+ 	public void calculateDiscount(GroupBuying GroupBuying) throws DataAccessException;	//할인율 계산 -->
+	<!-- <update id="calculateDiscount" parameterType="GroupBuying">
 		UPDATE GroupBuying
-		SET DISCOUNT = #{(unitCost - discount) / unitCost}	<!-- 할인율 계산식 -->
+		SET DISCOUNT = #{(unitCost - discount) / unitCost}	할인율 계산식
 		WHERE ITEMID = #{itemId};
-	</update>
+	</update> -->
 </mapper>

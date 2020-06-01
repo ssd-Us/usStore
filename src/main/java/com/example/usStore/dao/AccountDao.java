@@ -6,14 +6,15 @@ import com.example.usStore.domain.Account;
 
 public interface AccountDao {
 
-  Account getAccount(String username) throws DataAccessException;
-
-  Account getAccount(String username, String password) throws DataAccessException;
-
-  void insertAccount(Account account) throws DataAccessException;
-
-  void updateAccount(Account account) throws DataAccessException;
-
-  List<String> getUsernameList() throws DataAccessException;
-
+	// userId로 Account 가져오기
+	Account getAccountByUsername(String userId) throws DataAccessException;
+	
+	// userId랑 password로 Account 가져오기
+	Account getAccountByUsernameAndPassword(String username, String password) throws DataAccessException;
+	
+	// 계정 추가
+	void insertAccount(Account account) throws DataAccessException;
+	
+	// 계정 수정
+	void updateAccount(Account account) throws DataAccessException;
 }

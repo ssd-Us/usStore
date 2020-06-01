@@ -7,8 +7,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.example.usStore.controller.mypage.UserSession;
 import com.example.usStore.domain.Orders;
-import com.example.usStore.service.UsStoreFacade;
+import com.example.usStore.service.facade.UsStoreFacade;
 
 /**
  * @author Juergen Hoeller
@@ -32,7 +34,7 @@ public class ViewOrderController {
 			@RequestParam("orderId") int orderId
 			) throws Exception {
 		Orders order = this.usStore.getOrder(orderId);
-		if (userSession.getAccount().getName().equals(order.getShipToName())) {
+		if (userSession.getAccount().getUsername().equals(order.getshipToUsername())) {
 			return new ModelAndView("ViewOrder", "order", order);
 		}
 		else {

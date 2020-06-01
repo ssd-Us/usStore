@@ -3,24 +3,27 @@ package com.example.usStore.domain;
 import java.io.Serializable;
 import java.util.Date;
 
+/*
+ * UsStore - Item(Auction) Domain Class
+ * */
 @SuppressWarnings("serial")
 public class Auction extends Item implements Serializable {
 	/* Private Fields */
 	private int itemId;
-	private String auctionState;
-	private Date time;
-	private int startPrice;
+	private int auctionState;
+	private Date deadLine;			// ê²½ë§¤ ë§ˆê°ì¼
+	private int startPrice;			// ê²½ë§¤ ì‹œì‘ê°€
 	private int bidPrice;
 	
 	/* JavaBeans Properties */
 	public int getItemId() { return itemId; }
 	public void setItemId(int itemId) { this.itemId = itemId; }
 	
-	public String getAuctionState() { return auctionState; }
-	public void setAuctionState(String auctionState) { this.auctionState = auctionState; }
+	public int getAuctionState() { return auctionState; }
+	public void setAuctionState(int auctionState) { this.auctionState = auctionState; }
 	
-	public Date getTime() { return time; }
-	public void setTime(Date time) { this.time = time; }
+	public Date getDeadLine() { return deadLine; }
+	public void setDeadLine(Date deadLine) { this.deadLine = deadLine; }
 	
 	public int getStartPrice() { return startPrice; }
 	public void setStartPrice(int startPrice) { this.startPrice = startPrice; }
@@ -31,7 +34,7 @@ public class Auction extends Item implements Serializable {
 	
 	/* Public Methods */
 	public String toString() {
-		return "[»óÇ° : " + getItemId() + "]";
-				//"ÆÇ¸ÅÀÚ - " + getSupplier() + ", ³«ÂûÀÚ - " + getBidder();
+		return "[ï¿½ï¿½Ç° : " + getItemId() + "]";
+				//"ï¿½Ç¸ï¿½ï¿½ï¿½ - " + getSupplier() + ", ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ - " + getBidder();
 	}
 }

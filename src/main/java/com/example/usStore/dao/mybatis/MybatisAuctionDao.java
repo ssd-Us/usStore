@@ -34,13 +34,19 @@ public class MybatisAuctionDao implements AuctionDao {
 	}
 
 	@Override
-	public void delteAuction(Auction auction) throws DataAccessException {
+	public void updateAuction(Auction auction) throws DataAccessException {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	@Override
+	public Auction getAuctionById(int itemId) throws DataAccessException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	@Override
-	public void updateAuction(Auction auction) throws DataAccessException {
+	public void deleteItem(int itemId) throws DataAccessException {
 		// TODO Auto-generated method stub
 		
 	}

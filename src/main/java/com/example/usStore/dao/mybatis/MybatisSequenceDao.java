@@ -14,14 +14,17 @@ public class MybatisSequenceDao implements SequenceDao {
 	@Autowired
 	protected SequenceMapper sequenceMapper;
 	
-  /**
-   * This is a generic sequence ID generator that is based on a database
-   * table called 'SEQUENCE', which contains two columns (NAME, NEXTID).
-   * This approach should work with any database.
-   * @param name the name of the sequence
-   * @return the next ID
-   */
-	public int getNextId(String name) throws DataAccessException {
+	  /**
+	   * This is a generic sequence ID generator that is based on a database
+	   * table called 'SEQUENCE', which contains two columns (NAME, NEXTID).
+	   * This approach should work with any database.
+	   * @param name the name of the sequence
+	   * @return the next ID
+	   */
+	
+	@Override
+	public int getSequence(String name) throws DataAccessException {
+		// TODO Auto-generated method stub
 		Sequence sequence = new Sequence(name, -1);
 	    sequence = (Sequence) sequenceMapper.getSequence(sequence);
 	    if (sequence == null) {
@@ -32,5 +35,11 @@ public class MybatisSequenceDao implements SequenceDao {
 	    Sequence parameterObject = new Sequence(name, sequence.getNextId()+1);
 	    sequenceMapper.updateSequence(parameterObject);
 	    return sequence.getNextId();
+	}
+	
+	@Override
+	public void updateSequence(int nextId, int name) throws DataAccessException {
+		// TODO Auto-generated method stub
+		
 	}
 }
