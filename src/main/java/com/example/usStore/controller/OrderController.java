@@ -1,4 +1,4 @@
-package com.example.usStore.controller.order;
+package com.example.usStore.controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.ModelAndViewDefiningException;
 
-import com.example.usStore.controller.account.UserSession;
+import com.example.usStore.controller.mypage.UserSession;
 import com.example.usStore.domain.Account;
 import com.example.usStore.domain.Cart;
 import com.example.usStore.service.OrderValidator;

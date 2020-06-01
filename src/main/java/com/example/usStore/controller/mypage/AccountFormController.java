@@ -1,4 +1,4 @@
-package com.example.usStore.controller.account;
+package com.example.usStore.controller.mypage;
 
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;

@@ -1,4 +1,4 @@
-package com.example.usStore.controller.account;
+package com.example.usStore.controller.mypage;
 
 import java.io.Serializable;
 

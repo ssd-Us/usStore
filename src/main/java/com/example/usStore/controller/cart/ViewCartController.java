@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.WebUtils;
 
-import com.example.usStore.controller.account.UserSession;
+import com.example.usStore.controller.mypage.UserSession;
 import com.example.usStore.domain.Cart;
 
 /**

@@ -1,4 +1,4 @@
-package com.example.usStore.controller.order;
+package com.example.usStore.controller;
 
 import java.io.Serializable;
 
