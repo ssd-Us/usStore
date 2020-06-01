@@ -2,6 +2,9 @@ package com.example.usStore.domain;
 
 import java.io.Serializable;
 
+/*
+ * UsStore - LineItem Domain Class
+ * */
 @SuppressWarnings("serial")
 public class LineItem implements Serializable {
 

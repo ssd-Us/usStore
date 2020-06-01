@@ -1,31 +1,33 @@
 package com.example.usStore.domain;
 
+import java.io.Serializable;
+
 /*
- * Event Function - Coupon
+ * Event - Coupon Domain Class
  * */
-public class Coupon {
-	private String coupon_id;		// Coupon의 id
-	private String coupon_name;		// Coupon의 이름
-	private int discountRate;		// Coupon의 할인율
-	private String user_id;			// Coupon을 발급받은 user의 Id
+@SuppressWarnings("serial")
+public class Coupon  implements Serializable {
+	private String couponId;		// Sequence
+	private String couponName;		
+	private int discountRate;		
+	private String userId;			// (FK) userId;
 	
-	// 기본 생성자
-	public Coupon() {
-		
+	// Constructor
+	public Coupon() {	
 	}
 	
 	// getter & setter
-	public String getCoupon_id() {
-		return coupon_id;
+	public String getcouponId() {
+		return couponId;
 	}
-	public void setCoupon_id(String coupon_id) {
-		this.coupon_id = coupon_id;
+	public void setcouponId(String couponId) {
+		this.couponId = couponId;
 	}
-	public String getCoupon_name() {
-		return coupon_name;
+	public String getcouponName() {
+		return couponName;
 	}
-	public void setCoupon_name(String coupon_name) {
-		this.coupon_name = coupon_name;
+	public void setcouponName(String couponName) {
+		this.couponName = couponName;
 	}
 	public int getDiscountRate() {
 		return discountRate;
@@ -33,10 +35,10 @@ public class Coupon {
 	public void setDiscountRate(int discountRate) {
 		this.discountRate = discountRate;
 	}
-	public String getUser_id() {
-		return user_id;
+	public String getuserId() {
+		return userId;
 	}
-	public void setUser_id(String user_id) {
-		this.user_id = user_id;
+	public void setuserId(String userId) {
+		this.userId = userId;
 	}
 }

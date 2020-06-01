@@ -1,27 +1,30 @@
 package com.example.usStore.domain;
 
+import java.io.Serializable;
+
 /*
- * Å°¿öµå ¾Ë¸² Å×ÀÌºí Domain Class
+ * UsStore - KeyAlarm Domain Class
  * */
-public class KeyAlarm {
+@SuppressWarnings("serial")
+public class KeyAlarm implements Serializable {
 
 	// variable
-	private int KeyAlarm_id;  // Å°¿öµå ¾Ë¶÷ °íÀ¯ ¾ÆÀÌµð
-	private String user_id;   // Å°¿öµå¸¦ ¼³Á¤ÇÑ °èÁ¤ÀÇ ¾ÆÀÌµð
-	private String keyword;   // Å°¿öµå
+	private int keyAlarmId;  // Sequence
+	private String userId;   // (FK) userId
+	private String keyword;	 // ì•ŒëžŒ ì„¤ì •í•  í‚¤ì›Œë“œ
 	
 	// setter & getter
-	public int getKeyAlarm_id() {
-		return KeyAlarm_id;
+	public int getkeyAlarmId() {
+		return keyAlarmId;
 	}
-	public void setKeyAlarm_id(int keyAlarm_id) {
-		KeyAlarm_id = keyAlarm_id;
+	public void setkeyAlarmId(int keyAlarmId) {
+		keyAlarmId = keyAlarmId;
 	}
-	public String getUser_id() {
-		return user_id;
+	public String getuserId() {
+		return userId;
 	}
-	public void setUser_id(String user_id) {
-		this.user_id = user_id;
+	public void setuserId(String userId) {
+		this.userId = userId;
 	}
 	public String getKeyword() {
 		return keyword;

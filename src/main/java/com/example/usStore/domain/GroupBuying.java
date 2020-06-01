@@ -1,13 +1,21 @@
 package com.example.usStore.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 
+/*
+ * UsStore - Item(GroupBuying) Domain Class
+ * */
 @SuppressWarnings("serial")
-public class GroupBuying  extends Item {
+public class GroupBuying extends Item implements Serializable {
+	
+	// Field
 	private int itemId;
-	private int discount;	//�������� ���ΰ� - ������	
+	private int discount;
 	private int listPrice;
 	private Date deadLine;
+	
+	// Getter & Setter
 	public int getItemId() {
 		return itemId;
 	}
@@ -32,6 +40,4 @@ public class GroupBuying  extends Item {
 	public void setDeadLine(Date deadLine) {
 		this.deadLine = deadLine;
 	}
-
-	
 }

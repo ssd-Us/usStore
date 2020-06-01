@@ -51,7 +51,7 @@ public class OrderServiceClient_httpInvoker {
 	protected void printOrder(Orders order) {
 		System.out.println("Got order with order ID " + order.getOrderId() +
 				" and order date " + order.getOrderDate());
-		System.out.println("Shipping address is: " + order.getShipAddress1());
+		System.out.println("Shipping address is: " + order.getshipAddr1());
 		for (Iterator<LineItem> lineItems = order.getLineItems().iterator(); lineItems.hasNext();) {
 			LineItem lineItem = (LineItem) lineItems.next();
 			System.out.println("LineItem " + lineItem.getLineNum() + ": " + lineItem.getQuantity() +

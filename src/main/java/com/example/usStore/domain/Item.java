@@ -2,19 +2,22 @@ package com.example.usStore.domain;
 
 import java.io.Serializable;
 
+/*
+ * Item Domain Class
+ * */
 @SuppressWarnings("serial")
 public class Item implements Serializable {
   /* Private Fields */
   private int itemId;			 //(PK) String- > int
-  private String supplierId;	 //(FK) ÆÇ¸ÅÀÚ ¾ÆÀÌµð
-  private int unitCost; 		 //´Ü°¡(¼¼ÀÏ)
-  private String title; 		 //Á¦¸ñ
-  private String description; 	 //³»¿ë
-  private int viewCount; 		 //Á¶È¸¼ö
-  private int tagId;	 		 //(FK) ÅÂ±×¾ÆÀÌµð 
-  private int quantity;			 //Àç°í
-  private String userId;		 //(FK) ±¸¸ÅÀÚ ¾ÆÀÌµð
-  private int productId;      	 //(FK) °øµ¿±¸¸Å/Áß°í°Å·¡/°æ¸Å/¼ö°ø¿¹ÆÇ¸Å ±¸ºÐ  
+  private String supplierId;	 //(FK) ï¿½Ç¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½
+  private int unitCost; 		 //ï¿½Ü°ï¿½(ï¿½ï¿½ï¿½ï¿½)
+  private String title; 		 //ï¿½ï¿½ï¿½ï¿½
+  private String description; 	 //ï¿½ï¿½ï¿½ï¿½
+  private int viewCount; 		 //ï¿½ï¿½È¸ï¿½ï¿½
+  private int tagId;	 		 //(FK) ï¿½Â±×¾ï¿½ï¿½Ìµï¿½ 
+  private int quantity;			 //ï¿½ï¿½ï¿½
+  private String userId;		 //(FK) ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½
+  private int productId;      	 //(FK) ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½/ï¿½ß°ï¿½Å·ï¿½/ï¿½ï¿½ï¿½/ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç¸ï¿½ ï¿½ï¿½ï¿½ï¿½  
   
   /* JavaBeans Properties */
   public int getItemId() {
@@ -100,7 +103,7 @@ public class Item implements Serializable {
  
   /* Public Methods */
   public String toString() {
-    return "Á¦Ç° : " + getItemId() + ", ÆÇ¸ÅÀÚ : " + getSupplierId().trim();
+    return "ï¿½ï¿½Ç° : " + getItemId() + ", ï¿½Ç¸ï¿½ï¿½ï¿½ : " + getSupplierId().trim();
   }
 
 }

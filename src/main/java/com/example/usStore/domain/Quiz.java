@@ -1,26 +1,29 @@
 package com.example.usStore.domain;
 
+import java.io.Serializable;
+
 /*
- * Event Function - Quiz
+ * Event - Quiz Domain Class
  * */
-public class Quiz {
+@SuppressWarnings("serial")
+public class Quiz  implements Serializable {
 	
-	private String quiz_id;		// ÄûÁîÀÇ id
-	private String question;	// ÄûÁî Áú¹®
-	private String answer;		// ÄûÁî ´ä
-	private String hint;		// ÄûÁî¿¡ ´ëÇÑ ÈùÆ®
-	private int catId; 		//(FK) Ä«Å×°í¸® ¾ÆÀÌµğ
-	// ±âº» »ı¼ºÀÚ
+	private String quizId;		// Sequence
+	private String question;	// í€´ì¦ˆ ì§ˆë¬¸
+	private String answer;		// í€´ì¦ˆ ë‹µ
+	private String hint;		// í€´ì¦ˆ íŒíŠ¸
+	private int catId; 		//(FK) catId
+	
 	public Quiz() {
 		
 	}
 	
 	// getter & setter
-	public String getQuiz_id() {
-		return quiz_id;
+	public String getquizId() {
+		return quizId;
 	}
-	public void setQuiz_id(String quiz_id) {
-		this.quiz_id = quiz_id;
+	public void setquizId(String quizId) {
+		this.quizId = quizId;
 	}
 	public String getQuestion() {
 		return question;

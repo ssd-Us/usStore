@@ -1,29 +1,32 @@
 package com.example.usStore.domain;
 
+import java.io.Serializable;
+
 /*
- * Mypage Function - BookMark
+ * Mypage - BookMark Domain Class
  * */
-public class BookMark {
+@SuppressWarnings("serial")
+public class BookMark  implements Serializable {
 	
-	private String item_id;		// 유저가 BookMark를 설정한 아이템의 Id
-	private String user_id;		// BookMark를 설정한 유저의 Id
+	private String itemId;	// (FK) itemId - BookMark Item
+	private String userId;  // (FK) userId
 	
-	// 기본 생성자
+	// Constructor
 	public BookMark() {
 		
 	}
 	
 	// getter & setter
-	public String getUser_id() {
-		return user_id;
+	public String getuserId() {
+		return userId;
 	}
-	public void setUser_id(String user_id) {
-		this.user_id = user_id;
+	public void setuserId(String userId) {
+		this.userId = userId;
 	}
-	public String getItem_id() {
-		return item_id;
+	public String getitemId() {
+		return itemId;
 	}
-	public void setItem_id(String item_id) {
-		this.item_id = item_id;
+	public void setitemId(String itemId) {
+		this.itemId = itemId;
 	}
 }

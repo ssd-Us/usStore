@@ -1,6 +1,12 @@
 package com.example.usStore.domain;
 
-public class SecondHand {
+import java.io.Serializable;
+
+/*
+ * UsStore - Item(SecondHand) Domain Class
+ * */
+@SuppressWarnings("serial")
+public class SecondHand extends Item implements Serializable {
 
 	private int itemId;
 	private int discount;

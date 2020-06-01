@@ -1,22 +1,25 @@
 package com.example.usStore.domain;
 
+import java.io.Serializable;
+
 /*
- * Ω≈∞Ì ≈◊¿Ã∫Ì Domain Class
+ * MyPage - Accuse Domain Class
  * */
-public class Accuse {
+@SuppressWarnings("serial")
+public class Accuse  implements Serializable {
 
 	// variable
-	private int accuse_id;   // Ω≈∞Ì«“ ªÁ∂˜¿« ∞Ë¡§ æ∆¿Ãµ
-	private String victim;   //(FK)
-	private String attacker; //(FK)
-	private String reason;  // Ω≈∞Ì ¿Ã¿Ø
+	private int accuseId;   // Sequence
+	private String victim;   // (FK) userId
+	private String attacker; // (FK) userId
+	private String reason;  // Ïã†Í≥† Ïù¥Ïú†
 	
 	// setter & getter
-	public int getAccuse_id() {
-		return accuse_id;
+	public int getAccuseId() {
+		return accuseId;
 	}
-	public void setAccuse_id(int accuse_id) {
-		this.accuse_id = accuse_id;
+	public void setAccuseId(int accuseId) {
+		this.accuseId = accuseId;
 	}
 	public String getVictim() {
 		return victim;
@@ -37,5 +40,4 @@ public class Accuse {
 		this.reason = reason;
 	}
 		
-	
 }
