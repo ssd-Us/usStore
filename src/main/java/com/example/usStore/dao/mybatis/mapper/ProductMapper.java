@@ -26,9 +26,9 @@ import com.example.usStore.domain.Product;
  */
 public interface ProductMapper {
 
-  List<Product> getProductListByCategory(String categoryId);
+  List<Product> getProductListByCategory(int catId);
 
-  Product getProduct(String productId);
+  Product getProduct(int productId);
 
   List<Product> searchProductList(String keywords);
 

@@ -9,13 +9,13 @@ import com.example.usStore.domain.Item;
 public interface GroupBuyingMapper {
 	  void updateGroupBuyingQuantity(Map<String, Object> param);
 
-	  int getGroupBuyingQuantity(String itemId);
+	  int getGroupBuyingQuantity(int itemId);
 
-	  List<GroupBuying> getGroupBuyingItemListByProduct(String productId);
+	  List<GroupBuying> getGroupBuyingItemListByProduct(int productId);
 
-	  Item getGroupBuyingItem(String itemId);
+	  Item getGroupBuyingItem(int itemId);
 	  
-	  boolean isGroupBuyingItemInStock(String itemId);	
+	  boolean isGroupBuyingItemInStock(int itemId);	
 	
 
 }
