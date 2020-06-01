@@ -23,7 +23,7 @@
   </select>
   
 
-  <select id="getHandMade" resultType="HandMade">
+  <select id="getHandMadeList" resultType="HandMade">
     SELECT
       I.ITEMID,
       I.PRODUCTID,

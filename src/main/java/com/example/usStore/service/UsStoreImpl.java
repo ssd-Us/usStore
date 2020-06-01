@@ -67,9 +67,6 @@ public class UsStoreImpl implements UsStoreFacade {
 	 * public List<Item> getItemListByProduct(int productId) { return
 	 * itemDao.getItemListByProduct(productId); }
 	 */
-	public HandMade getHandMadeItem(int itemId) {
-		return handMadeDao.getHandMadeItem(itemId);
-	}
 	
 	public SecondHand getSecondHandItem(int itemId) {
 		return secondHandDao.getSecondHandItem(itemId);
