@@ -13,7 +13,7 @@ public class Auction extends Item implements Serializable {
 	private int auctionState;
 	private Date deadLine;			// 경매 마감일
 	private int startPrice;			// 경매 시작가
-	private int bidPrice;			// 경ㅁ
+	private int bidPrice;
 	
 	/* JavaBeans Properties */
 	public int getItemId() { return itemId; }
