@@ -18,7 +18,7 @@ public interface HandMadeDao {
 	public void updateHandMade(HandMade handmade) throws DataAccessException;
 	
 	// 아이템 아이디로 해당 수공예품의 재고가 있는지 확인하는 메소드
-	boolean isItemInStock(int itemId) throws DataAccessException;
+	boolean isItemInStock(int itemId, int productId) throws DataAccessException;
 	
 	// 모든 수공예 리스트 가져오는 메소드
 	List<HandMade> getHandMadeList() throws DataAccessException;
@@ -30,8 +30,8 @@ public interface HandMadeDao {
 	List<HandMade> getHandMadeListByProductId(int productId) throws DataAccessException;
 
 	// 구매 개수 수정
-	void updateQuantity(int qty, int itemId) throws DataAccessException;
+	void updateQuantity(int qty, int itemId, int productId) throws DataAccessException;
 	
 	// 구매 개수 받아오기
-	int getQuantity(int itemId) throws DataAccessException;
+	int getQuantity(int itemId, int productId) throws DataAccessException;
 }
