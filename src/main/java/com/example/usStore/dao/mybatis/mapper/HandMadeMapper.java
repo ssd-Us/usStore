@@ -20,21 +20,12 @@ public interface HandMadeMapper {
 //	boolean isHandMadeItemInStock(int itemId);
 
 	// insert HandMade
-<<<<<<< HEAD
 	public void insertHandMade(HandMade handmade);
-=======
-	public void insertHandMade(HandMade handmade) throws DataAccessException;
->>>>>>> branch 'test' of https://github.com/ssd-Us/usStore.git
 
 	// delete HandMade
-<<<<<<< HEAD
 	public void deleteItem(int itemId);
-=======
-	public void deleteItem(int itemId) throws DataAccessException;
->>>>>>> branch 'test' of https://github.com/ssd-Us/usStore.git
 
 	// update HandMade
-<<<<<<< HEAD
 	public void updateHandMade(HandMade handmade);
 
 	// 아이템 아이디로 해당 수공예품의 재고가 있는지 확인하는 메소드
@@ -54,25 +45,4 @@ public interface HandMadeMapper {
 
 	// 구매 개수 받아오기
 	int getQuantity(int itemId, int productId);
-=======
-	public void updateHandMade(HandMade handmade) throws DataAccessException;
-
-	// 아이템 아이디로 해당 수공예품의 재고가 있는지 확인하는 메소드
-	boolean isItemInStock(int itemId, int productId) throws DataAccessException;
-
-	// 모든 수공예 리스트 가져오는 메소드
-	List<HandMade> getHandMadeList() throws DataAccessException;
-
-	// itemId 받아서 해당하는 HandMade 객체 반환
-	HandMade getHandMadeById(int itemId) throws DataAccessException;
-
-	// Product_id를 받아 HandMade 전체 list 가져오기
-	List<HandMade> getHandMadeListByProductId(int productId) throws DataAccessException;
-
-	// 구매 개수 수정
-	void updateQuantity(int qty, int itemId, int productId) throws DataAccessException;
-
-	// 구매 개수 받아오기
-	int getQuantity(int itemId, int productId) throws DataAccessException;
->>>>>>> branch 'test' of https://github.com/ssd-Us/usStore.git
 }
