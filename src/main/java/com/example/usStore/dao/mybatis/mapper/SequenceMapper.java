@@ -29,8 +29,8 @@ public interface SequenceMapper {
 //  void updateSequence(Sequence sequence);
   
 	// 시퀀스 받아오기
-	public int getSequence(String name) throws DataAccessException;
+	public int getSequence(String name);
 	
 	// 시퀀스 수정하기
-	public void updateSequence(int nextId, int name) throws DataAccessException;
+	public void updateSequence(int nextId, int name);
 }

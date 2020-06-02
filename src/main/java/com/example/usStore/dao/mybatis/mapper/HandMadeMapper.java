@@ -20,29 +20,29 @@ public interface HandMadeMapper {
 //	boolean isHandMadeItemInStock(int itemId);
 
 	// insert HandMade
-	public void insertHandMade(HandMade handmade) throws DataAccessException;
+	public void insertHandMade(HandMade handmade);
 
 	// delete HandMade
-	public void deleteItem(int itemId) throws DataAccessException;
+	public void deleteItem(int itemId);
 
 	// update HandMade
-	public void updateHandMade(HandMade handmade) throws DataAccessException;
+	public void updateHandMade(HandMade handmade);
 
 	// 아이템 아이디로 해당 수공예품의 재고가 있는지 확인하는 메소드
-	boolean isItemInStock(int itemId, int productId) throws DataAccessException;
+	boolean isItemInStock(int itemId, int productId);
 
 	// 모든 수공예 리스트 가져오는 메소드
-	List<HandMade> getHandMadeList() throws DataAccessException;
+	List<HandMade> getHandMadeList();
 
 	// itemId 받아서 해당하는 HandMade 객체 반환
-	HandMade getHandMadeById(int itemId) throws DataAccessException;
+	HandMade getHandMadeById(int itemId);
 
 	// Product_id를 받아 HandMade 전체 list 가져오기
-	List<HandMade> getHandMadeListByProductId(int productId) throws DataAccessException;
+	List<HandMade> getHandMadeListByProductId(int productId);
 
 	// 구매 개수 수정
-	void updateQuantity(int qty, int itemId, int productId) throws DataAccessException;
+	void updateQuantity(int qty, int itemId, int productId);
 
 	// 구매 개수 받아오기
-	int getQuantity(int itemId, int productId) throws DataAccessException;
+	int getQuantity(int itemId, int productId);
 }

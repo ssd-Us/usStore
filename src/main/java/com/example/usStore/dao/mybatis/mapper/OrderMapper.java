@@ -38,14 +38,14 @@ public interface OrderMapper {
 //	int msSqlServerInsertOrder(Orders order);
 
 	// 해당 사용자의 주문 목록 가져오기 (userId)
-	List<Orders> getOrdersByUserId(String userId) throws DataAccessException;
+	List<Orders> getOrdersByUserId(String userId);
 
 	// 해당 사용자의 주문 목록 가져오기 (username)
-	List<Orders> getOrdersByUsername(String username) throws DataAccessException;
+	List<Orders> getOrdersByUsername(String username);
 
 	// orderId 를 매개변수로 받아 해당하는 Order 객체 반환하기
-	Orders getOrder(int orderId) throws DataAccessException;
+	Orders getOrder(int orderId);
 
 	// Order 추가
-	void insertOrder(Orders order) throws DataAccessException;
+	void insertOrder(Orders order);
 }

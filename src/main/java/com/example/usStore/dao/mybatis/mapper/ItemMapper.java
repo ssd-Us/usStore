@@ -27,14 +27,14 @@ import com.example.usStore.domain.Item;
  */
 public interface ItemMapper {
 
-  void updateInventoryQuantity(Map<String, Object> param);
+	void updateInventoryQuantity(Map<String, Object> param);
 
-  int getInventoryQuantity(int itemId);
+	int getInventoryQuantity(int itemId);
 
-  List<Item> getItemListByProduct(int productId);
+	List<Item> getItemListByProduct(int productId);
 
-  Item getItem(int itemId);
-  
-  boolean isItemInStock(int itemId);
+	Item getItem(int itemId);
+
+	boolean isItemInStock(int itemId);
 
 }
