@@ -9,6 +9,7 @@ import com.example.usStore.domain.Coupon;
 public interface CouponMapper {
 
 	// couponId로 해당 쿠폰의 객체를 받아오는 메소드
+<<<<<<< HEAD
 	Coupon getCoupon(int couponId);
 
 	// 쿠폰 추가 메소드
@@ -19,4 +20,16 @@ public interface CouponMapper {
 
 	// 사용자가 가지고 있는 쿠폰의 전체 리스트를 가져오는 메소드
 	List<Coupon> getCouponList(String userId);
+=======
+	Coupon getCoupon(int couponId) throws DataAccessException;
+
+	// 쿠폰 추가 메소드
+	void insertCoupon(Coupon coupon) throws DataAccessException;
+
+	// 쿠폰 삭제 메소드
+	void deleteCoupon(int couponId) throws DataAccessException;
+
+	// 사용자가 가지고 있는 쿠폰의 전체 리스트를 가져오는 메소드
+	List<Coupon> getCouponList(String userId) throws DataAccessException;
+>>>>>>> branch 'test' of https://github.com/ssd-Us/usStore.git
 }
