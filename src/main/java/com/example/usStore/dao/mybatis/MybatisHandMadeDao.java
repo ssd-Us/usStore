@@ -11,7 +11,7 @@ import com.example.usStore.dao.mybatis.mapper.HandMadeMapper;
 import com.example.usStore.domain.HandMade;
 
 @Repository
-public class MyBatisHandMadeDao implements HandMadeDao{
+public class MybatisHandMadeDao implements HandMadeDao {
 
 	@Autowired
 	private HandMadeMapper handMadeMapper;
