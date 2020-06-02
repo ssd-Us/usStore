@@ -30,16 +30,17 @@ public class MybatisAccountDao implements AccountDao {
 
 	public void insertAccount(Account account) throws DataAccessException {
 		accountMapper.insertAccount(account);
-		accountMapper.insertProfile(account);
-		accountMapper.insertSignon(account);
+//		accountMapper.insertProfile(account);
+//		accountMapper.insertSignon(account);
 	}
 
 	public void updateAccount(Account account) throws DataAccessException {
 		accountMapper.updateAccount(account);
-		accountMapper.updateProfile(account);
+//		accountMapper.updateProfile(account);
 		if (account.getPassword() != null && account.getPassword().length() > 0) 
 		{
-			accountMapper.updateSignon(account);
+//			accountMapper.updateSignon(account);
+			accountMapper.updateAccount(account);
 		}
 	}
 	

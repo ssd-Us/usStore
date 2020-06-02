@@ -13,7 +13,7 @@ public class OracleSequenceDao extends MybatisSequenceDao {
   public int getNextId(String name) throws DataAccessException {
     Sequence sequence = new Sequence();
     sequence.setName(name);
-    sequence = sequenceMapper.getOracleSequence(sequence);
+//    sequence = sequenceMapper.getOracleSequence(sequence);
     return sequence.getNextId();
   }
 }
