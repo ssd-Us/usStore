@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <title>중고거래 상세페이지</title>
 
+
 </head>
 <body>
    <!-- 여기서 secondHand는 컨트롤러에서 보내준 모델 객체(db에서 select 결과 ) -->
