@@ -12,6 +12,7 @@
 <body>
    <form:form modelAttribute="secondHand" method="post" action="done/${item.productId}">
    
+   
    에눌가능여부: <form:input path="title" value="${title}"/>
    <form:errors path="title"/> <br>
    

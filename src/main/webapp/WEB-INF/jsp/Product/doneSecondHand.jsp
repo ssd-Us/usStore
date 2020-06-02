@@ -30,6 +30,7 @@
       <li><label>수량</label>:
       ${secondHand.unitcost}</li>
       
+    
       <li><label>discount</label>:
       ${secondHand.discount}</li>
       <li><label>listPrice</label>:

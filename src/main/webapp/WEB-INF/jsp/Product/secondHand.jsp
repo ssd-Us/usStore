@@ -13,6 +13,7 @@ table, th, td {
     border-collapse: collapse;
     text-align: center;
 }
+
 </style>
 </head>
 <body>
