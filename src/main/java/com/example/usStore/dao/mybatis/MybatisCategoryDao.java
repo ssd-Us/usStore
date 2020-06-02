@@ -10,6 +10,7 @@ import com.example.usStore.domain.Category;
 
 @Repository
 public class MybatisCategoryDao implements CategoryDao {
+	
 	@Autowired
 	private CategoryMapper categoryMapper;
 	

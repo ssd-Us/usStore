@@ -1,12 +1,56 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<% request.setCharacterEncoding("UTF-8"); %>
+
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
-<title>Insert title here</title>
+<meta charset="UTF-8">
+<title>경매 리스트 페이지</title>
 </head>
-<body>
-
+<body>   
+   <form name = "pform" action="" style="position:absolute; left:50%; margin:0 0 0 -420px;">
+      <div class="container" >
+         <div class="row"  style="display:inline">
+            <div style="display:inline;float:left;width:800px">
+               <div style="font-size:15px">
+                  <h2>
+                     Auction List
+                  </h2>
+                  <hr>
+                  <table>
+                     <tr>
+                        <th>상품</th>
+                        	<th style="padding-left:50px">가격</th>
+                            <th><p style="padding-left:75px">판매자</p></th>
+                            <th><p style="padding-left:60px">낙찰자</p></th>
+                            <th><p style="padding-left:80px">남은시간</p></th>
+                        </tr>
+                  <tbody>                   
+                  <tr style="height:70px;">
+                  <td style="padding-left:30px">
+                                <a href="<c:url value='/shop/productDetail'>
+                                	<c:param name="kind2" value="0"/>
+                                    <c:param name="pId" value="${phone.productId}"/>
+                                         </c:url>">
+                                      <font><c:out value="ㅇㅇㅇ친필 사인 책"/></font>
+                                </a>
+                
+                   </td>
+                   <td style="padding-left:50px"><c:out value="시작: 10,0000"/><br><c:out value="낙찰: 70,0000"/></td>
+                       <td style="padding-left:85px"><c:out value="김문정"/></td>   
+                       <td style="padding-left:70px"><c:out value="이지은"/></td>
+                       <td style="padding-left:90px"><c:out value="경매 마감"/><br><c:out value="(00:00)"/></td>
+                  </tr>
+                  </tbody>
+                  </table>
+               </div>
+            </div>
+         </div>
+      </div>
+   </form>
 </body>
 </html>

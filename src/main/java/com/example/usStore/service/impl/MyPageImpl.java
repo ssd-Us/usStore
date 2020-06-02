@@ -3,6 +3,8 @@ package com.example.usStore.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.usStore.dao.AccuseDao;
 import com.example.usStore.dao.BookMarkDao;
@@ -20,6 +22,8 @@ import com.example.usStore.service.facade.MyPageFacade;
  * 
  * keyAlarm / bookMark / follow / accuse
  * */
+@Service("mypageImpl")
+@Transactional
 public class MyPageImpl implements MyPageFacade {
 
 	@Autowired

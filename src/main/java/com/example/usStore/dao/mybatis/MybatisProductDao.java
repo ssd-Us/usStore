@@ -14,6 +14,7 @@ import com.example.usStore.domain.Product;
 
 @Repository
 public class MybatisProductDao implements ProductDao {
+	
 	@Autowired
 	private ProductMapper productMapper;
 

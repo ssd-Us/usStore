@@ -7,16 +7,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
-import com.example.usStore.dao.GroupBuyingDao;
-import com.example.usStore.dao.mybatis.mapper.GroupBuyingMapper;
-import com.example.usStore.domain.GroupBuying;
+import com.example.usStore.dao.HandMadeDao;
+import com.example.usStore.dao.mybatis.mapper.HandMadeMapper;
+import com.example.usStore.domain.HandMade;
 import com.example.usStore.domain.Item;
 
 @Repository
-public class MybatisGroupBuyingDao implements GroupBuyingDao {	
-	
+public class MybatisHandMadeDao implements HandMadeDao {
+
 	@Autowired
-	private GroupBuyingMapper groupBuyingMapper;
+	private HandMadeMapper handMadeMapper;
 
 	@Override
 	public void updateInventoryQuantity(Map<String, Object> param) throws DataAccessException {
@@ -61,7 +61,7 @@ public class MybatisGroupBuyingDao implements GroupBuyingDao {
 	}
 
 	@Override
-	public void insertGroupBuying(GroupBuying GroupBuying) throws DataAccessException {
+	public void insertHandMade(HandMade handmade) throws DataAccessException {
 		// TODO Auto-generated method stub
 		
 	}
@@ -73,33 +73,27 @@ public class MybatisGroupBuyingDao implements GroupBuyingDao {
 	}
 
 	@Override
-	public void updateGroupBuying(GroupBuying GroupBuying) throws DataAccessException {
+	public void updateHandMade(HandMade handmade) throws DataAccessException {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public List<GroupBuying> getGroupBuyingList() throws DataAccessException {
+	public List<HandMade> getHandMadeList() throws DataAccessException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public GroupBuying getGroupBuyingItem(int itemId) throws DataAccessException {
+	public HandMade getHandMadeById(int itemId) throws DataAccessException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void joinGroupBuying(GroupBuying GroupBuying) throws DataAccessException {
+	public List<HandMade> getHandMadeListByProductId(int productId) throws DataAccessException {
 		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void calculateDiscount(GroupBuying GroupBuying) throws DataAccessException {
-		// TODO Auto-generated method stub
-		
+		return null;
 	}
 
 }

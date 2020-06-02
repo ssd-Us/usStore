@@ -3,6 +3,8 @@ package com.example.usStore.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.usStore.dao.AuctionDao;
 import com.example.usStore.dao.GroupBuyingDao;
@@ -21,6 +23,8 @@ import com.example.usStore.service.facade.ItemFacade;
  * 
  * HandMade / GroupBuying / SecondHand / Auction / Tag
  * */
+@Service("itemImpl")
+@Transactional
 public class ItemImpl implements ItemFacade {
 
 	@Autowired
