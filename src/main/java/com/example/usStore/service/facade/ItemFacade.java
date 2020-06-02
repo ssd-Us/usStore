@@ -18,7 +18,7 @@ import com.example.usStore.domain.Tag;
 public interface ItemFacade {
 
 	/////////////////////////////////////////////////////////////////////////
-	/* HandMade */
+	/* HandMade (Item) */
 	/////////////////////////////////////////////////////////////////////////
 	public void insertHandMade(HandMade handmade);
 	  
@@ -26,17 +26,17 @@ public interface ItemFacade {
 	  
 	public void updateHandMade(HandMade handmade);
 	
-	boolean isItemInStock(int itemId);
-	
 	List<HandMade> getHandMadeList();
 	
 	HandMade getHandMadeById(int itemId);
 	
 	List<HandMade> getHandMadeListByProductId(int productId);
 	
-	void updateQuantity(int qty, int itemId);
+	boolean isItemInStock(int itemId, int productId);
 	
-	int getQuantity(int itemId);
+	void updateQuantity(int qty, int itemId, int productId);
+	
+	int getQuantity(int itemId, int productId);
 	
 	/////////////////////////////////////////////////////////////////////////
 	/* GroupBuying */
