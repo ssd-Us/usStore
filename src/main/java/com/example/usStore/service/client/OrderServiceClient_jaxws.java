@@ -5,7 +5,7 @@ import org.springframework.beans.factory.ListableBeanFactory;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.util.StopWatch;
 import com.example.usStore.domain.LineItem;
-import com.example.usStore.domain.Order;
+import com.example.usStore.domain.Orders;
 import com.example.usStore.service.OrderService;
 
 /**
@@ -39,7 +39,7 @@ public class OrderServiceClient_jaxws {
 		StopWatch stopWatch = new StopWatch(orderServiceBeanName + " call");
 		System.out.println("Calling jaxwsOrderService with order ID " + orderId);
 		stopWatch.start(orderServiceBeanName);
-		Order order = orderService.getOrder(orderId);
+		Orders order = orderService.getOrder(orderId);
 		stopWatch.stop();
 		if (order != null) {
 			printOrder(order);
@@ -51,13 +51,13 @@ public class OrderServiceClient_jaxws {
 		System.out.println(stopWatch.prettyPrint());
 	}
 
-	protected void printOrder(Order order) {
+	protected void printOrder(Orders order) {
 		System.out.println("Got order with order ID " + order.getOrderId() +
 				" and order date " + order.getOrderDate());
-		System.out.println("Shipping address is: " + order.getShipAddress1());
+		System.out.println("Shipping address is: " + order.getshipAddr1());
 		for (Iterator<LineItem> lineItems = order.getLineItems().iterator(); lineItems.hasNext();) {
 			LineItem lineItem = (LineItem) lineItems.next();
-			System.out.println("LineItem " + lineItem.getLineNumber() + ": " + lineItem.getQuantity() +
+			System.out.println("LineItem " + lineItem.getLineNum() + ": " + lineItem.getQuantity() +
 					" piece(s) of item " + lineItem.getItemId());
 		}
 	}

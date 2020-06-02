@@ -2,41 +2,90 @@ package com.example.usStore.domain;
 
 import java.io.Serializable;
 
+/*
+ * Item Domain Class
+ * */
 @SuppressWarnings("serial")
 public class Item implements Serializable {
   /* Private Fields */
-  private int itemId;			 //(PK) String- > int
-  private String supplierId;	 //(FK)
-  private int listPrice; 	 //Á¤°¡(¿ø·¡)
-  private int unitCost; 		 //´Ü°¡(¼¼ÀÏ)
-  private String title; 		 //Á¦¸ñ
-  private String description; 	 //³»¿ë
-  private int viewCount; 		 //Á¶È¸¼ö
-
+  private int itemId;			//(PK) String- > int
+  private String suppId;	 	//(FK) userId
+  private int unitCost;			// ì •ê°€
+  private String title;			// ì œëª©
+  private String description;	// ì„¤ëª…
+  private int viewCount; 		// ì¡°íšŒìˆ˜
+  private int qty;			 	// ìž¬ê³ 
+  private int productId;      	//(FK) productId
+  
   /* JavaBeans Properties */
-  public int getItemId() { return itemId; }
-  public void setItemId(int itemId) { this.itemId = itemId; }
+  public int getItemId() {
+	return itemId;
+  }
+
+  public void setItemId(int itemId) {
+	this.itemId = itemId;
+  }
+
+  public String getsuppId() {
+	return suppId;
+  }
+
+  public void setsuppId(String suppId) {
+	this.suppId = suppId;
+  }
+
+  public int getUnitCost() {
+	return unitCost;
+  }
+
+  public void setUnitCost(int unitCost) {
+	this.unitCost = unitCost;
+  }
+
+  public String getTitle() {
+	return title;
+  }
+
+  public void setTitle(String title) {
+	this.title = title;
+  }
+
+  public String getDescription() {
+	return description;
+  }
+
+  public void setDescription(String description) {
+	this.description = description;
+  }
+
+  public int getViewCount() {
+	return viewCount;
+  }
+
+  public void setViewCount(int viewCount) {
+	this.viewCount = viewCount;
+  }
+
+  public int getqty() {
+	return qty;
+  }
+
+  public void setqty(int qty) {
+	this.qty = qty;
+  }
   
-  public String getSupplierId() { return supplierId; }
-  public void setSupplierId(String supplierId) { this.supplierId = supplierId; }
+  public int getProductId() {
+	return productId;
+  }
 
-  public int getListPrice() { return listPrice; }
-  public void setListPrice(int listPrice) { this.listPrice = listPrice; }
-
-  public int getUnitCost() { return unitCost; }
-  public void setUnitCost(int unitCost) { this.unitCost = unitCost; }
-
-  public String getTitle() { return title; }
-  public void setTitle(String title) { this.title = title; }
+  public void setProductId(int productId) {
+	this.productId = productId;
+  }
   
-  public String getDescription() { return description; }
-  public void setDescription(String description) { this.description = description; }
-
-  public int getViewCount() { return viewCount; }
-  public void setViewCount(int viewCount) { this.viewCount = viewCount; }
-
+ 
   /* Public Methods */
   public String toString() {
-    return "Á¦Ç° : " + getItemId() + ", ÆÇ¸ÅÀÚ : " + getSupplierId().trim();
+    return "ï¿½ï¿½Ç° : " + getItemId() + ", ï¿½Ç¸ï¿½ï¿½ï¿½ : " + getsuppId().trim();
   }
+
 }

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.usStore.domain.Product;
-import com.example.usStore.service.UsStoreFacade;
+import com.example.usStore.service.facade.UsStoreFacade;
 
 /**
  * @author Juergen Hoeller

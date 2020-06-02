@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.example.usStore.domain.Item;
 import com.example.usStore.domain.Product;
-import com.example.usStore.service.UsStoreFacade;
+import com.example.usStore.service.facade.UsStoreFacade;
 
 /**
  * @author Juergen Hoeller
@@ -31,12 +31,12 @@ public class ViewProductController {
 
 	@RequestMapping("/shop/viewProduct.do")
 	public String handleRequest(
-			@RequestParam("productId") String productId,
+			@RequestParam("productId") int productId,
 			ModelMap model) throws Exception {
-		PagedListHolder<Item> itemList = new PagedListHolder<Item>(this.usStore.getItemListByProduct(productId));
-		itemList.setPageSize(4);
+//		PagedListHolder<Item> itemList = new PagedListHolder<Item>(this.usStore.getItemListByProduct(productId));
+//		itemList.setPageSize(4);
 		Product product = this.usStore.getProduct(productId);
-		model.put("itemList", itemList);
+//		model.put("itemList", itemList);
 		model.put("product", product);
 		return "Product";
 	}

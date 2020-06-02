@@ -20,14 +20,10 @@ import java.util.List;
 
 import com.example.usStore.domain.LineItem;
 
-/**
- * @author Eduardo Macarron
- *
- */
 public interface LineItemMapper {
 
-  List<LineItem> getLineItemsByOrderId(int orderId);
+	List<LineItem> getLineItemsByOrderId(int orderId);
 
-  void insertLineItem(LineItem lineItem);
+	void insertLineItem(LineItem lineItem);
 
 }

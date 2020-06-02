@@ -19,31 +19,30 @@ public class MybatisAccountDao implements AccountDao {
 	@Autowired
 	private AccountMapper accountMapper;
 	
-	public Account getAccount(String username) throws DataAccessException {
+	public Account getAccountByUsername(String username) throws DataAccessException {
 		return accountMapper.getAccountByUsername(username);
 	}
 
-	public Account getAccount(String username, String password) 
+	public Account getAccountByUsernameAndPassword(String username, String password) 
 			throws DataAccessException {
 		return accountMapper.getAccountByUsernameAndPassword(username, password);
 	}
 
 	public void insertAccount(Account account) throws DataAccessException {
 		accountMapper.insertAccount(account);
-		accountMapper.insertProfile(account);
-		accountMapper.insertSignon(account);
+//		accountMapper.insertProfile(account);
+//		accountMapper.insertSignon(account);
 	}
 
 	public void updateAccount(Account account) throws DataAccessException {
 		accountMapper.updateAccount(account);
-		accountMapper.updateProfile(account);
+//		accountMapper.updateProfile(account);
 		if (account.getPassword() != null && account.getPassword().length() > 0) 
 		{
-			accountMapper.updateSignon(account);
+//			accountMapper.updateSignon(account);
+			accountMapper.updateAccount(account);
 		}
 	}
- 
-	public List<String> getUsernameList() throws DataAccessException {
-		return accountMapper.getUsernameList();
-	}
+	
+	
 }

@@ -6,15 +6,15 @@ import com.example.usStore.domain.Coupon;
 
 public interface CouponDao {
 
-	// coupon_id·Î ÇØ´ç ÄíÆùÀÇ °´Ã¼¸¦ ¹Ş¾Æ¿À´Â ¸Ş¼Òµå
-	Coupon getCoupon(String coupon_id) throws DataAccessException;
+	// couponIdë¡œ í•´ë‹¹ ì¿ í°ì˜ ê°ì²´ë¥¼ ë°›ì•„ì˜¤ëŠ” ë©”ì†Œë“œ
+	Coupon getCoupon(int couponId) throws DataAccessException;
 
-	// ÄíÆù Ãß°¡ ¸Ş¼Òµå
+	// ì¿ í° ì¶”ê°€ ë©”ì†Œë“œ
 	void insertCoupon(Coupon coupon) throws DataAccessException;
-	
-	// ÄíÆù »èÁ¦ ¸Ş¼Òµå
-	void deleteCoupon(String coupon_id) throws DataAccessException;
 
-	// »ç¿ëÀÚ°¡ °¡Áö°í ÀÖ´Â ÄíÆùÀÇ ÀüÃ¼ ¸®½ºÆ®¸¦ °¡Á®¿À´Â ¸Ş¼Òµå
-	List<Coupon> getCouponList(String user_id) throws DataAccessException;
+	// ì¿ í° ì‚­ì œ ë©”ì†Œë“œ
+	void deleteCoupon(int couponId) throws DataAccessException;
+
+	// ì‚¬ìš©ìê°€ ê°€ì§€ê³  ìˆëŠ” ì¿ í°ì˜ ì „ì²´ ë¦¬ìŠ¤íŠ¸ë¥¼ ê°€ì ¸ì˜¤ëŠ” ë©”ì†Œë“œ
+	List<Coupon> getCouponList(String userId) throws DataAccessException;
 }

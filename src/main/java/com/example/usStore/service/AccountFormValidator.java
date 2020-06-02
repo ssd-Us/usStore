@@ -4,7 +4,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
-import com.example.usStore.controller.AccountForm;
+
+import com.example.usStore.controller.mypage.AccountForm;
 import com.example.usStore.domain.Account;
 /**
  * @author Juergen Hoeller

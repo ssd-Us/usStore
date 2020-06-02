@@ -2,6 +2,9 @@ package com.example.usStore.domain;
 
 import java.io.Serializable;
 
+/*
+ * Sequence Domain Class
+ * */
 @SuppressWarnings("serial")
 public class Sequence implements Serializable {
 

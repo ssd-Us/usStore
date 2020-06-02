@@ -17,14 +17,17 @@ public class MybatisProductDao implements ProductDao {
 	@Autowired
 	private ProductMapper productMapper;
 
-	public List<Product> getProductListByCategory(String categoryId) 
-			throws DataAccessException {
-	    return productMapper.getProductListByCategory(categoryId);
+	@Override
+	public List<Product> getProductListByCategory(int catId) throws DataAccessException {
+		// TODO Auto-generated method stub
+		return productMapper.getProductListByCategory(catId);
 	}
 
-	public Product getProduct(String productId) throws DataAccessException {
-	    return productMapper.getProduct(productId);
-	}
+	@Override
+	public Product getProduct(int productId) throws DataAccessException {
+		// TODO Auto-generated method stub
+		return productMapper.getProduct(productId);
+	}	
 
 	public List<Product> searchProductList(String keywords) 
 			throws DataAccessException {
@@ -46,5 +49,5 @@ public class MybatisProductDao implements ProductDao {
 		public List<String> getKeywordList() {
 			return keywordList;
 		}
-	}	
+	}
 }

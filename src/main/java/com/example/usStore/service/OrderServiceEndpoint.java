@@ -7,7 +7,7 @@ import javax.jws.WebService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.example.usStore.domain.Order;
+import com.example.usStore.domain.Orders;
 
 /**
  * @author Chang-Sup Park
@@ -19,12 +19,12 @@ public class OrderServiceEndpoint {
 	OrderService orderService;		// inject orderSeviceImpl
 	
 	@WebMethod
-	public Order getOrder(int orderId) {
+	public Orders getOrder(int orderId) {
 		return orderService.getOrder(orderId);
 	}
 
 	@WebMethod
-	public List<Order> getOrdersByUsername(String username) {
+	public List<Orders> getOrdersByUsername(String username) {
 		return orderService.getOrdersByUsername(username);
 	}
 }

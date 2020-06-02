@@ -1,18 +1,20 @@
 package com.example.usStore.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /*
- * Event Function - Attendance (Ãâ¼®Ã¼Å©)
+ * Event - Attendance Domain Class
  * */
-public class Attendance {
+@SuppressWarnings("serial")
+public class Attendance  implements Serializable {
 	
-	private Date attendance_date;	// Ãâ¼®Ã¼Å©ÇÑ ³¯Â¥
-	private String user_id; 		// Ãâ¼®Ã¼Å©ÇÑ »ç¿ëÀÚ ID
+	private String userId; 			// (FK) userId
+	private int catId;				// (FK) catId 
+	private Date attendance_date;	// ì¶œì„ì²´í¬í•œ ë‚ ì§œ
 	
-	// ±âº» »ı¼ºÀÚ
+	// Constructor
 	public Attendance() {
-		
 	}
 	
 	// getter & setter
@@ -22,10 +24,19 @@ public class Attendance {
 	public void setAttendance_date(Date attendance_date) {
 		this.attendance_date = attendance_date;
 	}
-	public String getUser_id() {
-		return user_id;
+	public String getUserId() {
+		return userId;
 	}
-	public void setUser_id(String user_id) {
-		this.user_id = user_id;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
+
+	public int getCatId() {
+		return catId;
+	}
+
+	public void setCatId(int catId) {
+		this.catId = catId;
+	}
+	
 }

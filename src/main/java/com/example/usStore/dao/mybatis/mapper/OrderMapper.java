@@ -18,20 +18,34 @@ package com.example.usStore.dao.mybatis.mapper;
 
 import java.util.List;
 
-import com.example.usStore.domain.Order;
+import org.springframework.dao.DataAccessException;
+
+import com.example.usStore.domain.Orders;
 
 /**
  * @author Eduardo Macarron
  */
 public interface OrderMapper {
 
-  List<Order> getOrdersByUsername(String username);
+//	List<Orders> getOrdersByUsername(String username);
+//
+//	Orders getOrder(int orderId);
+//
+//	void insertOrder(Orders order);
+//
+//	void insertOrderStatus(Orders order);
+//
+//	int msSqlServerInsertOrder(Orders order);
 
-  Order getOrder(int orderId);
-  
-  void insertOrder(Order order);
-  
-  void insertOrderStatus(Order order);
+	// 해당 사용자의 주문 목록 가져오기 (userId)
+	List<Orders> getOrdersByUserId(String userId) throws DataAccessException;
 
-  int msSqlServerInsertOrder(Order order);
+	// 해당 사용자의 주문 목록 가져오기 (username)
+	List<Orders> getOrdersByUsername(String username) throws DataAccessException;
+
+	// orderId 를 매개변수로 받아 해당하는 Order 객체 반환하기
+	Orders getOrder(int orderId) throws DataAccessException;
+
+	// Order 추가
+	void insertOrder(Orders order) throws DataAccessException;
 }

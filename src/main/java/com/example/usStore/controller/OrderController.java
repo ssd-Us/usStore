@@ -15,10 +15,11 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.ModelAndViewDefiningException;
 
+import com.example.usStore.controller.mypage.UserSession;
 import com.example.usStore.domain.Account;
 import com.example.usStore.domain.Cart;
 import com.example.usStore.service.OrderValidator;
-import com.example.usStore.service.UsStoreFacade;
+import com.example.usStore.service.facade.UsStoreFacade;
 
 /**
  * @author Juergen Hoeller
@@ -55,8 +56,10 @@ public class OrderController {
 		UserSession userSession = (UserSession) request.getSession().getAttribute("userSession");
 		if (cart != null) {
 			// Re-read account from DB at team's request.
-			Account account = usStore.getAccount(userSession.getAccount().getUsername());
-			orderForm.getOrder().initOrder(account, cart);
+			Account account = usStore.getAccountByUsername(userSession.getAccount().getUsername());
+			
+			String status = usStore.getStatus(userSession.getAccount().getUserId());
+			orderForm.getOrder().initOrder(account, cart, status);
 			return "NewOrderForm";	
 		}
 		else {
