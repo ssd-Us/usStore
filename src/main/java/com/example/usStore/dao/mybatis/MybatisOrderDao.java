@@ -43,7 +43,7 @@ public class MybatisOrderDao implements OrderDao {
 	public void insertOrder(Orders order) throws DataAccessException {  
     	order.setOrderId(sequenceDao.getSequence("ordernum"));
     	orderMapper.insertOrder(order);
-    	orderMapper.insertOrderStatus(order);
+//    	orderMapper.insertOrderStatus(order);
     	for (int i = 0; i < order.getLineItems().size(); i++) {
     		LineItem lineItem = (LineItem) order.getLineItems().get(i);
     		lineItem.setOrderId(order.getOrderId());
