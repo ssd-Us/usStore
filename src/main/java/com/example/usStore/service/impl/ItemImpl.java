@@ -46,11 +46,13 @@ public class ItemImpl implements ItemFacade {
 		handMadeDao.updateHandMade(handmade);
 	}
 
+	
+	// 이거 고처야됌
 	@Override
-	public boolean isItemInStock(int itemId) {
+	public boolean isItemInStock(int itemId, int productId) {
 		// TODO Auto-generated method stub
-		handMadeDao.isItemInStock(itemId);
-		return false;
+		
+		return handMadeDao.isItemInStock(itemId, productId);
 	}
 
 	@Override
@@ -72,17 +74,43 @@ public class ItemImpl implements ItemFacade {
 	}
 
 	@Override
-	public void updateQuantity(int qty, int itemId) {
+	public void updateQuantity(int qty, int itemId, int productId) {
 		// TODO Auto-generated method stub
-		handMadeDao.updateQuantity(qty, itemId);
+		switch(productId) {
+			case 0:
+				groupBuyingDao.updateQuantity(qty, itemId, productId);
+				break;
+			case 1:
+				auctionDao.updateQuantity(qty, itemId, productId);
+				break;
+			case 2:
+				secondHandDao.updateQuantity(qty, itemId, productId);
+				break;
+			case 3:
+				handMadeDao.updateQuantity(qty, itemId, productId);
+				break;
+			default:
+				System.err.println("updateQuantity Error !!");
+		}
 	}
 
 	@Override
-	public int getQuantity(int itemId) {
+	public int getQuantity(int itemId, int productId) {
 		// TODO Auto-generated method stub
-		return handMadeDao.getQuantity(itemId);
+		switch(productId) {
+		case 0:
+			return groupBuyingDao.getQuantity(itemId, productId);
+		case 1:
+			return auctionDao.getQuantity(itemId, productId);
+		case 2:
+			return secondHandDao.getQuantity(itemId, productId);
+		case 3:
+			return handMadeDao.getQuantity(itemId, productId);
+		default :
+			return -1;
+		}
 	}
-
+	
 	@Override
 	public void insertGroupBuying(GroupBuying GroupBuying) {
 		// TODO Auto-generated method stub
@@ -214,11 +242,10 @@ public class ItemImpl implements ItemFacade {
 		// TODO Auto-generated method stub
 		tagDao.deleteTag(tagId);
 	}
-
+  
 	@Override
 	public void deleteItem(int itemId, int productId) {
 		// TODO Auto-generated method stub
 		
 	}
-	
 }

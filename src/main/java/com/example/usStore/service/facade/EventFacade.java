@@ -39,7 +39,7 @@ public interface EventFacade {
 	/////////////////////////////////////////////////////////////////////////
 	/* Attendance */
 	/////////////////////////////////////////////////////////////////////////
-	List<Attendance> getAttendanceList(String user_id) throws DataAccessException;
+	List<Attendance> getAttendanceList(String userId) throws DataAccessException;
 	
 	void insertAttendance(Attendance attendance) throws DataAccessException;
 }

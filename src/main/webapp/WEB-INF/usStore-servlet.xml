@@ -35,7 +35,7 @@
         	<mvc:mapping path="/shop/listOrders.do"/>
         	<mvc:mapping path="/shop/viewOrder.do"/>
         	<mvc:mapping path="/shop/newOrder.do"/>
-        	<bean class="com.example.usStore.controller.SignonInterceptor" />
+        	<bean class="com.example.usStore.controller.mypage.SignonInterceptor" />
     	</mvc:interceptor>
 	</mvc:interceptors>
 </beans>
