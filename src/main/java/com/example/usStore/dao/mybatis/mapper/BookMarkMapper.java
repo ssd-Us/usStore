@@ -9,11 +9,11 @@ import com.example.usStore.domain.BookMark;
 public interface BookMarkMapper {
 
 	// 사용자의 북마크 리스트를 가져오는 메소드
-	List<BookMark> getBookMarkList(String userId) throws DataAccessException;
+	List<BookMark> getBookMarkList(String userId);
 
 	// 북마크 추가 메소드
-	void insertBookMark(BookMark bookMark) throws DataAccessException;
+	void insertBookMark(BookMark bookMark);
 
 	// 북마크 삭제 메소드
-	void deleteBookMark(String itemId) throws DataAccessException;
+	void deleteBookMark(String itemId);
 }

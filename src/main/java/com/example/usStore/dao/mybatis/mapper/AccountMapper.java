@@ -22,10 +22,6 @@ import org.springframework.dao.DataAccessException;
 
 import com.example.usStore.domain.Account;
 
-/**
- * @author Eduardo Macarron
- *
- */
 public interface AccountMapper {
 
 	// userId로 Account 가져오기

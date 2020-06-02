@@ -11,7 +11,7 @@ import com.example.usStore.dao.mybatis.mapper.GroupBuyingMapper;
 import com.example.usStore.domain.GroupBuying;
 
 @Repository
-public class MybatisGroupBuyingDao implements GroupBuyingDao{	
+public class MybatisGroupBuyingDao implements GroupBuyingDao {	
 	
 	@Autowired
 	private GroupBuyingMapper groupBuyingMapper;

@@ -20,24 +20,24 @@ public interface SecondHandMapper {
 //	boolean isSecondHandItemInStock(int itemId);
 
 	// 전체 SecondHandList 받아오기
-	List<SecondHand> getSecondHandList() throws DataAccessException;
+	List<SecondHand> getSecondHandList();
 
 	// itemId 매개변수로 받아 SecondHand 객체 반환
-	SecondHand getSecondHandItem(int itemId) throws DataAccessException;
+	SecondHand getSecondHandItem(int itemId);
 
 	// SecondHand 추가
-	public void insertSecondHand(SecondHand secondHand) throws DataAccessException;
+	public void insertSecondHand(SecondHand secondHand);
 
 	// SecondHand 삭제
-	public void deleteItem(int itemId) throws DataAccessException;
+	public void deleteItem(int itemId);
 
 	// SecondHand 수정
-	public void updateSecondHand(SecondHand secondHand) throws DataAccessException;
+	public void updateSecondHand(SecondHand secondHand);
 
 	/* 기존에 ItemDao에 있었던 메소드들 */
-	boolean isItemInStock(int itemId, int productId) throws DataAccessException;
+	boolean isItemInStock(int itemId, int productId);
 
-	void updateQuantity(int qty, int itemId, int productId) throws DataAccessException;
+	void updateQuantity(int qty, int itemId, int productId);
 
-	int getQuantity(int itemId, int productId) throws DataAccessException;
+	int getQuantity(int itemId, int productId);
 }

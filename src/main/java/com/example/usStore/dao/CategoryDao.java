@@ -12,5 +12,5 @@ public interface CategoryDao {
 	List<Category> getCategoryList() throws DataAccessException;
 
 	// catId를 받아 Category 가져오기
-	Category getCategory(int categoryId) throws DataAccessException;	//String -> int
+	Category getCategory(int catId) throws DataAccessException;
 }
