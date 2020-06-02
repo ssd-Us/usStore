@@ -11,7 +11,7 @@ import com.example.usStore.dao.mybatis.mapper.SecondHandMapper;
 import com.example.usStore.domain.SecondHand;
 
 @Repository
-public class MybatisSecondHandDao implements SecondHandDao{
+public class MybatisSecondHandDao implements SecondHandDao {
 
 	@Autowired
 	private SecondHandMapper secondHandMapper;

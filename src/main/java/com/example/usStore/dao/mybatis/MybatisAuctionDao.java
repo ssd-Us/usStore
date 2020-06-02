@@ -15,7 +15,7 @@ public class MybatisAuctionDao implements AuctionDao {
 
 	@Autowired
 	private AuctionMapper auctionMapper;
-	
+
 	@Override
 	public List<Auction> getAuctionList() throws DataAccessException {
 		// TODO Auto-generated method stub
@@ -35,21 +35,21 @@ public class MybatisAuctionDao implements AuctionDao {
 	}
 
 	@Override
+	public void deleteItem(int itemId) throws DataAccessException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
 	public void updateAuction(Auction auction) throws DataAccessException {
 		// TODO Auto-generated method stub
 		
 	}
-	
+
 	@Override
 	public Auction getAuctionById(int itemId) throws DataAccessException {
 		// TODO Auto-generated method stub
 		return null;
-	}
-
-	@Override
-	public void deleteItem(int itemId) throws DataAccessException {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
