@@ -19,43 +19,43 @@ public class MybatisTagDao implements TagDao {
 	@Override
 	public List<Tag> getTagList() throws DataAccessException {
 		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Tag getTagByTagId(int tagId) throws DataAccessException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Tag getTagByItemId(int itemId) throws DataAccessException {
-		// TODO Auto-generated method stub
-		return null;
+		return tagMapper.getTagList();
 	}
 
 	@Override
 	public Tag getTagByTagName(String tagName) throws DataAccessException {
 		// TODO Auto-generated method stub
-		return null;
+		return tagMapper.getTagByTagName(tagName);
 	}
 
 	@Override
 	public void insertTag(Tag tag) throws DataAccessException {
 		// TODO Auto-generated method stub
-		
+		tagMapper.insertTag(tag);
 	}
 
 	@Override
 	public void updateTag(Tag tag) throws DataAccessException {
 		// TODO Auto-generated method stub
-		
+		tagMapper.updateTag(tag);
 	}
 
 	@Override
 	public void deleteTag(int tagId) throws DataAccessException {
 		// TODO Auto-generated method stub
-		
+		tagMapper.deleteTag(tagId);
+	}
+
+	@Override
+	public List<Tag> getTagByTagId(int tagId) throws DataAccessException {
+		// TODO Auto-generated method stub
+		return tagMapper.getTagByTagId(tagId);
+	}
+
+	@Override
+	public List<Tag> getTagByItemId(int itemId) throws DataAccessException {
+		// TODO Auto-generated method stub
+		return tagMapper.getTagByItemId(itemId);
 	}
 
 }

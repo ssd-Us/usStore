@@ -20,11 +20,5 @@ public interface SecondHandDao extends ItemDao {
 	  
 	// SecondHand 수정
 	public void updateSecondHand(SecondHand secondHand) throws DataAccessException;
-	
-	/* 기존에 ItemDao에 있었던 메소드들 */
-	boolean isItemInStock(int itemId, int productId) throws DataAccessException;
-	
-	void updateQuantity(int qty, int itemId, int productId)  throws DataAccessException;
-	
-	int getQuantity(int itemId, int productId)  throws DataAccessException;
+
 }

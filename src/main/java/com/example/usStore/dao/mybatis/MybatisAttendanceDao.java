@@ -26,7 +26,7 @@ public class MybatisAttendanceDao implements AttendanceDao {
 	@Override
 	public void insertAttendance(Attendance attendance) throws DataAccessException {
 		// TODO Auto-generated method stub
-		
+		attendanceMapper.insertAttendance(attendance);
 	}
 
 }

@@ -20,37 +20,37 @@ public class MybatisFollowDao implements FollowDao {
 	@Override
 	public List<Follow> getFollowingList(String userId) throws DataAccessException {
 		// TODO Auto-generated method stub
-		return null;
+		return followMapper.getFollowingList(userId);
 	}
 
 	@Override
 	public List<Follow> getFollowerList(String userId) throws DataAccessException {
 		// TODO Auto-generated method stub
-		return null;
+		return followMapper.getFollowerList(userId);
 	}
 
 	@Override
 	public void insertFollow(Follow follow) throws DataAccessException {
 		// TODO Auto-generated method stub
-		
+		followMapper.insertFollow(follow);
 	}
 
 	@Override
 	public void deleteFollow(int following) throws DataAccessException {
 		// TODO Auto-generated method stub
-		
+		followMapper.deleteFollow(following);
 	}
 
 	@Override
 	public boolean isYourFollower(String follower) throws DataAccessException {
 		// TODO Auto-generated method stub
-		return false;
+		return followMapper.isYourFollower(follower);
 	}
 
 	@Override
 	public boolean isYourFollowing(String following) throws DataAccessException {
 		// TODO Auto-generated method stub
-		return false;
+		return followMapper.isYourFollowing(following);
 	}
 
 }

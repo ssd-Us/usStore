@@ -25,8 +25,7 @@ public class MybatisOrderDao implements OrderDao {
 	@Autowired
 	private SequenceDao sequenceDao;
 
-	public List<Orders> getOrdersByUsername(String username) 
-			throws DataAccessException {
+	public List<Orders> getOrdersByUsername(String username) throws DataAccessException {
 	    return orderMapper.getOrdersByUsername(username);
 	}
 	
@@ -54,6 +53,6 @@ public class MybatisOrderDao implements OrderDao {
 	@Override
 	public List<Orders> getOrdersByUserId(String userId) throws DataAccessException {
 		// TODO Auto-generated method stub
-		return null;
+		return orderMapper.getOrdersByUserId(userId);
 	}
 }
