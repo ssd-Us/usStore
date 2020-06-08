@@ -29,12 +29,12 @@ public interface ItemMapper {
 
   void updateInventoryQuantity(Map<String, Object> param);
 
-  int getInventoryQuantity(String itemId);
+  int getInventoryQuantity(int itemId);
 
-  List<Item> getItemListByProduct(String productId);
+  List<Item> getItemListByProduct(int productId);
 
-  Item getItem(String itemId);
+  Item getItem(int itemId);
   
-  boolean isItemInStock(String itemId);
+  boolean isItemInStock(int itemId);
 
 }

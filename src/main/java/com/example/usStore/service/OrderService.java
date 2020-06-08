@@ -3,6 +3,9 @@ package com.example.usStore.service;
 import java.util.List;
 
 import com.example.usStore.domain.Orders;
+import com.example.usStore.service.facade.UsStoreFacade;
+import com.example.usStore.service.impl.OrderServiceImpl;
+import com.example.usStore.service.impl.UsStoreImpl;
 
 /**
  * Separate OrderService interface, implemented by OrderServiceImpl. * 

@@ -15,10 +15,11 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.ModelAndViewDefiningException;
 
+import com.example.usStore.controller.mypage.UserSession;
 import com.example.usStore.domain.Account;
 import com.example.usStore.domain.Cart;
 import com.example.usStore.service.OrderValidator;
-import com.example.usStore.service.UsStoreFacade;
+import com.example.usStore.service.facade.UsStoreFacade;
 
 /**
  * @author Juergen Hoeller
