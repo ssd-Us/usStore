@@ -24,3 +24,4 @@ public interface ItemMapper {
 
 	void deleteItem(int itemId, int productId);
 }
+
