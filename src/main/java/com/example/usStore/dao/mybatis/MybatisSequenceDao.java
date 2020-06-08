@@ -26,14 +26,14 @@ public class MybatisSequenceDao implements SequenceDao {
 	public int getSequence(String name) throws DataAccessException {
 		// TODO Auto-generated method stub
 		Sequence sequence = new Sequence(name, -1);
-	    sequence = (Sequence) sequenceMapper.getSequence(sequence);
+//	    sequence = (Sequence) sequenceMapper.getSequence(sequence);
 	    if (sequence == null) {
 	    	throw new DataRetrievalFailureException(
 	    		"Error: A null sequence was returned from the database "
 	    		+ "(could not get next " + name + " sequence).");
 	    }
 	    Sequence parameterObject = new Sequence(name, sequence.getNextId()+1);
-	    sequenceMapper.updateSequence(parameterObject);
+//	    sequenceMapper.updateSequence(parameterObject);
 	    return sequence.getNextId();
 	}
 	

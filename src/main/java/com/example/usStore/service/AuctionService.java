@@ -1,5 +1,5 @@
 package com.example.usStore.service;
 
-public class AuctionService {
+public interface AuctionService {
 
 }

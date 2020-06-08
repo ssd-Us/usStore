@@ -6,13 +6,10 @@ import org.springframework.dao.DataAccessException;
 
 import com.example.usStore.domain.GroupBuying;
 
-public interface GroupBuyingDao {
+public interface GroupBuyingDao extends ItemDao {
 	
 	// 공동구매 추가 메소드
 	public void insertGroupBuying(GroupBuying GroupBuying) throws DataAccessException;
-	  
-	// 공동구매 삭제 메소드
-	public void deleteItem(int itemId) throws DataAccessException;
 	  
 	// 공동구매 수정 메소드  
 	public void updateGroupBuying(GroupBuying GroupBuying) throws DataAccessException;

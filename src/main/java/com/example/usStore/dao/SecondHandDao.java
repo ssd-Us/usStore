@@ -7,7 +7,7 @@ import org.springframework.dao.DataAccessException;
 import com.example.usStore.domain.SecondHand;
 
 
-public interface SecondHandDao {
+public interface SecondHandDao extends ItemDao {
 	
 	// 전체 SecondHandList 받아오기
 	List<SecondHand> getSecondHandList() throws DataAccessException;
@@ -17,9 +17,6 @@ public interface SecondHandDao {
 	
 	// SecondHand 추가
 	public void insertSecondHand(SecondHand secondHand) throws DataAccessException;
-	  
-	// SecondHand 삭제
-	public void deleteItem(int itemId) throws DataAccessException;
 	  
 	// SecondHand 수정
 	public void updateSecondHand(SecondHand secondHand) throws DataAccessException;

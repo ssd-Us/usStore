@@ -1,5 +1,5 @@
 package com.example.usStore.service;
 
-public class ItemService {
+public interface ItemService {
 
 }

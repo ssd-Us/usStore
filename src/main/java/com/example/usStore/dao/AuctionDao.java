@@ -6,7 +6,7 @@ import org.springframework.dao.DataAccessException;
 
 import com.example.usStore.domain.Auction;
 
-public interface AuctionDao {
+public interface AuctionDao extends ItemDao {
 	
 	// select Auction
 	List<Auction> getAuctionList() throws DataAccessException;
@@ -16,10 +16,7 @@ public interface AuctionDao {
 	
 	// insert Auction
 	public void insertAuction(Auction auction) throws DataAccessException;
-	 
-	// delete Auction
-	public void deleteItem(int itemId) throws DataAccessException;
-	  
+	 	  
 	// update Auction
 	public void updateAuction(Auction auction) throws DataAccessException;
 	
