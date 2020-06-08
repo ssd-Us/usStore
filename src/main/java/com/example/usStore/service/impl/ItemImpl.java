@@ -272,13 +272,13 @@ public class ItemImpl implements ItemFacade {
 	}
 
 	@Override
-	public Tag getTagByTagId(int tagId) {
+	public List<Tag> getTagByTagId(int tagId) {
 		// TODO Auto-generated method stub
 		return tagDao.getTagByTagId(tagId);
 	}
 
 	@Override
-	public Tag getTagByItemId(int itemId) {
+	public List<Tag> getTagByItemId(int itemId) {
 		// TODO Auto-generated method stub
 		return tagDao.getTagByItemId(itemId);
 	}

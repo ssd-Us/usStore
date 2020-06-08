@@ -92,9 +92,9 @@ public interface ItemFacade {
 	/////////////////////////////////////////////////////////////////////////
 	List<Tag> getTagList ();
 
-	Tag getTagByTagId(int tagId);
+	List<Tag> getTagByTagId(int tagId);
 
-	Tag getTagByItemId(int itemId);	
+	List<Tag> getTagByItemId(int itemId);	
 
 	Tag getTagByTagName(String tagName);	
 
