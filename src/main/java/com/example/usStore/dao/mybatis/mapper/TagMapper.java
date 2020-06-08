@@ -9,13 +9,13 @@ import com.example.usStore.domain.Tag;
 public interface TagMapper {
 
 	//아이템 아이디로 태그 객체 찾기
-	List<Tag> getTagList();
+	List<Tag> getTagList ();
 
 	// 태그 이름으로 태그 객체 찾기(검색 기능에 이용?)
-	Tag getTagByTagId(int tagId);
+	List<Tag> getTagByTagId(int tagId);
 
 	// itemId로 태그 객체 찾기
-	Tag getTagByItemId(int itemId);	
+	List<Tag> getTagByItemId(int itemId);	
 
 	// tagName으로 태그 객체 찾기
 	Tag getTagByTagName(String tagName);	
