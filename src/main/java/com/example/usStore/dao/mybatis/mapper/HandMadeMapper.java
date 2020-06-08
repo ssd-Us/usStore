@@ -8,16 +8,7 @@ import org.springframework.dao.DataAccessException;
 import com.example.usStore.domain.HandMade;
 import com.example.usStore.domain.Item;
 
-public interface HandMadeMapper {
-//	void updateHandMadeQuantity(Map<String, Object> param);
-//
-//	int getHandMadeQuantity(int itemId);
-//
-//	List<HandMade> getHandMadeItemListByProduct(int productId);
-//
-//	Item getHandMadeItem(int itemId);
-//
-//	boolean isHandMadeItemInStock(int itemId);
+public interface HandMadeMapper extends ItemMapper {
 
 	// insert HandMade
 	public void insertHandMade(HandMade handmade);
@@ -28,9 +19,6 @@ public interface HandMadeMapper {
 	// update HandMade
 	public void updateHandMade(HandMade handmade);
 
-	// 아이템 아이디로 해당 수공예품의 재고가 있는지 확인하는 메소드
-	boolean isItemInStock(int itemId, int productId);
-
 	// 모든 수공예 리스트 가져오는 메소드
 	List<HandMade> getHandMadeList();
 
@@ -40,9 +28,4 @@ public interface HandMadeMapper {
 	// Product_id를 받아 HandMade 전체 list 가져오기
 	List<HandMade> getHandMadeListByProductId(int productId);
 
-	// 구매 개수 수정
-	void updateQuantity(int qty, int itemId, int productId);
-
-	// 구매 개수 받아오기
-	int getQuantity(int itemId, int productId);
 }

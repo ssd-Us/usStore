@@ -20,7 +20,6 @@ public interface GroupBuyingDao extends ItemDao {
 	// itemId를 받아 해당하는 groupBuying 객체를 가져오는 메소드
 	GroupBuying getGroupBuyingItem(int itemId) throws DataAccessException;
 	
-
 	// 아이템 아이디로 해당 공동구매 객체 가져오는 메소드 
 	public void joinGroupBuying(GroupBuying GroupBuying) throws DataAccessException;
 	

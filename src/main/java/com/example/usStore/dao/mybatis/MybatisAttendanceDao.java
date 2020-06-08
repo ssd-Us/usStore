@@ -18,9 +18,9 @@ public class MybatisAttendanceDao implements AttendanceDao {
 	private AttendanceMapper attendanceMapper;
 	
 	@Override
-	public List<Attendance> getAttendanceList(String user_id) throws DataAccessException {
+	public List<Attendance> getAttendanceList(String userId) throws DataAccessException {
 		// TODO Auto-generated method stub
-		return null;
+		return attendanceMapper.getAttendanceList(userId);
 	}
 
 	@Override
