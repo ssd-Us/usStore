@@ -43,18 +43,6 @@ public class MybatisAuctionDao implements AuctionDao {
 	}
 
 	@Override
-	public List<Item> getItemListByProduct(int productId) throws DataAccessException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Item getItem(int itemId, int productId) throws DataAccessException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public boolean isItemInStock(int itemId, int productId) throws DataAccessException {
 		// TODO Auto-generated method stub
 		return false;
@@ -77,13 +65,7 @@ public class MybatisAuctionDao implements AuctionDao {
 		// TODO Auto-generated method stub
 		
 	}
-
-	@Override
-	public void deleteItem(int itemId) throws DataAccessException {
-		// TODO Auto-generated method stub
-		
-	}
-
+	
 	@Override
 	public void updateAuction(Auction auction) throws DataAccessException {
 		// TODO Auto-generated method stub
@@ -94,6 +76,12 @@ public class MybatisAuctionDao implements AuctionDao {
 	public Auction getAuctionById(int itemId) throws DataAccessException {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void deleteItem(int itemId, int productId) throws DataAccessException {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

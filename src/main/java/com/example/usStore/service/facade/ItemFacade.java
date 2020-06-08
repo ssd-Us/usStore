@@ -1,6 +1,7 @@
 package com.example.usStore.service.facade;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.dao.DataAccessException;
 
@@ -13,17 +14,32 @@ import com.example.usStore.domain.Tag;
 /*
  * ItemFacade
  * 
- * HandMade / GroupBuying / SecondHand / Auction / Tag
+ * Item / HandMade / GroupBuying / SecondHand / Auction / Tag
  * */
 public interface ItemFacade {
 
 	/////////////////////////////////////////////////////////////////////////
-	/* HandMade (Item) */
+	/* Item */
 	/////////////////////////////////////////////////////////////////////////
-	public void insertHandMade(HandMade handmade);
-	  
+	
+	void updateInventoryQuantity(Map<String, Object> param);
+
+	int getInventoryQuantity(int itemId, int productId);
+	
+	void updateQuantity(int qty, int itemId, int productId);
+	
+	int getQuantity(int itemId, int productId);
+
+	boolean isItemInStock(int itemId, int productId);
+	
 	public void deleteItem(int itemId, int productId);
-	  
+	
+	/////////////////////////////////////////////////////////////////////////
+	/* HandMade */
+	/////////////////////////////////////////////////////////////////////////
+
+	public void insertHandMade(HandMade handmade);
+	
 	public void updateHandMade(HandMade handmade);
 	
 	List<HandMade> getHandMadeList();
@@ -31,12 +47,6 @@ public interface ItemFacade {
 	HandMade getHandMadeById(int itemId);
 	
 	List<HandMade> getHandMadeListByProductId(int productId);
-	
-	boolean isItemInStock(int itemId, int productId);
-	
-	void updateQuantity(int qty, int itemId, int productId);
-	
-	int getQuantity(int itemId, int productId);
 	
 	/////////////////////////////////////////////////////////////////////////
 	/* GroupBuying */

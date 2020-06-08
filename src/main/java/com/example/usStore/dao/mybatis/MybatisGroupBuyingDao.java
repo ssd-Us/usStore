@@ -43,18 +43,6 @@ public class MybatisGroupBuyingDao implements GroupBuyingDao {
 	}
 
 	@Override
-	public List<Item> getItemListByProduct(int productId) throws DataAccessException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Item getItem(int itemId, int productId) throws DataAccessException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public boolean isItemInStock(int itemId, int productId) throws DataAccessException {
 		// TODO Auto-generated method stub
 		return false;
@@ -65,13 +53,7 @@ public class MybatisGroupBuyingDao implements GroupBuyingDao {
 		// TODO Auto-generated method stub
 		
 	}
-
-	@Override
-	public void deleteItem(int itemId) throws DataAccessException {
-		// TODO Auto-generated method stub
-		
-	}
-
+	
 	@Override
 	public void updateGroupBuying(GroupBuying GroupBuying) throws DataAccessException {
 		// TODO Auto-generated method stub
@@ -102,4 +84,9 @@ public class MybatisGroupBuyingDao implements GroupBuyingDao {
 		
 	}
 
+	@Override
+	public void deleteItem(int itemId, int productId) throws DataAccessException {
+		// TODO Auto-generated method stub
+		
+	}
 }

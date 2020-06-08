@@ -16,10 +16,7 @@ public interface AuctionDao extends ItemDao {
 	
 	// insert Auction
 	public void insertAuction(Auction auction) throws DataAccessException;
-	 
-	// delete Auction
-	public void deleteItem(int itemId) throws DataAccessException;
-	  
+	 	  
 	// update Auction
 	public void updateAuction(Auction auction) throws DataAccessException;
 	
