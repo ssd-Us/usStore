@@ -43,18 +43,6 @@ public class MybatisSecondHandDao implements SecondHandDao {
 	}
 
 	@Override
-	public List<Item> getItemListByProduct(int productId) throws DataAccessException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Item getItem(int itemId, int productId) throws DataAccessException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public boolean isItemInStock(int itemId, int productId) throws DataAccessException {
 		// TODO Auto-generated method stub
 		return false;
@@ -79,13 +67,13 @@ public class MybatisSecondHandDao implements SecondHandDao {
 	}
 
 	@Override
-	public void deleteItem(int itemId) throws DataAccessException {
+	public void updateSecondHand(SecondHand secondHand) throws DataAccessException {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void updateSecondHand(SecondHand secondHand) throws DataAccessException {
+	public void deleteItem(int itemId, int productId) throws DataAccessException {
 		// TODO Auto-generated method stub
 		
 	}

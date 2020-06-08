@@ -11,13 +11,9 @@ public interface HandMadeDao extends ItemDao {
 	// insert HandMade
 	public void insertHandMade(HandMade handmade) throws DataAccessException;
 	  
-	// delete HandMade
-	public void deleteItem(int itemId) throws DataAccessException;
-	  
 	// update HandMade
 	public void updateHandMade(HandMade handmade) throws DataAccessException;
 	
-
 	// 모든 수공예 리스트 가져오는 메소드
 	List<HandMade> getHandMadeList() throws DataAccessException;
 	
