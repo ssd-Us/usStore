@@ -26,5 +26,5 @@ public interface GroupBuyingMapper extends ItemMapper {
 
 	// 공동구매 가격 조정 메소드
 	public void calculateDiscount(GroupBuying GroupBuying);
-  
+
 }
