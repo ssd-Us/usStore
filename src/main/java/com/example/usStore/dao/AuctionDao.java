@@ -22,4 +22,5 @@ public interface AuctionDao extends ItemDao {
 
 	// 아이템 아이디로 해당 경매 객체 반환
 	public Auction getAuctionById(int itemId) throws DataAccessException;
+	
 }
