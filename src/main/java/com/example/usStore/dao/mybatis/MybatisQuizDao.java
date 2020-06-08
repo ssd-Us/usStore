@@ -20,19 +20,19 @@ public class MybatisQuizDao implements QuizDao {
 	@Override
 	public List<Quiz> getQuizList() throws DataAccessException {
 		// TODO Auto-generated method stub
-		return null;
+		return quizMapper.getQuizList();
 	}
 
 	@Override
 	public Quiz getRandomQuiz(List<Quiz> quizList) throws DataAccessException {
 		// TODO Auto-generated method stub
-		return null;
+		return quizMapper.getRandomQuiz(quizList);
 	}
 
 	@Override
 	public boolean isCorrect(String quizId, String answer) throws DataAccessException {
 		// TODO Auto-generated method stub
-		return false;
+		return quizMapper.isCorrect(quizId, answer);
 	}
 
 }

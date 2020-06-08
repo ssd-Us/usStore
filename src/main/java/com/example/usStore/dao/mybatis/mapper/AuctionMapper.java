@@ -8,7 +8,7 @@ import org.springframework.dao.DataAccessException;
 import com.example.usStore.domain.Auction;
 import com.example.usStore.domain.Item;
 
-public interface AuctionMapper {
+public interface AuctionMapper extends ItemMapper {
 	
 	// select Auction
 	List<Auction> getAuctionList();
