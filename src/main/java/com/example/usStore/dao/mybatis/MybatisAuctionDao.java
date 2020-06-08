@@ -84,4 +84,22 @@ public class MybatisAuctionDao implements AuctionDao {
 		
 	}
 
+	@Override
+	public boolean isItemInStock(int itemId, int productId) throws DataAccessException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void updateQuantity(int qty, int itemId, int productId) throws DataAccessException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int getQuantity(int itemId, int productId) throws DataAccessException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

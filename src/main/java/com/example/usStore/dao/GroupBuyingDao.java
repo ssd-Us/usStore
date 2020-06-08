@@ -26,4 +26,11 @@ public interface GroupBuyingDao extends ItemDao {
 	
 	// 공동구매 가격 조정 메소드
 	public void calculateDiscount(GroupBuying GroupBuying) throws DataAccessException;
+	
+	/* 기존에 ItemDao에 있었던 메소드들 */
+	boolean isItemInStock(int itemId, int productId) throws DataAccessException;
+	
+	void updateQuantity(int qty, int itemId, int productId)  throws DataAccessException;
+	
+	int getQuantity(int itemId, int productId)  throws DataAccessException;
 }
