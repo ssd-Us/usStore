@@ -25,13 +25,12 @@ public class AuctionFormController {
    //경매 리스트
    @RequestMapping("/shop/auction/listItem.do") 
    public String auctionList(@RequestParam("productId") int productId, ModelMap model) {
-//      List<Auction> auctionList = this.itemFacade.getAuctionList();
-//      
-//      System.out.println(auctionList.get(0).getTitle().toString());
-//      
-//      model.addAttribute("auctionList", auctionList);
+      List<Auction> auctionList = this.itemImpl.getAuctionList();
       
-	   System.out.println("컨트롤러로 넘어옴");
+      System.out.println("테스트" + auctionList.get(0).getTitle().toString());
+      
+      //model.addAttribute("auctionList", auctionList);
+
       return "Product/auction";
    }
    
