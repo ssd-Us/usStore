@@ -7,76 +7,84 @@ import java.io.Serializable;
  * */
 @SuppressWarnings("serial")
 public class Item implements Serializable {
-  /* Private Fields */
-  private int itemId;			 //(PK) String- > int
-  private int unitCost; 	
-  private String title; 		
-  private String description; 	
-  private int viewCount; 		 	 		
-  private int qty;			 
-  private String userId;		 //(FK)
-  private int productId;      	 //(FK)
-  
-  /* JavaBeans Properties */
-  public int getItemId() {
-	return itemId;
-  }
+	/* Private Fields */
+	private int itemId; // (PK) String- > int
+	private int unitCost;
+	private String title;
+	private String description;
+	private int viewCount;
+	private int qty;
+	private String userId; // (FK)
+	private int productId; // (FK)
 
-  public void setItemId(int itemId) {
-	this.itemId = itemId;
-  }
+	/* JavaBeans Properties */
+	public int getItemId() {
+		return itemId;
+	}
 
-  public int getUnitCost() {
-	return unitCost;
-  }
+	public void setItemId(int itemId) {
+		this.itemId = itemId;
+	}
 
-  public void setUnitCost(int unitCost) {
-	this.unitCost = unitCost;
-  }
+	public int getUnitCost() {
+		return unitCost;
+	}
 
-  public String getTitle() {
-	return title;
-  }
+	public void setUnitCost(int unitCost) {
+		this.unitCost = unitCost;
+	}
 
-  public void setTitle(String title) {
-	this.title = title;
-  }
+	public String getTitle() {
+		return title;
+	}
 
-  public String getDescription() {
-	return description;
-  }
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
-  public void setDescription(String description) {
-	this.description = description;
-  }
+	public String getDescription() {
+		return description;
+	}
 
-  public int getViewCount() {
-	return viewCount;
-  }
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
-  public void setViewCount(int viewCount) {
-	this.viewCount = viewCount;
-  }
+	public int getViewCount() {
+		return viewCount;
+	}
 
-  public String getUserId() {
-	return userId;
-  }
+	public void setViewCount(int viewCount) {
+		this.viewCount = viewCount;
+	}
 
-  public void setUserId(String userId) {
-	this.userId = userId;
-  }
+	public int getQty() {
+		return qty;
+	}
 
-  public int getProductId() {
-	return productId;
-  }
+	public void setQty(int qty) {
+		this.qty = qty;
+	}
 
-  public void setProductId(int productId) {
-	this.productId = productId;
-  }
-  
-  /* Public Methods */
-  public String toString() {
-	  return null;
-  }
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
+	public int getProductId() {
+		return productId;
+	}
+
+	public void setProductId(int productId) {
+		this.productId = productId;
+	}
+
+	/* Public Methods */
+	public String toString() {
+		return null;
+	}
 
 }
