@@ -17,22 +17,28 @@
               </tr>
               <tr>
                 <td>
-                  <a href="<c:url value="/shop/viewCategory.do?catId=0"/>"> <!-- Product -->
-                  <p>Product</p>
-                </td>
-                <td>
-                <a href="<c:url value="/shop/viewProduct.do?productId=0"/>"><p>GroupBuying</p>
-                <a href="<c:url value="/shop/viewProduct.do?productId=1"/>"><p>auction</p>
-                <a href="<c:url value="/shop/viewProduct.do?productId=2"/>"><p>secondHand</p>
-                <a href="<c:url value="/shop/viewProduct.do?productId=3"/>"><p>handMade</p>
+                	<hr>
+	                <a href="<c:url value="/shop/viewCategory.do?catId=0"/>"> <!-- Product -->
+	                <p>Product</p>
+	                <hr>
+	                <ul>
+		               	<li><a href=<c:url value="/shop/viewProduct.do?productId=0"/>"><p>GroupBuying</p></li>
+		                <li><a href="<c:url value="/shop/viewProduct.do?productId=1"/>"><p>auction</p></li>
+		                <li><a href="<c:url value="/shop/viewProduct.do?productId=2"/>"><p>secondHand</p></li>
+		                <li><a href="<c:url value="/shop/viewProduct.do?productId=3"/>"><p>handMade</p></li>
+	                </ul>
                 </td>
               </tr>
               <tr>
                 <td>
+                	<hr>
                     <a href="<c:url value="/shop/viewCategory.do?catId=1"/>"> <!-- Event -->
-                     <p>Event</p>
-                     <a href="<c:url value="/shop/viewEvent.do?catId=2"/>"><p>Quiz</p>
-                     <a href="<c:url value="/shop/viewEvent.do?catId=3"/>"><p>AttendanceCheck</p>
+                    <p>Event</p>
+                    <hr>
+                    <ul>
+                    	<li><a href="<c:url value="/shop/viewEvent.do?catId=2"/>"><p>Quiz</p></li>
+                    	<li><a href="<c:url value="/shop/viewEvent.do?catId=3"/>"><p>AttendanceCheck</p></li>
+                    </ul>
                 </td>
               </tr>
 <!--               <tr> -->
@@ -63,7 +69,7 @@
           </td>
           <td style="text-align:center;background-color:white;height:300;width:100%">
             <!-- MAIN IMAGE -->
-            <img src="../images/usStore3.png" style="float:center;width:600;height:355;border:0;" />
+            <img src="../images/open1.jpg" style="float:center;width:600;height:355;border:0;" />
           </td>
         </tr>
       </table>
