@@ -28,7 +28,7 @@ public class ViewProductController {
 	public void setusStore(UsStoreFacade usStore) {
 		this.usStore = usStore;
 	}
-
+/*
 	@RequestMapping("/shop/viewProduct.do")
 	public String handleRequest(
 			@RequestParam("productId") int productId,
@@ -40,7 +40,7 @@ public class ViewProductController {
 		model.put("product", product);
 		return "Product";
 	}
-	
+	*/
 	@RequestMapping("/shop/viewProduct2.do")
 	public String handleRequest2(
 			@ModelAttribute("product") Product product,
