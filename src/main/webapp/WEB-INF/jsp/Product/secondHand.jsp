@@ -22,15 +22,15 @@ table, th, td {
 <table style="width:70%">
    <tr><th>순번</th><th>제목</th><th>조회수</th></tr>
    
-    <c:forEach var="secondHand" items="${secondHandList}" varStatus="status">
+    <c:forEach var="item" items="${itemList.pageList}" varStatus="status">
       <tr>
-         <td>${secondHand.itemId}</td>
+         <td>${item.itemId}</td>
          <td><a href="<c:url value='/productDetail'>
                              <c:param name="product" value="2"/>
-                           <c:param name="itemId" value="${secondHand.itemId}"/></c:url>">
-                        <c:out value="${secondHand.title}"/></a>
+                           <c:param name="itemId" value="${item.itemId}"/></c:url>">
+                        <c:out value="${item.title}"/></a>
             </td>
-             <td><c:out value="${secondHand.viewcount}"/></td>                     
+             <td><c:out value="${item.viewcount}"/></td>                     
       </tr>
    </c:forEach>   
 </table>
