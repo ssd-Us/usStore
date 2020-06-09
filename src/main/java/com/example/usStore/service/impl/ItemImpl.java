@@ -43,6 +43,7 @@ public class ItemImpl implements ItemFacade {
 	@Autowired
 	private TagDao tagDao;
 	
+	
 	@Override
 	public void updateQuantity(int qty, int itemId, int productId) {
 		// TODO Auto-generated method stub
@@ -103,7 +104,7 @@ public class ItemImpl implements ItemFacade {
 		}
 	}
 	
-	// 이거 고처야됌
+	// �씠嫄� 怨좎쿂�빞�릪
 	@Override
 	public boolean isItemInStock(int itemId, int productId) {
 		// TODO Auto-generated method stub
@@ -190,25 +191,21 @@ public class ItemImpl implements ItemFacade {
 
 	@Override
 	public List<SecondHand> getSecondHandList() {
-		// TODO Auto-generated method stub
 		return secondHandDao.getSecondHandList();
 	}
 
 	@Override
 	public SecondHand getSecondHandItem(int itemId) {
-		// TODO Auto-generated method stub
 		return secondHandDao.getSecondHandItem(itemId);
 	}
 
 	@Override
 	public void insertSecondHand(SecondHand secondHand) {
-		// TODO Auto-generated method stub
 		secondHandDao.insertSecondHand(secondHand);
 	}
 
 	@Override
 	public void updateSecondHand(SecondHand secondHand) {
-		// TODO Auto-generated method stub
 		secondHandDao.updateSecondHand(secondHand);
 	}
 
