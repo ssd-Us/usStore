@@ -5,6 +5,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.samples.service.MemberService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import com.example.usStore.domain.GroupBuying;
@@ -27,6 +29,9 @@ public class GroupBuyingFormController {
 	private static final String ADD_FORM2 = "Product/addGroupBuying";
 	private static final String CHECK_FORM3 = "Product/checkGroupBuying";
 	private static final String DetailPage = "Product/viewGroupBuying";
+	
+	@Autowired
+	private ItemImpl itemImple;
 	
 	@ModelAttribute("gbform")
 	public GroupBuyingForm formBacking(
@@ -100,7 +105,7 @@ public class GroupBuyingFormController {
 			
 		GroupBuying gb;
 		
-		gb = ItemImpl.insertGroupBuying(gbcommand);
+		gb = itemImpl.insertGroupBuying(gbcommand);
 			/* ItemImpl.insertGroupBuying 메소드를 
 			 * @Override public GroupBuying insertGroupBuying(GroupBuyingForm gbcommand) { // TODO
 			 * groupBuyingDao.insertGroupBuying(GroupBuying); 
@@ -110,7 +115,7 @@ public class GroupBuyingFormController {
 		
 		model.addAttribute("newGroupBuying", gb);
 		
-		List<GroupBuying> gbs = ItemImpl.getGroupBuyingList();
+		List<GroupBuying> gbs = itemImpl.getGroupBuyingList();
 		model.addAttribute("groupBuyingList", gbs);
 		
 		sessionStatus.setComplete();	// session 종료		
