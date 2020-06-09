@@ -17,19 +17,7 @@ public class MybatisSecondHandDao implements SecondHandDao {
 
 	@Autowired
 	private SecondHandMapper secondHandMapper;
-
-	@Override
-	public void updateInventoryQuantity(Map<String, Object> param) throws DataAccessException {
-		// TODO Auto-generated method stub
-		secondHandMapper.updateInventoryQuantity(param);
-	}
-
-	@Override
-	public int getInventoryQuantity(int itemId, int productId) throws DataAccessException {
-		// TODO Auto-generated method stub
-		return secondHandMapper.getInventoryQuantity(itemId, productId);
-	}
-
+	
 	@Override
 	public void updateQuantity(int qty, int itemId, int productId) throws DataAccessException {
 		// TODO Auto-generated method stub
@@ -76,6 +64,24 @@ public class MybatisSecondHandDao implements SecondHandDao {
 	public void updateSecondHand(SecondHand secondHand) throws DataAccessException {
 		// TODO Auto-generated method stub
 		secondHandMapper.updateSecondHand(secondHand);
+	}
+
+	@Override
+	public void insertItem(Item item) {
+		// TODO Auto-generated method stub
+		secondHandMapper.insertItem(item);
+	}
+
+	@Override
+	public void updateItem(Item item) {
+		// TODO Auto-generated method stub
+		secondHandMapper.updateItem(item);
+	}
+
+	@Override
+	public void getItem(int itemId, int productId) {
+		// TODO Auto-generated method stub
+		secondHandMapper.getItem(itemId, productId);
 	}
 	
 }

@@ -10,11 +10,13 @@ import org.springframework.transaction.annotation.Transactional;
 import com.example.usStore.dao.AuctionDao;
 import com.example.usStore.dao.GroupBuyingDao;
 import com.example.usStore.dao.HandMadeDao;
+import com.example.usStore.dao.ItemDao;
 import com.example.usStore.dao.SecondHandDao;
 import com.example.usStore.dao.TagDao;
 import com.example.usStore.domain.Auction;
 import com.example.usStore.domain.GroupBuying;
 import com.example.usStore.domain.HandMade;
+import com.example.usStore.domain.Item;
 import com.example.usStore.domain.SecondHand;
 import com.example.usStore.domain.Tag;
 import com.example.usStore.service.facade.ItemFacade;
@@ -22,12 +24,14 @@ import com.example.usStore.service.facade.ItemFacade;
 /*
  * ItemFacade
  * 
- * HandMade / GroupBuying / SecondHand / Auction / Tag
+ * Item / HandMade / GroupBuying / SecondHand / Auction / Tag
  * */
 @Service("itemImpl")
 @Transactional
 public class ItemImpl implements ItemFacade {
 
+	@Autowired
+	private ItemDao itemDao;
 	@Autowired
 	private HandMadeDao handMadeDao;
 	@Autowired
@@ -39,33 +43,6 @@ public class ItemImpl implements ItemFacade {
 	@Autowired
 	private TagDao tagDao;
 	
-
-	// 구현...?? 모르겠음
-	@Override
-	public void updateInventoryQuantity(Map<String, Object> param) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public int getInventoryQuantity(int itemId, int productId) {
-		// TODO Auto-generated method stub
-		switch(productId) {
-		case 0:
-			return groupBuyingDao.getInventoryQuantity(itemId, productId);
-		case 1:
-			return auctionDao.getInventoryQuantity(itemId, productId);
-		case 2:
-			return secondHandDao.getInventoryQuantity(itemId, productId);
-		case 3:
-			return handMadeDao.getInventoryQuantity(itemId, productId);
-		default:
-			System.err.println("getInventoryQuantity Error !!");
-			return -1;
-		}
-	}
-	
-
 	@Override
 	public void updateQuantity(int qty, int itemId, int productId) {
 		// TODO Auto-generated method stub
@@ -306,4 +283,23 @@ public class ItemImpl implements ItemFacade {
 		// TODO Auto-generated method stub
 		tagDao.deleteTag(tagId);
 	}
+
+	@Override
+	public void insertItem(Item item) {
+		// TODO Auto-generated method stub
+		itemDao.insertItem(item);
+	}
+
+	@Override
+	public void updateItem(Item item) {
+		// TODO Auto-generated method stub
+		itemDao.updateItem(item);
+	}
+
+	@Override
+	public void getItem(int itemId, int productId) {
+		// TODO Auto-generated method stub
+		itemDao.getItem(itemId, productId);
+	}
+
 }
