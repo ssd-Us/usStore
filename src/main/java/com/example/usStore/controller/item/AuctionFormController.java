@@ -15,6 +15,7 @@ import com.example.usStore.service.impl.ItemImpl;
 
 @Controller
 public class AuctionFormController {
+   @Autowired
    private ItemImpl itemImpl;
    
    @Autowired
