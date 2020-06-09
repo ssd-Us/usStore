@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-	xmlns="http://xmlns.jcp.org/xml/ns/javaee" 
-	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee 
-						http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" 
-	id="WebApp_ID" version="4.0">
-	
+   xmlns="http://xmlns.jcp.org/xml/ns/javaee" 
+   xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee 
+                  http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" 
+   id="WebApp_ID" version="4.0">
+   
   <display-name>Archetype Created Web Application</display-name>
     <display-name>UsStore</display-name>
-  <description> 2020-01 Sofeware System Development (01-04) UsStore </description>
+  <description> 2020-01 Software System Development (01-04) UsStore </description>
 
   <context-param>
     <param-name>webAppRootKey</param-name>
@@ -20,9 +20,9 @@
   <context-param>
     <param-name>contextConfigLocation</param-name>
     <param-value>
-       	classpath:applicationContext.xml
-      	classpath:dataAccessContext-mybatis.xml 
-	</param-value>
+          classpath:applicationContext.xml
+         classpath:dataAccessContext-mybatis.xml 
+   </param-value>
   </context-param>
   
   <listener>
