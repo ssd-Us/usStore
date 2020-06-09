@@ -37,10 +37,10 @@ public class AddItemToCartController {
 			@RequestParam("workingItemId") int workingItemId,
 			@ModelAttribute("sessionCart") Cart cart 
 			) throws Exception {
-		if (cart.containsItemId(workingItemId)) {
-			cart.incrementQuantityByItemId(workingItemId);
-		}
-		else {
+//		if (cart.containsItemId(workingItemId)) {
+//			cart.incrementQuantityByItemId(workingItemId);
+//		}
+//		else {
 			// isInStock is a "real-time" property that must be updated
 			// every time an item is added to the cart, even if other
 			// item details are cached.
@@ -49,7 +49,7 @@ public class AddItemToCartController {
 //			boolean isInStock = this.usStore.isItemInStock(workingItemId);
 //			Item item = this.usStore.getItem(workingItemId);
 //			cart.addItem(item, isInStock);
-		}
+//		}
 		return new ModelAndView("Cart", "cart", cart);
 	}
 }

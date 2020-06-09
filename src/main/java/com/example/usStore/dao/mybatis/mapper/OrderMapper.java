@@ -11,16 +11,6 @@ import com.example.usStore.domain.Orders;
  */
 public interface OrderMapper {
 
-//	List<Orders> getOrdersByUsername(String username);
-//
-//	Orders getOrder(int orderId);
-//
-//	void insertOrder(Orders order);
-//
-//	void insertOrderStatus(Orders order);
-//
-//	int msSqlServerInsertOrder(Orders order);
-
 	// 해당 사용자의 주문 목록 가져오기 (userId)
 	List<Orders> getOrdersByUserId(String userId);
 

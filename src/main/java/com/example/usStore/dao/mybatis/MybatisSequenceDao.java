@@ -40,6 +40,6 @@ public class MybatisSequenceDao implements SequenceDao {
 	@Override
 	public void updateSequence(int nextId, int name) throws DataAccessException {
 		// TODO Auto-generated method stub
-		
+		sequenceMapper.updateSequence(nextId, name);
 	}
 }

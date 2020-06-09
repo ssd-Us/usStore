@@ -21,43 +21,37 @@ public class MybatisItemDao implements ItemDao {
 	@Override
 	public void updateInventoryQuantity(Map<String, Object> param) throws DataAccessException {
 		// TODO Auto-generated method stub
-		
+		itemMapper.updateInventoryQuantity(param);
 	}
 
 	@Override
 	public int getInventoryQuantity(int itemId, int productId) throws DataAccessException {
 		// TODO Auto-generated method stub
-		return 0;
+		return itemMapper.getInventoryQuantity(itemId, productId);
 	}
 
 	@Override
 	public void updateQuantity(int qty, int itemId, int productId) throws DataAccessException {
 		// TODO Auto-generated method stub
-		
+		itemMapper.updateQuantity(qty, itemId, productId);
 	}
 
 	@Override
 	public int getQuantity(int itemId, int productId) throws DataAccessException {
 		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public List<Item> getItemListByProduct(int productId) throws DataAccessException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Item getItem(int itemId, int productId) throws DataAccessException {
-		// TODO Auto-generated method stub
-		return null;
+		return itemMapper.getQuantity(itemId, productId);
 	}
 
 	@Override
 	public boolean isItemInStock(int itemId, int productId) throws DataAccessException {
 		// TODO Auto-generated method stub
-		return false;
+		return itemMapper.isItemInStock(itemId, productId);
+	}
+
+	@Override
+	public void deleteItem(int itemId, int productId) throws DataAccessException {
+		// TODO Auto-generated method stub
+		itemMapper.deleteItem(itemId, productId);
 	}
 
 }

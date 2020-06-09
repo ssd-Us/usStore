@@ -21,79 +21,67 @@ public class MybatisHandMadeDao implements HandMadeDao {
 	@Override
 	public void updateInventoryQuantity(Map<String, Object> param) throws DataAccessException {
 		// TODO Auto-generated method stub
-		
+		handMadeMapper.updateInventoryQuantity(param);
 	}
 
 	@Override
 	public int getInventoryQuantity(int itemId, int productId) throws DataAccessException {
 		// TODO Auto-generated method stub
-		return 0;
+		return handMadeMapper.getInventoryQuantity(itemId, productId);
 	}
 
 	@Override
 	public void updateQuantity(int qty, int itemId, int productId) throws DataAccessException {
 		// TODO Auto-generated method stub
-		
+		handMadeMapper.updateQuantity(qty, itemId, productId);
 	}
 
 	@Override
 	public int getQuantity(int itemId, int productId) throws DataAccessException {
 		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public List<Item> getItemListByProduct(int productId) throws DataAccessException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Item getItem(int itemId, int productId) throws DataAccessException {
-		// TODO Auto-generated method stub
-		return null;
+		return handMadeMapper.getQuantity(itemId, productId);
 	}
 
 	@Override
 	public boolean isItemInStock(int itemId, int productId) throws DataAccessException {
 		// TODO Auto-generated method stub
-		return false;
+		return handMadeMapper.isItemInStock(itemId, productId);
+	}
+
+	@Override
+	public void deleteItem(int itemId, int productId) throws DataAccessException {
+		// TODO Auto-generated method stub
+		handMadeMapper.deleteItem(itemId);
 	}
 
 	@Override
 	public void insertHandMade(HandMade handmade) throws DataAccessException {
 		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void deleteItem(int itemId) throws DataAccessException {
-		// TODO Auto-generated method stub
-		
+		handMadeMapper.insertHandMade(handmade);
 	}
 
 	@Override
 	public void updateHandMade(HandMade handmade) throws DataAccessException {
 		// TODO Auto-generated method stub
-		
+		handMadeMapper.updateHandMade(handmade);
 	}
 
 	@Override
 	public List<HandMade> getHandMadeList() throws DataAccessException {
 		// TODO Auto-generated method stub
-		return null;
+		return handMadeMapper.getHandMadeList();
 	}
 
 	@Override
 	public HandMade getHandMadeById(int itemId) throws DataAccessException {
 		// TODO Auto-generated method stub
-		return null;
+		return handMadeMapper.getHandMadeById(itemId);
 	}
 
 	@Override
 	public List<HandMade> getHandMadeListByProductId(int productId) throws DataAccessException {
 		// TODO Auto-generated method stub
-		return null;
+		return handMadeMapper.getHandMadeListByProductId(productId);
 	}
 
 }

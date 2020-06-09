@@ -11,14 +11,14 @@ public class KeyAlarm implements Serializable {
 	// variable
 	private int keyAlarmId;  // Sequence
 	private String userId;   // (FK) userId
-	private String keyword;	 // Keyword for Alarm
+	private String keyword;	 // 알람 설정할 키워드
 	
 	// setter & getter
 	public int getkeyAlarmId() {
 		return keyAlarmId;
 	}
 	public void setkeyAlarmId(int keyAlarmId) {
-		this.keyAlarmId = keyAlarmId;
+		keyAlarmId = keyAlarmId;
 	}
 	public String getuserId() {
 		return userId;

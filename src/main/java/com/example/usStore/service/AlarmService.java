@@ -1,5 +1,5 @@
 package com.example.usStore.service;
 
-public class AlarmService {
+public interface AlarmService {
 
 }

@@ -20,25 +20,25 @@ public class MybatisCouponDao implements CouponDao {
 	@Override
 	public Coupon getCoupon(int couponId) throws DataAccessException {
 		// TODO Auto-generated method stub
-		return null;
+		return couponMapper.getCoupon(couponId);
 	}
 
 	@Override
 	public void insertCoupon(Coupon coupon) throws DataAccessException {
 		// TODO Auto-generated method stub
-		
+		couponMapper.insertCoupon(coupon);
 	}
 
 	@Override
 	public void deleteCoupon(int couponId) throws DataAccessException {
 		// TODO Auto-generated method stub
-		
+		couponMapper.deleteCoupon(couponId);
 	}
 
 	@Override
 	public List<Coupon> getCouponList(String userId) throws DataAccessException {
 		// TODO Auto-generated method stub
-		return null;
+		return couponMapper.getCouponList(userId);
 	}
 
 }

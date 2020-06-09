@@ -8,14 +8,16 @@ import java.io.Serializable;
 @SuppressWarnings("serial")
 public class Item implements Serializable {
   /* Private Fields */
-  private int itemId;			//(PK) String- > int
-  private String suppId;	 	//(FK) userId
-  private int unitCost;			// 정가
-  private String title;			// 제목
-  private String description;	// 설명
-  private int viewCount; 		// 조회수
-  private int qty;			 	// 재고
-  private int productId;      	//(FK) productId
+  private int itemId;			 //(PK) String- > int
+  private String supplierId;	 //(FK) �Ǹ��� ���̵�
+  private int unitCost; 		 //�ܰ�(����)
+  private String title; 		 //����
+  private String description; 	 //����
+  private int viewCount; 		 //��ȸ��
+  private int tagId;	 		 //(FK) �±׾��̵� 
+  private int quantity;			 //���
+  private String userId;		 //(FK) ������ ���̵�
+  private int productId;      	 //(FK) ��������/�߰�ŷ�/���/�������Ǹ� ����  
   
   /* JavaBeans Properties */
   public int getItemId() {
@@ -26,12 +28,12 @@ public class Item implements Serializable {
 	this.itemId = itemId;
   }
 
-  public String getsuppId() {
-	return suppId;
+  public String getSupplierId() {
+	return supplierId;
   }
 
-  public void setsuppId(String suppId) {
-	this.suppId = suppId;
+  public void setSupplierId(String supplierId) {
+	this.supplierId = supplierId;
   }
 
   public int getUnitCost() {
@@ -66,14 +68,30 @@ public class Item implements Serializable {
 	this.viewCount = viewCount;
   }
 
-  public int getqty() {
-	return qty;
+  public int getTagId() {
+	return tagId;
   }
 
-  public void setqty(int qty) {
-	this.qty = qty;
+  public void setTagId(int tagId) {
+	this.tagId = tagId;
   }
-  
+
+  public int getQuantity() {
+	return quantity;
+  }
+
+  public void setQuantity(int quantity) {
+	this.quantity = quantity;
+  }
+
+  public String getUserId() {
+	return userId;
+  }
+
+  public void setUserId(String userId) {
+	this.userId = userId;
+  }
+
   public int getProductId() {
 	return productId;
   }
@@ -85,7 +103,7 @@ public class Item implements Serializable {
  
   /* Public Methods */
   public String toString() {
-    return "��ǰ : " + getItemId() + ", �Ǹ��� : " + getsuppId().trim();
+    return "��ǰ : " + getItemId() + ", �Ǹ��� : " + getSupplierId().trim();
   }
 
 }

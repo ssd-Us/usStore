@@ -21,73 +21,61 @@ public class MybatisSecondHandDao implements SecondHandDao {
 	@Override
 	public void updateInventoryQuantity(Map<String, Object> param) throws DataAccessException {
 		// TODO Auto-generated method stub
-		
+		secondHandMapper.updateInventoryQuantity(param);
 	}
 
 	@Override
 	public int getInventoryQuantity(int itemId, int productId) throws DataAccessException {
 		// TODO Auto-generated method stub
-		return 0;
+		return secondHandMapper.getInventoryQuantity(itemId, productId);
 	}
 
 	@Override
 	public void updateQuantity(int qty, int itemId, int productId) throws DataAccessException {
 		// TODO Auto-generated method stub
-		
+		secondHandMapper.updateQuantity(qty, itemId, productId);
 	}
 
 	@Override
 	public int getQuantity(int itemId, int productId) throws DataAccessException {
 		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public List<Item> getItemListByProduct(int productId) throws DataAccessException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Item getItem(int itemId, int productId) throws DataAccessException {
-		// TODO Auto-generated method stub
-		return null;
+		return secondHandMapper.getQuantity(itemId, productId);
 	}
 
 	@Override
 	public boolean isItemInStock(int itemId, int productId) throws DataAccessException {
 		// TODO Auto-generated method stub
-		return false;
+		return secondHandMapper.isItemInStock(itemId, productId);
+	}
+
+	@Override
+	public void deleteItem(int itemId, int productId) throws DataAccessException {
+		// TODO Auto-generated method stub
+		secondHandMapper.deleteItem(itemId, productId);
 	}
 
 	@Override
 	public List<SecondHand> getSecondHandList() throws DataAccessException {
 		// TODO Auto-generated method stub
-		return null;
+		return secondHandMapper.getSecondHandList();
 	}
 
 	@Override
 	public SecondHand getSecondHandItem(int itemId) throws DataAccessException {
 		// TODO Auto-generated method stub
-		return null;
+		return secondHandMapper.getSecondHandItem(itemId);
 	}
 
 	@Override
 	public void insertSecondHand(SecondHand secondHand) throws DataAccessException {
 		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void deleteItem(int itemId) throws DataAccessException {
-		// TODO Auto-generated method stub
-		
+		secondHandMapper.insertSecondHand(secondHand);
 	}
 
 	@Override
 	public void updateSecondHand(SecondHand secondHand) throws DataAccessException {
 		// TODO Auto-generated method stub
-		
+		secondHandMapper.updateSecondHand(secondHand);
 	}
 	
 }

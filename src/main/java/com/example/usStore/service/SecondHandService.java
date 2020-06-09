@@ -1,5 +1,5 @@
 package com.example.usStore.service;
 
-public class SecondHandService {
+public interface SecondHandService {
 
 }
