@@ -21,7 +21,7 @@ table, th, td {
                    
 <table style="width:70%">
    <tr><th>itemId</th><th>할인</th><th>판매가</th></tr>
-   
+ 
     <c:forEach var="item" items="${itemList.pageList}">
       <tr>
          <td>${item.itemId}</td>
@@ -32,6 +32,7 @@ table, th, td {
             </td> --%>
          <td><c:out value="${item.discount}"/></td>       
 		 <td><c:out value="${item.listPrice}"/></td>              
+
       </tr>
    </c:forEach>   
 </table>
