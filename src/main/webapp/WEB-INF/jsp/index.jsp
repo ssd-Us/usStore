@@ -21,22 +21,18 @@
                   <p>Product</p>
                 </td>
                 <td>
-	                <select>
-	                  	<option value="0"><a href="<c:url value="/shop/viewProduct.do?productId=0"/>">스토어</a></option>
-	                  	<option value="1"><a href="<c:url value="/shop/viewProduct.do?productId=1"/>">공동구매</a></option>
-	                  	<option value="2"><a href="<c:url value="/shop/viewProduct.do?productId=2"/>">중고거래</a></option>
-	                  	<option value="3"><a href="<c:url value="/shop/viewProduct.do?productId=3"/>">경매</a></option>
-	                </select>
+                <a href="<c:url value="/shop/viewProduct.do?productId=0"/>"><p>GroupBuying</p>
+                <a href="<c:url value="/shop/viewProduct.do?productId=1"/>"><p>auction</p>
+                <a href="<c:url value="/shop/viewProduct.do?productId=2"/>"><p>secondHand</p>
+                <a href="<c:url value="/shop/viewProduct.do?productId=3"/>"><p>handMade</p>
                 </td>
               </tr>
               <tr>
                 <td>
                     <a href="<c:url value="/shop/viewCategory.do?catId=1"/>"> <!-- Event -->
                      <p>Event</p>
-                  	<select>
-                  		<option value="2"><a href="<c:url value="/shop/viewEvent.do?catId=2"/>">퀴즈</option>
-                  		<option value="3"><a href="<c:url value="/shop/viewEvent.do?catId=3"/>">출석체크</option>
-                  	</select>
+                     <a href="<c:url value="/shop/viewEvent.do?catId=2"/>"><p>Quiz</p>
+                     <a href="<c:url value="/shop/viewEvent.do?catId=3"/>"><p>AttendanceCheck</p>
                 </td>
               </tr>
 <!--               <tr> -->
@@ -67,15 +63,7 @@
           </td>
           <td style="text-align:center;background-color:white;height:300;width:100%">
             <!-- MAIN IMAGE -->
-            <map name="estoremap">
-              <area alt="Birds" coords="72,2,280,250" href="viewCategory.do?categoryId=BIRDS" shape="RECT" />
-<!--               <area alt="Fish" coords="2,180,72,250" href="viewCategory.do?categoryId=FISH" shape="RECT" /> -->
-<!--               <area alt="Dogs" coords="60,250,130,320" href="viewCategory.do?categoryId=DOGS" shape="RECT" /> -->
-<!--               <area alt="Reptiles" coords="140,270,210,340" href="viewCategory.do?categoryId=REPTILES" shape="RECT" /> -->
-<!--               <area alt="Cats" coords="225,240,295,310" href="viewCategory.do?categoryId=CATS" shape="RECT" /> -->
-<!--               <area alt="Birds" coords="280,180,350,250" href="viewCategory.do?categoryId=BIRDS" shape="RECT" /> -->
-            </map>
-            <img src="../images/splash.gif" usemap="#estoremap" style="float:center;width:350;height:355;border:0;" />
+            <img src="../images/usStore3.png" style="float:center;width:600;height:355;border:0;" />
           </td>
         </tr>
       </table>
