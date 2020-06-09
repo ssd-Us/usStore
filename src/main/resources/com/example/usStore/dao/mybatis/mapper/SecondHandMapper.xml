@@ -20,8 +20,13 @@
 	WHERE I.itemId = #{value} AND I.ITEMID = S.ITEMID
 	</select>
 	
+	<insert id="insertSecondHand" parameterType="com.example.usStore.controller.item.SecondHandForm">
+     INSERT INTO SECONDHAND (ITEMID, DISCOUNT, LISTPRICE)
+     VALUES (#{itemId}, #{discount}, #{listPrice})
+  	</insert>
+  
 	<update id="updateSecondHand" parameterType="SecondHand">
-	    UPDATE SecondHand SET
+	    UPDATE SECONDHAND SET
 	      LISTPRICE = #{listPrice},
 	      DISCOUNT = #{discount}
 	    WHERE itemId = #{itemId}

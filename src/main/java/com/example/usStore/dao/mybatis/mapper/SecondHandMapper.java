@@ -9,16 +9,16 @@ import com.example.usStore.domain.SecondHand;
 import com.example.usStore.domain.Item;
 
 public interface SecondHandMapper extends ItemMapper {
-	// 전체 SecondHandList 받아오기
+	// �쟾泥� SecondHandList 諛쏆븘�삤湲�
 	List<SecondHand> getSecondHandList();
 
-	// itemId 매개변수로 받아 SecondHand 객체 반환
+	// itemId 留ㅺ컻蹂��닔濡� 諛쏆븘 SecondHand 媛앹껜 諛섑솚
 	SecondHand getSecondHandItem(int itemId);
 
-	// SecondHand 추가
+	// SecondHand 異붽�
 	public void insertSecondHand(SecondHand secondHand);
 
-	// SecondHand 수정
+	// SecondHand �닔�젙
 	public void updateSecondHand(SecondHand secondHand);
 	
 }
