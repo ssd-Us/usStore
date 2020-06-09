@@ -23,42 +23,43 @@ table, th, td {
 </head>
 <body>
 	<h2>다음 정보로 게시글을 등록하시겠습니까?</h2>
-  		<!-- 내가 보내고 싶은 url은 /shop/secondHand/detailItem/${} -->
-  		<form:form <%-- modelAttribute="secondHand" --%> action="/shop/secondHand/detailItem/${secondHand.itemId}">
 	
-		<form:label path="">정가 : </form:label>
-		<%-- ${secondHand.unitcost} --%>
+  <form:form >
+		<!--  action="<c:url value='/shop/secondHand/detailItem/'/>${secondHand.itemId}"
+		modelAttribute="secondHand"  -->
+	<%-- 	<form:label path="unitcost">정가 : </form:label> --%>
+	<%-- 	${secondHand.unitcost} --%>
 		110,000
 		<br/>
 		
-		<form:label path="">제목 : </form:label>
-		<%-- ${secondHand.title} --%>
+<%-- 		<form:label path="title">제목 : </form:label> --%>
+<%-- 		${secondHand.title} --%>
 		미개봉 게이밍용 마우스 팔아요
 		<br/>
 
-		<form:label path="">내용 : </form:label>
+<%-- 		<form:label path="description">내용 : </form:label> --%>
 		<%-- ${secondHand.description} --%>
 		미개봉 새상품입니다. 매너거래 시 만원 할인해드려요.
 		<br/>
 		
-		<form:label path="">수량 : </form:label>
+	<%-- 	<form:label path="qty">수량 : </form:label> --%>
 		<%-- ${secondHand.qty} --%>
 		2
 		<br/>
 
-		<form:label path="">discount : </form:label>
+		<%-- <form:label path="discount">discount : </form:label> --%>
 		<%-- ${secondHand.discount} --%>
 		에누리 해요 
 		<br/>	
 
-		<form:label path="">listPrice : </form:label>
+	<%-- 	<form:label path="listPrice">listPrice : </form:label> --%>
 		<%-- ${secondHand.listPrice} --%>
 		30000
 		<br/>
-
-		<p><a href="<c:url value='/shop/secondHand/detailItem/${secondHand.itemId}'/>">이전으로</a></p>
+		
+		<p><a href="<c:url value='/shop/secondHand/addItem/'/>${secondHand.itemId}">이전으로</a></p>
 		<input type="submit" value="[게시글 등록]">
-	</form:form>
+	</form:form> --%>
 
 </body>
 </html>
