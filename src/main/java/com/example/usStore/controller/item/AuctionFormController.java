@@ -11,15 +11,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.usStore.domain.Auction;
 import com.example.usStore.domain.Tag;
-import com.example.usStore.service.facade.ItemFacade;
+import com.example.usStore.service.impl.ItemImpl;
 
 @Controller
 public class AuctionFormController {
-   private ItemFacade itemFacade;
+   private ItemImpl itemImpl;
    
    @Autowired
-   public void setUsStore(ItemFacade itemFacade) {
-      this.itemFacade = itemFacade;
+   public void setUsStore(ItemImpl itemImpl) {
+      this.itemImpl = itemImpl;
    }
    
    //경매 리스트
@@ -38,8 +38,8 @@ public class AuctionFormController {
    //경매 상세 페이지
    @RequestMapping("/shop/auction/viewItem.do") 
    public String auctionView(@RequestParam("itemId") int itemId, ModelMap model) {
-      Auction auction = this.itemFacade.getAuctionById(itemId);
-      List<Tag> tag = this.itemFacade.getTagByItemId(itemId);
+      Auction auction = this.itemImpl.getAuctionById(itemId);
+      List<Tag> tag = this.itemImpl.getTagByItemId(itemId);
       
       model.addAttribute("tag", tag);
       model.addAttribute("auction", auction);
