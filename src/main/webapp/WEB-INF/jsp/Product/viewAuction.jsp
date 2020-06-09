@@ -60,7 +60,7 @@ function participation(price, startPrice) {
 		</td>
 		<td style="text-align: right; padding: 0px; font-size: small; border-bottom: none;">
 		<a href="
-							<c:url value='/addBookmark/${gb.suppId}/${gb.itemId}'/>	<!-- 로그인 여부 따지기 -->
+							<c:url value='/addBookmark/${auction.suppId}/${auction.itemId}'/>	<!-- 로그인 여부 따지기 -->
 					">[북마크 추가]</a>
 		</td>
 	
@@ -75,13 +75,13 @@ function participation(price, startPrice) {
    			<td>김문정&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	   			<span>
 		   			<a href="
-							<c:url value='/addFollow/${gb.suppId}'/>	<!-- 로그인 여부 따지기 -->
+							<c:url value='/addFollow/${auction.suppId}'/>	<!-- 로그인 여부 따지기 -->
 					">팔로잉</a>
 				</span>
 				&nbsp;
 				<span>
 					<a href="
-							<c:url value='/addAccuse/${gb.suppId}'/>	<!-- 로그인 여부 따지기 -->
+							<c:url value='/addAccuse/${auction.suppId}'/>	<!-- 로그인 여부 따지기 -->
 					">판매자 신고</a>
 				</span>
    			</td>
@@ -100,14 +100,14 @@ function participation(price, startPrice) {
 				">#${tag.tagName}</a>&nbsp;
    			</c:forEach> --%>
    			<a href="
-					<c:url value='/searchTag/${gb.tagName}'/>	<!-- tag검색 결과 페이지로 이동 -->
+					<c:url value='/searchTag/${auction.tagName}'/>	<!-- tag검색 결과 페이지로 이동 -->
 				">#도서</a>&nbsp;
 				
 			<a href="
-					<c:url value='/searchTag/${gb.tagName}'/>	<!-- tag검색 결과 페이지로 이동 -->
+					<c:url value='/searchTag/${auction.tagName}'/>	<!-- tag검색 결과 페이지로 이동 -->
 				">#사인</a>&nbsp;
 			<a href="
-					<c:url value='/searchTag/${gb.tagName}'/>	<!-- tag검색 결과 페이지로 이동 -->
+					<c:url value='/searchTag/${auction.tagName}'/>	<!-- tag검색 결과 페이지로 이동 -->
 				">#작가</a>&nbsp;
    			</td>
    		</tr>
@@ -137,7 +137,7 @@ function participation(price, startPrice) {
    			<td colspan="2" style="border-bottom: none;">
    				<span>
    				<a href="
-							<c:url value='/note/${gb.itemId}'/>	<!-- 로그인 여부 따지기 -->
+							<c:url value='/note/${auction.itemId}'/>	<!-- 로그인 여부 따지기 -->
 				">쪽지 보내기</a>
 				</span><br><br>
    				<form method="POST" name="form" action="">

@@ -33,8 +33,9 @@ public class AuctionFormController {
    @RequestMapping("/shop/auctionView") 
    public String handleRequest(@RequestParam("itemId") int itemId, ModelMap model) {
       Auction auction = this.itemFacade.getAuctionById(itemId);
-      //List<Tag> tag = this.itemFacade.getTagByItemId(itemId);
+      List<Tag> tag = this.itemFacade.getTagByItemId(itemId);
       
+      model.addAttribute("tag", tag);
       model.addAttribute("auction", auction);
       
       /*
