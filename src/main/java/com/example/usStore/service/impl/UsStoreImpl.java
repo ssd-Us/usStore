@@ -11,7 +11,7 @@ import com.example.usStore.service.facade.UsStoreFacade;
 /*
  * UsStoreImpl
  * 
- * Account / Orders / Category / Product
+ * Account / Orders / Category
  * */
 
 @Service
@@ -20,8 +20,6 @@ public class UsStoreImpl implements UsStoreFacade {
 	
 	@Autowired
 	private CategoryDao categoryDao;
-	@Autowired
-	private ProductDao productDao;
 	@Autowired
 	private AccountDao accountDao;
 	@Autowired
@@ -67,24 +65,6 @@ public class UsStoreImpl implements UsStoreFacade {
 	public Category getCategory(int categoryId) {
 		// TODO Auto-generated method stub
 		return categoryDao.getCategory(categoryId);
-	}
-
-	@Override
-	public List<Product> getProductListByCategory(int categoryId) {
-		// TODO Auto-generated method stub
-		return productDao.getProductListByCategory(categoryId);
-	}
-
-	@Override
-	public List<Product> searchProductList(String keywords) {
-		// TODO Auto-generated method stub
-		return productDao.searchProductList(keywords);
-	}
-
-	@Override
-	public Product getProduct(int productId) {
-		// TODO Auto-generated method stub
-		 return productDao.getProduct(productId);
 	}
 
 	@Override

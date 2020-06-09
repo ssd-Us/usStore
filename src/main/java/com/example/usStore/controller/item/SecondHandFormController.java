@@ -30,8 +30,8 @@ public class SecondHandFormController {
 	}
 
 	//중고거래 게시물 목록 보여주기
-	@RequestMapping("/shop/viewSecondHandList")
-	public String viewSecondHandList(ModelMap model) throws Exception{
+	@RequestMapping("/shop/viewProduct.do")
+	public String viewSecondHandList(@RequestParam("productId") int productId, ModelMap model) throws Exception{
 		PagedListHolder<SecondHand> itemList = new PagedListHolder<SecondHand>(this.itemFacade.getSecondHandList());
 		itemList.setPageSize(4);
 		

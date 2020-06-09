@@ -7,7 +7,7 @@ import com.example.usStore.domain.*;
 /*
  * UsStoreFacade
  * 
- * Account / Orders / Category / Product
+ * Account / Orders / Category 
  * */
 public interface UsStoreFacade {
 
@@ -31,15 +31,6 @@ public interface UsStoreFacade {
 
 	Category getCategory(int categoryId);
 	
-	/////////////////////////////////////////////////////////////////////////
-	/* Product */
-	/////////////////////////////////////////////////////////////////////////
-	List<Product> getProductListByCategory(int categoryId);
-
-	List<Product> searchProductList(String keywords);
-
-	Product getProduct(int productId);
-
 
 	/////////////////////////////////////////////////////////////////////////
 	/* Orders */

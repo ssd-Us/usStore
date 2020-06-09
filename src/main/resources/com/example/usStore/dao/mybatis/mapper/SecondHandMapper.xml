@@ -4,7 +4,7 @@
   <cache />
   
  	<select id="getSecondHandList" resultType="SecondHand">
-	    SELECT * FROM SecondHand;
+	    SELECT ITEMID, DISCOUNT, LISTPRICE FROM SECONDHAND 
 	</select>
 	
 	<select id="getSecondHandById" parameterType="int" resultType="SecondHand">
@@ -37,7 +37,7 @@
 	    WHERE itemId = #{itemId}
   	</update>
   
-	<delete id="deleteItem" parameterType="int">
+	<delete id="deleteSecondHand" parameterType="int">
 		DELETE ITEM
 		FROM ITEM
 		WHERE ITEMID=#{itemId}
