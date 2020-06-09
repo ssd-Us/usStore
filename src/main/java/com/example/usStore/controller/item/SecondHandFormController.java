@@ -35,7 +35,7 @@ public class SecondHandFormController {
 		PagedListHolder<SecondHand> itemList = new PagedListHolder<SecondHand>(this.itemFacade.getSecondHandList());
 		itemList.setPageSize(4);
 		
-		model.put("secondHandList", itemList);
+		model.put("itemList", itemList);
 		return "Product/secondHand"; //뷰 네임은 그 목록 보여주는 페이지 
 	}
 	
