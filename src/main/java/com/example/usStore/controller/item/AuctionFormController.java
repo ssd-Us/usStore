@@ -61,7 +61,7 @@ public class AuctionFormController {
    
    
    //경매 수정(로그인 여부 확인)
-   @RequestMapping("/shop/auction/listItem.do") 
+   @RequestMapping("/shop/auction/updateItem.do") 
    public String auctionUpdate(@RequestParam("productId") int productId, ModelMap model) {
 	   
 	   return "Product/item";
@@ -69,7 +69,7 @@ public class AuctionFormController {
    
    
    //경매 삭제(로그인 여부 확인)
-   @RequestMapping("/shop/auction/listItem.do") 
+   @RequestMapping("/shop/auction/deleteItem.do") 
    public String auctionDelete(@RequestParam("productId") int productId, ModelMap model) {
 	   
 	   return "Product/auction";

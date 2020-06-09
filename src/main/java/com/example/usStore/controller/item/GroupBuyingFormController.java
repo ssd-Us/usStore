@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import com.example.usStore.domain.Item;
-import com.example.usStore.service.impl.ItemImpl;
+import com.example.usStore.service.facade.ItemFacade;
 import com.example.usStore.controller.item.ItemForm;
 
 @Controller
@@ -31,9 +31,10 @@ public class GroupBuyingFormController {
 	private static final String DetailPage = "Product/viewGroupBuying";
 	
 	@Autowired
-	private ItemImpl itemImpl;
-	@Autowired
-	private ItemForm itemForm;
+	private ItemFacade itemFacade;
+
+//	@Autowired
+//	private ItemForm itemForm;
 	
 	@ModelAttribute("gbform")
 	public GroupBuyingForm formBacking(
@@ -52,60 +53,60 @@ public class GroupBuyingFormController {
 		return gbform;
 	}   
 	
-	@GetMapping("/shop/groupBuying/listGroupBuying.do")		// step1 요청
+	@GetMapping("/shop/groupBuying/listGroupBuying.do")		// step1 �슂泥�
 	public String step1() {
-		return ADD_FORM1;	// step1 form view(item.jsp)로 이동
+		return ADD_FORM1;	// step1 form view(item.jsp)濡� �씠�룞
 	}
 	
-	@GetMapping("/step2")		// step3 -> step2 이동	
+	@GetMapping("/step2")		// step3 -> step2 �씠�룞	
 	public String step2FromStep3() {
-		return ADD_FORM2;	// step2 form view로 이동
+		return ADD_FORM2;	// step2 form view濡� �씠�룞
 	}
 	
 	@RequestMapping(value="step2/{productId}", method = RequestMethod.GET)
 	public String form1(
 			@ModelAttribute("gbform") GroupBuyingForm gbcommand, 
 			BindingResult result) {
-		System.out.println("command 객체: " + gbcommand);
+		System.out.println("command 媛앹껜: " + gbcommand);
 		
 		if (result.hasFieldErrors("title") ||
 			result.hasFieldErrors("description") ||
 			result.hasFieldErrors("unitCost") ||
 			result.hasFieldErrors("qty") ||
 			result.hasFieldErrors("tag")) {		
-				return ADD_FORM1;	// 검증 오류 발생 시 step1 form view(item.jsp)로 이동
+				return ADD_FORM1;	// 寃�利� �삤瑜� 諛쒖깮 �떆 step1 form view(item.jsp)濡� �씠�룞
 			}
 		return ADD_FORM2;
-	}//폼으로 이동
+	}//�뤌�쑝濡� �씠�룞
 	
-	@PostMapping("/shop/groupbuying/step3")		// step2 -> step3 이동
+	@PostMapping("/shop/groupbuying/step3")		// step2 -> step3 �씠�룞
 	public String step3(
 			@ModelAttribute("gbform") GroupBuyingForm gbcommand, 
 			BindingResult result, Model model) {		
-		System.out.println("command 객체: " + gbcommand);
+		System.out.println("command 媛앹껜: " + gbcommand);
 		
-		// session에 저장된 regReq 객체에 저장된 입력 값 검증
-		// 위에서 @Valid를 통해 Hibernate Validator를 사용함
-		// MemberRegistValidator를 직접 구현하여 사용할 경우 아래 코드 실행
+		// session�뿉 ���옣�맂 regReq 媛앹껜�뿉 ���옣�맂 �엯�젰 媛� 寃�利�
+		// �쐞�뿉�꽌 @Valid瑜� �넻�빐 Hibernate Validator瑜� �궗�슜�븿
+		// MemberRegistValidator瑜� 吏곸젒 援ы쁽�븯�뿬 �궗�슜�븷 寃쎌슦 �븘�옒 肄붾뱶 �떎�뻾
 		// new MemberRegistValidator().validate(memRegReq, bindingResult);	
 		
 
 		if (result.hasFieldErrors("listPrice") ||
 				result.hasFieldErrors("deadLine")) {	
-			return ADD_FORM2;		// 검증 오류 발생 시 step2 form view(addGroupBuying.jsp)로 이동
+			return ADD_FORM2;		// 寃�利� �삤瑜� 諛쒖깮 �떆 step2 form view(addGroupBuying.jsp)濡� �씠�룞
 		}
-		return CHECK_FORM3;		// 오류 없으면 step3 form view(checkGroupBuying.jsp)로 이동
+		return CHECK_FORM3;		// �삤瑜� �뾾�쑝硫� step3 form view(checkGroupBuying.jsp)濡� �씠�룞
 	}
 	
-	@PostMapping("/shop/groupbuying/detailItem/${groupbuying.itemId}")		// step3 -> done 이동
+	@PostMapping("/shop/groupbuying/detailItem/${groupbuying.itemId}")		// step3 -> done �씠�룞
 	public String addGroupBuyingItem(
 			GroupBuying groupBuying, @ModelAttribute("gbform") GroupBuyingForm gbform, 
 			BindingResult result, Model model, SessionStatus sessionStatus, HttpServletRequest request) {
-		System.out.println("command 객체: " + gbform);
+		System.out.println("command 媛앹껜: " + gbform);
 		
-		HttpSession session = request.getSession(false); //이미 세션이 있다면 그 세션을 돌려주고, 세션이 없으면 null을 돌려준다.
-		if(session.getAttribute("itemForm") != null) {	//itemForm 세션이 존재한다면
-			System.out.println("itemForm 세션 존재");
+		HttpSession session = request.getSession(false); //�씠誘� �꽭�뀡�씠 �엳�떎硫� 洹� �꽭�뀡�쓣 �룎�젮二쇨퀬, �꽭�뀡�씠 �뾾�쑝硫� null�쓣 �룎�젮以��떎.
+		if(session.getAttribute("itemForm") != null) {	//itemForm �꽭�뀡�씠 議댁옱�븳�떎硫�
+			System.out.println("itemForm �꽭�뀡 議댁옱");
 			
 		/*	((itemForm)session.getAttribute("itemForm"))
 			itemImpl.insertItem()*/
@@ -115,19 +116,19 @@ public class GroupBuyingFormController {
 		 * groupBuying.s itemImpl.insertGroupBuying(groupBuying);
 		 */
 		
-			/* ItemImpl.insertGroupBuying 메소드를 
+			/* ItemImpl.insertGroupBuying 硫붿냼�뱶瑜� 
 			 * @Override public GroupBuying insertGroupBuying(GroupBuyingForm gbcommand) { // TODO
 			 * groupBuyingDao.insertGroupBuying(GroupBuying); 
 			 * }
-			 * 이렇게 변경해야 할듯..?
+			 * �씠�젃寃� 蹂�寃쏀빐�빞 �븷�벏..?
 			 */
 		
 		model.addAttribute("newGroupBuying", gbform);
 		
-		List<GroupBuying> gbs = itemImpl.getGroupBuyingList();
+		List<GroupBuying> gbs = itemFacade.getGroupBuyingList();
 		model.addAttribute("groupBuyingList", gbs);
 		
-		sessionStatus.setComplete();	// session 종료		
+		sessionStatus.setComplete();	// session 醫낅즺		
 		return DetailPage;
 	}
 }
