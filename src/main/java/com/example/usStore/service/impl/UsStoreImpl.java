@@ -23,14 +23,6 @@ public class UsStoreImpl implements UsStoreFacade {
 	@Autowired
 	private ProductDao productDao;
 	@Autowired
-	private HandMadeDao handMadeDao;
-	@Autowired
-	private GroupBuyingDao groupBuyingDao;
-	@Autowired
-	private SecondHandDao secondHandDao;
-	@Autowired
-	private AuctionDao auctionDao;
-	@Autowired
 	private AccountDao accountDao;
 	@Autowired
 	private OrderDao orderDao;

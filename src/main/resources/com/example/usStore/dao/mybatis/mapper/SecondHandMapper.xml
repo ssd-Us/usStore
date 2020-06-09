@@ -2,7 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.usStore.dao.mybatis.mapper.SecondHandMapper">
   <cache />
-	<select id="getSecondHandList" resultType="SecondHand">
+  
+ 	<select id="getSecondHandList" resultType="SecondHand">
+	    SELECT * FROM SecondHand;
+	</select>
+	
+	<select id="getSecondHandById" parameterType="int" resultType="SecondHand">
 	SELECT 
   		I.ITEMID,
   		I.UNITCOST,
@@ -17,10 +22,10 @@
 		S.DISCOUNT,
 		S.LISTPRICE
 	FROM ITEM I, SECONDHAND S
-	WHERE I.itemId = #{value} AND I.ITEMID = S.ITEMID
+	WHERE I.itemId = #{itemId} AND I.ITEMID = S.ITEMID
 	</select>
 	
-	<insert id="insertSecondHand" parameterType="com.example.usStore.controller.item.SecondHandForm">
+	<insert id="insertSecondHand" parameterType="SecondHand">
      INSERT INTO SECONDHAND (ITEMID, DISCOUNT, LISTPRICE)
      VALUES (#{itemId}, #{discount}, #{listPrice})
   	</insert>
@@ -32,7 +37,7 @@
 	    WHERE itemId = #{itemId}
   	</update>
   
-	<delete id="deleteItem">
+	<delete id="deleteItem" parameterType="int">
 		DELETE ITEM
 		FROM ITEM
 		WHERE ITEMID=#{itemId}
