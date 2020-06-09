@@ -81,7 +81,7 @@
   </update>
   
   <insert id="insertHandMade" parameterType="HandMade">
-   	INSERT INTO ACCOUNT
+   	INSERT INTO HANDMADE
       (ITEMID, UNITCOST, TITLE, DESCRIPTION, VIEWCOUNT, SUPPID, TAGID, QTY, USERID, PRODUCTID, LISTPRICE)
     VALUES
       (#{itemId}, #{unitCost}, #{title}, #{description}, #{viewCount}, #{suppId}, #{tagId}, #{quantity}, #{userId}, #{productId}, #{listPrice})

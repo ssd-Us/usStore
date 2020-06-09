@@ -20,9 +20,9 @@
 <title>공동구매 추가 입력 폼</title>
 </head>
 <body>
-	<spring:hasBindErrors name="item" />
+	<spring:hasBindErrors name="gbform" />
 
-	<form:form modelAttribute="item" method="post" action="step3">
+	<form:form modelAttribute="gbform" method="post" action="/shop/groupbuying/step3">
 	
 	<%-- 할인율: <form:input type="text" path="discount" value="${discount}"/>
 	<form:errors path="discount"/> <br> 
@@ -31,9 +31,9 @@
 	판매가: <form:input type="text" path="listPrice" value="${listPrice}" />
 	<form:errors path="listPrice"/> <br>
 	
-	<%-- 마감기한: <form:input type="date" path="deadLine.date"/>
+	마감기한: <form:input type="date" path="deadLine.date"/>
 	<input type="time" path="deadLine.time" value="23:59:59" min="00:00:01" max="23:59:59">
-	<form:errors path="deadLine"/> <br> --%>
+	<form:errors path="deadLine"/> <br>
 	
 	<a href="step1">[이전 단계로]</a> <input type="submit" value="다음 단계로" />
 	</form:form>
