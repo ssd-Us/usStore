@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
@@ -12,6 +13,7 @@ import com.example.usStore.dao.mybatis.mapper.HandMadeMapper;
 import com.example.usStore.domain.HandMade;
 import com.example.usStore.domain.Item;
 
+@Qualifier("mybatisHandMadeDao")
 @Repository
 public class MybatisHandMadeDao implements HandMadeDao {
 

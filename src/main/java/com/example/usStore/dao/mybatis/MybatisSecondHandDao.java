@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Primary;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
@@ -12,6 +14,8 @@ import com.example.usStore.dao.mybatis.mapper.SecondHandMapper;
 import com.example.usStore.domain.Item;
 import com.example.usStore.domain.SecondHand;
 
+@Primary
+@Qualifier("mybatisSecondHandDao")
 @Repository
 public class MybatisSecondHandDao implements SecondHandDao {
 
