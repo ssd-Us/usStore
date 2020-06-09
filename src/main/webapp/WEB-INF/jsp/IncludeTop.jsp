@@ -19,7 +19,9 @@
   <tr>
     <td>
       <a href="<c:url value="/shop/index.do"/>">
-        <img border="0" src="../images/logo-topbar.gif" /></a>
+      	<img border="0" src="../images/usStore3.png" style="float:left;width:80;height:60;border:0;"/>
+        <img border="0" src="../images/logo.png" style="float:left;width:120;height:60;border:0;" />
+      </a>
     </td>
     <td style="text-align:right">
       <a href="<c:url value="/shop/viewCart.do"/>">
