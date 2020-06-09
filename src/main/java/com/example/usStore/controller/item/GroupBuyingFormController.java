@@ -3,10 +3,9 @@ package com.example.usStore.controller.item;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.samples.service.MemberService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import com.example.usStore.domain.GroupBuying;
@@ -21,9 +20,10 @@ import org.springframework.web.bind.support.SessionStatus;
 
 import com.example.usStore.domain.Item;
 import com.example.usStore.service.impl.ItemImpl;
+import com.example.usStore.controller.item.ItemForm;
 
 @Controller
-@SessionAttributes({"gbform","item"})	
+@SessionAttributes("gbform")	
 public class GroupBuyingFormController {
 	private static final String ADD_FORM1 = "Product/item";
 	private static final String ADD_FORM2 = "Product/addGroupBuying";
@@ -31,7 +31,9 @@ public class GroupBuyingFormController {
 	private static final String DetailPage = "Product/viewGroupBuying";
 	
 	@Autowired
-	private ItemImpl itemImple;
+	private ItemImpl itemImpl;
+	@Autowired
+	private ItemForm itemForm;
 	
 	@ModelAttribute("gbform")
 	public GroupBuyingForm formBacking(
@@ -39,20 +41,18 @@ public class GroupBuyingFormController {
 		GroupBuyingForm gbform = new GroupBuyingForm();
 		
 		gbform.setItemId(item.getItemId());
-		gbform.setSupplierId(item.getSupplierId());
 		gbform.setUnitCost(item.getUnitCost());
 		gbform.setTitle(item.getTitle());
 		gbform.setDescription(item.getDescription());
 		gbform.setViewCount(item.getViewCount());
-		gbform.setTagId(item.getTagId());
-		gbform.setQuantity(item.getQuantity());
+		gbform.setQuantity(item.getQty());
 		gbform.setUserId(item.getUserId());
 		gbform.setProductId(item.getProductId());
 		
 		return gbform;
 	}   
 	
-	@GetMapping("/step1")		// step1 요청
+	@GetMapping("/shop/groupBuying/listGroupBuying.do")		// step1 요청
 	public String step1() {
 		return ADD_FORM1;	// step1 form view(item.jsp)로 이동
 	}
@@ -62,9 +62,9 @@ public class GroupBuyingFormController {
 		return ADD_FORM2;	// step2 form view로 이동
 	}
 	
-	@RequestMapping(value="step2/0", method = RequestMethod.GET)
+	@RequestMapping(value="step2/{productId}", method = RequestMethod.GET)
 	public String form1(
-			@Valid @ModelAttribute("gbform") GroupBuyingForm gbcommand, 
+			@ModelAttribute("gbform") GroupBuyingForm gbcommand, 
 			BindingResult result) {
 		System.out.println("command 객체: " + gbcommand);
 		
@@ -80,7 +80,7 @@ public class GroupBuyingFormController {
 	
 	@PostMapping("/shop/groupbuying/step3")		// step2 -> step3 이동
 	public String step3(
-			@Valid @ModelAttribute("gbform") GroupBuyingForm gbcommand, 
+			@ModelAttribute("gbform") GroupBuyingForm gbcommand, 
 			BindingResult result, Model model) {		
 		System.out.println("command 객체: " + gbcommand);
 		
@@ -98,14 +98,23 @@ public class GroupBuyingFormController {
 	}
 	
 	@PostMapping("/shop/groupbuying/detailItem/${groupbuying.itemId}")		// step3 -> done 이동
-	public String regist(
-			@ModelAttribute("gbform") GroupBuyingForm gbcommand, BindingResult result,
-			Model model, SessionStatus sessionStatus) {	
-		System.out.println("command 객체: " + gbcommand);
-			
-		GroupBuying gb;
+	public String addGroupBuyingItem(
+			GroupBuying groupBuying, @ModelAttribute("gbform") GroupBuyingForm gbform, 
+			BindingResult result, Model model, SessionStatus sessionStatus, HttpServletRequest request) {
+		System.out.println("command 객체: " + gbform);
 		
-		gb = itemImpl.insertGroupBuying(gbcommand);
+		HttpSession session = request.getSession(false); //이미 세션이 있다면 그 세션을 돌려주고, 세션이 없으면 null을 돌려준다.
+		if(session.getAttribute("itemForm") != null) {	//itemForm 세션이 존재한다면
+			System.out.println("itemForm 세션 존재");
+			
+		/*	((itemForm)session.getAttribute("itemForm"))
+			itemImpl.insertItem()*/
+		}
+		
+		/*
+		 * groupBuying.s itemImpl.insertGroupBuying(groupBuying);
+		 */
+		
 			/* ItemImpl.insertGroupBuying 메소드를 
 			 * @Override public GroupBuying insertGroupBuying(GroupBuyingForm gbcommand) { // TODO
 			 * groupBuyingDao.insertGroupBuying(GroupBuying); 
@@ -113,7 +122,7 @@ public class GroupBuyingFormController {
 			 * 이렇게 변경해야 할듯..?
 			 */
 		
-		model.addAttribute("newGroupBuying", gb);
+		model.addAttribute("newGroupBuying", gbform);
 		
 		List<GroupBuying> gbs = itemImpl.getGroupBuyingList();
 		model.addAttribute("groupBuyingList", gbs);

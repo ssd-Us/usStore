@@ -10,29 +10,18 @@
   
 	<insert id="insertGroupBuying" parameterType="GroupBuying">
     INSERT INTO GroupBuying
-      (ITEMID, UNITCOST, TITLE, DESCRIPTION, VIEWCOUNT, SUPPID, 
-      TAGID, QTY, USERID, PRODUCTID, DISCOUNT, LISTPRICE, TIME)
+      (ITEMID, DISCOUNT, LISTPRICE, DEADLINE)
     VALUES
-      (#{itemId}, #{unitCost}, #{title}, #{description}, #{viewCount}, 
-      #{suppId}, #{tagId}, #{quantity}, #{userId}, #{productId},#{discount}, #{listPrice}, #{time})
+      (#{itemId}, #{discount}, #{listPrice}, #{deadLine})
   </insert>
 	
 	<update id="updateGroupBuying" parameterType="GroupBuying">
 		UPDATE GroupBuying
 		SET 
 			ITEMID = #{itemId}, 
-		  	UNITCOST = #{unitCost}, 
-		  	TITLE = #{title}, 
-		  	DESCRIPTION = #{description}, 
-		  	VIEWCOUNT = #{viewCount}, 
-		  	SUPPID = #{suppId}, 
-		  	TAGID = #{tagId}, 
-		  	QTY = #{quantity}, 
-		  	USERID = #{userId}, 
-		  	PRODUCTID = #{productId},
-			DISCOUNT = #{discount}, 
+		 	DISCOUNT = #{discount}, 
 			LISTPRICE = #{listPrice}, 
-			TIME = #{time}
+			DEADLINE = #{deadLine}
 		WHERE ITEMID = #{itemId};
 	</update>
 	

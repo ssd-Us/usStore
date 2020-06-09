@@ -20,9 +20,9 @@
 <title>공동구매 추가 입력 폼</title>
 </head>
 <body>
-	<spring:hasBindErrors name="gbcomm" />
+	<spring:hasBindErrors name="gbform" />
 
-	<form:form modelAttribute="gbcomm" method="post" action="/shop/groupbuying/step3">
+	<form:form modelAttribute="gbform" method="post" action="/shop/groupbuying/step3">
 	
 	<%-- 할인율: <form:input type="text" path="discount" value="${discount}"/>
 	<form:errors path="discount"/> <br> 
