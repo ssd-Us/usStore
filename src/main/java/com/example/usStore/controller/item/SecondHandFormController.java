@@ -29,14 +29,15 @@ public class SecondHandFormController {
 		this.itemFacade = itemFacade;
 	}
 
-	//Áß°í°Å·¡ °Ô½Ã¹° ¸ñ·Ï º¸¿©ÁÖ±â
+	//ì¤‘ê³ ê±°ë˜ ê²Œì‹œë¬¼ ëª©ë¡ ë³´ì—¬ì£¼ê¸°
 	@RequestMapping("/shop/viewProduct.do")
 	public String viewSecondHandList(@RequestParam("productId") int productId, ModelMap model) throws Exception{
 		PagedListHolder<SecondHand> itemList = new PagedListHolder<SecondHand>(this.itemFacade.getSecondHandList());
 		itemList.setPageSize(4);
 		
-		model.put("secondHandList", itemList);
-		return "Product/secondHand"; //ºä ³×ÀÓÀº ±× ¸ñ·Ï º¸¿©ÁÖ´Â ÆäÀÌÁö 
+
+		model.put("itemList", itemList);
+		return "Product/secondHand"; //ë·° ë„¤ì„ì€ ê·¸ ëª©ë¡ ë³´ì—¬ì£¼ëŠ” í˜ì´ì§€ 
 	}
 	
 	
