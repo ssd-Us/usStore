@@ -8,6 +8,7 @@ import org.springframework.dao.DataAccessException;
 import com.example.usStore.domain.Auction;
 import com.example.usStore.domain.GroupBuying;
 import com.example.usStore.domain.HandMade;
+import com.example.usStore.domain.Item;
 import com.example.usStore.domain.SecondHand;
 import com.example.usStore.domain.Tag;
 
@@ -22,17 +23,20 @@ public interface ItemFacade {
 	/* Item */
 	/////////////////////////////////////////////////////////////////////////
 	
-	void updateInventoryQuantity(Map<String, Object> param);
-
-	int getInventoryQuantity(int itemId, int productId);
+	void insertItem(Item item);
+	
+	void updateItem(Item item);
+	
+	void getItem(int itemId, int productId);
+	
+	public void deleteItem(int itemId, int productId);
 	
 	void updateQuantity(int qty, int itemId, int productId);
 	
 	int getQuantity(int itemId, int productId);
 
 	boolean isItemInStock(int itemId, int productId);
-	
-	public void deleteItem(int itemId, int productId);
+
 	
 	/////////////////////////////////////////////////////////////////////////
 	/* HandMade */

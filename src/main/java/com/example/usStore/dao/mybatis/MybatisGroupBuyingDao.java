@@ -19,18 +19,6 @@ public class MybatisGroupBuyingDao implements GroupBuyingDao {
 	private GroupBuyingMapper groupBuyingMapper;
 
 	@Override
-	public void updateInventoryQuantity(Map<String, Object> param) throws DataAccessException {
-		// TODO Auto-generated method stub
-		groupBuyingMapper.updateInventoryQuantity(param);
-	}
-
-	@Override
-	public int getInventoryQuantity(int itemId, int productId) throws DataAccessException {
-		// TODO Auto-generated method stub
-		return groupBuyingMapper.getInventoryQuantity(itemId, productId);
-	}
-
-	@Override
 	public void updateQuantity(int qty, int itemId, int productId) throws DataAccessException {
 		// TODO Auto-generated method stub
 		groupBuyingMapper.updateQuantity(qty, itemId, productId);
@@ -88,6 +76,24 @@ public class MybatisGroupBuyingDao implements GroupBuyingDao {
 	public void calculateDiscount(GroupBuying GroupBuying) throws DataAccessException {
 		// TODO Auto-generated method stub
 		groupBuyingMapper.calculateDiscount(GroupBuying);
+	}
+
+	@Override
+	public void insertItem(Item item) {
+		// TODO Auto-generated method stub
+		groupBuyingMapper.insertItem(item);
+	}
+
+	@Override
+	public void updateItem(Item item) {
+		// TODO Auto-generated method stub
+		groupBuyingMapper.updateItem(item);
+	}
+
+	@Override
+	public void getItem(int itemId, int productId) {
+		// TODO Auto-generated method stub
+		groupBuyingMapper.getItem(itemId, productId);
 	}
 
 }

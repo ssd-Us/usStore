@@ -19,18 +19,6 @@ public class MybatisAuctionDao implements AuctionDao {
 	private AuctionMapper auctionMapper;
 
 	@Override
-	public void updateInventoryQuantity(Map<String, Object> param) throws DataAccessException {
-		// TODO Auto-generated method stub
-		auctionMapper.updateInventoryQuantity(param);
-	}
-
-	@Override
-	public int getInventoryQuantity(int itemId, int productId) throws DataAccessException {
-		// TODO Auto-generated method stub
-		return auctionMapper.getInventoryQuantity(itemId, productId);
-	}
-
-	@Override
 	public void updateQuantity(int qty, int itemId, int productId) throws DataAccessException {
 		// TODO Auto-generated method stub
 		auctionMapper.updateQuantity(qty, itemId, productId);
@@ -82,6 +70,24 @@ public class MybatisAuctionDao implements AuctionDao {
 	public Auction getAuctionById(int itemId) throws DataAccessException {
 		// TODO Auto-generated method stub
 		return auctionMapper.getAuctionById(itemId);
+	}
+
+	@Override
+	public void insertItem(Item item) {
+		// TODO Auto-generated method stub
+		auctionMapper.insertItem(item);
+	}
+
+	@Override
+	public void updateItem(Item item) {
+		// TODO Auto-generated method stub
+		auctionMapper.updateItem(item);
+	}
+
+	@Override
+	public void getItem(int itemId, int productId) {
+		// TODO Auto-generated method stub
+		auctionMapper.getItem(itemId, productId);
 	}
 
 }
