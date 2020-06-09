@@ -6,8 +6,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.support.PagedListHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+
+import com.example.usStore.domain.Auction;
 import com.example.usStore.domain.GroupBuying;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,10 +19,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import com.example.usStore.domain.Item;
+import com.example.usStore.domain.SecondHand;
 import com.example.usStore.service.facade.ItemFacade;
 import com.example.usStore.controller.item.ItemForm;
 
@@ -36,24 +42,32 @@ public class GroupBuyingFormController {
 //	@Autowired
 //	private ItemForm itemForm;
 	
-	@ModelAttribute("gbform")
-	public GroupBuyingForm formBacking(
-			@ModelAttribute("item") Item item) {
-		GroupBuyingForm gbform = new GroupBuyingForm();
-		
-		gbform.setItemId(item.getItemId());
-		gbform.setUnitCost(item.getUnitCost());
-		gbform.setTitle(item.getTitle());
-		gbform.setDescription(item.getDescription());
-		gbform.setViewCount(item.getViewCount());
-		gbform.setQuantity(item.getQty());
-		gbform.setUserId(item.getUserId());
-		gbform.setProductId(item.getProductId());
-		
-		return gbform;
-	}   
+	/*
+	 * @ModelAttribute("gbform") public GroupBuyingForm formBacking(
+	 * 
+	 * @ModelAttribute("item") Item item, HttpServletRequest rq) { GroupBuyingForm
+	 * gbform = new GroupBuyingForm();
+	 * 
+	 * gbform.setItemId(item.getItemId()); gbform.setUnitCost(item.getUnitCost());
+	 * gbform.setTitle(item.getTitle());
+	 * gbform.setDescription(item.getDescription());
+	 * gbform.setViewCount(item.getViewCount()); gbform.setQuantity(item.getQty());
+	 * gbform.setUserId(item.getUserId()); gbform.setProductId(item.getProductId());
+	 * 
+	 * return gbform; 
+	 * }
+	 */  
 	
-	@GetMapping("/shop/groupBuying/listGroupBuying.do")		// step1 �슂泥�
+ @RequestMapping("/shop/groupBuying/listItem.do") 
+   public String groupBuyingList(@RequestParam("productId") int productId, ModelMap model) {
+	 List<GroupBuying> groupBuyingList = this.itemFacade.getGroupBuyingList();
+		
+	 //item값도 받아와야 함
+     model.put("groupBuyingList", groupBuyingList);
+	 return "Product/groupBuying";
+   }
+	
+	@GetMapping("/shop/groupBuying/step1")		// step1 �슂泥�
 	public String step1() {
 		return ADD_FORM1;	// step1 form view(item.jsp)濡� �씠�룞
 	}
