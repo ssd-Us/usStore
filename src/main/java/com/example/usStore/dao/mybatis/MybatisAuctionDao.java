@@ -85,4 +85,3 @@ public class MybatisAuctionDao implements AuctionDao {
 	}
 
 }
-

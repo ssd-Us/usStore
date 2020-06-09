@@ -39,7 +39,7 @@
   
   <update id="updateAuction" parameterType="AUCTION">
      UPDATE AUCTION 
-     SET ITEMID = "#{itemID}", AUCTIONSTATE = "#{auctionState}", TIME = "#{time}", STARTPRICE = "#{startPrice}", BIDPRICE = "#{bidPrice}"
+     SET ITEMID = #{itemID}, AUCTIONSTATE = #{auctionState}, TIME = #{time}, STARTPRICE = #{startPrice}, BIDPRICE = #{bidPrice}
   </update>
   
   
@@ -61,6 +61,6 @@
       A.BIDPRICE
     FROM AUCTION A, ITEM I
     WHERE A.ITEMID = I.ITEMID
-    	AND I.ITEMID = "#{itemId}" 
+    	AND I.ITEMID = #{itemId}
   </select>
 </mapper>
