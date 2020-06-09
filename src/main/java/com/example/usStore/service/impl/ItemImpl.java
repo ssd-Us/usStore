@@ -1,6 +1,7 @@
 package com.example.usStore.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,44 +39,32 @@ public class ItemImpl implements ItemFacade {
 	@Autowired
 	private TagDao tagDao;
 	
-	@Override
-	public void insertHandMade(HandMade handmade) {
-		// TODO Auto-generated method stub
-		handMadeDao.insertHandMade(handmade);
-	}
 
+	// 구현...?? 모르겠음
 	@Override
-	public void updateHandMade(HandMade handmade) {
-		// TODO Auto-generated method stub
-		handMadeDao.updateHandMade(handmade);
-	}
-
-	
-	// 이거 고처야됌
-	@Override
-	public boolean isItemInStock(int itemId, int productId) {
+	public void updateInventoryQuantity(Map<String, Object> param) {
 		// TODO Auto-generated method stub
 		
-		return handMadeDao.isItemInStock(itemId, productId);
 	}
 
 	@Override
-	public List<HandMade> getHandMadeList() {
+	public int getInventoryQuantity(int itemId, int productId) {
 		// TODO Auto-generated method stub
-		return handMadeDao.getHandMadeList();
+		switch(productId) {
+		case 0:
+			return groupBuyingDao.getInventoryQuantity(itemId, productId);
+		case 1:
+			return auctionDao.getInventoryQuantity(itemId, productId);
+		case 2:
+			return secondHandDao.getInventoryQuantity(itemId, productId);
+		case 3:
+			return handMadeDao.getInventoryQuantity(itemId, productId);
+		default:
+			System.err.println("getInventoryQuantity Error !!");
+			return -1;
+		}
 	}
-
-	@Override
-	public HandMade getHandMadeById(int itemId) {
-		// TODO Auto-generated method stub
-		return handMadeDao.getHandMadeById(itemId);
-	}
-
-	@Override
-	public List<HandMade> getHandMadeListByProductId(int productId) {
-		// TODO Auto-generated method stub
-		return handMadeDao.getHandMadeListByProductId(productId);
-	}
+	
 
 	@Override
 	public void updateQuantity(int qty, int itemId, int productId) {
@@ -111,8 +100,79 @@ public class ItemImpl implements ItemFacade {
 		case 3:
 			return handMadeDao.getQuantity(itemId, productId);
 		default :
+			System.err.println("getQuantity Error !!");
 			return -1;
 		}
+	}
+	
+	@Override
+	public void deleteItem(int itemId, int productId) {
+		// TODO Auto-generated method stub
+		switch(productId) {
+		case 0:
+			groupBuyingDao.deleteItem(itemId, productId);
+			break;
+		case 1:
+			auctionDao.deleteItem(itemId, productId);
+			break;
+		case 2:
+			secondHandDao.deleteItem(itemId, productId);
+			break;
+		case 3:
+			handMadeDao.deleteItem(itemId, productId);
+			break;
+		default:
+			System.err.println("deleteItem Error !!");
+		}
+	}
+	
+	// 이거 고처야됌
+	@Override
+	public boolean isItemInStock(int itemId, int productId) {
+		// TODO Auto-generated method stub
+		switch(productId) {
+		case 0:
+			return groupBuyingDao.isItemInStock(itemId, productId);
+		case 1:
+			return auctionDao.isItemInStock(itemId, productId);
+		case 2:
+			return secondHandDao.isItemInStock(itemId, productId);
+		case 3:
+			return handMadeDao.isItemInStock(itemId, productId);
+		default :
+			System.err.println("isItemInStock Error !!");
+			return false;
+		}
+	}
+	
+	@Override
+	public void insertHandMade(HandMade handmade) {
+		// TODO Auto-generated method stub
+		handMadeDao.insertHandMade(handmade);
+	}
+
+	@Override
+	public void updateHandMade(HandMade handmade) {
+		// TODO Auto-generated method stub
+		handMadeDao.updateHandMade(handmade);
+	}
+
+	@Override
+	public List<HandMade> getHandMadeList() {
+		// TODO Auto-generated method stub
+		return handMadeDao.getHandMadeList();
+	}
+
+	@Override
+	public HandMade getHandMadeById(int itemId) {
+		// TODO Auto-generated method stub
+		return handMadeDao.getHandMadeById(itemId);
+	}
+
+	@Override
+	public List<HandMade> getHandMadeListByProductId(int productId) {
+		// TODO Auto-generated method stub
+		return handMadeDao.getHandMadeListByProductId(productId);
 	}
 	
 	@Override
@@ -212,13 +272,13 @@ public class ItemImpl implements ItemFacade {
 	}
 
 	@Override
-	public Tag getTagByTagId(int tagId) {
+	public List<Tag> getTagByTagId(int tagId) {
 		// TODO Auto-generated method stub
 		return tagDao.getTagByTagId(tagId);
 	}
 
 	@Override
-	public Tag getTagByItemId(int itemId) {
+	public List<Tag> getTagByItemId(int itemId) {
 		// TODO Auto-generated method stub
 		return tagDao.getTagByItemId(itemId);
 	}
@@ -245,11 +305,5 @@ public class ItemImpl implements ItemFacade {
 	public void deleteTag(int tagId) {
 		// TODO Auto-generated method stub
 		tagDao.deleteTag(tagId);
-	}
-  
-	@Override
-	public void deleteItem(int itemId, int productId) {
-		// TODO Auto-generated method stub
-		
 	}
 }

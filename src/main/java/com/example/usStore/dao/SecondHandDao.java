@@ -18,9 +18,7 @@ public interface SecondHandDao extends ItemDao {
 	// SecondHand 추가
 	public void insertSecondHand(SecondHand secondHand) throws DataAccessException;
 	  
-	// SecondHand 삭제
-	public void deleteItem(int itemId) throws DataAccessException;
-	  
 	// SecondHand 수정
 	public void updateSecondHand(SecondHand secondHand) throws DataAccessException;
+
 }

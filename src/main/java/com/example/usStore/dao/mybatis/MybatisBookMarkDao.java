@@ -20,19 +20,19 @@ public class MybatisBookMarkDao implements BookMarkDao {
 	@Override
 	public List<BookMark> getBookMarkList(String userId) throws DataAccessException {
 		// TODO Auto-generated method stub
-		return null;
+		return bookMarkMapper.getBookMarkList(userId);
 	}
 
 	@Override
 	public void insertBookMark(BookMark bookMark) throws DataAccessException {
 		// TODO Auto-generated method stub
-		
+		bookMarkMapper.insertBookMark(bookMark);
 	}
 
 	@Override
 	public void deleteBookMark(String itemId) throws DataAccessException {
 		// TODO Auto-generated method stub
-		
+		bookMarkMapper.deleteBookMark(itemId);
 	}
 
 }

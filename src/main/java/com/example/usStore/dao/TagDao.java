@@ -8,14 +8,15 @@ import com.example.usStore.domain.Tag;
 
 
 public interface TagDao {
+	
 	//아이템 아이디로 태그 객체 찾기
 	List<Tag> getTagList () throws DataAccessException;
 
 	// 태그 이름으로 태그 객체 찾기(검색 기능에 이용?)
-	Tag getTagByTagId(int tagId) throws DataAccessException;
+	List<Tag> getTagByTagId(int tagId) throws DataAccessException;
 
 	// itemId로 태그 객체 찾기
-	Tag getTagByItemId(int itemId) throws DataAccessException;	
+	List<Tag> getTagByItemId(int itemId) throws DataAccessException;	
 
 	// tagName으로 태그 객체 찾기
 	Tag getTagByTagName(String tagName) throws DataAccessException;	

@@ -8,22 +8,9 @@ import org.springframework.dao.DataAccessException;
 import com.example.usStore.domain.GroupBuying;
 import com.example.usStore.domain.Item;
 
-public interface GroupBuyingMapper {
-//	void updateGroupBuyingQuantity(Map<String, Object> param);
-//
-//	int getGroupBuyingQuantity(int itemId);
-//
-//	List<GroupBuying> getGroupBuyingItemListByProduct(int productId);
-//
-//	Item getGroupBuyingItem(int itemId);
-//
-//	boolean isGroupBuyingItemInStock(int itemId);
-
+public interface GroupBuyingMapper extends ItemMapper {
 	// 공동구매 추가 메소드
 	public void insertGroupBuying(GroupBuying GroupBuying);
-
-	// 공동구매 삭제 메소드
-	public void deleteItem(int itemId);
 
 	// 공동구매 수정 메소드
 	public void updateGroupBuying(GroupBuying GroupBuying);
@@ -39,12 +26,5 @@ public interface GroupBuyingMapper {
 
 	// 공동구매 가격 조정 메소드
 	public void calculateDiscount(GroupBuying GroupBuying);
-
-	/* 기존에 ItemDao에 있었던 메소드들 */
-	boolean isItemInStock(int itemId, int productId);
-
-	void updateQuantity(int qty, int itemId, int productId);
-
-	int getQuantity(int itemId, int productId);
 
 }

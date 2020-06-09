@@ -20,19 +20,19 @@ public class MybatisKeyAlarmDao implements KeyAlarmDao {
 	@Override
 	public void insertKeyAlarm(KeyAlarm keyAlarm) throws DataAccessException {
 		// TODO Auto-generated method stub
-		
+		keyAlarmMapper.insertKeyAlarm(keyAlarm);
 	}
 
 	@Override
 	public void deleteKeyAlarm(String KeyAlarmId) throws DataAccessException {
 		// TODO Auto-generated method stub
-		
+		keyAlarmMapper.deleteKeyAlarm(KeyAlarmId);
 	}
 
 	@Override
 	public List<KeyAlarm> ListKeyAlarm(String userId) throws DataAccessException {
 		// TODO Auto-generated method stub
-		return null;
+		return keyAlarmMapper.ListKeyAlarm(userId);
 	}
 
 }

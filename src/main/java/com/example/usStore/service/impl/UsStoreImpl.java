@@ -118,31 +118,5 @@ public class UsStoreImpl implements UsStoreFacade {
 		//itemDao.updateQuantity(order);	    
 		orderDao.insertOrder(order);
 	}
- 
-//	public List<Item> getItemListByProduct(int productId) { 
-//		switch(productId) {
-//			// groupbuying
-//			case 0:
-//				return groupBuyingDao.getGroupBuyingList();
-//				break;
-//			// auction
-//			case 1:
-//				return itemDao.getItemListByProduct(productId);
-//				break;
-//			// secondHand
-//			case 2:
-//				return itemDao.getItemListByProduct(productId);
-//				break;
-//			// handMade
-//			case 3:
-//				return itemDao.getItemListByProduct(productId);
-//				break;
-//		}
-//		
-//	}
-//	 
-//	public boolean isItemInStock(int itemId, int productId) { 
-//		return itemDao.isItemInStock(itemId);
-//	}
 	 
 }

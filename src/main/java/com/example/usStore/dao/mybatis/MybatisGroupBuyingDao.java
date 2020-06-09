@@ -21,85 +21,73 @@ public class MybatisGroupBuyingDao implements GroupBuyingDao {
 	@Override
 	public void updateInventoryQuantity(Map<String, Object> param) throws DataAccessException {
 		// TODO Auto-generated method stub
-		
+		groupBuyingMapper.updateInventoryQuantity(param);
 	}
 
 	@Override
 	public int getInventoryQuantity(int itemId, int productId) throws DataAccessException {
 		// TODO Auto-generated method stub
-		return 0;
+		return groupBuyingMapper.getInventoryQuantity(itemId, productId);
 	}
 
 	@Override
 	public void updateQuantity(int qty, int itemId, int productId) throws DataAccessException {
 		// TODO Auto-generated method stub
-		
+		groupBuyingMapper.updateQuantity(qty, itemId, productId);
 	}
 
 	@Override
 	public int getQuantity(int itemId, int productId) throws DataAccessException {
 		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public List<Item> getItemListByProduct(int productId) throws DataAccessException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Item getItem(int itemId, int productId) throws DataAccessException {
-		// TODO Auto-generated method stub
-		return null;
+		return groupBuyingMapper.getQuantity(itemId, productId);
 	}
 
 	@Override
 	public boolean isItemInStock(int itemId, int productId) throws DataAccessException {
 		// TODO Auto-generated method stub
-		return false;
+		return groupBuyingMapper.isItemInStock(itemId, productId);
+	}
+
+	@Override
+	public void deleteItem(int itemId, int productId) throws DataAccessException {
+		// TODO Auto-generated method stub
+		groupBuyingMapper.deleteItem(itemId, productId);
 	}
 
 	@Override
 	public void insertGroupBuying(GroupBuying GroupBuying) throws DataAccessException {
 		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void deleteItem(int itemId) throws DataAccessException {
-		// TODO Auto-generated method stub
-		
+		groupBuyingMapper.insertGroupBuying(GroupBuying);
 	}
 
 	@Override
 	public void updateGroupBuying(GroupBuying GroupBuying) throws DataAccessException {
 		// TODO Auto-generated method stub
-		
+		groupBuyingMapper.updateGroupBuying(GroupBuying);
 	}
 
 	@Override
 	public List<GroupBuying> getGroupBuyingList() throws DataAccessException {
 		// TODO Auto-generated method stub
-		return null;
+		return groupBuyingMapper.getGroupBuyingList();
 	}
 
 	@Override
 	public GroupBuying getGroupBuyingItem(int itemId) throws DataAccessException {
 		// TODO Auto-generated method stub
-		return null;
+		return groupBuyingMapper.getGroupBuyingItem(itemId);
 	}
 
 	@Override
 	public void joinGroupBuying(GroupBuying GroupBuying) throws DataAccessException {
 		// TODO Auto-generated method stub
-		
+		groupBuyingMapper.joinGroupBuying(GroupBuying);
 	}
 
 	@Override
 	public void calculateDiscount(GroupBuying GroupBuying) throws DataAccessException {
 		// TODO Auto-generated method stub
-		
+		groupBuyingMapper.calculateDiscount(GroupBuying);
 	}
 
 }
