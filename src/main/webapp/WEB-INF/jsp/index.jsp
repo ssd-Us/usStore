@@ -22,10 +22,10 @@
 	                <p>Product</p>
 	                <hr>
 	                <ul>
-		               	<li><a href=<c:url value="/shop/viewProduct.do?productId=0"/>"><p>GroupBuying</p></li>
-		                <li><a href="<c:url value="/shop/viewProduct.do?productId=1"/>"><p>auction</p></li>
-		                <li><a href="<c:url value="/shop/viewProduct.do?productId=2"/>"><p>secondHand</p></li>
-		                <li><a href="<c:url value="/shop/viewProduct.do?productId=3"/>"><p>handMade</p></li>
+		               	<li><a href="<c:url value="/shop/groupBuying/listItem.do?productId=0"/>"><p>GroupBuying</p></li>
+		                <li><a href="<c:url value="/shop/auction/listItem.do?productId=1"/>"><p>Auction</p></li>
+		                <li><a href="<c:url value="/shop/secondHand/listItem.do?productId=2"/>"><p>SecondHand</p></li>
+		                <li><a href="<c:url value="/shop/handMade/listItem.do?productId=3"/>"><p>HandMade</p></li>
 	                </ul>
                 </td>
               </tr>
