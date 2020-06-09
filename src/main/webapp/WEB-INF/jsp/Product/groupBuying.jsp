@@ -18,7 +18,7 @@
 <body>
 	공동구매 게시글 목록: <br/><br/>
 <table style="width:70%;">
-   		<tr><th>&nbsp;</th><th>게시물 제목</th><th>정가</th><th>공동구매가</th><th>할인율</th><th>수량</th></tr>
+   		<tr><th>&nbsp;</th><th>게시물 제목</th><th>정가</th><th>공동구매가</th><th>할인율</th><th>수량</th><th>마감 날짜</th></tr>
    		<%
 			int index = 0;
 		%>
@@ -38,6 +38,7 @@
 			<td>${gb.listPrice}</td>
 			<td>${gb.discount}</td>
 			<td>${gb.qty}</td>
+			<td>${gb.deadLine}</td>
    		</c:forEach>
 </table>
 <br/>
