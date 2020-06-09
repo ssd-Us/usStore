@@ -20,17 +20,19 @@ table, th, td {
    <!-- db에서 select 결과 보여주는 페이지 -->
                    
 <table style="width:70%">
-   <tr><th>순번</th><th>제목</th><th>조회수</th></tr>
-   
-    <c:forEach var="item" items="${itemList.pageList}" varStatus="status">
+   <tr><th>itemId</th><th>할인</th><th>판매가</th></tr>
+ 
+    <c:forEach var="item" items="${itemList.pageList}">
       <tr>
          <td>${item.itemId}</td>
-         <td><a href="<c:url value='/productDetail'>
+         <%-- <td><a href="<c:url value='/productDetail'>
                              <c:param name="product" value="2"/>
                            <c:param name="itemId" value="${item.itemId}"/></c:url>">
                         <c:out value="${item.title}"/></a>
-            </td>
-             <td><c:out value="${item.viewcount}"/></td>                     
+            </td> --%>
+         <td><c:out value="${item.discount}"/></td>       
+		 <td><c:out value="${item.listPrice}"/></td>              
+
       </tr>
    </c:forEach>   
 </table>
