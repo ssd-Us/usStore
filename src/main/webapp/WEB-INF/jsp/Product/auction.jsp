@@ -11,7 +11,7 @@
 <meta charset="UTF-8">
 <title>경매 리스트 페이지</title>
 </head>
-<body>   
+<body> 
    <form name = "pform" action="" style="position:absolute; left:50%; margin:0 0 0 -420px;">
       <div class="container" >
          <div class="row"  style="display:inline">

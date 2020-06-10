@@ -41,7 +41,7 @@
   </update>
   
   
-  <select id="getAuctionById" parameterType="int">
+  <select id="getAuctionById" parameterType="int" resultType="Auction">
   	SELECT
       I.ITEMID,
       I.UNITCOST,

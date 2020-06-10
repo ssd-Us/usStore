@@ -60,14 +60,14 @@ function participation(price, startPrice) {
 		</td>
 		<td style="text-align: right; padding: 0px; font-size: small; border-bottom: none;">
 		<a href="
-							<c:url value='/addBookmark/${auction.suppId}/${auction.itemId}'/>	<!-- 로그인 여부 따지기 -->
+							<c:url value='/addBookmark/${auction.userId}/${auction.itemId}'/>	<!-- 로그인 여부 따지기 -->
 					">[북마크 추가]</a>
 		</td>
 	
 	</tr>
    		<tr>
 	   		<th style="border-right: 1px solid black; border-top: 1px solid black;">제목</th>
-	   		<td style="border-top: 1px solid black;">ㅇㅇㅇ친필 사인 책</td>
+	   		<td style="border-top: 1px solid black;">${auction.title}</td>
    		</tr>
    		
    		<tr>
@@ -75,19 +75,19 @@ function participation(price, startPrice) {
    			<td>김문정&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	   			<span>
 		   			<a href="
-							<c:url value='/addFollow/${auction.suppId}'/>	<!-- 로그인 여부 따지기 -->
+							<c:url value='/addFollow/${auction.userId}'/>	<!-- 로그인 여부 따지기 -->
 					">팔로잉</a>
 				</span>
 				&nbsp;
 				<span>
 					<a href="
-							<c:url value='/addAccuse/${auction.suppId}'/>	<!-- 로그인 여부 따지기 -->
+							<c:url value='/addAccuse/${auction.userId}'/>	<!-- 로그인 여부 따지기 -->
 					">판매자 신고</a>
 				</span>
    			</td>
    		</tr> <!-- userId = suppId -->
    		
-   		<tr><td colspan="2" style="padding: 15px;">2019년에 직접 사인받은 책 입니다.<br></td></tr>
+   		<tr><td colspan="2" style="padding: 15px;">${auction.description}<br></td></tr>
    		
    		<tr>
    			<th style="border-right: 1px solid black;"><font color=blue>#</font>관련태그</th>
@@ -100,14 +100,14 @@ function participation(price, startPrice) {
 				">#${tag.tagName}</a>&nbsp;
    			</c:forEach> --%>
    			<a href="
-					<c:url value='/searchTag/${auction.tagName}'/>	<!-- tag검색 결과 페이지로 이동 -->
+					<c:url value='/searchTag/${auction.itemId}'/>	<!-- tag검색 결과 페이지로 이동 -->
 				">#도서</a>&nbsp;
 				
 			<a href="
-					<c:url value='/searchTag/${auction.tagName}'/>	<!-- tag검색 결과 페이지로 이동 -->
+					<c:url value='/searchTag/${auction.itemId}'/>	<!-- tag검색 결과 페이지로 이동 -->
 				">#사인</a>&nbsp;
 			<a href="
-					<c:url value='/searchTag/${auction.tagName}'/>	<!-- tag검색 결과 페이지로 이동 -->
+					<c:url value='/searchTag/${auction.itemId}'/>	<!-- tag검색 결과 페이지로 이동 -->
 				">#작가</a>&nbsp;
    			</td>
    		</tr>
@@ -115,29 +115,29 @@ function participation(price, startPrice) {
    		<tr>
    			<th style="border-right: 1px solid black;"><font color=red>마감 날짜</font></th>
    			<td><font color=red>
-   				10일 남음
+   				${auction.deadLine}
    			</font></td>
    		</tr>
    		
    		<tr>
    		<th style="border-right: 1px solid black;">가격</th>
    			<td>
-   				시작 가격 : 10000 원<br>
-   				낙찰 가격 : <ins></ins> 원&nbsp;<font color=red>(경매 진행중)</font> <br><br>
+   				시작 가격 : ${auction.startPrice} 원<br>
+   				낙찰 가격 : <ins></ins> ${auction.bidPrice}원&nbsp;<font color=red>(경매 진행중)</font> <br><br>
    				현재 최대 금액 : 50000원<br>
    			</td>
    		</tr>
    		
    		<tr>
    		<th style="border-right: 1px solid black;">수량 </th> 
-   		<td> 20</td>
+   		<td>${auction.qty}</td>
    		</tr>
    		
    		<tr>
    			<td colspan="2" style="border-bottom: none;">
    				<span>
    				<a href="
-							<c:url value='/note/${auction.itemId}'/>	<!-- 로그인 여부 따지기 -->
+							<c:url value='/note/${auction.userId}'/>	<!-- 로그인 여부 따지기 -->
 				">쪽지 보내기</a>
 				</span><br><br>
    				<form method="POST" name="form" action="">
@@ -156,8 +156,8 @@ function participation(price, startPrice) {
    		<c:if test="${sh.suppId==session.userId}"> <!-- 로그인시 실행 -->
    		<tr>
    		<td colspan="2" style="text-align: right; padding: 0px; font-size: small; border-bottom: none; border-top: 1px solid black;">
-		   <a href="<c:url value='/editItem/${item.productId}'/>">[게시물 수정하기]</a>
-		   <a href="<c:url value='/deleteItem/${item.productId}'/>"> [게시물 삭제하기]</a>
+		   <a href="<c:url value='/editItem/${auction.itemId}'/>">[게시물 수정하기]</a>
+		   <a href="<c:url value='/deleteItem/${auction.itemId}'/>"> [게시물 삭제하기]</a>
 		   </td>
 		 </tr>
 		</c:if>

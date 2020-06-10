@@ -36,10 +36,9 @@ public class AuctionFormController {
    //경매 상세 페이지
    @RequestMapping("/shop/auction/viewItem.do") 
    public String auctionView(@RequestParam("itemId") int itemId, ModelMap model) {
-      Auction auction = this.itemFacade.getAuctionById(itemId);
-      List<Tag> tag = this.itemFacade.getTagByItemId(itemId);
-      
-      model.addAttribute("tag", tag);
+	  System.out.println("아이템 아이디 : " + itemId);
+	  Auction auction = this.itemFacade.getAuctionById(itemId);
+
       model.addAttribute("auction", auction);
       
       /*
