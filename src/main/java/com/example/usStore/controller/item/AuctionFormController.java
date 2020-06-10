@@ -11,22 +11,22 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.usStore.domain.Auction;
 import com.example.usStore.domain.Tag;
-import com.example.usStore.service.impl.ItemImpl;
+import com.example.usStore.service.facade.ItemFacade;
 
 @Controller
 public class AuctionFormController {
    @Autowired
-   private ItemImpl itemImpl;
+   private ItemFacade itemFacade;
    
    @Autowired
-   public void setUsStore(ItemImpl itemImpl) {
-      this.itemImpl = itemImpl;
+   public void setUsStore(ItemFacade itemFacade) {
+      this.itemFacade = itemFacade;
    }
    
    //경매 리스트
    @RequestMapping("/shop/auction/listItem.do") 
    public String auctionList(@RequestParam("productId") int productId, ModelMap model) {
-      List<Auction> auctionList = this.itemImpl.getAuctionList();
+      List<Auction> auctionList = this.itemFacade.getAuctionList();
       
       System.out.println("테스트" + auctionList.get(0).getTitle().toString());
       
@@ -38,8 +38,8 @@ public class AuctionFormController {
    //경매 상세 페이지
    @RequestMapping("/shop/auction/viewItem.do") 
    public String auctionView(@RequestParam("itemId") int itemId, ModelMap model) {
-      Auction auction = this.itemImpl.getAuctionById(itemId);
-      List<Tag> tag = this.itemImpl.getTagByItemId(itemId);
+      Auction auction = this.itemFacade.getAuctionById(itemId);
+      List<Tag> tag = this.itemFacade.getTagByItemId(itemId);
       
       model.addAttribute("tag", tag);
       model.addAttribute("auction", auction);
@@ -61,7 +61,7 @@ public class AuctionFormController {
    
    
    //경매 수정(로그인 여부 확인)
-   @RequestMapping("/shop/auction/listItem.do") 
+   @RequestMapping("/shop/auction/updateItem.do") 
    public String auctionUpdate(@RequestParam("productId") int productId, ModelMap model) {
 	   
 	   return "Product/item";
@@ -69,7 +69,7 @@ public class AuctionFormController {
    
    
    //경매 삭제(로그인 여부 확인)
-   @RequestMapping("/shop/auction/listItem.do") 
+   @RequestMapping("/shop/auction/deleteItem.do") 
    public String auctionDelete(@RequestParam("productId") int productId, ModelMap model) {
 	   
 	   return "Product/auction";
