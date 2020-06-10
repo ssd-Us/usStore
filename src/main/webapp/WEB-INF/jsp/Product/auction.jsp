@@ -24,27 +24,28 @@
                   <table>
                      <tr>
                         <th>상품</th>
-                        	<th style="padding-left:50px">가격</th>
-                            <th><p style="padding-left:75px">판매자</p></th>
-                            <th><p style="padding-left:60px">낙찰자</p></th>
-                            <th><p style="padding-left:80px">남은시간</p></th>
+                        <th style="padding-left:50px">가격</th>
+                        <th><p style="padding-left:75px">판매자</p></th>
+                        <th><p style="padding-left:60px">낙찰자</p></th>
+                        <th><p style="padding-left:80px">마감일</p></th>
                         </tr>
-                  <tbody>                   
+                  <tbody>   
+                  <c:forEach var="al" items="${auctionList}">                
                   <tr style="height:70px;">
                   <td style="padding-left:30px">
-                                <a href="<c:url value='/shop/productDetail'>
-                                	<c:param name="productId" value="3"/>
-                                    <c:param name="itemId" value="${auction.itemId}"/>
+                                <a href="<c:url value='/shop/auction/viewItem.do'>
+                                    <c:param name="itemId" value="${al.itemId}"/>
                                          </c:url>">
-                                      <font><c:out value="ㅇㅇㅇ친필 사인 책"/></font>
+                                      <font><c:out value="${al.title}"/></font>
                                 </a>
                 
                    </td>
-                   <td style="padding-left:50px"><c:out value="시작: 10,0000"/><br><c:out value="낙찰: 70,0000"/></td>
-                       <td style="padding-left:85px"><c:out value="김문정"/></td>   
-                       <td style="padding-left:70px"><c:out value="이지은"/></td>
-                       <td style="padding-left:90px"><c:out value="경매 마감"/><br><c:out value="(00:00)"/></td>
+                   <td style="padding-left:50px"><c:out value="시작: ${al.startPrice}"/><br><c:out value="낙찰: ${al.bidPrice}"/></td>
+                       <td style="padding-left:85px"><c:out value="a"/></td>   
+                       <td style="padding-left:70px"><c:out value="b"/></td>
+                       <td style="padding-left:90px"><c:out value="${al.deadLine}"/><br><c:out value="(00:00)"/></td>
                   </tr>
+                  </c:forEach>
                   </tbody>
                   </table>
                </div>

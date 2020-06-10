@@ -28,9 +28,7 @@ public class AuctionFormController {
    public String auctionList(@RequestParam("productId") int productId, ModelMap model) {
       List<Auction> auctionList = this.itemFacade.getAuctionList();
       
-      System.out.println("Å×½ºÆ®" + auctionList.get(0).getTitle().toString());
-      
-      //model.addAttribute("auctionList", auctionList);
+      model.addAttribute("auctionList", auctionList);
 
       return "Product/auction";
    }
