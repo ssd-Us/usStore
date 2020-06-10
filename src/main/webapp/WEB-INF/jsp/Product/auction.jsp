@@ -23,7 +23,7 @@
                   <hr>
                   <table>
                      <tr>
-                        <th>상품</th>
+                        <th>제목</th>
                         <th style="padding-left:50px">가격</th>
                         <th><p style="padding-left:75px">판매자</p></th>
                         <th><p style="padding-left:60px">낙찰자</p></th>
