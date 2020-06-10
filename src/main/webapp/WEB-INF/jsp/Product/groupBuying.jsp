@@ -1,48 +1,79 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<% request.setCharacterEncoding("UTF-8"); %>
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>공동구매 게시물 목록</title>
+<title>공동구매 리스트 페이지</title>
 <style>
-			table, th, td {
-			    border: 1px solid black;
-			    border-collapse: collapse;
+			th, td {
 			    text-align: center;
+			    height:70px;
+			    padding-left:50px;
+			    padding-right:50px;
 			}
 </style>
 </head>
-<body>
-	공동구매 게시글 목록: <br/><br/>
-<table style="width:70%;">
-   		<tr><th>&nbsp;</th><th>게시물 제목</th><th>정가</th><th>공동구매가</th><th>할인율</th><th>수량</th><th>마감 날짜</th></tr>
-   		<%
-			int index = 0;
-		%>
-   		<c:forEach var="gb" items="${groupBuyingList}">
-   			<%index++; %>
-   			<tr>
-			
-			<td><%=index %></td>
-			<td>
-				<a href="
-					<c:url value='/detail'>
-			  		  <c:param name="itemId" value="${gb.itemId}"/>
-			  		</c:url>
-				">${gb.title}</a>
-			</td>
-			<td>${gb.unitCost}</td>
-			<td>${gb.listPrice}</td>
-			<td>${gb.discount}%</td>
-			<td>${gb.qty}</td>
-			<td>${gb.deadLine}</td>
-   		</c:forEach>
-</table>
-<br/>
-<a href="<c:url value='/shop/item/addItem.do/${gb.productId}'/>">공동구매 게시글 추가하기</a><p/>	<!-- 로그인 여부 인터셉터로 이동 -->
-<%-- 	<c:param name="productId" value="${item.productId}"/>	<!-- 판매 카테고리 param 전달, 해당 판매 입력폼으로 이동  --> --%>
+<body>	  
+   <form name = "pform" action="" style="position:absolute; left:45%; margin:0 0 0 -420px;">
+      <div class="container" >
+         <div class="row"  style="display:inline">
+            <div style="display:inline;float:left;">
+               <div style="font-size:15px">
+                  <h2>
+                     	GroupBuying List
+                  </h2>
+                  <p style="text-align:right;">
+		                <a href="<c:url value='/shop/groupBuying/addItem.do'>
+		               		<c:param name="productId" value="${productId}"/></c:url>
+						">공동구매 게시글 추가하기
+						</a>
+					</p>	<!-- 로그인 여부 인터셉터로 이동 -->
+                  <hr>
+                  <table>
+                     <tr>
+                        <th>글 제목</th>
+                        <th>가격</th>
+                        <th>할인율</th>
+                        <th>수량</th>
+                        <th>마감 날짜</th>
+                     </tr>
+                  <tbody>    
+		
+   				<c:forEach var="gb" items="${groupBuyingList}">         
+                  <tr style="height:70px;">
+                  
+                  <td>
+                                <a href="<c:url value='/shop/productDetail'>
+                                	<c:param name="productId" value="${gb.productId}"/>
+                                    <c:param name="itemId" value="${gb.itemId}"/>
+                                         </c:url>">
+                                      <font>${gb.title}</font>
+                                </a>
+                
+                   </td>
+                   <td><del> 정가 &nbsp;&nbsp;${gb.unitCost}</del><br>할인가 &nbsp;${gb.listPrice}</td>
+                   <td>${gb.discount}%</td>
+                   <td>${gb.qty}</td>
+                   <td>${gb.deadLine}<br></td>
+                       
+                  </tr>
+                  </c:forEach>
+                  </tbody>
+                  </table>
+               </div>
+            </div>
+         </div>
+      </div>
+      <br><br>
+      
+      
+   </form>
+  
 </body>
 </html>
