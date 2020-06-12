@@ -11,5 +11,5 @@ public interface AccuseMapper {
 	void insertAccuse(Accuse accuse);
 	
 	// 해당 유저 별 신고 당한 횟수 받아오기
-	int countAccuse(Account account);
+	int countAccuseById(String attacker);
 }

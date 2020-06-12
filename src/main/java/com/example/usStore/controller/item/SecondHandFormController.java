@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.ModelAndViewDefiningException;
 
+import com.example.usStore.domain.Auction;
 import com.example.usStore.domain.Product;
 import com.example.usStore.domain.SecondHand;
 import com.example.usStore.service.facade.ItemFacade;
@@ -31,15 +32,24 @@ public class SecondHandFormController {
 
 	//중고거래 게시물 목록 보여주기
 	@RequestMapping("/shop/secondHand/listItem.do")
-	public String viewSecondHandList(@RequestParam("productId") int productId, ModelMap model) throws Exception{
+	public String secondHandList(@RequestParam("productId") int productId, ModelMap model) throws Exception{
 		PagedListHolder<SecondHand> itemList = new PagedListHolder<SecondHand>(this.itemFacade.getSecondHandList());
 		itemList.setPageSize(4);
 		
 
 		model.put("itemList", itemList);
-		return "Product/secondHand"; //뷰 네임은 그 목록 보여주는 페이지 
+		return "product/secondHand"; //뷰 네임은 그 목록 보여주는 페이지 
 	}
 	
+	@RequestMapping("/shop/secondHand/viewItem.do") 
+	public String viewSecondHand(@RequestParam("itemId") int itemId, ModelMap model) {
+		  SecondHand sh = this.itemFacade.getSecondHandItem(itemId);
+		  //도메인에서 가져와야함 디비에서 불러온걸 도메인에 저장해놈 
+	      model.addAttribute("sh", sh);
+
+	      return "product/viewSecondHand";
+	}
+	 
 	@RequestMapping("/shop/secondHand/addItem.do")
 	public String goItem(@RequestParam("productId") int productId) {
 	      return "redirect:/shop/item/addItem.do?productId=" + productId;

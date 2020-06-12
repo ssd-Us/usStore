@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.usStore.dao.mybatis.mapper.AccuseMapper">
+  <cache />
+  
+  	<insert id="insertAccuse" parameterType="Accuse">
+     INSERT INTO ACCUSE (ACCUSEID, VICTIM, ATTACKER, REASON)
+     VALUES (#{accuseId}, #{victim}, #{attacker}, #{reason})
+  	</insert>
+  	
+  	<select id="countAccuseById" parameterType="String" resultType="Accuse">
+  		SELECT COUNT(ATTACKER)
+  		FROM ACCUSE
+  		WHERE ATTACKER = #{attacker}
+  	</select>
+  	
+ </mapper>

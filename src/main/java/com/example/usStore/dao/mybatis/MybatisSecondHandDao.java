@@ -77,6 +77,6 @@ public class MybatisSecondHandDao implements SecondHandDao {
 
 	@Override
 	public SecondHand getSecondHandItem(int itemId) throws DataAccessException {
-		return null;
+		return secondHandMapper.getSecondHandById(itemId);
 	}
 }
