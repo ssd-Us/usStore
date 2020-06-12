@@ -1,5 +1,7 @@
 package com.example.usStore.controller.item;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,44 +25,52 @@ public class AuctionFormController {
       this.itemFacade = itemFacade;
    }
    
-   //°æ¸Å ¸®½ºÆ®
+   //ê²½ë§¤ ë¦¬ìŠ¤íŠ¸
    @RequestMapping("/shop/auction/listItem.do") 
    public String auctionList(@RequestParam("productId") int productId, ModelMap model) {
       List<Auction> auctionList = this.itemFacade.getAuctionList();
       
-      System.out.println("Å×½ºÆ®" + auctionList.get(0).getTitle().toString());
-      
-      //model.addAttribute("auctionList", auctionList);
+      model.addAttribute("auctionList", auctionList);
 
       return "Product/auction";
    }
    
-   //°æ¸Å »ó¼¼ ÆäÀÌÁö
+   //ê²½ë§¤ ìƒì„¸ í˜ì´ì§€
    @RequestMapping("/shop/auction/viewItem.do") 
    public String auctionView(@RequestParam("itemId") int itemId, ModelMap model) {
-      Auction auction = this.itemFacade.getAuctionById(itemId);
-      List<Tag> tag = this.itemFacade.getTagByItemId(itemId);
-      
-      model.addAttribute("tag", tag);
+	  Auction auction = this.itemFacade.getAuctionById(itemId);
+
       model.addAttribute("auction", auction);
       
-      /*
-       ¸¶°¨ ³¯Â¥ °è»êÇØ¼­ model ¿¡ ´ã¾Æ º¸³»±â
-       */
+//      ë§ˆê° ë‚ ì§œ ê³„ì‚°í•´ì„œ model ì— ë‹´ì•„ ë³´ë‚´ê¸°        
+//      SimpleDateFormat format = new SimpleDateFormat("yy/mm/dd");
+//      Date time = new Date();
+//      System.out.println("auction deadline : " + auction.getDeadLine().toString() + ", sysdate : " + format.format(time));
+      
+      
+//      unitCost ë¥¼ í˜„ì¬ ìµœëŒ€ ê¸ˆì•¡ìœ¼ë¡œ ë°›ìœ¼ë ¤ê³  í•¨.
       
       return "Product/viewAuction";
    }
 
+   
+   //ê²½ë§¤ ì°¸ì—¬(ë¡œê·¸ì¸ ì—¬ë¶€ í™•ì¸)
+   @RequestMapping("/shop/auction/participateItem.do") 
+   public String auctionParticipate(@RequestParam("price") String price, ModelMap model) {
+	   System.out.println("ì°¸ì—¬ ê¸ˆì•¡ : " + price.toString());
+	   
+	   return "Product/viewAuction";
+   }
       
-   //°æ¸Å Ãß°¡(·Î±×ÀÎ ¿©ºÎ È®ÀÎ)
-   @RequestMapping("/shop/auction/addItem.do/{auctionList.productId}") 
-   public String auctionAdd(@PathVariable int productId, ModelMap model) {
-	   return "Product/addAuction";
+   //ê²½ë§¤ ì¶”ê°€(ë¡œê·¸ì¸ ì—¬ë¶€ í™•ì¸)
+   @RequestMapping("/shop/groupBuying/addItem.do")
+   public String goItem(@RequestParam("productId") int productId) {
+      return "redirect:/shop/item/addItem.do?productId=" + productId;
    }
    
    
    
-   //°æ¸Å ¼öÁ¤(·Î±×ÀÎ ¿©ºÎ È®ÀÎ)
+   //ê²½ë§¤ ìˆ˜ì •(ë¡œê·¸ì¸ ì—¬ë¶€ í™•ì¸)
    @RequestMapping("/shop/auction/updateItem.do") 
    public String auctionUpdate(@RequestParam("productId") int productId, ModelMap model) {
 	   
@@ -68,7 +78,7 @@ public class AuctionFormController {
    }
    
    
-   //°æ¸Å »èÁ¦(·Î±×ÀÎ ¿©ºÎ È®ÀÎ)
+   //ê²½ë§¤ ì‚­ì œ(ë¡œê·¸ì¸ ì—¬ë¶€ í™•ì¸)
    @RequestMapping("/shop/auction/deleteItem.do") 
    public String auctionDelete(@RequestParam("productId") int productId, ModelMap model) {
 	   
