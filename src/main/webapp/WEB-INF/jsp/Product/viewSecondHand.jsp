@@ -43,21 +43,28 @@
 	}
 	
 </style>
+<script type="text/javascript"> 
+function accuse(){
+	var reason = prompt('판매자 신고하기', '신고 사유를 작성하세요.');
+	if(reason == null){alert("취소");} 
+	else{alert("확인\n 사유 : " + reason); }
+}
+	
+</script>
 </head>
 <body>
 <!-- 여기서 secondHand는 컨트롤러에서 보내준 모델 객체(db에서 select 결과 ) -->
 <!-- 아직 메세지 파일 작성안함 반드시 푸시전에 메세지 체크하기 !!!!!!!!!! -->
-	<table style="margin-left: auto; margin-right: auto;">
+<table style="margin-left: auto; margin-right: auto;">
 	<tr>
 		<td style="text-align: left; padding: 0px; font-size: small; border-bottom: none;">
 		${sh.viewCount}<font color=gray>view</font>
 		</td>
 		<td style="text-align: right; padding: 0px; font-size: small; border-bottom: none;">
 		<a href="
-							<c:url value='/addBookmark/${auction.userId}/${auction.itemId}'/>	<!-- 로그인 여부 따지기 -->
+							<c:url value='/addBookmark/${sh.userId}/${sh.itemId}'/>	<!-- 로그인 여부 따지기 -->
 					">[북마크 추가]</a>
 		</td>
-	
 	</tr>
    	<tr>
 	   	<th style="border-right: 1px solid black; border-top: 1px solid black;">제목</th>
@@ -74,13 +81,15 @@
 		&nbsp;
 		<span>
 		<a href="
-			<c:url value='/addAccuse/${sh.userId}'/>	<!-- 로그인 여부 따지기 -->
-			">판매자 신고</a>
+			<c:url value='/addAccuse/${sh.userId}'/>	<!-- 로그인 여부 따지기  , 이  url누르면  인터셉터에서 로그인 여부 따져서 컨트롤러로 보내줄지말지 설정 -->
+			" onclick = "accuse();">판매자 신고</a> <!-- 여기서 userId는  판매자를 의미하고, 세션의 로그인 아이디가 신고자 아이디이다.-->
 		</span>
    		</td>
-   		</tr> <!-- userId = suppId -->
-   		<tr><td colspan="2" style="padding: 15px;">${sh.description}<br></td></tr>
-   		<tr>
+   	</tr> 
+   	<tr>
+   		<td colspan="2" style="padding: 15px;">${sh.description}<br></td>
+   	</tr>
+   	<tr>
    		<th style="border-right: 1px solid black;"><font color=blue>#</font>관련태그</th>
    		<td>
    			<%-- <c:forEach var="tag" items="${tag}">	<!-- tag 테이블 이용 -> 해당 itemId를 어떻게 연결하지? -->
@@ -100,13 +109,20 @@
 			<c:url value='/searchTag/${sh.itemId}'/>	<!-- tag검색 결과 페이지로 이동 -->
 			">#경매</a>&nbsp;
    		</td>
-   		</tr>
-   		<tr>
-   		<th style="border-right: 1px solid black;">가격</th>
+   	</tr>
+   	<tr>
+   			<th style="border-right: 1px solid black;">가격</th>
    			<td>
    				인터넷 정가  : ${sh.unitCost}원<br>
-   				중고거래 판매가 : ${sh.listprice}원 <br>
-   				
+   			</td>
+   			<td>
+   				<%-- 중고거래 판매가 : ${sh.listPrice}원 <br> --%>
+   			</td>
+   	</tr>
+   	<tr>
+   			<th style="border-right: 1px solid black;">에눌가능여부</th>
+   			<td>
+   			    판매자 설정: 
    				<c:if test="${sh.discount == 1}">
    					<c:out value="에눌 가능합니다" />
    				</c:if>
@@ -114,40 +130,30 @@
    					<c:out value="가격 흥정은 불가능합니다." />
    				</c:if>
    			</td>
-   		</tr>
-   		
-   		<tr>
+   	</tr>
+   	<tr>
    		<th style="border-right: 1px solid black;">수량 </th> 
    		<td>${sh.qty}</td>
-   		</tr>
-   		
-   		<tr>
+   	</tr>	
+   	<tr>
    			<td colspan="2" style="border-bottom: none;">
    				<span>
    				<a href="
 							<c:url value='/note/${sh.userId}'/>	<!-- 로그인 여부 따지기 -->
 				">쪽지 보내기</a>
 				</span><br><br>
-   				<form method="POST" name="form" action="<c:url value="/shop/auction/participateItem.do?price=${price.value}"/>">
-   					<input type="text" id="price" name="price" placeholder="참여 가격을 입력하세요."/>
-				&nbsp;
-				<span>
-					<a href="#">경매 참여</a> <!-- 로그인 여부 따지기 -->
-					<%-- <a href="" onClick="participation(price, ${auction.unitCost}, '<c:url value='/shop/auction/participateItem.do?unitCost=${price}'/>')">경매 참여</a> --%>
-				</span>
-				</form>
    			</td>
-   		</tr>
+   	</tr>
    		
-   		<c:if test="${sh.suppId==session.userId}"> <!-- 로그인시 실행 -->
+   	<c:if test="${sh.userId==session.userId}"> <!-- 로그인시 실행 -->
    		<tr>
    		<td colspan="2" style="text-align: right; padding: 0px; font-size: small; border-bottom: none; border-top: 1px solid black;">
 		   <a href="<c:url value='/editItem/${auction.itemId}'/>">[게시물 수정하기]</a>
 		   <a href="<c:url value='/deleteItem/${auction.itemId}'/>"> [게시물 삭제하기]</a>
 		   </td>
 		 </tr>
-		</c:if>
-   	</table>
+	</c:if>
+</table>
         
        
 

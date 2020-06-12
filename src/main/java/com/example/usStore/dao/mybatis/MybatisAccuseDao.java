@@ -19,13 +19,11 @@ public class MybatisAccuseDao implements AccuseDao {
 
 	@Override
 	public void insertAccuse(Accuse accuse) throws DataAccessException {
-		// TODO Auto-generated method stub
 		accuseMapper.insertAccuse(accuse);
 	}
 
 	@Override
-	public int countAccuse(Account account) throws DataAccessException {
-		// TODO Auto-generated method stub
-		return accuseMapper.countAccuse(account);
+	public int countAccuseById(String attacker) throws DataAccessException {
+		return accuseMapper.countAccuseById(attacker);
 	}
 }

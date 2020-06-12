@@ -38,16 +38,16 @@ public class SecondHandFormController {
 		
 
 		model.put("itemList", itemList);
-		return "Product/secondHand"; //뷰 네임은 그 목록 보여주는 페이지 
+		return "product/secondHand"; //뷰 네임은 그 목록 보여주는 페이지 
 	}
 	
 	@RequestMapping("/shop/secondHand/viewItem.do") 
 	public String viewSecondHand(@RequestParam("itemId") int itemId, ModelMap model) {
 		  SecondHand sh = this.itemFacade.getSecondHandItem(itemId);
-
+		  //도메인에서 가져와야함 디비에서 불러온걸 도메인에 저장해놈 
 	      model.addAttribute("sh", sh);
 
-	      return "Product/viewSecondHand";
+	      return "product/viewSecondHand";
 	}
 	 
 	@RequestMapping("/shop/secondHand/addItem.do")

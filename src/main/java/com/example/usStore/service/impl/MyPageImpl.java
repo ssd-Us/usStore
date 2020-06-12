@@ -114,8 +114,8 @@ public class MyPageImpl implements MyPageFacade {
 	}
 
 	@Override
-	public int countAccuse(Account account) {
+	public int countAccuseById(String accountId) {
 		// TODO Auto-generated method stub
-		return accuseDao.countAccuse(account);
+		return accuseDao.countAccuseById(accountId);
 	}	
 }

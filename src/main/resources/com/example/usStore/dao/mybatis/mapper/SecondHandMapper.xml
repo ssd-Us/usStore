@@ -26,8 +26,6 @@
   		I.TITLE,
   		I.DESCRIPTION,
   		I.VIEWCOUNT,
-  		I.SUPPID,
-  		I.TAGID,
   		I.QTY,
 		I.USERID,
 		I.PRODUCTID,
