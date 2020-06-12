@@ -25,7 +25,7 @@ public class AuctionFormController {
       this.itemFacade = itemFacade;
    }
    
-   //경매 리스트
+   //寃쎈ℓ 由ъ뒪�듃
    @RequestMapping("/shop/auction/listItem.do") 
    public String auctionList(@RequestParam("productId") int productId, ModelMap model) {
       List<Auction> auctionList = this.itemFacade.getAuctionList();
@@ -35,42 +35,42 @@ public class AuctionFormController {
       return "Product/auction";
    }
    
-   //경매 상세 페이지
+   //寃쎈ℓ �긽�꽭 �럹�씠吏�
    @RequestMapping("/shop/auction/viewItem.do") 
    public String auctionView(@RequestParam("itemId") int itemId, ModelMap model) {
 	  Auction auction = this.itemFacade.getAuctionById(itemId);
 
       model.addAttribute("auction", auction);
       
-//      마감 날짜 계산해서 model 에 담아 보내기        
+//      留덇컧 �궇吏� 怨꾩궛�빐�꽌 model �뿉 �떞�븘 蹂대궡湲�        
 //      SimpleDateFormat format = new SimpleDateFormat("yy/mm/dd");
 //      Date time = new Date();
 //      System.out.println("auction deadline : " + auction.getDeadLine().toString() + ", sysdate : " + format.format(time));
       
       
-//      unitCost 를 현재 최대 금액으로 받으려고 함.
+//      unitCost 瑜� �쁽�옱 理쒕� 湲덉븸�쑝濡� 諛쏆쑝�젮怨� �븿.
       
       return "Product/viewAuction";
    }
 
    
-   //경매 참여(로그인 여부 확인)
+   //寃쎈ℓ 李몄뿬(濡쒓렇�씤 �뿬遺� �솗�씤)
    @RequestMapping("/shop/auction/participateItem.do") 
    public String auctionParticipate(@RequestParam("price") String price, ModelMap model) {
-	   System.out.println("참여 금액 : " + price.toString());
+	   System.out.println("李몄뿬 湲덉븸 : " + price.toString());
 	   
 	   return "Product/viewAuction";
    }
       
-   //경매 추가(로그인 여부 확인)
-   @RequestMapping("/shop/groupBuying/addItem.do")
+   //寃쎈ℓ 異붽�(濡쒓렇�씤 �뿬遺� �솗�씤)
+   @RequestMapping("/shop/auction/addItem.do")
    public String goItem(@RequestParam("productId") int productId) {
       return "redirect:/shop/item/addItem.do?productId=" + productId;
    }
    
    
    
-   //경매 수정(로그인 여부 확인)
+   //寃쎈ℓ �닔�젙(濡쒓렇�씤 �뿬遺� �솗�씤)
    @RequestMapping("/shop/auction/updateItem.do") 
    public String auctionUpdate(@RequestParam("productId") int productId, ModelMap model) {
 	   
@@ -78,7 +78,7 @@ public class AuctionFormController {
    }
    
    
-   //경매 삭제(로그인 여부 확인)
+   //寃쎈ℓ �궘�젣(濡쒓렇�씤 �뿬遺� �솗�씤)
    @RequestMapping("/shop/auction/deleteItem.do") 
    public String auctionDelete(@RequestParam("productId") int productId, ModelMap model) {
 	   
