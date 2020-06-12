@@ -54,7 +54,7 @@ public class AuctionFormController {
    }
 
    
-   //경매 참여(unitCost : 최대 참여 가격)
+   //경매 참여(로그인 여부 확인)
    @RequestMapping("/shop/auction/participateItem.do") 
    public String auctionParticipate(@RequestParam("price") String price, ModelMap model) {
 	   System.out.println("참여 금액 : " + price.toString());
@@ -63,9 +63,9 @@ public class AuctionFormController {
    }
       
    //경매 추가(로그인 여부 확인)
-   @RequestMapping("/shop/auction/addItem.do/{auctionList.productId}") 
-   public String auctionAdd(@PathVariable int productId, ModelMap model) {
-	   return "Product/addAuction";
+   @RequestMapping("/shop/groupBuying/addItem.do")
+   public String goItem(@RequestParam("productId") int productId) {
+      return "redirect:/shop/item/addItem.do?productId=" + productId;
    }
    
    

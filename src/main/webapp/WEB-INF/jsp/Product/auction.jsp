@@ -20,6 +20,12 @@
                   <h2>
                      Auction List
                   </h2>
+                   <p style="text-align:right;">
+		                <a href="<c:url value='/shop/auction/addItem.do'>
+		               		<c:param name="productId" value="${productId}"/></c:url>
+						">공동구매 게시글 추가하기
+						</a>
+					</p>
                   <hr>
                   <table>
                      <tr>

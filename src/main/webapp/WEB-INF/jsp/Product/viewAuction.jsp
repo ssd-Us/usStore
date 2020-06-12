@@ -156,14 +156,11 @@ function participation(price, unitCost, targetUri) {
 							<c:url value='/note/${auction.userId}'/>	<!-- 로그인 여부 따지기 -->
 				">쪽지 보내기</a>
 				</span><br><br>
-   				<form method="POST" name="form" action="">
+   				<form method="POST" name="form" action="<c:url value="/shop/auction/participateItem.do?price=${price.value}"/>">
    					<input type="text" id="price" name="price" placeholder="참여 가격을 입력하세요."/>
 				&nbsp;
 				<span>
-					<%-- <a href="
-							<c:url value='/order/${gb.itemId}'/>	<!-- 로그인 여부 따지기 -->
-					">공동구매 참여</a> --%>
-					<a href="<c:url value="/shop/auction/participateItem.do?price=${price.value}"/>">경매 참여</a>
+					<a href="#">경매 참여</a> <!-- 로그인 여부 따지기 -->
 					<%-- <a href="" onClick="participation(price, ${auction.unitCost}, '<c:url value='/shop/auction/participateItem.do?unitCost=${price}'/>')">경매 참여</a> --%>
 				</span>
 				</form>
