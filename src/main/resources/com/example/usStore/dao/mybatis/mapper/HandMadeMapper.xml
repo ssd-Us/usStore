@@ -7,11 +7,9 @@
     SELECT
       I.ITEMID,
       I.PRODUCTID,
-      SUPPID,
       UNITCOST,
       DESCRIPTION,
       VIEWCOUNT,
-      TAGID,
       QTY,
       DISCOUNT,
       LISTPRICE,
@@ -22,27 +20,16 @@
     WHERE H.ITEMID = I.ITEMID AND I.PRODUCTID = #{value}
   </select>
   
-
+  <select id="getHandMadeById" resultType="HandMade">
+    SELECT I.PRODUCTID, I.ITEMID, I.TITLE, I.QTY, I.UNITCOST, I.DESCRIPTION, I.VIEWCOUNT, LISTPRICE
+    FROM ITEM I, HANDMADE H
+    WHERE H.ITEMID = I.ITEMID AND I.ITEMID = #{itemId}
+  </select>
+  
   <select id="getHandMadeList" resultType="HandMade">
-    SELECT
-      I.ITEMID,
-      I.PRODUCTID,
-      SUPPID,
-      UNITCOST,
-      TITLE,
-      I.PRODUCTID AS "item.productId",
-      DESCRIPTION AS "item.description",
-      VIEWCOUNT,
-      TAGID,
-      STATUS,
-      QTY,
-      LISTPRICE,
-      I.USERID AS "item.userId",
-      I.PRODUCTID AS "item.productId",
-    FROM ITEM I, SECONDHAND S
-    WHERE P.PRODUCTID = I.PRODUCTID
-      AND I.ITEMID = V.ITEMID
-      AND I.ITEMID = #{value}
+    SELECT I.PRODUCTID, I.ITEMID, I.TITLE, I.QTY, I.UNITCOST, I.DESCRIPTION, I.VIEWCOUNT, LISTPRICE
+    FROM ITEM I, HANDMADE H
+    WHERE I.ITEMID = H.ITEMID
   </select>
 
   <select id="getQuantity" resultType="int">
@@ -71,8 +58,6 @@
 	  	TITLE = #{title}, 
 	  	DESCRIPTION = #{description}, 
 	  	VIEWCOUNT = #{viewCount}, 
-	  	SUPPID = #{suppId}, 
-	  	TAGID = #{tagId}, 
 	  	QTY = #{quantity}, 
 	  	USERID = #{userId}, 
 	  	PRODUCTID = #{productId},
@@ -81,9 +66,9 @@
   </update>
   
   <insert id="insertHandMade" parameterType="HandMade">
-   	INSERT INTO ACCOUNT
-      (ITEMID, UNITCOST, TITLE, DESCRIPTION, VIEWCOUNT, SUPPID, TAGID, QTY, USERID, PRODUCTID, LISTPRICE)
+   	INSERT INTO HANDMADE
+      (ITEMID, UNITCOST, TITLE, DESCRIPTION, VIEWCOUNT, QTY, USERID, PRODUCTID, LISTPRICE)
     VALUES
-      (#{itemId}, #{unitCost}, #{title}, #{description}, #{viewCount}, #{suppId}, #{tagId}, #{quantity}, #{userId}, #{productId}, #{listPrice})
+      (#{itemId}, #{unitCost}, #{title}, #{description}, #{viewCount}, #{quantity}, #{userId}, #{productId}, #{listPrice})
   </insert>
 </mapper>

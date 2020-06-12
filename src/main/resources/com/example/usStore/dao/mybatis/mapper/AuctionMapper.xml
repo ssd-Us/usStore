@@ -2,31 +2,29 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.usStore.dao.mybatis.mapper.AuctionMapper">
   <cache />
-  <select id="getAuctionList" resultType="List">
+  <select id="getAuctionList" resultType="Auction">
     SELECT
       I.ITEMID,
       I.UNITCOST,
       I.TITLE,
       I.DESCRIPTION,
       I.VIEWCOUNT,
-      I.SUPPID,
-      I.TAGID,
       I.QTY,
       I.USERID,
       I.PRODUCTID,
       A.AUCTIONSTATE,
-      A.TIME,
+      A.DEADLINE,
       A.STARTPRICE,
       A.BIDPRICE
     FROM AUCTION A, ITEM I
     WHERE A.ITEMID = I.ITEMID
   </select>
   
-  <insert id="insertAuction" parameterType="AUCTION">
+  <insert id="insertAuction" parameterType="Auction">
      INSERT INTO AUCTION
-     	(ITEMID, AUCTIONSTATE, TIME, STARTPRICE, BIDPRICE)
+     	(ITEMID, AUCTIONSTATE, DEADLINE, STARTPRICE, BIDPRICE)
      VALUES 
-     	(#{itemId}, #{auctionState}, #{time}, #{startPrice}, #{bidPrice})
+     	(#{itemId}, #{auctionState}, #{deadLine}, #{startPrice}, #{bidPrice})
   </insert>
   
   
@@ -37,30 +35,28 @@
   </delete>
   
   
-  <update id="updateAuction" parameterType="AUCTION">
+  <update id="updateAuction" parameterType="Auction">
      UPDATE AUCTION 
-     SET ITEMID = "#{itemID}", AUCTIONSTATE = "#{auctionState}", TIME = "#{time}", STARTPRICE = "#{startPrice}", BIDPRICE = "#{bidPrice}"
+     SET ITEMID = #{itemID}, AUCTIONSTATE = #{auctionState}, DEADLINE = #{deadLine}, STARTPRICE = #{startPrice}, BIDPRICE = #{bidPrice}
   </update>
   
   
-  <select id="getAuctionById" parameterType="int">
+  <select id="getAuctionById" parameterType="int" resultType="Auction">
   	SELECT
       I.ITEMID,
       I.UNITCOST,
       I.TITLE,
       I.DESCRIPTION,
       I.VIEWCOUNT,
-      I.SUPPID,
-      I.TAGID,
       I.QTY,
       I.USERID,
       I.PRODUCTID,
       A.AUCTIONSTATE,
-      A.TIME,
+      A.DEADLINE,
       A.STARTPRICE,
       A.BIDPRICE
     FROM AUCTION A, ITEM I
     WHERE A.ITEMID = I.ITEMID
-    	AND I.ITEMID = "#{itemId}" 
+    	AND I.ITEMID = #{itemId}
   </select>
 </mapper>

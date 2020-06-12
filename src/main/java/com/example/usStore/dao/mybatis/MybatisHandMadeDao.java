@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
@@ -12,23 +13,12 @@ import com.example.usStore.dao.mybatis.mapper.HandMadeMapper;
 import com.example.usStore.domain.HandMade;
 import com.example.usStore.domain.Item;
 
+@Qualifier("mybatisHandMadeDao")
 @Repository
 public class MybatisHandMadeDao implements HandMadeDao {
 
 	@Autowired
 	private HandMadeMapper handMadeMapper;
-
-	@Override
-	public void updateInventoryQuantity(Map<String, Object> param) throws DataAccessException {
-		// TODO Auto-generated method stub
-		handMadeMapper.updateInventoryQuantity(param);
-	}
-
-	@Override
-	public int getInventoryQuantity(int itemId, int productId) throws DataAccessException {
-		// TODO Auto-generated method stub
-		return handMadeMapper.getInventoryQuantity(itemId, productId);
-	}
 
 	@Override
 	public void updateQuantity(int qty, int itemId, int productId) throws DataAccessException {
@@ -82,6 +72,24 @@ public class MybatisHandMadeDao implements HandMadeDao {
 	public List<HandMade> getHandMadeListByProductId(int productId) throws DataAccessException {
 		// TODO Auto-generated method stub
 		return handMadeMapper.getHandMadeListByProductId(productId);
+	}
+
+	@Override
+	public void insertItem(Item item) {
+		// TODO Auto-generated method stub
+		handMadeMapper.insertItem(item);
+	}
+
+	@Override
+	public void updateItem(Item item) {
+		// TODO Auto-generated method stub
+		handMadeMapper.updateItem(item);
+	}
+
+	@Override
+	public void getItem(int itemId, int productId) {
+		// TODO Auto-generated method stub
+		handMadeMapper.getItem(itemId, productId);
 	}
 
 }

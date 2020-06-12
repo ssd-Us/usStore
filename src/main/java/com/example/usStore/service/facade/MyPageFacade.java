@@ -55,5 +55,5 @@ public interface MyPageFacade {
 	/////////////////////////////////////////////////////////////////////////
 	void insertAccuse(Accuse accuse);
 	
-	int countAccuse(Account account);
+	int countAccuseById(String accounId);
 }

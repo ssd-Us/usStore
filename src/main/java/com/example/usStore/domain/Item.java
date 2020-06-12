@@ -7,103 +7,100 @@ import java.io.Serializable;
  * */
 @SuppressWarnings("serial")
 public class Item implements Serializable {
-  /* Private Fields */
-  private int itemId;			 //(PK) String- > int
-  private String supplierId;	 //(FK) �Ǹ��� ���̵�
-  private int unitCost; 		 //�ܰ�(����)
-  private String title; 		 //����
-  private String description; 	 //����
-  private int viewCount; 		 //��ȸ��
-  private int tagId;	 		 //(FK) �±׾��̵� 
-  private int quantity;			 //���
-  private String userId;		 //(FK) ������ ���̵�
-  private int productId;      	 //(FK) ��������/�߰�ŷ�/���/�������Ǹ� ����  
-  
-  /* JavaBeans Properties */
-  public int getItemId() {
-	return itemId;
-  }
+	/* Private Fields */
+	private int itemId; // (PK) String- > int
+	private int unitCost;
+	private String title;
+	private String description;
+	private int viewCount;
+	private int qty;
+	private String userId; // (FK)
+	private int productId; // (FK)
 
-  public void setItemId(int itemId) {
-	this.itemId = itemId;
-  }
+	public Item() {}
+	
+	public Item(int unitCost, String title, String description, int viewCount, int qty, String userId,
+			int productId) {
+		this.unitCost = unitCost;
+		this.title = title;
+		this.description = description;
+		this.viewCount = viewCount;
+		this.qty = qty;
+		this.userId = userId;
+		this.productId = productId;
+	}
 
-  public String getSupplierId() {
-	return supplierId;
-  }
 
-  public void setSupplierId(String supplierId) {
-	this.supplierId = supplierId;
-  }
 
-  public int getUnitCost() {
-	return unitCost;
-  }
+	/* JavaBeans Properties */
+	public int getItemId() {
+		return itemId;
+	}
 
-  public void setUnitCost(int unitCost) {
-	this.unitCost = unitCost;
-  }
+	public void setItemId(int itemId) {
+		this.itemId = itemId;
+	}
 
-  public String getTitle() {
-	return title;
-  }
+	public int getUnitCost() {
+		return unitCost;
+	}
 
-  public void setTitle(String title) {
-	this.title = title;
-  }
+	public void setUnitCost(int unitCost) {
+		this.unitCost = unitCost;
+	}
 
-  public String getDescription() {
-	return description;
-  }
+	public String getTitle() {
+		return title;
+	}
 
-  public void setDescription(String description) {
-	this.description = description;
-  }
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
-  public int getViewCount() {
-	return viewCount;
-  }
+	public String getDescription() {
+		return description;
+	}
 
-  public void setViewCount(int viewCount) {
-	this.viewCount = viewCount;
-  }
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
-  public int getTagId() {
-	return tagId;
-  }
+	public int getViewCount() {
+		return viewCount;
+	}
 
-  public void setTagId(int tagId) {
-	this.tagId = tagId;
-  }
+	public void setViewCount(int viewCount) {
+		this.viewCount = viewCount;
+	}
 
-  public int getQuantity() {
-	return quantity;
-  }
+	public int getQty() {
+		return qty;
+	}
 
-  public void setQuantity(int quantity) {
-	this.quantity = quantity;
-  }
+	public void setQty(int qty) {
+		this.qty = qty;
+	}
 
-  public String getUserId() {
-	return userId;
-  }
+	public String getUserId() {
+		return userId;
+	}
 
-  public void setUserId(String userId) {
-	this.userId = userId;
-  }
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
 
-  public int getProductId() {
-	return productId;
-  }
+	public int getProductId() {
+		return productId;
+	}
 
-  public void setProductId(int productId) {
-	this.productId = productId;
-  }
-  
- 
-  /* Public Methods */
-  public String toString() {
-    return "��ǰ : " + getItemId() + ", �Ǹ��� : " + getSupplierId().trim();
-  }
+	public void setProductId(int productId) {
+		this.productId = productId;
+	}
+
+	@Override
+	public String toString() {
+		return "Item [itemId=" + itemId + ", unitCost=" + unitCost + ", title=" + title + ", description=" + description
+				+ ", viewCount=" + viewCount + ", qty=" + qty + ", userId=" + userId + ", productId=" + productId + "]";
+	}
 
 }

@@ -9,16 +9,16 @@ import com.example.usStore.domain.SecondHand;
 
 public interface SecondHandDao extends ItemDao {
 	
-	// ì „ì²´ SecondHandList ë°›ì•„ì˜¤ê¸°
+	// ÀüÃ¼ SecondHandList ¹Ş¾Æ¿À±â
 	List<SecondHand> getSecondHandList() throws DataAccessException;
 	
-	// itemId ë§¤ê°œë³€ìˆ˜ë¡œ ë°›ì•„ SecondHand ê°ì²´ ë°˜í™˜
+	// itemId ¸Å°³º¯¼ö·Î ¹Ş¾Æ SecondHand °´Ã¼ ¹İÈ¯
 	SecondHand getSecondHandItem(int itemId) throws DataAccessException;
 	
-	// SecondHand ì¶”ê°€
+	// SecondHand Ãß°¡
 	public void insertSecondHand(SecondHand secondHand) throws DataAccessException;
 	  
-	// SecondHand ìˆ˜ì •
+	// SecondHand ¼öÁ¤
 	public void updateSecondHand(SecondHand secondHand) throws DataAccessException;
 
 }

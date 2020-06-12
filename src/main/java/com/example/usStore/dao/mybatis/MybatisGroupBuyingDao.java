@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
@@ -12,23 +13,12 @@ import com.example.usStore.dao.mybatis.mapper.GroupBuyingMapper;
 import com.example.usStore.domain.GroupBuying;
 import com.example.usStore.domain.Item;
 
+@Qualifier("mybatisGroupBuyingDao")
 @Repository
 public class MybatisGroupBuyingDao implements GroupBuyingDao {	
 	
 	@Autowired
 	private GroupBuyingMapper groupBuyingMapper;
-
-	@Override
-	public void updateInventoryQuantity(Map<String, Object> param) throws DataAccessException {
-		// TODO Auto-generated method stub
-		groupBuyingMapper.updateInventoryQuantity(param);
-	}
-
-	@Override
-	public int getInventoryQuantity(int itemId, int productId) throws DataAccessException {
-		// TODO Auto-generated method stub
-		return groupBuyingMapper.getInventoryQuantity(itemId, productId);
-	}
 
 	@Override
 	public void updateQuantity(int qty, int itemId, int productId) throws DataAccessException {
@@ -88,6 +78,24 @@ public class MybatisGroupBuyingDao implements GroupBuyingDao {
 	public void calculateDiscount(GroupBuying GroupBuying) throws DataAccessException {
 		// TODO Auto-generated method stub
 		groupBuyingMapper.calculateDiscount(GroupBuying);
+	}
+
+	@Override
+	public void insertItem(Item item) {
+		// TODO Auto-generated method stub
+		groupBuyingMapper.insertItem(item);
+	}
+
+	@Override
+	public void updateItem(Item item) {
+		// TODO Auto-generated method stub
+		groupBuyingMapper.updateItem(item);
+	}
+
+	@Override
+	public void getItem(int itemId, int productId) {
+		// TODO Auto-generated method stub
+		groupBuyingMapper.getItem(itemId, productId);
 	}
 
 }

@@ -12,8 +12,8 @@
 <title>상품 입력 폼</title>
 </head>
 <body>
-	<spring:hasBindErrors name="item" />
-	<form:form modelAttribute="item" method="post" action="step2/${item.productId}">
+	<spring:hasBindErrors name="itemForm" />
+	<form:form modelAttribute="itemForm" method="post" action="/shop/item/addItem2/${productId}">
 	
 	제목: <form:input type="text" path="title" value="${title}"/>
 	<form:errors path="title"/> <br>

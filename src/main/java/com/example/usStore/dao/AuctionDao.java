@@ -11,7 +11,7 @@ public interface AuctionDao extends ItemDao {
 	// select Auction
 	List<Auction> getAuctionList() throws DataAccessException;
 
-	// itemId 받아와 해당 경매 객체 반환
+	// itemId 諛쏆븘�� �빐�떦 寃쎈ℓ 媛앹껜 諛섑솚
 	Auction getAuctionItem(int itemId) throws DataAccessException;
 
 	// insert Auction
@@ -20,7 +20,7 @@ public interface AuctionDao extends ItemDao {
 	// update Auction
 	public void updateAuction(Auction auction) throws DataAccessException;
 
-	// 아이템 아이디로 해당 경매 객체 반환
+	// �븘�씠�뀥 �븘�씠�뵒濡� �빐�떦 寃쎈ℓ 媛앹껜 諛섑솚
 	public Auction getAuctionById(int itemId) throws DataAccessException;
 
 }

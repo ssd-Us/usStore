@@ -10,8 +10,8 @@ public class Accuse  implements Serializable {
 
 	// variable
 	private int accuseId;   // Sequence
-	private String victim;   // (FK) userId
-	private String attacker; // (FK) userId
+	private String victim;   // (FK) userId : 피해자(로그인한, 신고한사람)
+	private String attacker; // (FK) userId : 판매자(신고 대상자)
 	private String reason;  // 신고 이유
 	
 	// setter & getter
