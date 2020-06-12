@@ -17,6 +17,21 @@ public class Item implements Serializable {
 	private String userId; // (FK)
 	private int productId; // (FK)
 
+	public Item() {}
+	
+	public Item(int unitCost, String title, String description, int viewCount, int qty, String userId,
+			int productId) {
+		this.unitCost = unitCost;
+		this.title = title;
+		this.description = description;
+		this.viewCount = viewCount;
+		this.qty = qty;
+		this.userId = userId;
+		this.productId = productId;
+	}
+
+
+
 	/* JavaBeans Properties */
 	public int getItemId() {
 		return itemId;
@@ -82,9 +97,10 @@ public class Item implements Serializable {
 		this.productId = productId;
 	}
 
-	/* Public Methods */
+	@Override
 	public String toString() {
-		return null;
+		return "Item [itemId=" + itemId + ", unitCost=" + unitCost + ", title=" + title + ", description=" + description
+				+ ", viewCount=" + viewCount + ", qty=" + qty + ", userId=" + userId + ", productId=" + productId + "]";
 	}
 
 }

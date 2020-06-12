@@ -66,7 +66,13 @@ public class ItemFormController {
 		itemForm.setDescription(rq.getParameter("description"));	
 		itemForm.setUnitCost(Integer.parseInt(rq.getParameter("unitCost")));
 		itemForm.setQty(Integer.parseInt(rq.getParameter("qty")));
-	//	itemForm.setTag(rq.getParameter("tag"));
+		itemForm.setTag1(rq.getParameter("tag1"));
+		itemForm.setTag2(rq.getParameter("tag2"));
+		itemForm.setTag3(rq.getParameter("tag3"));
+		itemForm.setTag4(rq.getParameter("tag4"));
+		itemForm.setTag5(rq.getParameter("tag5"));
+		
+		
 		
 		httpSession.setAttribute("itemForm", itemForm);	//itemForm 세션 생성, 사용자 입력값을 itemForm 세션에 저장
 		
