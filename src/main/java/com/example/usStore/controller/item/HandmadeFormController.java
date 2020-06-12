@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.usStore.domain.Auction;
 import com.example.usStore.domain.HandMade;
 import com.example.usStore.domain.SecondHand;
 import com.example.usStore.service.facade.ItemFacade;
@@ -35,7 +36,7 @@ public class HandmadeFormController {
 		itemList.setPageSize(4);
 		
 		model.put("itemList", itemList);
-		return "Product/handMade";
+		return "product/handMade";
 	}
 	
 	@RequestMapping("shop/handMade/listItem2.do")
@@ -52,7 +53,7 @@ public class HandmadeFormController {
 		}
 		model.put("itemList", itemList);
 		model.put("handMade", handMade);
-		return "Product/handMade";
+		return "product/handMade";
 	}
 	
 	@RequestMapping("/shop/handMade/addItem.do")
@@ -78,5 +79,14 @@ public class HandmadeFormController {
 		 * new ModelAndView("Cart", "cart", cart);
 		 */
 		return null;
-  }
+	}
+	
+	@RequestMapping("/shop/handMade/viewItem.do")
+	public String auctionView(@RequestParam("itemId") int itemId, ModelMap model) {
+		HandMade handMade = this.itemFacade.getHandMadeById(itemId);
+		
+		model.addAttribute("handMade", handMade);
+		return "product/viewHandMade";
+	}
+
 }

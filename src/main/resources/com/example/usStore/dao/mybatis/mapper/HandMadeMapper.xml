@@ -20,7 +20,12 @@
     WHERE H.ITEMID = I.ITEMID AND I.PRODUCTID = #{value}
   </select>
   
-
+  <select id="getHandMadeById" resultType="HandMade">
+    SELECT I.PRODUCTID, I.ITEMID, I.TITLE, I.QTY, I.UNITCOST, I.DESCRIPTION, I.VIEWCOUNT, LISTPRICE
+    FROM ITEM I, HANDMADE H
+    WHERE H.ITEMID = I.ITEMID AND I.ITEMID = #{itemId}
+  </select>
+  
   <select id="getHandMadeList" resultType="HandMade">
     SELECT I.PRODUCTID, I.ITEMID, I.TITLE, I.QTY, I.UNITCOST, I.DESCRIPTION, I.VIEWCOUNT, LISTPRICE
     FROM ITEM I, HANDMADE H
