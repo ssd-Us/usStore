@@ -35,7 +35,7 @@ public class SecondHandFormController {
 	public String secondHandList(@RequestParam("productId") int productId, ModelMap model) throws Exception{
 		PagedListHolder<SecondHand> itemList = new PagedListHolder<SecondHand>(this.itemFacade.getSecondHandList());
 		itemList.setPageSize(4);
-		
+		System.out.println("여기는 게시물 목록 컨트롤러\n ");
 
 		model.put("itemList", itemList);
 		return "product/secondHand"; //뷰 네임은 그 목록 보여주는 페이지 
