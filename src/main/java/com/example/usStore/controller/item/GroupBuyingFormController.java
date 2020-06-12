@@ -132,7 +132,7 @@ public class GroupBuyingFormController {
 			 * }
 			 * �씠�젃寃� 蹂�寃쏀빐�빞 �븷�벏..?
 			 */
-		
+	
 		model.addAttribute("newGroupBuying", gbform);
 		
 		List<GroupBuying> gbs = itemFacade.getGroupBuyingList();
@@ -143,7 +143,7 @@ public class GroupBuyingFormController {
 	}
 	
 	@RequestMapping("/shop/groupBuying/addItem.do")
-	public String goItem(@RequestParam("productId") int productId, Model model) {
+	public String goItem(@RequestParam("productId") int productId) {
 		System.out.println("item으로 꼬!");
 		return "redirect:/shop/item/addItem.do?productId=" + productId;
 	}

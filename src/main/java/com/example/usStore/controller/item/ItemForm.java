@@ -1,5 +1,10 @@
 package com.example.usStore.controller.item;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.example.usStore.domain.Tag;
+
 public class ItemForm {
 	/* Private Fields */
 	  private int itemId;			 //(PK) String- > int
@@ -8,6 +13,11 @@ public class ItemForm {
 	  private String description; 	 //����
 	  private int viewCount; 		 //��ȸ��
 	  private int qty;			 //���
+	  private Tag tag1;
+	  private Tag tag2;
+	  private Tag tag3;
+	  private Tag tag4;
+	  private Tag tag5;
 	  private String userId;		 //(FK) ������ ���̵�
 	  private int productId;      	 //(FK) ��������/�߰�ŷ�/���/�������Ǹ� ����  
 	  
@@ -75,7 +85,11 @@ public class ItemForm {
 	  public void setProductId(int productId) {
 		this.productId = productId;
 	  }
-
+	  
+		/*
+		 * private final List<String> tags = new ArrayList() { { tags.add(tag1);
+		 * add("2"); add("3"); } };
+		 */
 	@Override
 	public String toString() {
 		return "ItemForm [itemId=" + itemId + ", unitCost=" + unitCost + ", title="
