@@ -78,30 +78,5 @@ public class HandmadeFormController {
 		 * new ModelAndView("Cart", "cart", cart);
 		 */
 		return null;
-	}
-	
-	@RequestMapping("/shop/handMade/addItem.do")
-	public String goItem(@RequestParam("productId") int productId) {
-	      return "redirect:/shop/item/addItem.do?productId=" + productId;
-	}
-	
-	@ModelAttribute("handMadeForm")
-	public SecondHandForm createSecondHandForm() {
-		return new SecondHandForm();
-	}
-	
-	@RequestMapping("/shop/handMade/addItem/${itemId}")
-	public ModelAndView handleRequest(
-			@PathVariable String itemId,
-			@ModelAttribute("handMadeForm") HandMade handMade 
-			) throws Exception {
-		/*
-		 * if (cart.containsItemId(workingItemId)) {
-		 * cart.incrementQuantityByItemId(workingItemId); } else { boolean isInStock =
-		 * this.petStore.isItemInStock(workingItemId); Item item =
-		 * this.petStore.getItem(workingItemId); cart.addItem(item, isInStock); } return
-		 * new ModelAndView("Cart", "cart", cart);
-		 */
-		return null;
-	}
+  }
 }
