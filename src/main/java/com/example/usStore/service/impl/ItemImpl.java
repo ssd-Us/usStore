@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,6 +27,7 @@ import com.example.usStore.service.facade.ItemFacade;
  * 
  * Item / HandMade / GroupBuying / SecondHand / Auction / Tag
  * */
+@Repository
 @Service("itemImpl")
 @Transactional
 public class ItemImpl implements ItemFacade {
