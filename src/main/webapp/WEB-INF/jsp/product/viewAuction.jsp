@@ -166,7 +166,7 @@ function participation(price, unitCost) {
 				&nbsp;
 				<span onclick="participation(price.value, ${auction.unitCost})">
 					<!-- 로그인 여부 따지기 -->
-					<a href="">경매 참여</a>
+					<a href="#">경매 참여</a>
 				</span>
 				</form>
    			</td>
