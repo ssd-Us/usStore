@@ -37,7 +37,7 @@
 	
 </style>
 
-<table id="main-menu">
+<%-- <table id="main-menu">
   <tr>
     <td>
       <a href='<c:url value="/shop/handMade/viewItem.do">
@@ -46,7 +46,7 @@
           &lt;&lt; Go to List</font></b></a>
     </td>
   </tr>
-</table>
+</table> --%>
 <p>
 <div align="center">
   <table id="item">
@@ -97,7 +97,7 @@
 		</td>
 		<td style="text-align: right; padding: 0px; font-size: small; border-bottom: none;">
 		<a href="
-							<c:url value='/addBookmark/${hm.suppId}/${hm.itemId}'/>	<!-- 로그인 여부 따지기 -->
+							<c:url value='/addBookmark/${gb.suppId}/${gb.itemId}'/>	<!-- 로그인 여부 따지기 -->
 					">[북마크 추가]</a>
 		</td>
 	
@@ -112,13 +112,13 @@
    			<td>푸드리&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	   			<span>
 		   			<a href="
-							<c:url value='/addFollow/${hm.suppId}'/>	<!-- 로그인 여부 따지기 -->
+							<c:url value='/addFollow/${gb.suppId}'/>	<!-- 로그인 여부 따지기 -->
 					">팔로잉</a>
 				</span>
 				&nbsp;
 				<span>
 					<a href="
-							<c:url value='/addAccuse/${hm.suppId}'/>	<!-- 로그인 여부 따지기 -->
+							<c:url value='/addAccuse/${gb.suppId}'/>	<!-- 로그인 여부 따지기 -->
 					">판매자 신고</a>
 				</span>
    			</td>
@@ -137,11 +137,11 @@
 				">#${tag.tagName}</a>&nbsp;
    			</c:forEach> --%>
    			<a href="
-					<c:url value='/searchTag/${hm.tagName}'/>	<!-- tag검색 결과 페이지로 이동 -->
+					<c:url value='/searchTag/${gb.tagName}'/>	<!-- tag검색 결과 페이지로 이동 -->
 				">#과잠</a>&nbsp;
 				
 			<a href="
-					<c:url value='/searchTag/${hm.tagName}'/>	<!-- tag검색 결과 페이지로 이동 -->
+					<c:url value='/searchTag/${gb.tagName}'/>	<!-- tag검색 결과 페이지로 이동 -->
 				">#단체복</a>&nbsp;
    			</td>
    		</tr>
@@ -170,19 +170,19 @@
    			<td colspan="2" style="border-bottom: none;">
    			<span>
 		   			<a href="
-							<c:url value='/addCart/${handMade.itemId}'/>	<!-- 로그인 여부 따지기 -->
+							<c:url value='/addCart/${gb.itemId}'/>	<!-- 로그인 여부 따지기 -->
 					">장바구니 추가</a>
 				</span>
 				&nbsp;&nbsp;&nbsp;
 				<span>
 					<a href="
-							<c:url value='/order/${handMade.itemId}'/>	<!-- 로그인 여부 따지기 -->
+							<c:url value='/order/${gb.itemId}'/>	<!-- 로그인 여부 따지기 -->
 					">공동구매 참여</a>
 				</span>
 				&nbsp;&nbsp;&nbsp;
 				<span>
    				<a href="
-							<c:url value='/note/${handMade.itemId}'/>	<!-- 로그인 여부 따지기 -->
+							<c:url value='/note/${gb.itemId}'/>	<!-- 로그인 여부 따지기 -->
 				">쪽지 보내기</a>
 				</span>
    			
@@ -192,13 +192,16 @@
    		<c:if test="${sh.suppId==session.userId}"> <!-- 로그인시 실행 -->
    		<tr>
    		<td colspan="2" style="text-align: right; padding: 0px; font-size: small; border-bottom: none; border-top: 1px solid black;">
-		   <a href="<c:url value='/shop/handMade/editItem.do/${handMade.productId}'/>">[게시물 수정하기]</a>
-		   <a href="<c:url value='/shop/handMade/deleteItem.do/${handMade.productId}'/>"> [게시물 삭제하기]</a>
+		   <a href="<c:url value='/editItem/${handMade.productId}'/>">[게시물 수정하기]</a>
+		   <a href="<c:url value='/deleteItem/${handMade.productId}'/>"> [게시물 삭제하기]</a>
 		   </td>
 		 </tr>
 		</c:if>
+   <!-- 하나의 url을 공유하며 파라미터로 아이디 값을 넘겨줄지
+   네개의 컨트롤러를 각자 구현할지 정해야함
+   deleteItem 아이디만 받아와서 한번만 삭제할수 있는게 아니고
+    어차피 db테이블이 다르니까 delete문은 4번 써줘야함  -->
    	</table>
    	<br><br>
-	
 </body>
 <%@ include file="itemBottom.jsp" %>
