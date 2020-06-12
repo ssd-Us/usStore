@@ -40,7 +40,10 @@ public class SecondHandFormController {
 		return "Product/secondHand"; //뷰 네임은 그 목록 보여주는 페이지 
 	}
 	
-	
+	@RequestMapping("/shop/secondHand/addItem.do")
+	public String goItem(@RequestParam("productId") int productId) {
+	      return "redirect:/shop/item/addItem.do?productId=" + productId;
+	}
 	
 	@ModelAttribute("secondHandForm")
 	public SecondHandForm createSecondHandForm() {
