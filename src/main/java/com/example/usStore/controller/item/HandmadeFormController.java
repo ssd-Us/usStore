@@ -79,6 +79,7 @@ public class HandmadeFormController {
 		 * new ModelAndView("Cart", "cart", cart);
 		 */
 		return null;
+    
 	}
 	
 	@RequestMapping("/shop/handMade/viewItem.do")
@@ -88,5 +89,4 @@ public class HandmadeFormController {
 		model.addAttribute("handMade", handMade);
 		return "product/viewHandMade";
 	}
-
 }
