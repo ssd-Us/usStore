@@ -43,7 +43,9 @@
                         <th>수량</th>
                         <th>마감 날짜</th>
                      </tr>
+                     
                   <tbody>    
+                  
 		
    				<c:forEach var="gb" items="${groupBuyingList}">         
                   <tr style="height:70px;">

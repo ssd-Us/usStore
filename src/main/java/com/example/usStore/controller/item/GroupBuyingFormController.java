@@ -6,12 +6,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.support.PagedListHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 
-import com.example.usStore.domain.Auction;
 import com.example.usStore.domain.GroupBuying;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,10 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
-import com.example.usStore.domain.Item;
-import com.example.usStore.domain.SecondHand;
 import com.example.usStore.service.facade.ItemFacade;
-import com.example.usStore.controller.item.ItemForm;
 
 @Controller
 @SessionAttributes("gbform")	
@@ -58,12 +53,13 @@ public class GroupBuyingFormController {
 	 * }
 	 */  
 	
- @RequestMapping("/shop/groupBuying/listItem.do") 
-   public String groupBuyingList(@RequestParam("productId") int productId, ModelMap model) {
+	@RequestMapping("/shop/groupBuying/listItem.do") 
+    public String groupBuyingList(@RequestParam("productId") int productId, ModelMap modelMap, Model model) {
 	 List<GroupBuying> groupBuyingList = this.itemFacade.getGroupBuyingList();
 		
 	 //item값도 받아와야 함
-     model.put("groupBuyingList", groupBuyingList);
+	 model.addAttribute("productId", productId);
+	 modelMap.put("groupBuyingList", groupBuyingList);
 	 return "Product/groupBuying";
    }
 	
@@ -145,4 +141,11 @@ public class GroupBuyingFormController {
 		sessionStatus.setComplete();	// session 醫낅즺		
 		return DetailPage;
 	}
+	
+	@RequestMapping("/shop/groupBuying/addItem.do")
+	public String goItem(@RequestParam("productId") int productId, Model model) {
+		System.out.println("item으로 꼬!");
+		return "redirect:/shop/item/addItem.do?productId=" + productId;
+	}
+	
 }
