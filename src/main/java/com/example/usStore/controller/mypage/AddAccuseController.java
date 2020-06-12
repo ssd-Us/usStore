@@ -16,12 +16,12 @@ public class AddAccuseController {
 	@RequestMapping("/addAccuse") 
 	public String addAccuse(@RequestParam("userId") int userId, ModelMap model) {
 		 // SecondHand sh = this.itemFacade.getSecondHandItem(itemId);
-		  //ë„ë©”ì¸ì—ì„œ ê°€ì ¸ì™€ì•¼í•¨ ë””ë¹„ì—ì„œ ë¶ˆëŸ¬ì˜¨ê±¸ ë„ë©”ì¸ì— ì €ì¥í•´ë†ˆ 
-		  Accuse accuse = new Accuse(); //ìë°”ìŠ¤í¬ë¦½íŠ¸ì—ì„œ ë„˜ì–´ì˜¨ ìŠ¤íŠ¸ë§ê°’ì„ ì €ì¥í•˜ê¸° 
+		  //µµ¸ŞÀÎ¿¡¼­ °¡Á®¿Í¾ßÇÔ µğºñ¿¡¼­ ºÒ·¯¿Â°É µµ¸ŞÀÎ¿¡ ÀúÀåÇØ³ğ 
+		  Accuse accuse = new Accuse(); //ÀÚ¹Ù½ºÅ©¸³Æ®¿¡¼­ ³Ñ¾î¿Â ½ºÆ®¸µ°ªÀ» ÀúÀåÇÏ±â 
 		  
 		  this.myPageFacade.insertAccuse(accuse);
 		
-		  System.out.println("addAccuse ì»¨íŠ¸ë¡¤ëŸ¬ ì§„ì…\n");
+		  System.out.println("addAccuse ÄÁÆ®·Ñ·¯ ÁøÀÔ\n");
 	      return "product/viewSecondHand";
 	}
 	

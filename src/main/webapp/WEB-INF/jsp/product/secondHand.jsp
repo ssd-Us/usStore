@@ -25,7 +25,7 @@
 					</p>
                   <hr>                                
 				<table style="width:70%">
-   				<tr><th>itemId</th><th><p style="padding-left:80px">할인</th><th><p style="padding-left:80px">판매가</th></tr>
+   				<tr><th>title</th><th><p style="padding-left:80px">할인</th><th><p style="padding-left:80px">판매가</th></tr>
   				<tbody> 
 	    			<c:forEach var="item" items="${itemList.pageList}">
 		      			<tr style="height:70px;">
