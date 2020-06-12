@@ -30,16 +30,17 @@ public class HandmadeFormController {
 	@RequestMapping("/shop/handMade/listItem.do")
 	public String listHandMade (
 			@RequestParam("productId") int productId, ModelMap model) throws Exception {
+    
 		PagedListHolder<HandMade> itemList = new PagedListHolder<HandMade>(this.itemFacade.getHandMadeList());
 		itemList.setPageSize(4);
-		List<HandMade> list = itemFacade.getHandMadeList();
-		model.put("list", list);
+		
+		model.put("itemList", itemList);
 		return "Product/handMade";
 	}
 	
 	@RequestMapping("shop/handMade/listItem2.do")
 	public String handleRequest2(
-			@ModelAttribute("product") HandMade handMade,
+			@ModelAttribute("handMade") HandMade handMade,
 			@ModelAttribute("itemList") PagedListHolder<HandMade> itemList,
 			@RequestParam("pageName") String page, 
 			ModelMap model) throws Exception {
@@ -51,7 +52,32 @@ public class HandmadeFormController {
 		}
 		model.put("itemList", itemList);
 		model.put("handMade", handMade);
-		return "Product";
+		return "Product/handMade";
+	}
+	
+	@RequestMapping("/shop/handMade/addItem.do")
+	public String goItem(@RequestParam("productId") int productId) {
+	      return "redirect:/shop/item/addItem.do?productId=" + productId;
+	}
+	
+	@ModelAttribute("handMadeForm")
+	public SecondHandForm createSecondHandForm() {
+		return new SecondHandForm();
+	}
+	
+	@RequestMapping("/shop/handMade/addItem/${itemId}")
+	public ModelAndView handleRequest(
+			@PathVariable String itemId,
+			@ModelAttribute("handMadeForm") HandMade handMade 
+			) throws Exception {
+		/*
+		 * if (cart.containsItemId(workingItemId)) {
+		 * cart.incrementQuantityByItemId(workingItemId); } else { boolean isInStock =
+		 * this.petStore.isItemInStock(workingItemId); Item item =
+		 * this.petStore.getItem(workingItemId); cart.addItem(item, isInStock); } return
+		 * new ModelAndView("Cart", "cart", cart);
+		 */
+		return null;
 	}
 	
 	@RequestMapping("/shop/handMade/addItem.do")
