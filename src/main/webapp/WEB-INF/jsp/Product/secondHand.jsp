@@ -30,7 +30,7 @@
 	    			<c:forEach var="item" items="${itemList.pageList}">
 		      			<tr style="height:70px;">
 		         		<td style="padding-left:30px">
-                                <a href="<c:url value='/shop/secondHand/viewItem.do'>
+                                <a href="<c:url value='/shop/secondhand/viewItem.do'>
                                     <c:param name="itemId" value="${item.itemId}"/>
                                          </c:url>">
                                       <font><c:out value="${item.title}"/></font>
