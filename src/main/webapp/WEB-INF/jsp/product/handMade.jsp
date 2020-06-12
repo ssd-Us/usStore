@@ -1,4 +1,4 @@
-<%@ include file="ItemTop.jsp"%>
+<%@ include file="itemTop.jsp"%>
 
 <table id="main-menu">
   <tr>
@@ -57,4 +57,4 @@
   </table>
 </div>
 
-<%@ include file="ItemBottom.jsp"%>
+<%@ include file="itemBottom.jsp"%>
