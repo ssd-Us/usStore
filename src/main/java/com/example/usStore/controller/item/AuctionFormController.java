@@ -47,6 +47,8 @@ public class AuctionFormController {
 
       model.addAttribute("auction", auction);
       
+      //경매에 참여한 뒤에 다시 상세페이지로 가는 것이면, alert 창으로 완료됐다고 보여주고 싶음.
+      
       return "product/viewAuction";
    }
 
@@ -72,14 +74,14 @@ public class AuctionFormController {
    
    @RequestMapping("/shop/auction/updateItem.do") 
    public String auctionUpdate(@RequestParam("productId") int productId, ModelMap model) {
-	   
+	   this.itemFacade.updateAuction(this.itemFacade.getAuctionById(myItemId));
 	   return "product/item";
    }
 
   
    @RequestMapping("/shop/auction/deleteItem.do") 
    public String auctionDelete(@RequestParam("productId") int productId, ModelMap model) {
-	   
+	   this.itemFacade.deleteItem(myItemId, 1);
 	   return "product/auction";
    }
 }
