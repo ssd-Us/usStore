@@ -32,12 +32,13 @@ public class AuctionFormController {
       
       model.addAttribute("auctionList", auctionList);
 
-      return "Product/auction";
+      return "product/auction";
    }
    
    //寃쎈ℓ �긽�꽭 �럹�씠吏�
    @RequestMapping("/shop/auction/viewItem.do") 
    public String auctionView(@RequestParam("itemId") int itemId, ModelMap model) {
+	  System.out.println("---경매 상세 페이지---"); 
 	  Auction auction = this.itemFacade.getAuctionById(itemId);
 
       model.addAttribute("auction", auction);
@@ -50,17 +51,25 @@ public class AuctionFormController {
       
 //      unitCost 瑜� �쁽�옱 理쒕� 湲덉븸�쑝濡� 諛쏆쑝�젮怨� �븿.
       
-      return "Product/viewAuction";
+      return "product/viewAuction";
    }
 
    
    //寃쎈ℓ 李몄뿬(濡쒓렇�씤 �뿬遺� �솗�씤)
    @RequestMapping("/shop/auction/participateItem.do") 
-   public String auctionParticipate(@RequestParam("price") String price, ModelMap model) {
-	   System.out.println("李몄뿬 湲덉븸 : " + price.toString());
+   public String auctionParticipate(ModelMap model) {
+	   System.out.println("넘어옴");
 	   
-	   return "Product/viewAuction";
+	   return "product/viewAuction";
    }
+   
+	/*
+	 * @RequestMapping("/shop/auction/participateItem.do") public String
+	 * auctionParticipate(@RequestParam("price") int price, ModelMap model) {
+	 * System.out.println("입력 가격 : " + price);
+	 * 
+	 * return "Product/viewAuction"; }
+	 */
       
    //寃쎈ℓ 異붽�(濡쒓렇�씤 �뿬遺� �솗�씤)
    @RequestMapping("/shop/auction/addItem.do")
@@ -74,7 +83,7 @@ public class AuctionFormController {
    @RequestMapping("/shop/auction/updateItem.do") 
    public String auctionUpdate(@RequestParam("productId") int productId, ModelMap model) {
 	   
-	   return "Product/item";
+	   return "product/item";
    }
    
    
@@ -82,6 +91,6 @@ public class AuctionFormController {
    @RequestMapping("/shop/auction/deleteItem.do") 
    public String auctionDelete(@RequestParam("productId") int productId, ModelMap model) {
 	   
-	   return "Product/auction";
+	   return "product/auction";
    }
 }
