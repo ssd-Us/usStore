@@ -1,5 +1,6 @@
 package com.example.usStore.controller.item;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,6 +12,9 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 
 import com.example.usStore.domain.GroupBuying;
+import com.example.usStore.domain.Item;
+import com.example.usStore.domain.Tag;
+
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -83,16 +87,19 @@ public class GroupBuyingFormController {
 			result.hasFieldErrors("description") ||
 			result.hasFieldErrors("unitCost") ||
 			result.hasFieldErrors("qty") ||
-			result.hasFieldErrors("tag")) {		
-				return ADD_FORM1;	// 寃�利� �삤瑜� 諛쒖깮 �떆 step1 form view(item.jsp)濡� �씠�룞
+			result.hasFieldErrors("tag")) 
+		{		//에러 검증 발생시
+				return ADD_FORM1;	// 寃�利� �삤瑜� 諛쒖깮 �떆 step1 form view(item.jsp) 되돌아감
 			}
-		return ADD_FORM2;
+		return ADD_FORM2;	//item 입력 성공시 다음 groupBuying 입력 폼으로 이동
 	}//�뤌�쑝濡� �씠�룞
 	
 	@PostMapping("/shop/groupbuying/step3")		// step2 -> step3 �씠�룞
 	public String step3(
-			@ModelAttribute("gbform") GroupBuyingForm gbcommand, 
-			BindingResult result, Model model) {		
+			@ModelAttribute("gbform") GroupBuyingForm gbcommand, @RequestParam("productId") int productId, 
+			ItemForm itemformSession, 
+			BindingResult result, Model model, HttpServletRequest rq) {	
+		HttpSession session = rq.getSession(false); //이미 세션이 있다면 그 세션을 돌려주고, 세션이 없으면 새로운 세션을 생성한다.
 		System.out.println("command 媛앹껜: " + gbcommand);
 		
 		// session�뿉 ���옣�맂 regReq 媛앹껜�뿉 ���옣�맂 �엯�젰 媛� 寃�利�
@@ -105,6 +112,28 @@ public class GroupBuyingFormController {
 				result.hasFieldErrors("deadLine")) {	
 			return ADD_FORM2;		// 寃�利� �삤瑜� 諛쒖깮 �떆 step2 form view(addGroupBuying.jsp)濡� �씠�룞
 		}
+		
+		itemformSession = (ItemForm) session.getAttribute("itemForm");
+		Item item = new Item(itemformSession.getUnitCost(), itemformSession.getTitle(), 
+				itemformSession.getDescription(), itemformSession.getViewCount(), 
+				itemformSession.getQty(), itemformSession.getUserId(), productId);
+		
+		itemFacade.insertItem(item);
+		itemformSession.makeTags(item.getItemId(), itemformSession.getTag1());	//tag에 itemId, tagName 적용 후 리스트에 삽입
+		itemformSession.makeTags(item.getItemId(), itemformSession.getTag2());
+		itemformSession.makeTags(item.getItemId(), itemformSession.getTag3());
+		itemformSession.makeTags(item.getItemId(), itemformSession.getTag4());
+		itemformSession.makeTags(item.getItemId(), itemformSession.getTag5());
+		
+		List<Tag> tags = new ArrayList<Tag>();
+		tags = itemformSession.getTags();
+		
+		for(Tag t : tags) {	//tags 리스트 탐색
+			if(t.getTagName() != null || t.getTagName().trim() != "") {	//tagName이 null 또는 빈 값이 아닌 동안
+				itemFacade.insertTag(t);	//태그 삽입 완료
+			}
+		}
+		
 		return CHECK_FORM3;		// �삤瑜� �뾾�쑝硫� step3 form view(checkGroupBuying.jsp)濡� �씠�룞
 	}
 	
