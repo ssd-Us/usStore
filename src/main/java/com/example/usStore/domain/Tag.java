@@ -10,8 +10,15 @@ public class Tag  implements Serializable {
 	/* Private Fields */
 	private int tagId; 			// Sequence
 	private int itemId; 		// (FK) itemId
-	private String tagName;
+	private String tagName = null;
+ 
+	public Tag() {}
 	
+	public Tag(int itemId, String tagName) {
+		this.itemId = itemId;	
+		this.tagName = tagName;
+	}
+		
 	/* JavaBeans Properties */
 	public int getTagId() { return tagId; }
 	public void setTagId(int tagId) {	this.tagId = tagId; }
