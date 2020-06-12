@@ -4,7 +4,19 @@
   <cache />
   
  	<select id="getSecondHandList" resultType="SecondHand">
-	    SELECT ITEMID, DISCOUNT, LISTPRICE FROM SECONDHAND 
+	    SELECT 
+	     	  I.ITEMID,
+		      I.UNITCOST,
+		      I.TITLE,
+		      I.DESCRIPTION,
+		      I.VIEWCOUNT,
+		      I.QTY,
+		      I.USERID,
+		      I.PRODUCTID,
+	    	  S.DISCOUNT,
+	    	  S.LISTPRICE 
+	    FROM SECONDHAND S, ITEM I
+	    WHERE S.ITEMID = I.ITEMID
 	</select>
 	
 	<select id="getSecondHandById" parameterType="int" resultType="SecondHand">

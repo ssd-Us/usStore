@@ -24,7 +24,6 @@ public class HandmadeFormController {
 		this.itemFacade = itemFacade;
 	}
 
-	///
 	@RequestMapping("shop/handMade/listItem.do")
 	public String handleRequest(
 			@RequestParam("productId") int productId,
@@ -32,7 +31,6 @@ public class HandmadeFormController {
 //		PagedListHolder<Item> itemList = new PagedListHolder<Item>(this.itemFacade.getItemListByProduct(productId));
 //		itemList.setPageSize(4);
 		List<HandMade> list = itemFacade.getHandMadeList();
-//		model.put("itemList", itemList);
 		model.put("list", list);
 		return "Product/handMade";
 	}
