@@ -1,8 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ include file="itemTop.jsp"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <% request.setCharacterEncoding("UTF-8"); %>
 
 <!DOCTYPE html>
@@ -47,9 +44,9 @@
                 
                    </td>
                    <td style="padding-left:50px"><c:out value="시작: ${al.startPrice}"/><br><c:out value="낙찰: ${al.bidPrice}"/></td>
-                       <td style="padding-left:85px"><c:out value="a"/></td>   
+                       <td style="padding-left:85px"><c:out value="${al.userId}"/></td>   
                        <td style="padding-left:70px"><c:out value="b"/></td>
-                       <td style="padding-left:90px"><c:out value="${al.deadLine}"/><br><c:out value="(00:00)"/></td>
+                       <td style="padding-left:90px"><fmt:formatDate value="${al.deadLine}" pattern="yyyy년 MM월 dd일  hh시 mm분 ss초" /></td>
                   </tr>
                   </c:forEach>
                   </tbody>

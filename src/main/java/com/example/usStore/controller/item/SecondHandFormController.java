@@ -35,7 +35,7 @@ public class SecondHandFormController {
 	public String secondHandList(@RequestParam("productId") int productId, ModelMap model) throws Exception{
 		PagedListHolder<SecondHand> itemList = new PagedListHolder<SecondHand>(this.itemFacade.getSecondHandList());
 		itemList.setPageSize(4);
-		
+		System.out.println("ì—¬ê¸°ëŠ” ê²Œì‹œë¬¼ ëª©ë¡ ì»¨íŠ¸ë¡¤ëŸ¬\n ");
 
 		model.put("itemList", itemList);
 		return "product/secondHand"; //ºä ³×ÀÓÀº ±× ¸ñ·Ï º¸¿©ÁÖ´Â ÆäÀÌÁö 
