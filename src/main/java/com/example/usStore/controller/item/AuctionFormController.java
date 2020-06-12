@@ -63,7 +63,7 @@ public class AuctionFormController {
    }
       
    //경매 추가(로그인 여부 확인)
-   @RequestMapping("/shop/groupBuying/addItem.do")
+   @RequestMapping("/shop/auction/addItem.do")
    public String goItem(@RequestParam("productId") int productId) {
       return "redirect:/shop/item/addItem.do?productId=" + productId;
    }
