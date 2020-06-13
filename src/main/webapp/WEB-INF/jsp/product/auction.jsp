@@ -20,7 +20,7 @@
                    <p style="text-align:right;">
 		                <a href="<c:url value='/shop/auction/addItem.do'>
 		               		<c:param name="productId" value="${productId}"/></c:url>
-						">♡경매 추가♡
+						">[경매 추가]
 						</a>
 					</p>
                   <hr>
@@ -38,6 +38,7 @@
                   <td style="padding-left:15px">
                                 <a href="<c:url value='/shop/auction/viewItem.do'>
                                     <c:param name="itemId" value="${al.itemId}"/>
+                                    <c:param name="productId" value="${productId}"/>
                                          </c:url>">
                                       <font><c:out value="${al.title}"/></font>
                                 </a>

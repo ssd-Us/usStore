@@ -38,18 +38,20 @@ public class AuctionFormController {
       
       myProductId = productId;
       
+      model.addAttribute("productId", productId);
       model.addAttribute("auctionList", auctionList);
 
       return "product/auction";
    }
    
    @RequestMapping("/shop/auction/viewItem.do") 
-   public String auctionView(@RequestParam("itemId") int itemId, ModelMap model) {
+   public String auctionView(@RequestParam("itemId") int itemId, @RequestParam("productId") int productId, ModelMap model) {
 	  System.out.println("<경매 상세 페이지>"); 
 	  myItemId = itemId;
 	  
 	  Auction auction = this.itemFacade.getAuctionById(myItemId);
 
+	  model.addAttribute("productId", productId);
       model.addAttribute("auction", auction);
       
       return "product/viewAuction";
