@@ -1,6 +1,6 @@
 <%@ include file="itemTop.jsp"%>
 <body>
-   <form:form modelAttribute="secondHand" method="post" action="done/${item.productId}">
+   <form:form modelAttribute="SecondHand" method="post" action="done/${item.productId}">
 	   판매가: <form:input path="listPrice" value="${listPrice}"/>
 	   <form:errors path="listPrice"/> <br>
 	   
