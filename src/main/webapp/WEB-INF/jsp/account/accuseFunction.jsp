@@ -9,17 +9,43 @@ function accuse(){
 	else{alert("취소되었습니다.?? 정말 취소되도록 (디비문 안들어가도록)수정"); }
 }
 </script>
-<% System.out.println("accuseFunction.jsp 진입"); %>
+<% System.out.println("accuseFunction.jsp come in"); %>
 <span>
 		<c:choose>
 	   				<c:when test="${isAccuse}">
 						신고 완료 
 					</c:when>
 					<c:otherwise>
-						<a href="<c:url value='/addAccuse.do'>
-						<c:param name="userId" value="${sh.userId}"/>
-		 				<c:param name="itemId" value="${sh.itemId}"/></c:url>"
-						onClick = "accuse(); return;">판매자 신고하기</a>
+						<c:choose>
+							<c:when test="${productId==0}">
+								<a href="<c:url value='/addAccuse.do'>
+								<c:param name="userId" value="${gb.userId}"/>
+		 						<c:param name="itemId" value="${gb.itemId}"/>
+		 						<c:param name="productId" value="${productId}"/></c:url>"
+								onClick = "accuse(); return;">판매자 신고하기</a>
+							</c:when>
+							<c:when test="${productId==1}">
+								<a href="<c:url value='/addAccuse.do'>
+								<c:param name="userId" value="${auction.userId}"/>
+		 						<c:param name="itemId" value="${auction.itemId}"/>
+		 						<c:param name="productId" value="${productId}"/></c:url>"
+								onClick = "accuse(); return;">판매자 신고하기</a>
+							</c:when>
+							<c:when test="${productId==2}">
+								<a href="<c:url value='/addAccuse.do'>
+								<c:param name="userId" value="${sh.userId}"/>
+		 						<c:param name="itemId" value="${sh.itemId}"/>
+		 						<c:param name="productId" value="${productId}"/></c:url>"
+								onClick = "accuse(); return;">판매자 신고하기</a>
+							</c:when>
+							<c:when test="${productId==3}">
+								<a href="<c:url value='/addAccuse.do'>
+								<c:param name="userId" value="${handMade.userId}"/>
+		 						<c:param name="itemId" value="${handMade.itemId}"/>
+		 						<c:param name="productId" value="${productId}"/></c:url>"
+								onClick = "accuse(); return;">판매자 신고하기</a>
+							</c:when>
+						</c:choose>
 					</c:otherwise>
 		</c:choose>
 		<!-- 로그인 여부 따지기  , 이  url누르면  인터셉터에서 로그인 여부 따져서 컨트롤러로 보내줄지말지 설정 -->

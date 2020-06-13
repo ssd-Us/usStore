@@ -23,8 +23,9 @@ public class AddAccuseController {
 
 
 	@RequestMapping("/addAccuse.do") 
-	public String addAccuse(@RequestParam("userId") String userId,
-			@RequestParam("itemId") int itemId, HttpServletRequest request, Model model) {
+	public String addAccuse(@RequestParam(value="userId") String userId,
+			@RequestParam(value="itemId") int itemId, 
+			@RequestParam(value="productId") int productId, HttpServletRequest request, Model model) {
 		//신고하고자 하는 판매자 아이디를 파라미터로 받는다.	
 		  System.out.println("addAccuse 컨트롤러 진입\n");
 		  Accuse accuse = new Accuse();
@@ -33,7 +34,17 @@ public class AddAccuseController {
 		  // 판매자 아이디가 setAttacker(userId) 
 		  this.myPageFacade.insertAccuse(accuse);
 		  model.addAttribute("itemId", itemId);
-	      return "redirect:/shop/secondHand/viewItem.do";
+		  model.addAttribute("productId", productId);
+		  if(productId == 0)
+			  return "redirect:/shop/groupBuying/viewItem.do";
+		  else if(productId ==1)
+			  return "redirect:/shop/auction/viewItem.do";
+		  else if(productId ==2)
+			  return "redirect:/shop/secondHand/viewItem.do";
+		  else if(productId ==3)
+			  return "redirect:/shop/handMade/viewItem.do";
+		  else
+			  return "/index";
 	}
 	
 	
