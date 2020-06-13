@@ -35,7 +35,7 @@
                   <tbody>   
                   <c:forEach var="al" items="${auctionList}">                
                   <tr style="height:70px;">
-                  <td style="padding-left:30px">
+                  <td style="padding-left:15px">
                                 <a href="<c:url value='/shop/auction/viewItem.do'>
                                     <c:param name="itemId" value="${al.itemId}"/>
                                          </c:url>">
@@ -43,7 +43,7 @@
                                 </a>
                 
                    </td>
-                   <td style="padding-left:50px"><c:out value="시작:${al.startPrice}"/><br><c:out value="낙찰:${al.bidPrice}"/></td>
+                   <td style="padding-left:30px">시작:<c:out value="${al.startPrice}"/><br>낙찰:<c:out value="${al.bidPrice}"/></td>
                        <td style="padding-left:95px"><c:out value="${al.userId}"/></td>   
                        <td style="padding-left:82px"><c:out value="b"/></td>
                        <td style="padding-left:90px"><fmt:formatDate value="${al.deadLine}" pattern="yyyy년 MM월 dd일  hh시 mm분 ss초" /></td>
