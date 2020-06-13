@@ -17,79 +17,79 @@ import com.example.usStore.domain.Item;
 @Repository
 public class MybatisAuctionDao implements AuctionDao {
 
-	@Autowired
-	private AuctionMapper auctionMapper;
+   @Autowired
+   private AuctionMapper auctionMapper;
 
-	@Override
-	public void updateQuantity(int qty, int itemId, int productId) throws DataAccessException {
-		// TODO Auto-generated method stub
-		auctionMapper.updateQuantity(qty, itemId, productId);
-	}
+   @Override
+   public void updateQuantity(int qty, int itemId, int productId) throws DataAccessException {
+      // TODO Auto-generated method stub
+      auctionMapper.updateQuantity(qty, itemId, productId);
+   }
 
-	@Override
-	public int getQuantity(int itemId, int productId) throws DataAccessException {
-		// TODO Auto-generated method stub
-		return auctionMapper.getQuantity(itemId, productId);
-	}
+   @Override
+   public int getQuantity(int itemId, int productId) throws DataAccessException {
+      // TODO Auto-generated method stub
+      return auctionMapper.getQuantity(itemId, productId);
+   }
 
-	@Override
-	public boolean isItemInStock(int itemId, int productId) throws DataAccessException {
-		// TODO Auto-generated method stub
-		return auctionMapper.isItemInStock(itemId, productId);
-	}
+   @Override
+   public boolean isItemInStock(int itemId, int productId) throws DataAccessException {
+      // TODO Auto-generated method stub
+      return auctionMapper.isItemInStock(itemId, productId);
+   }
 
-	@Override
-	public void deleteItem(int itemId, int productId) throws DataAccessException {
-		// TODO Auto-generated method stub
-		auctionMapper.deleteItem(itemId, productId);
-	}
+   @Override
+   public void deleteItem(int itemId) throws DataAccessException {
+      // TODO Auto-generated method stub
+      auctionMapper.deleteItem(itemId);
+   }
 
-	@Override
-	public List<Auction> getAuctionList() throws DataAccessException {
-		// TODO Auto-generated method stub
-		return auctionMapper.getAuctionList();
-	}
+   @Override
+   public List<Auction> getAuctionList() throws DataAccessException {
+      // TODO Auto-generated method stub
+      return auctionMapper.getAuctionList();
+   }
 
-	@Override
-	public Auction getAuctionItem(int itemId) throws DataAccessException {
-		// TODO Auto-generated method stub
-		return auctionMapper.getAuctionItem(itemId);
-	}
+   @Override
+   public Auction getAuctionItem(int itemId) throws DataAccessException {
+      // TODO Auto-generated method stub
+      return auctionMapper.getAuctionItem(itemId);
+   }
 
-	@Override
-	public void insertAuction(Auction auction) throws DataAccessException {
-		// TODO Auto-generated method stub
-		auctionMapper.insertAuction(auction);
-	}
+   @Override
+   public void insertAuction(Auction auction) throws DataAccessException {
+      // TODO Auto-generated method stub
+      auctionMapper.insertAuction(auction);
+   }
 
-	@Override
-	public void updateAuction(Auction auction) throws DataAccessException {
-		// TODO Auto-generated method stub
-		auctionMapper.updateAuction(auction);
-	}
+   @Override
+   public void updateAuction(Auction auction) throws DataAccessException {
+      // TODO Auto-generated method stub
+      auctionMapper.updateAuction(auction);
+   }
 
-	@Override
-	public Auction getAuctionById(int itemId) throws DataAccessException {
-		// TODO Auto-generated method stub
-		return auctionMapper.getAuctionById(itemId);
-	}
+   @Override
+   public Auction getAuctionById(int itemId) throws DataAccessException {
+      // TODO Auto-generated method stub
+      return auctionMapper.getAuctionById(itemId);
+   }
 
-	@Override
-	public void insertItem(Item item) {
-		// TODO Auto-generated method stub
-		auctionMapper.insertItem(item);
-	}
+   @Override
+   public void insertItem(Item item) {
+      // TODO Auto-generated method stub
+      auctionMapper.insertItem(item);
+   }
 
-	@Override
-	public void updateItem(Item item) {
-		// TODO Auto-generated method stub
-		auctionMapper.updateItem(item);
-	}
+   @Override
+   public void updateItem(Item item) {
+      // TODO Auto-generated method stub
+      auctionMapper.updateItem(item);
+   }
 
-	@Override
-	public void getItem(int itemId, int productId) {
-		// TODO Auto-generated method stub
-		auctionMapper.getItem(itemId, productId);
-	}
+   @Override
+   public void getItem(int itemId, int productId) {
+      // TODO Auto-generated method stub
+      auctionMapper.getItem(itemId, productId);
+   }
 
 }

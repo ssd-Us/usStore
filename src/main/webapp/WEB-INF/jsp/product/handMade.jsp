@@ -56,17 +56,18 @@
 								</tr>
 							</c:forEach>
 						</tbody>
+						<!-- 페이지 구분  -->
 						<tr>
 							<td>
 								<c:if test="${!itemList.firstPage}">
 									<a href='<c:url value="/shop/handMade/listItem2.do">
-	           								 <c:param name="page" value="previous"/></c:url>'>
+	           								<c:param name="pageName" value="previous"/></c:url>'>
 										<font color="black"><B>&lt;&lt; Prev</B></font>
 									</a>
 								</c:if>
 								<c:if test="${!itemList.lastPage}">
-									<a href='<c:url value="/shop/handMade/listItem2.do">
-	            							 <c:param name="page" value="next"/></c:url>'>
+									<a href='<c:url value="/shop/handMade/listItem2.do">/>
+	            							 <c:param name="pageName" value="next"/></c:url>'>
 										<font color="black"><B>Next &gt;&gt;</B></font>
 									</a>
 								</c:if>

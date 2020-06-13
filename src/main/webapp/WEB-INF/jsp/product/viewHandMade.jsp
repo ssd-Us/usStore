@@ -153,14 +153,14 @@
    			
    			</td>
    		</tr>
-   		<c:if test="${sh.suppId==session.userId}"> <!-- 로그인시 실행 -->
+<%--    		<c:if test="${sh.suppId==session.userId}"> <!-- 로그인시 실행 --> --%>
 	   		<tr>
 		   		<td colspan="2" style="text-align: right; padding: 0px; font-size: small; border-bottom: none; border-top: 1px solid black;">
-				   <a href="<c:url value='/editItem/${handMade.productId}'/>">[게시물 수정하기]</a>
-				   <a href="<c:url value='/deleteItem/${handMade.productId}'/>"> [게시물 삭제하기]</a>
+				   <a href="<c:url value='/shop/handMade/editItem.do?itemId=${handMade.itemId}'/>">[게시물 수정하기]</a>
+				   <a href="<c:url value='/shop/handMade/deleteItem.do?productId=${handMade.productId}&itemId=${handMade.itemId}'/>"> [게시물 삭제하기]</a>
 				</td>
 			</tr>
-		</c:if>
+<%-- 		</c:if> --%>
    	</table>
    	<br><br>
 </body>

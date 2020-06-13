@@ -19,7 +19,7 @@ public interface ItemDao {
 	void getItem(int itemId, int productId);
 	
 	// 아이템 삭제 메소드
-	public void deleteItem(int itemId, int productId) throws DataAccessException;
+	public void deleteItem(int itemId) throws DataAccessException;
 	
 	// 구매 개수 수정
 	void updateQuantity(int qty, int itemId, int productId) throws DataAccessException;

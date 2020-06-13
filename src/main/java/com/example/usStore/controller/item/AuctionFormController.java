@@ -7,24 +7,30 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.support.PagedListHolder;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.usStore.domain.Auction;
+import com.example.usStore.domain.HandMade;
 import com.example.usStore.domain.Tag;
 import com.example.usStore.service.facade.ItemFacade;
 
 @Controller
+@SessionAttributes({"auctionForm", "auctionList"})
 public class AuctionFormController {
    @Autowired
    private ItemFacade itemFacade;
    
    private int myItemId;
+   private int myProductId;
    
    @Autowired
    public void setUsStore(ItemFacade itemFacade) {
@@ -33,20 +39,43 @@ public class AuctionFormController {
    
    @RequestMapping("/shop/auction/listItem.do") 
    public String auctionList(@RequestParam("productId") int productId, ModelMap model) {
-      List<Auction> auctionList = this.itemFacade.getAuctionList();
+      myProductId = productId;
       
+      PagedListHolder<Auction> auctionList = new PagedListHolder<Auction>(this.itemFacade.getAuctionList());
+      auctionList.setPageSize(4);
+      
+      model.addAttribute("productId", productId);
       model.addAttribute("auctionList", auctionList);
 
       return "product/auction";
    }
    
+   
+   	// 페이지 넘어갈때 실행되는 Controller
+	@RequestMapping("shop/auction/listItem2.do")
+	public String auctionList2 (
+			@ModelAttribute("auctionList") PagedListHolder<Auction> auctionList,
+			@RequestParam("pageName") String page,
+			ModelMap model) throws Exception {
+		if ("next".equals(page)) {
+			auctionList.nextPage();
+		}
+		else if ("previous".equals(page)) {
+			auctionList.previousPage();
+		}
+		model.addAttribute("productId", myProductId);
+	    model.addAttribute("auctionList", auctionList);
+		return "product/auction";
+	}
+	
    @RequestMapping("/shop/auction/viewItem.do") 
-   public String auctionView(@RequestParam("itemId") int itemId, ModelMap model) {
+   public String auctionView(@RequestParam("itemId") int itemId, @RequestParam("productId") int productId, ModelMap model) {
 	  System.out.println("<경매 상세 페이지>"); 
 	  myItemId = itemId;
 	  
 	  Auction auction = this.itemFacade.getAuctionById(myItemId);
 
+	  model.addAttribute("productId", productId);
       model.addAttribute("auction", auction);
       
       return "product/viewAuction";
@@ -80,9 +109,10 @@ public class AuctionFormController {
 
   
    @RequestMapping("/shop/auction/deleteItem.do") 
-   public String auctionDelete(@RequestParam("productId") int productId, ModelMap model) {
-	   this.itemFacade.deleteItem(myItemId, 1);
-	   return "product/auction";
+   public String auctionDelete(@RequestParam("itemId") int itemId, ModelMap model) { 
+	   this.itemFacade.deleteItem(itemId);
+	   
+	   return "redirect:/shop/auction/listItem.do?productId=" + myProductId;
    }
    
    //add Auction 하기 전에  여기를 거쳐서 다시 add Auction url 으로 가야한다.
@@ -94,5 +124,4 @@ public class AuctionFormController {
 		itemFacade.testScheduler(deadLine);
 		return new ModelAndView("Scheduled", "deadLine", deadLine);	
 	}
-   
 }
