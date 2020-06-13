@@ -10,9 +10,11 @@ public class Accuse  implements Serializable {
 
 	// variable
 	private int accuseId;   // Sequence
-	private String victim;   // (FK) userId : ÇÇÇØÀÚ(·Î±×ÀÎÇÑ, ½Å°íÇÑ»ç¶÷)
-	private String attacker; // (FK) userId : ÆÇ¸ÅÀÚ(½Å°í ´ë»óÀÚ)
-	private String reason;  // ½Å°í ÀÌÀ¯
+	private String victim;   // (FK) userId : ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(ï¿½Î±ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½Å°ï¿½ï¿½Ñ»ï¿½ï¿½)
+	private String attacker; // (FK) userId : ï¿½Ç¸ï¿½ï¿½ï¿½(ï¿½Å°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½)
+	private String reason;  // ï¿½Å°ï¿½ ï¿½ï¿½ï¿½ï¿½
+	private int accuseCount; 
+	private boolean isAccuse;
 	
 	// setter & getter
 	public int getAccuseId() {
@@ -38,6 +40,18 @@ public class Accuse  implements Serializable {
 	}
 	public void setReason(String reason) {
 		this.reason = reason;
+	}
+	public int getAccuseCount() {
+		return accuseCount;
+	}
+	public void setAccuseCount(int accuseCount) {
+		this.accuseCount = accuseCount;
+	}
+	public boolean isAccuse() {
+		return isAccuse;
+	}
+	public void setAccuse(boolean isAccuse) {
+		this.isAccuse = isAccuse;
 	}
 		
 }
