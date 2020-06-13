@@ -1,21 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="EUC-KR">
-<title>Insert title here</title>
-</head>
+<%@ include file="itemTop.jsp"%>
 <body>
-   <form:form modelAttribute="handMade" method="post" action="/shop/handMade/step3"">
-	   ø°¥≠∞°¥…ø©∫Œ: <form:input path="title" value="${title}"/>
-	   <form:errors path="title"/> <br>
-	   
-	   ∆«∏≈∞°: <form:input path="listPrice" value="${listPrice}"/>
+   <form:form modelAttribute="HandMade" method="post" action="/shop/handMade/step3">
+	   ÌåêÎß§Í∞Ä: <form:input type="text" path="listPrice" value="${listPrice}"/>
 	   <form:errors path="listPrice"/> <br>
 	   
-	   <a href="<c:url value='step1/${item.productId}'/>">¿Ã¿¸ ¥‹∞Ë∑Œ</a>
-	   <input type="submit" value="¥Ÿ¿Ω ¥‹∞Ë∑Œ" />
+	   <a href="<c:url value='step1/${productId}'/>">Ïù¥Ï†Ñ Îã®Í≥ÑÎ°ú</a>
+	   <input type="submit" value="Îã§Ïùå Îã®Í≥ÑÎ°ú" />
    </form:form>
 </body>
 </html>
