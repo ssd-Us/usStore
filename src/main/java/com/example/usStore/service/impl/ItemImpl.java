@@ -1,9 +1,12 @@
 package com.example.usStore.service.impl;
 
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -44,7 +47,8 @@ public class ItemImpl implements ItemFacade {
 	private AuctionDao auctionDao;
 	@Autowired
 	private TagDao tagDao;
-	
+	@Autowired		// applicationContext.xml에 정의된 scheduler 객체를 주입 받음
+	private ThreadPoolTaskScheduler scheduler;
 	
 	@Override
 	public void updateQuantity(int qty, int itemId, int productId) {
@@ -241,6 +245,22 @@ public class ItemImpl implements ItemFacade {
 		return auctionDao.getAuctionById(itemId);
 	}
 
+	
+	public void testScheduler(Date deadLine) {
+		Runnable updateTableRunner = new Runnable() {	
+			@Override
+			public void run() {   // 스케쥴러에 의해 미래의 특정 시점에 실행될 작업을 정의	(auctionState 0->1 수정)			
+			//경매를 수정한다. 경매 상태를 0 에서 1로 바꾼다.
+			}
+		};
+
+		// 스케줄 생성: 마감시간이 되면 updateTableRunner.run() 메소드 실행
+		scheduler.schedule(updateTableRunner, deadLine);  
+		
+		System.out.println("updateTableRunner has been scheduled to execute at " + deadLine);
+	}
+	
+	
 	@Override
 	public List<Tag> getTagList() {
 		// TODO Auto-generated method stub
