@@ -90,24 +90,9 @@ public class ItemImpl implements ItemFacade {
 	}
 	
 	@Override
-	public void deleteItem(int itemId, int productId) {
+	public void deleteItem(int itemId) {
 		// TODO Auto-generated method stub
-		switch(productId) {
-		case 0:
-			groupBuyingDao.deleteItem(itemId, productId);
-			break;
-		case 1:
-			auctionDao.deleteItem(itemId, productId);
-			break;
-		case 2:
-			secondHandDao.deleteItem(itemId, productId);
-			break;
-		case 3:
-			handMadeDao.deleteItem(itemId, productId);
-			break;
-		default:
-			System.err.println("deleteItem Error !!");
-		}
+		itemDao.deleteItem(itemId);
 	}
 	
 	// �씠嫄� 怨좎쿂�빞�릪
@@ -321,4 +306,9 @@ public class ItemImpl implements ItemFacade {
 		itemDao.getItem(itemId, productId);
 	}
 
+	@Override
+	public void deleteHandMade(int itemId) {
+		// TODO Auto-generated method stub
+		handMadeDao.deleteHandMade(itemId);
+	}
 }

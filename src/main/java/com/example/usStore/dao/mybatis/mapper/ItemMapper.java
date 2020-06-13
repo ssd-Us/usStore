@@ -9,7 +9,7 @@ public interface ItemMapper {
 	
 	void updateItem(Item item);
 	
-	void deleteItem(int itemId, int productId);
+	void deleteItem(int itemId);
 	
 	void getItem(int itemId, int productId);
 	
