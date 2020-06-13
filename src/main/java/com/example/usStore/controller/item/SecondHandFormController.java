@@ -1,7 +1,5 @@
 package com.example.usStore.controller.item;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.support.PagedListHolder;
 import org.springframework.stereotype.Controller;
@@ -12,10 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.ModelAndViewDefiningException;
 
-import com.example.usStore.domain.Auction;
-import com.example.usStore.domain.Product;
 import com.example.usStore.domain.SecondHand;
 import com.example.usStore.service.facade.ItemFacade;
 
@@ -30,23 +25,22 @@ public class SecondHandFormController {
 		this.itemFacade = itemFacade;
 	}
 
-	//¡ﬂ∞Ì∞≈∑° ∞‘Ω√π∞ ∏Ò∑œ ∫∏ø©¡÷±‚
 	@RequestMapping("/shop/secondHand/listItem.do")
 	public String secondHandList(@RequestParam("productId") int productId, ModelMap model) throws Exception{
 		PagedListHolder<SecondHand> itemList = new PagedListHolder<SecondHand>(this.itemFacade.getSecondHandList());
 		itemList.setPageSize(4);
 		System.out.println("Ïó¨Í∏∞Îäî Í≤åÏãúÎ¨º Î™©Î°ù Ïª®Ìä∏Î°§Îü¨\n ");
-
-		model.put("itemList", itemList);
-		return "product/secondHand"; //∫‰ ≥◊¿”¿∫ ±◊ ∏Ò∑œ ∫∏ø©¡÷¥¬ ∆‰¿Ã¡ˆ 
+		model.addAttribute("itemList", itemList);
+		model.addAttribute("productId", productId);
+		return "product/secondHand"; 
 	}
 	
 	@RequestMapping("/shop/secondHand/viewItem.do") 
-	public String viewSecondHand(@RequestParam("itemId") int itemId, ModelMap model) {
+	public String viewSecondHand(@RequestParam("itemId") int itemId,
+			@RequestParam("productId") int productId, ModelMap model) {
 		  SecondHand sh = this.itemFacade.getSecondHandItem(itemId);
-		  //µµ∏ﬁ¿Œø°º≠ ∞°¡ÆøÕæﬂ«‘ µ∫Òø°º≠ ∫“∑Øø¬∞… µµ∏ﬁ¿Œø° ¿˙¿Â«ÿ≥ 
 	      model.addAttribute("sh", sh);
-
+	      model.addAttribute("productId", productId);
 	      return "product/viewSecondHand";
 	}
 	 
