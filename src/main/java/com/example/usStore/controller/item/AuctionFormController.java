@@ -109,11 +109,8 @@ public class AuctionFormController {
 
   
    @RequestMapping("/shop/auction/deleteItem.do") 
-   public String auctionDelete(@RequestParam("itemId") int itemId, ModelMap model) {
-	   System.out.println("<경매 삭제>");
-	   System.out.println("아이템 아이디는 : " + itemId);
-	   
-	   this.itemFacade.deleteItem(itemId, myProductId);
+   public String auctionDelete(@RequestParam("itemId") int itemId, ModelMap model) { 
+	   this.itemFacade.deleteItem(itemId);
 	   
 	   return "redirect:/shop/auction/listItem.do?productId=" + myProductId;
    }

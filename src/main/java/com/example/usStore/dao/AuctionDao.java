@@ -23,7 +23,7 @@ public interface AuctionDao extends ItemDao {
 	public void updateAuction(Auction auction) throws DataAccessException;
 	
 	// 아이템 삭제 메소드
-	public void deleteItem(int itemId, int productId) throws DataAccessException;
+	public void deleteItem(int itemId) throws DataAccessException;
 
 	// �븘�씠�뀥 �븘�씠�뵒濡� �빐�떦 寃쎈ℓ 媛앹껜 諛섑솚
 	public Auction getAuctionById(int itemId) throws DataAccessException;
