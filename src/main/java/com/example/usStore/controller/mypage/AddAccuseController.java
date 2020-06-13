@@ -1,7 +1,10 @@
 package com.example.usStore.controller.mypage;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -13,16 +16,24 @@ public class AddAccuseController {
 
 	private MyPageFacade myPageFacade;
 	
-	@RequestMapping("/addAccuse") 
-	public String addAccuse(@RequestParam("userId") int userId, ModelMap model) {
-		 // SecondHand sh = this.itemFacade.getSecondHandItem(itemId);
-		  //µµ¸ŞÀÎ¿¡¼­ °¡Á®¿Í¾ßÇÔ µğºñ¿¡¼­ ºÒ·¯¿Â°É µµ¸ŞÀÎ¿¡ ÀúÀåÇØ³ğ 
-		  Accuse accuse = new Accuse(); //ÀÚ¹Ù½ºÅ©¸³Æ®¿¡¼­ ³Ñ¾î¿Â ½ºÆ®¸µ°ªÀ» ÀúÀåÇÏ±â 
-		  
+	@Autowired
+	public void setMyPageFacade(MyPageFacade myPageFacade) {
+		this.myPageFacade = myPageFacade;
+	}
+
+
+	@RequestMapping("/addAccuse.do") 
+	public String addAccuse(@RequestParam("userId") String userId,
+			@RequestParam("itemId") int itemId, HttpServletRequest request, Model model) {
+		//ì‹ ê³ í•˜ê³ ì í•˜ëŠ” íŒë§¤ì ì•„ì´ë””ë¥¼ íŒŒë¼ë¯¸í„°ë¡œ ë°›ëŠ”ë‹¤.	
+		  System.out.println("addAccuse ì»¨íŠ¸ë¡¤ëŸ¬ ì§„ì…\n");
+		  Accuse accuse = new Accuse();
+		  //ìë°”ìŠ¤í¬ë¦½íŠ¸ì—ì„œ ë„˜ì–´ì˜¨ ì‹ ê³ ì‚¬ìœ  setReason
+		  // ë¡œê·¸ì¸ì•„ì´ë””ê°€ setVictim();
+		  // íŒë§¤ì ì•„ì´ë””ê°€ setAttacker(userId) 
 		  this.myPageFacade.insertAccuse(accuse);
-		
-		  System.out.println("addAccuse ÄÁÆ®·Ñ·¯ ÁøÀÔ\n");
-	      return "product/viewSecondHand";
+		  model.addAttribute("itemId", itemId);
+	      return "redirect:/shop/secondHand/viewItem.do";
 	}
 	
 	

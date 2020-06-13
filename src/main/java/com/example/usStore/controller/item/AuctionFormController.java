@@ -7,11 +7,13 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.example.usStore.domain.Auction;
 import com.example.usStore.domain.Tag;
@@ -46,8 +48,6 @@ public class AuctionFormController {
 	  Auction auction = this.itemFacade.getAuctionById(myItemId);
 
       model.addAttribute("auction", auction);
-      
-      //경매에 참여한 뒤에 다시 상세페이지로 가는 것이면, alert 창으로 완료됐다고 보여주고 싶음.
       
       return "product/viewAuction";
    }
@@ -84,4 +84,15 @@ public class AuctionFormController {
 	   this.itemFacade.deleteItem(myItemId, 1);
 	   return "product/auction";
    }
+   
+   //add Auction 하기 전에  여기를 거쳐서 다시 add Auction url 으로 가야한다.
+   @RequestMapping("/shop/auction/testSchedulerItem.do")
+	public ModelAndView handleRequest(HttpServletRequest request,
+			@RequestParam("keyword")
+			@DateTimeFormat(pattern="yyyy-MM-dd HH:mm") Date deadLine) throws Exception {
+		System.out.println(deadLine);
+		itemFacade.testScheduler(deadLine);
+		return new ModelAndView("Scheduled", "deadLine", deadLine);	
+	}
+   
 }
