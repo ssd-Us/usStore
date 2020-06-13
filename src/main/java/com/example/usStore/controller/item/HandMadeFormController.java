@@ -1,25 +1,23 @@
 package com.example.usStore.controller.item;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.support.PagedListHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.example.usStore.domain.Auction;
 import com.example.usStore.domain.HandMade;
-import com.example.usStore.domain.SecondHand;
 import com.example.usStore.service.facade.ItemFacade;
 
 @Controller
-public class HandmadeFormController {
+@SessionAttributes({"handMadeForm", "itemList"})
+public class HandMadeFormController {
 
 	private ItemFacade itemFacade;
 
@@ -28,10 +26,11 @@ public class HandmadeFormController {
 		this.itemFacade = itemFacade;
 	}
 
+	// HandMade 리스트 초기 화면 출력시 실행되는 Controller
 	@RequestMapping("/shop/handMade/listItem.do")
 	public String listHandMade (
 			@RequestParam("productId") int productId, ModelMap model) throws Exception {
-    
+  
 		PagedListHolder<HandMade> itemList = new PagedListHolder<HandMade>(this.itemFacade.getHandMadeList());
 		itemList.setPageSize(4);
 		
@@ -39,11 +38,11 @@ public class HandmadeFormController {
 		return "product/handMade";
 	}
 	
+	// 페이지 넘어갈때 실행되는 Controller
 	@RequestMapping("shop/handMade/listItem2.do")
-	public String handleRequest2(
-			@ModelAttribute("handMade") HandMade handMade,
+	public String listHandMade2 (
 			@ModelAttribute("itemList") PagedListHolder<HandMade> itemList,
-			@RequestParam("pageName") String page, 
+			@RequestParam("pageName") String page,
 			ModelMap model) throws Exception {
 		if ("next".equals(page)) {
 			itemList.nextPage();
@@ -52,7 +51,6 @@ public class HandmadeFormController {
 			itemList.previousPage();
 		}
 		model.put("itemList", itemList);
-		model.put("handMade", handMade);
 		return "product/handMade";
 	}
 	
@@ -83,10 +81,17 @@ public class HandmadeFormController {
 	}
 	
 	@RequestMapping("/shop/handMade/viewItem.do")
-	public String auctionView(@RequestParam("itemId") int itemId, ModelMap model) {
+	public String handMadeView(@RequestParam("itemId") int itemId, 
+			@RequestParam("productId") int productId, ModelMap model) {
 		HandMade handMade = this.itemFacade.getHandMadeById(itemId);
 		
 		model.addAttribute("handMade", handMade);
+		model.addAttribute("productId", productId);
 		return "product/viewHandMade";
+	}
+	
+	@RequestMapping("/shop/handMade/deleteItem.do")
+	public String delete(@RequestParam("itemId") int itemId, ModelMap model) {
+		return "product/handMade";
 	}
 }

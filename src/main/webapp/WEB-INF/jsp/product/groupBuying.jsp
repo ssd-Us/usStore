@@ -1,9 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ include file="itemTop.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<% request.setCharacterEncoding("UTF-8"); %>
 
 <!DOCTYPE html>
 <html>
@@ -31,7 +29,7 @@
                   <p style="text-align:right;">
 		                <a href="<c:url value='/shop/groupBuying/addItem.do'>
 		               		<c:param name="productId" value="${productId}"/></c:url>
-						">공동구매 게시글 추가하기
+						">공동구매 물품 판매하기
 						</a>
 					</p>	<!-- 로그인 여부 인터셉터로 이동 -->
                   <hr>
