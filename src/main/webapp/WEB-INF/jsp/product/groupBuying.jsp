@@ -27,7 +27,7 @@
                      	GroupBuying List
                   </h2>
                   <p style="text-align:right;">
-		                <a href="<c:url value='/shop/groupBuying/addItem.do'>
+		                <a href="<c:url value='/shop/item/addItem.do'>
 		               		<c:param name="productId" value="${productId}"/></c:url>
 						">공동구매 물품 판매하기
 						</a>
@@ -49,7 +49,7 @@
                   <tr style="height:70px;">
                   
                   <td>
-                                <a href="<c:url value='/shop/productDetail'>
+                                <a href="<c:url value='/shop/groupBuying/viewItem.do'>
                                 	<c:param name="productId" value="${gb.productId}"/>
                                     <c:param name="itemId" value="${gb.itemId}"/>
                                          </c:url>">
