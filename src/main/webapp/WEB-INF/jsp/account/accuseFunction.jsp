@@ -18,7 +18,8 @@ function accuse(){
 					<c:otherwise>
 						<a href="<c:url value='/addAccuse.do'>
 						<c:param name="userId" value="${sh.userId}"/>
-		 				<c:param name="itemId" value="${sh.itemId}"/></c:url>"
+		 				<c:param name="itemId" value="${sh.itemId}"/>
+		 				<c:param name="productId" value="${productId}"/></c:url>"
 						onClick = "accuse(); return;">판매자 신고하기</a>
 					</c:otherwise>
 		</c:choose>
