@@ -45,9 +45,8 @@
   </update>
   
   <!-- 내가 추가한 것 -->
-  <delete id="deleteItem" parameterType="String">
-  	DELETE ITEM
-  	FROM ITEM
+  <delete id="deleteHandMade" parameterType="int">
+  	DELETE FROM HAMDMADE
   	WHERE ITEMID = #{itemId}
   </delete>
   

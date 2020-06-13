@@ -39,12 +39,6 @@ public class MybatisItemDao implements ItemDao {
 	}
 
 	@Override
-	public void deleteItem(int itemId, int productId) throws DataAccessException {
-		// TODO Auto-generated method stub
-		itemMapper.deleteItem(itemId, productId);
-	}
-
-	@Override
 	public void insertItem(Item item) {
 		// TODO Auto-generated method stub
 		itemMapper.insertItem(item);
@@ -60,6 +54,12 @@ public class MybatisItemDao implements ItemDao {
 	public void getItem(int itemId, int productId) {
 		// TODO Auto-generated method stub
 		itemMapper.getItem(itemId, productId);
+	}
+
+	@Override
+	public void deleteItem(int itemId) throws DataAccessException {
+		// TODO Auto-generated method stub
+		itemMapper.deleteItem(itemId);
 	}
 
 }

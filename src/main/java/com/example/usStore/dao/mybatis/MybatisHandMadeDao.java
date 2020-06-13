@@ -39,9 +39,9 @@ public class MybatisHandMadeDao implements HandMadeDao {
 	}
 
 	@Override
-	public void deleteItem(int itemId, int productId) throws DataAccessException {
+	public void deleteHandMade(int itemId) throws DataAccessException {
 		// TODO Auto-generated method stub
-		handMadeMapper.deleteItem(itemId);
+		handMadeMapper.deleteHandMade(itemId);
 	}
 
 	@Override
@@ -90,6 +90,12 @@ public class MybatisHandMadeDao implements HandMadeDao {
 	public void getItem(int itemId, int productId) {
 		// TODO Auto-generated method stub
 		handMadeMapper.getItem(itemId, productId);
+	}
+
+	@Override
+	public void deleteItem(int itemId) throws DataAccessException {
+		// TODO Auto-generated method stub
+		handMadeMapper.deleteItem(itemId);
 	}
 
 }

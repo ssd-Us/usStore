@@ -14,7 +14,7 @@ public interface HandMadeMapper extends ItemMapper {
 	public void insertHandMade(HandMade handmade);
 
 	// delete HandMade
-	public void deleteItem(int itemId);
+	public void deleteHandMade(int itemId);
 
 	// update HandMade
 	public void updateHandMade(HandMade handmade);

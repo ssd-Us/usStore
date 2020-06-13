@@ -50,10 +50,22 @@
 							 		<td style="padding-left:120px"> <c:out value="에눌 불가능" /></td> 
 						    </c:otherwise>
 						</c:choose>
-				 		<td style="padding-left:100px"><c:out value="${item.unitCost}"/>원</td>              
-						<td style="padding-left:130px"><c:out value="${item.listPrice}"/>원</td>
+				 		<td style="padding-left:100px"><fmt:formatNumber value="${item.unitCost}" pattern="###,###원" /></td>              
+						<td style="padding-left:130px"><fmt:formatNumber value="${item.listPrice}" pattern="###,###원" /></td>
 		      			</tr>
 	     			</c:forEach>
+	     			 <tr>
+      					<td>
+        					<c:if test="${!itemList.firstPage}">
+          					<a href='<c:url value="/shop/secondHand/listItem2.do">
+	           								<c:param name="pageName" value="previous"/></c:url>'><font color="white"><B>&lt;&lt; Prev</B></font></a>
+        					</c:if> 
+        					<c:if test="${!itemList.lastPage}">
+          					<a href='<c:url value="/shop/secondHand/listItem2.do">/>
+	            							 <c:param name="pageName" value="next"/></c:url>'><font color="white"><B>Next &gt;&gt;</B></font></a>
+        					</c:if>
+      					</td>
+    				</tr>
                 </tbody>
                   </table>
                </div>
