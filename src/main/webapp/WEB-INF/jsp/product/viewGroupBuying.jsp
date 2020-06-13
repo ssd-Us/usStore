@@ -71,11 +71,7 @@
 					">팔로잉</a>
 				</span>
 				&nbsp;
-				<span>
-					<a href="
-							<c:url value='/addAccuse/${gb.suppId}'/>	<!-- 로그인 여부 따지기 -->
-					">판매자 신고</a>
-				</span>
+				<%@ include file="/WEB-INF/jsp/account/accuseFunction.jsp" %>
    			</td>
    		</tr> <!-- userId = suppId -->
    		
