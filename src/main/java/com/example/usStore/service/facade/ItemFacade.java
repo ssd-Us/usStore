@@ -1,5 +1,6 @@
 package com.example.usStore.service.facade;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -90,6 +91,8 @@ public interface ItemFacade {
 	public void updateAuction(Auction auction);
 
 	public Auction getAuctionById(int itemId);
+	
+	public void testScheduler(Date closingTime);
 	
 	/////////////////////////////////////////////////////////////////////////
 	/* Tag */

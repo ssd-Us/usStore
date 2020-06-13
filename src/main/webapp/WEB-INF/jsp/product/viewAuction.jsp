@@ -60,6 +60,7 @@ function participation(price, unitCost) {
 			alert("참여 취소");
 		}
 	}
+	alert("제출 완료");
 }
 </script>
 <body>
