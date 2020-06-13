@@ -22,9 +22,9 @@
                      SecondHand List
                   </h2>
                    <p style="text-align:right;">
-		                  <a href="<c:url value='/shop/secondHand/addItem.do'>
-     	 					<c:param name="productId" value="${productId}"/></c:url>">중고거래 게시글 추가하기
-      						</a>
+                   	<a href="<c:url value='/shop/item/addItem.do'>
+                           <c:param name="productId" value="${productId}"/></c:url>">공동구매 물품 판매하기
+                  	</a>
 					</p>
                   <hr>                                
 				<table style="width:70%">
