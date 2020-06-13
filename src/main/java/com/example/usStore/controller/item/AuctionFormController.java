@@ -25,6 +25,7 @@ public class AuctionFormController {
    private ItemFacade itemFacade;
    
    private int myItemId;
+   private int myProductId;
    
    @Autowired
    public void setUsStore(ItemFacade itemFacade) {
@@ -34,6 +35,8 @@ public class AuctionFormController {
    @RequestMapping("/shop/auction/listItem.do") 
    public String auctionList(@RequestParam("productId") int productId, ModelMap model) {
       List<Auction> auctionList = this.itemFacade.getAuctionList();
+      
+      myProductId = productId;
       
       model.addAttribute("auctionList", auctionList);
 
@@ -80,9 +83,13 @@ public class AuctionFormController {
 
   
    @RequestMapping("/shop/auction/deleteItem.do") 
-   public String auctionDelete(@RequestParam("productId") int productId, ModelMap model) {
-	   this.itemFacade.deleteItem(myItemId, 1);
-	   return "product/auction";
+   public String auctionDelete(@RequestParam("itemId") int itemId, ModelMap model) {
+	   System.out.println("<경매 삭제>");
+	   System.out.println("아이템 아이디는 : " + itemId);
+	   
+	   this.itemFacade.deleteItem(itemId, myProductId);
+	   
+	   return "redirect:/shop/auction/listItem.do?productId=" + myProductId;
    }
    
    //add Auction 하기 전에  여기를 거쳐서 다시 add Auction url 으로 가야한다.
@@ -94,5 +101,4 @@ public class AuctionFormController {
 		itemFacade.testScheduler(deadLine);
 		return new ModelAndView("Scheduled", "deadLine", deadLine);	
 	}
-   
 }
