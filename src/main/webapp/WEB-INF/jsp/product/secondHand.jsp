@@ -57,10 +57,12 @@
 	     			 <tr>
       					<td>
         					<c:if test="${!itemList.firstPage}">
-          					<a href="?page=previous"><font color="white"><B>&lt;&lt; Prev</B></font></a>
+          					<a href='<c:url value="/shop/secondHand/listItem2.do">
+	           								<c:param name="pageName" value="previous"/></c:url>'><font color="white"><B>&lt;&lt; Prev</B></font></a>
         					</c:if> 
         					<c:if test="${!itemList.lastPage}">
-          					<a href="?page=next"><font color="white"><B>Next &gt;&gt;</B></font></a>
+          					<a href='<c:url value="/shop/secondHand/listItem2.do">/>
+	            							 <c:param name="pageName" value="next"/></c:url>'><font color="white"><B>Next &gt;&gt;</B></font></a>
         					</c:if>
       					</td>
     				</tr>
