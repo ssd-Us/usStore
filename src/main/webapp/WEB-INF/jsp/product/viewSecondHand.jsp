@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%-- <%@ page contentType="text/html; charset=UTF-8" %> --%>
+<%@ include file="itemTop.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
@@ -43,18 +44,9 @@
 	}
 	
 </style>
-<script type="text/javascript"> 
-function accuse(){
-	var reason = prompt('판매자 신고하기', '신고 사유를 작성하세요.');
-	if(reason == null){alert("취소");} 
-	else{alert("확인\n 사유 : " + reason); }
-}
-	
-</script>
 </head>
 <body>
 <!-- 여기서 secondHand는 컨트롤러에서 보내준 모델 객체(db에서 select 결과 ) -->
-<!-- 아직 메세지 파일 작성안함 반드시 푸시전에 메세지 체크하기 !!!!!!!!!! -->
 <table style="margin-left: auto; margin-right: auto;">
 	<tr>
 		<td style="text-align: left; padding: 0px; font-size: small; border-bottom: none;">
@@ -79,11 +71,7 @@ function accuse(){
 			">팔로잉</a>
 		</span>
 		&nbsp;
-		<span>
-		<a href="
-			<c:url value='/addAccuse/${sh.userId}'/>	<!-- 로그인 여부 따지기  , 이  url누르면  인터셉터에서 로그인 여부 따져서 컨트롤러로 보내줄지말지 설정 -->
-			" onclick = "accuse();">판매자 신고</a> <!-- 여기서 userId는  판매자를 의미하고, 세션의 로그인 아이디가 신고자 아이디이다.-->
-		</span>
+		<%@ include file="/WEB-INF/jsp/account/accuseFunction.jsp" %>
    		</td>
    	</tr> 
    	<tr>
@@ -121,15 +109,14 @@ function accuse(){
    	</tr>
    	<tr>
    			<th style="border-right: 1px solid black;">에눌가능여부</th>
-   			<td>
-   			    판매자 설정: 
-   				<c:if test="${sh.discount == 1}">
-   					<c:out value="에눌 가능합니다" />
-   				</c:if>
-   				<c:if test="${sh.discount == 0}">
-   					<c:out value="가격 흥정은 불가능합니다." />
-   				</c:if>
-   			</td>
+   			<c:choose>
+	   				<c:when test="${item.discount eq 1}">
+						<td><c:out value="에눌 가능" /></td> 
+					</c:when>
+					<c:otherwise>
+						<td> <c:out value="에눌 불가능" /></td> 
+					</c:otherwise>
+			</c:choose>
    	</tr>
    	<tr>
    		<th style="border-right: 1px solid black;">수량 </th> 
@@ -137,11 +124,17 @@ function accuse(){
    	</tr>	
    	<tr>
    			<td colspan="2" style="border-bottom: none;">
-   				<span>
+   			<span>
+		   		<a href="
+						<c:url value='/addCart/${sh.itemId}'/>	<!-- 로그인 여부 따지기 -->
+					">장바구니 추가</a>
+			</span>			
+				&nbsp;&nbsp;&nbsp;
+			<span>
    				<a href="
-							<c:url value='/note/${sh.userId}'/>	<!-- 로그인 여부 따지기 -->
+						<c:url value='/note/${sh.itemId}'/>	<!-- 로그인 여부 따지기 -->
 				">쪽지 보내기</a>
-				</span><br><br>
+			</span>
    			</td>
    	</tr>
    		

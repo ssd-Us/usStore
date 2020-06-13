@@ -5,13 +5,20 @@
   
   	<insert id="insertAccuse" parameterType="Accuse">
      INSERT INTO ACCUSE (ACCUSEID, VICTIM, ATTACKER, REASON)
-     VALUES (#{accuseId}, #{victim}, #{attacker}, #{reason})
+     VALUES (ACCUSEID_SEQ.NEXTVAL, #{victim}, #{attacker}, #{reason})
   	</insert>
   	
   	<select id="countAccuseById" parameterType="String" resultType="Accuse">
-  		SELECT COUNT(ATTACKER)
+  		SELECT COUNT(ATTACKER) AS "accuseCount"
   		FROM ACCUSE
   		WHERE ATTACKER = #{attacker}
+  	</select>
+  	
+  	<select id="isAccuseAlready" parameterType="Accuse" resultType="Accuse">
+  		SELECT CASE WHEN (COUNT(ACCUSEID) > 0) 
+  		THEN 'true' ELSE 'false' END AS "isAccuse"
+  		FROM ACCUSE
+  		WHERE ATTACKER = #{attacker} AND VICTIM = #{victim} 		
   	</select>
   	
  </mapper>
