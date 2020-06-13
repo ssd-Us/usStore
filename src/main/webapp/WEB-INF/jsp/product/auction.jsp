@@ -9,10 +9,18 @@
 <title>경매 리스트 페이지</title>
 </head>
 <body> 
-   <form name = "pform" action="" style="position:absolute; left:50%; margin:0 0 0 -420px;">
+<table id="main-menu">
+  <tr>
+    <td><a href='<c:url value="/shop/index.do"/>'>
+        <b><font color="black" size="2">
+          &lt;&lt; Go to Index</font></b></a>
+    </td>
+  </tr>
+</table>
+   <form name = "pform" action="" style="position:absolute; left:50%; margin:0 0 0 -500px;">
       <div class="container" >
          <div class="row"  style="display:inline">
-            <div style="display:inline;float:left;width:800px">
+            <div style="display:inline;float:left;width:1000px">
                <div style="font-size:15px">
                   <h2>
                      Auction List
@@ -27,15 +35,15 @@
                   <table>
                      <tr>
                         <th>제목</th>
-                        <th style="padding-left:50px">가격</th>
-                        <th><p style="padding-left:75px">판매자</p></th>
-                        <th><p style="padding-left:60px">낙찰자</p></th>
+                        <th style="padding-left:150px">가격</th>
+                        <th><p style="padding-left:100px">판매자</p></th>
+                        <th><p style="padding-left:80px">낙찰자</p></th>
                         <th><p style="padding-left:80px">마감일</p></th>
                         </tr>
                   <tbody>   
-                  <c:forEach var="al" items="${auctionList}">                
+                  <c:forEach var="al" items="${auctionList.pageList}">               
                   <tr style="height:70px;">
-                  <td style="padding-left:15px">
+                  <td style="padding-left:40px">
                                 <a href="<c:url value='/shop/auction/viewItem.do'>
                                     <c:param name="itemId" value="${al.itemId}"/>
                                     <c:param name="productId" value="${productId}"/>
@@ -44,13 +52,30 @@
                                 </a>
                 
                    </td>
-                   <td style="padding-left:30px">시작:<c:out value="${al.startPrice}"/><br>낙찰:<c:out value="${al.bidPrice}"/></td>
-                       <td style="padding-left:95px"><c:out value="${al.userId}"/></td>   
-                       <td style="padding-left:82px"><c:out value="b"/></td>
-                       <td style="padding-left:90px"><fmt:formatDate value="${al.deadLine}" pattern="yyyy년 MM월 dd일  hh시 mm분 ss초" /></td>
+                   <td style="padding-left:140px">시작:<c:out value="${al.startPrice}"/><br>낙찰:<c:out value="${al.bidPrice}"/></td>
+                       <td style="padding-left:120px"><c:out value="${al.userId}"/></td>   
+                       <td style="padding-left:100px"><c:out value="b"/></td>
+                       <td style="padding-left:80px"><fmt:formatDate value="${al.deadLine}" pattern="yyyy년 MM월 dd일  hh시 mm분 ss초" /></td>
                   </tr>
                   </c:forEach>
                   </tbody>
+                  <tr>
+							<td>
+								<c:if test="${!al.firstPage}">
+									<a href='<c:url value="/shop/auction/listItem2.do">
+	           								<c:param name="pageName" value="previous"/></c:url>'>
+										<font color="black"><B>&lt;&lt; Prev</B></font>
+									</a>
+								</c:if>
+								<c:if test="${!al.lastPage}">
+									<a href='<c:url value="/shop/auction/listItem2.do">/>
+	            							 <c:param name="pageName" value="next"/></c:url>'>
+										<font color="black"><B>Next &gt;&gt;</B></font>
+									</a>
+								</c:if>
+							</td>
+						</tr>
+                  
                   </table>
                </div>
             </div>
