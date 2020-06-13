@@ -1,14 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>중고거래 입력 폼</title>
-</head>
+<%@ include file="itemTop.jsp"%>
 <body>
    <form:form modelAttribute="secondHand" method="post" action="done/${item.productId}">
    
