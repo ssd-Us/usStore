@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.usStore.domain.Item;
 import com.example.usStore.domain.SecondHand;
 import com.example.usStore.service.facade.ItemFacade;
 
@@ -33,6 +34,22 @@ public class SecondHandFormController {
 		model.addAttribute("itemList", itemList);
 		model.addAttribute("productId", productId);
 		return "product/secondHand"; 
+	}	
+	
+	@RequestMapping("/shop/secondHand/listItem2.do")
+	public String secondHandList2(
+			@RequestParam("productId") int productId,
+			@ModelAttribute("itemList") PagedListHolder<Item> itemList,
+			@RequestParam("pageName") String page, ModelMap model) throws Exception {
+		if ("next".equals(page)) {
+			itemList.nextPage();
+		}
+		else if ("previous".equals(page)) {
+			itemList.previousPage();
+		}
+		model.addAttribute("itemList", itemList);
+		model.addAttribute("productId", productId);
+		return "product/secondHand";
 	}
 	
 	@RequestMapping("/shop/secondHand/viewItem.do") 
