@@ -23,9 +23,9 @@ public class AddAccuseController {
 
 
 	@RequestMapping("/addAccuse.do") 
-	public String addAccuse(@RequestParam("userId") String userId,
-			@RequestParam("itemId") int itemId, 
-			@RequestParam("productId") int productId, HttpServletRequest request, Model model) {
+	public String addAccuse(@RequestParam(value="userId") String userId,
+			@RequestParam(value="itemId") int itemId, 
+			@RequestParam(value="productId") int productId, HttpServletRequest request, Model model) {
 		//신고하고자 하는 판매자 아이디를 파라미터로 받는다.	
 		  System.out.println("addAccuse 컨트롤러 진입\n");
 		  Accuse accuse = new Accuse();

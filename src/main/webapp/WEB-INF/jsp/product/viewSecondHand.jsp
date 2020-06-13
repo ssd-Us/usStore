@@ -47,6 +47,7 @@
 </head>
 <body>
 <!-- 여기서 secondHand는 컨트롤러에서 보내준 모델 객체(db에서 select 결과 ) -->
+
 <table style="margin-left: auto; margin-right: auto;">
 	<tr>
 		<td style="text-align: left; padding: 0px; font-size: small; border-bottom: none;">

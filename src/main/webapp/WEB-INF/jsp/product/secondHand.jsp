@@ -22,7 +22,7 @@
                      SecondHand List
                   </h2>
                    <p style="text-align:right;">
-		                  <a href="<c:url value='/shop/groupBuying/addItem.do'> <!-- 이거 경로 바꿔달라고 하기  -->
+		                  <a href="<c:url value='/shop/secondHand/addItem.do'>
      	 					<c:param name="productId" value="${productId}"/></c:url>">중고거래 게시글 추가하기
       						</a>
 					</p>
@@ -37,6 +37,7 @@
 		         		<td>
                                 <a href="<c:url value='/shop/secondHand/viewItem.do'>
                                     <c:param name="itemId" value="${item.itemId}"/>
+                                    <c:param name="productId" value="${productId}"/>
                                          </c:url>">
                                       <font style="padding-left:30px"><c:out value="${item.title}"/></font>
                                 </a>
