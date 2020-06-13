@@ -91,7 +91,8 @@ public class HandMadeFormController {
 	}
 	
 	@RequestMapping("/shop/handMade/deleteItem.do")
-	public String delete(@RequestParam("itemId") int itemId, ModelMap model) {
-		return "product/handMade";
+	public String delete(@RequestParam("productId") int productId, @RequestParam("itemId") int itemId, ModelMap model) {
+		this.itemFacade.deleteItem(itemId);
+		return "redirect:/shop/handMade/listItem.do?productId=" + productId;
 	}
 }

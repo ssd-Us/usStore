@@ -38,8 +38,8 @@ public class MybatisSecondHandDao implements SecondHandDao {
 	}
 	
 	@Override
-	public void deleteItem(int itemId, int productId) throws DataAccessException {
-		secondHandMapper.deleteItem(itemId, productId);
+	public void deleteItem(int itemId) throws DataAccessException {
+		secondHandMapper.deleteItem(itemId);
 	}
 	
 	@Override

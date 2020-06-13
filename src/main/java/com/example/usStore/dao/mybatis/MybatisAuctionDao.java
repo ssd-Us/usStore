@@ -39,9 +39,9 @@ public class MybatisAuctionDao implements AuctionDao {
 	}
 
 	@Override
-	public void deleteItem(int itemId, int productId) throws DataAccessException {
+	public void deleteItem(int itemId) throws DataAccessException {
 		// TODO Auto-generated method stub
-		auctionMapper.deleteItem(itemId, productId);
+		auctionMapper.deleteItem(itemId);
 	}
 
 	@Override

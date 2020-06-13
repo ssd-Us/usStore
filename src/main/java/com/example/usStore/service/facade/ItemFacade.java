@@ -30,7 +30,7 @@ public interface ItemFacade {
 	
 	void getItem(int itemId, int productId);
 	
-	public void deleteItem(int itemId, int productId);
+	public void deleteItem(int itemId);
 	
 	void updateQuantity(int qty, int itemId, int productId);
 	
@@ -52,6 +52,8 @@ public interface ItemFacade {
 	HandMade getHandMadeById(int itemId);
 	
 	List<HandMade> getHandMadeListByProductId(int productId);
+	
+	public void deleteHandMade(int itemId);
 	
 	/////////////////////////////////////////////////////////////////////////
 	/* GroupBuying */

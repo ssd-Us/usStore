@@ -24,8 +24,7 @@
 	</update>
 
 	<delete id="deleteItem">
-		DELETE ITEM
-		FROM ITEM
+		DELETE FROM ITEM
 		WHERE ITEMID = #{itemId} 
 	</delete>
 
