@@ -1,5 +1,4 @@
 <%@ include file="itemTop.jsp" %>
-
 <style type="text/css"> 
 	a { text-decoration:none } 
 </style> 
@@ -82,12 +81,8 @@
 							<c:url value='/addFollow/${gb.suppId}'/>	<!-- 로그인 여부 따지기 -->
 					">팔로잉</a>
 				</span>
-				&nbsp;
-				<span>
-					<a href="
-							<c:url value='/addAccuse/${gb.suppId}'/>	<!-- 로그인 여부 따지기 -->
-					">판매자 신고</a>
-				</span>
+				<!-- 판매자 신고하기 -->
+				&nbsp; <%@ include file="/WEB-INF/jsp/account/accuseFunction.jsp" %>
    			</td>
    		</tr> <!-- userId = suppId -->
    		
