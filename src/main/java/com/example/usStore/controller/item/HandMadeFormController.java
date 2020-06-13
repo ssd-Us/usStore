@@ -1,8 +1,5 @@
 package com.example.usStore.controller.item;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.support.PagedListHolder;
 import org.springframework.stereotype.Controller;
@@ -12,14 +9,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.example.usStore.domain.Auction;
 import com.example.usStore.domain.HandMade;
-import com.example.usStore.domain.SecondHand;
 import com.example.usStore.service.facade.ItemFacade;
 
 @Controller
+@SessionAttributes({"handMadeForm", "itemList"})
 public class HandMadeFormController {
 
 	private ItemFacade itemFacade;
@@ -29,6 +26,7 @@ public class HandMadeFormController {
 		this.itemFacade = itemFacade;
 	}
 
+	// HandMade 리스트 초기 화면 출력시 실행되는 Controller
 	@RequestMapping("/shop/handMade/listItem.do")
 	public String listHandMade (
 			@RequestParam("productId") int productId, ModelMap model) throws Exception {
@@ -40,17 +38,19 @@ public class HandMadeFormController {
 		return "product/handMade";
 	}
 	
+	// 페이지 넘어갈때 실행되는 Controller
 	@RequestMapping("shop/handMade/listItem2.do")
 	public String listHandMade2 (
-			@RequestParam("page") String page,
 			@ModelAttribute("itemList") PagedListHolder<HandMade> itemList,
-			BindingResult result) throws Exception {
+			@RequestParam("pageName") String page,
+			ModelMap model) throws Exception {
 		if ("next".equals(page)) {
 			itemList.nextPage();
 		}
 		else if ("previous".equals(page)) {
 			itemList.previousPage();
 		}
+		model.put("itemList", itemList);
 		return "product/handMade";
 	}
 	
