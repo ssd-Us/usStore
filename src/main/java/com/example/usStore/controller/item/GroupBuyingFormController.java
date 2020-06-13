@@ -30,10 +30,10 @@ import com.example.usStore.service.facade.ItemFacade;
 @Controller
 @SessionAttributes("gbform")	
 public class GroupBuyingFormController {
-	private static final String ADD_FORM1 = "Product/item";
-	private static final String ADD_FORM2 = "Product/addGroupBuying";
-	private static final String CHECK_FORM3 = "Product/checkGroupBuying";
-	private static final String DetailPage = "Product/viewGroupBuying";
+	private static final String ADD_FORM1 = "product/item";
+	private static final String ADD_FORM2 = "product/addGroupBuying";
+	private static final String CHECK_FORM3 = "product/checkGroupBuying";
+	private static final String DetailPage = "product/viewGroupBuying";
 	
 	@Autowired
 	private ItemFacade itemFacade;
@@ -64,7 +64,7 @@ public class GroupBuyingFormController {
 	 //item값도 받아와야 함
 	 model.addAttribute("productId", productId);
 	 modelMap.put("groupBuyingList", groupBuyingList);
-	 return "Product/groupBuying";
+	 return "product/groupBuying";
    }
 	
 	@GetMapping("/shop/groupBuying/step1")		// step1 �슂泥�
@@ -97,7 +97,7 @@ public class GroupBuyingFormController {
 	@PostMapping("/shop/groupbuying/step3")		// step2 -> step3 �씠�룞
 	public String step3(
 			@ModelAttribute("gbform") GroupBuyingForm gbcommand, @RequestParam("productId") int productId, 
-			ItemForm itemformSession, 
+			Item itemformSession, 
 			BindingResult result, Model model, HttpServletRequest rq) {	
 		HttpSession session = rq.getSession(false); //이미 세션이 있다면 그 세션을 돌려주고, 세션이 없으면 새로운 세션을 생성한다.
 		System.out.println("command 媛앹껜: " + gbcommand);
@@ -113,7 +113,7 @@ public class GroupBuyingFormController {
 			return ADD_FORM2;		// 寃�利� �삤瑜� 諛쒖깮 �떆 step2 form view(addGroupBuying.jsp)濡� �씠�룞
 		}
 		
-		itemformSession = (ItemForm) session.getAttribute("itemForm");
+		itemformSession = (Item) session.getAttribute("item");
 		Item item = new Item(itemformSession.getUnitCost(), itemformSession.getTitle(), 
 				itemformSession.getDescription(), itemformSession.getViewCount(), 
 				itemformSession.getQty(), itemformSession.getUserId(), productId);

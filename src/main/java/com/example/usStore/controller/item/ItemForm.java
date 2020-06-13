@@ -8,19 +8,19 @@ import com.example.usStore.domain.Tag;
 public class ItemForm {
 	/* Private Fields */
 	  private int itemId;			 //(PK) String- > int
-	  private int unitCost; 		 //�ܰ�(����)
-	  private String title; 		 //����
-	  private String description; 	 //����
-	  private int viewCount; 		 //��ȸ��
-	  private int qty;			 //���
+	  private int unitCost; 		 //占쌤곤옙(占쏙옙占쏙옙)
+	  private String title; 		 //占쏙옙占쏙옙
+	  private String description; 	 //占쏙옙占쏙옙
+	  private int viewCount; 		 //占쏙옙회占쏙옙
+	  private int qty;			 //占쏙옙占�
 	  private String tag1;
 	  private String tag2;
 	  private String tag3;
 	  private String tag4;
 	  private String tag5;
 	  private List<Tag> tags = new ArrayList<Tag>();
-	  private String userId;		 //(FK) ������ ���̵�
-	  private int productId;      	 //(FK) ��������/�߰�ŷ�/���/�������Ǹ� ����  
+	  private String userId;		 //(FK) 占쏙옙占쏙옙占쏙옙 占쏙옙占싱듸옙
+	  private int productId;      	 //(FK) 占쏙옙占쏙옙占쏙옙占쏙옙/占쌩곤옙킹占�/占쏙옙占�/占쏙옙占쏙옙占쏙옙占실몌옙 占쏙옙占쏙옙  
 	  
 	  /* JavaBeans Properties */
 	  public int getItemId() {
@@ -136,19 +136,11 @@ public class ItemForm {
 		this.tags = tags;
 	}
 	
-	 public void makeTags(int itemId, String tagName) {	//itemId를 tag의 itemId로, tagName(tag1, 2, 3, 4, 5) 지정 , tagId는 임의의 수 0 으로 지정
-		Tag tag = new Tag(itemId, tagName);
-		tags.add(tag);
-	  }
-//	  
-//	public List<Tag> GetTags(Tag tag) {		//tags 리스트에 tag하나 추가	
-//		return tags;
-//	}
-
-	/*
-		 * private final List<String> tags = new ArrayList() { { tags.add(tag1);
-		 * add("2"); add("3"); } };
-		 */
+//	public void makeTags(int itemId, String tagName) {	//itemId瑜� tag�쓽 itemId濡�, tagName(tag1, 2, 3, 4, 5) 吏��젙 , tagId�뒗 �엫�쓽�쓽 �닔 0 �쑝濡� 吏��젙
+//		Tag tag = new Tag(itemId, tagName);
+//		tags.add(tag);
+//	  }
+	
 	@Override
 	public String toString() {
 		return "ItemForm [itemId=" + itemId + ", unitCost=" + unitCost + ", title="
