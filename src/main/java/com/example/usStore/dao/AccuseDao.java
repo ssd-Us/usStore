@@ -2,14 +2,13 @@ package com.example.usStore.dao;
 
 import org.springframework.dao.DataAccessException;
 
-import com.example.usStore.domain.Account;
 import com.example.usStore.domain.Accuse;
 
 public interface AccuseDao {
 
-	// ì‹ ê³ í•˜ê¸°
+	// ½Å°íÇÏ±â
 	void insertAccuse(Accuse accuse) throws DataAccessException;
 	
-	// í•´ë‹¹ ìœ ì € ë³„ ì‹ ê³  ë‹¹í•œ íšŸìˆ˜ ë°›ì•„ì˜¤ê¸°
+	// ÇØ´ç À¯Àú º° ½Å°í ´çÇÑ È½¼ö ¹Þ¾Æ¿À±â
 	int countAccuseById(String accountId) throws DataAccessException;
 }

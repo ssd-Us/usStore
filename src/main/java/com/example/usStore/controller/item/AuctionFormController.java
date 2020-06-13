@@ -4,6 +4,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -20,68 +22,66 @@ public class AuctionFormController {
    @Autowired
    private ItemFacade itemFacade;
    
+   private int myItemId;
+   
    @Autowired
    public void setUsStore(ItemFacade itemFacade) {
       this.itemFacade = itemFacade;
    }
    
-   //寃쎈ℓ 由ъ뒪�듃
    @RequestMapping("/shop/auction/listItem.do") 
    public String auctionList(@RequestParam("productId") int productId, ModelMap model) {
       List<Auction> auctionList = this.itemFacade.getAuctionList();
       
       model.addAttribute("auctionList", auctionList);
 
-      return "Product/auction";
+      return "product/auction";
    }
    
-   //寃쎈ℓ �긽�꽭 �럹�씠吏�
    @RequestMapping("/shop/auction/viewItem.do") 
    public String auctionView(@RequestParam("itemId") int itemId, ModelMap model) {
-	  Auction auction = this.itemFacade.getAuctionById(itemId);
+	  System.out.println("<경매 상세 페이지>"); 
+	  myItemId = itemId;
+	  
+	  Auction auction = this.itemFacade.getAuctionById(myItemId);
 
       model.addAttribute("auction", auction);
       
-//      留덇컧 �궇吏� 怨꾩궛�빐�꽌 model �뿉 �떞�븘 蹂대궡湲�        
-//      SimpleDateFormat format = new SimpleDateFormat("yy/mm/dd");
-//      Date time = new Date();
-//      System.out.println("auction deadline : " + auction.getDeadLine().toString() + ", sysdate : " + format.format(time));
+      //경매에 참여한 뒤에 다시 상세페이지로 가는 것이면, alert 창으로 완료됐다고 보여주고 싶음.
       
-      
-//      unitCost 瑜� �쁽�옱 理쒕� 湲덉븸�쑝濡� 諛쏆쑝�젮怨� �븿.
-      
-      return "Product/viewAuction";
+      return "product/viewAuction";
    }
 
    
-   //寃쎈ℓ 李몄뿬(濡쒓렇�씤 �뿬遺� �솗�씤)
    @RequestMapping("/shop/auction/participateItem.do") 
-   public String auctionParticipate(@RequestParam("price") String price, ModelMap model) {
-	   System.out.println("李몄뿬 湲덉븸 : " + price.toString());
+   public String auctionParticipate(HttpServletRequest request, ModelMap model) {
+	   System.out.println("<경매 참여>");
 	   
-	   return "Product/viewAuction";
+	   int price = Integer.parseInt(request.getParameter("price"));
+	   System.out.println("입력 가격 : " + price);
+	   
+	   //파라미터로 받아온 입력 가격(price)을 unitCost 필드에 update 해주기
+	   
+	   return "redirect:/shop/auction/viewItem.do?itemId=" + myItemId;
    }
-      
-   //寃쎈ℓ 異붽�(濡쒓렇�씤 �뿬遺� �솗�씤)
+   
+
    @RequestMapping("/shop/auction/addItem.do")
    public String goItem(@RequestParam("productId") int productId) {
       return "redirect:/shop/item/addItem.do?productId=" + productId;
    }
    
    
-   
-   //寃쎈ℓ �닔�젙(濡쒓렇�씤 �뿬遺� �솗�씤)
    @RequestMapping("/shop/auction/updateItem.do") 
    public String auctionUpdate(@RequestParam("productId") int productId, ModelMap model) {
-	   
-	   return "Product/item";
+	   this.itemFacade.updateAuction(this.itemFacade.getAuctionById(myItemId));
+	   return "product/item";
    }
-   
-   
-   //寃쎈ℓ �궘�젣(濡쒓렇�씤 �뿬遺� �솗�씤)
+
+  
    @RequestMapping("/shop/auction/deleteItem.do") 
    public String auctionDelete(@RequestParam("productId") int productId, ModelMap model) {
-	   
-	   return "Product/auction";
+	   this.itemFacade.deleteItem(myItemId, 1);
+	   return "product/auction";
    }
 }

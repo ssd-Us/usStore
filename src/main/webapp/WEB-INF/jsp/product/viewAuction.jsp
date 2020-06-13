@@ -1,7 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ include file="itemTop.jsp"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<% request.setCharacterEncoding("UTF-8"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -45,16 +44,22 @@
 	
 </style>
 <script>
-function participation(price, unitCost, targetUri) {
-	alert("넘어옴 - 입력 값 : " + price.value + ", 최댓값 : " + unitCost);
-/* 	if (price.value > unitCost) {
-		boolean c = confirm('경매에 참여하시겠습니까?');
+function participation(price, unitCost) {
+	var p = parseInt(price);
+	var u = parseInt(unitCost);
+	
+	alert("입력 가격 : " + p + "\n최댓값 : " + u);
+
+	if (p > u) {
+		var c = confirm("경매에 참여하시겠습니까?");
 
 		if (c) {
-			form.action = targetUri;
 			form.submit();
 		}
-	} */
+		else {
+			alert("참여 취소");
+		}
+	}
 }
 </script>
 <body>
@@ -121,7 +126,7 @@ function participation(price, unitCost, targetUri) {
    		<tr>
    			<th style="border-right: 1px solid black;"><font color=red>마감 날짜</font></th>
    			<td><font color=red>
-   				<fmt:formatDate value="${auction.deadLine}" pattern="yyyy년 MM월 dd일" />
+   				<fmt:formatDate value="${auction.deadLine}" pattern="yyyy년 MM월 dd일  hh시 mm분 ss초" />
    			</font></td>
    		</tr>
    		
@@ -156,12 +161,12 @@ function participation(price, unitCost, targetUri) {
 							<c:url value='/note/${auction.userId}'/>	<!-- 로그인 여부 따지기 -->
 				">쪽지 보내기</a>
 				</span><br><br>
-   				<form method="POST" name="form" action="<c:url value="/shop/auction/participateItem.do?price=${price.value}"/>">
+   				<form name="form" action="<c:url value='/shop/auction/participateItem.do'/>">
    					<input type="text" id="price" name="price" placeholder="참여 가격을 입력하세요."/>
 				&nbsp;
-				<span>
-					<a href="#">경매 참여</a> <!-- 로그인 여부 따지기 -->
-					<%-- <a href="" onClick="participation(price, ${auction.unitCost}, '<c:url value='/shop/auction/participateItem.do?unitCost=${price}'/>')">경매 참여</a> --%>
+				<span onclick="participation(price.value, ${auction.unitCost})">
+					<!-- 로그인 여부 따지기 -->
+					<a href="#">경매 참여</a>
 				</span>
 				</form>
    			</td>
@@ -170,8 +175,8 @@ function participation(price, unitCost, targetUri) {
    		<c:if test="${sh.suppId==session.userId}"> <!-- 로그인시 실행 -->
    		<tr>
    		<td colspan="2" style="text-align: right; padding: 0px; font-size: small; border-bottom: none; border-top: 1px solid black;">
-		   <a href="<c:url value='/editItem/${auction.itemId}'/>">[게시물 수정하기]</a>
-		   <a href="<c:url value='/deleteItem/${auction.itemId}'/>"> [게시물 삭제하기]</a>
+		   <a href="<c:url value='/shop/auction/updateItem.do'/>">[게시물 수정하기]</a>
+		   <a href="<c:url value='/shop/auction/deleteItem.do'/>"> [게시물 삭제하기]</a>
 		   </td>
 		 </tr>
 		</c:if>

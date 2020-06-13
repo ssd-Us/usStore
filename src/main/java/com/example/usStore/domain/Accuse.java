@@ -10,9 +10,9 @@ public class Accuse  implements Serializable {
 
 	// variable
 	private int accuseId;   // Sequence
-	private String victim;   // (FK) userId : í”¼í•´ì(ë¡œê·¸ì¸í•œ, ì‹ ê³ í•œì‚¬ëŒ)
-	private String attacker; // (FK) userId : íŒë§¤ì(ì‹ ê³  ëŒ€ìƒì)
-	private String reason;  // ì‹ ê³  ì´ìœ 
+	private String victim;   // (FK) userId : ÇÇÇØÀÚ(·Î±×ÀÎÇÑ, ½Å°íÇÑ»ç¶÷)
+	private String attacker; // (FK) userId : ÆÇ¸ÅÀÚ(½Å°í ´ë»óÀÚ)
+	private String reason;  // ½Å°í ÀÌÀ¯
 	
 	// setter & getter
 	public int getAccuseId() {

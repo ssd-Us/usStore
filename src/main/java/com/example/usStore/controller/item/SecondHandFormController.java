@@ -30,7 +30,7 @@ public class SecondHandFormController {
 		this.itemFacade = itemFacade;
 	}
 
-	//ì¤‘ê³ ê±°ë˜ ê²Œì‹œë¬¼ ëª©ë¡ ë³´ì—¬ì£¼ê¸°
+	//Áß°í°Å·¡ °Ô½Ã¹° ¸ñ·Ï º¸¿©ÁÖ±â
 	@RequestMapping("/shop/secondHand/listItem.do")
 	public String secondHandList(@RequestParam("productId") int productId, ModelMap model) throws Exception{
 		PagedListHolder<SecondHand> itemList = new PagedListHolder<SecondHand>(this.itemFacade.getSecondHandList());
@@ -38,13 +38,13 @@ public class SecondHandFormController {
 		System.out.println("ì—¬ê¸°ëŠ” ê²Œì‹œë¬¼ ëª©ë¡ ì»¨íŠ¸ë¡¤ëŸ¬\n ");
 
 		model.put("itemList", itemList);
-		return "product/secondHand"; //ë·° ë„¤ì„ì€ ê·¸ ëª©ë¡ ë³´ì—¬ì£¼ëŠ” í˜ì´ì§€ 
+		return "product/secondHand"; //ºä ³×ÀÓÀº ±× ¸ñ·Ï º¸¿©ÁÖ´Â ÆäÀÌÁö 
 	}
 	
 	@RequestMapping("/shop/secondHand/viewItem.do") 
 	public String viewSecondHand(@RequestParam("itemId") int itemId, ModelMap model) {
 		  SecondHand sh = this.itemFacade.getSecondHandItem(itemId);
-		  //ë„ë©”ì¸ì—ì„œ ê°€ì ¸ì™€ì•¼í•¨ ë””ë¹„ì—ì„œ ë¶ˆëŸ¬ì˜¨ê±¸ ë„ë©”ì¸ì— ì €ì¥í•´ë†ˆ 
+		  //µµ¸ŞÀÎ¿¡¼­ °¡Á®¿Í¾ßÇÔ µğºñ¿¡¼­ ºÒ·¯¿Â°É µµ¸ŞÀÎ¿¡ ÀúÀåÇØ³ğ 
 	      model.addAttribute("sh", sh);
 
 	      return "product/viewSecondHand";
