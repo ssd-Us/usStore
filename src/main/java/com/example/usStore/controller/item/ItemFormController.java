@@ -24,68 +24,59 @@ public class ItemFormController {
 	@Autowired
 	private ItemFacade itemFacade;
 	
-	@ModelAttribute("itemForm")		  //"itemForm"媛앹껜�쓽 �씠由� 吏��젙
+	@ModelAttribute("itemForm")		  //"itemForm"揶쏆빘猿쒙옙�벥 占쎌뵠�뵳占� 筌욑옙占쎌젟
 	public ItemForm formBacking(HttpServletRequest request, @RequestParam("productId") int productId) {  // accessor method 
-		ItemForm itemForm = new ItemForm(); //itemForm媛앹껜 �깮�꽦
+		ItemForm itemForm = new ItemForm(); //itemForm揶쏆빘猿� 占쎄문占쎄쉐
 		
-		itemForm.setProductId(autoDetectPid(request.getRemoteAddr(), productId));	//productId�븘�뱶 珥덇린�솕
+		itemForm.setProductId(autoDetectPid(request.getRemoteAddr(), productId));	//productId占쎈툡占쎈굡 �룯�뜃由곤옙�넅
 		
-		return itemForm; //�꽭�뀡�뿉 "itemForm"�씠由꾩쑝濡� ���옣�맖
+		return itemForm; //占쎄쉭占쎈�∽옙肉� "itemForm"占쎌뵠�뵳袁⑹몵嚥∽옙 占쏙옙占쎌삢占쎈쭡
 	}
 	
-	private int autoDetectPid(String remoteAddr, int productId) {	//珥덇린�솕 媛�
+	private int autoDetectPid(String remoteAddr, int productId) {	//�룯�뜃由곤옙�넅 揶쏉옙
 		return productId;
 	}
 	
-	@RequestMapping(value="/shop/item/addItem.do", method = RequestMethod.GET)		//泥� item.jsp �슂泥�
+	@RequestMapping(value="/shop/item/addItem.do", method = RequestMethod.GET)		//筌ｏ옙 item.jsp 占쎌뒄筌ｏ옙
 	public String step1(@ModelAttribute("item") ItemForm itemForm, 
 			@RequestParam("productId") int productId, Model model) {
 		System.out.println("item controller");
-		model.addAttribute("productId", productId);		// item.jsp�뿉 <productId> �쟾�떖 
-		return "product/item";	//form view(item.jsp)濡� �씠�룞
+		model.addAttribute("productId", productId);		// item.jsp占쎈퓠 <productId> 占쎌읈占쎈뼎 
+		return "product/item";	//form view(item.jsp)嚥∽옙 占쎌뵠占쎈짗
 	}
 	
-	@RequestMapping(value="/shop/item/addItem2/{productId}", method = RequestMethod.POST)	//item.jsp �뤌 �엯�젰 �썑 �떎�쓬 jsp�슂泥�
-	public String submit(Item item, ItemForm itemForm,  
-			BindingResult result, @PathVariable("productId") int productId, 
-			HttpServletRequest rq, Model model) {
-		HttpSession httpSession = rq.getSession(true); //�씠誘� �꽭�뀡�씠 �엳�떎硫� 洹� �꽭�뀡�쓣 �룎�젮二쇨퀬, �꽭�뀡�씠 �뾾�쑝硫� �깉濡쒖슫 �꽭�뀡�쓣 �깮�꽦�븳�떎.
+	@RequestMapping(value="/shop/item/addItem2.do", method = RequestMethod.POST)	//item.jsp 占쎈쨲 占쎌뿯占쎌젾 占쎌뜎 占쎈뼄占쎌벉 jsp占쎌뒄筌ｏ옙
+	public String submit(@RequestParam("productId") int productId, HttpServletRequest rq) {
+		System.out.println("addItem2.do");
+		HttpSession httpSession = rq.getSession(true); //占쎌뵠沃섓옙 占쎄쉭占쎈�∽옙�뵠 占쎌뿳占쎈뼄筌롳옙 域뱄옙 占쎄쉭占쎈�∽옙�뱽 占쎈즼占쎌젻雅뚯눊��, 占쎄쉭占쎈�∽옙�뵠 占쎈씨占쎌몵筌롳옙 占쎄퉱嚥≪뮇�뒲 占쎄쉭占쎈�∽옙�뱽 占쎄문占쎄쉐占쎈립占쎈뼄.
 				
-		String view = "";
+		String itemController = "";
+		 
+//		if (result.hasErrors()) {	return formViewName;	}	//野껓옙筌앾옙 占쎌궎�몴占� 獄쏆뮇源�占쎈뻻 item.jsp嚥∽옙 占쎈뼄占쎈뻻 占쎌뵠占쎈짗
 		
-		if (result.hasErrors()) {	return formViewName;	}	//寃�利� �삤瑜� 諛쒖깮�떆 item.jsp濡� �떎�떆 �씠�룞
+		Item item = new Item(rq.getParameter("title"), rq.getParameter("description"), Integer.parseInt(rq.getParameter("unitCost")), 
+				Integer.parseInt(rq.getParameter("qty")), rq.getParameter("tag1"), rq.getParameter("tag2"), rq.getParameter("tag3"), 
+				rq.getParameter("tag4"), rq.getParameter("tag5"));
 		
-		itemForm.setTitle(rq.getParameter("title"));
-		itemForm.setDescription(rq.getParameter("description"));	
-		itemForm.setUnitCost(Integer.parseInt(rq.getParameter("unitCost")));
-		itemForm.setQty(Integer.parseInt(rq.getParameter("qty")));
-		itemForm.setTag1(rq.getParameter("tag1"));
-		itemForm.setTag2(rq.getParameter("tag2"));
-		itemForm.setTag3(rq.getParameter("tag3"));
-		itemForm.setTag4(rq.getParameter("tag4"));
-		itemForm.setTag5(rq.getParameter("tag5"));
-		
-		
-		
-		httpSession.setAttribute("itemForm", itemForm);	//itemForm �꽭�뀡 �깮�꽦, �궗�슜�옄 �엯�젰媛믪쓣 itemForm �꽭�뀡�뿉 ���옣
+		httpSession.setAttribute("item", item);	//generate item session
 		
 		/*itemImpl.insertItem()*/
 		switch(productId) {
 			case 0 : 
-				view = "Product/addGroupBuying";
+				itemController = "redirect:/shop/groupBuying/addItem.do?productId=" + productId;
 				break;
 			case 1 :
-				view = "Product/addAuction";
+				itemController = "redirect:/shop/auction/addItem.do?productId=" + productId;
 				break;
 			case 2 : 
-				view = "Product/addSecondHand";
+				itemController = "redirect:/shop/secondHand/addItem.do?productId=" + productId;
 				break;
 			case 3 : 
-				view = "Product/addHandMade";
+				itemController = "redirect:/shop/handMade/addItem.do?productId=" + productId;
 				break;
 		}
 	
-		return view;
+		return itemController;
 	}
 	
 }

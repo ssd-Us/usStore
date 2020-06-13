@@ -8,21 +8,37 @@ import com.example.usStore.domain.Tag;
 public class ItemForm {
 	/* Private Fields */
 	  private int itemId;			 //(PK) String- > int
-	  private int unitCost; 		 //占쌤곤옙(占쏙옙占쏙옙)
-	  private String title; 		 //占쏙옙占쏙옙
-	  private String description; 	 //占쏙옙占쏙옙
-	  private int viewCount; 		 //占쏙옙회占쏙옙
-	  private int qty;			 //占쏙옙占�
+	  private int unitCost; 		 //�뜝�뙟怨ㅼ삕(�뜝�룞�삕�뜝�룞�삕)
+	  private String title; 		 //�뜝�룞�삕�뜝�룞�삕
+	  private String description; 	 //�뜝�룞�삕�뜝�룞�삕
+	  private int viewCount; 		 //�뜝�룞�삕�쉶�뜝�룞�삕
+	  private int qty;			 //�뜝�룞�삕�뜝占�
 	  private String tag1;
 	  private String tag2;
 	  private String tag3;
 	  private String tag4;
 	  private String tag5;
 	  private List<Tag> tags = new ArrayList<Tag>();
-	  private String userId;		 //(FK) 占쏙옙占쏙옙占쏙옙 占쏙옙占싱듸옙
-	  private int productId;      	 //(FK) 占쏙옙占쏙옙占쏙옙占쏙옙/占쌩곤옙킹占�/占쏙옙占�/占쏙옙占쏙옙占쏙옙占실몌옙 占쏙옙占쏙옙  
+	  private String userId;		 //(FK) �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝�떛�벝�삕
+	  private int productId;      	 //(FK) �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕�뜝�룞�삕/�뜝�뙥怨ㅼ삕�궧�뜝占�/�뜝�룞�삕�뜝占�/�뜝�룞�삕�뜝�룞�삕�뜝�룞�삕�뜝�떎紐뚯삕 �뜝�룞�삕�뜝�룞�삕  
 	  
-	  /* JavaBeans Properties */
+	  public ItemForm() {}
+	  
+//	  public ItemForm(String title, String description, int unitCost, int qty, String tag1, String tag2, String tag3,
+//			String tag4, String tag5) {
+//		super();
+//		this.unitCost = unitCost;
+//		this.title = title;
+//		this.description = description;
+//		this.qty = qty;
+//		this.tag1 = tag1;
+//		this.tag2 = tag2;
+//		this.tag3 = tag3;
+//		this.tag4 = tag4;
+//		this.tag5 = tag5;
+//	}
+
+	/* JavaBeans Properties */
 	  public int getItemId() {
 		return itemId;
 	  }
@@ -136,7 +152,7 @@ public class ItemForm {
 		this.tags = tags;
 	}
 	
-//	public void makeTags(int itemId, String tagName) {	//itemId瑜� tag�쓽 itemId濡�, tagName(tag1, 2, 3, 4, 5) 吏��젙 , tagId�뒗 �엫�쓽�쓽 �닔 0 �쑝濡� 吏��젙
+//	public void makeTags(int itemId, String tagName) {	//itemId�몴占� tag占쎌벥 itemId嚥∽옙, tagName(tag1, 2, 3, 4, 5) 筌욑옙占쎌젟 , tagId占쎈뮉 占쎌뿫占쎌벥占쎌벥 占쎈땾 0 占쎌몵嚥∽옙 筌욑옙占쎌젟
 //		Tag tag = new Tag(itemId, tagName);
 //		tags.add(tag);
 //	  }

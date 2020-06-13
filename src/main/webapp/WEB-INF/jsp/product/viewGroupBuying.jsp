@@ -58,12 +58,12 @@
 	</tr>
    		<tr>
 	   		<th style="border-right: 1px solid black; border-top: 1px solid black;">제목</th>
-	   		<td style="border-top: 1px solid black;">대학교 과잠 공동구매</td>
+	   		<td style="border-top: 1px solid black;">${gb.title}</td>
    		</tr>
    		
    		<tr>
    			<th style="border-right: 1px solid black;">판매자</th>
-   			<td>푸드리&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   			<td>${sh.userId}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	   			<span>
 		   			<a href="
 							<c:url value='/addFollow/${gb.suppId}'/>	<!-- 로그인 여부 따지기 -->
@@ -74,24 +74,17 @@
    			</td>
    		</tr> <!-- userId = suppId -->
    		
-   		<tr><td colspan="2" style="padding: 15px;">이 상품은 대학교에서 가장 잘 팔리는 디자인, 색상입니다!!!<br></td></tr>
+   		<tr><td colspan="2" style="padding: 15px;">${gb.description}<br></td></tr>
    		
    		<tr>
    			<th style="border-right: 1px solid black;"><font color=blue>#</font>관련태그</th>
    			<td>
-   			<%-- <c:forEach var="tag" items="${tag}">	<!-- tag 테이블 이용 -> 해당 itemId를 어떻게 연결하지? -->
-   				<a href="
-					<c:url value='/searchTag'>	<!-- tag검색 결과 페이지로 이동 -->
-					  <c:param name="tagName" value="${tag.tagName}"/>
-				  	</c:url>
-				">#${tag.tagName}</a>&nbsp;
-   			</c:forEach> --%>
    			<a href="
-					<c:url value='/searchTag/${gb.tagName}'/>	<!-- tag검색 결과 페이지로 이동 -->
+					<c:url value='/searchTag/${gb.itemId}'/>	<!-- tag검색 결과 페이지로 이동 -->
 				">#과잠</a>&nbsp;
 				
 			<a href="
-					<c:url value='/searchTag/${gb.tagName}'/>	<!-- tag검색 결과 페이지로 이동 -->
+					<c:url value='/searchTag/${gb.itemId}'/>	<!-- tag검색 결과 페이지로 이동 -->
 				">#단체복</a>&nbsp;
    			</td>
    		</tr>
@@ -99,21 +92,21 @@
    		<tr>
    			<th style="border-right: 1px solid black;"><font color=red>마감 날짜</font></th>
    			<td><font color=red>
-   				10일 남음
+   				${gb.deadLine}
    			</font></td>
    		</tr>
    		
    		<tr>
    		<th style="border-right: 1px solid black;">판매가</th>
    			<td>
-   				<del>정가 : 70000 원</del> <br>
-   				공동구매가 : <ins>35000</ins> 원&nbsp;<font color=red>-50%</font> <br>
+   				<del>정가 : ${gb.unitCost} 원</del> <br>
+   				공동구매가 : <ins>${gb.listPrice}</ins> 원&nbsp;<font color=red>-${gb.discount}%</font> <br>
    			</td>
    		</tr>
    		
    		<tr>
    		<th style="border-right: 1px solid black;">수량 </th> 
-   		<td> 20</td>
+   		<td>${gb.qty}</td>
    		</tr>
    		
    		<tr>
@@ -142,8 +135,8 @@
    		<c:if test="${sh.suppId==session.userId}"> <!-- 로그인시 실행 -->
    		<tr>
    		<td colspan="2" style="text-align: right; padding: 0px; font-size: small; border-bottom: none; border-top: 1px solid black;">
-		   <a href="<c:url value='/editItem/${item.productId}'/>">[게시물 수정하기]</a>
-		   <a href="<c:url value='/deleteItem/${item.productId}'/>"> [게시물 삭제하기]</a>
+		   <a href="<c:url value='/editItem/${productId}'/>">[게시물 수정하기]</a>
+		   <a href="<c:url value='/deleteItem/${productId}'/>"> [게시물 삭제하기]</a>
 		   </td>
 		 </tr>
 		</c:if>
