@@ -15,52 +15,45 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.usStore.domain.Item;
-import com.example.usStore.domain.Tag;
 import com.example.usStore.service.facade.ItemFacade;
 
 @Controller
 public class ItemFormController {
-	private String formViewName = "Product/item";
+	private String formViewName = "product/item";
 	
 	@Autowired
 	private ItemFacade itemFacade;
 	
-	@ModelAttribute("ItemForm")		  //"itemForm"객체의 이름 지정
+	@ModelAttribute("itemForm")		  //"itemForm"媛앹껜�쓽 �씠由� 吏��젙
 	public ItemForm formBacking(HttpServletRequest request, @RequestParam("productId") int productId) {  // accessor method 
-		ItemForm itemForm = new ItemForm(); //itemForm객체 생성
+		ItemForm itemForm = new ItemForm(); //itemForm媛앹껜 �깮�꽦
 		
-//		Tag tag = new Tag();
-//		tag.setCity(autoDetectTag(request.getRemoteAddr()));	//address - city 필드 초기화
+		itemForm.setProductId(autoDetectPid(request.getRemoteAddr(), productId));	//productId�븘�뱶 珥덇린�솕
 		
-		itemForm.setProductId(autoDetectPid(request.getRemoteAddr(), productId));	//productId필드 초기화
-		
-		return itemForm; //세션에 "itemForm"이름으로 저장됨
+		return itemForm; //�꽭�뀡�뿉 "itemForm"�씠由꾩쑝濡� ���옣�맖
 	}
-
-//	private int autoDetectTag(String remoteAddr) {	//초기화 값
-//		return productId;
-//	}
 	
-	private int autoDetectPid(String remoteAddr, int productId) {	//초기화 값
+	private int autoDetectPid(String remoteAddr, int productId) {	//珥덇린�솕 媛�
 		return productId;
 	}
 	
-	@RequestMapping(value="/shop/item/addItem.do", method = RequestMethod.GET)		//첫 item.jsp 요청
-	public String step1(@RequestParam("productId") int productId, Model model) {
-		System.out.println("item폼컨트롤러 들어옴");
-		model.addAttribute("productId", productId);		// item.jsp에 <productId> 전달 
-		return "Product/item";	//form view(item.jsp)로 이동
+	@RequestMapping(value="/shop/item/addItem.do", method = RequestMethod.GET)		//泥� item.jsp �슂泥�
+	public String step1(@ModelAttribute("item") ItemForm itemForm, 
+			@RequestParam("productId") int productId, Model model) {
+		System.out.println("item controller");
+		model.addAttribute("productId", productId);		// item.jsp�뿉 <productId> �쟾�떖 
+		return "product/item";	//form view(item.jsp)濡� �씠�룞
 	}
 	
-	@RequestMapping(value="/shop/item/addItem2/{productId}", method = RequestMethod.POST)	//item.jsp 폼 입력 후 다음 jsp요청
+	@RequestMapping(value="/shop/item/addItem2/{productId}", method = RequestMethod.POST)	//item.jsp �뤌 �엯�젰 �썑 �떎�쓬 jsp�슂泥�
 	public String submit(Item item, ItemForm itemForm,  
 			BindingResult result, @PathVariable("productId") int productId, 
 			HttpServletRequest rq, Model model) {
-		HttpSession httpSession = rq.getSession(true); //이미 세션이 있다면 그 세션을 돌려주고, 세션이 없으면 새로운 세션을 생성한다.
+		HttpSession httpSession = rq.getSession(true); //�씠誘� �꽭�뀡�씠 �엳�떎硫� 洹� �꽭�뀡�쓣 �룎�젮二쇨퀬, �꽭�뀡�씠 �뾾�쑝硫� �깉濡쒖슫 �꽭�뀡�쓣 �깮�꽦�븳�떎.
 				
 		String view = "";
 		
-		if (result.hasErrors()) {	return formViewName;	}	//검증 오류 발생시 item.jsp로 다시 이동
+		if (result.hasErrors()) {	return formViewName;	}	//寃�利� �삤瑜� 諛쒖깮�떆 item.jsp濡� �떎�떆 �씠�룞
 		
 		itemForm.setTitle(rq.getParameter("title"));
 		itemForm.setDescription(rq.getParameter("description"));	
@@ -74,7 +67,7 @@ public class ItemFormController {
 		
 		
 		
-		httpSession.setAttribute("itemForm", itemForm);	//itemForm 세션 생성, 사용자 입력값을 itemForm 세션에 저장
+		httpSession.setAttribute("itemForm", itemForm);	//itemForm �꽭�뀡 �깮�꽦, �궗�슜�옄 �엯�젰媛믪쓣 itemForm �꽭�뀡�뿉 ���옣
 		
 		/*itemImpl.insertItem()*/
 		switch(productId) {
