@@ -18,9 +18,9 @@
 <title>공동구매 추가 입력 폼</title>
 </head>
 <body>
-	<spring:hasBindErrors name="gbform" />
+	<spring:hasBindErrors name="GroupBuying" />
 
-	<form:form modelAttribute="gbform" method="post" action="/shop/groupbuying/step3">
+	<form:form modelAttribute="GroupBuying" method="post" action="step3?productId=${productId}">
 	
 	<%-- 할인율: <form:input type="text" path="discount" value="${discount}"/>
 	<form:errors path="discount"/> <br> 
@@ -33,7 +33,10 @@
 	<input type="time" path="deadLine.time" value="23:59:59" min="00:00:01" max="23:59:59">
 	<form:errors path="deadLine"/> <br>
 	
-	<a href="step1">[이전 단계로]</a> <input type="submit" value="다음 단계로" />
+	<a href="<c:url value='/shop/groupBuying/gobackItem.do'>
+		         <c:param name="productId" value="${productId}"/>
+		     </c:url>
+		">[이전 단계로]</a> <input type="submit" value="다음 단계로" />
 	</form:form>
 </body>
 </html>

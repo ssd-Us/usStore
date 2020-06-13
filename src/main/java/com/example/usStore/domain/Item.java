@@ -27,17 +27,28 @@ public class Item implements Serializable {
 
 	public Item() {}
 	
-	public Item(int unitCost, String title, String description, int viewCount, int qty, String userId,
-			int productId) {
+	public Item(int unitCost, String title, String description, int qty, String userId,	int productId) {
 		this.unitCost = unitCost;
 		this.title = title;
 		this.description = description;
-		this.viewCount = viewCount;
 		this.qty = qty;
 		this.userId = userId;
 		this.productId = productId;
 	}
 
+	public Item(String title, String description, int unitCost, int qty, String tag1, String tag2, String tag3,
+			String tag4, String tag5) {
+		super();
+		this.unitCost = unitCost;
+		this.title = title;
+		this.description = description;
+		this.qty = qty;
+		this.tag1 = tag1;
+		this.tag2 = tag2;
+		this.tag3 = tag3;
+		this.tag4 = tag4;
+		this.tag5 = tag5;
+	}
 
 
 	/* JavaBeans Properties */
@@ -153,7 +164,7 @@ public class Item implements Serializable {
 		this.tags = tags;
 	}
 
-	public void makeTags(int itemId, String tagName) {	//itemId瑜� tag�쓽 itemId濡�, tagName(tag1, 2, 3, 4, 5) 吏��젙 , tagId�뒗 �엫�쓽�쓽 �닔 0 �쑝濡� 吏��젙
+	public void makeTags(int itemId, String tagName) {	//itemId�몴占� tag占쎌벥 itemId嚥∽옙, tagName(tag1, 2, 3, 4, 5) 筌욑옙占쎌젟 , tagId占쎈뮉 占쎌뿫占쎌벥占쎌벥 占쎈땾 0 占쎌몵嚥∽옙 筌욑옙占쎌젟
 		Tag tag = new Tag(itemId, tagName);
 		tags.add(tag);
 	  }

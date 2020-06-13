@@ -10,7 +10,7 @@
 </head>
 <body>
 	<spring:hasBindErrors name="item" />
-	<form:form modelAttribute="item" method="post" action="/shop/item/addItem2/${productId}">
+	<form:form modelAttribute="item" method="post" action="addItem2.do?productId=${productId}">
 	
 	제목: <form:input type="text" path="title"/>
 	<form:errors path="title"/> <br><br>
