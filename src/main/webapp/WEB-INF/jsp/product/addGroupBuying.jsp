@@ -20,18 +20,21 @@
 <body>
 	<spring:hasBindErrors name="GroupBuying" />
 
-	<form:form modelAttribute="GroupBuying" method="post" action="step3?productId=${productId}">
+	<form:form modelAttribute="GroupBuying" method="post" action="step3.do">
 	
 	<%-- 할인율: <form:input type="text" path="discount" value="${discount}"/>
 	<form:errors path="discount"/> <br> 
 	컨트롤러에서 할인율 계산하여 자동으로 세션에 추가하도록!--%>
 	
 	판매가: <form:input type="text" path="listPrice" value="${listPrice}" />
-	<form:errors path="listPrice"/> <br>
+	<form:errors path="listPrice"/> <br><br>
 	
-	마감기한: <form:input type="date" path="deadLine.date"/>
-	<input type="time" path="deadLine.time" value="23:59:59" min="00:00:01" max="23:59:59">
-	<form:errors path="deadLine"/> <br>
+	마감기한: 
+	<%-- <form:input type="date" path="deadLine.date"/>
+	<input type="time" path="deadLine.time" value="23:59:59" min="00:00:01" max="23:59:59"> --%>
+<%-- 	<form:input type="date" path="deadLine" value="${deadLine}" />	"yyyy-dd-mm"형식으로 입력
+	<form:errors path="deadLine"/>  --%>
+	<br>
 	
 	<a href="<c:url value='/shop/groupBuying/gobackItem.do'>
 		         <c:param name="productId" value="${productId}"/>
