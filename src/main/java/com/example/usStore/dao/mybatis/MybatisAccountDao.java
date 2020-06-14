@@ -9,10 +9,6 @@ import com.example.usStore.dao.AccountDao;
 import com.example.usStore.dao.mybatis.mapper.AccountMapper;
 import com.example.usStore.domain.Account;
 
-/**
- * @author Juergen Hoeller
- * @author Colin Sampaleanu
- */
 @Repository
 public class MybatisAccountDao implements AccountDao {
 
@@ -30,16 +26,12 @@ public class MybatisAccountDao implements AccountDao {
 
 	public void insertAccount(Account account) throws DataAccessException {
 		accountMapper.insertAccount(account);
-//		accountMapper.insertProfile(account);
-//		accountMapper.insertSignon(account);
 	}
 
 	public void updateAccount(Account account) throws DataAccessException {
 		accountMapper.updateAccount(account);
-//		accountMapper.updateProfile(account);
 		if (account.getPassword() != null && account.getPassword().length() > 0) 
 		{
-//			accountMapper.updateSignon(account);
 			accountMapper.updateAccount(account);
 		}
 	}

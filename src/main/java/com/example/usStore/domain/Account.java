@@ -20,8 +20,6 @@ public class Account implements Serializable {
     private String zip;
     private String country;
     private String phone;
-    private String follower;
-    private String following;
     private String unniversity;
 
   	/* JavaBeans Properties */
@@ -91,27 +89,11 @@ public class Account implements Serializable {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	public String getFollower() {
-		return follower;
-	}
-	public void setFollower(String follower) {
-		this.follower = follower;
-	}
-	public String getFollowing() {
-		return following;
-	}
-	public void setFollowing(String following) {
-		this.following = following;
-	}
+
 	public String getUnniversity() {
 		return unniversity;
 	}
 	public void setUnniversity(String unniversity) {
 		this.unniversity = unniversity;
-	}
-	
-	// ??
-	public void setListOption(boolean b) {
-		// TODO Auto-generated method stub
 	}
 }
