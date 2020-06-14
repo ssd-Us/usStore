@@ -4,11 +4,11 @@
   	<cache />
 	<insert id="insertItem" parameterType="Item">
 		<selectKey keyProperty="itemId" resultType="int" order="BEFORE">
-			SELECT ITEM_seq.nextval AS id FROM DUAL
+			SELECT ITEMID_seq.nextval AS itemId FROM DUAL
 		</selectKey> 
 		INSERT INTO ITEM
 		(ITEMID, UNITCOST, TITLE, DESCRIPTION, VIEWCOUNT, QTY, USERID, PRODUCTID) VALUES
-		(#{itemId}, #{unitCost}, #{title}, #{description}, #{viewCount}, #{quantity}, #{userId}, #{productId})
+		(#{itemId}, #{unitCost}, #{title}, #{description}, #{viewCount}, #{qty}, #{userId}, #{productId})
 	</insert>
 
 	<update id="updateItem" parameterType="Item">
