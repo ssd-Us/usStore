@@ -19,12 +19,35 @@
 
 	<mvc:annotation-driven/>		<!-- create RequestMappingHandlerMapping -->
 	
+	<mvc:default-servlet-handler /> <!-- 로그인 구현 관련  -->
+	
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
 		<property name="prefix" value="/WEB-INF/jsp/"/>
 		<property name="suffix" value=".jsp"/>
 	</bean>
+	
+	<!-- 로그인 구현 관련  -->
+	<bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basenames">
+			<list>
+				<value>messages.validation</value>
+			</list>
+		</property>
+		<property name="defaultEncoding" value="UTF-8" />
+	</bean>
+
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/members/get*" />
+			<mvc:mapping path="/members/delete*" />
+			<bean class="org.springframework.samples.controller.LoginInterceptor" />
+		</mvc:interceptor>
+	</mvc:interceptors>
+	
+	<!-- 로그인 구현 관련  끝 -->
 	
 	<mvc:view-controller path="/shop/index.do" view-name="index"/>
 	<mvc:view-controller path="/shop/signonForm.do" view-name="SignonForm"/> 
