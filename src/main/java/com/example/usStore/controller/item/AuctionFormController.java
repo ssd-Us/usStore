@@ -1,10 +1,12 @@
 package com.example.usStore.controller.item;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.support.PagedListHolder;
@@ -12,16 +14,18 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.usStore.domain.Auction;
-import com.example.usStore.domain.HandMade;
 import com.example.usStore.domain.Item;
 import com.example.usStore.domain.Tag;
 import com.example.usStore.service.facade.ItemFacade;
@@ -30,7 +34,9 @@ import com.example.usStore.service.facade.ItemFacade;
 @SessionAttributes({"auctionForm", "auctionList"})
 public class AuctionFormController {
    private static final String ADD_Auction_FORM = "product/addAuction";
-   
+   private static final String GoAddItemFORM = "redirect:/shop/item/addItem.do?productId=";
+   private static final String CHECK_FORM3 = "product/checkAuction";
+	
    @Autowired
    private ItemFacade itemFacade;
    
@@ -41,6 +47,13 @@ public class AuctionFormController {
    public void setUsStore(ItemFacade itemFacade) {
       this.itemFacade = itemFacade;
    }
+   
+   @ModelAttribute("auctionForm")		  
+	public AuctionForm formBacking() {  // accessor method 
+		System.out.println("formBacking");
+		
+		return new AuctionForm();
+	}
    
    @RequestMapping("/shop/auction/listItem.do") 
    public String auctionList(@RequestParam("productId") int productId, ModelMap model) {
@@ -112,7 +125,7 @@ public class AuctionFormController {
 	 * "redirect:/shop/item/addItem.do?productId=" + productId; }
 	 */
    
-   @RequestMapping(value="/shop/auction/addItem.do", method = RequestMethod.GET)
+   @RequestMapping(value="/shop/auction/addItem2.do", method = RequestMethod.GET)
    public String step2(
          @ModelAttribute("Auction") AuctionForm auctionForm, 
          @RequestParam("productId") int productId, Model model) {
@@ -120,10 +133,97 @@ public class AuctionFormController {
       System.out.println("AuctionForm controller");   //print toString
       
       model.addAttribute("productId", productId);
-      return ADD_Auction_FORM;   // addGroupBuying.jsp
+      return ADD_Auction_FORM;   // addAuction.jsp
    }
  
+   @RequestMapping(value="/shop/auction/gobackItem.do", method = RequestMethod.GET)		// go back to item.jsp
+	public String backToItem(@ModelAttribute("Auction") AuctionForm auctionForm, 
+			@RequestParam("productId") int productId) {
+		System.out.println("go back to item.jsp");
+		return GoAddItemFORM + productId;	// step1(item.jsp) form step2(addAuction.jsp)
+	}
+	
+	@GetMapping("/addStep2")		// step3 -> step2
+	public String addAuctionFromCheck() {
+		return ADD_Auction_FORM;	// step2 form view
+	}
    
+	
+	@PostMapping("/shop/auction/step3.do")		// step2 -> step3
+	public String goCheck(@ModelAttribute("Auction") AuctionForm auctionForm, 
+			HttpServletRequest rq, ItemForm itemForm, Model model) {	
+		System.out.println("step3.do(before check form)");
+		HttpSession session = rq.getSession(false);
+		
+		itemForm = (ItemForm) session.getAttribute("itemForm");
+		if(session.getAttribute("itemForm") != null) {
+			System.out.println("itemformSession: " + itemForm);	//print itemformSession toString
+		}
+		
+		System.out.println("deadLine still null," + auctionForm);	//print command toString
+		
+		String deadLine = auctionForm.getDate() + " " + auctionForm.getTime() + ":00";
+		auctionForm.setDeadLine(deadLine);
+		
+		model.addAttribute(itemForm);
+		
+		Date date = new Date();
+		model.addAttribute(date);
+		
+		return CHECK_FORM3;		// step3(CHECK_FORM3)
+	}
+	
+	@PostMapping("/shop/auction/detailItem.do")		// step3 -> done
+	public String done(@ModelAttribute("Auction") AuctionForm auctionForm,
+			ItemForm itemformSession, BindingResult result, Model model, HttpServletRequest rq, 
+			SessionStatus sessionStatus, Auction auction, ModelMap modelMap) {
+		System.out.println("detailItem.do");
+		
+		HttpSession session = rq.getSession(false);
+		itemformSession = (ItemForm) session.getAttribute("itemForm");
+		if(session.getAttribute("itemForm") != null) {
+			System.out.println("itemformSession: " + itemformSession);	//print itemformSession toString
+		}
+		System.out.println(auctionForm);
+	
+		//put itemformSession to item
+		Item item = new Item(itemformSession.getUnitCost(), itemformSession.getTitle(), 
+				itemformSession.getDescription(), itemformSession.getQty(), "A", 	//must change userId -> loginCommand.getUserId()
+				itemformSession.getProductId());
+		
+		itemFacade.insertItem(item);	// -> generate itemId, insert DB
+		
+		System.out.println("itemId: " + item.getItemId());	//print itemformSession toString
+		
+		//generate tags(only have tagName)
+		itemformSession.makeTags(item.getItemId(), itemformSession.getTag1());	//if(tag != null && "") then addTags
+		itemformSession.makeTags(item.getItemId(), itemformSession.getTag2());
+		itemformSession.makeTags(item.getItemId(), itemformSession.getTag3());
+		itemformSession.makeTags(item.getItemId(), itemformSession.getTag4());
+		itemformSession.makeTags(item.getItemId(), itemformSession.getTag5());
+			
+		List<Tag> tags = new ArrayList<Tag>();
+		tags = itemformSession.getTags();
+		
+		System.out.println("tags: " + tags);
+		
+		for(Tag t : tags) {
+				itemFacade.insertTag(t);	//matching tag - item (via itemId) , insert DB
+		}
+		
+		System.out.println("deadLine : " + auctionForm.getDeadLine());
+		
+		auction.setItemId(item.getItemId());
+		auction.setStartPrice(auction.getStartPrice());
+		auction.setDeadLine(auction.getDeadLine());
+	
+		itemFacade.insertAuction(auction);	// insert DB
+		
+		sessionStatus.setComplete();	// Auction session close
+		session.removeAttribute("itemForm");	//itemForm session close
+		return "redirect:/shop/auction/viewItem.do?itemId=" + auction.getItemId() + "&productId=" + item.getProductId();
+	}
+	
    @RequestMapping("/shop/auction/updateItem.do") 
    public String auctionUpdate(@RequestParam("productId") int productId, ModelMap model) {
 	   this.itemFacade.updateAuction(this.itemFacade.getAuctionById(myItemId));
