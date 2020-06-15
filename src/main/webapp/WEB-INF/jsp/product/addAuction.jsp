@@ -5,20 +5,47 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style>
+	div#addItemForm {
+		position: absolute;
+		left: 18%;
+		border: none;
+		padding: 20px;
+	}
+</style>
 <meta charset="UTF-8">
-<title>경매 입력 폼</title>
+<title>경매 추가 페이지</title>
 </head>
 <body>
+<table id="main-menu">
+  <tr>
+    <td><a href='<c:url value="/shop/index.do"/>'>
+        <b><font color="black" size="2">
+          &lt;&lt; Go to Index</font></b></a>
+    </td>
+  </tr>
+</table>
+<div id = "addItemForm">
+<h2>ADD ITEM</h2>
+<hr width = "927px" align="left"><br><br>
 	<spring:hasBindErrors name="Auction" />
-	<form:form modelAttribute="Auction" method="post" action="step3/${productId}">
+
+	<form:form modelAttribute="Auction" method="post" action="step3.do">
+		
+	시작 가격: <form:input type="int" path="startPrice" value="${startPrice}"/>
+	<form:errors path="startPrice"/> <br>	
 	
-	시작 가격: <form:input type="text" path="startPrice" value="${startPrice}"/>
-	<form:errors path="startPrice"/> <br>
+	마감 기한: 
+	<form:input type="date" path="date"/>
+	<form:input type="time" path="time"/> 
+	<form:errors path="deadLine"/> 
+	<br>
 	
-<%-- 	마감일: <form:input type="text" path="unitCost"  value="${unitCost}"/>
-	<form:errors path="unitCost"/> <br> --%>
-	
-	<a href="step1">[이전 단계로]</a> <input type="submit" value="다음 단계로" />
+	<a href="<c:url value='/shop/auction/gobackItem.do'>
+		         <c:param name="productId" value="${productId}"/>
+		     </c:url>
+		">[이전 단계로]</a> <input type="submit" value="다음 단계로" />
 	</form:form>
+</div>	
 </body>
 </html>

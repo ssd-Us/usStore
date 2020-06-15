@@ -28,7 +28,7 @@
                    <p style="text-align:right;">
 		                <a href="<c:url value='/shop/item/addItem.do'>
                            <c:param name="productId" value="${productId}"/></c:url>
-                  ">경매 추가하기
+                  ">[경매 추가]
                   </a>
 					</p>
                   <hr>
@@ -38,7 +38,7 @@
                         <th style="padding-left:150px">가격</th>
                         <th><p style="padding-left:100px">판매자</p></th>
                         <th><p style="padding-left:80px">낙찰자</p></th>
-                        <th><p style="padding-left:80px">마감일</p></th>
+                        <th><p style="padding-left:80px">마감 날짜</p></th>
                         </tr>
                   <tbody>   
                   <c:forEach var="al" items="${auctionList.pageList}">               

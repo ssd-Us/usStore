@@ -14,15 +14,6 @@ public class AuctionForm {
 	private String time;
 	private String deadLine;
 	
-	public AuctionForm(int itemId, int startPrice, String date, String time, String deadLine) {
-		super();
-		this.itemId = itemId;
-		this.startPrice = startPrice;
-		this.date = date;
-		this.time = time;
-		this.deadLine = deadLine;
-	}
-
 	/*getter setter*/
 	public int getItemId() {
 		return itemId;
