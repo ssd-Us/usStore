@@ -10,10 +10,12 @@
 	a { text-decoration:none } 
 </style> 
 <style>
-	.right-box {
-	  float: right;
-	  border-radius: 2em;
-	  text-align: center;
+
+	table#detail {
+		border: none;
+		text-align: center;
+		font-size: medium;
+		padding: 15px;
 	}
 	
 	span {
@@ -26,13 +28,6 @@
 		padding: 5px;
 	}
 	
-	table {
-			border: none;
-		 	text-align: center;
-			font-size: medium;
-			padding: 15px;
-	}
-	
 	 th, td {
 				border-bottom: 1px solid black;
 			    border-collapse: collapse;
@@ -43,8 +38,21 @@
 	
 </style>
 <body>
-	
-	<table style="margin-left: auto; margin-right: auto;">
+<table id="main-menu">
+  <tr>
+    <td>
+	    <a href='<c:url value="/shop/index.do"/>'>
+	        <b><font color="black" size="2">&lt;&lt; Go to Index</font></b>
+	    </a><br><br>
+	    <a href='<c:url value="/shop/groupBuying/listItem.do">
+    				<c:param name="productId" value="${gb.productId}" />
+    			</c:url>'>
+	        <b><font color="black" size="2">&lt;&lt; Go to List</font></b>
+	    </a><br>
+    </td>
+  </tr>
+</table> 
+	<table id="detail" style="margin-left: auto; margin-right: auto;">
 	<tr>
 		<td style="text-align: left; padding: 0px; font-size: small; border-bottom: none;">
 		${gb.viewCount}<font color=gray>view</font>
@@ -99,7 +107,7 @@
    		<th style="border-right: 1px solid black;">판매가</th>
    			<td>
    				<del>정가 : ${gb.unitCost} 원</del> <br>
-   				공동구매가 : <ins>${gb.listPrice}</ins> 원&nbsp;<font color=red>-${gb.discount}%</font> <br>
+   				공동구매가 : ${gb.listPrice}원&nbsp;<font color=red>-${gb.discount}%</font> <br>
    			</td>
    		</tr>
    		
@@ -134,8 +142,8 @@
    		<c:if test="${gb.userId==session.userId}"> <!-- 로그인시 실행 -->
    		<tr>
    		<td colspan="2" style="text-align: right; padding: 0px; font-size: small; border-bottom: none; border-top: 1px solid black;">
-		   <a href="<c:url value='/editItem/${productId}'/>">[게시물 수정하기]</a>
-		   <a href="<c:url value='/deleteItem/${productId}'/>"> [게시물 삭제하기]</a>
+		   <a href="<c:url value='/editItem/${gb.productId}'/>">[게시물 수정하기]</a>
+		   <a href="<c:url value='/deleteItem/${gb.productId}'/>"> [게시물 삭제하기]</a>
 		   </td>
 		 </tr>
 		</c:if>

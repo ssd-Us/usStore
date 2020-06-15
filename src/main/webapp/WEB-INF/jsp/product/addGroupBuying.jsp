@@ -41,7 +41,7 @@
 	<form:input type="date" path="date"/>
 	<form:input type="time" path="time"/> 
 	<form:errors path="deadLine"/> 
-	<br>
+	<br><br>
 	
 	<a href="<c:url value='/shop/groupBuying/gobackItem.do'>
 		         <c:param name="productId" value="${productId}"/>

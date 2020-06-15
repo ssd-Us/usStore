@@ -53,7 +53,7 @@
                   <tbody>    
                   
 		
-   				<c:forEach var="gb" items="${groupBuyingList}">         
+   				<c:forEach var="gb" items="${groupBuyingList.pageList}">         
                   <tr style="height:70px;">
                   
                   <td>
@@ -73,6 +73,31 @@
                   </tr>
                   </c:forEach>
                   </tbody>
+                  
+                  <tr>
+							<td style="text-align: left;">
+								<c:if test="${!groupBuyingList.firstPage}">
+									<a href='<c:url value="/shop/groupBuying/listItem2.do">
+		           								<c:param name="pageName" value="previous"/>
+		           								<c:param name="productId" value="${productId}"/>
+	           								</c:url>'>
+										<font color="black"><B>&lt;&lt; Prev</B></font>
+									</a>
+								</c:if>
+							</td><td/><td/>
+							<td/>
+							<td style="text-align: right;">
+								<c:if test="${!groupBuyingList.lastPage}">
+									<a href='<c:url value="/shop/groupBuying/listItem2.do">/>
+	            							 	<c:param name="pageName" value="next"/>
+	            							 	<c:param name="productId" value="${productId}"/>
+	            							 </c:url>'>
+										<font color="black"><B>Next &gt;&gt;</B></font>
+									</a>
+								</c:if>
+							</td>
+					</tr>
+						
                   </table>
                </div>
             </div>
