@@ -22,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.example.usStore.domain.Auction;
 import com.example.usStore.domain.HandMade;
+import com.example.usStore.domain.Item;
 import com.example.usStore.domain.Tag;
 import com.example.usStore.service.facade.ItemFacade;
 
@@ -55,7 +56,7 @@ public class AuctionFormController {
    }
    
    
-   	// 페이지 넘어갈때 실행되는 Controller
+   	// �럹�씠吏� �꽆�뼱媛덈븣 �떎�뻾�릺�뒗 Controller
 	@RequestMapping("shop/auction/listItem2.do")
 	public String auctionList2 (
 			@ModelAttribute("auctionList") PagedListHolder<Auction> auctionList,
@@ -75,6 +76,12 @@ public class AuctionFormController {
    @RequestMapping("/shop/auction/viewItem.do") 
    public String auctionView(@RequestParam("itemId") int itemId, @RequestParam("productId") int productId, ModelMap model) {
 	  System.out.println("<경매 상세 페이지>"); 
+	  
+	  Item item = itemFacade.getItem(itemId);
+	  item.setViewCount(item.getViewCount() + 1);
+	        
+	  itemFacade.updateItem(item);   // update : viewCount++
+	  
 	  myItemId = itemId;
 	  
 	  Auction auction = this.itemFacade.getAuctionById(myItemId);
@@ -93,7 +100,7 @@ public class AuctionFormController {
 	   int price = Integer.parseInt(request.getParameter("price"));
 	   System.out.println("입력 가격 : " + price);
 	   
-	   //파라미터로 받아온 입력 가격(price)을 unitCost 필드에 update 해주기
+	   //�뙆�씪誘명꽣濡� 諛쏆븘�삩 �엯�젰 媛�寃�(price)�쓣 unitCost �븘�뱶�뿉 update �빐二쇨린
 	   
 	   return "redirect:/shop/auction/viewItem.do?itemId=" + myItemId;
    }
@@ -131,7 +138,7 @@ public class AuctionFormController {
 	   return "redirect:/shop/auction/listItem.do?productId=" + myProductId;
    }
    
-   //add Auction 하기 전에  여기를 거쳐서 다시 add Auction url 으로 가야한다.
+   //add Auction �븯湲� �쟾�뿉  �뿬湲곕�� 嫄곗퀜�꽌 �떎�떆 add Auction url �쑝濡� 媛��빞�븳�떎.
    @RequestMapping("/shop/auction/testSchedulerItem.do")
 	public ModelAndView handleRequest(HttpServletRequest request,
 			@RequestParam("keyword")
