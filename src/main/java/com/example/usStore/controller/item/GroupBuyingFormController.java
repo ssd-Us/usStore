@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.support.PagedListHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -16,7 +17,6 @@ import com.example.usStore.domain.Item;
 import com.example.usStore.domain.Tag;
 
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,7 +28,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import com.example.usStore.service.facade.ItemFacade;
 
 @Controller
-@SessionAttributes("GroupBuying")	
+@SessionAttributes({"GroupBuying", "groupBuyingList"})
 public class GroupBuyingFormController {
 	private static final String GoAddItemFORM = "redirect:/shop/item/addItem.do?productId=";
 	private static final String ADD_GroupBuying_FORM = "product/addGroupBuying";
@@ -38,15 +38,6 @@ public class GroupBuyingFormController {
 	@Autowired
 	private ItemFacade itemFacade; 
 	
-	@RequestMapping("/shop/groupBuying/listItem.do") 
-    public String groupBuyingList(@RequestParam("productId") int productId, ModelMap modelMap, Model model) {
-	 List<GroupBuying> groupBuyingList = this.itemFacade.getGroupBuyingList();
-		
-	 model.addAttribute("productId", productId);
-	 modelMap.put("groupBuyingList", groupBuyingList);
-	 return "product/groupBuying";
-   }
-	
 	@ModelAttribute("GroupBuying")		  
 	public GroupBuyingForm formBacking() {  // accessor method 
 		System.out.println("formBacking");
@@ -54,10 +45,38 @@ public class GroupBuyingFormController {
 		return new GroupBuyingForm();
 	}
 	
+	@RequestMapping("/shop/groupBuying/listItem.do") 
+    public String groupBuyingList(@RequestParam("productId") int productId, ModelMap modelMap, Model model) {
+		
+		PagedListHolder<GroupBuying> groupBuyingList = new PagedListHolder<GroupBuying>(this.itemFacade.getGroupBuyingList());
+		groupBuyingList.setPageSize(4);
+		
+		model.addAttribute("productId", productId);
+		modelMap.put("groupBuyingList", groupBuyingList);
+		return "product/groupBuying";
+   }	
+	
+	@RequestMapping("/shop/groupBuying/listItem2.do")
+	public String groupBuyingList2 (
+			@ModelAttribute("groupBuyingList") PagedListHolder<GroupBuying> groupBuyingList,
+			@RequestParam("pageName") String page, @RequestParam("productId") int productId, 
+			ModelMap modelMap, Model model) throws Exception {
+		System.out.println(groupBuyingList);
+		if ("next".equals(page)) {
+			groupBuyingList.nextPage();
+		}
+		else if ("previous".equals(page)) {
+			groupBuyingList.previousPage();
+		}
+		
+		model.addAttribute("productId", productId);
+		modelMap.put("groupBuyingList", groupBuyingList);
+		return "product/groupBuying";
+	}
+	
 	@RequestMapping(value="/shop/groupBuying/addItem2.do", method = RequestMethod.GET)
 	public String step2(@ModelAttribute("GroupBuying") GroupBuyingForm groupBuyingForm, 
 			@RequestParam("productId") int productId, Model model) {
-		
 		System.out.println("groupBuyingForm controller");	//print toString
 		
 		model.addAttribute("productId", productId);
@@ -68,12 +87,15 @@ public class GroupBuyingFormController {
 	public String backToItem(@ModelAttribute("GroupBuying") GroupBuyingForm groupBuyingForm, 
 			@RequestParam("productId") int productId) {
 		System.out.println("go back to item.jsp");
-		return GoAddItemFORM + productId;	// step1(item.jsp) form step2(addGroupBuying.jsp)
+		return "redirect:/shop/item/addItem.do?productId=" + productId;	// step1(item.jsp) form step2(addGroupBuying.jsp)
 	}
 	
-	@GetMapping("/step2")		// step3 -> step2
-	public String addGroupFromCheck() {
-		return ADD_GroupBuying_FORM;	// step2 form view
+	@RequestMapping(value="/shop/groupBuying/gobackAddGb.do", method = RequestMethod.GET)		// step3 -> step2
+	public String backToAddGroupBuying(
+			@ModelAttribute("GroupBuying") GroupBuyingForm groupBuyingForm, 
+			@RequestParam("productId") int productId, Model model){
+		model.addAttribute("productId", productId);
+		return ADD_GroupBuying_FORM;	// check.jsp -> addGroupBuying.jsp
 	}
 	
 	@PostMapping("/shop/groupBuying/step3.do")		// step2 -> step3
