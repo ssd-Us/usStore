@@ -126,7 +126,7 @@ function participation(price, unitCost) {
    		<tr>
    			<th style="border-right: 1px solid black;"><font color=red>마감 날짜</font></th>
    			<td><font color=red>
-   				<fmt:formatDate value="${auction.deadLine}" pattern="yyyy년 MM월 dd일  hh시 mm분 ss초" />
+   				${auction.deadLine}
    			</font></td>
    		</tr>
    		

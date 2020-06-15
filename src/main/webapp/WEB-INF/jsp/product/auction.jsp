@@ -55,7 +55,7 @@
                    <td style="padding-left:140px">시작:<c:out value="${al.startPrice}"/><br>낙찰:<c:out value="${al.bidPrice}"/></td>
                        <td style="padding-left:120px"><c:out value="${al.userId}"/></td>   
                        <td style="padding-left:100px"><c:out value="b"/></td>
-                       <td style="padding-left:80px"><fmt:formatDate value="${al.deadLine}" pattern="yyyy년 MM월 dd일  hh시 mm분 ss초" /></td>
+                       <td style="padding-left:80px"><c:out value="${al.deadLine}"/></td>
                   </tr>
                   </c:forEach>
                   </tbody>
