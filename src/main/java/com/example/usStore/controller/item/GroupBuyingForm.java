@@ -2,14 +2,14 @@ package com.example.usStore.controller.item;
 
 import java.util.Date;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 public class GroupBuyingForm {
 	/* Private Fields */
 	private int itemId;
 	private int discount;	//calculate at controller
 	private int listPrice;
-	private Date deadLine;
+	private String date;
+	private String time;
+	private String deadLine;
 	  
 	  /* JavaBeans Properties */
 	  public int getItemId() {
@@ -36,11 +36,27 @@ public class GroupBuyingForm {
 		  this.listPrice = listPrice;
 	  }
 		
-	  public Date getDeadLine() {
+	  public String getDate() {
+		return date;
+	  }
+
+	  public void setDate(String date) {
+		this.date = date;
+	  }
+
+	  public String getTime() {
+		 return time;
+	  }
+
+	  public void setTime(String time) {
+		this.time = time;
+	  }
+
+	  public String getDeadLine() {
 		  return deadLine;
 	  }
 	  
-	  public void setDeadLine(Date deadLine) {
+	  public void setDeadLine(String deadLine) {
 		  this.deadLine = deadLine;
 	  }
 
@@ -51,3 +67,4 @@ public class GroupBuyingForm {
 	}
 
 }
+

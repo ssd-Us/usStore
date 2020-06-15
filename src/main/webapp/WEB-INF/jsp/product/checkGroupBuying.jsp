@@ -1,9 +1,6 @@
 <%@ include file="itemTop.jsp" %>
-<%@ page import="java.util.Date" %>
 <%@ page import="com.example.usStore.controller.item.ItemForm" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-
-<% Date nowTime = new Date(); %>
 
 <!DOCTYPE html>
 <html>
@@ -11,9 +8,25 @@
 <meta charset="UTF-8">
 <title>Step3</title>
 </head>
+<style>
+	div#addItemForm {
+		position: absolute;
+		left: 18%;
+		border: none;
+		padding: 20px;
+	}
+</style>
+<table id="main-menu">
+  <tr>
+    <td><a href='<c:url value="/shop/index.do"/>'>
+        <b><font color="black" size="2">
+          &lt;&lt; Go to Index</font></b></a>
+    </td>
+  </tr>
+</table>
 <body>
 <h1>공동구매 최종 확인</h1>
-다음 정보로 신청하시겠습니까?<br><br>
+다음 정보로 판매하시겠습니까?<br><br>
 
 <form:form modelAttribute="GroupBuying" action="detailItem.do">
 <label>제목</label>: ${itemForm.title} <br> 
