@@ -138,7 +138,7 @@ public class AuctionFormController {
 	   return "redirect:/shop/auction/listItem.do?productId=" + myProductId;
    }
    
-   //add Auction �븯湲� �쟾�뿉  �뿬湲곕�� 嫄곗퀜�꽌 �떎�떆 add Auction url �쑝濡� 媛��빞�븳�떎.
+
    @RequestMapping("/shop/auction/testSchedulerItem.do")
 	public ModelAndView handleRequest(HttpServletRequest request,
 			@RequestParam("keyword")

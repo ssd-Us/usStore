@@ -7,48 +7,29 @@ import com.example.usStore.domain.Auction;
 import com.example.usStore.domain.Tag;
 
 public class AuctionForm {
-	/*field (���⿡ ���� auction field �� default ������ ����*/
-	private String title;
-	private String description;
-	private List<Tag> tag;
+	/* Private Fields */
+	private int itemId;
 	private int startPrice;
-	private Date deadLine; //�� ��¥ ��� �� ������
+	private String date;
+	private String time;
+	private String deadLine;
 	
-	
-	
-	
-	public AuctionForm(String title, String description, List<Tag> tag, int startPrice, Date deadLine) {
+	public AuctionForm(int itemId, int startPrice, String date, String time, String deadLine) {
 		super();
-		this.title = title;
-		this.description = description;
-		this.tag = tag;
+		this.itemId = itemId;
 		this.startPrice = startPrice;
+		this.date = date;
+		this.time = time;
 		this.deadLine = deadLine;
 	}
 
 	/*getter setter*/
-	public String getTitle() {
-		return title;
+	public int getItemId() {
+		return itemId;
 	}
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public List<Tag> getTag() {
-		return tag;
-	}
-
-	public void setTag(List<Tag> tag) {
-		this.tag = tag;
+	public void setItemId(int itemId) {
+		this.itemId = itemId;
 	}
 		
 	public int getStartPrice() {
@@ -59,23 +40,27 @@ public class AuctionForm {
 		this.startPrice = startPrice;
 	}
 
-	public Date getDeadLine() {
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
+	}
+
+	public String getTime() {
+		return time;
+	}
+
+	public void setTime(String time) {
+		this.time = time;
+	}
+	
+	public String getDeadLine() {
 		return deadLine;
 	}
 
-	public void setDeadLine(Date deadLine) {
+	public void setDeadLine(String deadLine) {
 		this.deadLine = deadLine;
-	}
-	
-	
-	
-	
-	
-
-	/*Constructor*/
-	public AuctionForm(Auction auction) {
-		title = auction.getTitle();
-		description = auction.getDescription();
-		//tag = auction.getTag(); //tag ��� �� �� �� ���ؾ� �� ��
 	}
 }

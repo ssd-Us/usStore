@@ -234,12 +234,11 @@ public class ItemImpl implements ItemFacade {
 	public void testScheduler(Date deadLine) {
 		Runnable updateTableRunner = new Runnable() {	
 			@Override
-			public void run() {   // �뒪耳�伊대윭�뿉 �쓽�빐 誘몃옒�쓽 �듅�젙 �떆�젏�뿉 �떎�뻾�맆 �옉�뾽�쓣 �젙�쓽	(auctionState 0->1 �닔�젙)			
-			//寃쎈ℓ瑜� �닔�젙�븳�떎. 寃쎈ℓ �긽�깭瑜� 0 �뿉�꽌 1濡� 諛붽씔�떎.
+			public void run() {  	
+				Date curTime = new Date();
+				auctionDao.closeAuction(curTime);
 			}
 		};
-
-		// �뒪耳�以� �깮�꽦: 留덇컧�떆媛꾩씠 �릺硫� updateTableRunner.run() 硫붿냼�뱶 �떎�뻾
 		scheduler.schedule(updateTableRunner, deadLine);  
 		
 		System.out.println("updateTableRunner has been scheduled to execute at " + deadLine);
