@@ -16,18 +16,18 @@ public interface ItemDao {
 	void updateItem(Item item);
 	
 	// getItem
-	void getItem(int itemId, int productId);
+	Item getItem(int itemId);
 	
-	// 아이템 삭제 메소드
+	// �븘�씠�뀥 �궘�젣 硫붿냼�뱶
 	public void deleteItem(int itemId) throws DataAccessException;
 	
-	// 구매 개수 수정
+	// 援щℓ 媛쒖닔 �닔�젙
 	void updateQuantity(int qty, int itemId, int productId) throws DataAccessException;
 	
-	// 구매 개수 받아오기
+	// 援щℓ 媛쒖닔 諛쏆븘�삤湲�
 	int getQuantity(int itemId, int productId) throws DataAccessException;
 
-	// 아이템 아이디로 해당 수공예품의 재고가 있는지 확인하는 메소드
+	// �븘�씠�뀥 �븘�씠�뵒濡� �빐�떦 �닔怨듭삁�뭹�쓽 �옱怨좉� �엳�뒗吏� �솗�씤�븯�뒗 硫붿냼�뱶
 	boolean isItemInStock(int itemId, int productId) throws DataAccessException;
 
 }

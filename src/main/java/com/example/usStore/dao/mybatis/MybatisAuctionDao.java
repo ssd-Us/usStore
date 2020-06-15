@@ -87,9 +87,8 @@ public class MybatisAuctionDao implements AuctionDao {
    }
 
    @Override
-   public void getItem(int itemId, int productId) {
-      // TODO Auto-generated method stub
-      auctionMapper.getItem(itemId, productId);
+   public Item getItem(int itemId) {
+      return auctionMapper.getItem(itemId);
    }
 
 }

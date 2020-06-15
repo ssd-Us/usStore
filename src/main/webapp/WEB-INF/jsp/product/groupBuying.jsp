@@ -17,7 +17,15 @@
 			}
 </style>
 </head>
-<body>	  
+<body>	 
+<table id="main-menu">
+  <tr>
+    <td><a href='<c:url value="/shop/index.do"/>'>
+        <b><font color="black" size="2">
+          &lt;&lt; Go to Index</font></b></a>
+    </td>
+  </tr>
+</table> 
    <form name = "pform" action="" style="position:absolute; left:45%; margin:0 0 0 -420px;">
       <div class="container" >
          <div class="row"  style="display:inline">
@@ -50,9 +58,9 @@
                   
                   <td>
                                 <a href="<c:url value='/shop/groupBuying/viewItem.do'>
-                                	<c:param name="productId" value="${gb.productId}"/>
-                                    <c:param name="itemId" value="${gb.itemId}"/>
-                                         </c:url>">
+		                               		<c:param name="itemId" value="${gb.itemId}"/>
+		                                	<c:param name="productId" value="${gb.productId}"/>
+                                    	</c:url>">
                                       <font>${gb.title}</font>
                                 </a>
                 

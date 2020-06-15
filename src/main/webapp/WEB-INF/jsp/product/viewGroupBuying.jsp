@@ -47,11 +47,11 @@
 	<table style="margin-left: auto; margin-right: auto;">
 	<tr>
 		<td style="text-align: left; padding: 0px; font-size: small; border-bottom: none;">
-		2,000<font color=gray>view</font>
+		${gb.viewCount}<font color=gray>view</font>
 		</td>
 		<td style="text-align: right; padding: 0px; font-size: small; border-bottom: none;">
 		<a href="
-							<c:url value='/addBookmark/${gb.suppId}/${gb.itemId}'/>	<!-- 로그인 여부 따지기 -->
+							<c:url value='/addBookmark/${gb.userId}/${gb.itemId}'/>	<!-- 로그인 여부 따지기 -->
 					">[북마크 추가]</a>
 		</td>
 	
@@ -63,29 +63,28 @@
    		
    		<tr>
    			<th style="border-right: 1px solid black;">판매자</th>
-   			<td>${sh.userId}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   			<td>${gb.userId}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	   			<span>
 		   			<a href="
-							<c:url value='/addFollow/${gb.suppId}'/>	<!-- 로그인 여부 따지기 -->
+							<c:url value='/addFollow/${gb.userId}'/>	<!-- 로그인 여부 따지기 -->
 					">팔로잉</a>
 				</span>
 				&nbsp;
 				<%@ include file="/WEB-INF/jsp/account/accuseFunction.jsp" %>
    			</td>
-   		</tr> <!-- userId = suppId -->
+   		</tr>
    		
    		<tr><td colspan="2" style="padding: 15px;">${gb.description}<br></td></tr>
    		
    		<tr>
    			<th style="border-right: 1px solid black;"><font color=blue>#</font>관련태그</th>
    			<td>
-   			<a href="
-					<c:url value='/searchTag/${gb.itemId}'/>	<!-- tag검색 결과 페이지로 이동 -->
-				">#과잠</a>&nbsp;
-				
-			<a href="
-					<c:url value='/searchTag/${gb.itemId}'/>	<!-- tag검색 결과 페이지로 이동 -->
-				">#단체복</a>&nbsp;
+   			<c:forEach var="tag" items="${tags}">        
+	   			<a href="
+						<c:url value='/searchTag/${gb.itemId}'/>	<!-- tag검색 결과 페이지로 이동 -->
+					">#${tag.tagName}
+				</a>&nbsp;
+			</c:forEach>
    			</td>
    		</tr>
    		
@@ -132,7 +131,7 @@
    			</td>
    		</tr>
    		
-   		<c:if test="${sh.suppId==session.userId}"> <!-- 로그인시 실행 -->
+   		<c:if test="${gb.userId==session.userId}"> <!-- 로그인시 실행 -->
    		<tr>
    		<td colspan="2" style="text-align: right; padding: 0px; font-size: small; border-bottom: none; border-top: 1px solid black;">
 		   <a href="<c:url value='/editItem/${productId}'/>">[게시물 수정하기]</a>

@@ -93,9 +93,8 @@ public class MybatisGroupBuyingDao implements GroupBuyingDao {
 	}
 
 	@Override
-	public void getItem(int itemId, int productId) {
-		// TODO Auto-generated method stub
-		groupBuyingMapper.getItem(itemId, productId);
+	public Item getItem(int itemId) {
+		return groupBuyingMapper.getItem(itemId);
 	}
 
 }

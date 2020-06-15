@@ -87,9 +87,8 @@ public class MybatisHandMadeDao implements HandMadeDao {
 	}
 
 	@Override
-	public void getItem(int itemId, int productId) {
-		// TODO Auto-generated method stub
-		handMadeMapper.getItem(itemId, productId);
+	public Item getItem(int itemId) {
+		return handMadeMapper.getItem(itemId);
 	}
 
 	@Override
