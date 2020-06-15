@@ -10,10 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.support.PagedListHolder;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
@@ -26,6 +28,8 @@ import com.example.usStore.service.facade.ItemFacade;
 @Controller
 @SessionAttributes({"auctionForm", "auctionList"})
 public class AuctionFormController {
+   private static final String ADD_Auction_FORM = "product/addAuction";
+   
    @Autowired
    private ItemFacade itemFacade;
    
@@ -95,11 +99,23 @@ public class AuctionFormController {
    }
    
 
-   @RequestMapping("/shop/auction/addItem.do")
-   public String goItem(@RequestParam("productId") int productId) {
-      return "redirect:/shop/item/addItem.do?productId=" + productId;
-   }
+	/*
+	 * @RequestMapping("/shop/auction/addItem.do") public String
+	 * goItem(@RequestParam("productId") int productId) { return
+	 * "redirect:/shop/item/addItem.do?productId=" + productId; }
+	 */
    
+   @RequestMapping(value="/shop/auction/addItem.do", method = RequestMethod.GET)
+   public String step2(
+         @ModelAttribute("Auction") AuctionForm auctionForm, 
+         @RequestParam("productId") int productId, Model model) {
+      
+      System.out.println("AuctionForm controller");   //print toString
+      
+      model.addAttribute("productId", productId);
+      return ADD_Auction_FORM;   // addGroupBuying.jsp
+   }
+ 
    
    @RequestMapping("/shop/auction/updateItem.do") 
    public String auctionUpdate(@RequestParam("productId") int productId, ModelMap model) {

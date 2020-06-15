@@ -9,8 +9,8 @@
 <title>경매 입력 폼</title>
 </head>
 <body>
-	<spring:hasBindErrors name="item" />
-	<form:form modelAttribute="auction" method="post" action="step3/${item.productId}">
+	<spring:hasBindErrors name="Auction" />
+	<form:form modelAttribute="Auction" method="post" action="step3/${productId}">
 	
 	시작 가격: <form:input type="text" path="startPrice" value="${startPrice}"/>
 	<form:errors path="startPrice"/> <br>

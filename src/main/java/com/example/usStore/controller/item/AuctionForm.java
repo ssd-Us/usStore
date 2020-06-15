@@ -7,16 +7,25 @@ import com.example.usStore.domain.Auction;
 import com.example.usStore.domain.Tag;
 
 public class AuctionForm {
-	/*field (¿©±â¿¡ ¾ø´Â auction field ´Â default °ªÀ¸·Î ÀúÀå*/
+	/*field (ï¿½ï¿½ï¿½â¿¡ ï¿½ï¿½ï¿½ï¿½ auction field ï¿½ï¿½ default ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½*/
 	private String title;
 	private String description;
 	private List<Tag> tag;
 	private int startPrice;
-	private Date deadLine; //ÀÌ ³¯Â¥ ¾î¶»°Ô ÇÒ °ÍÀÎÁö
+	private Date deadLine; //ï¿½ï¿½ ï¿½ï¿½Â¥ ï¿½î¶»ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	
 	
 	
 	
+	public AuctionForm(String title, String description, List<Tag> tag, int startPrice, Date deadLine) {
+		super();
+		this.title = title;
+		this.description = description;
+		this.tag = tag;
+		this.startPrice = startPrice;
+		this.deadLine = deadLine;
+	}
+
 	/*getter setter*/
 	public String getTitle() {
 		return title;
@@ -67,6 +76,6 @@ public class AuctionForm {
 	public AuctionForm(Auction auction) {
 		title = auction.getTitle();
 		description = auction.getDescription();
-		//tag = auction.getTag(); //tag ¾î¶»°Ô ÇÒ Áö Á» Á¤ÇØ¾ß ÇÒ µí
+		//tag = auction.getTag(); //tag ï¿½î¶»ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½Ø¾ï¿½ ï¿½ï¿½ ï¿½ï¿½
 	}
 }
