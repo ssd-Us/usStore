@@ -102,7 +102,7 @@ public class AuctionFormController {
 	   
 	   //�뙆�씪誘명꽣濡� 諛쏆븘�삩 �엯�젰 媛�寃�(price)�쓣 unitCost �븘�뱶�뿉 update �빐二쇨린
 	   
-	   return "redirect:/shop/auction/viewItem.do?itemId=" + myItemId;
+	   return "redirect:/shop/auction/viewItem.do?itemId=" + myItemId + "&productId=" + myProductId;
    }
    
 

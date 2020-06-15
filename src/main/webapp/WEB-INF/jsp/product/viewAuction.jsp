@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>ê²½ë§¤ ìì¸íì´ì§</title>
+<title>경매 상세 페이지</title>
 </head>
 <style type="text/css"> 
 	a { text-decoration:none } 
