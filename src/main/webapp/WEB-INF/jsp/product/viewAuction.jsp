@@ -72,7 +72,7 @@ function participation(price, unitCost) {
 		<td style="text-align: right; padding: 0px; font-size: small; border-bottom: none;">
 		<a href="
 							<c:url value='/addBookmark/${auction.userId}/${auction.itemId}'/>	<!-- 로그인 여부 따지기 -->
-					">[북마크 추가]</a>
+					">[북마크 추가]</a>
 		</td>
 	
 	</tr>
