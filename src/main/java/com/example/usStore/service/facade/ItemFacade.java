@@ -28,7 +28,7 @@ public interface ItemFacade {
 	
 	void updateItem(Item item);
 	
-	void getItem(int itemId, int productId);
+	Item getItem(int itemId);
 	
 	public void deleteItem(int itemId);
 	
