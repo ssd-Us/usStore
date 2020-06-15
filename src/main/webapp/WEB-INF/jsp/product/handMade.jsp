@@ -23,7 +23,7 @@
 				<div style="font-size: 15px">
 					<h2>HandMade List</h2>
 					<p style="text-align: right;">
-						<a href="<c:url value='/shop/handMade/addItem.do'>
+						<a href="<c:url value='/shop/item/addItem.do'>
 		               		<c:param name="productId" value="${productId}"/></c:url>">
 		               		수공예  판매하기 </a>
 					</p>

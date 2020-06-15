@@ -3,6 +3,8 @@ package com.example.usStore.domain;
 import java.io.Serializable;
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 /*
  * UsStore - Item(GroupBuying) Domain Class
  * */
