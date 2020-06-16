@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.dao.DataAccessException;
 
+import com.example.usStore.domain.Account;
 import com.example.usStore.domain.Auction;
 import com.example.usStore.domain.Bidder;
 import com.example.usStore.domain.GroupBuying;
@@ -53,8 +54,6 @@ public interface ItemFacade {
 	HandMade getHandMadeById(int itemId);
 	
 	List<HandMade> getHandMadeListByProductId(int productId);
-	
-	public void deleteHandMade(int itemId);
 	
 	/////////////////////////////////////////////////////////////////////////
 	/* GroupBuying */

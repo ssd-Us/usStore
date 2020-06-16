@@ -9,40 +9,36 @@ import com.example.usStore.dao.AccountDao;
 import com.example.usStore.dao.mybatis.mapper.AccountMapper;
 import com.example.usStore.domain.Account;
 
-/**
- * @author Juergen Hoeller
- * @author Colin Sampaleanu
- */
 @Repository
 public class MybatisAccountDao implements AccountDao {
 
 	@Autowired
 	private AccountMapper accountMapper;
 	
+	public Account getAccountByUserId(String username) throws DataAccessException {
+		return accountMapper.getAccountByUserId(username);
+	}
+	
+	@Override
 	public Account getAccountByUsername(String username) throws DataAccessException {
+		// TODO Auto-generated method stub
 		return accountMapper.getAccountByUsername(username);
 	}
 
-	public Account getAccountByUsernameAndPassword(String username, String password) 
+	public Account getAccountByUserIdAndPassword(String userId, String password) 
 			throws DataAccessException {
-		return accountMapper.getAccountByUsernameAndPassword(username, password);
+		return accountMapper.getAccountByUserIdAndPassword(userId, password);
 	}
 
 	public void insertAccount(Account account) throws DataAccessException {
 		accountMapper.insertAccount(account);
-//		accountMapper.insertProfile(account);
-//		accountMapper.insertSignon(account);
 	}
 
 	public void updateAccount(Account account) throws DataAccessException {
 		accountMapper.updateAccount(account);
-//		accountMapper.updateProfile(account);
 		if (account.getPassword() != null && account.getPassword().length() > 0) 
 		{
-//			accountMapper.updateSignon(account);
 			accountMapper.updateAccount(account);
 		}
 	}
-	
-	
 }

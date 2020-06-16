@@ -14,15 +14,15 @@ public interface UsStoreFacade {
 	/////////////////////////////////////////////////////////////////////////
 	/* Account */
 	/////////////////////////////////////////////////////////////////////////
-	Account getAccountByUsername(String username);
+	Account getAccountByUserId(String userId);
 
-	Account getAccountByUsernameAndPassword(String username, String password);
-	
-	String getStatus(String userId);
+	Account getAccountByUserIdAndPassword(String userId, String password);
 
 	void insertAccount(Account account);
 
 	void updateAccount(Account account);
+	
+	Account getAccountByUsername(String username);
 
 	/////////////////////////////////////////////////////////////////////////
 	/* Category */

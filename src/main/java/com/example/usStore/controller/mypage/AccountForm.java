@@ -11,6 +11,7 @@ import com.example.usStore.domain.Account;
 @SuppressWarnings("serial")
 public class AccountForm implements Serializable {
 
+
 	private Account account;
 
 	private boolean newAccount;
