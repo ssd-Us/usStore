@@ -38,15 +38,9 @@ public class UsStoreImpl implements UsStoreFacade {
 	}
 
 	@Override
-	public Account getAccountByUsername(String userName) {
+	public Account getAccountByUsername(String username) {
 		// TODO Auto-generated method stub
-		return accountDao.getAccountByUsername(userName);
-	}
-
-	@Override
-	public String getStatus(String userId) {
-		// TODO Auto-generated method stub
-		return null;
+		return accountDao.getAccountByUsername(username);
 	}
 
 	@Override

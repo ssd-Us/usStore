@@ -17,14 +17,12 @@ public interface UsStoreFacade {
 	Account getAccountByUserId(String userId);
 
 	Account getAccountByUserIdAndPassword(String userId, String password);
-	
-	String getStatus(String userId);
 
 	void insertAccount(Account account);
 
 	void updateAccount(Account account);
 	
-	Account getAccountByUsername(String userName);
+	Account getAccountByUsername(String username);
 
 	/////////////////////////////////////////////////////////////////////////
 	/* Category */

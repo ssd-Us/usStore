@@ -1,11 +1,9 @@
 package com.example.usStore.controller.mypage;
 
-import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.beans.support.PagedListHolder;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -15,8 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.util.WebUtils;
 
 import com.example.usStore.domain.Account;
-import com.example.usStore.domain.Category;
-import com.example.usStore.domain.Product;
 import com.example.usStore.service.AccountFormValidator;
 import com.example.usStore.service.facade.UsStoreFacade;
 
@@ -30,12 +26,11 @@ import com.example.usStore.service.facade.UsStoreFacade;
 @RequestMapping({"/shop/newAccount.do","/shop/editAccount.do"})
 public class AccountFormController { 
 
-	@Value("EditAccountForm")
+	@Value("account/EditAccountForm")
 	private String formViewName;
 	
 	@Value("index")
 	private String successViewName;
-	private static final String[] LANGUAGES = {"english", "japanese"};
 	
 	@Autowired
 	private UsStoreFacade usStore;
@@ -63,16 +58,6 @@ public class AccountFormController {
 		}
 	}
 
-	@ModelAttribute("languages")
-	public String[] getLanguages() {
-		return LANGUAGES;
-	}
-
-	@ModelAttribute("categories")
-	public List<Category> getCategoryList() {
-		return usStore.getCategoryList();
-	}
-	
 	@RequestMapping(method = RequestMethod.GET)
 	public String showForm() {
 		return formViewName;

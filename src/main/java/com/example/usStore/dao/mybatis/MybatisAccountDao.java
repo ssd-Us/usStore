@@ -20,9 +20,9 @@ public class MybatisAccountDao implements AccountDao {
 	}
 	
 	@Override
-	public Account getAccountByUsername(String userName) throws DataAccessException {
+	public Account getAccountByUsername(String username) throws DataAccessException {
 		// TODO Auto-generated method stub
-		return accountMapper.getAccountByUsername(userName);
+		return accountMapper.getAccountByUsername(username);
 	}
 
 	public Account getAccountByUserIdAndPassword(String userId, String password) 

@@ -7,7 +7,7 @@ public interface AccountMapper {
 	Account getAccountByUserId(String userId);
 	
 	// username으로 Account 가져오기
-	Account getAccountByUsername(String userName);
+	Account getAccountByUsername(String username);
 	
 	// userId랑 password로 Account 가져오기
 	Account getAccountByUserIdAndPassword(String userId, String password);

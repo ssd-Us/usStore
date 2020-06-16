@@ -10,7 +10,7 @@ public interface AccountDao {
 	Account getAccountByUserId(String userId) throws DataAccessException;
 	
 	// username으로 Account 가져오기
-	Account getAccountByUsername(String userName) throws DataAccessException;
+	Account getAccountByUsername(String username) throws DataAccessException;
 	
 	// userId랑 password로 Account 가져오기
 	Account getAccountByUserIdAndPassword(String userId, String password) throws DataAccessException;

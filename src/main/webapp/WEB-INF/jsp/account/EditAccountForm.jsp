@@ -12,14 +12,14 @@
         <h3><font color="darkgreen">User Information</font></h3>
         <table class="n13">
           <tr>
-            <td>User ID:</td>
+            <td>ID:</td>
             <td>
             <c:if test="${accountForm.newAccount}">
-              <form:input path="account.username" />
-              <B><form:errors path="account.username" cssClass="error" /></B>
+              <form:input path="account.userId" />
+              <B><form:errors path="account.userId" cssClass="error" /></B>
             </c:if> 
             <c:if test="${!accountForm.newAccount}">
-              <c:out value="${accountForm.account.username}" />
+              <c:out value="${accountForm.account.userId}" />
             </c:if>
             </td>
           </tr>

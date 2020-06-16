@@ -5,14 +5,9 @@
 
 <table class="n13">
   <tr>
-    <td>First name:</td>
-    <td><form:input path="account.firstName" />
-      <form:errors path="account.firstName" cssClass="error" /></td>
-  </tr>
-  <tr>
-    <td>Last name:</td>
-    <td><form:input path="account.lastName" /> 
-      <form:errors path="account.lastName" cssClass="error" /></td>
+    <td>Name:</td>
+    <td><form:input path="account.username" />
+      <form:errors path="account.username" cssClass="error" /></td>
   </tr>
   <tr>
     <td>Email:</td>
@@ -23,6 +18,11 @@
     <td>Phone:</td>
     <td><form:input path="account.phone" /> 
       <form:errors path="account.phone" cssClass="error" /></td>
+  </tr>
+  <tr>
+    <td>University:</td>
+    <td><form:input path="account.university" />
+      <form:errors path="account.university" cssClass="error" /></td>
   </tr>
   <tr>
     <td>Address 1:</td>
@@ -38,11 +38,6 @@
     <td>City:</td>
     <td><form:input path="account.city" /> 
       <form:errors path="account.city" cssClass="error" /></td>
-  </tr>
-  <tr>
-    <td>State:</td>
-    <td><form:input path="account.state" /> 
-      <form:errors path="account.state" cssClass="error" /></td>
   </tr>
   <tr>
     <td>Zip:</td>
