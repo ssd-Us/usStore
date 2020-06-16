@@ -238,6 +238,16 @@ public class ItemImpl implements ItemFacade {
 			public void run() {  	
 				Date curTime = new Date();
 				auctionDao.closeAuction(curTime);
+				
+				List<Auction> auctionList = auctionDao.getAuctionList();
+				for(int i = 0; i < auctionList.size(); i++) {
+					if (auctionList.get(i).getAuctionState() == 1) {
+						int unitCost = auctionList.get(i).getUnitCost();
+						int itemId = auctionList.get(i).getItemId();
+						
+						auctionDao.updateBidPrice(unitCost, itemId);
+					}
+				}
 			}
 		};
 		scheduler.schedule(updateTableRunner, deadLine);  
@@ -261,6 +271,9 @@ public class ItemImpl implements ItemFacade {
 		return auctionDao.isBidderExist(itemId);
 	}
 	
+	public void updateBidPrice(int unitCost, int itemId) {
+		auctionDao.updateBidPrice(unitCost, itemId);
+	}
 	
 	@Override
 	public List<Tag> getTagList() {

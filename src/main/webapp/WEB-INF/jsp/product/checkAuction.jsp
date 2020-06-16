@@ -1,10 +1,6 @@
 <%@ include file="itemTop.jsp"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<<<<<<< HEAD
-<%-- <% request.setCharacterEncoding("UTF-8"); %>
-=======
 <% request.setCharacterEncoding("UTF-8"); %>
->>>>>>> branch 'test' of https://github.com/ssd-Us/usStore.git
 
 <!DOCTYPE html>
 <html>
@@ -20,7 +16,7 @@
 <meta charset="UTF-8">
 <title>경매 추가 확인 페이지</title>
 </head>
-<body> --%>
+<body> 
 <table id="main-menu">
   <tr>
     <td><a href='<c:url value="/shop/index.do"/>'>

@@ -1,5 +1,6 @@
 package com.example.usStore.controller.item;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -200,7 +201,7 @@ public class AuctionFormController {
 	@PostMapping("/shop/auction/detailItem.do")		// step3 -> done
 	public String done(@ModelAttribute("Auction") AuctionForm auctionForm,
 			ItemForm itemformSession, BindingResult result, Model model, HttpServletRequest rq, 
-			SessionStatus sessionStatus, Auction auction, ModelMap modelMap) {
+			SessionStatus sessionStatus, Auction auction, ModelMap modelMap) throws ParseException {
 		System.out.println("detailItem.do");
 		
 		HttpSession session = rq.getSession(false);
@@ -245,6 +246,12 @@ public class AuctionFormController {
 		
 		sessionStatus.setComplete();	// Auction session close
 		session.removeAttribute("itemForm");	//itemForm session close
+		
+		SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss"); 
+		Date date = dt.parse(auctionForm.getDeadLine()); 
+		
+		itemFacade.testScheduler(date);
+		
 		return "redirect:/shop/auction/viewItem.do?itemId=" + auction.getItemId() + "&productId=" + item.getProductId();
 	}
 	
