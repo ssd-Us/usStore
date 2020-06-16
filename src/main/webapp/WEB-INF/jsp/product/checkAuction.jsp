@@ -20,11 +20,7 @@
 <meta charset="UTF-8">
 <title>경매 추가 확인 페이지</title>
 </head>
-<<<<<<< HEAD
 <body> --%>
-=======
-<body>
->>>>>>> branch 'test' of https://github.com/ssd-Us/usStore.git
 <table id="main-menu">
   <tr>
     <td><a href='<c:url value="/shop/index.do"/>'>
