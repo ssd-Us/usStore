@@ -86,8 +86,8 @@ public class AccountFormController {
 			return formViewName; 
 		}
 		
-		UserSession userSession = new UserSession(new Account());
-		usStore.getAccountByUserId(accountForm.getAccount().getUserId());
+		UserSession userSession = new UserSession(accountForm.getAccount());
+//		usStore.getAccountByUserId(accountForm.getAccount().getUserId());
 		session.setAttribute("userSession", userSession);
 		return successViewName;  
 	}
