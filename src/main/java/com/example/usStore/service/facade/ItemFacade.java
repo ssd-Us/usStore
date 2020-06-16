@@ -1,11 +1,14 @@
 package com.example.usStore.service.facade;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.dao.DataAccessException;
 
+import com.example.usStore.domain.Account;
 import com.example.usStore.domain.Auction;
+import com.example.usStore.domain.Bidder;
 import com.example.usStore.domain.GroupBuying;
 import com.example.usStore.domain.HandMade;
 import com.example.usStore.domain.Item;
@@ -27,9 +30,9 @@ public interface ItemFacade {
 	
 	void updateItem(Item item);
 	
-	void getItem(int itemId, int productId);
+	Item getItem(int itemId);
 	
-	public void deleteItem(int itemId, int productId);
+	public void deleteItem(int itemId);
 	
 	void updateQuantity(int qty, int itemId, int productId);
 	
@@ -90,6 +93,18 @@ public interface ItemFacade {
 	public void updateAuction(Auction auction);
 
 	public Auction getAuctionById(int itemId);
+	
+	public void testScheduler(Date deadLine);
+	
+	public void updateAuctionUnitCost(int unitCost, int itemId);
+	
+	public void updateBidder(String bidder, int itemId);
+	
+	public void insertBidder(Bidder bidder);
+	
+	public String isBidderExist(int itemId);
+	
+	public void updateBidPrice(int unitCost, int itemId);
 	
 	/////////////////////////////////////////////////////////////////////////
 	/* Tag */

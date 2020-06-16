@@ -1,9 +1,12 @@
 package com.example.usStore.service.impl;
 
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,6 +18,7 @@ import com.example.usStore.dao.ItemDao;
 import com.example.usStore.dao.SecondHandDao;
 import com.example.usStore.dao.TagDao;
 import com.example.usStore.domain.Auction;
+import com.example.usStore.domain.Bidder;
 import com.example.usStore.domain.GroupBuying;
 import com.example.usStore.domain.HandMade;
 import com.example.usStore.domain.Item;
@@ -44,7 +48,8 @@ public class ItemImpl implements ItemFacade {
 	private AuctionDao auctionDao;
 	@Autowired
 	private TagDao tagDao;
-	
+	@Autowired		// applicationContext.xml�뿉 �젙�쓽�맂 scheduler 媛앹껜瑜� 二쇱엯 諛쏆쓬
+	private ThreadPoolTaskScheduler scheduler;
 	
 	@Override
 	public void updateQuantity(int qty, int itemId, int productId) {
@@ -86,27 +91,12 @@ public class ItemImpl implements ItemFacade {
 	}
 	
 	@Override
-	public void deleteItem(int itemId, int productId) {
+	public void deleteItem(int itemId) {
 		// TODO Auto-generated method stub
-		switch(productId) {
-		case 0:
-			groupBuyingDao.deleteItem(itemId, productId);
-			break;
-		case 1:
-			auctionDao.deleteItem(itemId, productId);
-			break;
-		case 2:
-			secondHandDao.deleteItem(itemId, productId);
-			break;
-		case 3:
-			handMadeDao.deleteItem(itemId, productId);
-			break;
-		default:
-			System.err.println("deleteItem Error !!");
-		}
+		itemDao.deleteItem(itemId);
 	}
 	
-	// �씠嫄� 怨좎쿂�빞�릪
+	// 占쎌뵠椰꾬옙 �⑥쥙荑귨옙鍮욑옙由�
 	@Override
 	public boolean isItemInStock(int itemId, int productId) {
 		// TODO Auto-generated method stub
@@ -241,6 +231,50 @@ public class ItemImpl implements ItemFacade {
 		return auctionDao.getAuctionById(itemId);
 	}
 
+	
+	public void testScheduler(Date deadLine) {
+		Runnable updateTableRunner = new Runnable() {	
+			@Override
+			public void run() {  	
+				Date curTime = new Date();
+				auctionDao.closeAuction(curTime);
+				
+				List<Auction> auctionList = auctionDao.getAuctionList();
+				for(int i = 0; i < auctionList.size(); i++) {
+					if (auctionList.get(i).getAuctionState() == 1) {
+						int unitCost = auctionList.get(i).getUnitCost();
+						int itemId = auctionList.get(i).getItemId();
+						
+						auctionDao.updateBidPrice(unitCost, itemId);
+					}
+				}
+			}
+		};
+		scheduler.schedule(updateTableRunner, deadLine);  
+		
+		System.out.println("updateTableRunner has been scheduled to execute at " + deadLine);
+	}
+	
+	public void updateAuctionUnitCost(int unitCost, int itemId) {
+		auctionDao.updateAuctionUnitCost(unitCost, itemId);
+	}
+	
+	public void updateBidder(String bidder, int itemId) {
+		auctionDao.updateBidder(bidder, itemId);
+	}
+	
+	public void insertBidder(Bidder bidder) {
+		auctionDao.insertBidder(bidder);
+	}
+	
+	public String isBidderExist(int itemId) {
+		return auctionDao.isBidderExist(itemId);
+	}
+	
+	public void updateBidPrice(int unitCost, int itemId) {
+		auctionDao.updateBidPrice(unitCost, itemId);
+	}
+	
 	@Override
 	public List<Tag> getTagList() {
 		// TODO Auto-generated method stub
@@ -296,9 +330,8 @@ public class ItemImpl implements ItemFacade {
 	}
 
 	@Override
-	public void getItem(int itemId, int productId) {
+	public Item getItem(int itemId) {
 		// TODO Auto-generated method stub
-		itemDao.getItem(itemId, productId);
+		return itemDao.getItem(itemId);
 	}
-
 }

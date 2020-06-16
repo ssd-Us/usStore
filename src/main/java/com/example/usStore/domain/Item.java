@@ -1,6 +1,8 @@
 package com.example.usStore.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /*
  * Item Domain Class
@@ -14,23 +16,20 @@ public class Item implements Serializable {
 	private String description;
 	private int viewCount;
 	private int qty;
+//	private List<Tag> tags = new ArrayList<Tag>();
 	private String userId; // (FK)
 	private int productId; // (FK)
 
 	public Item() {}
 	
-	public Item(int unitCost, String title, String description, int viewCount, int qty, String userId,
-			int productId) {
+	public Item(int unitCost, String title, String description, int qty, String userId,	int productId) {
 		this.unitCost = unitCost;
 		this.title = title;
 		this.description = description;
-		this.viewCount = viewCount;
 		this.qty = qty;
 		this.userId = userId;
 		this.productId = productId;
 	}
-
-
 
 	/* JavaBeans Properties */
 	public int getItemId() {
@@ -96,11 +95,22 @@ public class Item implements Serializable {
 	public void setProductId(int productId) {
 		this.productId = productId;
 	}
-
+//
+//	public List<Tag> getTags() {
+//		return tags;
+//	}
+//
+//	public void setTags(List<Tag> tags) {
+//		this.tags = tags;
+//	}
+	
 	@Override
 	public String toString() {
 		return "Item [itemId=" + itemId + ", unitCost=" + unitCost + ", title=" + title + ", description=" + description
-				+ ", viewCount=" + viewCount + ", qty=" + qty + ", userId=" + userId + ", productId=" + productId + "]";
+				+ ", viewCount=" + viewCount + ", qty=" + qty + ", userId=" + userId + ", productId="
+				+ productId + "]";
 	}
+
+	
 
 }

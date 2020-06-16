@@ -15,84 +15,92 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.usStore.domain.Item;
-import com.example.usStore.domain.Tag;
 import com.example.usStore.service.facade.ItemFacade;
 
 @Controller
 public class ItemFormController {
-	private String formViewName = "Product/item";
+	private String formViewName = "product/item";
 	
 	@Autowired
 	private ItemFacade itemFacade;
 	
-	@ModelAttribute("ItemForm")		  //"itemForm"객체의 이름 지정
-	public ItemForm formBacking(HttpServletRequest request, @RequestParam("productId") int productId) {  // accessor method 
-		ItemForm itemForm = new ItemForm(); //itemForm객체 생성
-		
-//		Tag tag = new Tag();
-//		tag.setCity(autoDetectTag(request.getRemoteAddr()));	//address - city 필드 초기화
-		
-		itemForm.setProductId(autoDetectPid(request.getRemoteAddr(), productId));	//productId필드 초기화
-		
-		return itemForm; //세션에 "itemForm"이름으로 저장됨
+	@ModelAttribute("item")		  
+	public ItemForm formBacking(HttpServletRequest rq, @RequestParam("productId") int productId) {  // accessor method 
+		System.out.println("item controller formBacking");
+		HttpSession session = rq.getSession(false);
+		ItemForm itemForm;
+		if((ItemForm) session.getAttribute("itemForm") != null) {
+			System.out.println("session alive");
+			ItemForm itemFormSession = (ItemForm) session.getAttribute("itemForm");
+			System.out.println(itemFormSession);
+			itemForm = new ItemForm();
+			itemForm.setUnitCost(itemFormSession.getUnitCost());
+			itemForm.setTitle(itemFormSession.getTitle());
+			itemForm.setDescription(itemFormSession.getDescription());
+			itemForm.setQty(itemFormSession.getQty());
+			itemForm.setTag1(itemFormSession.getTag1());
+			itemForm.setTag2(itemFormSession.getTag2());
+			itemForm.setTag3(itemFormSession.getTag3());
+			itemForm.setTag4(itemFormSession.getTag4());
+			itemForm.setTag5(itemFormSession.getTag5());
+			
+			System.out.println("itemForm setting: " + itemForm);
+			return itemForm;
+		}
+		else {
+			System.out.println("session null");
+			itemForm = new ItemForm();
+			itemForm.setProductId(autoDetectPid(rq.getRemoteAddr(), productId));	// itemForm.productId initializable
+			return itemForm;
+		}
 	}
-
-//	private int autoDetectTag(String remoteAddr) {	//초기화 값
-//		return productId;
-//	}
 	
-	private int autoDetectPid(String remoteAddr, int productId) {	//초기화 값
+	private int autoDetectPid(String remoteAddr, int productId) {	// itemForm.productId initialize
 		return productId;
 	}
 	
-	@RequestMapping(value="/shop/item/addItem.do", method = RequestMethod.GET)		//첫 item.jsp 요청
-	public String step1(@RequestParam("productId") int productId, Model model) {
-		System.out.println("item폼컨트롤러 들어옴");
-		model.addAttribute("productId", productId);		// item.jsp에 <productId> 전달 
-		return "Product/item";	//form view(item.jsp)로 이동
+	@RequestMapping(value="/shop/item/addItem.do", method = RequestMethod.GET)		// go to item.jsp
+	public String step1(@ModelAttribute("item") ItemForm itemForm, 
+			@RequestParam("productId") int productId, Model model) {
+		System.out.println("item controller");
+		
+		model.addAttribute("productId", productId);		// deliver [productId] to item.jsp
+		return "product/item";	//form view(item.jsp)
 	}
 	
-	@RequestMapping(value="/shop/item/addItem2/{productId}", method = RequestMethod.POST)	//item.jsp 폼 입력 후 다음 jsp요청
-	public String submit(Item item, ItemForm itemForm,  
-			BindingResult result, @PathVariable("productId") int productId, 
-			HttpServletRequest rq, Model model) {
-		HttpSession httpSession = rq.getSession(true); //이미 세션이 있다면 그 세션을 돌려주고, 세션이 없으면 새로운 세션을 생성한다.
+	@RequestMapping(value="/shop/item/addItem2.do", method = RequestMethod.POST)	// detailItem.jsp 
+	public String submit(@ModelAttribute("item") ItemForm itemForm, 
+			@RequestParam("productId") int productId, HttpServletRequest rq) {
+		System.out.println("item.addItem2.do");
+		String itemController = "";
+		HttpSession httpSession = rq.getSession(true); //占쎌뵠沃섓옙 占쎄쉭占쎈�∽옙�뵠 占쎌뿳占쎈뼄筌롳옙 域뱄옙 占쎄쉭占쎈�∽옙�뱽 占쎈즼占쎌젻雅뚯눊��, 占쎄쉭占쎈�∽옙�뵠 占쎈씨占쎌몵筌롳옙 占쎄퉱嚥≪뮇�뒲 占쎄쉭占쎈�∽옙�뱽 占쎄문占쎄쉐占쎈립占쎈뼄.
 				
-		String view = "";
+		System.out.println("itemForm : " + itemForm);
 		
-		if (result.hasErrors()) {	return formViewName;	}	//검증 오류 발생시 item.jsp로 다시 이동
+//		if (result.hasErrors()) {	return formViewName;	}	//野껓옙筌앾옙 占쎌궎�몴占� 獄쏆뮇源�占쎈뻻 item.jsp嚥∽옙 占쎈뼄占쎈뻻 占쎌뵠占쎈짗
 		
-		itemForm.setTitle(rq.getParameter("title"));
-		itemForm.setDescription(rq.getParameter("description"));	
-		itemForm.setUnitCost(Integer.parseInt(rq.getParameter("unitCost")));
-		itemForm.setQty(Integer.parseInt(rq.getParameter("qty")));
-		itemForm.setTag1(rq.getParameter("tag1"));
-		itemForm.setTag2(rq.getParameter("tag2"));
-		itemForm.setTag3(rq.getParameter("tag3"));
-		itemForm.setTag4(rq.getParameter("tag4"));
-		itemForm.setTag5(rq.getParameter("tag5"));
+//		ItemForm itemform = new ItemForm(itemForm.getTitle(), itemForm.getUserId(), itemForm.getProductId(), itemForm.getDescription(), itemForm.getUnitCost(), 
+//										itemForm.getQty(), rq.getParameter("tag1"), rq.getParameter("tag2"), rq.getParameter("tag3"), 
+//				rq.getParameter("tag4"), rq.getParameter("tag5"));
 		
+		httpSession.setAttribute("itemForm", itemForm);	//generate item session
 		
-		
-		httpSession.setAttribute("itemForm", itemForm);	//itemForm 세션 생성, 사용자 입력값을 itemForm 세션에 저장
-		
-		/*itemImpl.insertItem()*/
 		switch(productId) {
 			case 0 : 
-				view = "Product/addGroupBuying";
+				itemController = "redirect:/shop/groupBuying/addItem2.do?productId=" + productId;
 				break;
 			case 1 :
-				view = "Product/addAuction";
+				itemController = "redirect:/shop/auction/addItem2.do?productId=" + productId;
 				break;
 			case 2 : 
-				view = "Product/addSecondHand";
+				itemController = "redirect:/shop/secondHand/addItem2.do?productId=" + productId;
 				break;
 			case 3 : 
-				view = "Product/addHandMade";
+				itemController = "redirect:/shop/handMade/addItem2.do?productId=" + productId;
 				break;
 		}
 	
-		return view;
+		return itemController;
 	}
 	
 }

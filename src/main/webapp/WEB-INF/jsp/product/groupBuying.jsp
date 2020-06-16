@@ -1,9 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ include file="itemTop.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<% request.setCharacterEncoding("UTF-8"); %>
 
 <!DOCTYPE html>
 <html>
@@ -19,7 +17,15 @@
 			}
 </style>
 </head>
-<body>	  
+<body>	 
+<table id="main-menu">
+  <tr>
+    <td><a href='<c:url value="/shop/index.do"/>'>
+        <b><font color="black" size="2">
+          &lt;&lt; Go to Index</font></b></a>
+    </td>
+  </tr>
+</table> 
    <form name = "pform" action="" style="position:absolute; left:45%; margin:0 0 0 -420px;">
       <div class="container" >
          <div class="row"  style="display:inline">
@@ -29,9 +35,9 @@
                      	GroupBuying List
                   </h2>
                   <p style="text-align:right;">
-		                <a href="<c:url value='/shop/groupBuying/addItem.do'>
+		                <a href="<c:url value='/shop/item/addItem.do'>
 		               		<c:param name="productId" value="${productId}"/></c:url>
-						">공동구매 게시글 추가하기
+						">공동구매 물품 판매하기
 						</a>
 					</p>	<!-- 로그인 여부 인터셉터로 이동 -->
                   <hr>
@@ -47,14 +53,14 @@
                   <tbody>    
                   
 		
-   				<c:forEach var="gb" items="${groupBuyingList}">         
+   				<c:forEach var="gb" items="${groupBuyingList.pageList}">         
                   <tr style="height:70px;">
                   
                   <td>
-                                <a href="<c:url value='/shop/productDetail'>
-                                	<c:param name="productId" value="${gb.productId}"/>
-                                    <c:param name="itemId" value="${gb.itemId}"/>
-                                         </c:url>">
+                                <a href="<c:url value='/shop/groupBuying/viewItem.do'>
+		                               		<c:param name="itemId" value="${gb.itemId}"/>
+		                                	<c:param name="productId" value="${gb.productId}"/>
+                                    	</c:url>">
                                       <font>${gb.title}</font>
                                 </a>
                 
@@ -67,6 +73,31 @@
                   </tr>
                   </c:forEach>
                   </tbody>
+                  
+                  <tr>
+							<td style="text-align: left;">
+								<c:if test="${!groupBuyingList.firstPage}">
+									<a href='<c:url value="/shop/groupBuying/listItem2.do">
+		           								<c:param name="pageName" value="previous"/>
+		           								<c:param name="productId" value="${productId}"/>
+	           								</c:url>'>
+										<font color="black"><B>&lt;&lt; Prev</B></font>
+									</a>
+								</c:if>
+							</td><td/><td/>
+							<td/>
+							<td style="text-align: right;">
+								<c:if test="${!groupBuyingList.lastPage}">
+									<a href='<c:url value="/shop/groupBuying/listItem2.do">/>
+	            							 	<c:param name="pageName" value="next"/>
+	            							 	<c:param name="productId" value="${productId}"/>
+	            							 </c:url>'>
+										<font color="black"><B>Next &gt;&gt;</B></font>
+									</a>
+								</c:if>
+							</td>
+					</tr>
+						
                   </table>
                </div>
             </div>

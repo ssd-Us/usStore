@@ -39,9 +39,9 @@ public class MybatisGroupBuyingDao implements GroupBuyingDao {
 	}
 
 	@Override
-	public void deleteItem(int itemId, int productId) throws DataAccessException {
+	public void deleteItem(int itemId) throws DataAccessException {
 		// TODO Auto-generated method stub
-		groupBuyingMapper.deleteItem(itemId, productId);
+		groupBuyingMapper.deleteItem(itemId);
 	}
 
 	@Override
@@ -93,9 +93,8 @@ public class MybatisGroupBuyingDao implements GroupBuyingDao {
 	}
 
 	@Override
-	public void getItem(int itemId, int productId) {
-		// TODO Auto-generated method stub
-		groupBuyingMapper.getItem(itemId, productId);
+	public Item getItem(int itemId) {
+		return groupBuyingMapper.getItem(itemId);
 	}
 
 }

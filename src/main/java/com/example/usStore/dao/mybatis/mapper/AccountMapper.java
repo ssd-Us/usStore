@@ -1,18 +1,16 @@
 package com.example.usStore.dao.mybatis.mapper;
-
-import java.util.List;
-
-import org.springframework.dao.DataAccessException;
-
 import com.example.usStore.domain.Account;
 
 public interface AccountMapper {
 
 	// userId로 Account 가져오기
-	Account getAccountByUsername(String userId);
+	Account getAccountByUserId(String userId);
+	
+	// username으로 Account 가져오기
+	Account getAccountByUsername(String username);
 	
 	// userId랑 password로 Account 가져오기
-	Account getAccountByUsernameAndPassword(String username, String password);
+	Account getAccountByUserIdAndPassword(String userId, String password);
 	
 	// 계정 추가
 	void insertAccount(Account account);

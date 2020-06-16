@@ -1,7 +1,10 @@
 package com.example.usStore.controller.mypage;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -13,16 +16,35 @@ public class AddAccuseController {
 
 	private MyPageFacade myPageFacade;
 	
-	@RequestMapping("/addAccuse") 
-	public String addAccuse(@RequestParam("userId") int userId, ModelMap model) {
-		 // SecondHand sh = this.itemFacade.getSecondHandItem(itemId);
-		  //도메인에서 가져와야함 디비에서 불러온걸 도메인에 저장해놈 
-		  Accuse accuse = new Accuse(); //자바스크립트에서 넘어온 스트링값을 저장하기 
-		  
-		  this.myPageFacade.insertAccuse(accuse);
-		
+	@Autowired
+	public void setMyPageFacade(MyPageFacade myPageFacade) {
+		this.myPageFacade = myPageFacade;
+	}
+
+
+	@RequestMapping("/addAccuse.do") 
+	public String addAccuse(@RequestParam(value="userId") String userId,
+			@RequestParam(value="itemId") int itemId, 
+			@RequestParam(value="productId") int productId, HttpServletRequest request, Model model) {
+		//신고하고자 하는 판매자 아이디를 파라미터로 받는다.	
 		  System.out.println("addAccuse 컨트롤러 진입\n");
-	      return "product/viewSecondHand";
+		  Accuse accuse = new Accuse(); //여기에 값 저장 ..
+		  //자바스크립트에서 넘어온 신고사유 setReason
+		  // 로그인아이디가 setVictim();
+		  // 판매자 아이디가 setAttacker(userId) 
+		  this.myPageFacade.insertAccuse(accuse);
+		  model.addAttribute("itemId", itemId);
+		  model.addAttribute("productId", productId);
+		  if(productId == 0)
+			  return "redirect:/shop/groupBuying/viewItem.do";
+		  else if(productId ==1)
+			  return "redirect:/shop/auction/viewItem.do";
+		  else if(productId ==2)
+			  return "redirect:/shop/secondHand/viewItem.do";
+		  else if(productId ==3)
+			  return "redirect:/shop/handMade/viewItem.do";
+		  else
+			  return "/index";
 	}
 	
 	

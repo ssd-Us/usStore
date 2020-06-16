@@ -32,11 +32,11 @@ public class SignonController {
 
 	@RequestMapping("/shop/signon.do")
 	public ModelAndView handleRequest(HttpServletRequest request,
-			@RequestParam("username") String username,
+			@RequestParam("userId") String userId,
 			@RequestParam("password") String password,
 			@RequestParam(value="forwardAction", required=false) String forwardAction,
 			Model model) throws Exception {
-		Account account = usStore.getAccountByUsernameAndPassword(username, password);
+		Account account = usStore.getAccountByUserIdAndPassword(userId, password);
 		if (account == null) {
 			return new ModelAndView("Error", "message", 
 					"Invalid username or password.  Signon failed.");

@@ -38,8 +38,8 @@ public class MybatisSecondHandDao implements SecondHandDao {
 	}
 	
 	@Override
-	public void deleteItem(int itemId, int productId) throws DataAccessException {
-		secondHandMapper.deleteItem(itemId, productId);
+	public void deleteItem(int itemId) throws DataAccessException {
+		secondHandMapper.deleteItem(itemId);
 	}
 	
 	@Override
@@ -70,9 +70,9 @@ public class MybatisSecondHandDao implements SecondHandDao {
 	}
 
 	@Override
-	public void getItem(int itemId, int productId) {
+	public Item getItem(int itemId) {
 		// TODO Auto-generated method stub
-		secondHandMapper.getItem(itemId, productId);
+		return secondHandMapper.getItem(itemId);
 	}
 
 	@Override

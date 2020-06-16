@@ -4,43 +4,41 @@
   	<cache />
 	<insert id="insertItem" parameterType="Item">
 		<selectKey keyProperty="itemId" resultType="int" order="BEFORE">
-			SELECT ITEM_seq.nextval AS id FROM DUAL
+			SELECT ITEMID_seq.nextval AS itemId FROM DUAL
 		</selectKey> 
 		INSERT INTO ITEM
 		(ITEMID, UNITCOST, TITLE, DESCRIPTION, VIEWCOUNT, QTY, USERID, PRODUCTID) VALUES
-		(#{itemId}, #{unitCost}, #{title}, #{description}, #{viewCount}, #{quantity}, #{userId}, #{productId})
+		(#{itemId}, #{unitCost}, #{title}, #{description}, #{viewCount}, #{qty}, #{userId}, #{productId})
 	</insert>
 
 	<update id="updateItem" parameterType="Item">
-		UPDATE ITEM SET
-		UNITCOST = #{unitCost},
-		TITLE = #{title},
-		DESCRIPTION = #{description},
-		VIEWCOUNT = #{viewCount},
-		QTY = #{quantity},
-		USERID = #{userId},
-		PRODUCTID = #{productId}
+		UPDATE ITEM 
+		SET
+			UNITCOST = #{unitCost},
+			TITLE = #{title},
+			DESCRIPTION = #{description},
+			VIEWCOUNT = #{viewCount},
+			QTY = #{qty}
 		WHERE itemId = #{itemId}
 	</update>
 
 	<delete id="deleteItem">
-		DELETE ITEM
-		FROM ITEM
+		DELETE FROM ITEM
 		WHERE ITEMID = #{itemId} 
 	</delete>
 
-	<select id="getItem" resultType="Item">
+	<select id="getItem" parameterType="int" resultType="Item">
 		SELECT
-		ITEMID,
-		UNITCOST,
-		TITLE,
-		DESCRIPTION,
-		VIEWCOUNT,
-		QTY,
-		USERID,
-		PRODUCTID
+			ITEMID,
+			UNITCOST,
+			TITLE,
+			DESCRIPTION,
+			VIEWCOUNT,
+			QTY,
+			USERID,
+			PRODUCTID
 		FROM ITEM
-		WHERE I.ITEMID = #{value}
+		WHERE ITEMID = #{itemId}
 	</select>
 
 	<select id="getQuantity" resultType="int">

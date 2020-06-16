@@ -21,13 +21,13 @@
   </select>
   
   <select id="getHandMadeById" resultType="HandMade">
-    SELECT I.PRODUCTID, I.ITEMID, I.TITLE, I.QTY, I.UNITCOST, I.DESCRIPTION, I.VIEWCOUNT, LISTPRICE
+    SELECT I.PRODUCTID, I.ITEMID, I.USERID, I.TITLE, I.QTY, I.UNITCOST, I.DESCRIPTION, I.VIEWCOUNT, LISTPRICE
     FROM ITEM I, HANDMADE H
     WHERE H.ITEMID = I.ITEMID AND I.ITEMID = #{itemId}
   </select>
   
   <select id="getHandMadeList" resultType="HandMade">
-    SELECT I.PRODUCTID, I.ITEMID, I.TITLE, I.QTY, I.UNITCOST, I.DESCRIPTION, I.VIEWCOUNT, LISTPRICE
+    SELECT I.PRODUCTID, I.ITEMID, I.USERID, I.TITLE, I.QTY, I.UNITCOST, I.DESCRIPTION, I.VIEWCOUNT, LISTPRICE
     FROM ITEM I, HANDMADE H
     WHERE I.ITEMID = H.ITEMID
   </select>
@@ -45,30 +45,22 @@
   </update>
   
   <!-- 내가 추가한 것 -->
-  <delete id="deleteItem" parameterType="String">
-  	DELETE ITEM
-  	FROM ITEM
+  <delete id="deleteHandMade" parameterType="int">
+  	DELETE FROM HAMDMADE
   	WHERE ITEMID = #{itemId}
   </delete>
   
   <update id="updateHandMade" parameterType="HandMade">
   	UPDATE HANDMADE SET
-	  	ITEMID = #{itemId}, 
-	  	UNITCOST = #{unitCost}, 
-	  	TITLE = #{title}, 
-	  	DESCRIPTION = #{description}, 
-	  	VIEWCOUNT = #{viewCount}, 
-	  	QTY = #{quantity}, 
-	  	USERID = #{userId}, 
-	  	PRODUCTID = #{productId},
+	  	ITEMID = #{itemId},
 	  	LISTPRICE = #{listPrice}
   	WHERE ITEMID = #{itemId}
   </update>
   
   <insert id="insertHandMade" parameterType="HandMade">
    	INSERT INTO HANDMADE
-      (ITEMID, UNITCOST, TITLE, DESCRIPTION, VIEWCOUNT, QTY, USERID, PRODUCTID, LISTPRICE)
+      (ITEMID, LISTPRICE)
     VALUES
-      (#{itemId}, #{unitCost}, #{title}, #{description}, #{viewCount}, #{quantity}, #{userId}, #{productId}, #{listPrice})
+      (#{itemId}, #{listPrice})
   </insert>
 </mapper>

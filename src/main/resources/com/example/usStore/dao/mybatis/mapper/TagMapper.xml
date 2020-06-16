@@ -11,4 +11,10 @@
 		(#{tagId}, #{tagName}, #{itemId})
 	</insert>
 	
+	<select id="getTagByItemId" parameterType="int" resultType="Tag">
+	SELECT TAGNAME
+	FROM TAG T, ITEM I
+	WHERE T.ITEMID = #{itemId}
+		AND T.ITEMID = I.ITEMID
+	</select>
 </mapper>

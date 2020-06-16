@@ -1,10 +1,6 @@
 package com.example.usStore.service.facade;
 
 import java.util.List;
-
-import org.springframework.dao.DataAccessException;
-
-import com.example.usStore.domain.Account;
 import com.example.usStore.domain.Accuse;
 import com.example.usStore.domain.BookMark;
 import com.example.usStore.domain.Follow;
@@ -56,4 +52,6 @@ public interface MyPageFacade {
 	void insertAccuse(Accuse accuse);
 	
 	int countAccuseById(String accounId);
+	
+	boolean isAccuseAlready(String attacker, String victim);
 }

@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.support.PagedListHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -16,7 +17,6 @@ import com.example.usStore.domain.Item;
 import com.example.usStore.domain.Tag;
 
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,153 +28,194 @@ import org.springframework.web.bind.support.SessionStatus;
 import com.example.usStore.service.facade.ItemFacade;
 
 @Controller
-@SessionAttributes("gbform")	
+@SessionAttributes({"GroupBuying", "groupBuyingList"})
 public class GroupBuyingFormController {
-	private static final String ADD_FORM1 = "Product/item";
-	private static final String ADD_FORM2 = "Product/addGroupBuying";
-	private static final String CHECK_FORM3 = "Product/checkGroupBuying";
-	private static final String DetailPage = "Product/viewGroupBuying";
+	private static final String GoAddItemFORM = "redirect:/shop/item/addItem.do?productId=";
+	private static final String ADD_GroupBuying_FORM = "product/addGroupBuying";
+	private static final String CHECK_FORM3 = "product/checkGroupBuying";
+	private static final String DetailPage = "product/viewGroupBuying";
 	
 	@Autowired
-	private ItemFacade itemFacade;
-
-//	@Autowired
-//	private ItemForm itemForm;
+	private ItemFacade itemFacade; 
 	
-	/*
-	 * @ModelAttribute("gbform") public GroupBuyingForm formBacking(
-	 * 
-	 * @ModelAttribute("item") Item item, HttpServletRequest rq) { GroupBuyingForm
-	 * gbform = new GroupBuyingForm();
-	 * 
-	 * gbform.setItemId(item.getItemId()); gbform.setUnitCost(item.getUnitCost());
-	 * gbform.setTitle(item.getTitle());
-	 * gbform.setDescription(item.getDescription());
-	 * gbform.setViewCount(item.getViewCount()); gbform.setQuantity(item.getQty());
-	 * gbform.setUserId(item.getUserId()); gbform.setProductId(item.getProductId());
-	 * 
-	 * return gbform; 
-	 * }
-	 */  
+	@ModelAttribute("GroupBuying")		  
+	public GroupBuyingForm formBacking() {  // accessor method 
+		System.out.println("formBacking");
+		
+		return new GroupBuyingForm();
+	}
 	
 	@RequestMapping("/shop/groupBuying/listItem.do") 
     public String groupBuyingList(@RequestParam("productId") int productId, ModelMap modelMap, Model model) {
-	 List<GroupBuying> groupBuyingList = this.itemFacade.getGroupBuyingList();
 		
-	 //item값도 받아와야 함
-	 model.addAttribute("productId", productId);
-	 modelMap.put("groupBuyingList", groupBuyingList);
-	 return "Product/groupBuying";
-   }
-	
-	@GetMapping("/shop/groupBuying/step1")		// step1 �슂泥�
-	public String step1() {
-		return ADD_FORM1;	// step1 form view(item.jsp)濡� �씠�룞
-	}
-	
-	@GetMapping("/step2")		// step3 -> step2 �씠�룞	
-	public String step2FromStep3() {
-		return ADD_FORM2;	// step2 form view濡� �씠�룞
-	}
-	
-	@RequestMapping(value="step2/{productId}", method = RequestMethod.GET)
-	public String form1(
-			@ModelAttribute("gbform") GroupBuyingForm gbcommand, 
-			BindingResult result) {
-		System.out.println("command 媛앹껜: " + gbcommand);
+		PagedListHolder<GroupBuying> groupBuyingList = new PagedListHolder<GroupBuying>(this.itemFacade.getGroupBuyingList());
+		groupBuyingList.setPageSize(4);
 		
-		if (result.hasFieldErrors("title") ||
-			result.hasFieldErrors("description") ||
-			result.hasFieldErrors("unitCost") ||
-			result.hasFieldErrors("qty") ||
-			result.hasFieldErrors("tag")) 
-		{		//에러 검증 발생시
-				return ADD_FORM1;	// 寃�利� �삤瑜� 諛쒖깮 �떆 step1 form view(item.jsp) 되돌아감
-			}
-		return ADD_FORM2;	//item 입력 성공시 다음 groupBuying 입력 폼으로 이동
-	}//�뤌�쑝濡� �씠�룞
+		model.addAttribute("productId", productId);
+		modelMap.put("groupBuyingList", groupBuyingList);
+		return "product/groupBuying";
+   }	
 	
-	@PostMapping("/shop/groupbuying/step3")		// step2 -> step3 �씠�룞
-	public String step3(
-			@ModelAttribute("gbform") GroupBuyingForm gbcommand, @RequestParam("productId") int productId, 
-			ItemForm itemformSession, 
-			BindingResult result, Model model, HttpServletRequest rq) {	
-		HttpSession session = rq.getSession(false); //이미 세션이 있다면 그 세션을 돌려주고, 세션이 없으면 새로운 세션을 생성한다.
-		System.out.println("command 媛앹껜: " + gbcommand);
-		
-		// session�뿉 ���옣�맂 regReq 媛앹껜�뿉 ���옣�맂 �엯�젰 媛� 寃�利�
-		// �쐞�뿉�꽌 @Valid瑜� �넻�빐 Hibernate Validator瑜� �궗�슜�븿
-		// MemberRegistValidator瑜� 吏곸젒 援ы쁽�븯�뿬 �궗�슜�븷 寃쎌슦 �븘�옒 肄붾뱶 �떎�뻾
-		// new MemberRegistValidator().validate(memRegReq, bindingResult);	
-		
-
-		if (result.hasFieldErrors("listPrice") ||
-				result.hasFieldErrors("deadLine")) {	
-			return ADD_FORM2;		// 寃�利� �삤瑜� 諛쒖깮 �떆 step2 form view(addGroupBuying.jsp)濡� �씠�룞
+	@RequestMapping("/shop/groupBuying/listItem2.do")
+	public String groupBuyingList2 (
+			@ModelAttribute("groupBuyingList") PagedListHolder<GroupBuying> groupBuyingList,
+			@RequestParam("pageName") String page, @RequestParam("productId") int productId, 
+			ModelMap modelMap, Model model) throws Exception {
+		System.out.println(groupBuyingList);
+		if ("next".equals(page)) {
+			groupBuyingList.nextPage();
+		}
+		else if ("previous".equals(page)) {
+			groupBuyingList.previousPage();
 		}
 		
-		itemformSession = (ItemForm) session.getAttribute("itemForm");
-		Item item = new Item(itemformSession.getUnitCost(), itemformSession.getTitle(), 
-				itemformSession.getDescription(), itemformSession.getViewCount(), 
-				itemformSession.getQty(), itemformSession.getUserId(), productId);
+		model.addAttribute("productId", productId);
+		modelMap.put("groupBuyingList", groupBuyingList);
+		return "product/groupBuying";
+	}
+	
+	@RequestMapping(value="/shop/groupBuying/addItem2.do", method = RequestMethod.GET)
+	public String step2(@ModelAttribute("GroupBuying") GroupBuyingForm groupBuyingForm, 
+			@RequestParam("productId") int productId, Model model) {
+		System.out.println("groupBuyingForm controller");	//print toString
 		
-		itemFacade.insertItem(item);
-		itemformSession.makeTags(item.getItemId(), itemformSession.getTag1());	//tag에 itemId, tagName 적용 후 리스트에 삽입
+		model.addAttribute("productId", productId);
+		return ADD_GroupBuying_FORM;	// addGroupBuying.jsp
+	}
+
+	@RequestMapping(value="/shop/groupBuying/gobackItem.do", method = RequestMethod.GET)		// go back to item.jsp
+	public String backToItem(@ModelAttribute("GroupBuying") GroupBuyingForm groupBuyingForm, 
+			@RequestParam("productId") int productId) {
+		System.out.println("go back to item.jsp");
+		return "redirect:/shop/item/addItem.do?productId=" + productId;	// step1(item.jsp) form step2(addGroupBuying.jsp)
+	}
+	
+	@RequestMapping(value="/shop/groupBuying/gobackAddGb.do", method = RequestMethod.GET)		// step3 -> step2
+	public String backToAddGroupBuying(
+			@ModelAttribute("GroupBuying") GroupBuyingForm groupBuyingForm, 
+			@RequestParam("productId") int productId, Model model){
+		model.addAttribute("productId", productId);
+		return ADD_GroupBuying_FORM;	// check.jsp -> addGroupBuying.jsp
+	}
+	
+	@PostMapping("/shop/groupBuying/step3.do")		// step2 -> step3
+	public String goCheck(@ModelAttribute("GroupBuying") GroupBuyingForm groupBuyingForm, 
+			HttpServletRequest rq, ItemForm itemForm, Model model) {	
+		System.out.println("step3.do(before check form)");
+		HttpSession session = rq.getSession(false);
+		
+		itemForm = (ItemForm) session.getAttribute("itemForm");
+		if(session.getAttribute("itemForm") != null) {
+			System.out.println("itemformSession: " + itemForm);	//print itemformSession toString
+		}
+		
+		System.out.println("deadLine still null," + groupBuyingForm);	//print command toString
+	
+		int calDiscount;
+		double listPrice = groupBuyingForm.getListPrice();
+		double unitCost = itemForm.getUnitCost();
+		if(listPrice <= unitCost) {
+			calDiscount = (int) ((unitCost - listPrice) / unitCost * 100);
+		}
+		else {
+			calDiscount = -999;	// 이부분은 나중에 error로 고치기
+		}
+		
+		System.out.println("calDiscount: " + calDiscount);
+		
+		groupBuyingForm.setDiscount(calDiscount);
+		
+		String deadLine = groupBuyingForm.getDate() + " " + groupBuyingForm.getTime() + ":00";
+		groupBuyingForm.setDeadLine(deadLine);
+		
+		model.addAttribute(itemForm);
+		return CHECK_FORM3;		// step3(CHECK_FORM3)
+	}
+	
+	@PostMapping("/shop/groupBuying/detailItem.do")		// step3 -> done
+	public String done(@ModelAttribute("GroupBuying") GroupBuyingForm groupBuyingform, 
+			ItemForm itemformSession, BindingResult result, Model model, HttpServletRequest rq, 
+			SessionStatus sessionStatus, GroupBuying groupBuying, ModelMap modelMap) {
+		System.out.println("detailItem.do");
+		
+		HttpSession session = rq.getSession(false);
+		itemformSession = (ItemForm) session.getAttribute("itemForm");
+		if(session.getAttribute("itemForm") != null) {
+			System.out.println("itemformSession: " + itemformSession);	//print itemformSession toString
+		}
+		System.out.println(groupBuyingform);
+	
+		//put itemformSession to item
+		Item item = new Item(itemformSession.getUnitCost(), itemformSession.getTitle(), 
+				itemformSession.getDescription(), itemformSession.getQty(), "A", 	//must change userId -> loginCommand.getUserId()
+				itemformSession.getProductId());
+		
+		itemFacade.insertItem(item);	// -> generate itemId, insert DB
+		
+		System.out.println("itemId: " + item.getItemId());	//print itemformSession toString
+		
+		//generate tags(only have tagName)
+		itemformSession.makeTags(item.getItemId(), itemformSession.getTag1());	//if(tag != null && "") then addTags
 		itemformSession.makeTags(item.getItemId(), itemformSession.getTag2());
 		itemformSession.makeTags(item.getItemId(), itemformSession.getTag3());
 		itemformSession.makeTags(item.getItemId(), itemformSession.getTag4());
 		itemformSession.makeTags(item.getItemId(), itemformSession.getTag5());
-		
+			
 		List<Tag> tags = new ArrayList<Tag>();
 		tags = itemformSession.getTags();
 		
-		for(Tag t : tags) {	//tags 리스트 탐색
-			if(t.getTagName() != null || t.getTagName().trim() != "") {	//tagName이 null 또는 빈 값이 아닌 동안
-				itemFacade.insertTag(t);	//태그 삽입 완료
-			}
+		System.out.println("tags: " + tags);
+		
+		for(Tag t : tags) {
+				itemFacade.insertTag(t);	//matching tag - item (via itemId) , insert DB
 		}
 		
-		return CHECK_FORM3;		// �삤瑜� �뾾�쑝硫� step3 form view(checkGroupBuying.jsp)濡� �씠�룞
+		System.out.println("deadLine : " + groupBuyingform.getDeadLine());
+		
+		groupBuying.setItemId(item.getItemId());
+		groupBuying.setDiscount(groupBuyingform.getDiscount());
+		groupBuying.setListPrice(groupBuyingform.getListPrice());
+		groupBuying.setDeadLine(groupBuyingform.getDeadLine());
+	
+		itemFacade.insertGroupBuying(groupBuying);	// insert DB
+//		
+//		model.addAttribute("gb", groupBuying);
+//		model.addAttribute("item", item);
+//		modelMap.addAttribute("tags", tags);
+//		
+//		List<GroupBuying> gb = itemFacade.getGroupBuyingList();
+//		model.addAttribute("productId", item.getProductId());
+//		itemFacade.getTagByItemId(groupBuying.getItemId());
+		
+		sessionStatus.setComplete();	// groupBuying session close
+		session.removeAttribute("itemForm");	//itemForm session close
+		return "redirect:/shop/groupBuying/viewItem.do?itemId=" + groupBuying.getItemId() + "&productId=" + item.getProductId();
 	}
 	
-	@PostMapping("/shop/groupbuying/detailItem/${groupbuying.itemId}")		// step3 -> done �씠�룞
-	public String addGroupBuyingItem(
-			GroupBuying groupBuying, @ModelAttribute("gbform") GroupBuyingForm gbform, 
-			BindingResult result, Model model, SessionStatus sessionStatus, HttpServletRequest request) {
-		System.out.println("command 媛앹껜: " + gbform);
+	@RequestMapping("/shop/groupBuying/viewItem.do") //click title -> detail Page(viewCount++)
+	public String viewGroupBuying(@RequestParam("itemId") int itemId, 
+			@RequestParam("productId") int productId, Model model, Model modelMap)
+	{
+		System.out.println("viewItem.do");
+		System.out.println("itemId:" + itemId);
 		
-		HttpSession session = request.getSession(false); //�씠誘� �꽭�뀡�씠 �엳�떎硫� 洹� �꽭�뀡�쓣 �룎�젮二쇨퀬, �꽭�뀡�씠 �뾾�쑝硫� null�쓣 �룎�젮以��떎.
-		if(session.getAttribute("itemForm") != null) {	//itemForm �꽭�뀡�씠 議댁옱�븳�떎硫�
-			System.out.println("itemForm �꽭�뀡 議댁옱");
-			
-		/*	((itemForm)session.getAttribute("itemForm"))
-			itemImpl.insertItem()*/
-		}
+		Item item = itemFacade.getItem(itemId);
+		item.setViewCount(item.getViewCount() + 1);
+		System.out.println("object's viewcount ++ ? : " + item);
 		
-		/*
-		 * groupBuying.s itemImpl.insertGroupBuying(groupBuying);
-		 */
+		itemFacade.updateItem(item);	// update : viewCount++
+		System.out.println("updated item data: " + itemFacade.getItem(itemId).toString());
+				
+		GroupBuying gb = itemFacade.getGroupBuyingItem(itemId);
 		
-			/* ItemImpl.insertGroupBuying 硫붿냼�뱶瑜� 
-			 * @Override public GroupBuying insertGroupBuying(GroupBuyingForm gbcommand) { // TODO
-			 * groupBuyingDao.insertGroupBuying(GroupBuying); 
-			 * }
-			 * �씠�젃寃� 蹂�寃쏀빐�빞 �븷�벏..?
-			 */
-	
-		model.addAttribute("newGroupBuying", gbform);
+		List<Tag> tags = new ArrayList<Tag>();
+		tags = itemFacade.getTagByItemId(gb.getItemId());
 		
-		List<GroupBuying> gbs = itemFacade.getGroupBuyingList();
-		model.addAttribute("groupBuyingList", gbs);
-		
-		sessionStatus.setComplete();	// session 醫낅즺		
-		return DetailPage;
-	}
-	
-	@RequestMapping("/shop/groupBuying/addItem.do")
-	public String goItem(@RequestParam("productId") int productId) {
-		System.out.println("item으로 꼬!");
-		return "redirect:/shop/item/addItem.do?productId=" + productId;
+		model.addAttribute("gb", gb);
+		model.addAttribute("productId", productId);
+		modelMap.addAttribute("tags", tags);
+	      
+		return "product/viewGroupBuying";
 	}
 	
 }

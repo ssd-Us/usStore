@@ -10,7 +10,6 @@ import com.example.usStore.dao.AccuseDao;
 import com.example.usStore.dao.BookMarkDao;
 import com.example.usStore.dao.FollowDao;
 import com.example.usStore.dao.KeyAlarmDao;
-import com.example.usStore.domain.Account;
 import com.example.usStore.domain.Accuse;
 import com.example.usStore.domain.BookMark;
 import com.example.usStore.domain.Follow;
@@ -109,7 +108,9 @@ public class MyPageImpl implements MyPageFacade {
 
 	@Override
 	public void insertAccuse(Accuse accuse) {
-		// TODO Auto-generated method stub
+		accuse.setAttacker("B");
+		accuse.setReason("신고이유 원래는 자바스크립트에서 넘겨줌");
+		accuse.setVictim("A");
 		accuseDao.insertAccuse(accuse);
 	}
 
@@ -117,5 +118,11 @@ public class MyPageImpl implements MyPageFacade {
 	public int countAccuseById(String accountId) {
 		// TODO Auto-generated method stub
 		return accuseDao.countAccuseById(accountId);
-	}	
+	}
+
+	@Override
+	public boolean isAccuseAlready(String attacker, String victim) {
+		return accuseDao.isAccuseAlready(attacker, victim);
+	}
+
 }
