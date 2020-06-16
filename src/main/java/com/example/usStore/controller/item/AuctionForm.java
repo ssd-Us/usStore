@@ -54,4 +54,11 @@ public class AuctionForm {
 	public void setDeadLine(String deadLine) {
 		this.deadLine = deadLine;
 	}
+	
+	@Override
+	public String toString() {
+		return "AuctionForm [itemId=" + itemId + ", startPrice=" + startPrice + ", date=" + date + ", time=" + time
+				+ ", deadLine=" + deadLine + "]";
+	}
+	
 }

@@ -8,6 +8,7 @@ import java.util.Map;
 import org.springframework.dao.DataAccessException;
 
 import com.example.usStore.domain.Auction;
+import com.example.usStore.domain.Bidder;
 import com.example.usStore.domain.Item;
 
 public interface AuctionMapper extends ItemMapper {
@@ -30,4 +31,13 @@ public interface AuctionMapper extends ItemMapper {
 	public void insertNewEvent(HashMap<String, Date> map);
 	
 	public void closeAuction(Date curTime);
+
+	public void updateAuctionUnitCost(int unitCost, int itemId);
+	
+	public void updateBidder(String bidder, int itemId);
+	
+	public void insertBidder(Bidder bidder);
+	
+	public String isBidderExist(int itemId);
+
 }
