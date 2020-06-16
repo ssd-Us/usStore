@@ -334,10 +334,4 @@ public class ItemImpl implements ItemFacade {
 		// TODO Auto-generated method stub
 		return itemDao.getItem(itemId);
 	}
-
-	@Override
-	public void deleteHandMade(int itemId) {
-		// TODO Auto-generated method stub
-		handMadeDao.deleteHandMade(itemId);
-	}
 }
