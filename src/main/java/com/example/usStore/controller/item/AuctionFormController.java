@@ -89,7 +89,7 @@ public class AuctionFormController {
 	}
 	
    @RequestMapping("/shop/auction/viewItem.do") 
-   public String auctionView(@RequestParam("itemId") int itemId, @RequestParam("productId") int productId, ModelMap model) {
+   public String auctionView(@RequestParam("itemId") int itemId, @RequestParam("productId") int productId, Model model, Model modelMap) {
 	  System.out.println("<경매 상세 페이지>"); 
 	  
 	  Item item = itemFacade.getItem(itemId);
@@ -101,8 +101,12 @@ public class AuctionFormController {
 	  
 	  Auction auction = this.itemFacade.getAuctionById(myItemId);
 
+	  List<Tag> tags = new ArrayList<Tag>();
+	  tags = itemFacade.getTagByItemId(auction.getItemId());
+		
 	  model.addAttribute("productId", productId);
       model.addAttribute("auction", auction);
+      modelMap.addAttribute("tags", tags);
       
       return "product/viewAuction";
    }

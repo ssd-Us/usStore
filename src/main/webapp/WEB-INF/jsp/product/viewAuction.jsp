@@ -110,23 +110,12 @@ function participation(price, unitCost) {
    		<tr>
    			<th style="border-right: 1px solid black;"><font color=blue>#</font>관련태그</th>
    			<td>
-   			<%-- <c:forEach var="tag" items="${tag}">	<!-- tag 테이블 이용 -> 해당 itemId를 어떻게 연결하지? -->
-   				<a href="
-					<c:url value='/searchTag'>	<!-- tag검색 결과 페이지로 이동 -->
-					  <c:param name="tagName" value="${tag.tagName}"/>
-				  	</c:url>
-				">#${tag.tagName}</a>&nbsp;
-   			</c:forEach> --%>
-   			<a href="
-					<c:url value='/searchTag/${auction.itemId}'/>	<!-- tag검색 결과 페이지로 이동 -->
-				">#한정판</a>&nbsp;
-				
-			<a href="
-					<c:url value='/searchTag/${auction.itemId}'/>	<!-- tag검색 결과 페이지로 이동 -->
-				">#커스텀</a>&nbsp;
-			<a href="
-					<c:url value='/searchTag/${auction.itemId}'/>	<!-- tag검색 결과 페이지로 이동 -->
-				">#경매</a>&nbsp;
+   			<c:forEach var="tag" items="${tags}">        
+	   			<a href="
+						<c:url value='/searchTag/${gb.itemId}'/>	
+					">#${tag.tagName}
+				</a>&nbsp;
+			</c:forEach>
    			</td>
    		</tr>
    		
@@ -143,9 +132,6 @@ function participation(price, unitCost) {
    				시작 가격 : ${auction.startPrice} 원<br>
    				낙찰 가격 : <ins></ins> ${auction.bidPrice}원&nbsp;
    				<c:set var="state" value="${auction.auctionState}"/>
-   				<c:if test="${state eq -1}">
-   					<font color=red>(경매 대기)</font> <br><br>
-   				</c:if>
    				<c:if test="${state eq 0}">
    					<font color=red>(경매 진행중)</font> <br><br>
    				</c:if>
