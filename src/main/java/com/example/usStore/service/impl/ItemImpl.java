@@ -18,6 +18,7 @@ import com.example.usStore.dao.ItemDao;
 import com.example.usStore.dao.SecondHandDao;
 import com.example.usStore.dao.TagDao;
 import com.example.usStore.domain.Auction;
+import com.example.usStore.domain.Bidder;
 import com.example.usStore.domain.GroupBuying;
 import com.example.usStore.domain.HandMade;
 import com.example.usStore.domain.Item;
@@ -242,6 +243,22 @@ public class ItemImpl implements ItemFacade {
 		scheduler.schedule(updateTableRunner, deadLine);  
 		
 		System.out.println("updateTableRunner has been scheduled to execute at " + deadLine);
+	}
+	
+	public void updateAuctionUnitCost(int unitCost, int itemId) {
+		auctionDao.updateAuctionUnitCost(unitCost, itemId);
+	}
+	
+	public void updateBidder(String bidder, int itemId) {
+		auctionDao.updateBidder(bidder, itemId);
+	}
+	
+	public void insertBidder(Bidder bidder) {
+		auctionDao.insertBidder(bidder);
+	}
+	
+	public String isBidderExist(int itemId) {
+		return auctionDao.isBidderExist(itemId);
 	}
 	
 	
