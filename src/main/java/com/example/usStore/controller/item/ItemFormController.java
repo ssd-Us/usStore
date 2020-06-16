@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ValidationUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,6 +38,7 @@ public class ItemFormController {
 			itemForm.setUnitCost(itemFormSession.getUnitCost());
 			itemForm.setTitle(itemFormSession.getTitle());
 			itemForm.setDescription(itemFormSession.getDescription());
+			itemForm.setViewCount(itemFormSession.getViewCount());
 			itemForm.setQty(itemFormSession.getQty());
 			itemForm.setTag1(itemFormSession.getTag1());
 			itemForm.setTag2(itemFormSession.getTag2());
@@ -69,9 +71,32 @@ public class ItemFormController {
 	}
 	
 	@RequestMapping(value="/shop/item/addItem2.do", method = RequestMethod.POST)	// detailItem.jsp 
-	public String submit(@ModelAttribute("item") ItemForm itemForm, 
-			@RequestParam("productId") int productId, HttpServletRequest rq) {
+	public String submit(@ModelAttribute("item") ItemForm itemForm, BindingResult bindingResult, 
+			@RequestParam("productId") int productId, HttpServletRequest rq, Model model) {
 		System.out.println("item.addItem2.do");
+		
+		ValidationUtils.rejectIfEmptyOrWhitespace(bindingResult, "title", "required");
+		ValidationUtils.rejectIfEmptyOrWhitespace(bindingResult, "description", "required");
+		if(itemForm.getDescription().length() > 0 && itemForm.getDescription().length() < 11) {
+			bindingResult.rejectValue("description", "tooShortDesc");
+		}
+		
+		ValidationUtils.rejectIfEmptyOrWhitespace(bindingResult, "unitCost", "required");
+		try {
+			int unitCost = itemForm.getUnitCost();
+		} catch(NumberFormatException e) {	
+			bindingResult.rejectValue("unitCost", "mustInt");
+		} 
+		
+		if(itemForm.getUnitCost() <= 0) {
+			bindingResult.rejectValue("unitCost", "tooSmall");
+		}
+		
+		ValidationUtils.rejectIfEmptyOrWhitespace(bindingResult, "qty", "required");
+		if(itemForm.getQty() <= 0) {
+			bindingResult.rejectValue("qty", "tooSmall");
+		}
+		
 		String itemController = "";
 		HttpSession httpSession = rq.getSession(true); //占쎌뵠沃섓옙 占쎄쉭占쎈�∽옙�뵠 占쎌뿳占쎈뼄筌롳옙 域뱄옙 占쎄쉭占쎈�∽옙�뱽 占쎈즼占쎌젻雅뚯눊��, 占쎄쉭占쎈�∽옙�뵠 占쎈씨占쎌몵筌롳옙 占쎄퉱嚥≪뮇�뒲 占쎄쉭占쎈�∽옙�뱽 占쎄문占쎄쉐占쎈립占쎈뼄.
 				
@@ -84,6 +109,11 @@ public class ItemFormController {
 //				rq.getParameter("tag4"), rq.getParameter("tag5"));
 		
 		httpSession.setAttribute("itemForm", itemForm);	//generate item session
+		
+		if (bindingResult.hasErrors()) {	//검증 오류 발생시 두번째 폼으로 돌아감
+			model.addAttribute("productId", productId);
+			return "product/item";
+		}
 		
 		switch(productId) {
 			case 0 : 

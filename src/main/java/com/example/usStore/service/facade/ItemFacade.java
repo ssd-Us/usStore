@@ -121,6 +121,6 @@ public interface ItemFacade {
 
 	void updateTag(Tag tag);	
 
-	void deleteTag(int tagId);	
+	void deleteTag(int itemId);	
 	
 }
