@@ -47,14 +47,8 @@
 	수량 <form:input type="text" path="qty" value="${qty}"/>
 	<form:errors path="qty"/> <br><br>
 	
-<<<<<<< HEAD
-	태그  
-	<form:input path="tag1" placeholder="#tag"/>
-=======
-
 	태그 
 	<form:input path="tag1" placeholder="#tag" value="${tag1}"/>
->>>>>>> branch 'test' of https://github.com/ssd-Us/usStore.git
 	<form:errors path="tag1"/>&nbsp;
 	<form:input path="tag2" placeholder="#tag" value="${tag2}"/>
 	<form:errors path="tag2"/>&nbsp;
