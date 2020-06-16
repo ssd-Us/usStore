@@ -15,7 +15,7 @@ public class GroupBuying extends Item implements Serializable {
 	private int itemId;
 	private int discount;
 	private int listPrice;
-	private Date deadLine;
+	private String deadLine;
 	
 	// Getter & Setter
 	public int getItemId() {
@@ -36,10 +36,10 @@ public class GroupBuying extends Item implements Serializable {
 	public void setListPrice(int listPrice) {
 		this.listPrice = listPrice;
 	}
-	public Date getDeadLine() {
+	public String getDeadLine() {
 		return deadLine;
 	}
-	public void setDeadLine(Date deadLine) {
+	public void setDeadLine(String deadLine) {
 		this.deadLine = deadLine;
 	}
 }

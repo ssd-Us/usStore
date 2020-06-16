@@ -1,5 +1,6 @@
 package com.example.usStore.dao.mybatis;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -87,9 +88,11 @@ public class MybatisAuctionDao implements AuctionDao {
    }
 
    @Override
-   public void getItem(int itemId, int productId) {
-      // TODO Auto-generated method stub
-      auctionMapper.getItem(itemId, productId);
+   public Item getItem(int itemId) {
+      return auctionMapper.getItem(itemId);
    }
-
+   
+   public void closeAuction(Date curTime) {
+	   auctionMapper.closeAuction(curTime);
+   }
 }

@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>경매 상세페이지</title>
+<title>경매 상세 페이지</title>
 </head>
 <style type="text/css"> 
 	a { text-decoration:none } 
@@ -59,10 +59,6 @@ function participation(price, unitCost) {
 		else {
 			alert("참여 취소");
 		}
-		alert("제출 완료");
-	}
-	else if (p <= u) {
-		alert("최고 금액보다 낮습니다.");
 	}
 }
 </script>
@@ -94,7 +90,11 @@ function participation(price, unitCost) {
 					">팔로잉</a>
 				</span>
 				&nbsp;
-				<%@ include file="/WEB-INF/jsp/account/accuseFunction.jsp" %>
+				<span>
+					<a href="
+							<c:url value='/addAccuse/${auction.userId}'/>	<!-- 로그인 여부 따지기 -->
+					">판매자 신고</a>
+				</span>
    			</td>
    		</tr> <!-- userId = suppId -->
    		
@@ -126,7 +126,7 @@ function participation(price, unitCost) {
    		<tr>
    			<th style="border-right: 1px solid black;"><font color=red>마감 날짜</font></th>
    			<td><font color=red>
-   				<fmt:formatDate value="${auction.deadLine}" pattern="yyyy년 MM월 dd일  hh시 mm분 ss초" />
+   				${auction.deadLine}
    			</font></td>
    		</tr>
    		
@@ -161,6 +161,8 @@ function participation(price, unitCost) {
 							<c:url value='/note/${auction.userId}'/>	<!-- 로그인 여부 따지기 -->
 				">쪽지 보내기</a>
 				</span><br><br>
+				
+				<c:if test="${state eq 0}">
    				<form name="form" action="<c:url value='/shop/auction/participateItem.do'/>">
    					<input type="text" id="price" name="price" placeholder="참여 가격을 입력하세요."/>
 				&nbsp;
@@ -169,6 +171,7 @@ function participation(price, unitCost) {
 					<a href="#">경매 참여</a>
 				</span>
 				</form>
+				</c:if>
    			</td>
    		</tr>
    		
@@ -176,7 +179,7 @@ function participation(price, unitCost) {
    		<tr>
    		<td colspan="2" style="text-align: right; padding: 0px; font-size: small; border-bottom: none; border-top: 1px solid black;">
 		   <a href="<c:url value='/shop/auction/updateItem.do'/>">[게시물 수정하기]</a>
-		   <a href="<c:url value='/shop/auction/deleteItem.do'><c:param name="itemId" value="${auction.itemId}"/></c:url>"> [게시물 삭제하기]</a>
+		   <a href="<c:url value='/shop/auction/deleteItem.do'/>"> [게시물 삭제하기]</a>
 		   </td>
 		 </tr>
 		</c:if>

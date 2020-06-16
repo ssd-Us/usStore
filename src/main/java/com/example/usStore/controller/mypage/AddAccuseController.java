@@ -28,7 +28,7 @@ public class AddAccuseController {
 			@RequestParam(value="productId") int productId, HttpServletRequest request, Model model) {
 		//신고하고자 하는 판매자 아이디를 파라미터로 받는다.	
 		  System.out.println("addAccuse 컨트롤러 진입\n");
-		  Accuse accuse = new Accuse();
+		  Accuse accuse = new Accuse(); //여기에 값 저장 ..
 		  //자바스크립트에서 넘어온 신고사유 setReason
 		  // 로그인아이디가 setVictim();
 		  // 판매자 아이디가 setAttacker(userId) 

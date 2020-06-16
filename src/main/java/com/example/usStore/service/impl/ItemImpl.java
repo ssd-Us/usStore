@@ -47,7 +47,7 @@ public class ItemImpl implements ItemFacade {
 	private AuctionDao auctionDao;
 	@Autowired
 	private TagDao tagDao;
-	@Autowired		// applicationContext.xml에 정의된 scheduler 객체를 주입 받음
+	@Autowired		// applicationContext.xml�뿉 �젙�쓽�맂 scheduler 媛앹껜瑜� 二쇱엯 諛쏆쓬
 	private ThreadPoolTaskScheduler scheduler;
 	
 	@Override
@@ -95,7 +95,7 @@ public class ItemImpl implements ItemFacade {
 		itemDao.deleteItem(itemId);
 	}
 	
-	// �씠嫄� 怨좎쿂�빞�릪
+	// 占쎌뵠椰꾬옙 �⑥쥙荑귨옙鍮욑옙由�
 	@Override
 	public boolean isItemInStock(int itemId, int productId) {
 		// TODO Auto-generated method stub
@@ -234,12 +234,11 @@ public class ItemImpl implements ItemFacade {
 	public void testScheduler(Date deadLine) {
 		Runnable updateTableRunner = new Runnable() {	
 			@Override
-			public void run() {   // 스케쥴러에 의해 미래의 특정 시점에 실행될 작업을 정의	(auctionState 0->1 수정)			
-			//경매를 수정한다. 경매 상태를 0 에서 1로 바꾼다.
+			public void run() {  	
+				Date curTime = new Date();
+				auctionDao.closeAuction(curTime);
 			}
 		};
-
-		// 스케줄 생성: 마감시간이 되면 updateTableRunner.run() 메소드 실행
 		scheduler.schedule(updateTableRunner, deadLine);  
 		
 		System.out.println("updateTableRunner has been scheduled to execute at " + deadLine);
@@ -301,9 +300,9 @@ public class ItemImpl implements ItemFacade {
 	}
 
 	@Override
-	public void getItem(int itemId, int productId) {
+	public Item getItem(int itemId) {
 		// TODO Auto-generated method stub
-		itemDao.getItem(itemId, productId);
+		return itemDao.getItem(itemId);
 	}
 
 	@Override

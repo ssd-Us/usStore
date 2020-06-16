@@ -17,7 +17,15 @@
 			}
 </style>
 </head>
-<body>	  
+<body>	 
+<table id="main-menu">
+  <tr>
+    <td><a href='<c:url value="/shop/index.do"/>'>
+        <b><font color="black" size="2">
+          &lt;&lt; Go to Index</font></b></a>
+    </td>
+  </tr>
+</table> 
    <form name = "pform" action="" style="position:absolute; left:45%; margin:0 0 0 -420px;">
       <div class="container" >
          <div class="row"  style="display:inline">
@@ -45,14 +53,14 @@
                   <tbody>    
                   
 		
-   				<c:forEach var="gb" items="${groupBuyingList}">         
+   				<c:forEach var="gb" items="${groupBuyingList.pageList}">         
                   <tr style="height:70px;">
                   
                   <td>
                                 <a href="<c:url value='/shop/groupBuying/viewItem.do'>
-                                	<c:param name="productId" value="${gb.productId}"/>
-                                    <c:param name="itemId" value="${gb.itemId}"/>
-                                         </c:url>">
+		                               		<c:param name="itemId" value="${gb.itemId}"/>
+		                                	<c:param name="productId" value="${gb.productId}"/>
+                                    	</c:url>">
                                       <font>${gb.title}</font>
                                 </a>
                 
@@ -65,6 +73,31 @@
                   </tr>
                   </c:forEach>
                   </tbody>
+                  
+                  <tr>
+							<td style="text-align: left;">
+								<c:if test="${!groupBuyingList.firstPage}">
+									<a href='<c:url value="/shop/groupBuying/listItem2.do">
+		           								<c:param name="pageName" value="previous"/>
+		           								<c:param name="productId" value="${productId}"/>
+	           								</c:url>'>
+										<font color="black"><B>&lt;&lt; Prev</B></font>
+									</a>
+								</c:if>
+							</td><td/><td/>
+							<td/>
+							<td style="text-align: right;">
+								<c:if test="${!groupBuyingList.lastPage}">
+									<a href='<c:url value="/shop/groupBuying/listItem2.do">/>
+	            							 	<c:param name="pageName" value="next"/>
+	            							 	<c:param name="productId" value="${productId}"/>
+	            							 </c:url>'>
+										<font color="black"><B>Next &gt;&gt;</B></font>
+									</a>
+								</c:if>
+							</td>
+					</tr>
+						
                   </table>
                </div>
             </div>

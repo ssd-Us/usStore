@@ -45,7 +45,7 @@ public class HandMadeFormController {
 	public void setitemFacade(ItemFacade itemFacade) {
 		this.itemFacade = itemFacade;
 	}
-
+	
 	@ModelAttribute("handMadeForm")
 	public HandMadeForm createHandMadeForm() {
 		return new HandMadeForm();
@@ -68,7 +68,7 @@ public class HandMadeFormController {
 		return HANDMADE_LIST;
 	}
 	
-	// 페이지 넘어갈때 실행되는 Controller
+	// �럹�씠吏� �꽆�뼱媛덈븣 �떎�뻾�릺�뒗 Controller
 	@RequestMapping("shop/handMade/listItem2.do")
 	public String listHandMade2 (
 			@ModelAttribute("itemList") PagedListHolder<HandMade> itemList,

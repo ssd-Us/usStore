@@ -11,7 +11,7 @@ public interface ItemMapper {
 	
 	void deleteItem(int itemId);
 	
-	void getItem(int itemId, int productId);
+	Item getItem(int itemId);
 	
 	void updateQuantity(int qty, int itemId, int productId);
 	
