@@ -55,7 +55,10 @@
 <br> 
 <label>마감기한</label>: ${GroupBuying.deadLine} <br><br>
 
-<a href="step2">[이전 단계로]</a> <input type="submit" value="확인" />
+<a href="<c:url value='/shop/groupBuying/gobackAddGb.do'>
+			<c:param name="productId" value="${itemForm.productId}"/>
+		 </c:url>
+		">[이전 단계로]</a> <input type="submit" value="확인" />
 </form:form>
 </body>
 </html>

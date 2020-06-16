@@ -24,16 +24,38 @@ public class ItemFormController {
 	@Autowired
 	private ItemFacade itemFacade;
 	
-	@ModelAttribute("itemForm")		  
-	public ItemForm formBacking(HttpServletRequest request, @RequestParam("productId") int productId) {  // accessor method 
-		ItemForm itemForm = new ItemForm();
-		
-		itemForm.setProductId(autoDetectPid(request.getRemoteAddr(), productId));	// itemForm.productId initializable
-		
-		return itemForm;
+	@ModelAttribute("item")		  
+	public ItemForm formBacking(HttpServletRequest rq, @RequestParam("productId") int productId) {  // accessor method 
+		System.out.println("item controller formBacking");
+		HttpSession session = rq.getSession(false);
+		ItemForm itemForm;
+		if((ItemForm) session.getAttribute("itemForm") != null) {
+			System.out.println("session alive");
+			ItemForm itemFormSession = (ItemForm) session.getAttribute("itemForm");
+			System.out.println(itemFormSession);
+			itemForm = new ItemForm();
+			itemForm.setUnitCost(itemFormSession.getUnitCost());
+			itemForm.setTitle(itemFormSession.getTitle());
+			itemForm.setDescription(itemFormSession.getDescription());
+			itemForm.setQty(itemFormSession.getQty());
+			itemForm.setTag1(itemFormSession.getTag1());
+			itemForm.setTag2(itemFormSession.getTag2());
+			itemForm.setTag3(itemFormSession.getTag3());
+			itemForm.setTag4(itemFormSession.getTag4());
+			itemForm.setTag5(itemFormSession.getTag5());
+			
+			System.out.println("itemForm setting: " + itemForm);
+			return itemForm;
+		}
+		else {
+			System.out.println("session null");
+			itemForm = new ItemForm();
+			itemForm.setProductId(autoDetectPid(rq.getRemoteAddr(), productId));	// itemForm.productId initializable
+			return itemForm;
+		}
 	}
 	
-	private int autoDetectPid(String remoteAddr, int productId) {	// itemForm.productId initializable
+	private int autoDetectPid(String remoteAddr, int productId) {	// itemForm.productId initialize
 		return productId;
 	}
 	
@@ -41,6 +63,7 @@ public class ItemFormController {
 	public String step1(@ModelAttribute("item") ItemForm itemForm, 
 			@RequestParam("productId") int productId, Model model) {
 		System.out.println("item controller");
+		
 		model.addAttribute("productId", productId);		// deliver [productId] to item.jsp
 		return "product/item";	//form view(item.jsp)
 	}
@@ -49,11 +72,11 @@ public class ItemFormController {
 	public String submit(@ModelAttribute("item") ItemForm itemForm, 
 			@RequestParam("productId") int productId, HttpServletRequest rq) {
 		System.out.println("item.addItem2.do");
+		String itemController = "";
 		HttpSession httpSession = rq.getSession(true); //占쎌뵠沃섓옙 占쎄쉭占쎈�∽옙�뵠 占쎌뿳占쎈뼄筌롳옙 域뱄옙 占쎄쉭占쎈�∽옙�뱽 占쎈즼占쎌젻雅뚯눊��, 占쎄쉭占쎈�∽옙�뵠 占쎈씨占쎌몵筌롳옙 占쎄퉱嚥≪뮇�뒲 占쎄쉭占쎈�∽옙�뱽 占쎄문占쎄쉐占쎈립占쎈뼄.
 				
 		System.out.println("itemForm : " + itemForm);
-		String itemController = "";
-		 
+		
 //		if (result.hasErrors()) {	return formViewName;	}	//野껓옙筌앾옙 占쎌궎�몴占� 獄쏆뮇源�占쎈뻻 item.jsp嚥∽옙 占쎈뼄占쎈뻻 占쎌뵠占쎈짗
 		
 //		ItemForm itemform = new ItemForm(itemForm.getTitle(), itemForm.getUserId(), itemForm.getProductId(), itemForm.getDescription(), itemForm.getUnitCost(), 
