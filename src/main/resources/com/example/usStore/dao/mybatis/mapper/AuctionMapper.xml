@@ -62,7 +62,7 @@
   
   <update id="closeAuction" parameterType="Date">
     <![CDATA[
-     UPDATE AUCTION SET AUCTIONSTATE = 0
+     UPDATE AUCTION SET AUCTIONSTATE = 1
      WHERE DEADLINE <= #{curTime}
     ]]>
   </update>
@@ -87,8 +87,14 @@
   </insert>
 
 	<select id="isBidderExist" parameterType = "int" resultType="String">
-	 SELECT BIDDER
-     FROM BIDDER
-     WHERE ITEMID = #{itemId}
+	 	SELECT BIDDER
+     	FROM BIDDER
+    	WHERE ITEMID = #{itemId}
 	</select>
+
+	<update id="updateBidPrice">
+     	UPDATE AUCTION
+     	SET BIDPRICE= #{param1}
+     	WHERE ITEMID = #{param2}
+	</update>
 </mapper>

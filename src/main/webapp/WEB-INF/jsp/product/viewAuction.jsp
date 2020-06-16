@@ -185,12 +185,8 @@ function participation(price, unitCost) {
    		<c:if test="${sh.suppId==session.userId}"> <!-- 로그인시 실행 -->
    		<tr>
    		<td colspan="2" style="text-align: right; padding: 0px; font-size: small; border-bottom: none; border-top: 1px solid black;">
-		   <a href="<c:url value='/shop/auction/updateItem.do'/>">[게시물 수정하기]</a>
-<<<<<<< HEAD
-		   <a href="<c:url value='/shop/auction/deleteItem.do?itemId=${auction.itemId}'/>"> [게시물 삭제하기]</a>
-=======
-		   <a href="<c:url value='/shop/auction/deleteItem.do'/>"> [게시물 삭제하기]</a>
->>>>>>> branch 'test' of https://github.com/ssd-Us/usStore.git
+        <a href="<c:url value='/shop/auction/updateItem.do'/>">[게시물 수정하기]</a>
+		    <a href="<c:url value='/shop/auction/deleteItem.do?itemId=${auction.itemId}'/>"> [게시물 삭제하기]</a>
 		   </td>
 		 </tr>
 		</c:if>

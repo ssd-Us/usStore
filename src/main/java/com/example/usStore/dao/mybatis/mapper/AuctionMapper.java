@@ -39,5 +39,7 @@ public interface AuctionMapper extends ItemMapper {
 	public void insertBidder(Bidder bidder);
 	
 	public String isBidderExist(int itemId);
+  
+	public void updateBidPrice(int unitCost, int itemId);
 
 }
