@@ -47,7 +47,6 @@
 	수량 <form:input type="text" path="qty" value="${qty}"/>
 	<form:errors path="qty"/> <br><br>
 	
-
 	태그 
 	<form:input path="tag1" placeholder="#tag" value="${tag1}"/>
 	<form:errors path="tag1"/>&nbsp;

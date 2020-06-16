@@ -1,5 +1,6 @@
 package com.example.usStore.controller.item;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -26,12 +27,13 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.usStore.domain.Auction;
+import com.example.usStore.domain.Bidder;
 import com.example.usStore.domain.Item;
 import com.example.usStore.domain.Tag;
 import com.example.usStore.service.facade.ItemFacade;
 
 @Controller
-@SessionAttributes({"auctionForm", "auctionList"})
+@SessionAttributes({"Auction", "auctionList"})
 public class AuctionFormController {
    private static final String ADD_Auction_FORM = "product/addAuction";
    private static final String GoAddItemFORM = "redirect:/shop/item/addItem.do?productId=";
@@ -48,7 +50,7 @@ public class AuctionFormController {
       this.itemFacade = itemFacade;
    }
    
-   @ModelAttribute("auctionForm")		  
+   @ModelAttribute("Auction")		  
 	public AuctionForm formBacking() {  // accessor method 
 		System.out.println("formBacking");
 		
@@ -106,6 +108,7 @@ public class AuctionFormController {
    }
 
    
+   /*로그인 필요*/
    @RequestMapping("/shop/auction/participateItem.do") 
    public String auctionParticipate(HttpServletRequest request, ModelMap model) {
 	   System.out.println("<경매 참여>");
@@ -113,7 +116,27 @@ public class AuctionFormController {
 	   int price = Integer.parseInt(request.getParameter("price"));
 	   System.out.println("입력 가격 : " + price);
 	   
-	   //�뙆�씪誘명꽣濡� 諛쏆븘�삩 �엯�젰 媛�寃�(price)�쓣 unitCost �븘�뱶�뿉 update �빐二쇨린
+	   String rslt = itemFacade.isBidderExist(myItemId);
+	   System.out.println("낙찰자 검색 결과 : " + rslt);
+
+	   if (rslt == null) {//낙찰자가 없으면 낙찰자 테이블에 itemId, bidder 넣어주기
+		   System.out.println("낙찰자 테이블에 이 아이템이 없었음");
+		   
+		   Bidder bidder = new Bidder();
+		   bidder.setItemId(myItemId);
+		   bidder.setBidder("admin"); //로그인이 구현 안되어서 일단 임의로 admin 넣어줌
+		   
+		   itemFacade.insertBidder(bidder);
+	   }
+	   else {//이미 낙찰자가 있으면 낙찰자 테이블에 bidder 수정
+		   System.out.println("낙찰자 테이블에 이 아이템이 있음");
+		   
+		   itemFacade.updateBidder("admin", myItemId); //여기도 로그인 구현이 안되어서 임의로 admin 넣어줌
+	   }
+	   
+	   //파라미터로 받아온 입력 가격(price)을 item 테이블의 unitCost 필드에 update 해주기
+	   itemFacade.updateAuctionUnitCost(price, myItemId);
+	   System.out.println("Auction UnitCost 수정 완료");
 	   
 	   return "redirect:/shop/auction/viewItem.do?itemId=" + myItemId + "&productId=" + myProductId;
    }
@@ -159,6 +182,8 @@ public class AuctionFormController {
 		if(session.getAttribute("itemForm") != null) {
 			System.out.println("itemformSession: " + itemForm);	//print itemformSession toString
 		}
+
+		System.out.println(auctionForm);
 		
 		System.out.println("deadLine still null," + auctionForm);	//print command toString
 		
@@ -176,7 +201,7 @@ public class AuctionFormController {
 	@PostMapping("/shop/auction/detailItem.do")		// step3 -> done
 	public String done(@ModelAttribute("Auction") AuctionForm auctionForm,
 			ItemForm itemformSession, BindingResult result, Model model, HttpServletRequest rq, 
-			SessionStatus sessionStatus, Auction auction, ModelMap modelMap) {
+			SessionStatus sessionStatus, Auction auction, ModelMap modelMap) throws ParseException {
 		System.out.println("detailItem.do");
 		
 		HttpSession session = rq.getSession(false);
@@ -214,13 +239,19 @@ public class AuctionFormController {
 		System.out.println("deadLine : " + auctionForm.getDeadLine());
 		
 		auction.setItemId(item.getItemId());
-		auction.setStartPrice(auction.getStartPrice());
-		auction.setDeadLine(auction.getDeadLine());
+		auction.setStartPrice(auctionForm.getStartPrice());
+		auction.setDeadLine(auctionForm.getDeadLine());
 	
 		itemFacade.insertAuction(auction);	// insert DB
 		
 		sessionStatus.setComplete();	// Auction session close
 		session.removeAttribute("itemForm");	//itemForm session close
+		
+		SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss"); 
+		Date date = dt.parse(auctionForm.getDeadLine()); 
+		
+		itemFacade.testScheduler(date);
+		
 		return "redirect:/shop/auction/viewItem.do?itemId=" + auction.getItemId() + "&productId=" + item.getProductId();
 	}
 	

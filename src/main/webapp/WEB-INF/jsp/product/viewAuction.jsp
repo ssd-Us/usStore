@@ -63,7 +63,14 @@ function participation(price, unitCost) {
 }
 </script>
 <body>
-	
+<table id="main-menu">
+  <tr>
+    <td><a href='<c:url value="/shop/auction/listItem.do?productId=1"/>'>
+        <b><font color="black" size="2">
+          &lt;&lt; Go to Auction List</font></b></a>
+    </td>
+  </tr>
+</table>	
 	<table style="margin-left: auto; margin-right: auto;">
 	<tr>
 		<td style="text-align: left; padding: 0px; font-size: small; border-bottom: none;">
@@ -178,8 +185,8 @@ function participation(price, unitCost) {
    		<c:if test="${sh.suppId==session.userId}"> <!-- 로그인시 실행 -->
    		<tr>
    		<td colspan="2" style="text-align: right; padding: 0px; font-size: small; border-bottom: none; border-top: 1px solid black;">
-		   <a href="<c:url value='/shop/auction/updateItem.do'/>">[게시물 수정하기]</a>
-		   <a href="<c:url value='/shop/auction/deleteItem.do'/>"> [게시물 삭제하기]</a>
+        <a href="<c:url value='/shop/auction/updateItem.do'/>">[게시물 수정하기]</a>
+		    <a href="<c:url value='/shop/auction/deleteItem.do?itemId=${auction.itemId}'/>"> [게시물 삭제하기]</a>
 		   </td>
 		 </tr>
 		</c:if>

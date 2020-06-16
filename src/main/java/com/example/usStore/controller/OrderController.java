@@ -56,10 +56,9 @@ public class OrderController {
 		UserSession userSession = (UserSession) request.getSession().getAttribute("userSession");
 		if (cart != null) {
 			// Re-read account from DB at team's request.
-			Account account = usStore.getAccountByUsername(userSession.getAccount().getUsername());
+			Account account = usStore.getAccountByUserId(userSession.getAccount().getUserId());
 			
-			String status = usStore.getStatus(userSession.getAccount().getUserId());
-			orderForm.getOrder().initOrder(account, cart, status);
+			orderForm.getOrder().initOrder(account, cart, "OK");
 			return "NewOrderForm";	
 		}
 		else {
