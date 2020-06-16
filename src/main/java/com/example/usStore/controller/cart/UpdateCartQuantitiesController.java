@@ -40,7 +40,7 @@ public class UpdateCartQuantitiesController {
 				// ignore on purpose
 			}
 		}
-		return new ModelAndView("Cart", "cart", cart);
+		return new ModelAndView("order/Cart", "cart", cart);
 	}
 
 }
