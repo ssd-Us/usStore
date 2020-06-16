@@ -112,7 +112,7 @@ public class MybatisAuctionDao implements AuctionDao {
    public String isBidderExist(int itemId) {
 	   return auctionMapper.isBidderExist(itemId);
    }
-   
+
    public void updateBidPrice(int unitCost, int itemId) {
 	   auctionMapper.updateBidPrice(unitCost, itemId);
    }

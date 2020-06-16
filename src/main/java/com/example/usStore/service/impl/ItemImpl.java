@@ -275,7 +275,6 @@ public class ItemImpl implements ItemFacade {
 		auctionDao.updateBidPrice(unitCost, itemId);
 	}
 	
-	
 	@Override
 	public List<Tag> getTagList() {
 		// TODO Auto-generated method stub

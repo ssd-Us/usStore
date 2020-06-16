@@ -27,17 +27,17 @@
       <a href="<c:url value="/shop/viewCart.do"/>">
         <img border="0" name="img_cart" src="../images/cart.gif" /></a>
       <img border="0" src="../images/separator.gif" />
-<%--       <c:if test="${empty userSession.account}" > --%>
-<%--         <a href="<c:url value="/shop/signonForm.do"/>"> --%>
-<!--           <img border="0" name="img_signin" src="../images/sign-in.gif" /></a> -->
-<%--       </c:if> --%>
-<%--       <c:if test="${!empty userSession.account}" > --%>
-<%--         <a href="<c:url value="/shop/signoff.do"/>"> --%>
-<!--           <img border="0" name="img_signout" src="../images/sign-out.gif" /></a> -->
-<!--         <img border="0" src="../images/separator.gif" /> -->
-<%--         <a href="<c:url value="/shop/editAccount.do"/>"> --%>
-<!--           <img border="0" name="img_myaccount" src="../images/my_account.gif" /></a> -->
-<%--       </c:if> --%>
+      <c:if test="${empty userSession.account}" >
+        <a href="<c:url value="/shop/signonForm.do"/>">
+          <img border="0" name="img_signin" src="../images/sign-in.gif" /></a>
+      </c:if>
+      <c:if test="${!empty userSession.account}" >
+        <a href="<c:url value="/shop/signoff.do"/>">
+			<img border="0" name="img_signout" src="../images/sign-out.gif" /></a>
+	        <img border="0" src="../images/separator.gif" />
+        <a href="<c:url value="/shop/editAccount.do"/>">
+          	<img border="0" name="img_myaccount" src="../images/my_account.gif" /></a>
+      </c:if>
       <img border="0" src="../images/separator.gif" />&nbsp;
       <a href="../help.html"><img border="0" name="img_help" src="../images/help.gif" /></a>
     </td>
