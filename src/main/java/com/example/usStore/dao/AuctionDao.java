@@ -43,4 +43,7 @@ public interface AuctionDao extends ItemDao {
 	
 	//해당 아이템이 낙찰자 테이블에 존재하는지
 	public String isBidderExist(int itemId);
+	
+	//경매가 종료된 뒤, item 테이블의 unitCost 를 Auction 테이블의 bidPrice 에 수정
+	public void updateBidPrice(int unitCost, int itemId);
 }
