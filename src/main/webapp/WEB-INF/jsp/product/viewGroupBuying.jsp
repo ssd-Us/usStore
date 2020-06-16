@@ -139,14 +139,21 @@
    			</td>
    		</tr>
    		
-   		<c:if test="${gb.userId==session.userId}"> <!-- 로그인시 실행 -->
+   		<%-- <c:if test="${gb.userId==session.userId}"> <!-- 로그인시 실행 --> --%>
    		<tr>
    		<td colspan="2" style="text-align: right; padding: 0px; font-size: small; border-bottom: none; border-top: 1px solid black;">
-		   <a href="<c:url value='/editItem/${gb.productId}'/>">[게시물 수정하기]</a>
-		   <a href="<c:url value='/deleteItem/${gb.productId}'/>"> [게시물 삭제하기]</a>
-		   </td>
+		   <a href="<c:url value='/shop/groupBuying/edit.do'>
+		   				<c:param name="itemId" value="${gb.itemId}" />
+		   			</c:url>
+		   			">[게시물 수정하기]</a>
+		   <a href="<c:url value='/shop/groupBuying/delete.do'>
+		   				<c:param name="itemId" value="${gb.itemId}" />
+		   				<c:param name="productId" value="${gb.productId}" />
+		   			</c:url>
+		   			"> [게시물 삭제하기]</a>
+		</td>
 		 </tr>
-		</c:if>
+		<%-- </c:if> --%>
    <!-- 하나의 url을 공유하며 파라미터로 아이디 값을 넘겨줄지
    네개의 컨트롤러를 각자 구현할지 정해야함
    deleteItem 아이디만 받아와서 한번만 삭제할수 있는게 아니고

@@ -7,39 +7,20 @@ import com.example.usStore.domain.Auction;
 import com.example.usStore.domain.Tag;
 
 public class AuctionForm {
-	/*field (여기에 없는 auction field 는 default 값으로 저장*/
-	private String title;
-	private String description;
-	private List<Tag> tag;
+	/* Private Fields */
+	private int itemId;
 	private int startPrice;
-	private Date deadLine; //이 날짜 어떻게 할 것인지
-	
-	
-	
+	private String date;
+	private String time;
+	private String deadLine;
 	
 	/*getter setter*/
-	public String getTitle() {
-		return title;
+	public int getItemId() {
+		return itemId;
 	}
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public List<Tag> getTag() {
-		return tag;
-	}
-
-	public void setTag(List<Tag> tag) {
-		this.tag = tag;
+	public void setItemId(int itemId) {
+		this.itemId = itemId;
 	}
 		
 	public int getStartPrice() {
@@ -50,23 +31,34 @@ public class AuctionForm {
 		this.startPrice = startPrice;
 	}
 
-	public Date getDeadLine() {
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
+	}
+
+	public String getTime() {
+		return time;
+	}
+
+	public void setTime(String time) {
+		this.time = time;
+	}
+	
+	public String getDeadLine() {
 		return deadLine;
 	}
 
-	public void setDeadLine(Date deadLine) {
+	public void setDeadLine(String deadLine) {
 		this.deadLine = deadLine;
 	}
 	
-	
-	
-	
-	
-
-	/*Constructor*/
-	public AuctionForm(Auction auction) {
-		title = auction.getTitle();
-		description = auction.getDescription();
-		//tag = auction.getTag(); //tag 어떻게 할 지 좀 정해야 할 듯
+	@Override
+	public String toString() {
+		return "AuctionForm [itemId=" + itemId + ", startPrice=" + startPrice + ", date=" + date + ", time=" + time
+				+ ", deadLine=" + deadLine + "]";
 	}
+	
 }

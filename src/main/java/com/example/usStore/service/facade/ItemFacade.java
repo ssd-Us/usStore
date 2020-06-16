@@ -6,7 +6,9 @@ import java.util.Map;
 
 import org.springframework.dao.DataAccessException;
 
+import com.example.usStore.domain.Account;
 import com.example.usStore.domain.Auction;
+import com.example.usStore.domain.Bidder;
 import com.example.usStore.domain.GroupBuying;
 import com.example.usStore.domain.HandMade;
 import com.example.usStore.domain.Item;
@@ -53,8 +55,6 @@ public interface ItemFacade {
 	
 	List<HandMade> getHandMadeListByProductId(int productId);
 	
-	public void deleteHandMade(int itemId);
-	
 	/////////////////////////////////////////////////////////////////////////
 	/* GroupBuying */
 	/////////////////////////////////////////////////////////////////////////
@@ -94,7 +94,17 @@ public interface ItemFacade {
 
 	public Auction getAuctionById(int itemId);
 	
-	public void testScheduler(Date closingTime);
+	public void testScheduler(Date deadLine);
+	
+	public void updateAuctionUnitCost(int unitCost, int itemId);
+	
+	public void updateBidder(String bidder, int itemId);
+	
+	public void insertBidder(Bidder bidder);
+	
+	public String isBidderExist(int itemId);
+	
+	public void updateBidPrice(int unitCost, int itemId);
 	
 	/////////////////////////////////////////////////////////////////////////
 	/* Tag */
@@ -111,6 +121,6 @@ public interface ItemFacade {
 
 	void updateTag(Tag tag);	
 
-	void deleteTag(int tagId);	
+	void deleteTag(int itemId);	
 	
 }

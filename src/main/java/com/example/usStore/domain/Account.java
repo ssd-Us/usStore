@@ -16,13 +16,10 @@ public class Account implements Serializable {
     private String address1;
     private String address2;
     private String city;
-    private String status;
     private String zip;
     private String country;
     private String phone;
-    private String follower;
-    private String following;
-    private String unniversity;
+    private String university;
 
   	/* JavaBeans Properties */
 	public String getUserId() {
@@ -67,12 +64,6 @@ public class Account implements Serializable {
 	public void setCity(String city) {
 		this.city = city;
 	}
-	public String getStatus() {
-		return status;
-	}
-	public void setStatus(String status) {
-		this.status = status;
-	}
 	public String getZip() {
 		return zip;
 	}
@@ -91,27 +82,10 @@ public class Account implements Serializable {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	public String getFollower() {
-		return follower;
+	public String getUniversity() {
+		return university;
 	}
-	public void setFollower(String follower) {
-		this.follower = follower;
-	}
-	public String getFollowing() {
-		return following;
-	}
-	public void setFollowing(String following) {
-		this.following = following;
-	}
-	public String getUnniversity() {
-		return unniversity;
-	}
-	public void setUnniversity(String unniversity) {
-		this.unniversity = unniversity;
-	}
-	
-	// ??
-	public void setListOption(boolean b) {
-		// TODO Auto-generated method stub
+	public void setUniversity(String university) {
+		this.university = university;
 	}
 }

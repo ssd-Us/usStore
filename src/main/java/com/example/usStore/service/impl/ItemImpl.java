@@ -18,6 +18,7 @@ import com.example.usStore.dao.ItemDao;
 import com.example.usStore.dao.SecondHandDao;
 import com.example.usStore.dao.TagDao;
 import com.example.usStore.domain.Auction;
+import com.example.usStore.domain.Bidder;
 import com.example.usStore.domain.GroupBuying;
 import com.example.usStore.domain.HandMade;
 import com.example.usStore.domain.Item;
@@ -47,7 +48,7 @@ public class ItemImpl implements ItemFacade {
 	private AuctionDao auctionDao;
 	@Autowired
 	private TagDao tagDao;
-	@Autowired		// applicationContext.xml�뿉 �젙�쓽�맂 scheduler 媛앹껜瑜� 二쇱엯 諛쏆쓬
+	@Autowired		// applicationContext.xml占쎈퓠 占쎌젟占쎌벥占쎈쭆 scheduler 揶쏆빘猿쒐몴占� 雅뚯눘�뿯 獄쏆룇�벉
 	private ThreadPoolTaskScheduler scheduler;
 	
 	@Override
@@ -95,7 +96,7 @@ public class ItemImpl implements ItemFacade {
 		itemDao.deleteItem(itemId);
 	}
 	
-	// 占쎌뵠椰꾬옙 �⑥쥙荑귨옙鍮욑옙由�
+	// �뜝�럩逾졿ㅀ袁ъ삕 占썩뫁伊숃뜎洹⑥삕�뜮�쉻�삕�뵳占�
 	@Override
 	public boolean isItemInStock(int itemId, int productId) {
 		// TODO Auto-generated method stub
@@ -234,17 +235,45 @@ public class ItemImpl implements ItemFacade {
 	public void testScheduler(Date deadLine) {
 		Runnable updateTableRunner = new Runnable() {	
 			@Override
-			public void run() {   // �뒪耳�伊대윭�뿉 �쓽�빐 誘몃옒�쓽 �듅�젙 �떆�젏�뿉 �떎�뻾�맆 �옉�뾽�쓣 �젙�쓽	(auctionState 0->1 �닔�젙)			
-			//寃쎈ℓ瑜� �닔�젙�븳�떎. 寃쎈ℓ �긽�깭瑜� 0 �뿉�꽌 1濡� 諛붽씔�떎.
+			public void run() {  	
+				Date curTime = new Date();
+				auctionDao.closeAuction(curTime);
+				
+				List<Auction> auctionList = auctionDao.getAuctionList();
+				for(int i = 0; i < auctionList.size(); i++) {
+					if (auctionList.get(i).getAuctionState() == 1) {
+						int unitCost = auctionList.get(i).getUnitCost();
+						int itemId = auctionList.get(i).getItemId();
+						
+						auctionDao.updateBidPrice(unitCost, itemId);
+					}
+				}
 			}
 		};
-
-		// �뒪耳�以� �깮�꽦: 留덇컧�떆媛꾩씠 �릺硫� updateTableRunner.run() 硫붿냼�뱶 �떎�뻾
 		scheduler.schedule(updateTableRunner, deadLine);  
 		
 		System.out.println("updateTableRunner has been scheduled to execute at " + deadLine);
 	}
 	
+	public void updateAuctionUnitCost(int unitCost, int itemId) {
+		auctionDao.updateAuctionUnitCost(unitCost, itemId);
+	}
+	
+	public void updateBidder(String bidder, int itemId) {
+		auctionDao.updateBidder(bidder, itemId);
+	}
+	
+	public void insertBidder(Bidder bidder) {
+		auctionDao.insertBidder(bidder);
+	}
+	
+	public String isBidderExist(int itemId) {
+		return auctionDao.isBidderExist(itemId);
+	}
+	
+	public void updateBidPrice(int unitCost, int itemId) {
+		auctionDao.updateBidPrice(unitCost, itemId);
+	}
 	
 	@Override
 	public List<Tag> getTagList() {
@@ -283,9 +312,9 @@ public class ItemImpl implements ItemFacade {
 	}
 
 	@Override
-	public void deleteTag(int tagId) {
+	public void deleteTag(int itemId) {
 		// TODO Auto-generated method stub
-		tagDao.deleteTag(tagId);
+		tagDao.deleteTag(itemId);
 	}
 
 	@Override
@@ -304,11 +333,5 @@ public class ItemImpl implements ItemFacade {
 	public Item getItem(int itemId) {
 		// TODO Auto-generated method stub
 		return itemDao.getItem(itemId);
-	}
-
-	@Override
-	public void deleteHandMade(int itemId) {
-		// TODO Auto-generated method stub
-		handMadeDao.deleteHandMade(itemId);
 	}
 }
