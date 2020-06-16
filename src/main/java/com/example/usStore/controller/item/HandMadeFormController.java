@@ -41,7 +41,7 @@ public class HandMadeFormController {
 		this.itemFacade = itemFacade;
 	}
 
-	// HandMade 리스트 초기 화면 출력시 실행되는 Controller
+	// HandMade 由ъ뒪�듃 珥덇린 �솕硫� 異쒕젰�떆 �떎�뻾�릺�뒗 Controller
 	@RequestMapping("/shop/handMade/listItem.do")
 	public String listHandMade (
 			@RequestParam("productId") int productId, ModelMap model) throws Exception {
@@ -54,7 +54,7 @@ public class HandMadeFormController {
 		return "product/handMade";
 	}
 	
-	// 페이지 넘어갈때 실행되는 Controller
+	// �럹�씠吏� �꽆�뼱媛덈븣 �떎�뻾�릺�뒗 Controller
 	@RequestMapping("shop/handMade/listItem2.do")
 	public String listHandMade2 (
 			@ModelAttribute("itemList") PagedListHolder<HandMade> itemList,
@@ -80,30 +80,30 @@ public class HandMadeFormController {
 	      return "redirect:/shop/item/addItem.do?productId=" + productId;
 	}
 
-	@PostMapping("/shop/handMade/step3")		// step2 -> step3 占쎌뵠占쎈짗
+	@PostMapping("/shop/handMade/step3")		// step2 -> step3 �뜝�럩逾졾뜝�럥吏�
 	public String step3(
 			@ModelAttribute("HandMade") HandMadeForm handMadeForm, 
-			@RequestParam("productId") int productId, Item itemformSession, 
+			@RequestParam("productId") int productId, ItemForm itemformSession, 
 			BindingResult result, Model model, HttpServletRequest rq) {	
-		HttpSession session = rq.getSession(false); //�씠誘� �꽭�뀡�씠 �엳�떎硫� 洹� �꽭�뀡�쓣 �룎�젮二쇨퀬, �꽭�뀡�씠 �뾾�쑝硫� �깉濡쒖슫 �꽭�뀡�쓣 �깮�꽦�븳�떎.
+		HttpSession session = rq.getSession(false); //占쎌뵠沃섓옙 占쎄쉭占쎈�∽옙�뵠 占쎌뿳占쎈뼄筌롳옙 域뱄옙 占쎄쉭占쎈�∽옙�뱽 占쎈즼占쎌젻雅뚯눊��, 占쎄쉭占쎈�∽옙�뵠 占쎈씨占쎌몵筌롳옙 占쎄퉱嚥≪뮇�뒲 占쎄쉭占쎈�∽옙�뱽 占쎄문占쎄쉐占쎈립占쎈뼄.
 		System.out.println("handMadeCommand: " + handMadeForm);	//print command toString
 		
-		// session占쎈퓠 占쏙옙占쎌삢占쎈쭆 regReq 揶쏆빘猿쒙옙肉� 占쏙옙占쎌삢占쎈쭆 占쎌뿯占쎌젾 揶쏉옙 野껓옙筌앾옙
-		// 占쎌맄占쎈퓠占쎄퐣 @Valid�몴占� 占쎈꽰占쎈퉸 Hibernate Validator�몴占� 占쎄텢占쎌뒠占쎈맙
-		// MemberRegistValidator�몴占� 筌욊낯�젔 �뤃�뗭겱占쎈릭占쎈연 占쎄텢占쎌뒠占쎈막 野껋럩�뒭 占쎈툡占쎌삋 �굜遺얜굡 占쎈뼄占쎈뻬
+		// session�뜝�럥�뱺 �뜝�룞�삕�뜝�럩�궋�뜝�럥彛� regReq �뤆�룇鍮섊뙼�뮋�삕�굢占� �뜝�룞�삕�뜝�럩�궋�뜝�럥彛� �뜝�럩肉��뜝�럩�졑 �뤆�룊�삕 �뇦猿볦삕嶺뚯빢�삕
+		// �뜝�럩留꾢뜝�럥�뱺�뜝�럡�맋 @Valid占쎈ご�뜝占� �뜝�럥苑겼뜝�럥�돵 Hibernate Validator占쎈ご�뜝占� �뜝�럡�뀬�뜝�럩�뮔�뜝�럥留�
+		// MemberRegistValidator占쎈ご�뜝占� 嶺뚯쉳�궚占쎌젘 占쎈쨨占쎈뿭寃긷뜝�럥由��뜝�럥�뿰 �뜝�럡�뀬�뜝�럩�뮔�뜝�럥留� �뇦猿뗫윪占쎈뮡 �뜝�럥�닡�뜝�럩�굥 占쎄턀�겫�뼔援� �뜝�럥堉꾢뜝�럥六�
 		// new MemberRegistValidator().validate(memRegReq, bindingResult);	
 
 //		if (result.hasFieldErrors("listPrice") ||
 //				result.hasFieldErrors("deadLine")) {	
-//			return ADD_GroupBuying_FORM;		// 野껓옙筌앾옙 占쎌궎�몴占� 獄쏆뮇源� 占쎈뻻 step2 form view(addGroupBuying.jsp)嚥∽옙 占쎌뵠占쎈짗
+//			return ADD_GroupBuying_FORM;		// �뇦猿볦삕嶺뚯빢�삕 �뜝�럩沅롳옙紐닷뜝占� �뛾�룇裕뉑틦占� �뜝�럥六� step2 form view(addGroupBuying.jsp)�슖�댙�삕 �뜝�럩逾졾뜝�럥吏�
 //		}
 		
-		itemformSession = (Item) session.getAttribute("item");
+		itemformSession = (ItemForm) session.getAttribute("itemForm");
 		Item item = new Item(itemformSession.getUnitCost(), itemformSession.getTitle(), 
 				itemformSession.getDescription(), itemformSession.getQty(), itemformSession.getUserId(), productId);
 		
 		itemFacade.insertItem(item);
-		itemformSession.makeTags(item.getItemId(), itemformSession.getTag1());	//tag�뿉 itemId, tagName �쟻�슜 �썑 由ъ뒪�듃�뿉 �궫�엯
+		itemformSession.makeTags(item.getItemId(), itemformSession.getTag1());	//tag占쎈퓠 itemId, tagName 占쎌읅占쎌뒠 占쎌뜎 �뵳�딅뮞占쎈뱜占쎈퓠 占쎄땜占쎌뿯
 		itemformSession.makeTags(item.getItemId(), itemformSession.getTag2());
 		itemformSession.makeTags(item.getItemId(), itemformSession.getTag3());
 		itemformSession.makeTags(item.getItemId(), itemformSession.getTag4());
@@ -112,13 +112,13 @@ public class HandMadeFormController {
 		List<Tag> tags = new ArrayList<Tag>();
 		tags = itemformSession.getTags();
 		
-		for(Tag t : tags) {	//tags 由ъ뒪�듃 �깘�깋
-			if(t.getTagName() != null || t.getTagName().trim() != "") {	//tagName�씠 null �삉�뒗 鍮� 媛믪씠 �븘�땶 �룞�븞
-				itemFacade.insertTag(t);	//�깭洹� �궫�엯 �셿猷�
+		for(Tag t : tags) {	//tags �뵳�딅뮞占쎈뱜 占쎄튂占쎄퉳
+			if(t.getTagName() != null || t.getTagName().trim() != "") {	//tagName占쎌뵠 null 占쎌굢占쎈뮉 �뜮占� 揶쏅�れ뵠 占쎈툡占쎈빒 占쎈짗占쎈툧
+				itemFacade.insertTag(t);	//占쎄묶域뱄옙 占쎄땜占쎌뿯 占쎌끏�뙴占�
 			}
 		}
 		
-		return CHECK_FORM3;		// 占쎌궎�몴占� 占쎈씨占쎌몵筌롳옙 step3 form view(checkGroupBuying.jsp)嚥∽옙 占쎌뵠占쎈짗
+		return CHECK_FORM3;		// �뜝�럩沅롳옙紐닷뜝占� �뜝�럥�뵪�뜝�럩紐든춯濡녹삕 step3 form view(checkGroupBuying.jsp)�슖�댙�삕 �뜝�럩逾졾뜝�럥吏�
 	}
 	
 	@RequestMapping(value="/shop/handMade/addItem.do", method = RequestMethod.GET)

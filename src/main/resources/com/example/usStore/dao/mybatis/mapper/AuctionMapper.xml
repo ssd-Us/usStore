@@ -24,7 +24,7 @@
      INSERT INTO AUCTION
      	(ITEMID, AUCTIONSTATE, DEADLINE, STARTPRICE, BIDPRICE)
      VALUES 
-     	(#{itemId}, #{auctionState}, #{deadLine}, #{startPrice}, #{bidPrice})
+     	(#{itemId}, #{auctionState}, TO_DATE(#{deadLine}, 'yyyy-mm-dd hh24:mi:ss'), #{startPrice}, #{bidPrice})
   </insert>
   
   
@@ -59,4 +59,11 @@
     WHERE A.ITEMID = I.ITEMID
     	AND I.ITEMID = #{itemId}
   </select>
+  
+  <update id="closeAuction" parameterType="Date">
+    <![CDATA[
+     UPDATE AUCTION SET AUCTIONSTATE = 0
+     WHERE DEADLINE <= #{curTime}
+    ]]>
+  </update>
 </mapper>

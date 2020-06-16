@@ -26,10 +26,10 @@
                      Auction List
                   </h2>
                    <p style="text-align:right;">
-		                <a href="<c:url value='/shop/auction/addItem.do'>
-		               		<c:param name="productId" value="${productId}"/></c:url>
-						">[경매 추가]
-						</a>
+		                <a href="<c:url value='/shop/item/addItem.do'>
+                           <c:param name="productId" value="${productId}"/></c:url>
+                  ">[경매 추가]
+                  </a>
 					</p>
                   <hr>
                   <table>
@@ -38,7 +38,7 @@
                         <th style="padding-left:150px">가격</th>
                         <th><p style="padding-left:100px">판매자</p></th>
                         <th><p style="padding-left:80px">낙찰자</p></th>
-                        <th><p style="padding-left:80px">마감일</p></th>
+                        <th><p style="padding-left:80px">마감 날짜</p></th>
                         </tr>
                   <tbody>   
                   <c:forEach var="al" items="${auctionList.pageList}">               
@@ -55,7 +55,7 @@
                    <td style="padding-left:140px">시작:<c:out value="${al.startPrice}"/><br>낙찰:<c:out value="${al.bidPrice}"/></td>
                        <td style="padding-left:120px"><c:out value="${al.userId}"/></td>   
                        <td style="padding-left:100px"><c:out value="b"/></td>
-                       <td style="padding-left:80px"><fmt:formatDate value="${al.deadLine}" pattern="yyyy년 MM월 dd일  hh시 mm분 ss초" /></td>
+                       <td style="padding-left:80px"><c:out value="${al.deadLine}"/></td>
                   </tr>
                   </c:forEach>
                   </tbody>

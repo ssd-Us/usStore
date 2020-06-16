@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>상품 입력 폼</title>
+<title>ìí ìë ¥ í¼</title>
 </head>
 <style>
 	div#addItemForm {
@@ -38,12 +38,16 @@
 	<form:textarea path="description" cols="50" rows="10" value="${discription}"/>
 	<form:errors path="description"/> <br><br>
 	
-	정가 <form:input type="text" path="unitCost" value="${unitCost}"/>원
+	<c:set var="pId" value="${productId}"/>
+	<c:if test="${pId != 1}">
+	정가 <form:input type="text" path="unitCost" value="${unitCost}"/>
 	<form:errors path="unitCost"/> <br><br>
+	</c:if>
 	
 	수량 <form:input type="text" path="qty" value="${qty}"/>
 	<form:errors path="qty"/> <br><br>
 	
+
 	태그 
 	<form:input path="tag1" placeholder="#tag" value="${tag1}"/>
 	<form:errors path="tag1"/>&nbsp;

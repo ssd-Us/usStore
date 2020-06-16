@@ -29,5 +29,5 @@ public interface AuctionMapper extends ItemMapper {
 	
 	public void insertNewEvent(HashMap<String, Date> map);
 	
-	public void closeEvent(Date curTime);
+	public void closeAuction(Date curTime);
 }
