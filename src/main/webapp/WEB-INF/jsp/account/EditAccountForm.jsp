@@ -1,4 +1,4 @@
-<%@ include file="../IncludeTop.jsp"%>
+<%@ include file="accountTop.jsp"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
@@ -50,5 +50,3 @@
   <h3><b><a href='<c:url value="/shop/listOrders.do"/>'>My Orders</a></b></h3>
   
 </div>
-
-<%@ include file="../IncludeBottom.jsp"%>

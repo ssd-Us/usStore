@@ -1,4 +1,4 @@
-<%@ include file="../IncludeTop.jsp"%>
+<%@ include file="accountTop.jsp"%>
 
 <c:if test="${!empty message}">
   <b><font color="red"><c:url value="${message}" /></font></b>
@@ -33,5 +33,3 @@
     <img border="0" src="../images/button_register_now.gif" alt="" />
   </a>
 </div>
-
-<%@ include file="../IncludeBottom.jsp"%>
