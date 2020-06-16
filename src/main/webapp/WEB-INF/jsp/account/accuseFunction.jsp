@@ -2,9 +2,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <% request.setCharacterEncoding("UTF-8"); %>
 <script type="text/javascript"> 
-function accuse(){
+function accuse(href){  //a랑 href 
 	var reason = prompt('판매자 신고하기', '신고 사유를 작성하세요.');
 	if(reason){
+		a.href += "&reason=" + reason;
 		alert("신고되었습니다.");}
 	else{alert("취소되었습니다.?? 정말 취소되도록 (디비문 안들어가도록)수정"); }
 }
@@ -36,7 +37,7 @@ function accuse(){
 								<c:param name="userId" value="${sh.userId}"/>
 		 						<c:param name="itemId" value="${sh.itemId}"/>
 		 						<c:param name="productId" value="${productId}"/></c:url>"
-								onClick = "accuse(); return;">판매자 신고하기</a>
+								onClick = "accuse(this.href); return;">판매자 신고하기</a>
 							</c:when>
 							<c:when test="${productId==3}">
 								<a href="<c:url value='/addAccuse.do'>

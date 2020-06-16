@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import com.example.usStore.dao.AuctionDao;
 import com.example.usStore.dao.mybatis.mapper.AuctionMapper;
 import com.example.usStore.domain.Auction;
+import com.example.usStore.domain.Bidder;
 import com.example.usStore.domain.Item;
 
 @Qualifier("mybatisAuctionDao")
@@ -95,4 +96,21 @@ public class MybatisAuctionDao implements AuctionDao {
    public void closeAuction(Date curTime) {
 	   auctionMapper.closeAuction(curTime);
    }
+
+   public void updateAuctionUnitCost(int unitCost, int itemId) {
+	   auctionMapper.updateAuctionUnitCost(unitCost, itemId);
+   }
+	
+   public void updateBidder(String bidder, int itemId) {
+	   auctionMapper.updateBidder(bidder, itemId);
+   }
+	
+   public void insertBidder(Bidder bidder) {
+	   auctionMapper.insertBidder(bidder);
+   }
+   
+   public String isBidderExist(int itemId) {
+	   return auctionMapper.isBidderExist(itemId);
+   }
+
 }
