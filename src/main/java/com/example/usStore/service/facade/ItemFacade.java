@@ -94,7 +94,7 @@ public interface ItemFacade {
 
 	public Auction getAuctionById(int itemId);
 	
-	public void testScheduler(Date closingTime);
+	public void testScheduler(Date deadLine);
 	
 	/////////////////////////////////////////////////////////////////////////
 	/* Tag */

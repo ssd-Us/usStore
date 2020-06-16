@@ -27,4 +27,7 @@ public interface AuctionDao extends ItemDao {
 
 	// �븘�씠�뀥 �븘�씠�뵒濡� �빐�떦 寃쎈ℓ 媛앹껜 諛섑솚
 	public Auction getAuctionById(int itemId) throws DataAccessException;
+	
+	//경매 종료 (scheduler)
+	public void closeAuction(Date curTime);
 }
