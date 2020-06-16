@@ -43,7 +43,7 @@
     </tr>
   </table>
   <br />
-    <input type="image" src="../images/button_submit.gif" name="submit"
+    <input type="image" src="../../images/button_submit.gif" name="submit"
       value="Save Account Information" />
 </form:form>
 <p></p>
