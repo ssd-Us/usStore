@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.util.WebUtils;
-
 import com.example.usStore.domain.Account;
 import com.example.usStore.service.AccountFormValidator;
 import com.example.usStore.service.facade.UsStoreFacade;
@@ -47,11 +46,12 @@ public class AccountFormController {
 	@ModelAttribute("accountForm")
 	public AccountForm formBackingObject(HttpServletRequest request) 
 			throws Exception {
+		System.out.println("formBackingObject");
 		UserSession userSession = 
 			(UserSession) WebUtils.getSessionAttribute(request, "userSession");
 		if (userSession != null) {	// edit an existing account
-			usStore.getAccountByUserId(userSession.getAccount().getUserId());
-			return new AccountForm();
+			return new AccountForm(
+					usStore.getAccountByUserId(userSession.getAccount().getUserId()));
 		}
 		else {	// create a new account
 			return new AccountForm();
@@ -70,13 +70,17 @@ public class AccountFormController {
 			BindingResult result) throws Exception {
 
 		validator.validate(accountForm, result);
+		System.out.println("onSubmit");
+		if (result.hasErrors())
+			return formViewName;
 		
-		if (result.hasErrors()) return formViewName;
 		try {
 			if (accountForm.isNewAccount()) {
+				System.out.println("newAccount");
 				usStore.insertAccount(accountForm.getAccount());
 			}
 			else {
+				System.out.println("updateAccount");
 				usStore.updateAccount(accountForm.getAccount());
 			}
 		}
@@ -87,7 +91,7 @@ public class AccountFormController {
 		}
 		
 		UserSession userSession = new UserSession(accountForm.getAccount());
-//		usStore.getAccountByUserId(accountForm.getAccount().getUserId());
+		usStore.getAccountByUserId(accountForm.getAccount().getUserId());
 		session.setAttribute("userSession", userSession);
 		return successViewName;  
 	}
