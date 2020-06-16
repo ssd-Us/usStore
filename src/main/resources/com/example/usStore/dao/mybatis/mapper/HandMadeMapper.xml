@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.usStore.dao.mybatis.mapper.HandMadeMapper">
+	<cache/>
+  <!-- Product_id를 받아 HandMade 전체 list 가져오기  -->
+  <select id="getHandMadeListByProductId" resultType="HandMade">
+    SELECT
+      I.ITEMID,
+      I.PRODUCTID,
+      UNITCOST,
+      DESCRIPTION,
+      VIEWCOUNT,
+      QTY,
+      DISCOUNT,
+      LISTPRICE,
+      I.USERID AS "item.userId",
+      I.PRODUCTID AS "item.productId",
+      STATUS
+    FROM ITEM I, HANDMADE H
+    WHERE H.ITEMID = I.ITEMID AND I.PRODUCTID = #{value}
+  </select>
+  
+  <select id="getHandMadeById" resultType="HandMade">
+    SELECT I.PRODUCTID, I.ITEMID, I.USERID, I.TITLE, I.QTY, I.UNITCOST, I.DESCRIPTION, I.VIEWCOUNT, LISTPRICE
+    FROM ITEM I, HANDMADE H
+    WHERE H.ITEMID = I.ITEMID AND I.ITEMID = #{itemId}
+  </select>
+  
+  <select id="getHandMadeList" resultType="HandMade">
+    SELECT I.PRODUCTID, I.ITEMID, I.USERID, I.TITLE, I.QTY, I.UNITCOST, I.DESCRIPTION, I.VIEWCOUNT, LISTPRICE
+    FROM ITEM I, HANDMADE H
+    WHERE I.ITEMID = H.ITEMID
+  </select>
+
+  <select id="getQuantity" resultType="int">
+    SELECT QTY AS value
+    FROM INVENTORY
+    WHERE ITEMID = #{itemId}
+  </select>
+
+  <update id="updateQuantity">
+    UPDATE INVENTORY 
+    SET QTY = QTY - #{increment}
+    WHERE ITEMID = #{itemId}
+  </update>
+  
+  <!-- 내가 추가한 것 -->
+  <delete id="deleteHandMade" parameterType="int">
+  	DELETE FROM HAMDMADE
+  	WHERE ITEMID = #{itemId}
+  </delete>
+  
+  <update id="updateHandMade" parameterType="HandMade">
+  	UPDATE HANDMADE SET
+	  	ITEMID = #{itemId},
+	  	LISTPRICE = #{listPrice}
+  	WHERE ITEMID = #{itemId}
+  </update>
+  
+  <insert id="insertHandMade" parameterType="HandMade">
+   	INSERT INTO HANDMADE
+      (ITEMID, LISTPRICE)
+    VALUES
+      (#{itemId}, #{listPrice})
+  </insert>
+</mapper>

@@ -39,12 +39,6 @@ public class MybatisHandMadeDao implements HandMadeDao {
 	}
 
 	@Override
-	public void deleteHandMade(int itemId) throws DataAccessException {
-		// TODO Auto-generated method stub
-		handMadeMapper.deleteHandMade(itemId);
-	}
-
-	@Override
 	public void insertHandMade(HandMade handmade) throws DataAccessException {
 		// TODO Auto-generated method stub
 		handMadeMapper.insertHandMade(handmade);
