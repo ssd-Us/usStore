@@ -115,10 +115,9 @@ public class AuctionFormController {
 	   int price = Integer.parseInt(request.getParameter("price"));
 	   System.out.println("입력 가격 : " + price);
 	   
-	   //
 	   String rslt = itemFacade.isBidderExist(myItemId);
 	   System.out.println("낙찰자 검색 결과 : " + rslt);
-	   
+
 	   if (rslt == null) {//낙찰자가 없으면 낙찰자 테이블에 itemId, bidder 넣어주기
 		   System.out.println("낙찰자 테이블에 이 아이템이 없었음");
 		   
@@ -182,6 +181,7 @@ public class AuctionFormController {
 		if(session.getAttribute("itemForm") != null) {
 			System.out.println("itemformSession: " + itemForm);	//print itemformSession toString
 		}
+
 		System.out.println(auctionForm);
 		
 		System.out.println("deadLine still null," + auctionForm);	//print command toString

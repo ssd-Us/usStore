@@ -31,7 +31,7 @@ public interface AuctionDao extends ItemDao {
 	
 	//경매 종료 (scheduler)
 	public void closeAuction(Date curTime);
-	
+
 	//경매 최대 가격 변경
 	public void updateAuctionUnitCost(int unitCost, int itemId);
 	

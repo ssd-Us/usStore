@@ -31,7 +31,7 @@ public interface AuctionMapper extends ItemMapper {
 	public void insertNewEvent(HashMap<String, Date> map);
 	
 	public void closeAuction(Date curTime);
-	
+
 	public void updateAuctionUnitCost(int unitCost, int itemId);
 	
 	public void updateBidder(String bidder, int itemId);
@@ -39,4 +39,5 @@ public interface AuctionMapper extends ItemMapper {
 	public void insertBidder(Bidder bidder);
 	
 	public String isBidderExist(int itemId);
+
 }

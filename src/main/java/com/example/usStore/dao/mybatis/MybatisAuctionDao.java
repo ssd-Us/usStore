@@ -96,7 +96,7 @@ public class MybatisAuctionDao implements AuctionDao {
    public void closeAuction(Date curTime) {
 	   auctionMapper.closeAuction(curTime);
    }
-   	
+
    public void updateAuctionUnitCost(int unitCost, int itemId) {
 	   auctionMapper.updateAuctionUnitCost(unitCost, itemId);
    }
@@ -112,4 +112,5 @@ public class MybatisAuctionDao implements AuctionDao {
    public String isBidderExist(int itemId) {
 	   return auctionMapper.isBidderExist(itemId);
    }
+
 }
