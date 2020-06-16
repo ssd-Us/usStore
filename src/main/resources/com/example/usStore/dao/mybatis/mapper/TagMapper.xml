@@ -17,4 +17,15 @@
 	WHERE T.ITEMID = #{itemId}
 		AND T.ITEMID = I.ITEMID
 	</select>
+	
+	<update id="updateTag" parameterType="Tag">
+		UPDATE TAG 
+  		SET TAGID = #{tagId}, TAGNAME = #{tagName}
+  		WHERE ITEMID = #{itemId}
+	</update>
+	
+	 <delete id="deleteTag" parameterType="int">
+     DELETE FROM TAG
+     WHERE ITEMID = #{itemId}
+  </delete>
 </mapper>

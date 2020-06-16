@@ -48,7 +48,7 @@ public class ItemImpl implements ItemFacade {
 	private AuctionDao auctionDao;
 	@Autowired
 	private TagDao tagDao;
-	@Autowired		// applicationContext.xml�뿉 �젙�쓽�맂 scheduler 媛앹껜瑜� 二쇱엯 諛쏆쓬
+	@Autowired		// applicationContext.xml占쎈퓠 占쎌젟占쎌벥占쎈쭆 scheduler 揶쏆빘猿쒐몴占� 雅뚯눘�뿯 獄쏆룇�벉
 	private ThreadPoolTaskScheduler scheduler;
 	
 	@Override
@@ -96,7 +96,7 @@ public class ItemImpl implements ItemFacade {
 		itemDao.deleteItem(itemId);
 	}
 	
-	// 占쎌뵠椰꾬옙 �⑥쥙荑귨옙鍮욑옙由�
+	// �뜝�럩逾졿ㅀ袁ъ삕 占썩뫁伊숃뜎洹⑥삕�뜮�쉻�삕�뵳占�
 	@Override
 	public boolean isItemInStock(int itemId, int productId) {
 		// TODO Auto-generated method stub
@@ -312,9 +312,9 @@ public class ItemImpl implements ItemFacade {
 	}
 
 	@Override
-	public void deleteTag(int tagId) {
+	public void deleteTag(int itemId) {
 		// TODO Auto-generated method stub
-		tagDao.deleteTag(tagId);
+		tagDao.deleteTag(itemId);
 	}
 
 	@Override

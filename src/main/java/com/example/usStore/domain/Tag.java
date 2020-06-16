@@ -18,6 +18,12 @@ public class Tag  implements Serializable {
 		this.itemId = itemId;	
 		this.tagName = tagName;
 	}
+	
+	public Tag(int tagId, int itemId, String tagName) {
+		this.tagId = tagId;
+		this.itemId = itemId;	
+		this.tagName = tagName;
+	}
 		
 	/* JavaBeans Properties */
 	public int getTagId() { return tagId; }
