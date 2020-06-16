@@ -111,7 +111,7 @@ public class HandMadeFormController {
 		return ADD_HANDMADE_FORM;	// step2 form view
 	}
 
-	@PostMapping("/shop/handMade/step3")		// step2 -> step3 占쎌뵠占쎈짗
+	@PostMapping("/shop/handMade/step3.do")		// step2 -> step3 占쎌뵠占쎈짗
 	public String step3(
 			@ModelAttribute("HandMade") HandMadeForm handMadeForm, 
 			HttpServletRequest rq, ItemForm itemForm, Model model) {
@@ -129,9 +129,17 @@ public class HandMadeFormController {
 		model.addAttribute(itemForm);
 		return CHECK_FORM3;	// step3(CHECK_FORM3)
 	}
-	   
+	
+	@RequestMapping(value="/shop/handMade/gobackAddHandMade.do", method = RequestMethod.GET)		// step3 -> step2
+	public String backToAddHandMade(
+			@ModelAttribute("HandMade") HandMadeForm handMadeForm, 
+			@RequestParam("productId") int productId, Model model){
+		model.addAttribute("productId", productId);
+		return ADD_HANDMADE_FORM;	// check.jsp -> addHandMade.jsp
+	}
+	
 	@PostMapping("/shop/handMade/detailItem.do")		// step3 -> done
-	public String finalAddGroupBuying(@ModelAttribute("HandMade") HandMadeForm handMadeForm, 
+	public String finalAddHandMade(@ModelAttribute("HandMade") HandMadeForm handMadeForm, 
 			ItemForm itemformSession, BindingResult result, Model model, HttpServletRequest rq, 
 			SessionStatus sessionStatus, HandMade handMade) {
 		System.out.println("detailItem.do");

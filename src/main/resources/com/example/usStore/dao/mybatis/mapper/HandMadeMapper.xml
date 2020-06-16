@@ -52,22 +52,15 @@
   
   <update id="updateHandMade" parameterType="HandMade">
   	UPDATE HANDMADE SET
-	  	ITEMID = #{itemId}, 
-	  	UNITCOST = #{unitCost}, 
-	  	TITLE = #{title}, 
-	  	DESCRIPTION = #{description}, 
-	  	VIEWCOUNT = #{viewCount}, 
-	  	QTY = #{quantity}, 
-	  	USERID = #{userId}, 
-	  	PRODUCTID = #{productId},
+	  	ITEMID = #{itemId},
 	  	LISTPRICE = #{listPrice}
   	WHERE ITEMID = #{itemId}
   </update>
   
   <insert id="insertHandMade" parameterType="HandMade">
    	INSERT INTO HANDMADE
-      (ITEMID, UNITCOST, TITLE, DESCRIPTION, VIEWCOUNT, QTY, USERID, PRODUCTID, LISTPRICE)
+      (ITEMID, LISTPRICE)
     VALUES
-      (#{itemId}, #{unitCost}, #{title}, #{description}, #{viewCount}, #{quantity}, #{userId}, #{productId}, #{listPrice})
+      (#{itemId}, #{listPrice})
   </insert>
 </mapper>
