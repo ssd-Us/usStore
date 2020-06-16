@@ -38,19 +38,11 @@
 		</property>
 		<property name="defaultEncoding" value="UTF-8" />
 	</bean>
-
-	<mvc:interceptors>
-		<mvc:interceptor>
-			<mvc:mapping path="/members/get*" />
-			<mvc:mapping path="/members/delete*" />
-			<bean class="org.springframework.samples.controller.LoginInterceptor" />
-		</mvc:interceptor>
-	</mvc:interceptors>
 	
 	<!-- 로그인 구현 관련  끝 -->
 	
 	<mvc:view-controller path="/shop/index.do" view-name="index"/>
-	<mvc:view-controller path="/shop/signonForm.do" view-name="SignonForm"/> 
+	<mvc:view-controller path="/shop/signonForm.do" view-name="account/SignonForm"/> 
 	
 	<mvc:interceptors>
 		<mvc:interceptor>

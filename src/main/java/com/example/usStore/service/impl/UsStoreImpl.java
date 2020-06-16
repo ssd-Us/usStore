@@ -26,15 +26,21 @@ public class UsStoreImpl implements UsStoreFacade {
 	private OrderDao orderDao;
 
 	@Override
-	public Account getAccountByUsername(String username) {
+	public Account getAccountByUserId(String userId) {
 		// TODO Auto-generated method stub
-		return accountDao.getAccountByUsername(username);
+		return accountDao.getAccountByUserId(userId);
 	}
 
 	@Override
-	public Account getAccountByUsernameAndPassword(String username, String password) {
+	public Account getAccountByUserIdAndPassword(String userId, String password) {
 		// TODO Auto-generated method stub
-		return accountDao.getAccountByUsernameAndPassword(username, password);
+		return accountDao.getAccountByUserIdAndPassword(userId, password);
+	}
+
+	@Override
+	public Account getAccountByUsername(String userName) {
+		// TODO Auto-generated method stub
+		return accountDao.getAccountByUsername(userName);
 	}
 
 	@Override

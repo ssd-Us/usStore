@@ -24,6 +24,7 @@ import com.example.usStore.service.facade.UsStoreFacade;
  * @author Juergen Hoeller
  * @since 01.12.2003
  * @modified by Changsup Park
+ * @modified by Jieun Lee
  */
 @Controller
 @RequestMapping({"/shop/newAccount.do","/shop/editAccount.do"})
@@ -31,6 +32,7 @@ public class AccountFormController {
 
 	@Value("EditAccountForm")
 	private String formViewName;
+	
 	@Value("index")
 	private String successViewName;
 	private static final String[] LANGUAGES = {"english", "japanese"};
@@ -53,8 +55,8 @@ public class AccountFormController {
 		UserSession userSession = 
 			(UserSession) WebUtils.getSessionAttribute(request, "userSession");
 		if (userSession != null) {	// edit an existing account
+			usStore.getAccountByUserId(userSession.getAccount().getUserId());
 			return new AccountForm();
-//				usStore.getAccountByUsername(userSession.getAccount().getUsername()));
 		}
 		else {	// create a new account
 			return new AccountForm();
@@ -87,10 +89,10 @@ public class AccountFormController {
 		if (result.hasErrors()) return formViewName;
 		try {
 			if (accountForm.isNewAccount()) {
-//				usStore.insertAccount(accountForm.getAccount());
+				usStore.insertAccount(accountForm.getAccount());
 			}
 			else {
-//				usStore.updateAccount(accountForm.getAccount());
+				usStore.updateAccount(accountForm.getAccount());
 			}
 		}
 		catch (DataIntegrityViolationException ex) {
@@ -100,7 +102,7 @@ public class AccountFormController {
 		}
 		
 		UserSession userSession = new UserSession(new Account());
-//			usStore.getAccountByUsername(accountForm.getAccount().getUsername()));
+		usStore.getAccountByUserId(accountForm.getAccount().getUserId());
 		session.setAttribute("userSession", userSession);
 		return successViewName;  
 	}
