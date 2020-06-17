@@ -108,9 +108,6 @@ public class MyPageImpl implements MyPageFacade {
 
 	@Override
 	public void insertAccuse(Accuse accuse) {
-		accuse.setAttacker("B");
-		accuse.setReason("신고이유 원래는 자바스크립트에서 넘겨줌");
-		accuse.setVictim("A");
 		accuseDao.insertAccuse(accuse);
 	}
 
