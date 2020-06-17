@@ -39,7 +39,7 @@ public class ViewCartController {
 		UserSession userSession = 
 			(UserSession) WebUtils.getSessionAttribute(request, "userSession");
 		handleRequest(page, cart, userSession);
-		return new ModelAndView("Cart", "cart", cart);
+		return new ModelAndView("order/Cart", "cart", cart);
 	}
 
 	@RequestMapping("/shop/checkout.do")
@@ -51,7 +51,7 @@ public class ViewCartController {
 		UserSession userSession = 
 			(UserSession) WebUtils.getSessionAttribute(request, "userSession");
 		handleRequest(page, cart, userSession);
-		return new ModelAndView("Checkout", "cart", cart);
+		return new ModelAndView("order/Checkout", "cart", cart);
 	}
 	
 	private void handleRequest(String page, Cart cart, UserSession userSession)
