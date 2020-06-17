@@ -30,4 +30,6 @@ public interface ItemDao {
 	// �븘�씠�뀥 �븘�씠�뵒濡� �빐�떦 �닔怨듭삁�뭹�쓽 �옱怨좉� �엳�뒗吏� �솗�씤�븯�뒗 硫붿냼�뱶
 	boolean isItemInStock(int itemId, int productId) throws DataAccessException;
 
+	String getUserIdByItemId(int itemId) throws DataAccessException;
+
 }

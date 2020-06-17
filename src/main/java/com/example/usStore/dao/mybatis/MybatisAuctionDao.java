@@ -116,4 +116,11 @@ public class MybatisAuctionDao implements AuctionDao {
    public void updateBidPrice(int unitCost, int itemId) {
 	   auctionMapper.updateBidPrice(unitCost, itemId);
    }
+
+   @Override
+   public String getUserIdByItemId(int itemId) throws DataAccessException {
+	return auctionMapper.getUserIdByItemId(itemId);
+   }
+   
+
 }

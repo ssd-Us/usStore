@@ -3,6 +3,7 @@ package com.example.usStore.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,6 +22,7 @@ import com.example.usStore.service.facade.MyPageFacade;
  * 
  * keyAlarm / bookMark / follow / accuse
  * */
+@Repository
 @Service("mypageImpl")
 @Transactional
 public class MyPageImpl implements MyPageFacade {
@@ -118,8 +120,9 @@ public class MyPageImpl implements MyPageFacade {
 	}
 
 	@Override
-	public boolean isAccuseAlready(String attacker, String victim) {
+	public String isAccuseAlready(String attacker, String victim) {
 		return accuseDao.isAccuseAlready(attacker, victim);
+		
 	}
 
 }
