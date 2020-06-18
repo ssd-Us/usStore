@@ -50,6 +50,6 @@ public class AddItemToCartController {
 //			Item item = this.usStore.getItem(workingItemId);
 //			cart.addItem(item, isInStock);
 //		}
-		return new ModelAndView("Cart", "cart", cart);
+		return new ModelAndView("order/Cart", "cart", cart);
 	}
 }

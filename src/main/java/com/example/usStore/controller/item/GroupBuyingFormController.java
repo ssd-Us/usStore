@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 
+import com.example.usStore.controller.mypage.UserSession;
 import com.example.usStore.domain.GroupBuying;
 import com.example.usStore.domain.Item;
 import com.example.usStore.domain.Tag;
@@ -28,7 +29,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import com.example.usStore.service.facade.ItemFacade;
 
 @Controller
-@SessionAttributes({"GroupBuying", "groupBuyingList", "editStatus"})
+@SessionAttributes({"GroupBuying", "groupBuyingList", "userSession"})
 public class GroupBuyingFormController {
 	
 	private static final String ADD_GroupBuying_FORM = "product/addGroupBuying";
@@ -150,13 +151,17 @@ public class GroupBuyingFormController {
 	public String done(@ModelAttribute("GroupBuying") GroupBuyingForm groupBuyingform, 
 			ItemForm itemformSession, BindingResult result, Model model, HttpServletRequest rq, 
 			SessionStatus sessionStatus, GroupBuying groupBuying, ModelMap modelMap) {
-	//	boolean flag = false;
+	
 		System.out.println("detailItem.do");
 		
 		HttpSession session = rq.getSession(false);
 		itemformSession = (ItemForm) session.getAttribute("itemForm");
 		int status = (int) session.getAttribute("status");
+		UserSession userSession = (UserSession) session.getAttribute("userSession");
 		
+		String suppId = userSession.getAccount().getUserId();
+		System.out.println("suppId: " + suppId);
+				
 		if(session.getAttribute("itemForm") != null) {
 			System.out.println("itemformSession: " + itemformSession);	//print itemformSession toString
 		}
@@ -164,7 +169,7 @@ public class GroupBuyingFormController {
 	
 		//put itemformSession to item
 		Item item = new Item(itemformSession.getUnitCost(), itemformSession.getTitle(), 
-				itemformSession.getDescription(), itemformSession.getQty(), "A", 	//must change userId -> loginCommand.getUserId()
+				itemformSession.getDescription(), itemformSession.getQty(), suppId, 	//인터셉터 타고 오니까 suppId 무조건 있음
 				itemformSession.getProductId());
 		
 		if(status != 0) {
@@ -224,15 +229,27 @@ public class GroupBuyingFormController {
 		
 		sessionStatus.setComplete();	// groupBuying, editStatus session close
 		session.removeAttribute("itemForm");	//itemForm session close
+		
 		return "redirect:/shop/groupBuying/viewItem.do?itemId=" + groupBuying.getItemId() + "&productId=" + item.getProductId();
-	}
+	} 
 	
 	@RequestMapping("/shop/groupBuying/viewItem.do") //click title -> detail Page(viewCount++)
 	public String viewGroupBuying(@RequestParam("itemId") int itemId, 
+			HttpServletRequest rq, 
 			@RequestParam("productId") int productId, Model model, Model modelMap)
 	{
 		System.out.println("viewItem.do");
 		System.out.println("itemId:" + itemId);
+		
+		HttpSession session = rq.getSession(false);
+		
+		if(session.getAttribute("userSession") != null) {
+			UserSession userSession = (UserSession) session.getAttribute("userSession");
+			String suppId = userSession.getAccount().getUserId();
+			
+			System.out.println("suppId: " + suppId);
+			model.addAttribute("suppId", suppId);
+		}
 		
 		Item item = itemFacade.getItem(itemId);
 		item.setViewCount(item.getViewCount() + 1);

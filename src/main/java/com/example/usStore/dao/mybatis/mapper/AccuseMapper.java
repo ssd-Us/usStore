@@ -1,5 +1,7 @@
 package com.example.usStore.dao.mybatis.mapper;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.example.usStore.domain.Accuse;
 
 public interface AccuseMapper {
@@ -10,5 +12,5 @@ public interface AccuseMapper {
 	// 해당 유저 별 신고 당한 횟수 받아오기
 	int countAccuseById(String attacker);
 	
-	boolean isAccuseAlready(String attacker, String victim);
+	String isAccuseAlready(@Param("attacker") String attacker, @Param("victim") String victim);
 }

@@ -97,4 +97,11 @@ public class MybatisGroupBuyingDao implements GroupBuyingDao {
 		return groupBuyingMapper.getItem(itemId);
 	}
 
+	@Override
+	public String getUserIdByItemId(int itemId) throws DataAccessException {
+		return groupBuyingMapper.getUserIdByItemId(itemId);
+	}
+
+	
+
 }
