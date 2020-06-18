@@ -11,10 +11,12 @@ div#addItemForm {
 </style>
 
 <table id="main-menu">
-	<tr>
-		<td><a href='<c:url value="/shop/index.do"/>'> <b><font
-					color="black" size="2"> &lt;&lt; Go to Index</font></b></a></td>
-	</tr>
+  <tr>
+    <td><a href='<c:url value="/shop/product/index.do"/>'>
+        <b><font color="black" size="2">
+          &lt;&lt; Go to Index</font></b></a>
+    </td>
+  </tr>
 </table>
 
 <div id="addItemForm">
