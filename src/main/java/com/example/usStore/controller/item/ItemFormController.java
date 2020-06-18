@@ -99,13 +99,13 @@ public class ItemFormController {
 		}
 		
 		String itemController = "";
-		HttpSession httpSession = rq.getSession(true); //占쎌뵠沃섓옙 占쎄쉭占쎈�∽옙�뵠 占쎌뿳占쎈뼄筌롳옙 域뱄옙 占쎄쉭占쎈�∽옙�뱽 占쎈즼占쎌젻雅뚯눊��, 占쎄쉭占쎈�∽옙�뵠 占쎈씨占쎌몵筌롳옙 占쎄퉱嚥≪뮇�뒲 占쎄쉭占쎈�∽옙�뱽 占쎄문占쎄쉐占쎈립占쎈뼄.
+		HttpSession httpSession = rq.getSession(true); //�뜝�럩逾졿쾬�꼻�삕 �뜝�럡�돪�뜝�럥占썩댙�삕占쎈턄 �뜝�럩肉녑뜝�럥堉꾤춯濡녹삕 �윜諭꾩삕 �뜝�럡�돪�뜝�럥占썩댙�삕占쎈굵 �뜝�럥利쇔뜝�럩�졎�썒�슣�닁占쏙옙, �뜝�럡�돪�뜝�럥占썩댙�삕占쎈턄 �뜝�럥�뵪�뜝�럩紐든춯濡녹삕 �뜝�럡�돮�슖�돦裕뉛옙�뮧 �뜝�럡�돪�뜝�럥占썩댙�삕占쎈굵 �뜝�럡臾멨뜝�럡�뎽�뜝�럥由썲뜝�럥堉�.
 				
 		System.out.println("itemForm : " + itemForm);
 		
 		httpSession.setAttribute("itemForm", itemForm);	//generate item session
 		
-		if (bindingResult.hasErrors()) {	//검증 오류 발생시 두번째 폼으로 돌아감
+		if (bindingResult.hasErrors()) {	//寃�利� �삤瑜� 諛쒖깮�떆 �몢踰덉㎏ �뤌�쑝濡� �룎�븘媛�
 			model.addAttribute("productId", productId);
 			return "product/item";
 		}
@@ -128,6 +128,26 @@ public class ItemFormController {
 		return itemController;
 	}
 	
-	
-	
+	@RequestMapping("/shop/item/index.do") //go index(remove sessions)
+	public String goIndex(@RequestParam("productId") int productId)
+	{
+		String url = "";
+		
+		switch(productId) {
+			case 0 : 
+					url = "redirect:/shop/groupBuying/index.do";
+					break;
+			case 1 :
+					url = "redirect:/shop/auction/index.do";
+					break;
+			case 2 : 
+					url = "redirect:/shop/secondHand/index.do";
+					break;
+			case 3 : 
+					url = "redirect:/shop/handMade/index.do";
+					break;
+		}
+		
+		return url;
+	}
 }

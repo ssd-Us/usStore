@@ -135,7 +135,7 @@ public class GroupBuyingFormController {
 		if(listPrice <= unitCost) {
 			calDiscount = (int) ((unitCost - listPrice) / unitCost * 100);
 		}
-		else {	calDiscount = -999;	}	// 이부분은 나중에 error로 고치기
+		else {	calDiscount = -999;	}	// �씠遺�遺꾩� �굹以묒뿉 error濡� 怨좎튂湲�
 		
 		System.out.println("calDiscount: " + calDiscount);
 		
@@ -153,12 +153,14 @@ public class GroupBuyingFormController {
 	public String done(@ModelAttribute("GroupBuying") GroupBuyingForm groupBuyingform, 
 			ItemForm itemformSession, BindingResult result, Model model, HttpServletRequest rq, 
 			SessionStatus sessionStatus, GroupBuying groupBuying, ModelMap modelMap) {
-	
+		int status = 0;
 		System.out.println("detailItem.do");
 		
 		HttpSession session = rq.getSession(false);
 		itemformSession = (ItemForm) session.getAttribute("itemForm");
-		int status = (int) session.getAttribute("status");
+		if(session.getAttribute("status") != null) {
+			status = (int) session.getAttribute("status");
+		}
 		UserSession userSession = (UserSession) session.getAttribute("userSession");
 		
 		String suppId = userSession.getAccount().getUserId();
@@ -171,7 +173,7 @@ public class GroupBuyingFormController {
 	
 		//put itemformSession to item
 		Item item = new Item(itemformSession.getUnitCost(), itemformSession.getTitle(), 
-				itemformSession.getDescription(), itemformSession.getQty(), suppId, 	//인터셉터 타고 오니까 suppId 무조건 있음
+				itemformSession.getDescription(), itemformSession.getQty(), suppId, 	//�씤�꽣�뀎�꽣 ��怨� �삤�땲源� suppId 臾댁“嫄� �엳�쓬
 				itemformSession.getProductId());
 		
 		if(status != 0) {
@@ -217,7 +219,7 @@ public class GroupBuyingFormController {
 		
 		System.out.println("deadLine : " + groupBuyingform.getDeadLine());
 		
-		groupBuying.setItemId(status);
+		groupBuying.setItemId(item.getItemId());
 		groupBuying.setDiscount(groupBuyingform.getDiscount());
 		groupBuying.setListPrice(groupBuyingform.getListPrice());
 		groupBuying.setDeadLine(groupBuyingform.getDeadLine());
@@ -231,6 +233,7 @@ public class GroupBuyingFormController {
 		
 		sessionStatus.setComplete();	// groupBuying, editStatus session close
 		session.removeAttribute("itemForm");	//itemForm session close
+		session.removeAttribute("status");
 		
 		return "redirect:/shop/groupBuying/viewItem.do?itemId=" + groupBuying.getItemId() + "&productId=" + item.getProductId();
 	} 
@@ -342,7 +345,7 @@ public class GroupBuyingFormController {
 		return "redirect:/shop/groupBuying/listItem.do?productId=" + productId;
 	}
 	
-	@RequestMapping("/shop/product/index.do") //go index(remove sessions)
+	@RequestMapping("/shop/groupBuying/index.do") //go index(remove sessions)
 	public String goIndex(SessionStatus sessionStatus, HttpServletRequest rq)
 	{
 		System.out.println("go back index.do From [add / edit product]");
