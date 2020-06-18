@@ -1,3 +1,4 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="IncludeTop.jsp" %>
 
 <table style="border:none;border-collapse:collapse;width:100%">
