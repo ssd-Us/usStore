@@ -25,7 +25,7 @@ public class MybatisAccuseDao implements AccuseDao {
 	}
 
 	@Override
-	public boolean isAccuseAlready(String attacker, String victim) throws DataAccessException {
+	public String isAccuseAlready(String attacker, String victim) throws DataAccessException {
 		return accuseMapper.isAccuseAlready(attacker, victim);
 	}
 }
