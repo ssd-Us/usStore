@@ -91,4 +91,11 @@ public class MybatisHandMadeDao implements HandMadeDao {
 		handMadeMapper.deleteItem(itemId);
 	}
 
+	@Override
+	public String getUserIdByItemId(int itemId) throws DataAccessException {
+		return handMadeMapper.getUserIdByItemId(itemId);
+	}
+	
+	
+
 }

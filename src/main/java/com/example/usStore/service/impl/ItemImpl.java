@@ -334,4 +334,9 @@ public class ItemImpl implements ItemFacade {
 		// TODO Auto-generated method stub
 		return itemDao.getItem(itemId);
 	}
+
+	@Override
+	public String getUserIdByItemId(int itemId) {
+		return itemDao.getUserIdByItemId(itemId);
+	}
 }

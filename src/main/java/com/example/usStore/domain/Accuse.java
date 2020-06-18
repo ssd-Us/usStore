@@ -14,7 +14,8 @@ public class Accuse  implements Serializable {
 	private String attacker; // (FK) userId : �Ǹ���(�Ű� �����)
 	private String reason;  // �Ű� ����
 	private int accuseCount; 
-	private boolean isAccuse;
+	//private boolean isAccuse;
+	private String isAccuse;
 	
 	// setter & getter
 	public int getAccuseId() {
@@ -47,11 +48,13 @@ public class Accuse  implements Serializable {
 	public void setAccuseCount(int accuseCount) {
 		this.accuseCount = accuseCount;
 	}
-	public boolean isAccuse() {
+	public String isAccuse() {
 		return isAccuse;
 	}
-	public void setAccuse(boolean isAccuse) {
+	public void setAccuse(String isAccuse) {
 		this.isAccuse = isAccuse;
 	}
+
+	
 		
 }

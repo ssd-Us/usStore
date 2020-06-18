@@ -14,7 +14,7 @@
   		WHERE ATTACKER = #{attacker}
   	</select>
   	
-  	<select id="isAccuseAlready" parameterType="Accuse" resultType="Accuse">
+  	<select id="isAccuseAlready" parameterType="String" resultType="String">
   		SELECT CASE WHEN (COUNT(ACCUSEID) > 0) 
   		THEN 'true' ELSE 'false' END AS "isAccuse"
   		FROM ACCUSE
