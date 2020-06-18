@@ -7,7 +7,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
 <title>공동구매 리스트 페이지</title>
 <style>
 			th, td {

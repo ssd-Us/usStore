@@ -7,8 +7,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-
 <title>ê³µëêµ¬ë§¤ ì¶ê° ìë ¥ í¼</title>
 </head>
 <style>

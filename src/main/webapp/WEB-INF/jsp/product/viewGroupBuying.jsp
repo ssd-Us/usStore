@@ -4,7 +4,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
 <title>공동구매 상세페이지</title>
 </head>
 <style type="text/css"> 
