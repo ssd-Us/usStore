@@ -151,7 +151,7 @@
           </c:forEach>
           <tr>
             <td colspan="5" align="right"><b>Total: <fmt:formatNumber
-                value="${order.totalPrice}" pattern="$#,##0.00" /></b></td>
+               value="${order.totalPrice}" pattern="$#,##0.00" /></b></td>
           </tr>
         </table>
       </td>
