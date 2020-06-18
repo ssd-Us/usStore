@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.support.SessionStatus;
 
 import com.example.usStore.domain.Item;
 import com.example.usStore.service.facade.ItemFacade;
@@ -102,12 +103,6 @@ public class ItemFormController {
 				
 		System.out.println("itemForm : " + itemForm);
 		
-//		if (result.hasErrors()) {	return formViewName;	}	//野껓옙筌앾옙 占쎌궎�몴占� 獄쏆뮇源�占쎈뻻 item.jsp嚥∽옙 占쎈뼄占쎈뻻 占쎌뵠占쎈짗
-		
-//		ItemForm itemform = new ItemForm(itemForm.getTitle(), itemForm.getUserId(), itemForm.getProductId(), itemForm.getDescription(), itemForm.getUnitCost(), 
-//										itemForm.getQty(), rq.getParameter("tag1"), rq.getParameter("tag2"), rq.getParameter("tag3"), 
-//				rq.getParameter("tag4"), rq.getParameter("tag5"));
-		
 		httpSession.setAttribute("itemForm", itemForm);	//generate item session
 		
 		if (bindingResult.hasErrors()) {	//검증 오류 발생시 두번째 폼으로 돌아감
@@ -132,5 +127,7 @@ public class ItemFormController {
 	
 		return itemController;
 	}
+	
+	
 	
 }
