@@ -21,7 +21,8 @@
 <body>
 <table id="main-menu">
   <tr>
-    <td><a href='<c:url value="/shop/index.do"/>'>
+    <td>
+    	<a href='<c:url value="/shop/product/index.do"/>'>
         <b><font color="black" size="2">
           &lt;&lt; Go to Index</font></b></a>
     </td>
@@ -32,23 +33,23 @@
 	<spring:hasBindErrors name="item" />
 	<form:form modelAttribute="item" method="post" action="addItem2.do?productId=${productId}">
 	
-	ì ëª© <form:input type="text" path="title" style="width:380px; height:35px;" value="${title}"/>
+	제목 : <form:input type="text" path="title" style="width:380px; height:35px;" value="${title}"/>
 	<form:errors path="title"/> <br><br>
 	
-	ë´ì© <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	내용 : <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	<form:textarea path="description" cols="50" rows="10" value="${discription}"/>
 	<form:errors path="description"/> <br><br>
 	
 	<c:set var="pId" value="${productId}"/>
 	<c:if test="${pId != 1}">
-	ì ê°Â<form:input type="text" path="unitCost" value="${unitCost}"/>
+	정가 : <form:input type="text" path="unitCost" value="${unitCost}"/>
 	<form:errors path="unitCost"/> <br><br>
 	</c:if>
 	
-	ìëÂÂ<form:input type="text" path="qty" value="${qty}"/>
+	수량 : <form:input type="text" path="qty" value="${qty}"/>
 	<form:errors path="qty"/> <br><br>
 	
-	íê·¸
+	태그 : 
 	<form:input path="tag1" placeholder="#tag" value="${tag1}"/>
 	<form:errors path="tag1"/>&nbsp;
 	<form:input path="tag2" placeholder="#tag" value="${tag2}"/>
@@ -60,7 +61,7 @@
 	<form:input path="tag5" placeholder="#tag" value="${tag5}"/>
 	<form:errors path="tag5"/> <br><br><br>
 	
-	<input type="submit" value="ë¤ì ë¨ê³ë¡" />
+	<input type="submit" value="다음 단계로" />
 	
 	</form:form>
 </div>
