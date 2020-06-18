@@ -52,7 +52,6 @@
         	<mvc:mapping path="/shop/newOrder.do"/>
         	<mvc:mapping path="/shop/item/addItem.do"/>
         	<mvc:mapping path="/shop/auction/participateItem.do"/>
-        	<mvc:mapping path="/addAccuse.do"/>
         	<bean class="com.example.usStore.controller.mypage.SignonInterceptor" />
     	</mvc:interceptor>
 	</mvc:interceptors>
