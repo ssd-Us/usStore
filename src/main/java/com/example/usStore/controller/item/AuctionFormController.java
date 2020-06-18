@@ -1,5 +1,7 @@
 package com.example.usStore.controller.item;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -7,6 +9,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +29,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.usStore.controller.mypage.UserSession;
 import com.example.usStore.domain.Auction;
 import com.example.usStore.domain.Bidder;
 import com.example.usStore.domain.Item;
@@ -33,12 +37,12 @@ import com.example.usStore.domain.Tag;
 import com.example.usStore.service.facade.ItemFacade;
 
 @Controller
-@SessionAttributes({"Auction", "auctionList"})
+@SessionAttributes({"userSession", "Auction", "auctionList"})
 public class AuctionFormController {
    private static final String ADD_Auction_FORM = "product/addAuction";
    private static final String GoAddItemFORM = "redirect:/shop/item/addItem.do?productId=";
    private static final String CHECK_FORM3 = "product/checkAuction";
-	
+   
    @Autowired
    private ItemFacade itemFacade;
    
@@ -89,7 +93,7 @@ public class AuctionFormController {
 	}
 	
    @RequestMapping("/shop/auction/viewItem.do") 
-   public String auctionView(@RequestParam("itemId") int itemId, @RequestParam("productId") int productId, ModelMap model) {
+   public String auctionView(@RequestParam("itemId") int itemId, @RequestParam("productId") int productId, Model model, Model modelMap) {
 	  System.out.println("<경매 상세 페이지>"); 
 	  
 	  Item item = itemFacade.getItem(itemId);
@@ -101,9 +105,13 @@ public class AuctionFormController {
 	  
 	  Auction auction = this.itemFacade.getAuctionById(myItemId);
 
+	  List<Tag> tags = new ArrayList<Tag>();
+	  tags = itemFacade.getTagByItemId(auction.getItemId());
+		
 	  model.addAttribute("productId", productId);
       model.addAttribute("auction", auction);
-      
+      modelMap.addAttribute("tags", tags);
+
       return "product/viewAuction";
    }
 
@@ -263,7 +271,15 @@ public class AuctionFormController {
 
   
    @RequestMapping("/shop/auction/deleteItem.do") 
-   public String auctionDelete(@RequestParam("itemId") int itemId, ModelMap model) { 
+   public String auctionDelete(@ModelAttribute("userSession") UserSession userSession, @RequestParam("itemId") int itemId, ModelMap model, HttpServletResponse response) throws IOException { 
+	   String userId = userSession.getAccount().getUserId();
+	   String supplier = itemFacade.getAuctionById(myItemId).getUserId();
+	   
+	   if (!userId.equals(supplier)) {
+		   System.out.println("삭제할 수 없습니다.");
+		   return "redirect:/shop/auction/viewItem.do?itemId=" + itemId + "&productId=1";
+	   }
+	   
 	   this.itemFacade.deleteItem(itemId);
 	   
 	   return "redirect:/shop/auction/listItem.do?productId=" + myProductId;

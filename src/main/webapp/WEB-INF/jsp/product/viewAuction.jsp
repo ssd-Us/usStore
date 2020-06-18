@@ -111,23 +111,12 @@ function participation(price, unitCost) {
    		<tr>
    			<th style="border-right: 1px solid black;"><font color=blue>#</font>ê´ë ¨íê·¸</th>
    			<td>
-   			<%-- <c:forEach var="tag" items="${tag}">	<!-- tag íì´ë¸ ì´ì© -> í´ë¹ itemIdë¥¼ ì´ë»ê² ì°ê²°íì§? -->
-   				<a href="
-					<c:url value='/searchTag'>	<!-- tagê²ì ê²°ê³¼ íì´ì§ë¡ ì´ë -->
-					  <c:param name="tagName" value="${tag.tagName}"/>
-				  	</c:url>
-				">#${tag.tagName}</a>&nbsp;
-   			</c:forEach> --%>
-   			<a href="
-					<c:url value='/searchTag/${auction.itemId}'/>	<!-- tagê²ì ê²°ê³¼ íì´ì§ë¡ ì´ë -->
-				">#íì í</a>&nbsp;
-				
-			<a href="
-					<c:url value='/searchTag/${auction.itemId}'/>	<!-- tagê²ì ê²°ê³¼ íì´ì§ë¡ ì´ë -->
-				">#ì»¤ì¤í</a>&nbsp;
-			<a href="
-					<c:url value='/searchTag/${auction.itemId}'/>	<!-- tagê²ì ê²°ê³¼ íì´ì§ë¡ ì´ë -->
-				">#ê²½ë§¤</a>&nbsp;
+   			<c:forEach var="tag" items="${tags}">        
+	   			<a href="
+						<c:url value='/searchTag/${gb.itemId}'/>	
+					">#${tag.tagName}
+				</a>&nbsp;
+			</c:forEach>
    			</td>
    		</tr>
    		
@@ -144,9 +133,6 @@ function participation(price, unitCost) {
    				ìì ê°ê²© : ${auction.startPrice} ì<br>
    				ëì°° ê°ê²© : <ins></ins> ${auction.bidPrice}ì&nbsp;
    				<c:set var="state" value="${auction.auctionState}"/>
-   				<c:if test="${state eq -1}">
-   					<font color=red>(ê²½ë§¤ ëê¸°)</font> <br><br>
-   				</c:if>
    				<c:if test="${state eq 0}">
    					<font color=red>(ê²½ë§¤ ì§íì¤)</font> <br><br>
    				</c:if>
@@ -186,8 +172,8 @@ function participation(price, unitCost) {
    		<c:if test="${sh.suppId==session.userId}"> <!-- ë¡ê·¸ì¸ì ì¤í -->
    		<tr>
    		<td colspan="2" style="text-align: right; padding: 0px; font-size: small; border-bottom: none; border-top: 1px solid black;">
-        <a href="<c:url value='/shop/auction/updateItem.do'/>">[ê²ìë¬¼ ìì íê¸°]</a>
-		    <a href="<c:url value='/shop/auction/deleteItem.do?itemId=${auction.itemId}'/>"> [ê²ìë¬¼ ì­ì íê¸°]</a>
+		   <a href="<c:url value='/shop/auction/updateItem.do'/>">[게시물 수정하기]</a>
+		   <a href="<c:url value='/shop/auction/deleteItem.do?itemId=${auction.itemId}'/>"> [게시물 삭제하기]</a>
 		   </td>
 		 </tr>
 		</c:if>
