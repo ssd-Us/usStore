@@ -1,3 +1,4 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="itemTop.jsp" %>
 <%@ page import="com.example.usStore.controller.item.ItemForm" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>

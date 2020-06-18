@@ -1,3 +1,4 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="itemTop.jsp"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <% request.setCharacterEncoding("UTF-8"); %>
@@ -6,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>경매 리스트 페이지</title>
+<title>ê²½ë§¤ ë¦¬ì¤í¸ íì´ì§</title>
 </head>
 <body> 
 <table id="main-menu">
@@ -28,17 +29,17 @@
                    <p style="text-align:right;">
 		                <a href="<c:url value='/shop/item/addItem.do'>
                            <c:param name="productId" value="${productId}"/></c:url>
-                  ">[경매 추가]
+                  ">[ê²½ë§¤ ì¶ê°]
                   </a>
 					</p>
                   <hr>
                   <table>
                      <tr>
-                        <th>제목</th>
-                        <th style="padding-left:150px">가격</th>
-                        <th><p style="padding-left:100px">판매자</p></th>
-                        <th><p style="padding-left:80px">낙찰자</p></th>
-                        <th><p style="padding-left:80px">마감 날짜</p></th>
+                        <th>ì ëª©</th>
+                        <th style="padding-left:150px">ê°ê²©</th>
+                        <th><p style="padding-left:100px">íë§¤ì</p></th>
+                        <th><p style="padding-left:80px">ëì°°ì</p></th>
+                        <th><p style="padding-left:80px">ë§ê° ë ì§</p></th>
                         </tr>
                   <tbody>   
                   <c:forEach var="al" items="${auctionList.pageList}">               
@@ -52,7 +53,7 @@
                                 </a>
                 
                    </td>
-                   <td style="padding-left:140px">시작:<c:out value="${al.startPrice}"/><br>낙찰:<c:out value="${al.bidPrice}"/></td>
+                   <td style="padding-left:140px">ìì:<c:out value="${al.startPrice}"/><br>ëì°°:<c:out value="${al.bidPrice}"/></td>
                        <td style="padding-left:120px"><c:out value="${al.userId}"/></td>   
                        <td style="padding-left:100px"><c:out value="b"/></td>
                        <td style="padding-left:80px"><c:out value="${al.deadLine}"/></td>
