@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>ê³µëêµ¬ë§¤ ìì¸íì´ì§</title>
+<title>공동구매 상세페이지</title>
 </head>
 <style type="text/css"> 
 	a { text-decoration:none } 
@@ -60,8 +60,8 @@
 		</td>
 		<td style="text-align: right; padding: 0px; font-size: small; border-bottom: none;">
 		<a href="
-							<c:url value='/addBookmark/${gb.userId}/${gb.itemId}'/>	<!-- ë¡ê·¸ì¸ ì¬ë¶ ë°ì§ê¸° -->
-					">[ë¶ë§í¬ ì¶ê°]</a>
+							<c:url value='/addBookmark/${gb.userId}/${gb.itemId}'/>	<!-- 로그인 여부 따지기 -->
+					">[북마크 추가]</a>
 		</td>
 	
 	</tr>
@@ -71,12 +71,12 @@
    		</tr>
    		
    		<tr>
-   			<th style="border-right: 1px solid black;">íë§¤ì</th>
+   			<th style="border-right: 1px solid black;">판매자</th>
    			<td>${gb.userId}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	   			<span>
 		   			<a href="
-							<c:url value='/addFollow/${gb.userId}'/>	<!-- ë¡ê·¸ì¸ ì¬ë¶ ë°ì§ê¸° -->
-					">íë¡ì</a>
+							<c:url value='/addFollow/${gb.userId}'/>	<!-- 로그인 여부 따지기 -->
+					">팔로잉</a>
 				</span>
 				&nbsp;
 				<%@ include file="/WEB-INF/jsp/account/accuseFunction.jsp" %>
@@ -86,11 +86,11 @@
    		<tr><td colspan="2" style="padding: 15px;">${gb.description}<br></td></tr>
    		
    		<tr>
-   			<th style="border-right: 1px solid black;"><font color=blue>#</font>ê´ë ¨íê·¸</th>
+   			<th style="border-right: 1px solid black;"><font color=blue>#</font>관련태그</th>
    			<td>
    			<c:forEach var="tag" items="${tags}">        
 	   			<a href="
-						<c:url value='/searchTag/${gb.itemId}'/>	<!-- tagê²ì ê²°ê³¼ íì´ì§ë¡ ì´ë -->
+						<c:url value='/searchTag/${gb.itemId}'/>	
 					">#${tag.tagName}
 				</a>&nbsp;
 			</c:forEach>
@@ -98,22 +98,22 @@
    		</tr>
    		
    		<tr>
-   			<th style="border-right: 1px solid black;"><font color=red>ë§ê° ë ì§</font></th>
+   			<th style="border-right: 1px solid black;"><font color=red>마감기한</font></th>
    			<td><font color=red>
    				${gb.deadLine}
    			</font></td>
    		</tr>
    		
    		<tr>
-   		<th style="border-right: 1px solid black;">íë§¤ê°</th>
+   		<th style="border-right: 1px solid black;">할인율</th>
    			<td>
-   				<del>ì ê° : ${gb.unitCost} ì</del> <br>
-   				ê³µëêµ¬ë§¤ê° : ${gb.listPrice}ì&nbsp;<font color=red>-${gb.discount}%</font> <br>
+   				<del>정가 : ${gb.unitCost} 원</del> <br>
+   				할인가 : ${gb.listPrice}ì&nbsp;<font color=red>-${gb.discount}%</font> <br>
    			</td>
    		</tr>
    		
    		<tr>
-   		<th style="border-right: 1px solid black;">ìë </th> 
+   		<th style="border-right: 1px solid black;">수량 </th> 
    		<td>${gb.qty}</td>
    		</tr>
    		
@@ -122,19 +122,19 @@
    			<span>
 		   			<a href="
 							<c:url value='/addCart/${gb.itemId}'/>	<!-- ë¡ê·¸ì¸ ì¬ë¶ ë°ì§ê¸° -->
-					">ì¥ë°êµ¬ë ì¶ê°</a>
+					">장바구니 추가</a>
 				</span>
 				&nbsp;&nbsp;&nbsp;
 				<span>
 					<a href="
 							<c:url value='/order/${gb.itemId}'/>	<!-- ë¡ê·¸ì¸ ì¬ë¶ ë°ì§ê¸° -->
-					">ê³µëêµ¬ë§¤ ì°¸ì¬</a>
+					">공동구매 참여하기</a>
 				</span>
 				&nbsp;&nbsp;&nbsp;
 				<span>
    				<a href="
 							<c:url value='/note/${gb.itemId}'/>	<!-- ë¡ê·¸ì¸ ì¬ë¶ ë°ì§ê¸° -->
-				">ìª½ì§ ë³´ë´ê¸°</a>
+				">쪽지 보내기</a>
 				</span>
    			
    			</td>
@@ -145,19 +145,19 @@
 				   <a href="<c:url value='/shop/groupBuying/edit.do'>
 				   				<c:param name="itemId" value="${gb.itemId}" />
 				   			</c:url>
-				   			">[ê²ìë¬¼ ìì íê¸°]</a>
+				   			">[게시물 수정하기]</a>
 				   <a href="<c:url value='/shop/groupBuying/delete.do'>
 				   				<c:param name="itemId" value="${gb.itemId}" />
 				   				<c:param name="productId" value="${gb.productId}" />
 				   			</c:url>
-				   			"> [ê²ìë¬¼ ì­ì íê¸°]</a>
+				   			"> [게시물 삭제하기]</a>
 				</td>
 			 </tr>
 		</c:if>
-   <!-- íëì urlì ê³µì íë©° íë¼ë¯¸í°ë¡ ìì´ë ê°ì ëê²¨ì¤ì§
-   ë¤ê°ì ì»¨í¸ë¡¤ë¬ë¥¼ ê°ì êµ¬íí ì§ ì í´ì¼í¨
-   deleteItem ìì´ëë§ ë°ììì íë²ë§ ì­ì í ì ìëê² ìëê³ 
-    ì´ì°¨í¼ dbíì´ë¸ì´ ë¤ë¥´ëê¹ deleteë¬¸ì 4ë² ì¨ì¤ì¼í¨  -->
+<!--* 현재 로그인 user가 글 작성자 일때만 수정/삭제 버튼이 보임 
+   * 작성자 정보는 controller에서 model(db에서 suppId찾아옴)로 넘겨줌
+   * model로 넘어온 suppId와 세션의 로그인Id를 비교함 
+   * 세션에 로그인 정보가 없으면, 즉 null이어도 수정/삭제 안보여줌-->
    	</table>
    	<br><br>
 	
