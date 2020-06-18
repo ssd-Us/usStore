@@ -1,3 +1,4 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <center>
 <%--   <a href="<c:url value="/shop/viewCategory.do?categoryId=FISH"/>">
     <img border="0" src="../images/sm_fish.gif" /></a>
