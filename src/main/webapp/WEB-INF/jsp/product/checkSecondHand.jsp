@@ -1,64 +1,70 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ page import="java.util.Date" %>
-<%@ page import="java.text.SimpleDateFormat" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ include file="itemTop.jsp"%>
+
+<%@ page import="java.util.Date"%>
+<%@ page import="java.text.SimpleDateFormat"%>
 <%
    Date nowTime = new Date();
    SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일 a hh:mm:ss");
 %>
-<!DOCTYPE html>
-<html>
-<head>
+
 <title>중고거래 입력 최종 확인 step3- view 이름을 check로 바꾸기</title>
 <style>
-table, th, td {
-    border: 1px solid black;
-    border-collapse: collapse;
-    text-align: center;
+div#addItemForm {
+   position: absolute;
+   left: 18%;
+   border: none;
+   padding: 20px;
 }
 </style>
-</head>
-<body>
-	<h2>다음 정보로 게시글을 등록하시겠습니까?</h2>
-	
-  <form:form >
-		<!--  action="<c:url value='/shop/secondHand/detailItem/'/>${secondHand.itemId}"
-		modelAttribute="secondHand"  -->
-	<%-- 	<form:label path="unitcost">정가 : </form:label> --%>
-	<%-- 	${secondHand.unitcost} --%>
-		110,000
-		<br/>
-		
-<%-- 		<form:label path="title">제목 : </form:label> --%>
-<%-- 		${secondHand.title} --%>
-		미개봉 게이밍용 마우스 팔아요
-		<br/>
 
-<%-- 		<form:label path="description">내용 : </form:label> --%>
-		<%-- ${secondHand.description} --%>
-		미개봉 새상품입니다. 매너거래 시 만원 할인해드려요.
-		<br/>
-		
-	<%-- 	<form:label path="qty">수량 : </form:label> --%>
-		<%-- ${secondHand.qty} --%>
-		2
-		<br/>
+<table id="main-menu">
+  <tr>
+    <td><a href='<c:url value="/shop/secondHand/index.do"/>'>
+        <b><font color="black" size="2">
+          &lt;&lt; Go to Index</font></b></a>
+    </td>
+  </tr>
+</table>
 
-		<%-- <form:label path="discount">discount : </form:label> --%>
-		<%-- ${secondHand.discount} --%>
-		에누리 해요 
-		<br/>	
+<h1>중고거래 최종 확인</h1>
+다음 정보로 판매하시겠습니까?<br><br>
+<div id="addItemForm">
+   <form:form modelAttribute="SecondHand" action="detailItem.do">
+      <hr width="927px" align="left">
+      <br><br>
+      <label>제목</label> : ${itemForm.title} <br>
+      <label>내용</label> : ${itemForm.description} <br>
+      <label>수량</label> : ${itemForm.qty} <br>
+      <label>정가</label>: ${itemForm.unitCost}원 <br> 
+      <label>판매가</label>: ${SecondHand.listPrice}원 <br> 
+      <label>에누리가능여부</label>: ${SecondHand.discount}% <br>
+      <label>태그</label> : 
 
-	<%-- 	<form:label path="listPrice">listPrice : </form:label> --%>
-		<%-- ${secondHand.listPrice} --%>
-		30000
-		<br/>
-		
-		<p><a href="<c:url value='/shop/secondHand/addItem/'/>${secondHand.itemId}">이전으로</a></p>
-		<input type="submit" value="[게시글 등록]">
-	</form:form> --%>
+<c:if test="${itemForm.tag1 != '' && itemForm.tag1 ne null}">
+         <font color="blue">#</font>${itemForm.tag1} 
+</c:if>
+      <c:if test="${itemForm.tag2 != '' && itemForm.tag2 ne null}">
+         <font color="blue">#</font>${itemForm.tag2} 
+</c:if>
+      <c:if test="${itemForm.tag3 != '' && itemForm.tag3 ne null}">
+         <font color="blue">#</font>${itemForm.tag3} 
+</c:if>
+      <c:if test="${itemForm.tag4 != '' && itemForm.tag4 ne null}">
+         <font color="blue">#</font>${itemForm.tag4} 
+</c:if>
+      <c:if test="${itemForm.tag5 != '' && itemForm.tag5 ne null}">
+         <font color="blue">#</font>${itemForm.tag5} 
+</c:if>
 
+<label>접수 일시</label> : ${nowtime} <br><br>
+
+      <a href="<c:url value='/shop/secondHand/gobackAddSh.do'>
+         <c:param name="productId" value="${itemForm.productId}"/>
+       </c:url>
+      ">[이전 단계로]</a> <input type="submit" value="확인" />
+   </form:form>
+</div>
 </body>
 </html>
