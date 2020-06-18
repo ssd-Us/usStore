@@ -47,7 +47,7 @@
 	<form:errors path="unitCost"/> <br><br>
 	</c:if>
 	
-	수량 : <form:input type="text" path="qty" value="${qty}"/>
+	재고 : <form:input type="text" path="qty" value="${qty}"/>
 	<form:errors path="qty"/> <br><br>
 	
 	태그 : 

@@ -59,7 +59,10 @@
 		</td>
 		<td style="text-align: right; padding: 0px; font-size: small; border-bottom: none;">
 		<a href="
-							<c:url value='/addBookmark/${gb.userId}/${gb.itemId}'/>	<!-- 로그인 여부 따지기 -->
+							<c:url value='/shop/groupBuying/addBookmark'>	<!-- 로그인 여부 따지기 -->
+								<c:param name="userId" value="${gb.userId}" />
+								<c:param name="itemId" value="${gb.itemId}" />
+							</c:url>
 					">[북마크 추가]</a>
 		</td>
 	
