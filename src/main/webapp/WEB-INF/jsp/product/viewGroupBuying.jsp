@@ -65,7 +65,7 @@
 	
 	</tr>
    		<tr>
-	   		<th style="border-right: 1px solid black; border-top: 1px solid black;">ì ëª©</th>
+	   		<th style="border-right: 1px solid black; border-top: 1px solid black;">제목</th>
 	   		<td style="border-top: 1px solid black;">${gb.title}</td>
    		</tr>
    		
@@ -107,7 +107,7 @@
    		<th style="border-right: 1px solid black;">할인율</th>
    			<td>
    				<del>정가 : ${gb.unitCost} 원</del> <br>
-   				할인가 : ${gb.listPrice}ì&nbsp;<font color=red>-${gb.discount}%</font> <br>
+   				할인가 : ${gb.listPrice}원&nbsp;<font color=red>-${gb.discount}%</font> <br>
    			</td>
    		</tr>
    		
