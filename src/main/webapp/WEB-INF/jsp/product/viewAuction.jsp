@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>ê²½ë§¤ ìì¸ íì´ì§Â</title>
+<title>경매 상세 페이지</title>
 </head>
 <style type="text/css"> 
 	a { text-decoration:none } 
@@ -48,16 +48,16 @@ function participation(price, unitCost) {
 	var p = parseInt(price);
 	var u = parseInt(unitCost);
 	
-	alert("ìë ¥ ê°ê²© : " + p + "\nìµëê° : " + u);
+	alert("입력 가격 : " + p + "\n최댓값 : " + u);
 
 	if (p > u) {
-		var c = confirm("ê²½ë§¤ì ì°¸ì¬íìê² ìµëê¹?");
+		var c = confirm("경매에 참여하시겠습니까?");
 
 		if (c) {
 			form.submit();
 		}
 		else {
-			alert("ì°¸ì¬ ì·¨ì");
+			alert("참여 취소");
 		}
 	}
 }
@@ -78,29 +78,29 @@ function participation(price, unitCost) {
 		</td>
 		<td style="text-align: right; padding: 0px; font-size: small; border-bottom: none;">
 		<a href="
-							<c:url value='/addBookmark/${auction.userId}/${auction.itemId}'/>	<!-- ë¡ê·¸ì¸ ì¬ë¶ ë°ì§ê¸° -->
-					">[ë¶ë§í¬ ì¶ê°]</a>
+							<c:url value='/addBookmark/${auction.userId}/${auction.itemId}'/>	<!-- 로그인 여부 따지기 -->
+					">[북마크 추가]</a>
 		</td>
 	
 	</tr>
    		<tr>
-	   		<th style="border-right: 1px solid black; border-top: 1px solid black;">ì ëª©</th>
+	   		<th style="border-right: 1px solid black; border-top: 1px solid black;">제목</th>
 	   		<td style="border-top: 1px solid black;">${auction.title}</td>
    		</tr>
    		
    		<tr>
-   			<th style="border-right: 1px solid black;">íë§¤ì</th>
-   			<td>ê¹ë¬¸ì &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   			<th style="border-right: 1px solid black;">판매자</th>
+   			<td>김문정&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	   			<span>
 		   			<a href="
-							<c:url value='/addFollow/${auction.userId}'/>	<!-- ë¡ê·¸ì¸ ì¬ë¶ ë°ì§ê¸° -->
-					">íë¡ì</a>
+							<c:url value='/addFollow/${auction.userId}'/>	<!-- 로그인 여부 따지기 -->
+					">팔로잉</a>
 				</span>
 				&nbsp;
 				<span>
 					<a href="
-							<c:url value='/addAccuse/${auction.userId}'/>	<!-- ë¡ê·¸ì¸ ì¬ë¶ ë°ì§ê¸° -->
-					">íë§¤ì ì ê³ </a>
+							<c:url value='/addAccuse/${auction.userId}'/>	<!-- 로그인 여부 따지기 -->
+					">판매자 신고</a>
 				</span>
    			</td>
    		</tr> <!-- userId = suppId -->
@@ -108,7 +108,7 @@ function participation(price, unitCost) {
    		<tr><td colspan="2" style="padding: 15px;">${auction.description}<br></td></tr>
    		
    		<tr>
-   			<th style="border-right: 1px solid black;"><font color=blue>#</font>ê´ë ¨íê·¸</th>
+   			<th style="border-right: 1px solid black;"><font color=blue>#</font>관련 태그</th>
    			<td>
    			<c:forEach var="tag" items="${tags}">        
 	   			<a href="
@@ -120,30 +120,30 @@ function participation(price, unitCost) {
    		</tr>
    		
    		<tr>
-   			<th style="border-right: 1px solid black;"><font color=red>ë§ê° ë ì§</font></th>
+   			<th style="border-right: 1px solid black;"><font color=red>마감 날짜</font></th>
    			<td><font color=red>
    				${auction.deadLine}
    			</font></td>
    		</tr>
    		
    		<tr>
-   		<th style="border-right: 1px solid black;">ê°ê²©</th>
+   		<th style="border-right: 1px solid black;">가격</th>
    			<td>
-   				ìì ê°ê²© : ${auction.startPrice} ì<br>
-   				ëì°° ê°ê²© : <ins></ins> ${auction.bidPrice}ì&nbsp;
+   				시작 가격 : ${auction.startPrice}원<br>
+   				낙찰 가격 : <ins></ins> ${auction.bidPrice}원<br>
    				<c:set var="state" value="${auction.auctionState}"/>
    				<c:if test="${state eq 0}">
-   					<font color=red>(ê²½ë§¤ ì§íì¤)</font> <br><br>
+   					<font color=red>(경매 진행중)</font><br><br>
    				</c:if>
    				<c:if test="${state eq 1}">
-   					<font color=red>(ê²½ë§¤ ì¢ë£)</font> <br><br>
+   					<font color=red>(경매 종료)</font><br><br>
    				</c:if>
-   				íì¬ ìµë ê¸ì¡ : ${auction.unitCost}ì<br>
+   				현재 최대 금액 : ${auction.unitCost}원<br>
    			</td>
    		</tr>
    		
    		<tr>
-   		<th style="border-right: 1px solid black;">ìë </th> 
+   		<th style="border-right: 1px solid black;">수량</th> 
    		<td>${auction.qty}</td>
    		</tr>
    		
@@ -151,24 +151,24 @@ function participation(price, unitCost) {
    			<td colspan="2" style="border-bottom: none;">
    				<span>
    				<a href="
-							<c:url value='/note/${auction.userId}'/>	<!-- ë¡ê·¸ì¸ ì¬ë¶ ë°ì§ê¸° -->
-				">ìª½ì§ ë³´ë´ê¸°</a>
+							<c:url value='/note/${auction.userId}'/>	<!-- 로그인 여부 따지기 -->
+				">쪽지 보내기</a>
 				</span><br><br>
 				
 				<c:if test="${state eq 0}">
    				<form name="form" action="<c:url value='/shop/auction/participateItem.do'/>">
-   					<input type="text" id="price" name="price" placeholder="ì°¸ì¬ ê°ê²©ì ìë ¥íì¸ì."/>
+   					<input type="text" id="price" name="price" placeholder="참여 가격을 입력하세요."/>
 				&nbsp;
 				<span onclick="participation(price.value, ${auction.unitCost})">
-					<!-- ë¡ê·¸ì¸ ì¬ë¶ ë°ì§ê¸° -->
-					<a href="#">ê²½ë§¤ ì°¸ì¬</a>
+					<!-- 로그인 여부 따지기 -->
+					<a href="#">경매 참여</a>
 				</span>
 				</form>
 				</c:if>
    			</td>
    		</tr>
    		
-   		<c:if test="${sh.suppId==session.userId}"> <!-- ë¡ê·¸ì¸ì ì¤í -->
+   		<c:if test="${sh.suppId==session.userId}"> <!-- 로그인시 실행 -->
    		<tr>
    		<td colspan="2" style="text-align: right; padding: 0px; font-size: small; border-bottom: none; border-top: 1px solid black;">
 		   <a href="<c:url value='/shop/auction/updateItem.do'/>">[게시물 수정하기]</a>
@@ -176,12 +176,7 @@ function participation(price, unitCost) {
 		   </td>
 		 </tr>
 		</c:if>
-   <!-- íëì urlì ê³µì íë©° íë¼ë¯¸í°ë¡ ìì´ë ê°ì ëê²¨ì¤ì§
-   ë¤ê°ì ì»¨í¸ë¡¤ë¬ë¥¼ ê°ì êµ¬íí ì§ ì í´ì¼í¨
-   deleteItem ìì´ëë§ ë°ììì íë²ë§ ì­ì í ì ìëê² ìëê³ 
-    ì´ì°¨í¼ dbíì´ë¸ì´ ë¤ë¥´ëê¹ deleteë¬¸ì 4ë² ì¨ì¤ì¼í¨  -->
    	</table>
    	<br><br>
-	
 </body>
 </html>
