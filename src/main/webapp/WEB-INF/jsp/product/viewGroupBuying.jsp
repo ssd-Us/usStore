@@ -70,7 +70,7 @@
    		</tr>
    		
    		<tr>
-   			<th style="border-right: 1px solid black;">판매자</th>
+   			<th style="border-right: 1px solid black;">판매자</th>
    			<td>${gb.userId}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	   			<span>
 		   			<a href="
@@ -106,7 +106,7 @@
    		<tr>
    		<th style="border-right: 1px solid black;">할인율</th>
    			<td>
-   				<del>정가 : ${gb.unitCost} 원</del> <br>
+   				<p><del>정가 : ${gb.unitCost}원</del></p>
    				할인가 : ${gb.listPrice}원&nbsp;<font color=red>-${gb.discount}%</font> <br>
    			</td>
    		</tr>
@@ -120,19 +120,19 @@
    			<td colspan="2" style="border-bottom: none;">
    			<span>
 		   			<a href="
-							<c:url value='/addCart/${gb.itemId}'/>	<!-- ë¡ê·¸ì¸ ì¬ë¶ ë°ì§ê¸° -->
-					">장바구니 추가</a>
+							<c:url value='/addCart/${gb.itemId}'/>
+					">장바구니 추가</a>
 				</span>
 				&nbsp;&nbsp;&nbsp;
 				<span>
 					<a href="
-							<c:url value='/order/${gb.itemId}'/>	<!-- ë¡ê·¸ì¸ ì¬ë¶ ë°ì§ê¸° -->
+							<c:url value='/order/${gb.itemId}'/>
 					">공동구매 참여하기</a>
 				</span>
 				&nbsp;&nbsp;&nbsp;
 				<span>
    				<a href="
-							<c:url value='/note/${gb.itemId}'/>	<!-- ë¡ê·¸ì¸ ì¬ë¶ ë°ì§ê¸° -->
+							<c:url value='/note/${gb.itemId}'/>	
 				">쪽지 보내기</a>
 				</span>
    			
