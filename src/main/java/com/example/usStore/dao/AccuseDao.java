@@ -10,5 +10,5 @@ public interface AccuseDao {
 	
 	int countAccuseById(String accountId) throws DataAccessException;
 	
-	boolean isAccuseAlready(String attacker, String victim) throws DataAccessException;
+	String isAccuseAlready(String attacker, String victim) throws DataAccessException;
 }

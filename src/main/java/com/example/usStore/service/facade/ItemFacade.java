@@ -18,7 +18,7 @@ import com.example.usStore.domain.Tag;
 /*
  * ItemFacade
  * 
- * Item / HandMade / GroupBuying / SecondHand / Auction / Tag
+ * Item / HandMade / GroupBuying / SecondHand / Auction / Tag 
  * */
 public interface ItemFacade {
 
@@ -40,6 +40,7 @@ public interface ItemFacade {
 
 	boolean isItemInStock(int itemId, int productId);
 
+	String getUserIdByItemId(int itemId);
 	
 	/////////////////////////////////////////////////////////////////////////
 	/* HandMade */
@@ -121,6 +122,6 @@ public interface ItemFacade {
 
 	void updateTag(Tag tag);	
 
-	void deleteTag(int tagId);	
+	void deleteTag(int itemId);	
 	
 }
