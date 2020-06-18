@@ -1,3 +1,4 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="itemTop.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
@@ -8,7 +9,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>공동구매 추가 입력 폼</title>
+<title>ê³µëêµ¬ë§¤ ì¶ê° ìë ¥ í¼</title>
 </head>
 <style>
 	div#addItemForm {
@@ -34,10 +35,10 @@
 
 	<form:form modelAttribute="GroupBuying" method="post" action="step3.do">
 		
-	판매가: <form:input type="text" path="listPrice" value="${listPrice}" />
+	íë§¤ê°: <form:input type="text" path="listPrice" value="${listPrice}" />
 	<form:errors path="listPrice"/> <br><br>
 	
-	마감기한: 
+	ë§ê°ê¸°í: 
 	<form:input type="date" path="date"/>
 	<form:input type="time" path="time"/> 
 	<form:errors path="deadLine"/> 
@@ -46,7 +47,7 @@
 	<a href="<c:url value='/shop/groupBuying/gobackItem.do'>
 		         <c:param name="productId" value="${productId}"/>
 		     </c:url>
-		">[이전 단계로]</a> <input type="submit" value="다음 단계로" />
+		">[ì´ì  ë¨ê³ë¡]</a> <input type="submit" value="ë¤ì ë¨ê³ë¡" />
 	</form:form>
 </div>
 </body>
