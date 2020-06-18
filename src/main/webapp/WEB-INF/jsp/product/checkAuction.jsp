@@ -14,7 +14,6 @@
 		padding: 20px;
 	}
 </style>
-<meta charset="UTF-8">
 <title>ê²½ë§¤ ì¶ê° íì¸ íì´ì§</title>
 </head>
 <body> 
