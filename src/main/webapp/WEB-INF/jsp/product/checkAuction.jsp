@@ -1,3 +1,4 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="itemTop.jsp"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <% request.setCharacterEncoding("UTF-8"); %>
@@ -14,7 +15,7 @@
 	}
 </style>
 <meta charset="UTF-8">
-<title>경매 추가 확인 페이지</title>
+<title>ê²½ë§¤ ì¶ê° íì¸ íì´ì§</title>
 </head>
 <body> 
 <table id="main-menu">
@@ -27,13 +28,13 @@
 </table>
 <div id = "addItemForm">
 <form:form modelAttribute="Auction" action="detailItem.do">
-<h2>경매 추가 확인</h2>
+<h2>ê²½ë§¤ ì¶ê° íì¸</h2>
 <hr width = "927px" align="left"><br><br>
-<label>제목</label> : ${itemForm.title} <br> 
-<label>내용</label> : ${itemForm.description} <br> 
-<label>수량</label> : ${itemForm.qty} <br> 
+<label>ì ëª©</label> : ${itemForm.title} <br> 
+<label>ë´ì©</label> : ${itemForm.description} <br> 
+<label>ìë</label> : ${itemForm.qty} <br> 
 
-<label>태그</label> : 
+<label>íê·¸</label> : 
 
 <c:if test="${itemForm.tag1 != '' && itemForm.tag1 ne null}">
 	<font color="blue">#</font>${itemForm.tag1} 
@@ -52,10 +53,10 @@
 </c:if>
 
 <br><br>
-<label>시작 가격</label> : ${Auction.startPrice}원<br> 
-<label>마감 날짜</label> : ${Auction.deadLine} <br><br>
+<label>ìì ê°ê²©</label> : ${Auction.startPrice}ì<br> 
+<label>ë§ê° ë ì§</label> : ${Auction.deadLine} <br><br>
 <br><br>
-<label>접수 일시</label> : ${date} <br><br>
+<label>ì ì ì¼ì</label> : ${date} <br><br>
 
 <p><a href="/addItemStep2">[이전 단계로]</a> <input type="submit" value="경매 추가" /></p>
 </form:form>
