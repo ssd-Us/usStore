@@ -1,3 +1,4 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="itemTop.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
@@ -6,7 +7,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>상품 입력 폼</title>
+<title>ìí ìë ¥ í¼</title>
 </head>
 <style>
 	div#addItemForm {
@@ -31,23 +32,23 @@
 	<spring:hasBindErrors name="item" />
 	<form:form modelAttribute="item" method="post" action="addItem2.do?productId=${productId}">
 	
-	제목 <form:input type="text" path="title" style="width:380px; height:35px;" value="${title}"/>
+	ì ëª© <form:input type="text" path="title" style="width:380px; height:35px;" value="${title}"/>
 	<form:errors path="title"/> <br><br>
 	
-	내용 <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	ë´ì© <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	<form:textarea path="description" cols="50" rows="10" value="${discription}"/>
 	<form:errors path="description"/> <br><br>
 	
 	<c:set var="pId" value="${productId}"/>
 	<c:if test="${pId != 1}">
-	정가<form:input type="text" path="unitCost" value="${unitCost}"/>
+	ì ê°Â<form:input type="text" path="unitCost" value="${unitCost}"/>
 	<form:errors path="unitCost"/> <br><br>
 	</c:if>
 	
-	수량<form:input type="text" path="qty" value="${qty}"/>
+	ìëÂÂ<form:input type="text" path="qty" value="${qty}"/>
 	<form:errors path="qty"/> <br><br>
 	
-	태그
+	íê·¸
 	<form:input path="tag1" placeholder="#tag" value="${tag1}"/>
 	<form:errors path="tag1"/>&nbsp;
 	<form:input path="tag2" placeholder="#tag" value="${tag2}"/>
@@ -59,7 +60,7 @@
 	<form:input path="tag5" placeholder="#tag" value="${tag5}"/>
 	<form:errors path="tag5"/> <br><br><br>
 	
-	<input type="submit" value="다음 단계로" />
+	<input type="submit" value="ë¤ì ë¨ê³ë¡" />
 	
 	</form:form>
 </div>
