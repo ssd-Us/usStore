@@ -6,7 +6,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
 <title>중고거래 상세페이지</title>
 <style type="text/css"> 
 	a { text-decoration:none } 

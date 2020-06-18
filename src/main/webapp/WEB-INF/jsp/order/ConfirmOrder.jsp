@@ -1,6 +1,6 @@
 <%@ include file="../IncludeTop.jsp"%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-
+ 
 <table id="main-menu">
   <tr><td>
     <a href='<c:url value="/shop/index.do"/>'>

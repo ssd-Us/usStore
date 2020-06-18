@@ -8,7 +8,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
 <title>중고거래 게시물 목록</title>
 </head>
 <body>
