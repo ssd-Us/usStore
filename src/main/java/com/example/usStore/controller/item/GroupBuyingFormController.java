@@ -16,6 +16,7 @@ import com.example.usStore.controller.mypage.UserSession;
 import com.example.usStore.domain.GroupBuying;
 import com.example.usStore.domain.Item;
 import com.example.usStore.domain.Tag;
+import com.example.usStore.service.facade.MyPageFacade;
 
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -29,7 +30,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import com.example.usStore.service.facade.ItemFacade;
 
 @Controller
-@SessionAttributes({"GroupBuying", "groupBuyingList", "userSession"})
+@SessionAttributes({"GroupBuying", "groupBuyingList"})
 public class GroupBuyingFormController {
 	
 	private static final String ADD_GroupBuying_FORM = "product/addGroupBuying";
@@ -38,6 +39,9 @@ public class GroupBuyingFormController {
 	
 	@Autowired
 	private ItemFacade itemFacade; 
+	
+	@Autowired
+	private MyPageFacade myPageFacade;
 	
 	@ModelAttribute("GroupBuying")		  
 	public GroupBuyingForm formBacking() {  // accessor method 
@@ -137,8 +141,6 @@ public class GroupBuyingFormController {
 		
 		groupBuyingForm.setDiscount(calDiscount);
 		
-		
-		
 		String deadLine = groupBuyingForm.getDate() + " " + groupBuyingForm.getTime() + ":00";
 		groupBuyingForm.setDeadLine(deadLine);
 		System.out.println("setting : " + groupBuyingForm);
@@ -235,8 +237,7 @@ public class GroupBuyingFormController {
 	
 	@RequestMapping("/shop/groupBuying/viewItem.do") //click title -> detail Page(viewCount++)
 	public String viewGroupBuying(@RequestParam("itemId") int itemId, 
-			HttpServletRequest rq, 
-			@RequestParam("productId") int productId, Model model, Model modelMap)
+			HttpServletRequest rq, @RequestParam("productId") int productId, Model model, Model modelMap)
 	{
 		System.out.println("viewItem.do");
 		System.out.println("itemId:" + itemId);
@@ -264,23 +265,18 @@ public class GroupBuyingFormController {
 		List<Tag> tags = new ArrayList<Tag>();
 		tags = itemFacade.getTagByItemId(gb.getItemId());
 		
+		String attacker = this.itemFacade.getUserIdByItemId(itemId);
+	    System.out.println("attacker : " + attacker);
+	      
+		String isAccuse = this.myPageFacade.isAccuseAlready(attacker, "A"); 
+	    System.out.println("isAccuse: " + isAccuse);
+	      
 		model.addAttribute("gb", gb);
 		model.addAttribute("productId", productId);
+		model.addAttribute("isAccuse", isAccuse);
 		modelMap.addAttribute("tags", tags);
 	
 		return DetailPage;
-	}
-	
-	@RequestMapping("/shop/GroupBuying/index.do") //go index(remove sessions)
-	public String goIndex(SessionStatus sessionStatus, HttpServletRequest rq)
-	{
-		System.out.println("gb - index.do");
-		HttpSession session = rq.getSession(false);
-		
-		sessionStatus.setComplete();	// groupBuying session close
-		session.removeAttribute("itemForm");	//itemForm session close
-		
-		return "redirect:/shop/index.do";
 	}
 	
 	@RequestMapping("/shop/groupBuying/edit.do") //edit Item
@@ -345,4 +341,18 @@ public class GroupBuyingFormController {
 		
 		return "redirect:/shop/groupBuying/listItem.do?productId=" + productId;
 	}
+	
+	@RequestMapping("/shop/product/index.do") //go index(remove sessions)
+	public String goIndex(SessionStatus sessionStatus, HttpServletRequest rq)
+	{
+		System.out.println("go back index.do From [add / edit product]");
+		HttpSession session = rq.getSession(false);
+		
+		sessionStatus.setComplete();// groupBuying session close
+		session.removeAttribute("itemForm");	//itemForm session close
+		session.removeAttribute("status");		//edit flag Session close
+		
+		return "redirect:/shop/index.do";
+	}
+	
 }
