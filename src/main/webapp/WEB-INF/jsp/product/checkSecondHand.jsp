@@ -11,7 +11,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
 <title>중고거래 입력 최종 확인 step3- view 이름을 check로 바꾸기</title>
 <style>
 table, th, td {

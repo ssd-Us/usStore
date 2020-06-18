@@ -6,7 +6,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
 <title>ê²½ë§¤ ë¦¬ì¤í¸ íì´ì§</title>
 </head>
 <body> 

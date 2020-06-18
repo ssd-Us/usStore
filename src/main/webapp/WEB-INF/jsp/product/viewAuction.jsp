@@ -5,7 +5,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
 <title>ê²½ë§¤ ìì¸ íì´ì§Â</title>
 </head>
 <style type="text/css"> 
