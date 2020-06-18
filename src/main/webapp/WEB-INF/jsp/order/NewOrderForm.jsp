@@ -2,7 +2,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-
+ 
 <c:set var="targetUrl"><c:url value="/shop/newOrderSubmitted.do" /></c:set>
 
 <div align="center">
