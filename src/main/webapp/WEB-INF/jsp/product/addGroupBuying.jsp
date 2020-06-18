@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>ê³µëêµ¬ë§¤ ì¶ê° ìë ¥ í¼</title>
+<title>공동구매 물품 추가 입력 폼</title>
 </head>
 <style>
 	div#addItemForm {
@@ -20,7 +20,7 @@
 <body>
 <table id="main-menu">
   <tr>
-    <td><a href='<c:url value="/shop/GroupBuying/index.do"/>'>
+    <td><a href='<c:url value="/shop/product/index.do"/>'>
         <b><font color="black" size="2">
           &lt;&lt; Go to Index</font></b></a>
     </td>
@@ -33,10 +33,10 @@
 
 	<form:form modelAttribute="GroupBuying" method="post" action="step3.do">
 		
-	íë§¤ê°: <form:input type="text" path="listPrice" value="${listPrice}" />
+	할인가 : <form:input type="text" path="listPrice" value="${listPrice}" />
 	<form:errors path="listPrice"/> <br><br>
 	
-	ë§ê°ê¸°í: 
+	마감 날짜 : 
 	<form:input type="date" path="date"/>
 	<form:input type="time" path="time"/> 
 	<form:errors path="deadLine"/> 
@@ -45,7 +45,7 @@
 	<a href="<c:url value='/shop/groupBuying/gobackItem.do'>
 		         <c:param name="productId" value="${productId}"/>
 		     </c:url>
-		">[ì´ì  ë¨ê³ë¡]</a> <input type="submit" value="ë¤ì ë¨ê³ë¡" />
+		">[이전 단계로]</a> <input type="submit" value="다음 단계로" />
 	</form:form>
 </div>
 </body>
