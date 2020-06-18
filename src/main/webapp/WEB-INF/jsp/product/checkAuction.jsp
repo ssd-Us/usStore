@@ -58,7 +58,7 @@
 <br><br>
 <label>ì ì ì¼ì</label> : ${date} <br><br>
 
-<p><a href="/addItemStep2">[ì´ì  ë¨ê³ë¡]</a> <input type="submit" value="ê²½ë§¤ ì¶ê°" /></p>
+<p><a href="/addItemStep2">[이전 단계로]</a> <input type="submit" value="경매 추가" /></p>
 </form:form>
 </div>
 </body>
