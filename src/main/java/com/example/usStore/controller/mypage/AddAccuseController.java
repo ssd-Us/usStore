@@ -22,8 +22,7 @@ public class AddAccuseController {
       this.myPageFacade = myPageFacade;
    }
 
-
-   @RequestMapping("/addAccuse.do") 
+   @RequestMapping("/addAccuse.do")  //로그인이 정상적으로 되어있을 때만 들어오는 컨트롤러
    public String addAccuse(@RequestParam(value="userId") String userId,
          @RequestParam(value="itemId") int itemId, 
          @RequestParam(value="productId") int productId,
@@ -36,15 +35,19 @@ public class AddAccuseController {
  	   	UserSession userSession = (UserSession) session.getAttribute("userSession");
  	    String victim = userSession.getAccount().getUserId();  
  	    	
- 	    if(victim != null && !reason.equals("") && reason != null && !reason.equals(null)) {
-	           Accuse accuse = new Accuse(); //여기에 값 저장 ..
+ 	    if(!reason.equals("") && reason != null && !reason.equals("null")) {
+ 	    	if(victim.equals(userId)) {
+ 	    		System.err.println("자신을 신고할 수 없습니다.");
+ 	    	}else {
+	           Accuse accuse = new Accuse(); 
 	           accuse.setAttacker(userId);  // 판매자가 공격자이다. 
 	           accuse.setReason(reason); //자바스크립트에서 넘어온 신고사유
-	           accuse.setVictim(victim);  // 세션: 로그인아이디가 setVictim();
+	           accuse.setVictim(victim);  // 세션: 로그인아이디
 	           
 	           this.myPageFacade.insertAccuse(accuse);
-	    }
-      
+ 	    	}
+ 	   }
+
         model.addAttribute("itemId", itemId);
         model.addAttribute("productId", productId);
         if(productId == 0)
@@ -57,6 +60,12 @@ public class AddAccuseController {
            return "redirect:/shop/handMade/viewItem.do";
         else
            return "/index";
+   }
+   
+   
+   @RequestMapping("/addAccuseNoLogin.do")  //로그인이 안되었는데 판매자 신고 눌렀을때 
+   public String addAccuseNoLogin(){
+	   return "redirect:shop/signonForm.do";
    }
    
    

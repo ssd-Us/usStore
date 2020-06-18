@@ -69,7 +69,13 @@
 			">팔로잉</a>
 		</span>
 		&nbsp;
-		<%@ include file="/WEB-INF/jsp/account/accuseFunction.jsp" %>
+		<% 
+
+		if(session.getAttribute("userSession") != null){
+		%> <%@ include file="/WEB-INF/jsp/account/accuseFunction.jsp" %>
+   		<% }else {%>
+   			<a href="<c:url value='/addAccuseNoLogin.do'/>">판매자 신고하기</a>
+   		<% }%>
    		</td>
    	</tr> 
    	<tr>

@@ -18,11 +18,14 @@ div#addItemForm {
    padding: 20px;
 }
 </style>
+
 <table id="main-menu">
-   <tr>
-      <td><a href='<c:url value="/shop/index.do"/>'> <b><font
-               color="black" size="2"> &lt;&lt; Go to Index</font></b></a></td>
-   </tr>
+  <tr>
+    <td><a href='<c:url value="/shop/secondHand/index.do"/>'>
+        <b><font color="black" size="2">
+          &lt;&lt; Go to Index</font></b></a>
+    </td>
+  </tr>
 </table>
 
 <h1>중고거래 최종 확인</h1>

@@ -8,6 +8,7 @@ import org.springframework.beans.support.PagedListHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -76,22 +77,31 @@ public class SecondHandFormController {
       return "product/secondHand";
    }
    
+	/*
+	 * @ExceptionHandler(NullPointerException.class) public String
+	 * handleNullPointerException(NullPointerException ex) { return
+	 * "account/SignonForm"; }
+	 */
+   
    @RequestMapping("/shop/secondHand/viewItem.do") 
    public String viewSecondHand(@RequestParam("itemId") int itemId,
          @RequestParam("productId") int productId, ModelMap model,
          HttpServletRequest request) {
 	   /*뷰를 띄어줄때는 인터셉터를 걸면 안되는게..무조건 컨트롤러 보내줘야하니까,,
 	    * 그대신 신고기능을 로그인이 안되있으면 못하도록.. */
-	   HttpSession session =  request.getSession(false);
-	   UserSession userSession = (UserSession) session.getAttribute("userSession");
-	   String victim = userSession.getAccount().getUserId();
-	   String isAccuse = "false";       //attacker = 판매자 아이디, victim = 세션 유저 아이디 
-	   String attacker = this.itemFacade.getUserIdByItemId(itemId); 
-	   if(victim != null) {
-		   System.out.println("session null !! : " + victim);
-		   isAccuse = this.myPageFacade.isAccuseAlready(attacker, victim); 
+	 
+	   String isAccuse = "false";
+	   if(request.getSession(false) != null) {
+		   HttpSession session = request.getSession(false);
+		   UserSession userSession = (UserSession) session.getAttribute("userSession");
+		   
+		   if(userSession != null) {//attacker = 판매자 아이디, victim = 세션 유저 아이디 
+			   String victim = userSession.getAccount().getUserId();
+			   String attacker = this.itemFacade.getUserIdByItemId(itemId); 
+			   isAccuse = this.myPageFacade.isAccuseAlready(attacker, victim); 
+		   }
 	   }
-
+	   
       SecondHand sh = this.itemFacade.getSecondHandItem(itemId);
          model.addAttribute("sh", sh);
          model.addAttribute("productId", productId);
@@ -101,7 +111,7 @@ public class SecondHandFormController {
    
    
    //여기부터 수정 
-   @RequestMapping("/shop/product/index.do") //go index(remove sessions)
+   @RequestMapping("/shop/secondHand/index.do") //go index(remove sessions)
    public String goIndex(SessionStatus sessionStatus, HttpServletRequest rq)
    {
       System.out.println("go back index.do From [add / edit product]");
