@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>ìí ìë ¥ í¼</title>
+<title>물품 판매 입력 폼</title>
 </head>
 <style>
 	div#addItemForm {
