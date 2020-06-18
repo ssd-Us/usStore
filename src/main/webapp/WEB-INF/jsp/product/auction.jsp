@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>ê²½ë§¤ ë¦¬ì¤í¸ íì´ì§</title>
+<title>경매 리스트 페이지</title>
 </head>
 <body> 
 <table id="main-menu">
@@ -28,17 +28,17 @@
                    <p style="text-align:right;">
 		                <a href="<c:url value='/shop/item/addItem.do'>
                            <c:param name="productId" value="${productId}"/></c:url>
-                  ">[ê²½ë§¤ ì¶ê°]
-                  </a>
+                  ">[경매 참여]
+                        </a>
 					</p>
                   <hr>
                   <table>
                      <tr>
-                        <th>ì ëª©</th>
-                        <th style="padding-left:150px">ê°ê²©</th>
-                        <th><p style="padding-left:100px">íë§¤ì</p></th>
-                        <th><p style="padding-left:80px">ëì°°ì</p></th>
-                        <th><p style="padding-left:80px">ë§ê° ë ì§</p></th>
+                        <th>제목</th>
+                        <th style="padding-left:150px">가격</th>
+                        <th><p style="padding-left:100px">판매자</p></th>
+                        <th><p style="padding-left:80px">낙찰자</p></th>
+                        <th><p style="padding-left:80px">마감 날짜</p></th>
                         </tr>
                   <tbody>   
                   <c:forEach var="al" items="${auctionList.pageList}">               
@@ -52,7 +52,7 @@
                                 </a>
                 
                    </td>
-                   <td style="padding-left:140px">ìì:<c:out value="${al.startPrice}"/><br>ëì°°:<c:out value="${al.bidPrice}"/></td>
+                   <td style="padding-left:140px">시작 : <c:out value="${al.startPrice}"/><br>낙찰 : <c:out value="${al.bidPrice}"/></td>
                        <td style="padding-left:120px"><c:out value="${al.userId}"/></td>   
                        <td style="padding-left:100px"><c:out value="b"/></td>
                        <td style="padding-left:80px"><c:out value="${al.deadLine}"/></td>

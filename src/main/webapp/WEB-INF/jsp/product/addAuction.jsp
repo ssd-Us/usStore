@@ -14,7 +14,7 @@
 		padding: 20px;
 	}
 </style>
-<title>ê²½ë§¤ ì¶ê° íì´ì§</title>
+<title>경매 입력 폼</title>
 </head>
 <body>
 <table id="main-menu">
@@ -32,10 +32,10 @@
 
 	<form:form modelAttribute="Auction" method="post" action="step3.do">
 		
-	ìì ê°ê²©: <form:input type="int" path="startPrice" value="${startPrice}"/>
+	시작 가격 : <form:input type="int" path="startPrice" value="${startPrice}"/>
 	<form:errors path="startPrice"/> <br>	
 	
-	ë§ê° ê¸°í: 
+	마감 날짜 : 
 	<form:input type="date" path="date"/>
 	<form:input type="time" path="time"/> 
 	<form:errors path="deadLine"/> 
@@ -44,7 +44,7 @@
 	<a href="<c:url value='/shop/auction/gobackItem.do'>
 		         <c:param name="productId" value="${productId}"/>
 		     </c:url>
-		">[ì´ì  ë¨ê³ë¡]</a> <input type="submit" value="ë¤ì ë¨ê³ë¡" />
+		">[이전 단계로]</a> <input type="submit" value="다음 단계로" />
 	</form:form>
 </div>	
 </body>
