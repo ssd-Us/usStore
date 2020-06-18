@@ -1,3 +1,4 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="itemTop.jsp"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <% request.setCharacterEncoding("UTF-8"); %>
@@ -14,7 +15,7 @@
 	}
 </style>
 <meta charset="UTF-8">
-<title>경매 추가 페이지</title>
+<title>ê²½ë§¤ ì¶ê° íì´ì§</title>
 </head>
 <body>
 <table id="main-menu">
@@ -32,10 +33,10 @@
 
 	<form:form modelAttribute="Auction" method="post" action="step3.do">
 		
-	시작 가격: <form:input type="int" path="startPrice" value="${startPrice}"/>
+	ìì ê°ê²©: <form:input type="int" path="startPrice" value="${startPrice}"/>
 	<form:errors path="startPrice"/> <br>	
 	
-	마감 기한: 
+	ë§ê° ê¸°í: 
 	<form:input type="date" path="date"/>
 	<form:input type="time" path="time"/> 
 	<form:errors path="deadLine"/> 
@@ -44,7 +45,7 @@
 	<a href="<c:url value='/shop/auction/gobackItem.do'>
 		         <c:param name="productId" value="${productId}"/>
 		     </c:url>
-		">[이전 단계로]</a> <input type="submit" value="다음 단계로" />
+		">[ì´ì  ë¨ê³ë¡]</a> <input type="submit" value="ë¤ì ë¨ê³ë¡" />
 	</form:form>
 </div>	
 </body>
