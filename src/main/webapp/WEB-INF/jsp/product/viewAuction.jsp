@@ -11,10 +11,12 @@
 	a { text-decoration:none } 
 </style> 
 <style>
-	.right-box {
-	  float: right;
-	  border-radius: 2em;
-	  text-align: center;
+
+	table#detail {
+		border: none;
+		text-align: center;
+		font-size: medium;
+		padding: 15px;
 	}
 	
 	span {
@@ -25,13 +27,6 @@
 		font-size: small;
 		text-align: center;
 		padding: 5px;
-	}
-	
-	table {
-			border: none;
-		 	text-align: center;
-			font-size: medium;
-			padding: 15px;
 	}
 	
 	 th, td {
@@ -65,12 +60,18 @@ function participation(price, unitCost) {
 <body>
 <table id="main-menu">
   <tr>
-    <td><a href='<c:url value="/shop/auction/listItem.do?productId=1"/>'>
-        <b><font color="black" size="2">
-          &lt;&lt; Go to Auction List</font></b></a>
+    <td>
+	    <a href='<c:url value="/shop/index.do"/>'>
+	        <b><font color="black" size="2">&lt;&lt; Go to Index</font></b>
+	    </a><br><br>
+	    <a href='<c:url value="/shop/auction/listItem.do">
+    				<c:param name="productId" value="${auction.productId}" />
+    			</c:url>'>
+	        <b><font color="black" size="2">&lt;&lt; Go to List</font></b>
+	    </a><br>
     </td>
   </tr>
-</table>	
+</table> 
 	<table style="margin-left: auto; margin-right: auto;">
 	<tr>
 		<td style="text-align: left; padding: 0px; font-size: small; border-bottom: none;">
@@ -90,18 +91,20 @@ function participation(price, unitCost) {
    		
    		<tr>
    			<th style="border-right: 1px solid black;">판매자</th>
-   			<td>김문정&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   			<td>${auction.userId}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	   			<span>
 		   			<a href="
 							<c:url value='/addFollow/${auction.userId}'/>	<!-- 로그인 여부 따지기 -->
 					">팔로잉</a>
 				</span>
 				&nbsp;
-				<span>
-					<a href="
-							<c:url value='/addAccuse/${auction.userId}'/>	<!-- 로그인 여부 따지기 -->
-					">판매자 신고</a>
-				</span>
+		<% 
+
+		if(session.getAttribute("userSession") != null){
+		%> <%@ include file="/WEB-INF/jsp/account/accuseFunction.jsp" %>
+   		<% }else {%>
+   			<a href="<c:url value='/addAccuseNoLogin.do'/>">판매자 신고하기</a>
+   		<% }%>
    			</td>
    		</tr> <!-- userId = suppId -->
    		
@@ -121,9 +124,7 @@ function participation(price, unitCost) {
    		
    		<tr>
    			<th style="border-right: 1px solid black;"><font color=red>마감 날짜</font></th>
-   			<td><font color=red>
-   				${auction.deadLine}
-   			</font></td>
+   			<td><font color=red>${auction.deadLine}</font></td>
    		</tr>
    		
    		<tr>

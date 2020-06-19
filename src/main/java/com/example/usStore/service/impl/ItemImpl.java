@@ -1,5 +1,6 @@
 package com.example.usStore.service.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -88,6 +89,11 @@ public class ItemImpl implements ItemFacade {
 			System.err.println("getQuantity Error !!");
 			return -1;
 		}
+	}
+	
+	@Override
+	public List<Item> searchItemList(String keywords) {
+		return itemDao.searchItemList(keywords);
 	}
 	
 	@Override
@@ -273,6 +279,10 @@ public class ItemImpl implements ItemFacade {
 	
 	public void updateBidPrice(int unitCost, int itemId) {
 		auctionDao.updateBidPrice(unitCost, itemId);
+	}
+	
+	public List<Bidder> getBidderList() {
+		return auctionDao.getBidderList();
 	}
 
 	@Override
