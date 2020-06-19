@@ -38,6 +38,7 @@
   <link href="../../resources/css/scrolling-nav.css" rel="stylesheet">
 </head>
 
+
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-white" id="mainNav">
      <a class="navbar-brand js-scroll-trigger" href="<c:url value="/shop/index.do"/>">
