@@ -16,7 +16,7 @@
           &lt;&lt; Go to Index</font></b></a>
     </td>
   </tr>
-</table>
+</table> 
    <form name = "pform" action="" style="position:absolute; left:50%; margin:0 0 0 -500px;">
       <div class="container" >
          <div class="row"  style="display:inline">
@@ -35,15 +35,16 @@
                   <table>
                      <tr>
                         <th>제목</th>
-                        <th style="padding-left:150px">가격</th>
-                        <th><p style="padding-left:100px">판매자</p></th>
-                        <th><p style="padding-left:80px">낙찰자</p></th>
+                        <th style="padding-left:120px">가격</th>
                         <th><p style="padding-left:80px">마감 날짜</p></th>
+                        <th><p style="padding-left:80px">판매자</p></th>
+                        <th><p style="padding-left:80px">낙찰자</p></th>
+                        
                         </tr>
                   <tbody>   
-                  <c:forEach var="al" items="${auctionList.pageList}">               
+                  <c:forEach var="al" items="${auctionList.pageList}" varStatus="status">         
                   <tr style="height:70px;">
-                  <td style="padding-left:40px">
+                  <td style="padding-left:20px">
                                 <a href="<c:url value='/shop/auction/viewItem.do'>
                                     <c:param name="itemId" value="${al.itemId}"/>
                                     <c:param name="productId" value="${productId}"/>
@@ -52,31 +53,52 @@
                                 </a>
                 
                    </td>
-                   <td style="padding-left:140px">시작 : <c:out value="${al.startPrice}"/><br>낙찰 : <c:out value="${al.bidPrice}"/></td>
-                       <td style="padding-left:120px"><c:out value="${al.userId}"/></td>   
-                       <td style="padding-left:100px"><c:out value="b"/></td>
-                       <td style="padding-left:80px"><c:out value="${al.deadLine}"/></td>
+                   <td style="padding-left:120px">
+                   		시작가 : <c:out value="${al.startPrice}"/><br>
+                   		<!-- 경매 종료시 낙찰가 보여주기, 경매 진행중일땐 현재 최고 가격 보여주기 -->
+                   		<c:set var="state" value="${al.auctionState}"/>
+                       	<c:if test="${state eq 0}">
+                       		현재 최고가 : <c:out value="${al.unitCost}"/>
+                       	</c:if>	
+                   		<c:if test="${state eq 1}">
+                       		낙찰가 : <c:out value="${al.bidPrice}"/>
+                       	</c:if>	
+                       	</td>
+                  
+                   <td style="padding-left:80px">
+                   		<c:out value="${al.deadLine}"/>
+                   		<c:if test="${state eq 0}">
+   					<font color=blue>(경매 진행중)</font><br><br>
+   				</c:if>
+   				<c:if test="${state eq 1}">
+   					<font color=red>(경매 종료)</font><br><br>
+   				</c:if>
+                   </td>
+                       <td style="padding-left:100px"><c:out value="${al.userId}"/></td>   
+                       <!-- 경매 종료시 낙찰자 출력, 경매 진행중일땐 None 출력 --> 
+                       <c:set var="state" value="${al.auctionState}"/>
+                       <c:if test="${state eq 0}">
+					   <td style="padding-left:90px"><c:out value="--none--"/></td>
+					   </c:if>
+   					   <c:if test="${state eq 1}">
+					   <td style="padding-left:90px"><c:out value="${(resultBidder.pageList)[status.index].bidder}"/></td>
+					   </c:if>
                   </tr>
                   </c:forEach>
                   </tbody>
-                  <tr>
-							<td>
-								<c:if test="${!al.firstPage}">
+                  </table>
+                  <c:if test="${!auctionList.firstPage}">
 									<a href='<c:url value="/shop/auction/listItem2.do">
 	           								<c:param name="pageName" value="previous"/></c:url>'>
 										<font color="black"><B>&lt;&lt; Prev</B></font>
 									</a>
 								</c:if>
-								<c:if test="${!al.lastPage}">
+								<c:if test="${!auctionList.lastPage}">
 									<a href='<c:url value="/shop/auction/listItem2.do">/>
 	            							 <c:param name="pageName" value="next"/></c:url>'>
 										<font color="black"><B>Next &gt;&gt;</B></font>
 									</a>
 								</c:if>
-							</td>
-						</tr>
-                  
-                  </table>
                </div>
             </div>
          </div>
