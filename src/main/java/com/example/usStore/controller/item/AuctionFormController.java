@@ -32,26 +32,33 @@ import org.springframework.web.servlet.ModelAndView;
 import com.example.usStore.controller.mypage.UserSession;
 import com.example.usStore.domain.Auction;
 import com.example.usStore.domain.Bidder;
+import com.example.usStore.domain.GroupBuying;
 import com.example.usStore.domain.Item;
 import com.example.usStore.domain.Tag;
 import com.example.usStore.service.facade.ItemFacade;
+import com.example.usStore.service.facade.MyPageFacade;
 
 @Controller
-@SessionAttributes({"userSession", "Auction", "auctionList"})
+@SessionAttributes({"Auction", "auctionList", "resultBidder"})
 public class AuctionFormController {
    private static final String ADD_Auction_FORM = "product/addAuction";
    private static final String GoAddItemFORM = "redirect:/shop/item/addItem.do?productId=";
    private static final String CHECK_FORM3 = "product/checkAuction";
    
-   @Autowired
    private ItemFacade itemFacade;
+   private MyPageFacade myPageFacade;
    
    private int myItemId;
    private int myProductId;
    
    @Autowired
-   public void setUsStore(ItemFacade itemFacade) {
+   public void setItemFacade(ItemFacade itemFacade) {
       this.itemFacade = itemFacade;
+   }
+   
+   @Autowired
+   public void setMyPageFacade(MyPageFacade myPageFacade) {
+      this.myPageFacade = myPageFacade;
    }
    
    @ModelAttribute("Auction")		  
@@ -65,35 +72,72 @@ public class AuctionFormController {
    public String auctionList(@RequestParam("productId") int productId, ModelMap model) {
       myProductId = productId;
       
-      PagedListHolder<Auction> auctionList = new PagedListHolder<Auction>(this.itemFacade.getAuctionList());
+      
+      List<Auction> al = new ArrayList<Auction>();
+      al = this.itemFacade.getAuctionList();
+      
+      PagedListHolder<Auction> auctionList = new PagedListHolder<Auction>(al);
       auctionList.setPageSize(4);
+      
+      //낙찰자 리스트 구하기 (jsp 에서는 경매가 종료된(auctionState = 1) 상태여야 bidder 을 보여줄 수 있게 해야한다.
+      List<Bidder> bidderList = new ArrayList<Bidder>();
+      bidderList = itemFacade.getBidderList();
+      
+      List<Bidder> bl = new ArrayList<Bidder>();
+     
+      Bidder noBidder = new Bidder();
+      noBidder.setItemId(-1);
+      noBidder.setBidder("<no Bidder>");
+      
+      for(int i = 0; i < al.size(); i++) {
+    	  bl.add(i, noBidder);
+      }
+      
+      for(int i = 0; i < al.size(); i++) {
+    	  for(int j = 0; j < bidderList.size(); j++) {
+    		  if (al.get(i).getItemId() == bidderList.get(j).getItemId()) {
+    			  bl.set(i, bidderList.get(j));
+    		  }
+    	  }
+      }
+      
+      PagedListHolder<Bidder> resultBidder = new PagedListHolder<Bidder>(bidderList);
+      resultBidder.setPageSize(4);
       
       model.addAttribute("productId", productId);
       model.addAttribute("auctionList", auctionList);
-
+      model.addAttribute("resultBidder", resultBidder);
+//      model.addAttribute("resultBidder", bl);
+      
       return "product/auction";
    }
    
    
-   	// �럹�씠吏� �꽆�뼱媛덈븣 �떎�뻾�릺�뒗 Controller
 	@RequestMapping("shop/auction/listItem2.do")
 	public String auctionList2 (
 			@ModelAttribute("auctionList") PagedListHolder<Auction> auctionList,
-			@RequestParam("pageName") String page,
-			ModelMap model) throws Exception {
+			@ModelAttribute("resultBidder") PagedListHolder<Auction> resultBidder,
+			@RequestParam("pageName") String page, ModelMap model) throws Exception {
 		if ("next".equals(page)) {
 			auctionList.nextPage();
+			resultBidder.nextPage();
 		}
 		else if ("previous".equals(page)) {
 			auctionList.previousPage();
+			resultBidder.previousPage();
 		}
 		model.addAttribute("productId", myProductId);
 	    model.addAttribute("auctionList", auctionList);
+	    model.addAttribute("resultBidder", resultBidder);
 		return "product/auction";
 	}
 	
    @RequestMapping("/shop/auction/viewItem.do") 
-   public String auctionView(@RequestParam("itemId") int itemId, @RequestParam("productId") int productId, Model model, Model modelMap) {
+   public String auctionView(@RequestParam("itemId") int itemId, 
+		   @RequestParam("productId") int productId, 
+		   Model model, Model modelMap, 
+		   HttpServletRequest request) {
+	   
 	  System.out.println("<경매 상세 페이지>"); 
 	  
 	  Item item = itemFacade.getItem(itemId);
@@ -107,10 +151,23 @@ public class AuctionFormController {
 
 	  List<Tag> tags = new ArrayList<Tag>();
 	  tags = itemFacade.getTagByItemId(auction.getItemId());
-		
+	  
+	  String isAccuse = "false";
+	   if(request.getSession(false) != null) {
+		   HttpSession session = request.getSession(false);
+		   UserSession userSession = (UserSession) session.getAttribute("userSession");
+		   
+		   if(userSession != null) {//attacker = 판매자 아이디, victim = 세션 유저 아이디 
+			   String victim = userSession.getAccount().getUserId();
+			   String attacker = this.itemFacade.getUserIdByItemId(itemId); 
+			   isAccuse = this.myPageFacade.isAccuseAlready(attacker, victim); 
+		   }
+	   }
+	   
 	  model.addAttribute("productId", productId);
       model.addAttribute("auction", auction);
       modelMap.addAttribute("tags", tags);
+      model.addAttribute("isAccuse", isAccuse);
 
       return "product/viewAuction";
    }
@@ -159,10 +216,16 @@ public class AuctionFormController {
    @RequestMapping(value="/shop/auction/addItem2.do", method = RequestMethod.GET)
    public String step2(
          @ModelAttribute("Auction") AuctionForm auctionForm, 
-         @RequestParam("productId") int productId, Model model) {
+         @RequestParam("productId") int productId, Model model, HttpServletRequest rq) {
       
-      System.out.println("AuctionForm controller");   //print toString
+      System.out.println("경매 추가 컨트롤러 들어왔음");   //print toString
       
+      
+      HttpSession session = rq.getSession(false);
+		if(session.getAttribute("status") != null) {
+			System.out.println("from edit - addItem2.do");	
+		}
+		
       model.addAttribute("productId", productId);
       return ADD_Auction_FORM;   // addAuction.jsp
    }
@@ -294,4 +357,17 @@ public class AuctionFormController {
 		itemFacade.testScheduler(deadLine);
 		return new ModelAndView("Scheduled", "deadLine", deadLine);	
 	}
+   
+   @RequestMapping("/shop/product/index.do") //go index(remove sessions)
+   public String goIndex(SessionStatus sessionStatus, HttpServletRequest rq)
+   {
+      System.out.println("go back index.do From [add / edit product]");
+      HttpSession session = rq.getSession(false);
+      
+      sessionStatus.setComplete();// groupBuying session close
+      session.removeAttribute("itemForm");   //itemForm session close
+      session.removeAttribute("status");      //edit flag Session close
+      
+      return "redirect:/shop/index.do";
+   }
 }
