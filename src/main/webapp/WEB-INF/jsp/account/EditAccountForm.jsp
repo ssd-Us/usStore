@@ -40,7 +40,7 @@
 			  <hr class="my-4">
 			  <%@ include file="IncludeAccountFields.jsp"%>
 			  <hr class="my-4">
-              <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Register</button>
+              <button class="btn btn-lg btn-light btn-block text-uppercase" type="submit">Register</button>
              </form:form>
              <%--   <h3><b><a href='<c:url value="/shop/listOrders.do"/>'>My Orders</a></b></h3> --%>
           </div>

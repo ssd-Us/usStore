@@ -44,14 +44,13 @@ public class ViewAccountController {
 		}
 	}
 
-	public String handleRequest(HttpServletRequest request, HttpSession session,
-			@ModelAttribute("accountForm") AccountForm accountForm,
-			BindingResult result) throws Exception {	
-		Account account = (Account) session.getAttribute("account");
-		
-		if (result.hasErrors())
-			return "index";
-		
+	@RequestMapping(method = RequestMethod.GET)
+	public String showForm() {
 		return "account/mypage";
+	}
+	
+	@RequestMapping(method = RequestMethod.POST)
+	public String goEdit() {
+		return "redirect:/shop/editAccount.do";
 	}
 }
