@@ -46,4 +46,7 @@ public interface AuctionDao extends ItemDao {
 
 	//경매가 종료된 뒤, item 테이블의 unitCost 를 Auction 테이블의 bidPrice 에 수정
 	public void updateBidPrice(int unitCost, int itemId);
+	
+	//낙찰자 리스트 받아오기
+	public List<Bidder> getBidderList();
 }
