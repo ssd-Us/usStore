@@ -1,8 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="itemTop.jsp" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -71,7 +69,13 @@
 			">팔로잉</a>
 		</span>
 		&nbsp;
-		<%@ include file="/WEB-INF/jsp/account/accuseFunction.jsp" %>
+		<% 
+
+		if(session.getAttribute("userSession") != null){
+		%> <%@ include file="/WEB-INF/jsp/account/accuseFunction.jsp" %>
+   		<% }else {%>
+   			<a href="<c:url value='/addAccuseNoLogin.do'/>">판매자 신고하기</a>
+   		<% }%>
    		</td>
    	</tr> 
    	<tr>
