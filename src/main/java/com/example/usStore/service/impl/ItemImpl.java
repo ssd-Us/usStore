@@ -92,11 +92,6 @@ public class ItemImpl implements ItemFacade {
 	}
 	
 	@Override
-	public List<Item> searchItemList(String keywords) {
-		return itemDao.searchItemList(keywords);
-	}
-	
-	@Override
 	public void deleteItem(int itemId) {
 		// TODO Auto-generated method stub
 		itemDao.deleteItem(itemId);
@@ -348,5 +343,11 @@ public class ItemImpl implements ItemFacade {
 	@Override
 	public String getUserIdByItemId(int itemId) {
 		return itemDao.getUserIdByItemId(itemId);
+	}
+
+	@Override
+	public List<Item> searchItemList(String keywords) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
