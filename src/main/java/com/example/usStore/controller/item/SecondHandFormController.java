@@ -8,14 +8,16 @@ import org.springframework.beans.support.PagedListHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
-import com.example.usStore.domain.Accuse;
+import com.example.usStore.controller.mypage.UserSession;
 import com.example.usStore.domain.Item;
 import com.example.usStore.domain.SecondHand;
 import com.example.usStore.service.facade.ItemFacade;
@@ -52,10 +54,10 @@ public class SecondHandFormController {
       
       System.out.println("여기는 게시물 목록 컨트롤러\n ");
       
-      PagedListHolder<SecondHand> itemList = new PagedListHolder<SecondHand>(this.itemFacade.getSecondHandList());
-      itemList.setPageSize(4);
+      PagedListHolder<SecondHand> secondHandList = new PagedListHolder<SecondHand>(this.itemFacade.getSecondHandList());
+      secondHandList.setPageSize(4);
    
-      model.addAttribute("itemList", itemList);
+      model.addAttribute("secondHandList", secondHandList);
       model.addAttribute("productId", productId);
       
       return "product/secondHand"; 
@@ -66,26 +68,40 @@ public class SecondHandFormController {
          @ModelAttribute("secondHandList") PagedListHolder<Item> secondHandList,
          @RequestParam("pageName") String page, ModelMap model) throws Exception {
       if ("next".equals(page)) {
-         secondHandList.nextPage();
+    	  secondHandList.nextPage();
       }
       else if ("previous".equals(page)) {
-         secondHandList.previousPage();
+    	  secondHandList.previousPage();
       }
       model.addAttribute("secondHandList", secondHandList);
       return "product/secondHand";
    }
    
+	/*
+	 * @ExceptionHandler(NullPointerException.class) public String
+	 * handleNullPointerException(NullPointerException ex) { return
+	 * "account/SignonForm"; }
+	 */
+   
    @RequestMapping("/shop/secondHand/viewItem.do") 
    public String viewSecondHand(@RequestParam("itemId") int itemId,
-         @RequestParam("productId") int productId, ModelMap model) {
-      
-      //attacker = 판매자 아이디, victim = 세션 유저 아이디 
-      String attacker = this.itemFacade.getUserIdByItemId(itemId);
-      System.out.println("공격자 : " + attacker);
-    
-      String isAccuse = this.myPageFacade.isAccuseAlready(attacker, "A"); 
-      System.out.println("이즈어큐즈: " + isAccuse);
-      
+         @RequestParam("productId") int productId, ModelMap model,
+         HttpServletRequest request) {
+	   /*뷰를 띄어줄때는 인터셉터를 걸면 안되는게..무조건 컨트롤러 보내줘야하니까,,
+	    * 그대신 신고기능을 로그인이 안되있으면 못하도록.. */
+	 
+	   String isAccuse = "false";
+	   if(request.getSession(false) != null) {
+		   HttpSession session = request.getSession(false);
+		   UserSession userSession = (UserSession) session.getAttribute("userSession");
+		   
+		   if(userSession != null) {//attacker = 판매자 아이디, victim = 세션 유저 아이디 
+			   String victim = userSession.getAccount().getUserId();
+			   String attacker = this.itemFacade.getUserIdByItemId(itemId); 
+			   isAccuse = this.myPageFacade.isAccuseAlready(attacker, victim); 
+		   }
+	   }
+	   
       SecondHand sh = this.itemFacade.getSecondHandItem(itemId);
          model.addAttribute("sh", sh);
          model.addAttribute("productId", productId);
@@ -93,7 +109,21 @@ public class SecondHandFormController {
          return "product/viewSecondHand";
    }
    
+   
    //여기부터 수정 
+   @RequestMapping("/shop/secondHand/index.do") //go index(remove sessions)
+   public String goIndex(SessionStatus sessionStatus, HttpServletRequest rq)
+   {
+      System.out.println("go back index.do From [add / edit product]");
+      HttpSession session = rq.getSession(false);
+      
+      sessionStatus.setComplete();// groupBuying session close
+      session.removeAttribute("itemForm");   //itemForm session close
+      session.removeAttribute("status");      //edit flag Session close
+      
+      return "redirect:/shop/index.do";
+   }
+   
    @RequestMapping("/shop/secondHand/gobackItem.do")      // item.jsp
    public String step1() {
       return "redirect:/shop/item/addItem.do?productId=";   // step1 form view(item.jsp)
