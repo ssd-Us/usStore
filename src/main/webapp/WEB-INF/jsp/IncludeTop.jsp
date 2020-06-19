@@ -31,10 +31,21 @@
 
   <!-- Custom styles for this template -->
   <link href="../resources/css/scrolling-nav.css" rel="stylesheet">
+  
+  <!-- Custom styles for this template -->
+  <link href="../resources/css/simple-sidebar.css" rel="stylesheet">
 </head>
 
   <!-- Navigation -->
   <!-- fixed-top 사용시 상단 고정 -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <button class="btn btn-light" id="menu-toggle">Menu</button>
+  </nav>
+  	
+  </nav>
   <nav class="navbar navbar-expand-lg navbar-dark bg-white" id="mainNav">
      <a class="navbar-brand js-scroll-trigger" href="<c:url value="/shop/index.do"/>">
      	<img border="0" src="../images/usStore3.png" style="float:left;width:80;height:60;border:0;"/>
@@ -76,5 +87,3 @@
       </div>
     </div>
   </nav>
-
-<%@ include file="IncludeQuickHeader.jsp" %>
