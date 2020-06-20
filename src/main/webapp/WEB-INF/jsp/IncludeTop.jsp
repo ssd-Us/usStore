@@ -58,24 +58,36 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="../help.html"><font color="black">HELP</font></a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="<c:url value="/shop/viewCart.do"/>"><font color="black">CART</font></a>
           </li>
+          
           <c:if test="${empty userSession.account}" >
 	          <li class="nav-item">
 	            <a class="nav-link js-scroll-trigger" href="<c:url value="/shop/signonForm.do"/>"><font color="black">LOGIN</font></a>
 	          </li>
           </c:if>
       	  <c:if test="${!empty userSession.account}" >
-	      <li class="nav-item">
-	        <a class="nav-link js-scroll-trigger" href="<c:url value="/shop/editAccount.do"/>"><font color="black">MYPAGE</font></a>
-	      </li>
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="<c:url value="/shop/signoff.do"/>"><font color="black">LOGOUT</font></a>
-          </li>
+      	    <li class="nav-item">
+            	<a class="nav-link js-scroll-trigger" href="<c:url value="/shop/signoff.do"/>"><font color="black">LOGOUT</font></a>
+         	</li>
+			<li class="nav-item dropdown">
+			<a class="nav-link dropdown-toggle js-scroll-trigger" href="#" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			  	<font color="black"> MYPAGE &nbsp; ▼</font>
+			</a>
+      	  	<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+      	  		<a class="dropdown-item" href="<c:url value="/shop/viewAccount.do"/>">My Account</a>
+				<a class="dropdown-item" href="<c:url value="/shop/editAccount.do"/>">Edit Account</a>
+				<div class="dropdown-divider"></div>
+				<a class="dropdown-item" href="<c:url value="/shop/listOrders.do"/>">My Orders</a>
+				<a class="dropdown-item" href="<c:url value="/shop/viewCoupon.do"/>">My Coupon</a>
+				<a class="dropdown-item" href="<c:url value="/shop/viewBookMark.do"/>">My StarList</a>
+				<a class="dropdown-item" href="#">My Coupon</a>
+			</div>
+			</li>
           </c:if>
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="../help.html"><font color="black">HELP</font></a>
-          </li>
 <!--           <li> -->
 <%--               <form action="<c:url value="/shop/searchProducts.do"/>" method="post"> --%>
 <!-- 			    <input type="hidden" name="search" value="true"/> -->

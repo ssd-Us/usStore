@@ -24,11 +24,11 @@
 	                <label for="inputPassword">Your Password</label>
 	              </div>
 	              <div class="form-label-group">
-	                <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign in</button>
+	                <button class="btn btn-lg btn-warning btn-block text-uppercase" type="submit">Sign in</button>
 	              </div>
 	              <hr class="my-4">
 	              <div class="form-label-group">
-	              	<a href='<c:url value="/shop/newAccount.do"/>' class="btn btn-lg btn-primary btn-block text-uppercase">
+	              	<a href='<c:url value="/shop/newAccount.do"/>' class="btn btn-lg btn-warning btn-block text-uppercase">
 		              		New Account
 	              	</a>
 	              </div>
