@@ -113,27 +113,20 @@ public class SecondHandFormController {
 		Item item = new Item(itemform.getUnitCost(), itemform.getTitle(), 
 				itemform.getDescription(), itemform.getQty(), suppId, itemform.getProductId());
 		
-		if(status != 0) { //수정할 때.. 왜 url 공유하는지 다시 확인해보기.. 
+		if(status != 0) { //수정할 때..?? 왜 url 공유하는지 다시 확인해보기.. 
 			item.setItemId(status);
 			item.setViewCount(itemform.getViewCount());
 			itemFacade.updateItem(item);
-		}
-		else {
-			itemFacade.insertItem(item);	// -> generate itemId, insert DB
-		}
-		
-		if(status != 0) { //수정할 때.. ?? 
+	
 			List<Tag> tags = itemFacade.getTagByItemId(status);
 			System.out.println("tag size : " + tags.size());	//0
+			
 			if(tags.size() > 0) {
 				itemFacade.deleteTag(status);
 				tags.removeAll(tags);
-				
-				System.out.println("removed tags, tag size : " + tags.size());
-				List<Tag> t = itemFacade.getTagByItemId(status);
-				System.out.println("deleted, tag size : " + t.size());
 			}
 		}
+		
 		//generate tags(only have tagName)
 		itemform.makeTags(item.getItemId(), itemform.getTag1());	//if(tag != null && "") then addTags
 		itemform.makeTags(item.getItemId(), itemform.getTag2());
@@ -150,7 +143,7 @@ public class SecondHandFormController {
 		secondHand.setDiscount(secondHandForm.getDiscount());
 		secondHand.setListPrice(secondHandForm.getListPrice());
 	
-		if(status != 0) { //수정일 때 
+		if(status != 0) { //수정일 때 ..?
 			itemFacade.updateSecondHand(secondHand);
 		}
 		else { // 처음 디비에 저장할 떄 ,, 트랜젝션으로 묶기 
