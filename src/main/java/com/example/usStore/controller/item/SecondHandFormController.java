@@ -135,14 +135,14 @@ public class SecondHandFormController {
 			}
 		}
 		//generate tags(only have tagName)
-		item.makeTags(item.getItemId(), itemform.getTag1());	//if(tag != null && "") then addTags
-		item.makeTags(item.getItemId(), itemform.getTag2());
-		item.makeTags(item.getItemId(), itemform.getTag3());
-		item.makeTags(item.getItemId(), itemform.getTag4());
-		item.makeTags(item.getItemId(), itemform.getTag5());
+		itemform.makeTags(item.getItemId(), itemform.getTag1());	//if(tag != null && "") then addTags
+		itemform.makeTags(item.getItemId(), itemform.getTag2());
+		itemform.makeTags(item.getItemId(), itemform.getTag3());
+		itemform.makeTags(item.getItemId(), itemform.getTag4());
+		itemform.makeTags(item.getItemId(), itemform.getTag5());
 		
-		List<Tag> tags = item.getTags();
-		item.setTags(tags);
+		List<Tag> tags = itemform.getTags();
+		
 		
 		//put secondHandForm to SecondHand domain 
 		SecondHand secondHand = new SecondHand();
