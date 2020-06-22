@@ -134,7 +134,7 @@ public class ItemForm {
 
 	public void setTag4(String tag4) {
 		this.tag4 = tag4;
-	}
+	} 
 
 	public String getTag5() {
 		return tag5;
