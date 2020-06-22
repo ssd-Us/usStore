@@ -60,4 +60,11 @@ public class MybatisTagDao implements TagDao {
 		return tagMapper.getTagByItemId(itemId);
 	}
 
+	@Override
+	public void insertTagList(List<Tag> tags) throws DataAccessException {
+		for(Tag t : tags ) {
+			tagMapper.insertTag(t);
+		}
+	}
+
 }
