@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.example.usStore.dao.AuctionDao;
 import com.example.usStore.dao.mybatis.mapper.AuctionMapper;
+import com.example.usStore.dao.mybatis.mapper.ItemMapper;
 import com.example.usStore.domain.Auction;
 import com.example.usStore.domain.Bidder;
 import com.example.usStore.domain.Item;
@@ -119,8 +120,15 @@ public class MybatisAuctionDao implements AuctionDao {
 
    @Override
    public String getUserIdByItemId(int itemId) throws DataAccessException {
-	return auctionMapper.getUserIdByItemId(itemId);
+	   return auctionMapper.getUserIdByItemId(itemId);
    }
    
-
+	@Override
+	public List<Item> searchItemList(String keywords) {
+		return auctionMapper.searchItemList(keywords);
+	}
+	
+	public List<Bidder> getBidderList() {
+		return auctionMapper.getBidderList();
+	}
 }
