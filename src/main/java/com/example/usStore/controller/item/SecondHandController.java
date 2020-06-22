@@ -87,15 +87,14 @@ public class SecondHandController {
             }
          }
          
-        Item item = itemFacade.getItem(itemId);
-        item.setViewCount(item.getViewCount() + 1);
-        itemFacade.updateItem(item); //조회수 디비에 업데이트
-        
-        //List<Tag> tags = itemFacade.getTagByItemId(itemId);
+         Item item = itemFacade.getItem(itemId);
+         item.setViewCount(item.getViewCount() + 1);
+         itemFacade.updateItem(item); //조회수 디비에 업데이트
+ 
+        // List<Tag> tags = item.getTags(); sh가 아이템 상속받으니까 여기서 테그 꺼내쓰기 
          
          SecondHand sh = this.itemFacade.getSecondHandItem(itemId);
          model.addAttribute("sh", sh);
-         model.addAttribute("productId", productId);
          model.addAttribute("isAccuse", isAccuse);
          return "product/viewSecondHand";
       }

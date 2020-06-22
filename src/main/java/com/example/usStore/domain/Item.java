@@ -16,7 +16,7 @@ public class Item implements Serializable {
 	private String description;
 	private int viewCount;
 	private int qty;
-//	private List<Tag> tags = new ArrayList<Tag>();
+	private List<Tag> tags;
 	private String userId; // (FK)
 	private int productId; // (FK)
 
@@ -95,14 +95,14 @@ public class Item implements Serializable {
 	public void setProductId(int productId) {
 		this.productId = productId;
 	}
-//
-//	public List<Tag> getTags() {
-//		return tags;
-//	}
-//
-//	public void setTags(List<Tag> tags) {
-//		this.tags = tags;
-//	}
+
+	public List<Tag> getTags() {
+		return tags;
+	}
+
+	public void setTags(List<Tag> tags) {
+		this.tags = tags;
+	}
 	
 	@Override
 	public String toString() {

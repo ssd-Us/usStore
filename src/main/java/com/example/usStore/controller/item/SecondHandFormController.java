@@ -1,6 +1,5 @@
 package com.example.usStore.controller.item;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,20 +8,16 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
-import com.example.usStore.controller.mypage.UserSession;
 import com.example.usStore.domain.Account;
-import com.example.usStore.domain.GroupBuying;
 import com.example.usStore.domain.Item;
 import com.example.usStore.domain.SecondHand;
 import com.example.usStore.domain.Tag;
@@ -95,14 +90,14 @@ public class SecondHandFormController {
    
  
 	@PostMapping("/shop/secondHand/done.do")		// step3 -> done
-	public String done(@ModelAttribute("secondHandForm") SecondHandForm secondHandForm,  
-			ItemForm itemform, BindingResult result, Model model, HttpServletRequest rq, 
+	public String done(@ModelAttribute("secondHandForm") SecondHandForm secondHandForm,
+			BindingResult result, Model model, HttpServletRequest rq, 
 			SessionStatus sessionStatus) {
 		
 		int status = 0;
 		
 		HttpSession session = rq.getSession(false);
-		itemform = (ItemForm) session.getAttribute("itemForm");
+		ItemForm itemform = (ItemForm) session.getAttribute("itemForm");
 		if(session.getAttribute("status") != null) {
 			status = (int) session.getAttribute("status");
 		}
@@ -113,7 +108,7 @@ public class SecondHandFormController {
 		Item item = new Item(itemform.getUnitCost(), itemform.getTitle(), 
 				itemform.getDescription(), itemform.getQty(), suppId, itemform.getProductId());
 		
-		if(status != 0) { //수정할 때..?? 왜 url 공유하는지 다시 확인해보기.. 
+		if(status != 0) { //뒤로 백했다가 다시 들어올 때 밎아..?? 
 			item.setItemId(status);
 			item.setViewCount(itemform.getViewCount());
 			itemFacade.updateItem(item);
