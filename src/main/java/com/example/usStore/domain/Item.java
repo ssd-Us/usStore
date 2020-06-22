@@ -101,7 +101,7 @@ public class Item implements Serializable {
 	}
 
 	public void setTags(List<Tag> tags) {
-		this.tags = tags;
+		this.tags = tags; 
 	}
 	
 	@Override
