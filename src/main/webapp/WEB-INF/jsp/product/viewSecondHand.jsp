@@ -62,7 +62,7 @@
    	</tr>	
    	<tr>
    		<th style="border-right: 1px solid black;">판매자</th>
-   		<td>이채정&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   		<td>${sh.userId}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	   	<span>
 		   	<a href="
 					<c:url value='/addFollow/${sh.userId}'/>	<!-- 로그인 여부 따지기 -->
