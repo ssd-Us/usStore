@@ -1,7 +1,5 @@
 package com.example.usStore.controller.item;
 
-import java.util.Date;
-
 public class GroupBuyingForm {
 	/* Private Fields */
 	private int itemId;
