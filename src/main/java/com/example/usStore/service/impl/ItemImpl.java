@@ -1,5 +1,6 @@
 package com.example.usStore.service.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -192,8 +193,12 @@ public class ItemImpl implements ItemFacade {
 	}
 
 	@Override
-	public void insertSecondHand(SecondHand secondHand) {
+	public void insertSecondHand(Item item, SecondHand secondHand, List<Tag> tags) {
+		itemDao.insertItem(item);
 		secondHandDao.insertSecondHand(secondHand);
+		for(Tag t : tags) {
+			tagDao.insertTag(t);
+		}
 	}
 
 	@Override
@@ -274,6 +279,10 @@ public class ItemImpl implements ItemFacade {
 	public void updateBidPrice(int unitCost, int itemId) {
 		auctionDao.updateBidPrice(unitCost, itemId);
 	}
+	
+	public List<Bidder> getBidderList() {
+		return auctionDao.getBidderList();
+	}
 
 	@Override
 	public List<Tag> getTagList() {
@@ -339,4 +348,11 @@ public class ItemImpl implements ItemFacade {
 	public String getUserIdByItemId(int itemId) {
 		return itemDao.getUserIdByItemId(itemId);
 	}
+
+	@Override
+	public List<Item> searchItemList(String keywords) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

@@ -1,178 +1,158 @@
 package com.example.usStore.controller.item;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.support.PagedListHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
-import com.example.usStore.domain.Accuse;
+import com.example.usStore.domain.Account;
 import com.example.usStore.domain.Item;
 import com.example.usStore.domain.SecondHand;
+import com.example.usStore.domain.Tag;
 import com.example.usStore.service.facade.ItemFacade;
-import com.example.usStore.service.facade.MyPageFacade;
 
-@Controller
-@SessionAttributes({"secondHandForm", "secondHandList"})
-/* 세컨핸드 리스트를 세션에 저장하는거 어디 출신..? */
+@Controller /* SecondHandForm 커맨드 객체를 관리하는 컨트롤러 */
+@SessionAttributes("secondHandForm")
 public class SecondHandFormController {
    
    private ItemFacade itemFacade;
-   private MyPageFacade myPageFacade;
    
    @Autowired
    public void setItemFacade(ItemFacade itemFacade) {
       this.itemFacade = itemFacade;
    }
-   
-   @Autowired
-   public void setMyPageFacade(MyPageFacade myPageFacade) {
-      this.myPageFacade = myPageFacade;
-   }
 
    @ModelAttribute("secondHandForm")
-   public SecondHandForm createSecondHandForm() {
-      //accessor method
-      return new SecondHandForm();
-   }
-
-   @RequestMapping("/shop/secondHand/listItem.do")
-   public String secondHandList(
-         @RequestParam("productId") int productId, 
-         ModelMap model) throws Exception{
-      
-      System.out.println("여기는 게시물 목록 컨트롤러\n ");
-      
-      PagedListHolder<SecondHand> itemList = new PagedListHolder<SecondHand>(this.itemFacade.getSecondHandList());
-      itemList.setPageSize(4);
-   
-      model.addAttribute("itemList", itemList);
-      model.addAttribute("productId", productId);
-      
-      return "product/secondHand"; 
-   }   
-   
-   @RequestMapping("/shop/secondHand/listItem2.do")
-   public String secondHandList2(
-         @ModelAttribute("secondHandList") PagedListHolder<Item> secondHandList,
-         @RequestParam("pageName") String page, ModelMap model) throws Exception {
-      if ("next".equals(page)) {
-         secondHandList.nextPage();
-      }
-      else if ("previous".equals(page)) {
-         secondHandList.previousPage();
-      }
-      model.addAttribute("secondHandList", secondHandList);
-      return "product/secondHand";
+   public SecondHandForm formBacking() { //accessor method
+	   SecondHandForm secondHandForm = new SecondHandForm();
+	   //필드 초기화 할것 있으면 여기서 하기 
+	   return secondHandForm;
    }
    
-   @RequestMapping("/shop/secondHand/viewItem.do") 
-   public String viewSecondHand(@RequestParam("itemId") int itemId,
-         @RequestParam("productId") int productId, ModelMap model) {
+   //여기부터 수정  이컨트롤러 공통사항으로 뺴도 되지아나유? 
+   @RequestMapping("/shop/secondHand/index.do") //go index(remove sessions)
+   public String goIndex(SessionStatus sessionStatus, HttpServletRequest rq)
+   {
+      HttpSession session = rq.getSession(false);
       
-      //attacker = 판매자 아이디, victim = 세션 유저 아이디 
-      String attacker = this.itemFacade.getUserIdByItemId(itemId);
-      System.out.println("공격자 : " + attacker);
-    
-      String isAccuse = this.myPageFacade.isAccuseAlready(attacker, "A"); 
-      System.out.println("이즈어큐즈: " + isAccuse);
+      sessionStatus.setComplete();// groupBuying session close
+      session.removeAttribute("itemForm");   //itemForm session close
+      session.removeAttribute("status");      //edit flag Session close
       
-      SecondHand sh = this.itemFacade.getSecondHandItem(itemId);
-         model.addAttribute("sh", sh);
-         model.addAttribute("productId", productId);
-         model.addAttribute("isAccuse", isAccuse);
-         return "product/viewSecondHand";
+      return "redirect:/shop/index.do";
    }
    
-   //여기부터 수정 
-   @RequestMapping("/shop/secondHand/gobackItem.do")      // item.jsp
-   public String step1() {
-      return "redirect:/shop/item/addItem.do?productId=";   // step1 form view(item.jsp)
-   }
-   
-   @RequestMapping("/shop/secondHand/addItem.do")
-   public String goItem(@RequestParam("productId") int productId) {
-         return "redirect:/shop/item/addItem.do?productId=" + productId;
-   }
-   
-   @RequestMapping(value="/shop/secondHand/addItem2.do", method = RequestMethod.GET)
-   public String step2(
-            @ModelAttribute("SecondHand") SecondHandForm secondHandForm, 
+   @GetMapping("/shop/secondHand/addItem2.do")
+   public String step2(@ModelAttribute("secondHandForm") SecondHandForm secondHandForm, 
             @RequestParam("productId") int productId, Model model) {
          
-         System.out.println("step2 controller");   //print toString
          model.addAttribute("productId", productId);
          return  "product/addSecondHand";  
    }
    
-   //여기서부터 수정하기 
-   @RequestMapping(value="/shop/secondHand/gobackItem.do", method = RequestMethod.GET)      // go back to item.jsp
-   public String backToItem(@ModelAttribute("SecondHand") SecondHandForm secondHandForm, 
-         @RequestParam("productId") int productId) {
-      
-      System.out.println("backToItem 컨트롤러 진입 ");
-      return "redirect:/shop/item/addItem.do?productId=" + productId;   // step1(item.jsp) form step2(addGroupBuying.jsp)
+   @GetMapping("/shop/secondHand/gobackItem.do")      // item.jsp
+   public String backToStep1(@ModelAttribute("secondHandForm") SecondHandForm secondHandForm, 
+			@RequestParam("productId") int productId) {
+      return "redirect:/shop/item/addItem.do?productId=";   // step1 form view(item.jsp)
    }
    
-   @RequestMapping(value="/shop/secondHand/gobackAddSh.do", method = RequestMethod.GET)      // step3 -> step2
-   public String backToAddSecondHand(
-         @ModelAttribute("SecondHand") SecondHandForm secondHandForm, 
+   @GetMapping("/shop/secondHand/gobackAddSh.do")     // step3 -> step2
+   public String backToStep2(
+		 @ModelAttribute("secondHandForm") SecondHandForm secondHandForm, 
          @RequestParam("productId") int productId, Model model){
       model.addAttribute("productId", productId);
       return "prodect/addSecondHand";   // check.jsp -> addGroupBuying.jsp
    }
    
    @PostMapping("/shop/secondHand/step3.do")      // step2 -> step3
-   public String goCheck(@ModelAttribute("SecondHand") SecondHandForm secondHandForm, 
+   public String goCheck(@ModelAttribute("secondHandForm") SecondHandForm secondHandForm, 
          HttpServletRequest rq, ItemForm itemForm, Model model) {   
       
-      System.out.println("goCheck 컨트롤러 진입");
-      HttpSession session = rq.getSession(false);
+   //   HttpSession session = rq.getSession(false);
       
-      itemForm = (ItemForm) session.getAttribute("itemForm");
-      if(session.getAttribute("itemForm") != null) {
-         System.out.println("itemformSession: " + itemForm);   //print itemformSession toString
-      }
-      
-      System.out.println("deadLine still null," + secondHandForm);   //print command toString
-   
-      int calDiscount;
-      double listPrice = secondHandForm.getListPrice();
-      double unitCost = itemForm.getUnitCost();
-      if(listPrice <= unitCost) {
-         calDiscount = (int) ((unitCost - listPrice) / unitCost * 100);
-      }
-      else {
-         calDiscount = -999;   // 이부분은 나중에 error로 고치기
-      }
-      
-      System.out.println("calDiscount: " + calDiscount);
-      
-      /*
-       * secondHandForm.setDiscount(calDiscount);
-       * 
-       * String deadLine = secondHandForm.getDate() + " " + groupBuyingForm.getTime()
-       * + ":00"; secondHandForm.setDeadLine(deadLine);
-       */
-      model.addAttribute(itemForm);
+    //  itemForm = (ItemForm) session.getAttribute("itemForm");
+    //  model.addAttribute(secondHandForm); 이건 왜 안해줌..?
+    //  model.addAttribute(itemForm); //근데 이미 세션에 있는데 왜 모델로 굳이 보내줘야해? 
       return "product/checkSecondHand";      // step3(CHECK_FORM3)
    }
    
-   @RequestMapping("/shop/secondHand/deleteItem.do")
-   public String delete(@RequestParam("productId") int productId, 
-         @RequestParam("itemId") int itemId, ModelMap model) {
-      
-      this.itemFacade.deleteItem(itemId);
-      return "redirect:/shop/secondHand/listItem.do?productId=" + productId;
-   }
+ 
+	@PostMapping("/shop/secondHand/done.do")		// step3 -> done
+	public String done(@ModelAttribute("secondHandForm") SecondHandForm secondHandForm,
+			BindingResult result, Model model, HttpServletRequest rq, 
+			SessionStatus sessionStatus) {
+		
+		int status = 0;
+		
+		HttpSession session = rq.getSession(false);
+		ItemForm itemform = (ItemForm) session.getAttribute("itemForm");
+		if(session.getAttribute("status") != null) {
+			status = (int) session.getAttribute("status");
+		}
+		Account loginAccount = (Account) session.getAttribute("account");
+		String suppId = loginAccount.getUserId();
+				
+		//put itemform to item domain 
+		Item item = new Item(itemform.getUnitCost(), itemform.getTitle(), 
+				itemform.getDescription(), itemform.getQty(), suppId, itemform.getProductId());
+		
+		if(status != 0) { //뒤로 백했다가 다시 들어올 때 밎아..?? 
+			item.setItemId(status);
+			item.setViewCount(itemform.getViewCount());
+			itemFacade.updateItem(item);
+	
+			List<Tag> tags = itemFacade.getTagByItemId(status);
+			System.out.println("tag size : " + tags.size());	//0
+			
+			if(tags.size() > 0) {
+				itemFacade.deleteTag(status);
+				tags.removeAll(tags);
+			}
+		}
+		
+		//generate tags(only have tagName)
+		item.makeTags(item.getItemId(), itemform.getTag1());	//if(tag != null && "") then addTags
+		item.makeTags(item.getItemId(), itemform.getTag2());
+		item.makeTags(item.getItemId(), itemform.getTag3());
+		item.makeTags(item.getItemId(), itemform.getTag4());
+		item.makeTags(item.getItemId(), itemform.getTag5());
+		
+		List<Tag> tags = item.getTags();
+		item.setTags(tags); //??? 이거 왜..? 
+		
+		
+		//put secondHandForm to SecondHand domain 
+		SecondHand secondHand = new SecondHand();
+		secondHand.setItemId(item.getItemId());
+		secondHand.setDiscount(secondHandForm.getDiscount());
+		secondHand.setListPrice(secondHandForm.getListPrice());
+	
+		if(status != 0) { //수정일 때 ..?
+			itemFacade.updateSecondHand(secondHand);
+		}
+		else { // 처음 디비에 저장할 떄 ,, 트랜젝션으로 묶기 
+			itemFacade.insertSecondHand(item, secondHand, tags);	// insert DB
+		}
+		
+		sessionStatus.setComplete();	// groupBuying, editStatus session close
+		session.removeAttribute("itemForm");	//itemForm session close
+		session.removeAttribute("status");
+		
+		return "redirect:/shop/secondHand/viewItem.do?itemId=" + secondHand.getItemId() + "&productId=" + item.getProductId();
+	} 
+	
    
 }

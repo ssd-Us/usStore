@@ -78,7 +78,7 @@ public interface ItemFacade {
 	
 	SecondHand getSecondHandItem(int itemId);
 	
-	public void insertSecondHand(SecondHand secondHand);
+	public void insertSecondHand(Item item, SecondHand secondHand, List<Tag> tags);
 	  
 	public void updateSecondHand(SecondHand secondHand);
 	
@@ -107,6 +107,8 @@ public interface ItemFacade {
 	
 	public void updateBidPrice(int unitCost, int itemId);
 	
+	public List<Bidder> getBidderList();
+	
 	/////////////////////////////////////////////////////////////////////////
 	/* Tag */
 	/////////////////////////////////////////////////////////////////////////
@@ -124,4 +126,8 @@ public interface ItemFacade {
 
 	void deleteTag(int itemId);	
 	
+	/////////////////////////////////////////////////////////////////////////
+	/* Tag */
+	/////////////////////////////////////////////////////////////////////////
+	List<Item> searchItemList(String keywords);
 }

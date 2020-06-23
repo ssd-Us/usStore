@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
+import com.example.usStore.service.GroupBuyingFormValidator;
 import com.example.usStore.service.facade.ItemFacade;
 
 @Controller
@@ -104,27 +105,31 @@ public class GroupBuyingFormController {
 	public String backToItem(@ModelAttribute("GroupBuying") GroupBuyingForm groupBuyingForm, 
 			@RequestParam("productId") int productId) {
 		System.out.println("go back to item.jsp");
-		return "redirect:/shop/item/addItem.do?productId=" + productId;	// step1(item.jsp) form step2(addGroupBuying.jsp)
+		return "redirect:/shop/item/addItem.do?productId="+productId;	// step1(item.jsp) form step2(addGroupBuying.jsp)
 	}
 	
 	@RequestMapping(value="/shop/groupBuying/gobackAddGb.do", method = RequestMethod.GET)		// step3 -> step2
 	public String backToAddGroupBuying(
 			@ModelAttribute("GroupBuying") GroupBuyingForm groupBuyingForm, 
-			@RequestParam("productId") int productId, Model model){
-		model.addAttribute("productId", productId);
-		return ADD_GroupBuying_FORM;	// check.jsp -> addGroupBuying.jsp
+			@RequestParam("productId") int productId){
+		return "redirect:/shop/groupBuying/addItem2.do?productId=" + productId;	// check.jsp -> addGroupBuying.jsp
 	}
 	
 	@PostMapping("/shop/groupBuying/step3.do")		// go checkGroupBuying.jsp
-	public String goCheck(@ModelAttribute("GroupBuying") GroupBuyingForm groupBuyingForm, 
-			HttpServletRequest rq, ItemForm itemForm, Model model, 
-			BindingResult bindingResult) {	
+	public String goCheck(@ModelAttribute("GroupBuying") GroupBuyingForm groupBuyingForm, BindingResult result,
+			HttpServletRequest rq, ItemForm itemForm, Model model) {	
 		System.out.println("step3.do(before check form)");
 		HttpSession session = rq.getSession(false);
+		new GroupBuyingFormValidator().validate(groupBuyingForm, result);
 		
-		itemForm = (ItemForm) session.getAttribute("itemForm");
 		if(session.getAttribute("itemForm") != null) {
+			itemForm = (ItemForm) session.getAttribute("itemForm");
 			System.out.println("itemformSession: " + itemForm);	//print itemformSession toString
+		}
+		
+		if (result.hasErrors()) {	//유효성 검증 에러 발생시
+			model.addAttribute("productId", itemForm.getProductId());
+			return ADD_GroupBuying_FORM;
 		}
 		
 		System.out.println("deadLine still null," + groupBuyingForm);	//print command toString
@@ -135,13 +140,15 @@ public class GroupBuyingFormController {
 		if(listPrice <= unitCost) {
 			calDiscount = (int) ((unitCost - listPrice) / unitCost * 100);
 		}
-		else {	calDiscount = -999;	}	// 이부분은 나중에 error로 고치기
+		else {	calDiscount = -999;	}	// �씠遺�遺꾩� �굹以묒뿉 error濡� 怨좎튂湲�
 		
 		System.out.println("calDiscount: " + calDiscount);
 		
 		groupBuyingForm.setDiscount(calDiscount);
 		
-		String deadLine = groupBuyingForm.getDate() + " " + groupBuyingForm.getTime() + ":00";
+		String date = groupBuyingForm.getDate();
+		String time = groupBuyingForm.getTime();
+		String deadLine = date + " " + time + ":00";
 		groupBuyingForm.setDeadLine(deadLine);
 		System.out.println("setting : " + groupBuyingForm);
 		
@@ -153,12 +160,14 @@ public class GroupBuyingFormController {
 	public String done(@ModelAttribute("GroupBuying") GroupBuyingForm groupBuyingform, 
 			ItemForm itemformSession, BindingResult result, Model model, HttpServletRequest rq, 
 			SessionStatus sessionStatus, GroupBuying groupBuying, ModelMap modelMap) {
-	
+		int status = 0;
 		System.out.println("detailItem.do");
 		
 		HttpSession session = rq.getSession(false);
 		itemformSession = (ItemForm) session.getAttribute("itemForm");
-		int status = (int) session.getAttribute("status");
+		if(session.getAttribute("status") != null) {
+			status = (int) session.getAttribute("status");
+		}
 		UserSession userSession = (UserSession) session.getAttribute("userSession");
 		
 		String suppId = userSession.getAccount().getUserId();
@@ -171,7 +180,7 @@ public class GroupBuyingFormController {
 	
 		//put itemformSession to item
 		Item item = new Item(itemformSession.getUnitCost(), itemformSession.getTitle(), 
-				itemformSession.getDescription(), itemformSession.getQty(), suppId, 	//인터셉터 타고 오니까 suppId 무조건 있음
+				itemformSession.getDescription(), itemformSession.getQty(), suppId, 	//�씤�꽣�뀎�꽣 ��怨� �삤�땲源� suppId 臾댁“嫄� �엳�쓬
 				itemformSession.getProductId());
 		
 		if(status != 0) {
@@ -199,14 +208,15 @@ public class GroupBuyingFormController {
 			}
 		}
 		//generate tags(only have tagName)
-		itemformSession.makeTags(item.getItemId(), itemformSession.getTag1());	//if(tag != null && "") then addTags
-		itemformSession.makeTags(item.getItemId(), itemformSession.getTag2());
-		itemformSession.makeTags(item.getItemId(), itemformSession.getTag3());
-		itemformSession.makeTags(item.getItemId(), itemformSession.getTag4());
-		itemformSession.makeTags(item.getItemId(), itemformSession.getTag5());
+		item.makeTags(item.getItemId(), itemformSession.getTag1());	//if(tag != null && "") then addTags
+		item.makeTags(item.getItemId(), itemformSession.getTag2());
+		item.makeTags(item.getItemId(), itemformSession.getTag3());
+		item.makeTags(item.getItemId(), itemformSession.getTag4());
+		item.makeTags(item.getItemId(), itemformSession.getTag5());
 		
 		List<Tag> tags = new ArrayList<Tag>();
-		tags = itemformSession.getTags();
+		tags = item.getTags();
+		item.setTags(tags);
 		
 		System.out.println("tags: " + tags);
 				
@@ -217,7 +227,7 @@ public class GroupBuyingFormController {
 		
 		System.out.println("deadLine : " + groupBuyingform.getDeadLine());
 		
-		groupBuying.setItemId(status);
+		groupBuying.setItemId(item.getItemId());
 		groupBuying.setDiscount(groupBuyingform.getDiscount());
 		groupBuying.setListPrice(groupBuyingform.getListPrice());
 		groupBuying.setDeadLine(groupBuyingform.getDeadLine());
@@ -231,6 +241,7 @@ public class GroupBuyingFormController {
 		
 		sessionStatus.setComplete();	// groupBuying, editStatus session close
 		session.removeAttribute("itemForm");	//itemForm session close
+		session.removeAttribute("status");
 		
 		return "redirect:/shop/groupBuying/viewItem.do?itemId=" + groupBuying.getItemId() + "&productId=" + item.getProductId();
 	} 
@@ -342,7 +353,7 @@ public class GroupBuyingFormController {
 		return "redirect:/shop/groupBuying/listItem.do?productId=" + productId;
 	}
 	
-	@RequestMapping("/shop/product/index.do") //go index(remove sessions)
+	@RequestMapping("/shop/groupBuying/index.do") //go index(remove sessions)
 	public String goIndex(SessionStatus sessionStatus, HttpServletRequest rq)
 	{
 		System.out.println("go back index.do From [add / edit product]");

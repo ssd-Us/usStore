@@ -21,8 +21,9 @@
 <body>
 <table id="main-menu">
   <tr>
-    <td>
-    	<a href='<c:url value="/shop/product/index.do"/>'>
+    <td><a href='<c:url value="/shop/item/index.do">
+    				<c:param name="productId" value="${productId}"/>
+    			</c:url>'>
         <b><font color="black" size="2">
           &lt;&lt; Go to Index</font></b></a>
     </td>
@@ -46,7 +47,7 @@
 	<form:errors path="unitCost"/> <br><br>
 	</c:if>
 	
-	수량 : <form:input type="text" path="qty" value="${qty}"/>
+	재고 : <form:input type="text" path="qty" value="${qty}"/>
 	<form:errors path="qty"/> <br><br>
 	
 	태그 : 

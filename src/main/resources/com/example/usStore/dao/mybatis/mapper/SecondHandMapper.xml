@@ -19,7 +19,27 @@
 	    WHERE S.ITEMID = I.ITEMID
 	</select>
 	
-	<select id="getSecondHandById" parameterType="int" resultType="SecondHand">
+
+	<resultMap id="tagMap" type="SecondHand">
+		<id  property="itemId" column="ITEMID" jdbcType="NUMERIC"/>
+		<result property="unitCost" column="UNITCOST"  jdbcType="NUMERIC"/>
+		<result property="title" column="TITLE" jdbcType="VARCHAR"/>
+		<result property="description" column="DESCRIPTION" jdbcType="VARCHAR"/>
+		<result property="viewCount" column="VIEWCOUNT"  jdbcType="NUMERIC"/>
+		<result property="qty" column="QTY" jdbcType="NUMERIC"/>
+		<result property="userId" column="USERID" jdbcType="VARCHAR"/>
+		<result property="productId" column="PRODUCTID" jdbcType="NUMERIC"/>
+		<result property="discount" column="DISCOUNT" jdbcType="VARCHAR"/>
+		<result property="listPrice" column="LISTPRICE" jdbcType="VARCHAR"/>
+	
+		<collection property="tags" ofType="Tag">
+			<id property="tagId" column="TAGID" jdbcType="NUMERIC" />
+			<result property="tagName" column="TAGNAME"  jdbcType="VARCHAR" />
+			<result property="itemId" column="ITEMID" jdbcType="NUMERIC"  />
+		</collection>
+	</resultMap>
+	
+	<select id="getSecondHandById" parameterType="int" resultType="tagMap">
 	SELECT 
   		I.ITEMID,
   		I.UNITCOST,
@@ -30,9 +50,12 @@
 		I.USERID,
 		I.PRODUCTID,
 		S.DISCOUNT,
-		S.LISTPRICE
-	FROM ITEM I, SECONDHAND S
-	WHERE I.itemId = #{itemId} AND I.ITEMID = S.ITEMID
+		S.LISTPRICE,
+		T.TAGNAME 
+	FROM ITEM I, SECONDHAND S, TAG T
+	WHERE I.itemId = #{itemId} 
+	AND I.ITEMID = S.ITEMID
+	AND I.ITENID = T.ITEMID
 	</select>
 	
 	<insert id="insertSecondHand" parameterType="SecondHand">
