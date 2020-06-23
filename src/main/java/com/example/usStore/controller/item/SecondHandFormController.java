@@ -1,5 +1,6 @@
 package com.example.usStore.controller.item;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -123,13 +124,14 @@ public class SecondHandFormController {
 		}
 		
 		//generate tags(only have tagName)
-		itemform.makeTags(item.getItemId(), itemform.getTag1());	//if(tag != null && "") then addTags
-		itemform.makeTags(item.getItemId(), itemform.getTag2());
-		itemform.makeTags(item.getItemId(), itemform.getTag3());
-		itemform.makeTags(item.getItemId(), itemform.getTag4());
-		itemform.makeTags(item.getItemId(), itemform.getTag5());
+		item.makeTags(item.getItemId(), itemform.getTag1());	//if(tag != null && "") then addTags
+		item.makeTags(item.getItemId(), itemform.getTag2());
+		item.makeTags(item.getItemId(), itemform.getTag3());
+		item.makeTags(item.getItemId(), itemform.getTag4());
+		item.makeTags(item.getItemId(), itemform.getTag5());
 		
-		List<Tag> tags = itemform.getTags();
+		List<Tag> tags = item.getTags();
+		item.setTags(tags); //??? 이거 왜..? 
 		
 		
 		//put secondHandForm to SecondHand domain 
