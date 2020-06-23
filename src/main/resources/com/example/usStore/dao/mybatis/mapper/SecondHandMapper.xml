@@ -39,7 +39,7 @@
 		</collection>
 	</resultMap>
 	
-	<select id="getSecondHandById" parameterType="int" resultType="tagMap">
+	<select id="getSecondHandItem" parameterType="int" resultType="SecondHand">
 	SELECT 
   		I.ITEMID,
   		I.UNITCOST,
@@ -50,12 +50,10 @@
 		I.USERID,
 		I.PRODUCTID,
 		S.DISCOUNT,
-		S.LISTPRICE,
-		T.TAGNAME 
-	FROM ITEM I, SECONDHAND S, TAG T
+		S.LISTPRICE
+	FROM ITEM I, SECONDHAND S
 	WHERE I.itemId = #{itemId} 
 	AND I.ITEMID = S.ITEMID
-	AND I.ITENID = T.ITEMID
 	</select>
 	
 	<insert id="insertSecondHand" parameterType="SecondHand">
