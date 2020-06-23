@@ -62,20 +62,21 @@
    	</tr>	
    	<tr>
    		<th style="border-right: 1px solid black;">판매자</th>
-   		<td>이채정&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   		<td>${sh.userId}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	   	<span>
 		   	<a href="
 					<c:url value='/addFollow/${sh.userId}'/>	<!-- 로그인 여부 따지기 -->
 			">팔로잉</a>
 		</span>
 		&nbsp;
-		<% 
-
-		if(session.getAttribute("userSession") != null){
-		%> <%@ include file="/WEB-INF/jsp/account/accuseFunction.jsp" %>
-   		<% }else {%>
-   			<a href="<c:url value='/addAccuseNoLogin.do'/>">판매자 신고하기</a>
-   		<% }%>
+			<c:choose>
+	   				<c:when test="${! empty account}">
+						<%@ include file="/WEB-INF/jsp/account/accuseFunction.jsp" %>
+					</c:when>
+					<c:otherwise>
+						<a href="<c:url value='/addAccuseNoLogin.do'/>">판매자 신고하기</a>
+					</c:otherwise>
+			</c:choose>
    		</td>
    	</tr> 
    	<tr>
@@ -142,7 +143,7 @@
    			</td>
    	</tr>
    		
-   	<c:if test="${sh.userId==session.userId}"> <!-- 로그인시 실행 -->
+   	<c:if test="${sh.userId==account.userId}"> <!-- 로그인시 실행 -->
    		<tr>
    		<td colspan="2" style="text-align: right; padding: 0px; font-size: small; border-bottom: none; border-top: 1px solid black;">
 		   <a href="<c:url value='/editItem/${sh.itemId}'/>">[게시물 수정하기]</a>
@@ -151,13 +152,6 @@
 		 </tr>
 	</c:if>
 </table>
-        
-       
-
-<!--* 현재 로그인 user가 글 작성자 일때만 수정/삭제 버튼이 보임 
-   * 작성자 정보는 controller에서 model(db에서 suppId찾아옴)로 넘겨줌
-   * model로 넘어온 suppId와 세션의 로그인Id를 비교함 
-   * 세션에 로그인 정보가 없으면, 즉 null이어도 수정/삭제 안보여줌-->
 
 </body>   
 </html>
