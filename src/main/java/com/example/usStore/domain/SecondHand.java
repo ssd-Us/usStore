@@ -8,7 +8,7 @@ import java.io.Serializable;
 @SuppressWarnings("serial")
 public class SecondHand extends Item implements Serializable {
 
-	private int itemId;
+	private int itemId; //FK 
 	private int discount;
 	private int listPrice;
 	

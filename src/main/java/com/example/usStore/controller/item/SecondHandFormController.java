@@ -80,11 +80,11 @@ public class SecondHandFormController {
    public String goCheck(@ModelAttribute("secondHandForm") SecondHandForm secondHandForm, 
          HttpServletRequest rq, ItemForm itemForm, Model model) {   
       
-      HttpSession session = rq.getSession(false);
+   //   HttpSession session = rq.getSession(false);
       
-      itemForm = (ItemForm) session.getAttribute("itemForm");
+    //  itemForm = (ItemForm) session.getAttribute("itemForm");
     //  model.addAttribute(secondHandForm); 이건 왜 안해줌..?
-      model.addAttribute(itemForm);
+    //  model.addAttribute(itemForm); //근데 이미 세션에 있는데 왜 모델로 굳이 보내줘야해? 
       return "product/checkSecondHand";      // step3(CHECK_FORM3)
    }
    
