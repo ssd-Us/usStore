@@ -10,7 +10,7 @@ public class Tag  implements Serializable {
 	/* Private Fields */
 	private int tagId; 			// Sequence
 	private int itemId; 		// (FK) itemId
-	private String tagName = null;
+	private String tagName;
  
 	public Tag() {}
 	
