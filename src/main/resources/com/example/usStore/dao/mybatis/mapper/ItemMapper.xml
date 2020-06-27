@@ -11,7 +11,7 @@
 		(#{itemId}, #{unitCost}, #{title}, #{description}, #{viewCount}, #{qty}, #{userId}, #{productId})
 	</insert>
 
-	<update id="updateItem" parameterType="Item">
+	<update id="updateItem">
 		UPDATE ITEM 
 		SET
 			UNITCOST = #{unitCost},

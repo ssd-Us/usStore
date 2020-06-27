@@ -31,6 +31,19 @@ public class Item implements Serializable {
 		this.productId = productId;
 	}
 
+	public Item(int itemId, int unitCost, String title, String description, int viewCount, int qty, List<Tag> tags, 
+			String userId, int productId) {
+		this.itemId = itemId;
+		this.unitCost = unitCost;
+		this.title = title;
+		this.description = description;
+		this.viewCount = viewCount;
+		this.qty = qty;
+		this.tags = tags;
+		this.userId = userId;
+		this.productId = productId;
+	}
+	
 	/* JavaBeans Properties */
 	public int getItemId() {
 		return itemId;

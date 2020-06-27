@@ -14,7 +14,7 @@
       (#{itemId}, #{discount}, #{listPrice}, TO_DATE(#{deadLine}, 'yyyy-mm-dd hh24:mi:ss'))
   </insert>
 	
-	<update id="updateGroupBuying" parameterType="GroupBuying">
+	<update id="updateGroupBuying">
 		UPDATE GROUPBUYING 
   		SET DISCOUNT = #{discount}, LISTPRICE = #{listPrice}, DEADLINE = TO_DATE(#{deadLine}, 'yyyy-mm-dd hh24:mi:ss')
   		WHERE ITEMID = #{itemId}

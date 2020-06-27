@@ -1,12 +1,8 @@
 package com.example.usStore.dao.mybatis.mapper;
 
 import java.util.List;
-import java.util.Map;
-
-import org.springframework.dao.DataAccessException;
 
 import com.example.usStore.domain.GroupBuying;
-import com.example.usStore.domain.Item;
 
 public interface GroupBuyingMapper extends ItemMapper {
 	// 공동구매 추가 메소드
