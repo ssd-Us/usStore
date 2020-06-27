@@ -14,26 +14,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="2020-01 소프트웨어 시스템 개발 ">
   <meta name="author" content="愛+">
-  <link rel="stylesheet" href="../style/usstore.css" type="text/css" />
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/usstore.css" type="text/css" />
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/account.css" type="text/css" />
   
     <!-- Bootstrap core JavaScript -->
-  <script src="../resources/vendor/jquery/jquery.min.js"></script>
-  <script src="../resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/vendor/jquery/jquery.min.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
   <!-- Plugin JavaScript -->
-  <script src="../resources/vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/vendor/jquery-easing/jquery.easing.min.js"></script>
 
   <!-- Custom JavaScript for this theme -->
-  <script src="../resources/js/scrolling-nav.js"></script>
+  <script src="${pageContext.request.contextPath}/resources/js/scrolling-nav.js"></script>
 
   <!-- Bootstrap core CSS -->
-  <link href="../resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="${pageContext.request.contextPath}/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
   <!-- Custom styles for this template -->
-  <link href="../resources/css/scrolling-nav.css" rel="stylesheet">
+  <link href="${pageContext.request.contextPath}/resources/css/scrolling-nav.css" rel="stylesheet">
   
   <!-- Custom styles for this template -->
-  <link href="../resources/css/simple-sidebar.css" rel="stylesheet">
+  <link href="${pageContext.request.contextPath}/resources/css/simple-sidebar.css" rel="stylesheet">
 </head>
 
   <!-- Navigation -->
@@ -48,8 +49,8 @@
   </nav>
   <nav class="navbar navbar-expand-lg navbar-dark bg-white" id="mainNav">
      <a class="navbar-brand js-scroll-trigger" href="<c:url value="/shop/index.do"/>">
-     	<img border="0" src="../images/usStore3.png" style="float:left;width:80;height:60;border:0;"/>
-     	<img border="0" src="../images/logo.png" style="float:left;width:120;height:60;border:0;" />
+     	<img border="0" src="${pageContext.request.contextPath}/images/usStore3.png" style="float:left;width:80;height:60;border:0;"/>
+     	<img border="0" src="${pageContext.request.contextPath}/images/logo.png" style="float:left;width:120;height:60;border:0;" />
      </a>
     <div class="container">
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">

@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ include file="accountTop.jsp"%>
+<%@ include file="../IncludeTop.jsp"%>
 
   <div class="container">
     <div class="row">
