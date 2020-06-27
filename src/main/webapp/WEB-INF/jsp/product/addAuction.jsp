@@ -35,8 +35,7 @@
 	시작 가격 : <form:input type="int" path="startPrice" value="${startPrice}"/>
 	<form:errors path="startPrice"/> <br>	
 	
-	마감 날짜 : 
-	<form:input type="date" path="date"/>
+	마감 날짜 : <form:input type="date" path="date"/>
 	<form:input type="time" path="time"/> 
 	<form:errors path="deadLine"/> 
 	<br>
@@ -44,7 +43,7 @@
 	<a href="<c:url value='/shop/auction/gobackItem.do'>
 		         <c:param name="productId" value="${productId}"/>
 		     </c:url>
-		">[이전 단계로]</a> <input type="submit" value="다음 단계로" />
+		">[이전 단계로]</a> <input type="submit" value="다음 단계로" />
 	</form:form>
 </div>	
 </body>
