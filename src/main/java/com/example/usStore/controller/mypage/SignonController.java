@@ -44,10 +44,9 @@ public class SignonController {
 					"Invalid username or password.  Signon failed.");
 		}
 		else {
-			//UserSession userSession = new UserSession(account);
-			//model.addAttribute("userSession", userSession);
+			UserSession userSession = new UserSession(account);
 			HttpSession session = request.getSession();
-			session.setAttribute("account", account);
+			session.setAttribute("userSession", userSession);
 			
 			if (forwardAction != null) {
 				return new ModelAndView("redirect:" + forwardAction);
