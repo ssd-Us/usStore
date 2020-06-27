@@ -88,7 +88,7 @@ function getSellerInfo(userId) {
 		</span>
 		&nbsp;
 			<c:choose>
-	   				<c:when test="${! empty account}">
+	   				<c:when test="${! empty userSession.account.userId}">
 						<%@ include file="/WEB-INF/jsp/account/accuseFunction.jsp" %>
 					</c:when>
 					<c:otherwise>
@@ -115,10 +115,8 @@ function getSellerInfo(userId) {
    	<tr>
    			<th style="border-right: 1px solid black;">가격</th>
    			<td>
-   				인터넷 정가  : ${sh.unitCost}원<br>
-   			</td>
-   			<td>
-   				 중고거래 판매가 : ${sh.listPrice}원 <br> 
+   				 인터넷 정가  : ${sh.unitCost}원<br>
+   				 중고거래 판매가 : ${sh.listPrice}원 
    			</td>
    	</tr>
    	<tr>

@@ -76,7 +76,7 @@ public interface ItemFacade {
 	/////////////////////////////////////////////////////////////////////////	
 	List<SecondHand> getSecondHandList();
 	
-	List<SecondHand> getSecondHandItem(int itemId);
+	SecondHand getSecondHandItem(int itemId);
 	
 	public void insertSecondHand(SecondHand secondHand);
 	

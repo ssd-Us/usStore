@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.example.usStore.controller.mypage.UserSession;
 import com.example.usStore.domain.Account;
 import com.example.usStore.domain.Item;
 import com.example.usStore.domain.SecondHand;
@@ -88,26 +89,26 @@ public class SecondHandController {
 		String isAccuse = "false";
 		if (request.getSession(false) != null) {
 			HttpSession session = request.getSession(false);
-			// UserSession userSession = (UserSession) session.getAttribute("userSession");
-			Account loginAccount = (Account) session.getAttribute("account");
-
-			if (loginAccount != null) {// attacker = 판매자 아이디, victim = 세션 유저 아이디
-				// victim = userSession.getAccount().getUserId();
-				victim = loginAccount.getUserId();
+			UserSession userSession = (UserSession) session.getAttribute("userSession");
+		
+			if (userSession != null) {// attacker = 판매자 아이디, victim = 세션 유저 아이디
+				victim = userSession.getAccount().getUserId();
 				String attacker = this.itemFacade.getUserIdByItemId(itemId);
 				isAccuse = this.myPageFacade.isAccuseAlready(attacker, victim);
 			}
 		}
 
-		/*
-		 *  item.setViewCount(item.getViewCount()
-		 * + 1); itemFacade.updateItem(item); // 조회수 디비에 업데이트
-		 */
 		// sh가 아이템 상속받으니까 여기서 테그 꺼내쓰기
 		List<Tag> tags = itemFacade.getTagByItemId(itemId);
 		
-		List<SecondHand> sh = this.itemFacade.getSecondHandItem(itemId);
-		model.addAttribute("sh", sh.get(0));
+		SecondHand sh = this.itemFacade.getSecondHandItem(itemId);
+		System.out.println("원래 조회수: "+sh.getViewCount());
+		sh.setViewCount(sh.getViewCount() + 1);
+		System.out.println("업데이트 조회수: "+sh.getViewCount());
+		
+		//this.itemFacade.updateItem(item);
+		
+		model.addAttribute("sh", sh);
 		model.addAttribute("isAccuse", isAccuse);
 		model.addAttribute("tags", tags);
 		return "product/viewSecondHand";

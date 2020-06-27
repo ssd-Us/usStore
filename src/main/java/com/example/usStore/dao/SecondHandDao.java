@@ -15,7 +15,7 @@ public interface SecondHandDao extends ItemDao {
 	List<SecondHand> getSecondHandList() throws DataAccessException;
 	
 	// itemId �Ű������� �޾� SecondHand ��ü ��ȯ
-	List<SecondHand> getSecondHandItem(int itemId) throws DataAccessException;
+	SecondHand getSecondHandItem(int itemId) throws DataAccessException;
 	
 	// SecondHand ����
 	public void updateSecondHand(SecondHand secondHand) throws DataAccessException;

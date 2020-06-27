@@ -188,7 +188,7 @@ public class ItemImpl implements ItemFacade {
 	}
 
 	@Override
-	public List<SecondHand> getSecondHandItem(int itemId) {
+	public SecondHand getSecondHandItem(int itemId) {
 		return secondHandDao.getSecondHandItem(itemId);
 	}
 
