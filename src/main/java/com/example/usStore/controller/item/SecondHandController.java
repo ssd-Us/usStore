@@ -102,11 +102,7 @@ public class SecondHandController {
 		List<Tag> tags = itemFacade.getTagByItemId(itemId);
 		
 		SecondHand sh = this.itemFacade.getSecondHandItem(itemId);
-		System.out.println("원래 조회수: "+sh.getViewCount());
-		sh.setViewCount(sh.getViewCount() + 1);
-		System.out.println("업데이트 조회수: "+sh.getViewCount());
-		
-		//this.itemFacade.updateItem(item);
+		this.itemFacade.updateViewCount(sh.getViewCount() + 1, itemId); //조회수 1증가
 		
 		model.addAttribute("sh", sh);
 		model.addAttribute("isAccuse", isAccuse);

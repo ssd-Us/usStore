@@ -26,20 +26,8 @@ public class ItemFormController {
 			System.out.println("session alive");
 			ItemForm itemFormSession = (ItemForm) session.getAttribute("itemForm");
 			System.out.println(itemFormSession);
-			itemForm = new ItemForm();
-			itemForm.setUnitCost(itemFormSession.getUnitCost());
-			itemForm.setTitle(itemFormSession.getTitle());
-			itemForm.setDescription(itemFormSession.getDescription());
-			itemForm.setViewCount(itemFormSession.getViewCount());
-			itemForm.setQty(itemFormSession.getQty());
-			itemForm.setTag1(itemFormSession.getTag1());
-			itemForm.setTag2(itemFormSession.getTag2());
-			itemForm.setTag3(itemFormSession.getTag3());
-			itemForm.setTag4(itemFormSession.getTag4());
-			itemForm.setTag5(itemFormSession.getTag5());
 			
-			System.out.println("itemForm setting: " + itemForm);
-			return itemForm;
+			return itemFormSession;
 		}
 		else {
 			System.out.println("session null");

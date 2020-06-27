@@ -18,7 +18,7 @@ function accuse(a){  //a랑 href   //여기는 로그인이 되었을 때 보내
 <span>
 
       <c:choose>
-                  <c:when test="${isAccuse}">
+               <c:when test="${isAccuse}">
                   		신고한 판매자입니다
                </c:when>
                <c:otherwise>
@@ -27,28 +27,28 @@ function accuse(a){  //a랑 href   //여기는 로그인이 되었을 때 보내
                         <a href="<c:url value='/addAccuse.do'>
                         <c:param name="userId" value="${gb.userId}"/>
                          <c:param name="itemId" value="${gb.itemId}"/>
-                         <c:param name="productId" value="${productId}"/></c:url>"
+                         <c:param name="productId" value="${gb.productId}"/></c:url>"
                         onClick = "accuse(this);">판매자 신고하기</a>
                      </c:when>
                      <c:when test="${productId==1}">
                         <a href="<c:url value='/addAccuse.do'>
                         <c:param name="userId" value="${auction.userId}"/>
                          <c:param name="itemId" value="${auction.itemId}"/>
-                         <c:param name="productId" value="${productId}"/></c:url>"
+                         <c:param name="productId" value="${auction.productId}"/></c:url>"
                         onClick = "accuse(this);">판매자 신고하기</a>
                      </c:when>
                      <c:when test="${productId==2}">
                         <a href="<c:url value='/addAccuse.do'>
                         <c:param name="userId" value="${sh.userId}"/>
                          <c:param name="itemId" value="${sh.itemId}"/>
-                         <c:param name="productId" value="${productId}"/></c:url>"
+                         <c:param name="productId" value="${sh.productId}"/></c:url>"
                         onClick = "accuse(this);">판매자 신고하기</a>
                      </c:when>
                      <c:when test="${productId==3}">
                         <a href="<c:url value='/addAccuse.do'>
                         <c:param name="userId" value="${handMade.userId}"/>
                          <c:param name="itemId" value="${handMade.itemId}"/>
-                         <c:param name="productId" value="${productId}"/></c:url>"
+                         <c:param name="productId" value="${handMade.productId}"/></c:url>"
                         onClick = "accuse(this);">판매자 신고하기</a>
                      </c:when>
                   </c:choose>

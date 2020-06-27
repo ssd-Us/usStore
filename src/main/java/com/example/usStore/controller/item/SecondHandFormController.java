@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import com.example.usStore.controller.mypage.UserSession;
-import com.example.usStore.domain.Account;
+import com.example.usStore.domain.GroupBuying;
 import com.example.usStore.domain.Item;
 import com.example.usStore.domain.SecondHand;
 import com.example.usStore.domain.Tag;
@@ -67,7 +67,6 @@ public class SecondHandFormController {
    @PostMapping("/shop/secondHand/step3.do")      // step2 -> step3
    public String goCheck(@ModelAttribute("secondHandForm") SecondHandForm secondHandForm,
 		   Model model) {   
-	   
       return "product/checkSecondHand";      // step3(CHECK_FORM3)
    }
    
@@ -85,9 +84,6 @@ public class SecondHandFormController {
       return "prodect/addSecondHand";   // check.jsp -> addGroupBuying.jsp
    }
    
-  
-   
- 
 	@PostMapping("/shop/secondHand/done.do")		// step3 -> done
 	public String done(@ModelAttribute("secondHandForm") SecondHandForm secondHandForm,
 			BindingResult result, Model model, HttpServletRequest rq, 
@@ -135,21 +131,8 @@ public class SecondHandFormController {
 		
 		System.out.println("태그 아이디" + item.getItemId() + item.getTags().get(0));
 		
-		
-		//secondHandForm.getItemId()
 		//put secondHandForm to SecondHand domain 세션에 있는거 도메인에 저장 
-		SecondHand secondHand = new SecondHand();
-		secondHand.setItemId(-1); 
-		secondHand.setDiscount(secondHandForm.getDiscount());
-		secondHand.setListPrice(secondHandForm.getListPrice());
-		secondHand.setDescription(item.getDescription());
-		secondHand.setQty(item.getQty());
-		secondHand.setTags(item.getTags());
-		secondHand.setTitle(item.getTitle());
-		secondHand.setUnitCost(item.getUnitCost());
-		secondHand.setViewCount(item.getViewCount() + 1);
-		secondHand.setUserId(item.getUserId());
-		
+		SecondHand secondHand = new SecondHand(item,secondHandForm.getDiscount(),secondHandForm.getListPrice());
 		
 		if(status != 0) { //수정일 때 ..?
 			itemFacade.updateSecondHand(secondHand);
@@ -164,6 +147,59 @@ public class SecondHandFormController {
 		
 		return "redirect:/shop/secondHand/viewItem.do?itemId=" + secondHand.getItemId() + "&productId=" + item.getProductId();
 	} 
+	
+	@RequestMapping("/shop/secondHand/edit.do") //edit Item
+	public String editItem(@RequestParam("itemId") int itemId, HttpServletRequest rq)
+	{
+		HttpSession session = rq.getSession(true);
+	
+		//itemId로 디비에서 세컨핸드와 태그 가져와서 도메인에 저장함 
+		List<Tag> tags = itemFacade.getTagByItemId(itemId);
+		SecondHand sh = itemFacade.getSecondHandItem(itemId);
+		//List<Tag> tags = sh.getTags(); 나중에 resultMap써서 이렇게 가져올 수 있도록 바꾸고 싶어염 하뚜 
+		System.out.println("프로덕트 아이디" + sh.getProductId());
+		
+		ItemForm itemForm = new ItemForm();
+		itemForm.setItemId(itemId);
+		itemForm.setUnitCost(sh.getUnitCost());
+		itemForm.setTitle(sh.getTitle());
+		itemForm.setDescription(sh.getDescription());
+		itemForm.setViewCount(sh.getViewCount());
+		itemForm.setQty(sh.getQty());
+		itemForm.setUserId(sh.getUserId());
+		itemForm.setProductId(sh.getProductId());
+		
+		session.setAttribute("status", itemId); //세션 종료 어디서 해주는지 다시 확인하기 
+		session.setAttribute("itemForm", itemForm); //왜 세션에 아이템폼을 유지? 어디서 세션 종료해주는지 다시 파악하기 
+		
+		switch(tags.size()) {
+		case 1: itemForm.setTag1(tags.get(0).getTagName());
+				break;
+				
+		case 2: itemForm.setTag1(tags.get(0).getTagName());
+				itemForm.setTag2(tags.get(1).getTagName());
+				break;
+				
+		case 3: itemForm.setTag1(tags.get(0).getTagName());
+				itemForm.setTag2(tags.get(1).getTagName());
+				itemForm.setTag3(tags.get(2).getTagName());
+				break;
+		
+		case 4: itemForm.setTag1(tags.get(0).getTagName());
+				itemForm.setTag2(tags.get(1).getTagName());
+				itemForm.setTag3(tags.get(2).getTagName());
+				itemForm.setTag4(tags.get(3).getTagName());
+				break;
+		
+		case 5: itemForm.setTag1(tags.get(0).getTagName());
+				itemForm.setTag2(tags.get(1).getTagName());
+				itemForm.setTag3(tags.get(2).getTagName());
+				itemForm.setTag4(tags.get(3).getTagName());
+				itemForm.setTag5(tags.get(4).getTagName());
+				break;
+		}
+		return "redirect:/shop/item/addItem.do?productId=" + sh.getProductId();
+	}
 	
    
 }

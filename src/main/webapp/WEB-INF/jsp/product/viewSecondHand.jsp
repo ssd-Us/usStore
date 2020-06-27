@@ -92,7 +92,7 @@ function getSellerInfo(userId) {
 						<%@ include file="/WEB-INF/jsp/account/accuseFunction.jsp" %>
 					</c:when>
 					<c:otherwise>
-						<a href="<c:url value='/addAccuseNoLogin.do'/>">판매자 신고하기</a>
+						<a href="<c:url value='/addAccuseNoLogin.do'/>">판매자 신고하기1</a>
 					</c:otherwise>
 			</c:choose>
    		</td>
@@ -153,12 +153,12 @@ function getSellerInfo(userId) {
    	<c:if test="${sh.userId eq userSession.account.userId}"> <!-- 로그인시 실행 -->
 		   		<td colspan="2" style="text-align: right; padding: 0px; font-size: small; border-bottom: none; border-top: 1px solid black;">
 				   <a href="<c:url value='/shop/secondHand/edit.do'>
-				   				<c:param name="itemId" value="${gb.itemId}" />
+				   				<c:param name="itemId" value="${sh.itemId}" />
 				   			</c:url>
 				   			">[게시물 수정하기]</a>
 				   <a href="<c:url value='/shop/secondHand/delete.do'>
-				   				<c:param name="itemId" value="${gb.itemId}" />
-				   				<c:param name="productId" value="${gb.productId}" />
+				   				<c:param name="itemId" value="${sh.itemId}" />
+				   				<c:param name="productId" value="${sh.productId}" />
 				   			</c:url>
 				   			"> [게시물 삭제하기]</a>
 				</td>
