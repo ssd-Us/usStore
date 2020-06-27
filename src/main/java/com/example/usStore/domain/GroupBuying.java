@@ -23,8 +23,8 @@ public class GroupBuying extends Item implements Serializable {
 	}
 	
 	public GroupBuying(Item item, int discount, int listPrice, String deadLine) {
-//		super(item.getItemId(), item.getUnitCost(), item.getTitle(), item.getDescription(), item.getViewCount(), item.getQty(), item.getTags(), 
-//				item.getUserId(), item.getProductId());
+		super(item.getItemId(), item.getUnitCost(), item.getTitle(), item.getDescription(), item.getViewCount(), item.getQty(), item.getTags(), 
+				item.getUserId(), item.getProductId());
 		this.itemId = item.getItemId();
 		this.discount = discount;
 		this.listPrice = listPrice;
