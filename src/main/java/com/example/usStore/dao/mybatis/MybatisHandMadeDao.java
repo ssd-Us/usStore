@@ -95,7 +95,10 @@ public class MybatisHandMadeDao implements HandMadeDao {
 	public String getUserIdByItemId(int itemId) throws DataAccessException {
 		return handMadeMapper.getUserIdByItemId(itemId);
 	}
-	
-	
 
+	@Override
+	public void updateViewCount(int viewCount, int itemId) {
+		// TODO Auto-generated method stub
+		handMadeMapper.updateViewCount(viewCount, itemId);
+	}
 }

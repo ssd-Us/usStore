@@ -20,5 +20,7 @@ public interface ItemMapper {
 	boolean isItemInStock(int itemId, int productId);
 
 	String getUserIdByItemId(int itemId);
+	
+	void updateViewCount(int viewCount, int itemId);
 }
 

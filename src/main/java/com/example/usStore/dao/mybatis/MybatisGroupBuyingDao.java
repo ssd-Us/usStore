@@ -125,6 +125,12 @@ public class MybatisGroupBuyingDao implements GroupBuyingDao {
 		return groupBuyingMapper.getUserIdByItemId(itemId);
 	}
 
+	@Override
+	public void updateViewCount(int viewCount, int itemId) {
+		// TODO Auto-generated method stub
+		groupBuyingMapper.updateViewCount(viewCount, itemId);
+	}
+
 	
 
 }

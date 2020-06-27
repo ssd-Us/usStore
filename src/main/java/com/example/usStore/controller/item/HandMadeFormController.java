@@ -265,10 +265,8 @@ public class HandMadeFormController {
 //		Item item = itemFacade.getItem(itemId);
 		
 		System.out.println("viewCount : " + handMade.getViewCount());
-		handMade.setViewCount(handMade.getViewCount() + 1);
+		itemFacade.updateViewCount(handMade.getViewCount() + 1, itemId);
 		System.out.println("object's viewcount ++ ? : " + handMade);
-		
-		itemFacade.updateHandMade(handMade);// update : viewCount++
 //		System.out.println("updated item data: " + itemFacade.getItem(itemId).toString());
 				
 		System.out.println(handMade);

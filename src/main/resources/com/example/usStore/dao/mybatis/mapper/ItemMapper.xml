@@ -22,6 +22,12 @@
 		WHERE itemId = #{itemId}
 	</update>
 
+	<update id="updateViewCount">
+		UPDATE ITEM 
+		SET VIEWCOUNT = #{param1}
+		WHERE itemId = #{param2}		
+	</update>
+	
 	<delete id="deleteItem">
 		DELETE FROM ITEM
 		WHERE ITEMID = #{itemId} 

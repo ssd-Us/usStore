@@ -32,4 +32,6 @@ public interface ItemDao {
 
 	String getUserIdByItemId(int itemId) throws DataAccessException;
 
+	// ViewCount + 1
+	void updateViewCount(int viewCount, int itemId);
 }

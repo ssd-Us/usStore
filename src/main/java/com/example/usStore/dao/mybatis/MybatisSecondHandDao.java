@@ -101,6 +101,12 @@ public class MybatisSecondHandDao implements SecondHandDao {
 		return null;
 	}
 
+	@Override
+	public void updateViewCount(int viewCount, int itemId) {
+		// TODO Auto-generated method stub
+		secondHandMapper.updateViewCount(viewCount, itemId);
+	}
+
 	
 
 }

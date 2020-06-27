@@ -127,4 +127,10 @@ public class MybatisAuctionDao implements AuctionDao {
 	public List<Bidder> getBidderList() {
 		return auctionMapper.getBidderList();
 	}
+
+	@Override
+	public void updateViewCount(int viewCount, int itemId) {
+		// TODO Auto-generated method stub
+		auctionMapper.updateViewCount(viewCount, itemId);
+	}
 }

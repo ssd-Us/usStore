@@ -346,6 +346,12 @@ public class ItemImpl implements ItemFacade {
 		return null;
 	}
 
+	@Override
+	public void updateViewCount(int viewCount, int itemId) {
+		// TODO Auto-generated method stub
+		itemDao.updateViewCount(viewCount, itemId);
+	}
+
 	
 
 }
