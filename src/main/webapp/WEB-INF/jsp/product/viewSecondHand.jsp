@@ -1,9 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="itemTop.jsp" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<!DOCTYPE html>
-<html>
-<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
 <title>중고거래 상세페이지</title>
 <style type="text/css"> 
 	a { text-decoration:none } 
@@ -41,9 +40,28 @@
 	}
 	
 </style>
-</head>
+<script>
+function getSellerInfo(userId) {
+	var reqUrl = "/rest/user/" + userId;
+	$.ajax({
+		type: "get",
+		url: reqUrl,
+		processData: false,
+		success: function(responseJson){
+			$("#detail").html("<ul></ul>");
+			$("#detail > ul").append("<li>User ID: " + responseJson.userId + "</li>");
+			$("#detail > ul").append("<li>User Email: " + responseJson.email + "</li>");
+		},
+		error: function(){
+			alert("ERROR", arguments);
+
+		}
+});
+};
+</script>
 <body>
 <!-- 여기서 secondHand는 컨트롤러에서 보내준 모델 객체(db에서 select 결과 ) -->
+
 
 <table style="margin-left: auto; margin-right: auto;">
 	<tr>

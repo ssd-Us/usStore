@@ -188,19 +188,16 @@ public class ItemImpl implements ItemFacade {
 	}
 
 	@Override
-	public SecondHand getSecondHandItem(int itemId) {
+	public List<SecondHand> getSecondHandItem(int itemId) {
 		return secondHandDao.getSecondHandItem(itemId);
 	}
 
-	@Override
-	public void insertSecondHand(Item item, SecondHand secondHand, List<Tag> tags) {
-		itemDao.insertItem(item);
-		secondHandDao.insertSecondHand(secondHand);
-		for(Tag t : tags) {
-			tagDao.insertTag(t);
-		}
-	}
 
+	@Override
+	public void insertSecondHand(SecondHand secondHand) {
+		secondHandDao.insertSecondHand(secondHand);
+	}
+	
 	@Override
 	public void updateSecondHand(SecondHand secondHand) {
 		secondHandDao.updateSecondHand(secondHand);
@@ -354,5 +351,7 @@ public class ItemImpl implements ItemFacade {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	
 
 }

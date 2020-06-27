@@ -1,7 +1,6 @@
 package com.example.usStore.controller.item;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.example.usStore.domain.Account;
 import com.example.usStore.domain.Item;
@@ -27,13 +26,16 @@ import com.example.usStore.domain.SecondHand;
 import com.example.usStore.domain.Tag;
 import com.example.usStore.service.facade.ItemFacade;
 import com.example.usStore.service.facade.MyPageFacade;
+import com.example.usStore.service.facade.UsStoreFacade;
 
 @Controller
+@SessionAttributes("secondHandList")
 public class SecondHandController {
 
 	private ItemFacade itemFacade;
 	private MyPageFacade myPageFacade;
-
+	private UsStoreFacade usStoreFacade;
+	
 	@Autowired
 	public void setItemFacade(ItemFacade itemFacade) {
 		this.itemFacade = itemFacade;
@@ -42,6 +44,11 @@ public class SecondHandController {
 	@Autowired
 	public void setMyPageFacade(MyPageFacade myPageFacade) {
 		this.myPageFacade = myPageFacade;
+	}
+	
+	@Autowired
+	public void setUsStoreFacade(UsStoreFacade usStoreFacade) {
+		this.usStoreFacade = usStoreFacade;
 	}
 
 	@RequestMapping("/shop/secondHand/listItem.do")
@@ -92,14 +99,15 @@ public class SecondHandController {
 			}
 		}
 
-		Item item = itemFacade.getItem(itemId);
-		item.setViewCount(item.getViewCount() + 1);
-		itemFacade.updateItem(item); // 조회수 디비에 업데이트
-
-		List<Tag> tags = item.getTags(); // sh가 아이템 상속받으니까 여기서 테그 꺼내쓰기
-
-		SecondHand sh = this.itemFacade.getSecondHandItem(itemId);
-		model.addAttribute("sh", sh);
+		/*
+		 *  item.setViewCount(item.getViewCount()
+		 * + 1); itemFacade.updateItem(item); // 조회수 디비에 업데이트
+		 */
+		// sh가 아이템 상속받으니까 여기서 테그 꺼내쓰기
+		List<Tag> tags = itemFacade.getTagByItemId(itemId);
+		
+		List<SecondHand> sh = this.itemFacade.getSecondHandItem(itemId);
+		model.addAttribute("sh", sh.get(0));
 		model.addAttribute("isAccuse", isAccuse);
 		model.addAttribute("tags", tags);
 		return "product/viewSecondHand";
@@ -114,26 +122,19 @@ public class SecondHandController {
 	  }
 	 
 
-	/*
-	 * @RequestMapping(value =
-	 * "/shop/secondHand/deleteItem.do/{productId}/{itemId}", method =
-	 * RequestMethod.DELETE)
-	 * 
-	 * @ResponseStatus(HttpStatus.OK)
-	 * 
-	 * @ResponseBody public String deleteSecondHand(@PathVariable("productId") int
-	 * productId,
-	 * 
-	 * @PathVariable("itemId") int itemId, HttpServletResponse response) throws
-	 * IOException {
-	 * 
-	 * this.itemFacade.deleteItem(itemId); //Category category =
-	 * categoryMap.remove(catId);
-	 * 
-	 * if (item == null) { response.sendError(HttpServletResponse.SC_NOT_FOUND);
-	 * return null; }
-	 * 
-	 * return "redirect:/shop/secondHand/listItem.do?productId=" + productId; }
-	 */
+	  @RequestMapping(value = "/rest/user/{userId}", method = RequestMethod.GET, produces="application/json")
+	  @ResponseBody
+	  public Account getSellerInfo(@PathVariable("userId") String userId, 
+			HttpServletResponse response) throws IOException {
+		
+		  	Account result = this.usStoreFacade.getAccountByUserId(userId);
+			if (result == null) {
+				response.sendError(HttpServletResponse.SC_NOT_FOUND);
+				return null;
+			}
+			
+								
+			return result;
+		}
 
 }

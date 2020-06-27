@@ -76,10 +76,10 @@ public interface ItemFacade {
 	/////////////////////////////////////////////////////////////////////////	
 	List<SecondHand> getSecondHandList();
 	
-	SecondHand getSecondHandItem(int itemId);
+	List<SecondHand> getSecondHandItem(int itemId);
 	
-	public void insertSecondHand(Item item, SecondHand secondHand, List<Tag> tags);
-	  
+	public void insertSecondHand(SecondHand secondHand);
+	
 	public void updateSecondHand(SecondHand secondHand);
 	
 	/////////////////////////////////////////////////////////////////////////
@@ -130,4 +130,5 @@ public interface ItemFacade {
 	/* Tag */
 	/////////////////////////////////////////////////////////////////////////
 	List<Item> searchItemList(String keywords);
+
 }

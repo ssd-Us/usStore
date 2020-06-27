@@ -32,4 +32,11 @@ public class UserSession implements Serializable {
 	public PagedListHolder<Product> getMyList() {
 		return myList;
 	}
+
+	@Override
+	public String toString() {
+		return "UserSession [account=" + account + ", myList=" + myList + "]";
+	}
+	
+	
 }
