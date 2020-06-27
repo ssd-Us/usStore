@@ -17,6 +17,26 @@ public class GroupBuying extends Item implements Serializable {
 	private int listPrice;
 	private String deadLine;
 	
+	
+	public GroupBuying() {
+		super();
+	}
+	
+	public GroupBuying(Item item, int discount, int listPrice, String deadLine) {
+//		super(item.getItemId(), item.getUnitCost(), item.getTitle(), item.getDescription(), item.getViewCount(), item.getQty(), item.getTags(), 
+//				item.getUserId(), item.getProductId());
+		this.itemId = item.getItemId();
+		this.discount = discount;
+		this.listPrice = listPrice;
+		this.deadLine = deadLine;
+	}
+	
+	public GroupBuying(int discount, int listPrice, String deadLine) {
+		this.discount = discount;
+		this.listPrice = listPrice;
+		this.deadLine = deadLine;
+	}
+	
 	// Getter & Setter
 	public int getItemId() {
 		return itemId;
@@ -42,4 +62,11 @@ public class GroupBuying extends Item implements Serializable {
 	public void setDeadLine(String deadLine) {
 		this.deadLine = deadLine;
 	}
+	
+	@Override
+	public String toString() {
+		return "GroupBuying [itemId=" + itemId + "super.itemid" + super.getItemId() + "super.title" + super.getTitle() + ", discount=" + discount + ", listPrice=" + listPrice + ", deadLine="
+				+ deadLine + "]";
+	}
+	
 }

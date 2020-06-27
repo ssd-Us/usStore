@@ -7,18 +7,29 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.usStore.dao.GroupBuyingDao;
 import com.example.usStore.dao.mybatis.mapper.GroupBuyingMapper;
+import com.example.usStore.dao.mybatis.mapper.ItemMapper;
+import com.example.usStore.dao.mybatis.mapper.TagMapper;
 import com.example.usStore.domain.GroupBuying;
 import com.example.usStore.domain.Item;
+import com.example.usStore.domain.Tag;
 
+@Transactional
 @Qualifier("mybatisGroupBuyingDao")
 @Repository
 public class MybatisGroupBuyingDao implements GroupBuyingDao {	
 	
 	@Autowired
 	private GroupBuyingMapper groupBuyingMapper;
+	
+	@Autowired
+	private ItemMapper itemMapper;
+	
+	@Autowired
+	private TagMapper tagMapper;
 
 	@Override
 	public void updateQuantity(int qty, int itemId, int productId) throws DataAccessException {
@@ -50,12 +61,24 @@ public class MybatisGroupBuyingDao implements GroupBuyingDao {
 		groupBuyingMapper.insertGroupBuying(GroupBuying);
 	}
 
-	@Override
-	public void updateGroupBuying(GroupBuying GroupBuying) throws DataAccessException {
-		// TODO Auto-generated method stub
-		groupBuyingMapper.updateGroupBuying(GroupBuying);
-	}
+//	@Override
+//	public void updateGroupBuying(GroupBuying GroupBuying) throws DataAccessException {
+//		// TODO Auto-generated method stub
+//		groupBuyingMapper.updateGroupBuying(GroupBuying);
+//	}
 
+	@Override
+	public void updateGroupBuying(GroupBuying groupBuying) {
+		// TODO Auto-generated method stub
+		System.out.println("updateGroupBuying mapper 시작");
+		itemMapper.updateItem((Item)groupBuying);
+		groupBuyingMapper.updateGroupBuying(groupBuying);
+		
+		for(Tag t : groupBuying.getTags()) {
+			tagMapper.insertTag(t);
+		}
+	}
+	
 	@Override
 	public List<GroupBuying> getGroupBuyingList() throws DataAccessException {
 		// TODO Auto-generated method stub

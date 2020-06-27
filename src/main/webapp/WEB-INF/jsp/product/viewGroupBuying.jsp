@@ -129,7 +129,9 @@
 				&nbsp;&nbsp;&nbsp;
 				<span>
 					<a href="
-							<c:url value='/order/${gb.itemId}'/>
+							<c:url value='/shop/groupBuying/joint.do'>
+								<c:param name="itemId" value="${gb.itemId}" />
+							</c:url>
 					">공동구매 참여하기</a>
 				</span>
 				&nbsp;&nbsp;&nbsp;
