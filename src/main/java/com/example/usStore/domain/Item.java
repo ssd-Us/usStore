@@ -111,6 +111,13 @@ public class Item implements Serializable {
 		}	
 	  }
 	
+	public void makeTags(String tagName) {	//itemId�몴占� tag占쎌벥 itemId嚥∽옙, tagName(tag1, 2, 3, 4, 5) 筌욑옙占쎌젟 , tagId占쎈뮉 占쎌뿫占쎌벥占쎌벥 占쎈땾 0 占쎌몵嚥∽옙 筌욑옙占쎌젟
+		if(tagName != null && tagName.trim() != "") {
+			Tag tag = new Tag(itemId, tagName);
+			tags.add(tag);
+		}	
+	  }
+	
 	@Override
 	public String toString() {
 		return "Item [itemId=" + itemId + ", unitCost=" + unitCost + ", title=" + title + ", description=" + description

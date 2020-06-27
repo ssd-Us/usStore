@@ -37,7 +37,7 @@ public class MybatisSecondHandDao implements SecondHandDao {
 		itemMapper.insertItem(secondHand);
 		secondHandMapper.insertSecondHand(secondHand); //새컨핸드랑 아이템 디비 테일 두개 모두 삽입 
 		for(Tag t : secondHand.getTags()) {
-			t.setItemId(secondHand.getItemId());
+			t.setItemId(secondHand.getItemId()); 
 			tagMapper.insertTag(t);
 		}
 	}

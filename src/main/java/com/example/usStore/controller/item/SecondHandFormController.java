@@ -127,11 +127,13 @@ public class SecondHandFormController {
 		}
 		
 		//generate tags(only have tagName)
-		item.makeTags(item.getItemId(), itemform.getTag1());	//if(tag != null && "") then addTags
-		item.makeTags(item.getItemId(), itemform.getTag2());
-		item.makeTags(item.getItemId(), itemform.getTag3());
-		item.makeTags(item.getItemId(), itemform.getTag4());
-		item.makeTags(item.getItemId(), itemform.getTag5());
+		item.makeTags(itemform.getTag1());	//if(tag != null && "") then addTags
+		item.makeTags(itemform.getTag2());	//if(tag != null && "") then addTags
+		item.makeTags(itemform.getTag3());	//if(tag != null && "") then addTags
+		item.makeTags(itemform.getTag4());	//if(tag != null && "") then addTags
+		item.makeTags(itemform.getTag5());	//if(tag != null && "") then addTags
+		
+		System.out.println("태그 아이디" + item.getItemId() + item.getTags().get(0));
 		
 		
 		//secondHandForm.getItemId()
