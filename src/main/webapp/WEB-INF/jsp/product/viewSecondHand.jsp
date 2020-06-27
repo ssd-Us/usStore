@@ -152,13 +152,19 @@ function getSellerInfo(userId) {
    			</td>
    	</tr>
    		
-   	<c:if test="${sh.userId==account.userId}"> <!-- 로그인시 실행 -->
-   		<tr>
-   		<td colspan="2" style="text-align: right; padding: 0px; font-size: small; border-bottom: none; border-top: 1px solid black;">
-		   <a href="<c:url value='/editItem/${sh.itemId}'/>">[게시물 수정하기]</a>
-		   <a href="<c:url value='/deleteItem/${sh.itemId}'/>"> [게시물 삭제하기]</a>
-		   </td>
-		 </tr>
+   	<c:if test="${sh.userId eq userSession.account.userId}"> <!-- 로그인시 실행 -->
+		   		<td colspan="2" style="text-align: right; padding: 0px; font-size: small; border-bottom: none; border-top: 1px solid black;">
+				   <a href="<c:url value='/shop/secondHand/edit.do'>
+				   				<c:param name="itemId" value="${gb.itemId}" />
+				   			</c:url>
+				   			">[게시물 수정하기]</a>
+				   <a href="<c:url value='/shop/secondHand/delete.do'>
+				   				<c:param name="itemId" value="${gb.itemId}" />
+				   				<c:param name="productId" value="${gb.productId}" />
+				   			</c:url>
+				   			"> [게시물 삭제하기]</a>
+				</td>
+			 </tr>
 	</c:if>
 </table>
 

@@ -113,7 +113,7 @@ public class SecondHandController {
 		return "product/viewSecondHand";
 	}
 	
-	  @RequestMapping("/shop/secondHand/deleteItem.do") 
+	  @RequestMapping("/shop/secondHand/delete.do") 
 	  public String delete(@RequestParam("productId") int productId,
 	  @RequestParam("itemId") int itemId, ModelMap model) {
 	  
