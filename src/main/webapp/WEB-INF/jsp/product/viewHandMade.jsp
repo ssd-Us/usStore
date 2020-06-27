@@ -110,8 +110,7 @@
    		<tr>
    		<th style="border-right: 1px solid black;">판매가</th>
    			<td>
-   				<del>정가 :  <c:out value="${handMade.listPrice}" /> 원</del> <br>
-   				단가 : <ins> <c:out value="${handMade.unitCost}" /></ins> 원&nbsp;<font color=red>-50%</font> <br>
+   				<c:out value="${handMade.listPrice}" /> 원
    			</td>
    		</tr>
    		

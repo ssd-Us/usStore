@@ -32,7 +32,7 @@
 <label>제목</label>: ${itemForm.title} <br> 
 <label>내용</label>: ${itemForm.description} <br> 
 <label>정가</label>: ${itemForm.unitCost}원 <br> 
-<label>판매가</label>: ${HandMade.listPrice}원 <br> 
+<label>판매가</label>: ${handMade.listPrice}원 <br> 
 <label>수량</label>: ${itemForm.qty} <br> 
 <label>태그</label>: 
 	<c:if test="${itemForm.tag1 != '' && itemForm.tag1 ne null}">

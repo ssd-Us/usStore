@@ -39,7 +39,7 @@
 							<th>&nbsp;</th>
 						</tr>
 						<tbody>
-							<c:forEach var="item" items="${itemList.pageList}">
+							<c:forEach var="item" items="${handMadeList.pageList}">
 								<tr style="height: 70px;">
 									<td>${item.itemId}</td>
 									<td>

@@ -82,11 +82,11 @@
       	  		<a class="dropdown-item" href="<c:url value="/shop/viewAccount.do"/>">My Account</a>
 				<a class="dropdown-item" href="<c:url value="/shop/editAccount.do"/>">Edit Account</a>
 				<div class="dropdown-divider"></div>
-				<a class="dropdown-item" href="<c:url value="/shop/listOrders.do"/>">My Orders</a>
-				<a class="dropdown-item" href="<c:url value="/shop/viewCoupon.do"/>">My Coupon</a>
-				<a class="dropdown-item" href="<c:url value="/shop/viewBookMark.do"/>">My StarList</a>
+<%-- 				<a class="dropdown-item" href="<c:url value="/shop/listOrders.do"/>">My Orders</a> --%>
+<%-- 				<a class="dropdown-item" href="<c:url value="/shop/viewCoupon.do"/>">My Coupon</a> --%>
+<%-- 				<a class="dropdown-item" href="<c:url value="/shop/viewBookMark.do"/>">My StarList</a> --%>
 				<a class="dropdown-item" href="#">My Coupon</a>
-			</div>
+			</div>	
 			</li>
           </c:if>
 <!--           <li> -->

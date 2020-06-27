@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
@@ -26,16 +25,17 @@ import com.example.usStore.controller.mypage.UserSession;
 import com.example.usStore.domain.HandMade;
 import com.example.usStore.domain.Item;
 import com.example.usStore.domain.Tag;
+import com.example.usStore.service.HandMadeFormValidator;
 import com.example.usStore.service.facade.ItemFacade;
 
 @Controller
-@SessionAttributes({"handMadeForm", "itemList", "userSession"})
+@SessionAttributes({"HandMade", "handMadeList"})
 public class HandMadeFormController {
 
 	private static final String ADD_HANDMADE_FORM = "product/addHandMade";
 	private static final String CHECK_FORM3 = "product/checkHandMade";
-	private static final String DETAIL = "product/viewHandMade";
 	private static final String HANDMADE_LIST = "product/handMade";
+	private static final String DETAIL = "product/viewHandMade";
 	
 	private ItemFacade itemFacade;
 
@@ -44,7 +44,7 @@ public class HandMadeFormController {
 		this.itemFacade = itemFacade;
 	}
 	
-	@ModelAttribute("handMadeForm")
+	@ModelAttribute("HandMade")
 	public HandMadeForm createHandMadeForm() {
 		return new HandMadeForm();
 	}
@@ -58,10 +58,10 @@ public class HandMadeFormController {
 	public String listHandMade (
 			@RequestParam("productId") int productId, ModelMap model) throws Exception {
   
-		PagedListHolder<HandMade> itemList = new PagedListHolder<HandMade>(this.itemFacade.getHandMadeList());
-		itemList.setPageSize(4);
+		PagedListHolder<HandMade> handMadeList = new PagedListHolder<HandMade>(this.itemFacade.getHandMadeList());
+		handMadeList.setPageSize(4);
 		
-		model.put("itemList", itemList);
+		model.put("handMadeList", handMadeList);
 		model.put("productId", productId);
 		return HANDMADE_LIST;
 	}
@@ -69,16 +69,16 @@ public class HandMadeFormController {
 	// 아이템 4개마다 페이지 구분, 다음 페이지나 이전 페이지로 전환하도록 해주는 Controller
 	@RequestMapping("shop/handMade/listItem2.do")
 	public String listHandMade2 (
-			@ModelAttribute("itemList") PagedListHolder<HandMade> itemList,
+			@ModelAttribute("handMadeList") PagedListHolder<HandMade> handMadeList,
 			@RequestParam("pageName") String page,
 			ModelMap model) throws Exception {
 		if ("next".equals(page)) {
-			itemList.nextPage();
+			handMadeList.nextPage();
 		}
 		else if ("previous".equals(page)) {
-			itemList.previousPage();
+			handMadeList.previousPage();
 		}
-		model.put("itemList", itemList);
+		model.put("handMadeList", handMadeList);
 		return HANDMADE_LIST;
 	}
 	
@@ -108,10 +108,10 @@ public class HandMadeFormController {
 	@RequestMapping(value="/shop/handMade/addItem2.do", method = RequestMethod.GET)
 	public String step2(
 			@ModelAttribute("HandMade") HandMadeForm handMadeForm, 
-			@RequestParam("productId") int productId, Model model) {
+			@RequestParam("productId") int productId, Model model, HttpServletRequest rq) {
 
 		System.out.println("handMadeForm controller"); // print toString
-
+		model.addAttribute("handMadeForm", handMadeForm);
 		model.addAttribute("productId", productId);
 		return ADD_HANDMADE_FORM; // addHandMade.jsp
 	}
@@ -123,21 +123,27 @@ public class HandMadeFormController {
 
 	@PostMapping("/shop/handMade/step3.do")		// step2 -> step3 占쎌뵠占쎈짗
 	public String step3(
-			@ModelAttribute("HandMade") HandMadeForm handMadeForm, 
-			HttpServletRequest rq, ItemForm itemForm, Model model, BindingResult bindingResult) {
+			@ModelAttribute("HandMade") HandMadeForm handMadeForm, BindingResult bindingResult, 
+			HttpServletRequest rq, ItemForm itemForm, Model model) {
 		
 		System.out.println("step3.do(before check form)");
 		HttpSession session = rq.getSession(false);
-		
-		itemForm = (ItemForm) session.getAttribute("itemForm");
+		new HandMadeFormValidator().validate(handMadeForm, bindingResult);
+		System.out.println("요기당!!!");
 		if(session.getAttribute("itemForm") != null) {
+			itemForm = (ItemForm) session.getAttribute("itemForm");
 			System.out.println("itemformSession: " + itemForm);	//print itemformSession toString
 		}
+		if(handMadeForm.getListPrice() >= itemForm.getUnitCost()) {
+			bindingResult.rejectValue("listPrice", "단가보다 높은 가격을 입력해주세요.");
+		}
 		
-		System.out.println("handMadeCommand: " + handMadeForm);	//print command toString
+		if (bindingResult.hasErrors()) {	//유효성 검증 에러 발생시
+			model.addAttribute("productId", itemForm.getProductId());
+			return ADD_HANDMADE_FORM;
+		}
 		
-		///// 여기 수정해야 함
-//		handMadeForm.setItemId();
+		System.out.println("handMadeForm setting : " + handMadeForm);
 		model.addAttribute(itemForm);
 		return CHECK_FORM3;	// step3(CHECK_FORM3)
 	}
@@ -152,46 +158,38 @@ public class HandMadeFormController {
 	
 	@PostMapping("/shop/handMade/detailItem.do")		// step3 -> done
 	public String finalAddHandMade(@ModelAttribute("HandMade") HandMadeForm handMadeForm, 
-			ItemForm itemformSession, BindingResult result, Model model, HttpServletRequest rq, 
+			ItemForm itemFormSession, BindingResult result, Model model, HttpServletRequest rq, 
 			SessionStatus sessionStatus, HandMade handMade, ModelMap modelMap) {
+		int status = 0;
 		System.out.println("detailItem.do");
 		
 		HttpSession session = rq.getSession(false);
-		itemformSession = (ItemForm) session.getAttribute("itemForm");
-		
-		int status = (int) session.getAttribute("status");
-		UserSession userSession = (UserSession) session.getAttribute("userSession");
-		
-		if(session.getAttribute("itemForm") != null) {
-			System.out.println("itemformSession: " + itemformSession);	// print itemformSession toString
+		itemFormSession = (ItemForm) session.getAttribute("itemForm");	
+		if(session.getAttribute("status") != null) {
+			status = (int) session.getAttribute("status");
 		}
-	
+		
+		UserSession userSession = (UserSession) session.getAttribute("userSession");
 		String suppId = userSession.getAccount().getUserId();
 		System.out.println("suppId: " + suppId);
 		
 		if(session.getAttribute("itemForm") != null) {
-			System.out.println("itemformSession: " + itemformSession);	//print itemformSession toString
+			System.out.println("itemformSession: " + itemFormSession);	//print itemformSession toString
 		}
+		
 		System.out.println(handMadeForm);
 	
 		//put itemformSession to item
-		Item item = new Item(itemformSession.getUnitCost(), itemformSession.getTitle(), 
-				itemformSession.getDescription(), itemformSession.getQty(), suppId, 	// must change userId -> loginCommand.getUserId()
-				itemformSession.getProductId());
+		Item item = new Item(itemFormSession.getUnitCost(), itemFormSession.getTitle(), 
+				itemFormSession.getDescription(), itemFormSession.getQty(), suppId, 	// must change userId -> loginCommand.getUserId()
+				itemFormSession.getProductId());
 		
 		if(status != 0) {
 			item.setItemId(status);
-			item.setViewCount(itemformSession.getViewCount());
+			item.setViewCount(itemFormSession.getViewCount());
 			itemFacade.updateItem(item);
 			System.out.println("itemUpdated" + item);
-		}
-		else {
-			itemFacade.insertItem(item);	// -> generate itemId, insert DB
-		}
-
-		System.out.println("itemId: " + item.getItemId());	//print itemformSession toString
-		
-		if(status != 0) {
+			
 			List<Tag> tags = itemFacade.getTagByItemId(status);
 			System.out.println("tag size : " + tags.size());	//0
 			if(tags.size() > 0) {
@@ -203,15 +201,21 @@ public class HandMadeFormController {
 				System.out.println("deleted, tag size : " + t.size());
 			}
 		}
+		else {
+			itemFacade.insertItem(item);	// -> generate itemId, insert DB
+		}
+
+		System.out.println("itemId: " + item.getItemId());	//print itemformSession toString
+		
 		//generate tags(only have tagName)
-		item.makeTags(item.getItemId(), itemformSession.getTag1());	//if(tag != null && "") then addTags
-		item.makeTags(item.getItemId(), itemformSession.getTag2());
-		item.makeTags(item.getItemId(), itemformSession.getTag3());
-		item.makeTags(item.getItemId(), itemformSession.getTag4());
-		item.makeTags(item.getItemId(), itemformSession.getTag5());
+		item.makeTags(item.getItemId(), itemFormSession.getTag1());	//if(tag != null && "") then addTags
+		item.makeTags(item.getItemId(), itemFormSession.getTag2());
+		item.makeTags(item.getItemId(), itemFormSession.getTag3());
+		item.makeTags(item.getItemId(), itemFormSession.getTag4());
+		item.makeTags(item.getItemId(), itemFormSession.getTag5());
 			
-		List<Tag> tags = new ArrayList<Tag>();
-		tags = item.getTags();
+		List<Tag> tags = item.getTags();
+		item.setTags(tags);
 		
 		System.out.println("tags: " + tags);
 		
@@ -229,20 +233,11 @@ public class HandMadeFormController {
 			itemFacade.insertHandMade(handMade);	// insert DB
 		}
 		
-		handMade.setItemId(status);
-		handMade.setListPrice(handMadeForm.getListPrice());
-		
-		if(status != 0) {
-			itemFacade.updateHandMade(handMade);
-		}
-		else {
-			itemFacade.insertHandMade(handMade);	// insert DB
-		}
-	
 		sessionStatus.setComplete();	// groupBuying, editStatus session close
 		session.removeAttribute("itemForm");	//itemForm session close
+		session.removeAttribute("status");
 		
-		return DETAIL;
+		return "redirect:/shop/handMade/viewItem.do?itemId=" + handMade.getItemId() + "&productId=" + item.getProductId();
 	}
 	
 	////////////////////////////////////////////////
@@ -264,14 +259,18 @@ public class HandMadeFormController {
 			model.addAttribute("suppId", suppId);
 		}
 		
-		Item item = itemFacade.getItem(itemId);
-		item.setViewCount(item.getViewCount() + 1);
-		System.out.println("object's viewcount ++ ? : " + item);
+		System.out.println("View HandMade Controller !!");
 		
-		itemFacade.updateItem(item);	// update : viewCount++
-		System.out.println("updated item data: " + itemFacade.getItem(itemId).toString());
+		HandMade handMade = itemFacade.getHandMadeById(itemId);
+//		Item item = itemFacade.getItem(itemId);
+		
+		System.out.println("viewCount : " + handMade.getViewCount());
+		handMade.setViewCount(handMade.getViewCount() + 1);
+		System.out.println("object's viewcount ++ ? : " + handMade);
+		
+		itemFacade.updateHandMade(handMade);// update : viewCount++
+//		System.out.println("updated item data: " + itemFacade.getItem(itemId).toString());
 				
-		HandMade handMade = this.itemFacade.getHandMadeById(itemId);
 		System.out.println(handMade);
 		
 		List<Tag> tags = new ArrayList<Tag>();
