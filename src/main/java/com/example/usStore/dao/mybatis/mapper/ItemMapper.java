@@ -6,9 +6,9 @@ import com.example.usStore.domain.Item;
 public interface ItemMapper {
 
 	void insertItem(Item item);
-	
+	  
 	void updateItem(Item item);
-	
+		 
 	void deleteItem(int itemId);
 	
 	Item getItem(int itemId);

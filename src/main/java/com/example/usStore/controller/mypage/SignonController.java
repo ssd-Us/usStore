@@ -23,7 +23,6 @@ import org.springframework.ui.Model;
  * @modified-by Changsup Park
  */
 @Controller
-@SessionAttributes("userSession")
 public class SignonController { 
 
 	private UsStoreFacade usStore;

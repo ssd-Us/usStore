@@ -4,21 +4,22 @@ import java.util.List;
 
 import org.springframework.dao.DataAccessException;
 
+import com.example.usStore.domain.Item;
 import com.example.usStore.domain.SecondHand;
+import com.example.usStore.domain.Tag;
 
 
 public interface SecondHandDao extends ItemDao {
 	
-	// ÀüÃ¼ SecondHandList ¹Þ¾Æ¿À±â
+	// ï¿½ï¿½Ã¼ SecondHandList ï¿½Þ¾Æ¿ï¿½ï¿½ï¿½
 	List<SecondHand> getSecondHandList() throws DataAccessException;
 	
-	// itemId ¸Å°³º¯¼ö·Î ¹Þ¾Æ SecondHand °´Ã¼ ¹ÝÈ¯
-	SecondHand getSecondHandItem(int itemId) throws DataAccessException;
+	// itemId ï¿½Å°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¾ï¿½ SecondHand ï¿½ï¿½Ã¼ ï¿½ï¿½È¯
+	List<SecondHand> getSecondHandItem(int itemId) throws DataAccessException;
 	
-	// SecondHand Ãß°¡
-	public void insertSecondHand(SecondHand secondHand) throws DataAccessException;
-	  
-	// SecondHand ¼öÁ¤
+	// SecondHand ï¿½ï¿½ï¿½ï¿½
 	public void updateSecondHand(SecondHand secondHand) throws DataAccessException;
+
+	public void insertSecondHand(SecondHand secondHand) throws DataAccessException;
 
 }

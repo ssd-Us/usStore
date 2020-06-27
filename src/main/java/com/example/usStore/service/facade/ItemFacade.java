@@ -60,26 +60,25 @@ public interface ItemFacade {
 	/* GroupBuying */
 	/////////////////////////////////////////////////////////////////////////
 	public void insertGroupBuying(GroupBuying GroupBuying);
-	  
+	
 	public void updateGroupBuying(GroupBuying GroupBuying);
 	
 	List<GroupBuying> getGroupBuyingList();
 	
 	GroupBuying getGroupBuyingItem(int itemId);
-
+	
 	public void joinGroupBuying(GroupBuying GroupBuying);
 	
 	public void calculateDiscount(GroupBuying GroupBuying);
-	
 	/////////////////////////////////////////////////////////////////////////
 	/* SecondHand */
 	/////////////////////////////////////////////////////////////////////////	
 	List<SecondHand> getSecondHandList();
 	
-	SecondHand getSecondHandItem(int itemId);
+	List<SecondHand> getSecondHandItem(int itemId);
 	
-	public void insertSecondHand(Item item, SecondHand secondHand, List<Tag> tags);
-	  
+	public void insertSecondHand(SecondHand secondHand);
+	
 	public void updateSecondHand(SecondHand secondHand);
 	
 	/////////////////////////////////////////////////////////////////////////
@@ -113,21 +112,19 @@ public interface ItemFacade {
 	/* Tag */
 	/////////////////////////////////////////////////////////////////////////
 	List<Tag> getTagList ();
-
-	List<Tag> getTagByTagId(int tagId);
-
-	List<Tag> getTagByItemId(int itemId);	
-
-	Tag getTagByTagName(String tagName);	
-
-	void insertTag(Tag tag);
-
-	void updateTag(Tag tag);	
-
-	void deleteTag(int itemId);	
 	
+	List<Tag> getTagByTagId(int tagId);
+	
+	List<Tag> getTagByItemId(int itemId);	
+	
+	Tag getTagByTagName(String tagName);	
+	
+	void insertTag(Tag tag);	
+	
+	void deleteTag(int itemId);
 	/////////////////////////////////////////////////////////////////////////
 	/* Tag */
 	/////////////////////////////////////////////////////////////////////////
 	List<Item> searchItemList(String keywords);
+
 }
