@@ -14,7 +14,7 @@ public class ItemFormValidator implements Validator {
 	public boolean supports(Class<?> clazz) {
 		return ItemForm.class.isAssignableFrom(clazz);
 	}
-
+    
 	@Override
 	public void validate(Object target, Errors errors) {
 		System.out.println("validator");

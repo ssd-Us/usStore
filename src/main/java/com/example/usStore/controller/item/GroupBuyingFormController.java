@@ -144,7 +144,7 @@ public class GroupBuyingFormController {
 		System.out.println("calDiscount: " + calDiscount);
 		
 		groupBuyingForm.setDiscount(calDiscount);
-		
+		 
 		String date = groupBuyingForm.getDate();
 		String time = groupBuyingForm.getTime();
 		String deadLine = date + " " + time + ":00";
