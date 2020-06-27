@@ -12,10 +12,10 @@
   <meta http-equiv="expires" content="0">
   <meta http-equiv="Expires" content="Tue, 01 Jan 1980 1:00:00 GMT">
   <meta http-equiv="Pragma" content="no-cache">
-  <link rel="stylesheet" href="../style/usstore.css" type="text/css" />
-  <link href="../resources/css/bootstrap.min.css" rel="stylesheet">
-  <link href="../resources/css/all.css" rel="stylesheet">
-  <link href="../resources/css/account.css" rel="stylesheet">
+  <link rel="stylesheet" href="../../style/usstore.css" type="text/css" />
+  <link href="../../resources/css/bootstrap.min.css" rel="stylesheet">
+  <link href="../../resources/css/all.css" rel="stylesheet">
+  <link href="../../resources/css/account.css" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="2020-01 소프트웨어 시스템 개발 ">
   <meta name="author" content="愛+">
@@ -42,8 +42,8 @@
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-white" id="mainNav">
      <a class="navbar-brand js-scroll-trigger" href="<c:url value="/shop/index.do"/>">
-     	<img border="0" src="../images/usStore3.png" style="float:left;width:80;height:60;border:0;"/>
-     	<img border="0" src="../images/logo.png" style="float:left;width:120;height:60;border:0;" />
+     	<img border="0" src="../../images/usStore3.png" style="float:left;width:80;height:60;border:0;"/>
+     	<img border="0" src="../../images/logo.png" style="float:left;width:120;height:60;border:0;" />
      </a>
     <div class="container">
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
