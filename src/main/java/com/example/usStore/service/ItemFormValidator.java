@@ -14,7 +14,7 @@ public class ItemFormValidator implements Validator {
 	public boolean supports(Class<?> clazz) {
 		return ItemForm.class.isAssignableFrom(clazz);
 	}
-
+    
 	@Override
 	public void validate(Object target, Errors errors) {
 		System.out.println("validator");
@@ -24,7 +24,7 @@ public class ItemFormValidator implements Validator {
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "description", "required");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "unitCost", "required");
 		
-		if(itemForm.getDescription().length() > 0 && itemForm.getDescription().length() < 11) {
+		if(itemForm.getDescription().length() > 0 && itemForm.getDescription().length() < 10) {
 			errors.rejectValue("description", "tooShortDesc");
 		}
 		

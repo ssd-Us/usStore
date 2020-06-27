@@ -94,7 +94,6 @@ public class GroupBuyingFormController {
 			GroupBuying gb = itemFacade.getGroupBuyingItem(itemId);
 			groupBuyingForm.setListPrice(gb.getListPrice());
 			System.out.println(groupBuyingForm);
-			
 		}
 		
 		model.addAttribute("productId", productId);
@@ -126,6 +125,9 @@ public class GroupBuyingFormController {
 			itemForm = (ItemForm) session.getAttribute("itemForm");
 			System.out.println("itemformSession: " + itemForm);	//print itemformSession toString
 		}
+		if(groupBuyingForm.getListPrice() >= itemForm.getUnitCost()) {
+			result.rejectValue("listPrice", "mustDiscount");
+		}
 		
 		if (result.hasErrors()) {	//유효성 검증 에러 발생시
 			model.addAttribute("productId", itemForm.getProductId());
@@ -137,15 +139,12 @@ public class GroupBuyingFormController {
 		int calDiscount;
 		double listPrice = groupBuyingForm.getListPrice();
 		double unitCost = itemForm.getUnitCost();
-		if(listPrice <= unitCost) {
-			calDiscount = (int) ((unitCost - listPrice) / unitCost * 100);
-		}
-		else {	calDiscount = -999;	}	// �씠遺�遺꾩� �굹以묒뿉 error濡� 怨좎튂湲�
 		
+		calDiscount = (int) ((unitCost - listPrice) / unitCost * 100);
 		System.out.println("calDiscount: " + calDiscount);
 		
 		groupBuyingForm.setDiscount(calDiscount);
-		
+		 
 		String date = groupBuyingForm.getDate();
 		String time = groupBuyingForm.getTime();
 		String deadLine = date + " " + time + ":00";

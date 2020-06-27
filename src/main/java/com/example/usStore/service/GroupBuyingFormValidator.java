@@ -15,7 +15,7 @@ public class GroupBuyingFormValidator implements Validator {
 	public boolean supports(Class<?> clazz) {
 		return GroupBuyingForm.class.isAssignableFrom(clazz);
 	}
-
+ 
 	@Override
 	public void validate(Object target, Errors errors) {
 		System.out.println("validator");
