@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
@@ -51,7 +52,7 @@ public class HandMadeFormController {
 	////////////////////////////////////////////////
 	// HandMade List Controller
 	////////////////////////////////////////////////
-	
+
 	// HandMade 리스트 초기 화면 출력시 실행되는 Controller
 	@RequestMapping("/shop/handMade/listItem.do")
 	public String listHandMade (
