@@ -58,10 +58,17 @@ public class SecondHandFormController {
    
    @GetMapping("/shop/secondHand/addItem2.do")
    public String step2(@ModelAttribute("secondHandForm") SecondHandForm secondHandForm, 
-            @RequestParam("productId") int productId, Model model) {
+            @RequestParam("productId") int productId, Model model, HttpServletRequest rq) {
 	   	
-         model.addAttribute("productId", productId);
-         return  "product/addSecondHand";  
+		HttpSession session = rq.getSession(false);
+		if(session.getAttribute("status") != null) {
+			int status = (int) session.getAttribute("status");
+			SecondHand sh = itemFacade.getSecondHandItem(status);
+			secondHandForm.setListPrice(sh.getListPrice());
+			secondHandForm.setDiscount(sh.getDiscount());
+		}
+        model.addAttribute("productId", productId);
+        return  "product/addSecondHand";  
    }
    
    @PostMapping("/shop/secondHand/step3.do")      // step2 -> step3
@@ -101,7 +108,6 @@ public class SecondHandFormController {
 		
 		UserSession userSession = (UserSession)session.getAttribute("userSession");
 		String suppId = userSession.getAccount().getUserId();
-		
 		System.out.println("done-suppId : " + suppId );	
 		
 		//put itemform to item domain 세션에 저장된 커맨드객체를 도메인에 저장하기 
@@ -134,12 +140,11 @@ public class SecondHandFormController {
 		//put secondHandForm to SecondHand domain 세션에 있는거 도메인에 저장 
 		SecondHand secondHand = new SecondHand(item,secondHandForm.getDiscount(),secondHandForm.getListPrice());
 		
-		if(status != 0) { //수정일 때 ..?
+		if(status != 0) { //수정일 때 
 			itemFacade.updateSecondHand(secondHand);
+		}else {  // 처음 디비에 저장할 떄 ,, 트랜젝션으로 묶기 
+			itemFacade.insertSecondHand(secondHand);	// insert DB 세개의 다른 도메인들을 가져옴 근데 아이템은 세컨핸드가 상속해서 따로 안가져와도댐 
 		}
-	
-		// 처음 디비에 저장할 떄 ,, 트랜젝션으로 묶기 
-		itemFacade.insertSecondHand(secondHand);	// insert DB 세개의 다른 도메인들을 가져옴 근데 아이템은 세컨핸드가 상속해서 따로 안가져와도댐 
 	
 		sessionStatus.setComplete();	// secondHand, editStatus session close
 		session.removeAttribute("itemForm");	//itemForm session close
@@ -157,6 +162,7 @@ public class SecondHandFormController {
 		List<Tag> tags = itemFacade.getTagByItemId(itemId);
 		SecondHand sh = itemFacade.getSecondHandItem(itemId);
 		//List<Tag> tags = sh.getTags(); 나중에 resultMap써서 이렇게 가져올 수 있도록 바꾸고 싶어염 하뚜 
+		System.out.println("프로덕트 " + sh);
 		System.out.println("프로덕트 아이디" + sh.getProductId());
 		
 		ItemForm itemForm = new ItemForm();

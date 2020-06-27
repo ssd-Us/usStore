@@ -70,7 +70,11 @@ public class MybatisSecondHandDao implements SecondHandDao {
 	
 	@Override
 	public void updateSecondHand(SecondHand secondHand) throws DataAccessException {
+		itemMapper.updateItem(secondHand);
 		secondHandMapper.updateSecondHand(secondHand);
+		for(Tag t : secondHand.getTags()) {
+			tagMapper.insertTag(t);
+		}
 	}
 
 	@Override
@@ -103,7 +107,6 @@ public class MybatisSecondHandDao implements SecondHandDao {
 
 	@Override
 	public void updateViewCount(int viewCount, int itemId) {
-		// TODO Auto-generated method stub
 		secondHandMapper.updateViewCount(viewCount, itemId);
 	}
 

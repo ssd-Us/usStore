@@ -44,6 +44,11 @@ public class SecondHand extends Item implements Serializable {
 	public void setListPrice(int listPrice) {
 		this.listPrice = listPrice;
 	}
+
+	@Override
+	public String toString() {
+		return "SecondHand [itemId=" + itemId + ", discount=" + discount + ", listPrice=" + listPrice + "]";
+	}
 	
 	
 }
