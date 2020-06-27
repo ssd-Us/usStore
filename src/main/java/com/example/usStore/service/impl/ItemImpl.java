@@ -312,12 +312,6 @@ public class ItemImpl implements ItemFacade {
 	}
 
 	@Override
-	public void updateTag(Tag tag) {
-		// TODO Auto-generated method stub
-		tagDao.updateTag(tag);
-	}
-
-	@Override
 	public void deleteTag(int itemId) {
 		// TODO Auto-generated method stub
 		tagDao.deleteTag(itemId);
