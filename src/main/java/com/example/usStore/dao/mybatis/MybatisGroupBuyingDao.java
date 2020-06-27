@@ -56,17 +56,16 @@ public class MybatisGroupBuyingDao implements GroupBuyingDao {
 	}
 
 	@Override
-	public void insertGroupBuying(GroupBuying GroupBuying) throws DataAccessException {
+	public void insertGroupBuying(GroupBuying groupBuying) throws DataAccessException {
 		// TODO Auto-generated method stub
-		groupBuyingMapper.insertGroupBuying(GroupBuying);
+		itemMapper.insertItem(groupBuying);
+		groupBuyingMapper.insertGroupBuying(groupBuying);
+		for(Tag t : groupBuying.getTags()) {
+			t.setItemId(groupBuying.getItemId()); 
+			tagMapper.insertTag(t);
+		}
 	}
-
-//	@Override
-//	public void updateGroupBuying(GroupBuying GroupBuying) throws DataAccessException {
-//		// TODO Auto-generated method stub
-//		groupBuyingMapper.updateGroupBuying(GroupBuying);
-//	}
-
+	
 	@Override
 	public void updateGroupBuying(GroupBuying groupBuying) {
 		// TODO Auto-generated method stub

@@ -15,6 +15,7 @@ import org.springframework.ui.ModelMap;
 import com.example.usStore.controller.mypage.UserSession;
 import com.example.usStore.domain.Account;
 import com.example.usStore.domain.GroupBuying;
+import com.example.usStore.domain.HandMade;
 import com.example.usStore.domain.Item;
 import com.example.usStore.domain.Tag;
 import com.example.usStore.service.facade.MyPageFacade;
@@ -190,13 +191,8 @@ public class GroupBuyingFormController {
 		
 		if(status != 0) {
 			item.setItemId(status);
-			System.out.println("조회수:" + itemformSession.getViewCount());
 			item.setViewCount(itemformSession.getViewCount());
-		//	itemFacade.updateItem(item);
-			System.out.println("itemUpdate" + item);
-		}
-		else {
-			itemFacade.insertItem(item);	// -> generate itemId, insert DB
+			System.out.println("Update id, viewCount" + item);
 		}
 		System.out.println("조회수:" + itemformSession.getViewCount());
 		
@@ -215,12 +211,12 @@ public class GroupBuyingFormController {
 			}
 		}
 		//generate tags(only have tagName)
-		item.makeTags(item.getItemId(), itemformSession.getTag1());	//if(tag != null && "") then addTags
-		item.makeTags(item.getItemId(), itemformSession.getTag2());
-		item.makeTags(item.getItemId(), itemformSession.getTag3());
-		item.makeTags(item.getItemId(), itemformSession.getTag4());
-		item.makeTags(item.getItemId(), itemformSession.getTag5());
-		
+		item.makeTags(itemformSession.getTag1());	//if(tag != null && "") then addTags
+		item.makeTags(itemformSession.getTag2());	//if(tag != null && "") then addTags
+		item.makeTags(itemformSession.getTag3());	//if(tag != null && "") then addTags
+		item.makeTags(itemformSession.getTag4());	//if(tag != null && "") then addTags
+		item.makeTags(itemformSession.getTag5());	//if(tag != null && "") then addTags
+				
 //		List<Tag> tags = new ArrayList<Tag>();
 //		tags = item.getTags();
 	//	item.setTags(tags);
@@ -232,14 +228,12 @@ public class GroupBuyingFormController {
 //		}
 		
 		System.out.println("deadLine : " + groupBuyingform.getDeadLine());
-		GroupBuying gb;
+		GroupBuying gb = new GroupBuying(item, groupBuyingform.getDiscount(), groupBuyingform.getListPrice(), groupBuyingform.getDeadLine());;
 		
 		if(status != 0) {
-			gb = new GroupBuying(item, groupBuyingform.getDiscount(), groupBuyingform.getListPrice(), groupBuyingform.getDeadLine());
 			itemFacade.updateGroupBuying(gb);
 		}
 		else {
-			gb = new GroupBuying(groupBuyingform.getDiscount(), groupBuyingform.getListPrice(), groupBuyingform.getDeadLine());
 			itemFacade.insertGroupBuying(gb);	// insert DB
 		}
 		
@@ -259,36 +253,34 @@ public class GroupBuyingFormController {
 		System.out.println("viewItem.do");
 		System.out.println("itemId:" + itemId);
 		
+		String victim = null;
+		String isAccuse = "false";
+		
 		HttpSession session = rq.getSession(false);
 		
 		if(session.getAttribute("userSession") != null) {
 			UserSession userSession = (UserSession) session.getAttribute("userSession");
-			String suppId = userSession.getAccount().getUserId();
-			
-			System.out.println("suppId: " + suppId);
-			model.addAttribute("suppId", suppId);
+			victim = userSession.getAccount().getUserId();
+			String attacker = this.itemFacade.getUserIdByItemId(itemId);
+			isAccuse = this.myPageFacade.isAccuseAlready(attacker, victim);
 		}
 		
-		Item item = itemFacade.getItem(itemId);
-		item.setViewCount(item.getViewCount() + 1);
-		System.out.println("object's viewcount ++ ? : " + item);
+		GroupBuying groupBuying = itemFacade.getGroupBuyingItem(itemId);
+		System.out.println("viewCount : " + groupBuying.getViewCount());
+		itemFacade.updateViewCount(groupBuying.getViewCount() + 1, itemId);
+		System.out.println("object's viewcount ++ ? : " + groupBuying);
 		
-		itemFacade.updateItem(item);	// update : viewCount++
-		System.out.println("updated item data: " + itemFacade.getItem(itemId).toString());
+	//	System.out.println("updated item data: " + itemFacade.getItem(itemId).toString());
 				
-		GroupBuying gb = itemFacade.getGroupBuyingItem(itemId);
-		System.out.println(gb);
+	//	GroupBuying gb = itemFacade.getGroupBuyingItem(itemId);
+		
+		System.out.println(groupBuying);
 		
 		List<Tag> tags = new ArrayList<Tag>();
-		tags = itemFacade.getTagByItemId(gb.getItemId());
+		tags = itemFacade.getTagByItemId(groupBuying.getItemId());
 		
-		String attacker = this.itemFacade.getUserIdByItemId(itemId);
-	    System.out.println("attacker : " + attacker);
 	      
-		String isAccuse = this.myPageFacade.isAccuseAlready(attacker, "A"); 
-	    System.out.println("isAccuse: " + isAccuse);
-	      
-		model.addAttribute("gb", gb);
+		model.addAttribute("gb", groupBuying);
 		model.addAttribute("productId", productId);
 		model.addAttribute("isAccuse", isAccuse);
 		modelMap.addAttribute("tags", tags);
@@ -311,14 +303,17 @@ public class GroupBuyingFormController {
 		System.out.println("edit.do");
 		System.out.println("itemId(status) : " + status);
 		
-		item = itemFacade.getItem(itemId);
+	//	GroupBuying gb = (GroupBuying) itemFacade.getItem(itemId);
+		
+		GroupBuying gb = itemFacade.getGroupBuyingItem(itemId);
 		
 		ItemForm itemFormSession = (ItemForm) session.getAttribute("itemForm");
-		itemFormSession.setUnitCost(item.getUnitCost());
-		itemFormSession.setTitle(item.getTitle());
-		itemFormSession.setDescription(item.getDescription());
-		itemFormSession.setQty(item.getQty());
-		itemFormSession.setViewCount(item.getViewCount());
+//		System.out.println("아이템아이디: " + itemFormSession.getItemId());
+		itemFormSession.setUnitCost(gb.getUnitCost());
+		itemFormSession.setTitle(gb.getTitle());
+		itemFormSession.setDescription(gb.getDescription());
+		itemFormSession.setQty(gb.getQty());
+		itemFormSession.setViewCount(gb.getViewCount());
 				
 		switch(tags.size()) {
 			case 1: itemFormSession.setTag1(tags.get(0).getTagName());
@@ -346,7 +341,7 @@ public class GroupBuyingFormController {
 					itemFormSession.setTag5(tags.get(4).getTagName());
 					break;
 		}
-		System.out.println(itemFormSession);
+		System.out.println("수정 전 아이템: " + itemFormSession);
 		
 		return "redirect:/shop/item/addItem.do?productId=" + item.getProductId();
 	}
