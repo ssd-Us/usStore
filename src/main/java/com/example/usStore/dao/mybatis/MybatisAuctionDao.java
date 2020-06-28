@@ -79,6 +79,7 @@ public class MybatisAuctionDao implements AuctionDao {
 	   auctionMapper.updateAuction(auction);
 	   
 	   for(Tag t : auction.getTags()) {
+		   t.setItemId(auction.getItemId());
 		   tagMapper.insertTag(t);
 	   }
    }
