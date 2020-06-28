@@ -1,9 +1,12 @@
 package com.example.usStore.controller.item;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -307,18 +310,21 @@ public class GroupBuyingFormController {
       return "redirect:/shop/index.do";
    }
    
-//   @RequestMapping("/shop/groupBuying/joint.do") //joint GroupBuying
-//   public String jointGroupBuying(@RequestParam("itemId") int itemId, HttpServletRequest rq, HttpServletResponse response) throws IOException
-//   {
-//      System.out.println("jointGroupBuying");
-//      HttpSession session = rq.getSession(true);
-//      
-//      PrintWriter out=response.getWriter();
-//      out.println("<script>alert('공동구매 참여 하시겠습니까?');</script>");
-//      out.flush();
-//      out.close();
-//      
-//      return "redirect:/shop/index.do";
-//   }
+   @RequestMapping("/shop/groupBuying/joint.do") //joint GroupBuying
+   public void jointGroupBuying(@RequestParam("itemId") int itemId, @RequestParam("productId") int productId, 
+		   HttpServletResponse response) throws IOException
+   {
+      System.out.println("jointGroupBuying");
+      
+      PrintWriter out=response.getWriter();
+      
+      out.println("<script>");
+      out.print("if (confirm('Do you want to participate in GroupBuying?') == true){");
+      out.print("alert('Go Participate in GroupBuying :)'); location.href='index.do';}");	//공동구매 진행
+      out.print("else{location.href='viewItem.do?itemId=" + itemId + "&productId=" + productId + "';}");	//공동구매 진행 취소
+      out.println("</script>");
+      out.flush();
+      out.close();
+   }
    
 }
