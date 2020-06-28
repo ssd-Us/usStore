@@ -235,7 +235,7 @@ public class HandMadeFormController {
 		session.removeAttribute("itemForm");	//itemForm session close
 		session.removeAttribute("status");
 		System.out.println("detail ItemId = " + handMade.getItemId());
-		return "redirect:/shop/handMade/viewItem.do?itemId=" + item.getItemId() + "&productId=" + item.getProductId();
+		return "redirect:/shop/handMade/viewItem.do?itemId=" + handMade.getItemId() + "&productId=" + item.getProductId();
 	}
 	
 	////////////////////////////////////////////////
@@ -264,6 +264,7 @@ public class HandMadeFormController {
 		System.out.println("View HandMade Controller !!");
 		
 		HandMade handMade = this.itemFacade.getHandMadeById(itemId);
+		handMade.setItemId(itemId);
 		System.out.println(handMade);
 		
 		System.out.println("viewCount : " + handMade.getViewCount());
