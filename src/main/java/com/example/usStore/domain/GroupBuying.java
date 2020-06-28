@@ -53,7 +53,7 @@ public class GroupBuying extends Item implements Serializable {
    public void setState(int state) {
       this.state = state;
    }
-
+	
    @Override
    public String toString() {
       return "GroupBuying [discount=" + discount + ", listPrice=" + listPrice + ", deadLine=" + deadLine + ", state="

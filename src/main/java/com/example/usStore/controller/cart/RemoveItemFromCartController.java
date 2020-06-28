@@ -23,7 +23,7 @@ public class RemoveItemFromCartController {
 			@RequestParam("workingItemId") int workingItemId,
 			@ModelAttribute("sessionCart") Cart cart
 		) throws Exception {
-//		cart.removeItemById(workingItemId);
+		cart.removeItemById(workingItemId);
 		return new ModelAndView("order/Cart", "cart", cart);
 	}
 }
