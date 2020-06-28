@@ -1,6 +1,8 @@
 package com.example.usStore.service.facade;
 
 import java.util.List;
+
+
 import com.example.usStore.domain.Accuse;
 import com.example.usStore.domain.BookMark;
 import com.example.usStore.domain.Follow;
@@ -54,4 +56,6 @@ public interface MyPageFacade {
 	int countAccuseById(String accounId);
 	
 	String isAccuseAlready(String attacker, String victim);
+
+	List<Accuse> selectAccuseList(String victim);
 }
