@@ -28,7 +28,7 @@ function accuse(a){  //a랑 href   //여기는 로그인이 되었을 때 보내
                          <c:param name="productId" value="${gb.productId}"/></c:url>"
                         onClick = "accuse(this);">판매자 신고하기</a>
                      </c:when>
-                     <c:when test="${productId==1}">
+                     <c:when test="${auction.productId==1}">
                         <a href="<c:url value='/addAccuse.do'>
                         <c:param name="userId" value="${auction.userId}"/>
                          <c:param name="itemId" value="${auction.itemId}"/>
