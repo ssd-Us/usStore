@@ -87,8 +87,6 @@ public interface ItemFacade {
 	/////////////////////////////////////////////////////////////////////////
 	List<Auction> getAuctionList();
 	
-	Auction getAuctionItem(int itemId);
-	
 	public void insertAuction(Auction auction);
 	 
 	public void updateAuction(Auction auction);

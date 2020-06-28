@@ -33,23 +33,11 @@
 <label>내용</label> : ${itemForm.description} <br> 
 <label>수량</label> : ${itemForm.qty} <br> 
 
-<label>태그</label> : 
-
-<c:if test="${itemForm.tag1 != '' && itemForm.tag1 ne null}">
-	<font color="blue">#</font>${itemForm.tag1} 
-</c:if>
-<c:if test="${itemForm.tag2 != '' && itemForm.tag2 ne null}">
-	<font color="blue">#</font>${itemForm.tag2} 
-</c:if>
-<c:if test="${itemForm.tag3 != '' && itemForm.tag3 ne null}">
-	<font color="blue">#</font>${itemForm.tag3} 
-</c:if>
-<c:if test="${itemForm.tag4 != '' && itemForm.tag4 ne null}">
-	<font color="blue">#</font>${itemForm.tag4} 
-</c:if>
-<c:if test="${itemForm.tag5 != '' && itemForm.tag5 ne null}">
-	<font color="blue">#</font>${itemForm.tag5} 
-</c:if>
+<label>태그</label>: <c:forEach var="tag" items="${tags}"> 
+                  <c:if test="${not empty tag.tagName}">
+                     <font color="blue">#</font>${tag.tagName}
+                  </c:if>
+               </c:forEach>
 
 <br><br>
 <label>시작 가격</label> : ${Auction.startPrice} <br> 
