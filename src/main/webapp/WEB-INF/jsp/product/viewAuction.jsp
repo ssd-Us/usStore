@@ -133,7 +133,13 @@ function participation(price, unitCost) {
    				시작 가격 : ${auction.startPrice}원<br>
    				<c:set var="state" value="${auction.auctionState}"/>
    				<c:if test="${state eq 0}">
+   					<c:set var="uc" value="${auction.unitCost}" />
+   					<c:if test="${uc eq 1}">
+   					--미참여--<br>
+   					</c:if>
+   					<c:if test="${uc ne 1}">
    					현재 최대 금액 : ${auction.unitCost}원<br>
+   					</c:if>
    					<br><font color=blue>(경매 진행중)</font>
    				</c:if>
    				<c:if test="${state eq 1}">
@@ -172,7 +178,9 @@ function participation(price, unitCost) {
 					<c:if test="${id eq bidder}">
 						<br><span>
 						<!-- 로그인 여부 따지기 -->
-						<a href="#">Insert to Cart</a>
+						<a href='<c:url value="/shop/addItemToCart.do">
+					            				<c:param name="workingItemId" value="${auction.itemId}"/></c:url>'>
+					              		Insert to Cart</a>
 						</span>
 					</c:if>
 				</c:if>
