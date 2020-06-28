@@ -33,11 +33,8 @@ div#addItemForm {
 		<br>
 	
 	가격 흥정 여부: 
-		  Yes&nbsp;<form:radiobutton items="${discount}" path="discount" checked="checked"/>&nbsp;&nbsp;
-		  No&nbsp;<form:radiobutton items="${discount}" path="discount"/>
-		<form:errors path="discount" />
-		<br>
-		<br>
+		<form:radiobuttons items="${radioKind}" path="discount"/>
+		<br><br>
 
 		<a href="<c:url value='/shop/secondHand/gobackItem.do'>
 		         <c:param name="productId" value="${productId}"/>

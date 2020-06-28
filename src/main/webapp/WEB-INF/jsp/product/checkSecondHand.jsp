@@ -39,13 +39,14 @@ div#addItemForm {
       <label>수량</label> : ${itemForm.qty} <br>
       <label>정가</label> : ${itemForm.unitCost}원 <br> 
       <label>판매가</label> : ${secondHandForm.listPrice}원 <br> 
-      <label>에누리가능여부</label> :
+       
+      <label>가격 흥정 여부</label> :
       		<c:choose>
-	   				<c:when test="${secondHandForm.discount eq 1}">
-						<td><c:out value="에눌 가능" /></td> 
+	   				<c:when test="${secondHandForm.discount eq 'Yes'}">
+						<td><c:out value="흥정 가능" /></td> 
 					</c:when>
 					<c:otherwise>
-						<td> <c:out value="에눌 불가능" /></td> 
+						<td> <c:out value="흥정 불가능" /></td> 
 					</c:otherwise>
 			</c:choose><br>
       <label>태그</label> : 

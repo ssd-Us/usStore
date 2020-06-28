@@ -42,6 +42,11 @@ public class SecondHandFormController {
 	   return secondHandForm;
    }
    
+   @ModelAttribute("radioKind")
+   public String[] referenceData() {
+	   return new String[] {"Yes", "No"};
+   }
+   
    //여기부터 수정  이컨트롤러 공통사항으로 뺴도 되지아나유? 
    @RequestMapping("/shop/secondHand/index.do") //go index(remove sessions)
    public String goIndex(SessionStatus sessionStatus, HttpServletRequest rq)
@@ -64,7 +69,10 @@ public class SecondHandFormController {
 			int status = (int) session.getAttribute("status");
 			SecondHand sh = itemFacade.getSecondHandItem(status);
 			secondHandForm.setListPrice(sh.getListPrice());
-			secondHandForm.setDiscount(sh.getDiscount());
+		
+			if(sh.getDiscount() == 0) { //흥정 불가능 
+				secondHandForm.setDiscount("No"); //여기  무슨값 넣어야하는지 모르게따고ㅜㅜ
+			}
 		}
         model.addAttribute("productId", productId);
         return  "product/addSecondHand";  
@@ -141,10 +149,17 @@ public class SecondHandFormController {
 		item.makeTags(itemform.getTag4());	//if(tag != null && "") then addTags
 		item.makeTags(itemform.getTag5());	//if(tag != null && "") then addTags
 		
-		System.out.println("태그 아이디" + item.getItemId() + item.getTags().get(0));
-		
 		//put secondHandForm to SecondHand domain 세션에 있는거 도메인에 저장 
-		SecondHand secondHand = new SecondHand(item,secondHandForm.getDiscount(),secondHandForm.getListPrice());
+		String discount = secondHandForm.getDiscount();
+		SecondHand secondHand = null;
+		System.out.println("세컨핸드컨트롤러에서 디스카운트 출력값: " + discount);
+		if(discount.equals("Yes")) {
+			secondHand = new SecondHand(item, 1 ,secondHandForm.getListPrice());
+		}else if(discount.equals("No")){
+			secondHand = new SecondHand(item, 0 ,secondHandForm.getListPrice());
+		}else {
+			System.out.println("아무것도 선택안하면 검증에서 잡아주도록 수정하기");
+		}
 		
 		if(status != 0) { //수정일 때 
 			itemFacade.updateSecondHand(secondHand);

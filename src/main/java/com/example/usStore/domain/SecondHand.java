@@ -1,7 +1,6 @@
 package com.example.usStore.domain;
 
 import java.io.Serializable;
-import java.util.List;
 
 /*
  * UsStore - Item(SecondHand) Domain Class
