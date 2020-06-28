@@ -33,103 +33,103 @@ import com.example.usStore.service.facade.UsStoreFacade;
 @SessionAttributes("secondHandList")
 public class SecondHandController {
 
-	private ItemFacade itemFacade;
-	private MyPageFacade myPageFacade;
-	private UsStoreFacade usStoreFacade;
-	
-	@Autowired
-	public void setItemFacade(ItemFacade itemFacade) {
-		this.itemFacade = itemFacade;
-	}
+   private ItemFacade itemFacade;
+   private MyPageFacade myPageFacade;
+   private UsStoreFacade usStoreFacade;
+   
+   @Autowired
+   public void setItemFacade(ItemFacade itemFacade) {
+      this.itemFacade = itemFacade;
+   }
 
-	@Autowired
-	public void setMyPageFacade(MyPageFacade myPageFacade) {
-		this.myPageFacade = myPageFacade;
-	}
-	
-	@Autowired
-	public void setUsStoreFacade(UsStoreFacade usStoreFacade) {
-		this.usStoreFacade = usStoreFacade;
-	}
+   @Autowired
+   public void setMyPageFacade(MyPageFacade myPageFacade) {
+      this.myPageFacade = myPageFacade;
+   }
+   
+   @Autowired
+   public void setUsStoreFacade(UsStoreFacade usStoreFacade) {
+      this.usStoreFacade = usStoreFacade;
+   }
 
-	@RequestMapping("/shop/secondHand/listItem.do")
-	public String secondHandList(@RequestParam("productId") int productId, Model model) throws Exception {
+   @RequestMapping("/shop/secondHand/listItem.do")
+   public String secondHandList(@RequestParam("productId") int productId, Model model) throws Exception {
 
-		PagedListHolder<SecondHand> secondHandList = new PagedListHolder<SecondHand>(
-				this.itemFacade.getSecondHandList());
-		secondHandList.setPageSize(4);
+      PagedListHolder<SecondHand> secondHandList = new PagedListHolder<SecondHand>(
+            this.itemFacade.getSecondHandList());
+      secondHandList.setPageSize(4);
 
-		model.addAttribute("secondHandList", secondHandList);
-		model.addAttribute("productId", productId);
+      model.addAttribute("secondHandList", secondHandList);
+      model.addAttribute("productId", productId);
 
-		return "product/secondHand";
-	}
+      return "product/secondHand";
+   }
 
-	@RequestMapping("/shop/secondHand/listItem2.do")
-	public String secondHandList2(@ModelAttribute("secondHandList") PagedListHolder<Item> secondHandList,
-			@RequestParam("pageName") String page, @RequestParam("productId") int productId, Model model)
-			throws Exception {
-		if ("next".equals(page)) {
-			secondHandList.nextPage();
-		} else if ("previous".equals(page)) {
-			secondHandList.previousPage();
-		}
-		model.addAttribute("secondHandList", secondHandList);
-		model.addAttribute("productId", productId);
-		return "product/secondHand";
-	}
+   @RequestMapping("/shop/secondHand/listItem2.do")
+   public String secondHandList2(@ModelAttribute("secondHandList") PagedListHolder<Item> secondHandList,
+         @RequestParam("pageName") String page, @RequestParam("productId") int productId, Model model)
+         throws Exception {
+      if ("next".equals(page)) {
+         secondHandList.nextPage();
+      } else if ("previous".equals(page)) {
+         secondHandList.previousPage();
+      }
+      model.addAttribute("secondHandList", secondHandList);
+      model.addAttribute("productId", productId);
+      return "product/secondHand";
+   }
 
-	@RequestMapping("/shop/secondHand/viewItem.do")
-	public String viewSecondHand(@RequestParam("itemId") int itemId, @RequestParam("productId") int productId,
-			Model model, HttpServletRequest request) {
-		/*
-		 * 뷰를 띄어줄때는 인터셉터를 걸면 안되는게..무조건 컨트롤러 보내줘야하니까,, 그대신 신고기능을 로그인이 안되있으면 못하도록..
-		 */
-		String victim = null;
-		String isAccuse = "false";
-		HttpSession session = request.getSession(false);
-		if (session.getAttribute("userSession") != null) {
-			UserSession userSession = (UserSession)session.getAttribute("userSession") ;
-			if (userSession != null) {// attacker = 판매자 아이디, victim = 세션 유저 아이디
-				victim = userSession.getAccount().getUserId();
-				String attacker = this.itemFacade.getUserIdByItemId(itemId);
-				isAccuse = this.myPageFacade.isAccuseAlready(attacker, victim);
-			}
-		}
+   @RequestMapping("/shop/secondHand/viewItem.do")
+   public String viewSecondHand(@RequestParam("itemId") int itemId, @RequestParam("productId") int productId,
+         Model model, HttpServletRequest request) {
+      /*
+       * 뷰를 띄어줄때는 인터셉터를 걸면 안되는게..무조건 컨트롤러 보내줘야하니까,, 그대신 신고기능을 로그인이 안되있으면 못하도록..
+       */
+      String victim = null;
+      String isAccuse = "false";
+      HttpSession session = request.getSession(false);
+      if (session.getAttribute("userSession") != null) {
+         UserSession userSession = (UserSession)session.getAttribute("userSession") ;
+         if (userSession != null) {// attacker = 판매자 아이디, victim = 세션 유저 아이디
+            victim = userSession.getAccount().getUserId();
+            String attacker = this.itemFacade.getUserIdByItemId(itemId);
+            isAccuse = this.myPageFacade.isAccuseAlready(attacker, victim);
+         }
+      }
 
-		// sh가 아이템 상속받으니까 여기서 테그 꺼내쓰기
-		List<Tag> tags = itemFacade.getTagByItemId(itemId);
-		SecondHand sh = this.itemFacade.getSecondHandItem(itemId);
-		this.itemFacade.updateViewCount(sh.getViewCount() + 1, itemId); //조회수 1증가
-		
-		model.addAttribute("sh", sh);
-		model.addAttribute("isAccuse", isAccuse);
-		model.addAttribute("tags", tags);
-		return "product/viewSecondHand";
-	}
-	
-	  @RequestMapping("/shop/secondHand/delete.do") 
-	  public String delete(@RequestParam("productId") int productId,
-	  @RequestParam("itemId") int itemId, ModelMap model) {
-	  
-		  this.itemFacade.deleteItem(itemId); 
-		  return "redirect:/shop/secondHand/listItem.do?productId=" + productId;
-	  }
-	 
+      // sh가 아이템 상속받으니까 여기서 테그 꺼내쓰기
+      List<Tag> tags = itemFacade.getTagByItemId(itemId);
+      SecondHand sh = this.itemFacade.getSecondHandItem(itemId);
+      this.itemFacade.updateViewCount(sh.getViewCount() + 1, itemId); //조회수 1증가
+      
+      model.addAttribute("sh", sh);
+      model.addAttribute("isAccuse", isAccuse);
+      model.addAttribute("tags", tags);
+      return "product/viewSecondHand";
+   }
+   
+     @RequestMapping("/shop/secondHand/delete.do") 
+     public String delete(@RequestParam("productId") int productId,
+     @RequestParam("itemId") int itemId, ModelMap model) {
+     
+        this.itemFacade.deleteItem(itemId); 
+        return "redirect:/shop/secondHand/listItem.do?productId=" + productId;
+     }
+    
 
-	  @RequestMapping(value = "/rest/user/{userId}", method = RequestMethod.GET, produces="application/json")
-	  @ResponseBody
-	  public Account getSellerInfo(@PathVariable("userId") String userId, 
-			HttpServletResponse response) throws IOException {
-		
-		  	Account result = this.usStoreFacade.getAccountByUserId(userId);
-			if (result == null) {
-				response.sendError(HttpServletResponse.SC_NOT_FOUND);
-				return null;
-			}
-			
-								
-			return result;
-		}
+     @RequestMapping(value = "/rest/user/{userId}", method = RequestMethod.GET, produces="application/json")
+     @ResponseBody
+     public Account getSellerInfo(@PathVariable("userId") String userId, 
+         HttpServletResponse response) throws IOException {
+      
+           Account result = this.usStoreFacade.getAccountByUserId(userId);
+         if (result == null) {
+            response.sendError(HttpServletResponse.SC_NOT_FOUND);
+            return null;
+         }
+         
+                        
+         return result;
+      }
 
 }
