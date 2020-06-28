@@ -64,7 +64,7 @@ public interface ItemFacade {
    
    public void updateGroupBuying(GroupBuying GroupBuying);
    
-   List<GroupBuying> getGroupBuyingList();
+   List<GroupBuying> getGroupBuyingList(Account account);
    
    GroupBuying getGroupBuyingItem(int itemId);
    

@@ -160,9 +160,9 @@ public class ItemImpl implements ItemFacade {
    }
 
    @Override
-   public List<GroupBuying> getGroupBuyingList() {
+   public List<GroupBuying> getGroupBuyingList(Account account) {
       // TODO Auto-generated method stub
-      return groupBuyingDao.getGroupBuyingList();
+      return groupBuyingDao.getGroupBuyingList(account);
    }
 
    @Override
