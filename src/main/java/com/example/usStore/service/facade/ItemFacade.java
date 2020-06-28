@@ -51,7 +51,7 @@ public interface ItemFacade {
    
    public void updateHandMade(HandMade handmade);
    
-   List<HandMade> getHandMadeList();
+   List<HandMade> getHandMadeList(Account account);
    
    HandMade getHandMadeById(int itemId);
    
@@ -64,7 +64,7 @@ public interface ItemFacade {
    
    public void updateGroupBuying(GroupBuying GroupBuying);
    
-   List<GroupBuying> getGroupBuyingList();
+   List<GroupBuying> getGroupBuyingList(Account account);
    
    GroupBuying getGroupBuyingItem(int itemId);
    
@@ -83,7 +83,7 @@ public interface ItemFacade {
    /////////////////////////////////////////////////////////////////////////
    /* Auction */
    /////////////////////////////////////////////////////////////////////////
-   List<Auction> getAuctionList();
+   List<Auction> getAuctionList(Account account);
    
    public void insertAuction(Auction auction);
     

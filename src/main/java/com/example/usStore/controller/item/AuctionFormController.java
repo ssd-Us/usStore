@@ -28,6 +28,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.usStore.controller.mypage.UserSession;
+import com.example.usStore.domain.Account;
 import com.example.usStore.domain.Auction;
 import com.example.usStore.domain.Bidder;
 import com.example.usStore.domain.Item;
@@ -67,12 +68,20 @@ public class AuctionFormController {
 	}
    
    @RequestMapping("/shop/auction/listItem.do") 
-   public String auctionList(@RequestParam("productId") int productId, ModelMap model) {
+   public String auctionList(@RequestParam("productId") int productId, ModelMap model,HttpServletRequest rq) {
       myProductId = productId;
+      HttpSession session = rq.getSession(false);
       
+      Account account = null;
+      if (session.getAttribute("userSession") != null) {
+             UserSession userSession = (UserSession)session.getAttribute("userSession") ;
+             if (userSession != null) {  //로그인상태이면 대학정보 가져온다 
+                account = userSession.getAccount();
+             }
+      }
       
       List<Auction> al = new ArrayList<Auction>();
-      al = this.itemFacade.getAuctionList();
+      al = this.itemFacade.getAuctionList(account);
       
       PagedListHolder<Auction> auctionList = new PagedListHolder<Auction>(al);
       auctionList.setPageSize(4);

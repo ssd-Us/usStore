@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.dao.DataAccessException;
 
+import com.example.usStore.domain.Account;
 import com.example.usStore.domain.GroupBuying;
 
 public interface GroupBuyingDao extends ItemDao {
@@ -16,7 +17,7 @@ public interface GroupBuyingDao extends ItemDao {
    public void updateGroupBuying(GroupBuying GroupBuying) throws DataAccessException;
    
    // 모든 공동구매 리스트 가져오는 메소드
-   List<GroupBuying> getGroupBuyingList() throws DataAccessException;
+   List<GroupBuying> getGroupBuyingList(Account account) throws DataAccessException;
    
    // itemId를 받아 해당하는 groupBuying 객체를 가져오는 메소드
    GroupBuying getGroupBuyingItem(int itemId) throws DataAccessException;

@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.dao.DataAccessException;
 
+import com.example.usStore.domain.Account;
 import com.example.usStore.domain.HandMade;
 import com.example.usStore.domain.Item;
 
@@ -17,7 +18,7 @@ public interface HandMadeMapper extends ItemMapper {
 	public void updateHandMade(HandMade handmade);
 
 	// 모든 수공예 리스트 가져오는 메소드
-	List<HandMade> getHandMadeList();
+	List<HandMade> getHandMadeList(Account account);
 
 	// itemId 받아서 해당하는 HandMade 객체 반환
 	HandMade getHandMadeById(int itemId);
