@@ -166,6 +166,16 @@ function participation(price, unitCost) {
 				</span>
 				</form>
 				</c:if>
+				<c:if test="${state eq 1}">
+					<c:set var="id" value="${suppId}"/>
+					<c:set var="bidder" value="${bidder}"/>
+					<c:if test="${id eq bidder}">
+						<span>
+						<!-- 로그인 여부 따지기 -->
+						<a href="#">Cart</a>
+						</span>
+					</c:if>
+				</c:if>
    			</td>
    		</tr>
    		

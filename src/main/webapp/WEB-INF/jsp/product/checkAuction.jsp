@@ -14,7 +14,7 @@
 		padding: 20px;
 	}
 </style>
-<title>ê²½ë§¤ ì¶ê° íì¸ íì´ì§</title>
+<title>경매 추가 확인</title>
 </head>
 <body> 
 <table id="main-menu">
@@ -27,13 +27,13 @@
 </table>
 <div id = "addItemForm">
 <form:form modelAttribute="Auction" action="detailItem.do">
-<h2>ê²½ë§¤ ì¶ê° íì¸</h2>
+<h2>경매 추가 확인</h2>
 <hr width = "927px" align="left"><br><br>
-<label>ì ëª©</label> : ${itemForm.title} <br> 
-<label>ë´ì©</label> : ${itemForm.description} <br> 
-<label>ìë</label> : ${itemForm.qty} <br> 
+<label>제목</label> : ${itemForm.title} <br> 
+<label>내용</label> : ${itemForm.description} <br> 
+<label>수량</label> : ${itemForm.qty} <br> 
 
-<label>íê·¸</label> : 
+<label>태그</label> : 
 
 <c:if test="${itemForm.tag1 != '' && itemForm.tag1 ne null}">
 	<font color="blue">#</font>${itemForm.tag1} 
@@ -52,12 +52,15 @@
 </c:if>
 
 <br><br>
-<label>ìì ê°ê²©</label> : ${Auction.startPrice}ì<br> 
-<label>ë§ê° ë ì§</label> : ${Auction.deadLine} <br><br>
+<label>시작 가격</label> : ${Auction.startPrice} <br> 
+<label>마감 기한</label> : ${Auction.deadLine}<br><br>
 <br><br>
-<label>ì ì ì¼ì</label> : ${date} <br><br>
+<label>경매 생성 시간</label> : ${date} <br><br>
 
-<p><a href="/addItemStep2">[이전 단계로]</a> <input type="submit" value="경매 추가" /></p>
+<a href="<c:url value='/shop/auction/addItem2.do'>
+         <c:param name="productId" value="${itemForm.productId}"/>
+       </c:url>
+      ">[이전 단계로]</a> <input type="submit" value="확인" />
 </form:form>
 </div>
 </body>
