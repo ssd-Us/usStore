@@ -17,4 +17,9 @@
 	WHERE T.ITEMID = #{itemId}
 		AND T.ITEMID = I.ITEMID
 	</select>
+	
+	 <delete id="deleteTag" parameterType="int">
+     DELETE FROM TAG
+     WHERE ITEMID = #{itemId}
+  </delete>
 </mapper>

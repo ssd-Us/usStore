@@ -16,6 +16,7 @@ public class SignonInterceptor extends HandlerInterceptorAdapter {
 	public boolean preHandle(HttpServletRequest request, 
 			HttpServletResponse response, Object handler)
 			throws Exception {
+		System.out.println("SignonInterceptor");
 		UserSession userSession = 
 			(UserSession) WebUtils.getSessionAttribute(request, "userSession");
 		if (userSession == null) {

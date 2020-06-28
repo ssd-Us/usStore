@@ -6,9 +6,9 @@ import com.example.usStore.domain.Item;
 public interface ItemMapper {
 
 	void insertItem(Item item);
-	
+	  
 	void updateItem(Item item);
-	
+		 
 	void deleteItem(int itemId);
 	
 	Item getItem(int itemId);
@@ -19,5 +19,8 @@ public interface ItemMapper {
 
 	boolean isItemInStock(int itemId, int productId);
 
+	String getUserIdByItemId(int itemId);
+	
+	void updateViewCount(int viewCount, int itemId);
 }
 

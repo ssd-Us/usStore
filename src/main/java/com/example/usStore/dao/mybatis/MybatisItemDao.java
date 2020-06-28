@@ -62,4 +62,16 @@ public class MybatisItemDao implements ItemDao {
 		itemMapper.deleteItem(itemId);
 	}
 
+	@Override
+	public String getUserIdByItemId(int itemId) throws DataAccessException {
+		return itemMapper.getUserIdByItemId(itemId);
+	}
+
+	@Override
+	public void updateViewCount(int viewCount, int itemId) {
+		// TODO Auto-generated method stub
+		itemMapper.updateViewCount(viewCount, itemId);
+	}
+
+	
 }

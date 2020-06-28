@@ -1,3 +1,4 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ include file="itemTop.jsp"%>
 <style>
@@ -10,10 +11,12 @@ div#addItemForm {
 </style>
 
 <table id="main-menu">
-	<tr>
-		<td><a href='<c:url value="/shop/index.do"/>'> <b><font
-					color="black" size="2"> &lt;&lt; Go to Index</font></b></a></td>
-	</tr>
+  <tr>
+    <td><a href='<c:url value="/shop/secondHand/index.do"/>'>
+        <b><font color="black" size="2">
+          &lt;&lt; Go to Index</font></b></a>
+    </td>
+  </tr>
 </table>
 
 <div id="addItemForm">
@@ -21,20 +24,17 @@ div#addItemForm {
 	<hr width="927px" align="left">
 	<br>
 	<br>
-	<spring:hasBindErrors name="SecondHand" />
 
-	<form:form modelAttribute="SecondHand" method="post" action="step3.do">
+	<form:form modelAttribute="secondHandForm"  method="post" action="step3.do">
 		
 	판매가(중고가): <form:input type="text" path="listPrice" value="${listPrice}" />
 		<form:errors path="listPrice" />
 		<br>
 		<br>
 	
-	에누리 가능여부: 
-	<form:input type="text" path="discount" value="${discount}" />
-		<form:errors path="discount" />
-		<br>
-		<br>
+	가격 흥정 여부: 
+		<form:radiobuttons items="${radioKind}" path="discount"/>
+		<br><br>
 
 		<a href="<c:url value='/shop/secondHand/gobackItem.do'>
 		         <c:param name="productId" value="${productId}"/>

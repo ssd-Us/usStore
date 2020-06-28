@@ -53,5 +53,5 @@ public interface MyPageFacade {
 	
 	int countAccuseById(String accounId);
 	
-	boolean isAccuseAlready(String attacker, String victim);
+	String isAccuseAlready(String attacker, String victim);
 }

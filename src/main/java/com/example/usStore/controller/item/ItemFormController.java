@@ -3,26 +3,19 @@ package com.example.usStore.controller.item;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.example.usStore.domain.Item;
-import com.example.usStore.service.facade.ItemFacade;
+import com.example.usStore.service.ItemFormValidator;
 
 @Controller
 public class ItemFormController {
-	private String formViewName = "product/item";
-	
-	@Autowired
-	private ItemFacade itemFacade;
 	
 	@ModelAttribute("item")		  
 	public ItemForm formBacking(HttpServletRequest rq, @RequestParam("productId") int productId) {  // accessor method 
@@ -33,19 +26,8 @@ public class ItemFormController {
 			System.out.println("session alive");
 			ItemForm itemFormSession = (ItemForm) session.getAttribute("itemForm");
 			System.out.println(itemFormSession);
-			itemForm = new ItemForm();
-			itemForm.setUnitCost(itemFormSession.getUnitCost());
-			itemForm.setTitle(itemFormSession.getTitle());
-			itemForm.setDescription(itemFormSession.getDescription());
-			itemForm.setQty(itemFormSession.getQty());
-			itemForm.setTag1(itemFormSession.getTag1());
-			itemForm.setTag2(itemFormSession.getTag2());
-			itemForm.setTag3(itemFormSession.getTag3());
-			itemForm.setTag4(itemFormSession.getTag4());
-			itemForm.setTag5(itemFormSession.getTag5());
 			
-			System.out.println("itemForm setting: " + itemForm);
-			return itemForm;
+			return itemFormSession;
 		}
 		else {
 			System.out.println("session null");
@@ -68,22 +50,24 @@ public class ItemFormController {
 		return "product/item";	//form view(item.jsp)
 	}
 	
-	@RequestMapping(value="/shop/item/addItem2.do", method = RequestMethod.POST)	// detailItem.jsp 
-	public String submit(@ModelAttribute("item") ItemForm itemForm, 
-			@RequestParam("productId") int productId, HttpServletRequest rq) {
+	@RequestMapping(value="/shop/item/addItem2.do", method = RequestMethod.POST)	// addGb.jsp 
+	public String submit(@ModelAttribute("item") ItemForm itemForm, BindingResult bindingResult, 
+			@RequestParam("productId") int productId, HttpServletRequest rq, Model model) {
 		System.out.println("item.addItem2.do");
+		
+		new ItemFormValidator().validate(itemForm, bindingResult);
+		
 		String itemController = "";
-		HttpSession httpSession = rq.getSession(true); //占쎌뵠沃섓옙 占쎄쉭占쎈�∽옙�뵠 占쎌뿳占쎈뼄筌롳옙 域뱄옙 占쎄쉭占쎈�∽옙�뱽 占쎈즼占쎌젻雅뚯눊��, 占쎄쉭占쎈�∽옙�뵠 占쎈씨占쎌몵筌롳옙 占쎄퉱嚥≪뮇�뒲 占쎄쉭占쎈�∽옙�뱽 占쎄문占쎄쉐占쎈립占쎈뼄.
+		HttpSession httpSession = rq.getSession(true); 
 				
 		System.out.println("itemForm : " + itemForm);
 		
-//		if (result.hasErrors()) {	return formViewName;	}	//野껓옙筌앾옙 占쎌궎�몴占� 獄쏆뮇源�占쎈뻻 item.jsp嚥∽옙 占쎈뼄占쎈뻻 占쎌뵠占쎈짗
-		
-//		ItemForm itemform = new ItemForm(itemForm.getTitle(), itemForm.getUserId(), itemForm.getProductId(), itemForm.getDescription(), itemForm.getUnitCost(), 
-//										itemForm.getQty(), rq.getParameter("tag1"), rq.getParameter("tag2"), rq.getParameter("tag3"), 
-//				rq.getParameter("tag4"), rq.getParameter("tag5"));
-		
 		httpSession.setAttribute("itemForm", itemForm);	//generate item session
+		
+		if (bindingResult.hasErrors()) {	//유효성 검증 에러 발생시
+			model.addAttribute("productId", productId);
+			return "product/item";
+		}
 		
 		switch(productId) {
 			case 0 : 
@@ -103,4 +87,26 @@ public class ItemFormController {
 		return itemController;
 	}
 	
+	@RequestMapping("/shop/item/index.do") //go index(remove sessions)
+	public String goIndex(@RequestParam("productId") int productId)
+	{
+		String url = "";
+		
+		switch(productId) {
+			case 0 : 
+					url = "redirect:/shop/groupBuying/index.do";
+					break;
+			case 1 :
+					url = "redirect:/shop/auction/index.do";
+					break;
+			case 2 : 
+					url = "redirect:/shop/secondHand/index.do";
+					break;
+			case 3 : 
+					url = "redirect:/shop/handMade/index.do";
+					break;
+		}
+		
+		return url;
+	}
 }

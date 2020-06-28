@@ -1,3 +1,4 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="itemTop.jsp" %>
 <%@ page import="com.example.usStore.controller.item.ItemForm" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
@@ -5,20 +6,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
 <title>Step3</title>
 </head>
 <style>
-	div#addItemForm {
-		position: absolute;
-		left: 18%;
-		border: none;
-		padding: 20px;
-	}
+   div#addItemForm {
+      position: absolute;
+      left: 18%;
+      border: none;
+      padding: 20px;
+   }
 </style>
 <table id="main-menu">
   <tr>
-    <td><a href='<c:url value="/shop/index.do"/>'>
+    <td><a href='<c:url value="/shop/groupBuying/index.do"/>'>
         <b><font color="black" size="2">
           &lt;&lt; Go to Index</font></b></a>
     </td>
@@ -35,30 +35,18 @@
 <label>판매가</label>: ${GroupBuying.listPrice}원 <br> 
 <label>할인율</label>: ${GroupBuying.discount}% <br> 
 <label>수량</label>: ${itemForm.qty} <br> 
-<label>태그</label>: 
-
-<c:if test="${itemForm.tag1 != '' && itemForm.tag1 ne null}">
-	<font color="blue">#</font>${itemForm.tag1} 
-</c:if>
-<c:if test="${itemForm.tag2 != '' && itemForm.tag2 ne null}">
-	<font color="blue">#</font>${itemForm.tag2} 
-</c:if>
-<c:if test="${itemForm.tag3 != '' && itemForm.tag3 ne null}">
-	<font color="blue">#</font>${itemForm.tag3} 
-</c:if>
-<c:if test="${itemForm.tag4 != '' && itemForm.tag4 ne null}">
-	<font color="blue">#</font>${itemForm.tag4} 
-</c:if>
-<c:if test="${itemForm.tag5 != '' && itemForm.tag5 ne null}">
-	<font color="blue">#</font>${itemForm.tag5} 
-</c:if>
+<label>태그</label>: <c:forEach var="tag" items="${tags}"> 
+                  <c:if test="${not empty tag.tagName}">
+                     <font color="blue">#</font>${tag.tagName}
+                  </c:if>
+               </c:forEach>
 <br> 
 <label>마감기한</label>: ${GroupBuying.deadLine} <br><br>
 
-<a href="<c:url value='/shop/groupBuying/gobackAddGb.do'>
-			<c:param name="productId" value="${itemForm.productId}"/>
-		 </c:url>
-		">[이전 단계로]</a> <input type="submit" value="확인" />
+<a href="<c:url value='/shop/groupBuying/addItem2.do'>
+         <c:param name="productId" value="${itemForm.productId}"/>
+       </c:url>
+      ">[이전 단계로]</a> <input type="submit" value="확인" />
 </form:form>
 </body>
 </html>

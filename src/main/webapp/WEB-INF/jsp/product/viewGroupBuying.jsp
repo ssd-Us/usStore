@@ -1,9 +1,9 @@
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="itemTop.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
 <title>공동구매 상세페이지</title>
 </head>
 <style type="text/css"> 
@@ -59,7 +59,10 @@
 		</td>
 		<td style="text-align: right; padding: 0px; font-size: small; border-bottom: none;">
 		<a href="
-							<c:url value='/addBookmark/${gb.userId}/${gb.itemId}'/>	<!-- 로그인 여부 따지기 -->
+							<c:url value='/shop/groupBuying/addBookmark'>	<!-- 로그인 여부 따지기 -->
+								<c:param name="userId" value="${gb.userId}" />
+								<c:param name="itemId" value="${gb.itemId}" />
+							</c:url>
 					">[북마크 추가]</a>
 		</td>
 	
@@ -78,7 +81,18 @@
 					">팔로잉</a>
 				</span>
 				&nbsp;
-				<%@ include file="/WEB-INF/jsp/account/accuseFunction.jsp" %>
+				
+					<c:choose>
+		   				<c:when test="${! empty userSession.account.userId}">
+							<%@ include file="/WEB-INF/jsp/account/accuseFunction.jsp" %>
+						</c:when>
+						<c:otherwise>
+						<span>
+							<a href="<c:url value='/addAccuseNoLogin.do'/>">판매자 신고하기</a>
+						</span>
+						</c:otherwise>
+					</c:choose>
+				
    			</td>
    		</tr>
    		
@@ -89,7 +103,7 @@
    			<td>
    			<c:forEach var="tag" items="${tags}">        
 	   			<a href="
-						<c:url value='/searchTag/${gb.itemId}'/>	<!-- tag검색 결과 페이지로 이동 -->
+						<c:url value='/searchTag/${gb.itemId}'/>	
 					">#${tag.tagName}
 				</a>&nbsp;
 			</c:forEach>
@@ -97,17 +111,17 @@
    		</tr>
    		
    		<tr>
-   			<th style="border-right: 1px solid black;"><font color=red>마감 날짜</font></th>
+   			<th style="border-right: 1px solid black;"><font color=red>마감기한</font></th>
    			<td><font color=red>
    				${gb.deadLine}
    			</font></td>
    		</tr>
    		
    		<tr>
-   		<th style="border-right: 1px solid black;">판매가</th>
+   		<th style="border-right: 1px solid black;">할인율</th>
    			<td>
-   				<del>정가 : ${gb.unitCost} 원</del> <br>
-   				공동구매가 : ${gb.listPrice}원&nbsp;<font color=red>-${gb.discount}%</font> <br>
+   				<p><del>정가 : ${gb.unitCost}원</del></p>
+   				할인가 : ${gb.listPrice}원&nbsp;<font color=red>-${gb.discount}%</font> <br>
    			</td>
    		</tr>
    		
@@ -120,37 +134,46 @@
    			<td colspan="2" style="border-bottom: none;">
    			<span>
 		   			<a href="
-							<c:url value='/addCart/${gb.itemId}'/>	<!-- 로그인 여부 따지기 -->
+							<c:url value='/addCart/${gb.itemId}'/>
 					">장바구니 추가</a>
 				</span>
 				&nbsp;&nbsp;&nbsp;
 				<span>
 					<a href="
-							<c:url value='/order/${gb.itemId}'/>	<!-- 로그인 여부 따지기 -->
-					">공동구매 참여</a>
+							<c:url value='/shop/groupBuying/joint.do'>
+								<c:param name="itemId" value="${gb.itemId}" />
+								<c:param name="productId" value="${gb.productId}" />
+							</c:url>
+					">공동구매 참여하기</a>
 				</span>
 				&nbsp;&nbsp;&nbsp;
 				<span>
    				<a href="
-							<c:url value='/note/${gb.itemId}'/>	<!-- 로그인 여부 따지기 -->
+							<c:url value='/note/${gb.itemId}'/>	
 				">쪽지 보내기</a>
 				</span>
    			
    			</td>
    		</tr>
-   		
-   		<c:if test="${gb.userId==session.userId}"> <!-- 로그인시 실행 -->
-   		<tr>
-   		<td colspan="2" style="text-align: right; padding: 0px; font-size: small; border-bottom: none; border-top: 1px solid black;">
-		   <a href="<c:url value='/editItem/${gb.productId}'/>">[게시물 수정하기]</a>
-		   <a href="<c:url value='/deleteItem/${gb.productId}'/>"> [게시물 삭제하기]</a>
-		   </td>
-		 </tr>
+   		<c:if test="${gb.userId eq userSession.account.userId}"> <!-- ë¡ê·¸ì¸ì ì¤í -->
+	   		<tr>
+		   		<td colspan="2" style="text-align: right; padding: 0px; font-size: small; border-bottom: none; border-top: 1px solid black;">
+				   <a href="<c:url value='/shop/groupBuying/edit.do'>
+				   				<c:param name="itemId" value="${gb.itemId}" />
+				   			</c:url>
+				   			">[게시물 수정하기]</a>
+				   <a href="<c:url value='/shop/groupBuying/delete.do'>
+				   				<c:param name="itemId" value="${gb.itemId}" />
+				   				<c:param name="productId" value="${gb.productId}" />
+				   			</c:url>
+				   			"> [게시물 삭제하기]</a>
+				</td>
+			 </tr>
 		</c:if>
-   <!-- 하나의 url을 공유하며 파라미터로 아이디 값을 넘겨줄지
-   네개의 컨트롤러를 각자 구현할지 정해야함
-   deleteItem 아이디만 받아와서 한번만 삭제할수 있는게 아니고
-    어차피 db테이블이 다르니까 delete문은 4번 써줘야함  -->
+<!--* 현재 로그인 user가 글 작성자 일때만 수정/삭제 버튼이 보임 
+   * 작성자 정보는 controller에서 model(db에서 suppId찾아옴)로 넘겨줌
+   * model로 넘어온 suppId와 세션의 로그인Id를 비교함 
+   * 세션에 로그인 정보가 없으면, 즉 null이어도 수정/삭제 안보여줌-->
    	</table>
    	<br><br>
 	

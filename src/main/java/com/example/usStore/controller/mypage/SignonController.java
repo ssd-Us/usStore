@@ -1,6 +1,8 @@
 package com.example.usStore.controller.mypage;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.support.PagedListHolder;
 import org.springframework.stereotype.Controller;
@@ -21,7 +23,6 @@ import org.springframework.ui.Model;
  * @modified-by Changsup Park
  */
 @Controller
-@SessionAttributes("userSession")
 public class SignonController { 
 
 	private UsStoreFacade usStore;
@@ -43,11 +44,14 @@ public class SignonController {
 		}
 		else {
 			UserSession userSession = new UserSession(account);
-			model.addAttribute("userSession", userSession);
-			if (forwardAction != null) 
+			HttpSession session = request.getSession();
+			session.setAttribute("userSession", userSession);
+			
+			if (forwardAction != null) {
 				return new ModelAndView("redirect:" + forwardAction);
-			else 
+			} else {
 				return new ModelAndView("index");
+			}
 		}
 	}
 }

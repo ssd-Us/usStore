@@ -35,7 +35,7 @@
   </delete>
   
   
-  <update id="updateAuction" parameterType="Auction">
+  <update id="updateAuction">
      UPDATE AUCTION 
      SET ITEMID = #{itemID}, AUCTIONSTATE = #{auctionState}, DEADLINE = #{deadLine}, STARTPRICE = #{startPrice}, BIDPRICE = #{bidPrice}
   </update>
@@ -97,4 +97,9 @@
      	SET BIDPRICE= #{param1}
      	WHERE ITEMID = #{param2}
 	</update>
+	
+	<select id="getBidderList" resultType="Bidder">
+	 	SELECT ITEMID, BIDDER
+     	FROM BIDDER
+	</select>
 </mapper>

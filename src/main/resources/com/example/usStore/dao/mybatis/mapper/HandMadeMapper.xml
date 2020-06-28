@@ -15,7 +15,6 @@
       LISTPRICE,
       I.USERID AS "item.userId",
       I.PRODUCTID AS "item.productId",
-      STATUS
     FROM ITEM I, HANDMADE H
     WHERE H.ITEMID = I.ITEMID AND I.PRODUCTID = #{value}
   </select>
@@ -50,14 +49,14 @@
   	WHERE ITEMID = #{itemId}
   </delete>
   
-  <update id="updateHandMade" parameterType="HandMade">
+  <update id="updateHandMade">
   	UPDATE HANDMADE SET
 	  	ITEMID = #{itemId},
 	  	LISTPRICE = #{listPrice}
   	WHERE ITEMID = #{itemId}
   </update>
   
-  <insert id="insertHandMade" parameterType="HandMade">
+  <insert id="insertHandMade">
    	INSERT INTO HANDMADE
       (ITEMID, LISTPRICE)
     VALUES

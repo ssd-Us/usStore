@@ -18,7 +18,7 @@ import com.example.usStore.domain.Tag;
 /*
  * ItemFacade
  * 
- * Item / HandMade / GroupBuying / SecondHand / Auction / Tag
+ * Item / HandMade / GroupBuying / SecondHand / Auction / Tag 
  * */
 public interface ItemFacade {
 
@@ -40,7 +40,9 @@ public interface ItemFacade {
 
 	boolean isItemInStock(int itemId, int productId);
 
+	String getUserIdByItemId(int itemId);
 	
+	void updateViewCount(int viewCount, int itemId);
 	/////////////////////////////////////////////////////////////////////////
 	/* HandMade */
 	/////////////////////////////////////////////////////////////////////////
@@ -59,17 +61,16 @@ public interface ItemFacade {
 	/* GroupBuying */
 	/////////////////////////////////////////////////////////////////////////
 	public void insertGroupBuying(GroupBuying GroupBuying);
-	  
+	
 	public void updateGroupBuying(GroupBuying GroupBuying);
 	
 	List<GroupBuying> getGroupBuyingList();
 	
 	GroupBuying getGroupBuyingItem(int itemId);
-
+	
 	public void joinGroupBuying(GroupBuying GroupBuying);
 	
 	public void calculateDiscount(GroupBuying GroupBuying);
-	
 	/////////////////////////////////////////////////////////////////////////
 	/* SecondHand */
 	/////////////////////////////////////////////////////////////////////////	
@@ -78,15 +79,13 @@ public interface ItemFacade {
 	SecondHand getSecondHandItem(int itemId);
 	
 	public void insertSecondHand(SecondHand secondHand);
-	  
+	
 	public void updateSecondHand(SecondHand secondHand);
 	
 	/////////////////////////////////////////////////////////////////////////
 	/* Auction */
 	/////////////////////////////////////////////////////////////////////////
 	List<Auction> getAuctionList();
-	
-	Auction getAuctionItem(int itemId);
 	
 	public void insertAuction(Auction auction);
 	 
@@ -106,21 +105,25 @@ public interface ItemFacade {
 	
 	public void updateBidPrice(int unitCost, int itemId);
 	
+	public List<Bidder> getBidderList();
+	
 	/////////////////////////////////////////////////////////////////////////
 	/* Tag */
 	/////////////////////////////////////////////////////////////////////////
 	List<Tag> getTagList ();
-
-	List<Tag> getTagByTagId(int tagId);
-
-	List<Tag> getTagByItemId(int itemId);	
-
-	Tag getTagByTagName(String tagName);	
-
-	void insertTag(Tag tag);
-
-	void updateTag(Tag tag);	
-
-	void deleteTag(int tagId);	
 	
+	List<Tag> getTagByTagId(int tagId);
+	
+	List<Tag> getTagByItemId(int itemId);	
+	
+	Tag getTagByTagName(String tagName);	
+	
+	void insertTag(Tag tag);	
+	
+	void deleteTag(int itemId);
+	/////////////////////////////////////////////////////////////////////////
+	/* Tag */
+	/////////////////////////////////////////////////////////////////////////
+	List<Item> searchItemList(String keywords);
+
 }

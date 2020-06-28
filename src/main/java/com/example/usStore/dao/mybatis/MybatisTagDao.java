@@ -35,13 +35,7 @@ public class MybatisTagDao implements TagDao {
 		// TODO Auto-generated method stub
 		tagMapper.insertTag(tag);
 	}
-
-	@Override
-	public void updateTag(Tag tag) throws DataAccessException {
-		// TODO Auto-generated method stub
-		tagMapper.updateTag(tag);
-	}
-
+	
 	@Override
 	public void deleteTag(int tagId) throws DataAccessException {
 		// TODO Auto-generated method stub
@@ -58,6 +52,13 @@ public class MybatisTagDao implements TagDao {
 	public List<Tag> getTagByItemId(int itemId) throws DataAccessException {
 		// TODO Auto-generated method stub
 		return tagMapper.getTagByItemId(itemId);
+	}
+
+	@Override
+	public void insertTagList(List<Tag> tags) throws DataAccessException {
+		for(Tag t : tags ) {
+			tagMapper.insertTag(t);
+		}
 	}
 
 }

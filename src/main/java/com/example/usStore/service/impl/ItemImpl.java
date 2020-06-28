@@ -1,5 +1,6 @@
 package com.example.usStore.service.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -48,7 +49,7 @@ public class ItemImpl implements ItemFacade {
 	private AuctionDao auctionDao;
 	@Autowired
 	private TagDao tagDao;
-	@Autowired		// applicationContext.xml�뿉 �젙�쓽�맂 scheduler 媛앹껜瑜� 二쇱엯 諛쏆쓬
+	@Autowired		// applicationContext.xml占쎈퓠 占쎌젟占쎌벥占쎈쭆 scheduler 揶쏆빘猿쒐몴占� 雅뚯눘�뿯 獄쏆룇�벉
 	private ThreadPoolTaskScheduler scheduler;
 	
 	@Override
@@ -96,7 +97,7 @@ public class ItemImpl implements ItemFacade {
 		itemDao.deleteItem(itemId);
 	}
 	
-	// 占쎌뵠椰꾬옙 �⑥쥙荑귨옙鍮욑옙由�
+	// �뜝�럩逾졿ㅀ袁ъ삕 占썩뫁伊숃뜎洹⑥삕�뜮�쉻�삕�뵳占�
 	@Override
 	public boolean isItemInStock(int itemId, int productId) {
 		// TODO Auto-generated method stub
@@ -191,11 +192,12 @@ public class ItemImpl implements ItemFacade {
 		return secondHandDao.getSecondHandItem(itemId);
 	}
 
+
 	@Override
 	public void insertSecondHand(SecondHand secondHand) {
 		secondHandDao.insertSecondHand(secondHand);
 	}
-
+	
 	@Override
 	public void updateSecondHand(SecondHand secondHand) {
 		secondHandDao.updateSecondHand(secondHand);
@@ -205,12 +207,6 @@ public class ItemImpl implements ItemFacade {
 	public List<Auction> getAuctionList() {
 		// TODO Auto-generated method stub
 		return auctionDao.getAuctionList();
-	}
-
-	@Override
-	public Auction getAuctionItem(int itemId) {
-		// TODO Auto-generated method stub
-		return auctionDao.getAuctionItem(itemId);
 	}
 
 	@Override
@@ -275,6 +271,10 @@ public class ItemImpl implements ItemFacade {
 		auctionDao.updateBidPrice(unitCost, itemId);
 	}
 	
+	public List<Bidder> getBidderList() {
+		return auctionDao.getBidderList();
+	}
+
 	@Override
 	public List<Tag> getTagList() {
 		// TODO Auto-generated method stub
@@ -306,15 +306,9 @@ public class ItemImpl implements ItemFacade {
 	}
 
 	@Override
-	public void updateTag(Tag tag) {
+	public void deleteTag(int itemId) {
 		// TODO Auto-generated method stub
-		tagDao.updateTag(tag);
-	}
-
-	@Override
-	public void deleteTag(int tagId) {
-		// TODO Auto-generated method stub
-		tagDao.deleteTag(tagId);
+		tagDao.deleteTag(itemId);
 	}
 
 	@Override
@@ -334,4 +328,24 @@ public class ItemImpl implements ItemFacade {
 		// TODO Auto-generated method stub
 		return itemDao.getItem(itemId);
 	}
+
+	@Override
+	public String getUserIdByItemId(int itemId) {
+		return itemDao.getUserIdByItemId(itemId);
+	}
+
+	@Override
+	public List<Item> searchItemList(String keywords) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void updateViewCount(int viewCount, int itemId) {
+		// TODO Auto-generated method stub
+		itemDao.updateViewCount(viewCount, itemId);
+	}
+
+	
+
 }

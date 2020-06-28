@@ -9,24 +9,24 @@ import com.example.usStore.domain.Tag;
 
 public interface TagDao {
 	
-	//아이템 아이디로 태그 객체 찾기
+	//�븘�씠�뀥 �븘�씠�뵒濡� �깭洹� 媛앹껜 李얘린
 	List<Tag> getTagList () throws DataAccessException;
 
-	// 태그 이름으로 태그 객체 찾기(검색 기능에 이용?)
+	// �깭洹� �씠由꾩쑝濡� �깭洹� 媛앹껜 李얘린(寃��깋 湲곕뒫�뿉 �씠�슜?)
 	List<Tag> getTagByTagId(int tagId) throws DataAccessException;
 
-	// itemId로 태그 객체 찾기
+	// itemId濡� �깭洹� 媛앹껜 李얘린
 	List<Tag> getTagByItemId(int itemId) throws DataAccessException;	
 
-	// tagName으로 태그 객체 찾기
+	// tagName�쑝濡� �깭洹� 媛앹껜 李얘린
 	Tag getTagByTagName(String tagName) throws DataAccessException;	
 
-	//태그 객체 삽입
+	//�깭洹� 媛앹껜 �궫�엯
 	void insertTag(Tag tag) throws DataAccessException;
 
-	//태그 객체 수정
-	void updateTag(Tag tag) throws DataAccessException;	
+	void insertTagList(List<Tag> tags) throws DataAccessException;
+	
+	//�깭洹� 媛앹껜 �궘�젣	
+	void deleteTag(int itemId) throws DataAccessException;
 
-	//태그 객체 삭제	
-	void deleteTag(int tagId) throws DataAccessException;	
 }

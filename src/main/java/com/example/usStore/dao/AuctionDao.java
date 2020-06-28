@@ -14,9 +14,6 @@ public interface AuctionDao extends ItemDao {
 	// select Auction
 	List<Auction> getAuctionList() throws DataAccessException;
 
-	// itemId 諛쏆븘�� �빐�떦 寃쎈ℓ 媛앹껜 諛섑솚
-	Auction getAuctionItem(int itemId) throws DataAccessException;
-
 	// insert Auction
 	public void insertAuction(Auction auction) throws DataAccessException;
 
@@ -43,7 +40,10 @@ public interface AuctionDao extends ItemDao {
 	
 	//해당 아이템이 낙찰자 테이블에 존재하는지
 	public String isBidderExist(int itemId);
-  
+
 	//경매가 종료된 뒤, item 테이블의 unitCost 를 Auction 테이블의 bidPrice 에 수정
 	public void updateBidPrice(int unitCost, int itemId);
+	
+	//낙찰자 리스트 받아오기
+	public List<Bidder> getBidderList();
 }
