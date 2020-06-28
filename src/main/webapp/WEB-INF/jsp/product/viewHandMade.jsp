@@ -148,7 +148,7 @@
 					     <c:param name="workingItemId" value="${handMade.itemId}"/>
 					     <c:param name="productId" value="${handMade.productId}"/></c:url>">
 					 장바구니 추가</a>
-				</span>
+			</span>
 				&nbsp;&nbsp;&nbsp;
 				<span>
    				<a href="

@@ -72,9 +72,10 @@
 				 		<td><fmt:formatNumber value="${item.unitCost}" pattern="###,###원" /></td>              
 						<td><fmt:formatNumber value="${item.listPrice}" pattern="###,###원" /></td>
 		      			<td><a href='<c:url value="/shop/addItemToCart.do">
-					            	<c:param name="workingItemId" value="${item.itemId}"/></c:url>'>
-					              	<img border="0" src="../../images/button_add_to_cart.gif" alt="" /></a></td>
-		      			</tr>
+					            				<c:param name="workingItemId" value="${item.itemId}"/>
+					            				<c:param name="productId" value="${item.productId}"/></c:url>'>
+					              		<img width="40" height="40" src="${pageContext.request.contextPath}/images/cart_img.png" alt="" /></a></td>
+						</tr>
 	     			</c:forEach></tbody>
 	     			
 	     			 <tr>

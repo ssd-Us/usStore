@@ -153,9 +153,10 @@ function getSellerInfo(userId) {
    	<tr>
    			<td colspan="2" style="border-bottom: none;">
    			<span>
-		   		<a href="
-						<c:url value='/addCart/${sh.itemId}'/>	<!-- 로그인 여부 따지기 -->
-					">장바구니 추가</a>
+   				<a href="<c:url value="/shop/addItemToCart.do">
+					     <c:param name="workingItemId" value="${sh.itemId}"/>
+					     <c:param name="productId" value="${sh.productId}"/></c:url>">
+					 장바구니 추가</a>
 			</span>			
 				&nbsp;&nbsp;&nbsp;
 			<span>
