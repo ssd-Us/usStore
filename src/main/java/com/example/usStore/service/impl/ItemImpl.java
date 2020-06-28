@@ -210,12 +210,6 @@ public class ItemImpl implements ItemFacade {
 	}
 
 	@Override
-	public Auction getAuctionItem(int itemId) {
-		// TODO Auto-generated method stub
-		return auctionDao.getAuctionItem(itemId);
-	}
-
-	@Override
 	public void insertAuction(Auction auction) {
 		// TODO Auto-generated method stub
 		auctionDao.insertAuction(auction);	

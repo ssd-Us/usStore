@@ -16,9 +16,6 @@ public interface AuctionMapper extends ItemMapper {
 	// select Auction
 	List<Auction> getAuctionList();
 
-	// itemId 諛쏆븘�� �빐�떦 寃쎈ℓ 媛앹껜 諛섑솚
-	Auction getAuctionItem(int itemId);
-
 	// insert Auction
 	public void insertAuction(Auction auction);
 
