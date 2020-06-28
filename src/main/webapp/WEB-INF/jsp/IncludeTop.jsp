@@ -44,9 +44,24 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <button class="btn btn-light" id="menu-toggle">Menu</button>
+       
+        
+        <div class="nav-item dropdown">
+			<a class="nav-link dropdown-toggle js-scroll-trigger" href="#" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			  	<button class="btn btn-light">Search</button>
+			</a>
+      	  	<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+      	  		<form name="searchForm" action="<c:url value='/shop/searchItem.do'/>">
+   					<input type="text" id="word" name="word" placeholder="태그 검색"/>
+   					<button class="btn btn-light dropdown-item" onclick="search(word.value)">
+   						Click To Search!
+   					</button>
+   				</form>
+			</div>	
+			</div>
   </nav>
-  	
-  </nav>
+
+
   <nav class="navbar navbar-expand-lg navbar-dark bg-white" id="mainNav">
      <a class="navbar-brand js-scroll-trigger" href="<c:url value="/shop/index.do"/>">
      	<img border="0" src="${pageContext.request.contextPath}/images/usStore3.png" style="float:left;width:80;height:60;border:0;"/>
@@ -100,3 +115,11 @@
       </div>
     </div>
   </nav>
+  <script>
+function search(word) {
+	
+	alert("검색어 : " + word);
+
+	searchForm.submit();	
+}
+</script>
