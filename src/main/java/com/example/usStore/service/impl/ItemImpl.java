@@ -130,9 +130,9 @@ public class ItemImpl implements ItemFacade {
    }
 
    @Override
-   public List<HandMade> getHandMadeList() {
+   public List<HandMade> getHandMadeList(Account account) {
       // TODO Auto-generated method stub
-      return handMadeDao.getHandMadeList();
+      return handMadeDao.getHandMadeList(account);
    }
 
    @Override

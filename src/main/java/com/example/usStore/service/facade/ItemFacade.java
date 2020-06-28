@@ -51,7 +51,7 @@ public interface ItemFacade {
    
    public void updateHandMade(HandMade handmade);
    
-   List<HandMade> getHandMadeList();
+   List<HandMade> getHandMadeList(Account account);
    
    HandMade getHandMadeById(int itemId);
    

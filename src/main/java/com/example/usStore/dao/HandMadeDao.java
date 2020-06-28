@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.dao.DataAccessException;
 
+import com.example.usStore.domain.Account;
 import com.example.usStore.domain.HandMade;
 
 public interface HandMadeDao extends ItemDao {
@@ -15,7 +16,7 @@ public interface HandMadeDao extends ItemDao {
 	public void updateHandMade(HandMade handmade) throws DataAccessException;
 	
 	// 모든 수공예 리스트 가져오는 메소드
-	List<HandMade> getHandMadeList() throws DataAccessException;
+	List<HandMade> getHandMadeList(Account account) throws DataAccessException;
 	
 	// itemId 받아서 해당하는 HandMade 객체 반환
 	HandMade getHandMadeById(int itemId) throws DataAccessException;
