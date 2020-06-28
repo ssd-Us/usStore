@@ -50,21 +50,30 @@ public class AddAccuseController {
 
         model.addAttribute("itemId", itemId);
         model.addAttribute("productId", productId);
+      
         if(productId == 0)
-           return "redirect:/shop/groupBuying/viewItem.do";
+           return "redirect:/shop/groupBuying/viewItem.do?itemId=" + itemId + "&productId=" + productId;
         else if(productId ==1)
-           return "redirect:/shop/auction/viewItem.do";
+           return "redirect:/shop/auction/viewItem.do?itemId=" + itemId + "&productId=" + productId;
         else if(productId ==2)
-           return "redirect:/shop/secondHand/viewItem.do";
+           return "redirect:/shop/secondHand/viewItem.do?itemId=" + itemId + "&productId=" + productId;
         else if(productId ==3)
-           return "redirect:/shop/handMade/viewItem.do";
+           return "redirect:/shop/handMade/viewItem.do?itemId=" + itemId + "&productId=" + productId;
         else
            return "/index";
+  
    }
    
    
    @RequestMapping("/addAccuseNoLogin.do")  //로그인이 안되었는데 판매자 신고 눌렀을때 
-   public String addAccuseNoLogin(){
+   public String addAccuseNoLogin( 
+		   	@RequestParam(value="itemId") int itemId, 
+	         @RequestParam(value="productId") int productId,HttpServletRequest rq){
+	   
+	   HttpSession session = rq.getSession(false);
+	   
+	   session.setAttribute("accuseItemId", itemId);
+	   session.setAttribute("accuseProductId", productId);
 	   return "redirect:shop/signonForm.do";
    }
    

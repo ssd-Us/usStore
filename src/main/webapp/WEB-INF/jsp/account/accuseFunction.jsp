@@ -5,13 +5,11 @@
 /* 아 여기서 신고버튼 누르면 무조건 자바스크립트 실행되는게 아니라 먼저 에드 어큐즈
    컨트롤러로 가서 로그인 여부 체크 한다음에 다시 보내줘야함 */
 function accuse(a){  //a랑 href   //여기는 로그인이 되었을 때 보내주는 페이지 
-       var reason = prompt('판매자 신고하기\n신고사유를 작성하세요.', '');
-     
-     if(reason){
-           a.href += "&reason=" + reason;
-            alert("신고되었습니다.")}
-     else if(reason == ''){ alert("이유를 작성하지 않아 취소됩니다."); }
-     else{ alert("취소되었습니다");}
+  	  var reason = prompt('판매자 신고하기\n신고사유를 작성하세요.', '');
+  	  a.href += "&reason=" + reason;
+	  if(reason){ alert("신고되었습니다.") }
+	  else if(reason == ''){ alert("이유를 작성하지 않아 취소됩니다."); }
+	  else{ alert("취소되었습니다"); }
 }
 </script>
 <% System.out.println("accuseFunction.jsp come in"); %>
