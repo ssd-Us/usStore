@@ -8,12 +8,14 @@ public interface SecondHandMapper extends ItemMapper {
 
 	List<SecondHand> getSecondHandList();
 
-	SecondHand getSecondHandById(int itemId);
+	SecondHand getSecondHandItem(int itemId);
 	
 	public void insertSecondHand(SecondHand secondHand);
 	
 	public void updateSecondHand(SecondHand secondHand);
 	
 	public void deleteSecondHand(int itemId);
+	
+	
 	
 }

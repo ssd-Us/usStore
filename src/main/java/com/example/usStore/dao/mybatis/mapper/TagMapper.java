@@ -23,9 +23,6 @@ public interface TagMapper {
 	//�깭洹� 媛앹껜 �궫�엯
 	void insertTag(Tag tag);
 
-	//�깭洹� 媛앹껜 �닔�젙
-	void updateTag(Tag tag);	
-
 	//�깭洹� 媛앹껜 �궘�젣	
 	void deleteTag(int itemId);	
 }

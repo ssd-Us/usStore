@@ -24,9 +24,9 @@ public interface TagDao {
 	//�깭洹� 媛앹껜 �궫�엯
 	void insertTag(Tag tag) throws DataAccessException;
 
-	//�깭洹� 媛앹껜 �닔�젙
-	void updateTag(Tag tag) throws DataAccessException;	
-
+	void insertTagList(List<Tag> tags) throws DataAccessException;
+	
 	//�깭洹� 媛앹껜 �궘�젣	
-	void deleteTag(int itemId) throws DataAccessException;	
+	void deleteTag(int itemId) throws DataAccessException;
+
 }

@@ -16,7 +16,7 @@ public class Item implements Serializable {
 	private String description;
 	private int viewCount;
 	private int qty;
-//	private List<Tag> tags = new ArrayList<Tag>();
+	private List<Tag> tags = new ArrayList<Tag>();
 	private String userId; // (FK)
 	private int productId; // (FK)
 
@@ -31,6 +31,19 @@ public class Item implements Serializable {
 		this.productId = productId;
 	}
 
+	public Item(int itemId, int unitCost, String title, String description, int viewCount, int qty, List<Tag> tags, 
+			String userId, int productId) {
+		this.itemId = itemId;
+		this.unitCost = unitCost;
+		this.title = title;
+		this.description = description;
+		this.viewCount = viewCount;
+		this.qty = qty;
+		this.tags = tags;
+		this.userId = userId;
+		this.productId = productId;
+	}
+	
 	/* JavaBeans Properties */
 	public int getItemId() {
 		return itemId;
@@ -95,14 +108,28 @@ public class Item implements Serializable {
 	public void setProductId(int productId) {
 		this.productId = productId;
 	}
-//
-//	public List<Tag> getTags() {
-//		return tags;
-//	}
-//
-//	public void setTags(List<Tag> tags) {
-//		this.tags = tags;
-//	}
+
+	public List<Tag> getTags() {
+		return tags;
+	}
+
+	public void setTags(List<Tag> tags) {
+		this.tags = tags; 
+	}
+	
+	public void makeTags(int itemId, String tagName) {	//itemId�몴占� tag占쎌벥 itemId嚥∽옙, tagName(tag1, 2, 3, 4, 5) 筌욑옙占쎌젟 , tagId占쎈뮉 占쎌뿫占쎌벥占쎌벥 占쎈땾 0 占쎌몵嚥∽옙 筌욑옙占쎌젟
+		if(tagName != null && tagName.trim() != "") {
+			Tag tag = new Tag(itemId, tagName);
+			tags.add(tag);
+		}	
+	  }
+	
+	public void makeTags(String tagName) {	//itemId�몴占� tag占쎌벥 itemId嚥∽옙, tagName(tag1, 2, 3, 4, 5) 筌욑옙占쎌젟 , tagId占쎈뮉 占쎌뿫占쎌벥占쎌벥 占쎈땾 0 占쎌몵嚥∽옙 筌욑옙占쎌젟
+		if(tagName != null && tagName.trim() != "") {
+			Tag tag = new Tag(itemId, tagName);
+			tags.add(tag);
+		}	
+	  }
 	
 	@Override
 	public String toString() {

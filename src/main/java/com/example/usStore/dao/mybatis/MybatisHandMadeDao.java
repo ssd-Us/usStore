@@ -7,12 +7,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.usStore.dao.HandMadeDao;
 import com.example.usStore.dao.mybatis.mapper.HandMadeMapper;
+import com.example.usStore.dao.mybatis.mapper.ItemMapper;
+import com.example.usStore.dao.mybatis.mapper.TagMapper;
 import com.example.usStore.domain.HandMade;
 import com.example.usStore.domain.Item;
+import com.example.usStore.domain.Tag;
 
+@Transactional
 @Qualifier("mybatisHandMadeDao")
 @Repository
 public class MybatisHandMadeDao implements HandMadeDao {
@@ -20,6 +25,12 @@ public class MybatisHandMadeDao implements HandMadeDao {
 	@Autowired
 	private HandMadeMapper handMadeMapper;
 
+	@Autowired
+	private ItemMapper itemMapper;
+	
+	@Autowired
+	private TagMapper tagMapper;
+	
 	@Override
 	public void updateQuantity(int qty, int itemId, int productId) throws DataAccessException {
 		// TODO Auto-generated method stub
@@ -39,15 +50,27 @@ public class MybatisHandMadeDao implements HandMadeDao {
 	}
 
 	@Override
-	public void insertHandMade(HandMade handmade) throws DataAccessException {
+	// transaction 구현
+	public void insertHandMade(HandMade handMade) throws DataAccessException {
 		// TODO Auto-generated method stub
-		handMadeMapper.insertHandMade(handmade);
+		itemMapper.insertItem(handMade); // auto-boxing
+		handMadeMapper.insertHandMade(handMade);
+		for(Tag tag : handMade.getTags()) {
+			tag.setItemId(handMade.getItemId());
+			tagMapper.insertTag(tag);
+		}
 	}
 
 	@Override
-	public void updateHandMade(HandMade handmade) throws DataAccessException {
+	// transaction 구현
+	public void updateHandMade(HandMade handMade) throws DataAccessException {
 		// TODO Auto-generated method stub
-		handMadeMapper.updateHandMade(handmade);
+		itemMapper.updateItem(handMade);
+		handMadeMapper.updateHandMade(handMade);
+		
+		for(Tag tag : handMade.getTags()) {
+			tagMapper.insertTag(tag);
+		}
 	}
 
 	@Override
@@ -95,7 +118,10 @@ public class MybatisHandMadeDao implements HandMadeDao {
 	public String getUserIdByItemId(int itemId) throws DataAccessException {
 		return handMadeMapper.getUserIdByItemId(itemId);
 	}
-	
-	
 
+	@Override
+	public void updateViewCount(int viewCount, int itemId) {
+		// TODO Auto-generated method stub
+		handMadeMapper.updateViewCount(viewCount, itemId);
+	}
 }

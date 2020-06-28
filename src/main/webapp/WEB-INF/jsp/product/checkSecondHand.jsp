@@ -9,7 +9,7 @@
    SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일 a hh:mm:ss");
 %>
 
-<title>중고거래 입력 최종 확인 step3- view 이름을 check로 바꾸기</title>
+<title>중고거래 입력 최종 확인 step3</title>
 <style>
 div#addItemForm {
    position: absolute;
@@ -29,17 +29,25 @@ div#addItemForm {
 </table>
 
 <h1>중고거래 최종 확인</h1>
-다음 정보로 판매하시겠습니까?<br><br>
-<div id="addItemForm">
-   <form:form modelAttribute="SecondHand" action="detailItem.do">
+<h2>다음 정보로 판매하시겠습니까?</h2><br><br>
+
+<form:form action="done.do">
       <hr width="927px" align="left">
       <br><br>
       <label>제목</label> : ${itemForm.title} <br>
       <label>내용</label> : ${itemForm.description} <br>
       <label>수량</label> : ${itemForm.qty} <br>
-      <label>정가</label>: ${itemForm.unitCost}원 <br> 
-      <label>판매가</label>: ${SecondHand.listPrice}원 <br> 
-      <label>에누리가능여부</label>: ${SecondHand.discount}% <br>
+      <label>정가</label> : ${itemForm.unitCost}원 <br> 
+      <label>판매가</label> : ${secondHandForm.listPrice}원 <br> 
+      <label>에누리가능여부</label> :
+      		<c:choose>
+	   				<c:when test="${secondHandForm.discount eq 1}">
+						<td><c:out value="에눌 가능" /></td> 
+					</c:when>
+					<c:otherwise>
+						<td> <c:out value="에눌 불가능" /></td> 
+					</c:otherwise>
+			</c:choose><br>
       <label>태그</label> : 
 
 <c:if test="${itemForm.tag1 != '' && itemForm.tag1 ne null}">
@@ -57,14 +65,14 @@ div#addItemForm {
       <c:if test="${itemForm.tag5 != '' && itemForm.tag5 ne null}">
          <font color="blue">#</font>${itemForm.tag5} 
 </c:if>
-
-<label>접수 일시</label> : ${nowtime} <br><br>
+<br>
+<label>접수 일시</label> : ${sf} <br><br>
 
       <a href="<c:url value='/shop/secondHand/gobackAddSh.do'>
-         <c:param name="productId" value="${itemForm.productId}"/>
-       </c:url>
-      ">[이전 단계로]</a> <input type="submit" value="확인" />
-   </form:form>
-</div>
+         <c:param name="productId" value="${itemForm.productId}"/></c:url>">[이전 단계로]&nbsp;&nbsp;</a> 
+     
+      <input type="submit" value="[확인]" /> 
+</form:form>
+
 </body>
 </html>

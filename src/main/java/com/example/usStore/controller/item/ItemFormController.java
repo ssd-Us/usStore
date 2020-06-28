@@ -3,28 +3,19 @@ package com.example.usStore.controller.item;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ValidationUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.support.SessionStatus;
 
-import com.example.usStore.domain.Item;
-import com.example.usStore.service.facade.ItemFacade;
+import com.example.usStore.service.ItemFormValidator;
 
 @Controller
 public class ItemFormController {
-	private String formViewName = "product/item";
-	
-	@Autowired
-	private ItemFacade itemFacade;
 	
 	@ModelAttribute("item")		  
 	public ItemForm formBacking(HttpServletRequest rq, @RequestParam("productId") int productId) {  // accessor method 
@@ -35,20 +26,8 @@ public class ItemFormController {
 			System.out.println("session alive");
 			ItemForm itemFormSession = (ItemForm) session.getAttribute("itemForm");
 			System.out.println(itemFormSession);
-			itemForm = new ItemForm();
-			itemForm.setUnitCost(itemFormSession.getUnitCost());
-			itemForm.setTitle(itemFormSession.getTitle());
-			itemForm.setDescription(itemFormSession.getDescription());
-			itemForm.setViewCount(itemFormSession.getViewCount());
-			itemForm.setQty(itemFormSession.getQty());
-			itemForm.setTag1(itemFormSession.getTag1());
-			itemForm.setTag2(itemFormSession.getTag2());
-			itemForm.setTag3(itemFormSession.getTag3());
-			itemForm.setTag4(itemFormSession.getTag4());
-			itemForm.setTag5(itemFormSession.getTag5());
 			
-			System.out.println("itemForm setting: " + itemForm);
-			return itemForm;
+			return itemFormSession;
 		}
 		else {
 			System.out.println("session null");
@@ -71,41 +50,21 @@ public class ItemFormController {
 		return "product/item";	//form view(item.jsp)
 	}
 	
-	@RequestMapping(value="/shop/item/addItem2.do", method = RequestMethod.POST)	// detailItem.jsp 
+	@RequestMapping(value="/shop/item/addItem2.do", method = RequestMethod.POST)	// addGb.jsp 
 	public String submit(@ModelAttribute("item") ItemForm itemForm, BindingResult bindingResult, 
 			@RequestParam("productId") int productId, HttpServletRequest rq, Model model) {
 		System.out.println("item.addItem2.do");
 		
-		ValidationUtils.rejectIfEmptyOrWhitespace(bindingResult, "title", "required");
-		ValidationUtils.rejectIfEmptyOrWhitespace(bindingResult, "description", "required");
-		if(itemForm.getDescription().length() > 0 && itemForm.getDescription().length() < 11) {
-			bindingResult.rejectValue("description", "tooShortDesc");
-		}
-		
-		ValidationUtils.rejectIfEmptyOrWhitespace(bindingResult, "unitCost", "required");
-		try {
-			int unitCost = itemForm.getUnitCost();
-		} catch(NumberFormatException e) {	
-			bindingResult.rejectValue("unitCost", "mustInt");
-		} 
-		
-		if(itemForm.getUnitCost() <= 0) {
-			bindingResult.rejectValue("unitCost", "tooSmall");
-		}
-		
-		ValidationUtils.rejectIfEmptyOrWhitespace(bindingResult, "qty", "required");
-		if(itemForm.getQty() <= 0) {
-			bindingResult.rejectValue("qty", "tooSmall");
-		}
+		new ItemFormValidator().validate(itemForm, bindingResult);
 		
 		String itemController = "";
-		HttpSession httpSession = rq.getSession(true); //�뜝�럩逾졿쾬�꼻�삕 �뜝�럡�돪�뜝�럥占썩댙�삕占쎈턄 �뜝�럩肉녑뜝�럥堉꾤춯濡녹삕 �윜諭꾩삕 �뜝�럡�돪�뜝�럥占썩댙�삕占쎈굵 �뜝�럥利쇔뜝�럩�졎�썒�슣�닁占쏙옙, �뜝�럡�돪�뜝�럥占썩댙�삕占쎈턄 �뜝�럥�뵪�뜝�럩紐든춯濡녹삕 �뜝�럡�돮�슖�돦裕뉛옙�뮧 �뜝�럡�돪�뜝�럥占썩댙�삕占쎈굵 �뜝�럡臾멨뜝�럡�뎽�뜝�럥由썲뜝�럥堉�.
+		HttpSession httpSession = rq.getSession(true); 
 				
 		System.out.println("itemForm : " + itemForm);
 		
 		httpSession.setAttribute("itemForm", itemForm);	//generate item session
 		
-		if (bindingResult.hasErrors()) {	//寃�利� �삤瑜� 諛쒖깮�떆 �몢踰덉㎏ �뤌�쑝濡� �룎�븘媛�
+		if (bindingResult.hasErrors()) {	//유효성 검증 에러 발생시
 			model.addAttribute("productId", productId);
 			return "product/item";
 		}

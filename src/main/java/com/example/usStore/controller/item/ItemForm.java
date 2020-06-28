@@ -18,12 +18,11 @@ public class ItemForm {
 	  private String tag3;
 	  private String tag4;
 	  private String tag5;
-	  private List<Tag> tags = new ArrayList<Tag>();
 	  private String userId;		 //(FK) �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕 �뜝�룞�삕�뜝�떛�벝�삕
 	  private int productId;      	 //(FK) �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕�뜝�룞�삕/�뜝�뙥怨ㅼ삕�궧�뜝占�/�뜝�룞�삕�뜝占�/�뜝�룞�삕�뜝�룞�삕�뜝�룞�삕�뜝�떎紐뚯삕 �뜝�룞�삕�뜝�룞�삕  
 	  
 	  public ItemForm() {}
-	  
+
 	  public ItemForm(String title, String userId, int productId, String description, int unitCost, int qty, String tag1, String tag2, String tag3,
 			String tag4, String tag5) {
 		super();
@@ -135,7 +134,7 @@ public class ItemForm {
 
 	public void setTag4(String tag4) {
 		this.tag4 = tag4;
-	}
+	} 
 
 	public String getTag5() {
 		return tag5;
@@ -145,35 +144,13 @@ public class ItemForm {
 		this.tag5 = tag5;
 	}
 
-	public List<Tag> getTags() {	// get List
-		return tags;
-	}
-
-	public void setTags(List<Tag> tags) {
-		this.tags = tags;
-	}
-	
-	public void makeTags(int itemId, String tagName) {	//itemId�몴占� tag占쎌벥 itemId嚥∽옙, tagName(tag1, 2, 3, 4, 5) 筌욑옙占쎌젟 , tagId占쎈뮉 占쎌뿫占쎌벥占쎌벥 占쎈땾 0 占쎌몵嚥∽옙 筌욑옙占쎌젟
-		if(tagName != null && tagName.trim() != "") {
-			Tag tag = new Tag(itemId, tagName);
-			tags.add(tag);
-		}	
-	  }
-	
-	public void makeTags(int tagId, int itemId, String tagName) {	//itemId�몴占� tag占쎌벥 itemId嚥∽옙, tagName(tag1, 2, 3, 4, 5) 筌욑옙占쎌젟 , tagId占쎈뮉 占쎌뿫占쎌벥占쎌벥 占쎈땾 0 占쎌몵嚥∽옙 筌욑옙占쎌젟
-		if(tagName != null && tagName.trim() != "") {
-			Tag tag = new Tag(tagId, itemId, tagName);
-			tags.add(tag);
-		}	
-	  }
-
 	@Override
 	public String toString() {
 		return "ItemForm [itemId=" + itemId + ", unitCost=" + unitCost + ", title=" + title + ", description="
 				+ description + ", viewCount=" + viewCount + ", qty=" + qty + ", tag1=" + tag1 + ", tag2=" + tag2
-				+ ", tag3=" + tag3 + ", tag4=" + tag4 + ", tag5=" + tag5 + ", tags=" + tags + ", userId=" + userId
+				+ ", tag3=" + tag3 + ", tag4=" + tag4 + ", tag5=" + tag5 + ", userId=" + userId
 				+ ", productId=" + productId + "]";
 	}
 	
-	  
+	   
 }

@@ -67,5 +67,11 @@ public class MybatisItemDao implements ItemDao {
 		return itemMapper.getUserIdByItemId(itemId);
 	}
 
+	@Override
+	public void updateViewCount(int viewCount, int itemId) {
+		// TODO Auto-generated method stub
+		itemMapper.updateViewCount(viewCount, itemId);
+	}
+
 	
 }

@@ -23,7 +23,6 @@ import org.springframework.ui.Model;
  * @modified-by Changsup Park
  */
 @Controller
-@SessionAttributes("userSession")
 public class SignonController { 
 
 	private UsStoreFacade usStore;
@@ -45,12 +44,12 @@ public class SignonController {
 		}
 		else {
 			UserSession userSession = new UserSession(account);
-			model.addAttribute("userSession", userSession);
+			HttpSession session = request.getSession();
+			session.setAttribute("userSession", userSession);
+			
 			if (forwardAction != null) {
 				return new ModelAndView("redirect:" + forwardAction);
 			} else {
-				HttpSession session = request.getSession();
-				session.setAttribute("account", account);
 				return new ModelAndView("index");
 			}
 		}

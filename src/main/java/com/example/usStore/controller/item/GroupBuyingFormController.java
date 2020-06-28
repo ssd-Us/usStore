@@ -13,7 +13,9 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 
 import com.example.usStore.controller.mypage.UserSession;
+import com.example.usStore.domain.Account;
 import com.example.usStore.domain.GroupBuying;
+import com.example.usStore.domain.HandMade;
 import com.example.usStore.domain.Item;
 import com.example.usStore.domain.Tag;
 import com.example.usStore.service.facade.MyPageFacade;
@@ -27,6 +29,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
+import com.example.usStore.service.GroupBuyingFormValidator;
 import com.example.usStore.service.facade.ItemFacade;
 
 @Controller
@@ -93,7 +96,6 @@ public class GroupBuyingFormController {
 			GroupBuying gb = itemFacade.getGroupBuyingItem(itemId);
 			groupBuyingForm.setListPrice(gb.getListPrice());
 			System.out.println(groupBuyingForm);
-			
 		}
 		
 		model.addAttribute("productId", productId);
@@ -104,27 +106,34 @@ public class GroupBuyingFormController {
 	public String backToItem(@ModelAttribute("GroupBuying") GroupBuyingForm groupBuyingForm, 
 			@RequestParam("productId") int productId) {
 		System.out.println("go back to item.jsp");
-		return "redirect:/shop/item/addItem.do?productId=" + productId;	// step1(item.jsp) form step2(addGroupBuying.jsp)
+		return "redirect:/shop/item/addItem.do?productId="+productId;	// step1(item.jsp) form step2(addGroupBuying.jsp)
 	}
 	
 	@RequestMapping(value="/shop/groupBuying/gobackAddGb.do", method = RequestMethod.GET)		// step3 -> step2
 	public String backToAddGroupBuying(
 			@ModelAttribute("GroupBuying") GroupBuyingForm groupBuyingForm, 
-			@RequestParam("productId") int productId, Model model){
-		model.addAttribute("productId", productId);
-		return ADD_GroupBuying_FORM;	// check.jsp -> addGroupBuying.jsp
+			@RequestParam("productId") int productId){
+		return "redirect:/shop/groupBuying/addItem2.do?productId=" + productId;	// check.jsp -> addGroupBuying.jsp
 	}
 	
 	@PostMapping("/shop/groupBuying/step3.do")		// go checkGroupBuying.jsp
-	public String goCheck(@ModelAttribute("GroupBuying") GroupBuyingForm groupBuyingForm, 
-			HttpServletRequest rq, ItemForm itemForm, Model model, 
-			BindingResult bindingResult) {	
+	public String goCheck(@ModelAttribute("GroupBuying") GroupBuyingForm groupBuyingForm, BindingResult result,
+			HttpServletRequest rq, ItemForm itemForm, Model model) {	
 		System.out.println("step3.do(before check form)");
 		HttpSession session = rq.getSession(false);
+		new GroupBuyingFormValidator().validate(groupBuyingForm, result);
 		
-		itemForm = (ItemForm) session.getAttribute("itemForm");
 		if(session.getAttribute("itemForm") != null) {
+			itemForm = (ItemForm) session.getAttribute("itemForm");
 			System.out.println("itemformSession: " + itemForm);	//print itemformSession toString
+		}
+		if(groupBuyingForm.getListPrice() >= itemForm.getUnitCost()) {
+			result.rejectValue("listPrice", "mustDiscount");
+		}
+		
+		if (result.hasErrors()) {	//유효성 검증 에러 발생시
+			model.addAttribute("productId", itemForm.getProductId());
+			return ADD_GroupBuying_FORM;
 		}
 		
 		System.out.println("deadLine still null," + groupBuyingForm);	//print command toString
@@ -132,16 +141,15 @@ public class GroupBuyingFormController {
 		int calDiscount;
 		double listPrice = groupBuyingForm.getListPrice();
 		double unitCost = itemForm.getUnitCost();
-		if(listPrice <= unitCost) {
-			calDiscount = (int) ((unitCost - listPrice) / unitCost * 100);
-		}
-		else {	calDiscount = -999;	}	// �씠遺�遺꾩� �굹以묒뿉 error濡� 怨좎튂湲�
 		
+		calDiscount = (int) ((unitCost - listPrice) / unitCost * 100);
 		System.out.println("calDiscount: " + calDiscount);
 		
 		groupBuyingForm.setDiscount(calDiscount);
-		
-		String deadLine = groupBuyingForm.getDate() + " " + groupBuyingForm.getTime() + ":00";
+		 
+		String date = groupBuyingForm.getDate();
+		String time = groupBuyingForm.getTime();
+		String deadLine = date + " " + time + ":00";
 		groupBuyingForm.setDeadLine(deadLine);
 		System.out.println("setting : " + groupBuyingForm);
 		
@@ -152,7 +160,7 @@ public class GroupBuyingFormController {
 	@PostMapping("/shop/groupBuying/detailItem.do")		// step3 -> done
 	public String done(@ModelAttribute("GroupBuying") GroupBuyingForm groupBuyingform, 
 			ItemForm itemformSession, BindingResult result, Model model, HttpServletRequest rq, 
-			SessionStatus sessionStatus, GroupBuying groupBuying, ModelMap modelMap) {
+			SessionStatus sessionStatus, ModelMap modelMap) {
 		int status = 0;
 		System.out.println("detailItem.do");
 		
@@ -160,9 +168,14 @@ public class GroupBuyingFormController {
 		itemformSession = (ItemForm) session.getAttribute("itemForm");
 		if(session.getAttribute("status") != null) {
 			status = (int) session.getAttribute("status");
+			System.out.println("status" + status);
 		}
-		UserSession userSession = (UserSession) session.getAttribute("userSession");
+		if(session.getAttribute("userSession") != null) {
+			UserSession userSession = (UserSession) session.getAttribute("userSession");
+			System.out.println(userSession);
+		}
 		
+		UserSession userSession = (UserSession) session.getAttribute("userSession");
 		String suppId = userSession.getAccount().getUserId();
 		System.out.println("suppId: " + suppId);
 				
@@ -179,12 +192,9 @@ public class GroupBuyingFormController {
 		if(status != 0) {
 			item.setItemId(status);
 			item.setViewCount(itemformSession.getViewCount());
-			itemFacade.updateItem(item);
-			System.out.println("itemUpdated" + item);
+			System.out.println("Update id, viewCount" + item);
 		}
-		else {
-			itemFacade.insertItem(item);	// -> generate itemId, insert DB
-		}
+		System.out.println("조회수:" + itemformSession.getViewCount());
 		
 		System.out.println("itemId: " + item.getItemId());	//print itemformSession toString
 		
@@ -193,7 +203,7 @@ public class GroupBuyingFormController {
 			System.out.println("tag size : " + tags.size());	//0
 			if(tags.size() > 0) {
 				itemFacade.deleteTag(status);
-				tags.removeAll(tags);
+				tags.removeAll(tags);	//기존의 태그 전부 삭제
 				
 				System.out.println("removed tags, tag size : " + tags.size());
 				List<Tag> t = itemFacade.getTagByItemId(status);
@@ -201,42 +211,40 @@ public class GroupBuyingFormController {
 			}
 		}
 		//generate tags(only have tagName)
-		itemformSession.makeTags(item.getItemId(), itemformSession.getTag1());	//if(tag != null && "") then addTags
-		itemformSession.makeTags(item.getItemId(), itemformSession.getTag2());
-		itemformSession.makeTags(item.getItemId(), itemformSession.getTag3());
-		itemformSession.makeTags(item.getItemId(), itemformSession.getTag4());
-		itemformSession.makeTags(item.getItemId(), itemformSession.getTag5());
-		
-		List<Tag> tags = new ArrayList<Tag>();
-		tags = itemformSession.getTags();
-		
-		System.out.println("tags: " + tags);
+		item.makeTags(itemformSession.getTag1());	//if(tag != null && "") then addTags
+		item.makeTags(itemformSession.getTag2());	//if(tag != null && "") then addTags
+		item.makeTags(itemformSession.getTag3());	//if(tag != null && "") then addTags
+		item.makeTags(itemformSession.getTag4());	//if(tag != null && "") then addTags
+		item.makeTags(itemformSession.getTag5());	//if(tag != null && "") then addTags
 				
-		for(Tag t : tags) {
-			itemFacade.insertTag(t);	//matching tag - item (via itemId) , insert DB
-		}
+//		List<Tag> tags = new ArrayList<Tag>();
+//		tags = item.getTags();
+	//	item.setTags(tags);
 		
+	//	System.out.println("tags: " + tags);
+			
+//		for(Tag t : tags) {
+//			itemFacade.insertTag(t);	//matching tag - item (via itemId) , insert DB
+//		}
 		
 		System.out.println("deadLine : " + groupBuyingform.getDeadLine());
+		GroupBuying gb = new GroupBuying(item, groupBuyingform.getDiscount(), groupBuyingform.getListPrice(), groupBuyingform.getDeadLine());;
 		
-		groupBuying.setItemId(item.getItemId());
-		groupBuying.setDiscount(groupBuyingform.getDiscount());
-		groupBuying.setListPrice(groupBuyingform.getListPrice());
-		groupBuying.setDeadLine(groupBuyingform.getDeadLine());
-	
 		if(status != 0) {
-			itemFacade.updateGroupBuying(groupBuying);
+			itemFacade.updateGroupBuying(gb);
 		}
 		else {
-			itemFacade.insertGroupBuying(groupBuying);	// insert DB
+			itemFacade.insertGroupBuying(gb);	// insert DB
 		}
+		
+		System.out.println(gb);
 		
 		sessionStatus.setComplete();	// groupBuying, editStatus session close
 		session.removeAttribute("itemForm");	//itemForm session close
 		session.removeAttribute("status");
 		
-		return "redirect:/shop/groupBuying/viewItem.do?itemId=" + groupBuying.getItemId() + "&productId=" + item.getProductId();
-	} 
+		return "redirect:/shop/groupBuying/viewItem.do?itemId=" + gb.getItemId() + "&productId=" + item.getProductId();
+	}
 	
 	@RequestMapping("/shop/groupBuying/viewItem.do") //click title -> detail Page(viewCount++)
 	public String viewGroupBuying(@RequestParam("itemId") int itemId, 
@@ -245,36 +253,34 @@ public class GroupBuyingFormController {
 		System.out.println("viewItem.do");
 		System.out.println("itemId:" + itemId);
 		
+		String victim = null;
+		String isAccuse = "false";
+		
 		HttpSession session = rq.getSession(false);
 		
 		if(session.getAttribute("userSession") != null) {
 			UserSession userSession = (UserSession) session.getAttribute("userSession");
-			String suppId = userSession.getAccount().getUserId();
-			
-			System.out.println("suppId: " + suppId);
-			model.addAttribute("suppId", suppId);
+			victim = userSession.getAccount().getUserId();
+			String attacker = this.itemFacade.getUserIdByItemId(itemId);
+			isAccuse = this.myPageFacade.isAccuseAlready(attacker, victim);
 		}
 		
-		Item item = itemFacade.getItem(itemId);
-		item.setViewCount(item.getViewCount() + 1);
-		System.out.println("object's viewcount ++ ? : " + item);
+		GroupBuying groupBuying = itemFacade.getGroupBuyingItem(itemId);
+		System.out.println("viewCount : " + groupBuying.getViewCount());
+		itemFacade.updateViewCount(groupBuying.getViewCount() + 1, itemId);
+		System.out.println("object's viewcount ++ ? : " + groupBuying);
 		
-		itemFacade.updateItem(item);	// update : viewCount++
-		System.out.println("updated item data: " + itemFacade.getItem(itemId).toString());
+	//	System.out.println("updated item data: " + itemFacade.getItem(itemId).toString());
 				
-		GroupBuying gb = itemFacade.getGroupBuyingItem(itemId);
-		System.out.println(gb);
+	//	GroupBuying gb = itemFacade.getGroupBuyingItem(itemId);
+		
+		System.out.println(groupBuying);
 		
 		List<Tag> tags = new ArrayList<Tag>();
-		tags = itemFacade.getTagByItemId(gb.getItemId());
+		tags = itemFacade.getTagByItemId(groupBuying.getItemId());
 		
-		String attacker = this.itemFacade.getUserIdByItemId(itemId);
-	    System.out.println("attacker : " + attacker);
 	      
-		String isAccuse = this.myPageFacade.isAccuseAlready(attacker, "A"); 
-	    System.out.println("isAccuse: " + isAccuse);
-	      
-		model.addAttribute("gb", gb);
+		model.addAttribute("gb", groupBuying);
 		model.addAttribute("productId", productId);
 		model.addAttribute("isAccuse", isAccuse);
 		modelMap.addAttribute("tags", tags);
@@ -297,14 +303,17 @@ public class GroupBuyingFormController {
 		System.out.println("edit.do");
 		System.out.println("itemId(status) : " + status);
 		
-		item = itemFacade.getItem(itemId);
+	//	GroupBuying gb = (GroupBuying) itemFacade.getItem(itemId);
+		
+		GroupBuying gb = itemFacade.getGroupBuyingItem(itemId);
 		
 		ItemForm itemFormSession = (ItemForm) session.getAttribute("itemForm");
-		itemFormSession.setUnitCost(item.getUnitCost());
-		itemFormSession.setTitle(item.getTitle());
-		itemFormSession.setDescription(item.getDescription());
-		itemFormSession.setQty(item.getQty());
-		itemFormSession.setViewCount(item.getViewCount());
+//		System.out.println("아이템아이디: " + itemFormSession.getItemId());
+		itemFormSession.setUnitCost(gb.getUnitCost());
+		itemFormSession.setTitle(gb.getTitle());
+		itemFormSession.setDescription(gb.getDescription());
+		itemFormSession.setQty(gb.getQty());
+		itemFormSession.setViewCount(gb.getViewCount());
 				
 		switch(tags.size()) {
 			case 1: itemFormSession.setTag1(tags.get(0).getTagName());
@@ -332,7 +341,7 @@ public class GroupBuyingFormController {
 					itemFormSession.setTag5(tags.get(4).getTagName());
 					break;
 		}
-		System.out.println(itemFormSession);
+		System.out.println("수정 전 아이템: " + itemFormSession);
 		
 		return "redirect:/shop/item/addItem.do?productId=" + item.getProductId();
 	}
@@ -358,4 +367,14 @@ public class GroupBuyingFormController {
 		return "redirect:/shop/index.do";
 	}
 	
+//	@RequestMapping("/shop/groupBuying/joint.do") //go index(remove sessions)
+//	public String jointGroupBuying(HttpServletRequest rq)
+//	{
+//		System.out.println("jointGroupBuying");
+//		HttpSession session = rq.getSession(true);
+//		
+//		session
+//		
+//		return "redirect:/shop/index.do";
+//	}
 }

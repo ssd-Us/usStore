@@ -92,11 +92,6 @@ public class ItemImpl implements ItemFacade {
 	}
 	
 	@Override
-	public List<Item> searchItemList(String keywords) {
-		return itemDao.searchItemList(keywords);
-	}
-	
-	@Override
 	public void deleteItem(int itemId) {
 		// TODO Auto-generated method stub
 		itemDao.deleteItem(itemId);
@@ -197,11 +192,12 @@ public class ItemImpl implements ItemFacade {
 		return secondHandDao.getSecondHandItem(itemId);
 	}
 
+
 	@Override
 	public void insertSecondHand(SecondHand secondHand) {
 		secondHandDao.insertSecondHand(secondHand);
 	}
-
+	
 	@Override
 	public void updateSecondHand(SecondHand secondHand) {
 		secondHandDao.updateSecondHand(secondHand);
@@ -316,12 +312,6 @@ public class ItemImpl implements ItemFacade {
 	}
 
 	@Override
-	public void updateTag(Tag tag) {
-		// TODO Auto-generated method stub
-		tagDao.updateTag(tag);
-	}
-
-	@Override
 	public void deleteTag(int itemId) {
 		// TODO Auto-generated method stub
 		tagDao.deleteTag(itemId);
@@ -349,4 +339,19 @@ public class ItemImpl implements ItemFacade {
 	public String getUserIdByItemId(int itemId) {
 		return itemDao.getUserIdByItemId(itemId);
 	}
+
+	@Override
+	public List<Item> searchItemList(String keywords) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void updateViewCount(int viewCount, int itemId) {
+		// TODO Auto-generated method stub
+		itemDao.updateViewCount(viewCount, itemId);
+	}
+
+	
+
 }

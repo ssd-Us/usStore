@@ -15,7 +15,6 @@
       LISTPRICE,
       I.USERID AS "item.userId",
       I.PRODUCTID AS "item.productId",
-      STATUS
     FROM ITEM I, HANDMADE H
     WHERE H.ITEMID = I.ITEMID AND I.PRODUCTID = #{value}
   </select>

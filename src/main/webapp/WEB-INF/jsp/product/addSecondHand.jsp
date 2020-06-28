@@ -24,9 +24,8 @@ div#addItemForm {
 	<hr width="927px" align="left">
 	<br>
 	<br>
-	<spring:hasBindErrors name="SecondHand" />
 
-	<form:form modelAttribute="SecondHand" method="post" action="step3.do">
+	<form:form modelAttribute="secondHandForm"  method="post" action="step3.do">
 		
 	판매가(중고가): <form:input type="text" path="listPrice" value="${listPrice}" />
 		<form:errors path="listPrice" />
