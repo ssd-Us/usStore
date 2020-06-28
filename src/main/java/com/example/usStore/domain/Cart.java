@@ -16,7 +16,7 @@ public class Cart implements Serializable {
 
 	/* Private Fields */
 	
-	private final Map<String, CartItem> itemMap = Collections.synchronizedMap(new HashMap<String, CartItem>());
+	private final Map<Integer, CartItem> itemMap = Collections.synchronizedMap(new HashMap<Integer, CartItem>());
 		
 	private final PagedListHolder<CartItem> itemList = new PagedListHolder<CartItem>();
 	
@@ -32,7 +32,7 @@ public class Cart implements Serializable {
 
   /* Public Methods */
 
-	public boolean containsItemId(String itemId) {
+	public boolean containsItemId(int itemId) {
 	  return itemMap.containsKey(itemId);
 	}
 
@@ -43,13 +43,13 @@ public class Cart implements Serializable {
 			cartItem.setItem(item);
 			cartItem.setQuantity(0);
 			cartItem.setInStock(isInStock);
-			itemMap.put(Integer.toString(item.getItemId()), cartItem);
+			itemMap.put(item.getItemId(), cartItem);
 			itemList.getSource().add(cartItem);
 		}
 		cartItem.incrementQuantity();
 	}
 
-	public Item removeItemById(String itemId) {
+	public Item removeItemById(int itemId) {
 		CartItem cartItem = itemMap.remove(itemId);
 		if (cartItem == null) {
 			return null;
@@ -59,12 +59,12 @@ public class Cart implements Serializable {
 		}
 	}
 
-	public void incrementQuantityByItemId(String itemId) {
+	public void incrementQuantityByItemId(int itemId) {
 		CartItem cartItem = itemMap.get(itemId);
 		cartItem.incrementQuantity();
 	}
 
-	public void setQuantityByItemId(String itemId, int quantity) {
+	public void setQuantityByItemId(int itemId, int quantity) {
 		CartItem cartItem = itemMap.get(itemId);
 		cartItem.setQuantity(quantity);
 	}

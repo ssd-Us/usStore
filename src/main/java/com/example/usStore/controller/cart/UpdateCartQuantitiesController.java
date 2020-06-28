@@ -31,7 +31,7 @@ public class UpdateCartQuantitiesController {
 			int itemId = cartItem.getItem().getItemId();
 			try {
 				int quantity = Integer.parseInt(request.getParameter(String.valueOf(itemId)));
-//				cart.setQuantityByItemId(itemId, quantity);
+				cart.setQuantityByItemId(itemId, quantity);
 				if (quantity < 1) {
 					cartItems.remove();
 				}
