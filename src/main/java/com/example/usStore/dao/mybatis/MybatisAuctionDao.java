@@ -62,12 +62,6 @@ public class MybatisAuctionDao implements AuctionDao {
    }
 
    @Override
-   public Auction getAuctionItem(int itemId) throws DataAccessException {
-      // TODO Auto-generated method stub
-      return auctionMapper.getAuctionItem(itemId);
-   }
-
-   @Override
    public void insertAuction(Auction auction) throws DataAccessException {
       // TODO Auto-generated method stub
 	  itemMapper.insertItem(auction);

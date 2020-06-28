@@ -39,32 +39,22 @@ div#addItemForm {
       <label>수량</label> : ${itemForm.qty} <br>
       <label>정가</label> : ${itemForm.unitCost}원 <br> 
       <label>판매가</label> : ${secondHandForm.listPrice}원 <br> 
-      <label>에누리가능여부</label> :
+       
+      <label>가격 흥정 여부</label> :
       		<c:choose>
-	   				<c:when test="${secondHandForm.discount eq 1}">
-						<td><c:out value="에눌 가능" /></td> 
+	   				<c:when test="${secondHandForm.discount eq 'Yes'}">
+						<td><c:out value="흥정 가능" /></td> 
 					</c:when>
 					<c:otherwise>
-						<td> <c:out value="에눌 불가능" /></td> 
+						<td> <c:out value="흥정 불가능" /></td> 
 					</c:otherwise>
 			</c:choose><br>
-      <label>태그</label> : 
+      <label>태그</label> : <c:forEach var="tag" items="${tags}"> 
+                  <c:if test="${not empty tag.tagName}">
+                     <font color="blue">#</font>${tag.tagName}
+                  </c:if>
+               </c:forEach>
 
-<c:if test="${itemForm.tag1 != '' && itemForm.tag1 ne null}">
-         <font color="blue">#</font>${itemForm.tag1} 
-</c:if>
-      <c:if test="${itemForm.tag2 != '' && itemForm.tag2 ne null}">
-         <font color="blue">#</font>${itemForm.tag2} 
-</c:if>
-      <c:if test="${itemForm.tag3 != '' && itemForm.tag3 ne null}">
-         <font color="blue">#</font>${itemForm.tag3} 
-</c:if>
-      <c:if test="${itemForm.tag4 != '' && itemForm.tag4 ne null}">
-         <font color="blue">#</font>${itemForm.tag4} 
-</c:if>
-      <c:if test="${itemForm.tag5 != '' && itemForm.tag5 ne null}">
-         <font color="blue">#</font>${itemForm.tag5} 
-</c:if>
 <br>
 <label>접수 일시</label> : ${sf} <br><br>
 

@@ -14,9 +14,6 @@ public interface AuctionDao extends ItemDao {
 	// select Auction
 	List<Auction> getAuctionList() throws DataAccessException;
 
-	// itemId 諛쏆븘�� �빐�떦 寃쎈ℓ 媛앹껜 諛섑솚
-	Auction getAuctionItem(int itemId) throws DataAccessException;
-
 	// insert Auction
 	public void insertAuction(Auction auction) throws DataAccessException;
 
