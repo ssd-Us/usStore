@@ -34,10 +34,10 @@
                   <hr>
                   <table>
                      <tr>
-                        <th>제목</th>
-                        <th style="padding-left:120px">가격</th>
+                        <th style="padding-left:20px">제목</th>
+                        <th style="padding-left:100px">가격</th>
                         <th><p style="padding-left:80px">마감 날짜</p></th>
-                        <th><p style="padding-left:80px">판매자</p></th>
+                        <th><p style="padding-left:90px">판매자</p></th>
                         <th><p style="padding-left:80px">낙찰자</p></th>
                         
                         </tr>
@@ -53,7 +53,7 @@
                                 </a>
                 
                    </td>
-                   <td style="padding-left:120px">
+                   <td style="padding-left:100px">
                    		시작가 : <c:out value="${al.startPrice}"/><br>
                    		<!-- 경매 종료시 낙찰가 보여주기, 경매 진행중일땐 현재 최고 가격 보여주기 -->
                    		<c:set var="state" value="${al.auctionState}"/>
