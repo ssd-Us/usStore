@@ -164,9 +164,10 @@
          <tr>
             <td colspan="2" style="border-bottom: none;">
                <span id="blue">
-                  <a href="
-                     <c:url value='/addCart/${gb.itemId}'/>
-               ">장바구니 추가</a>
+   				<a href="<c:url value="/shop/addItemToCart.do">
+					     <c:param name="workingItemId" value="${gb.itemId}"/>
+					     <c:param name="productId" value="${gb.productId}"/></c:url>">
+					 장바구니 추가</a>
             </span>
             &nbsp;&nbsp;&nbsp;
             <span id="blue">
