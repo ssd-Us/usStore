@@ -87,8 +87,22 @@
 					">팔로잉</a>
 				</span>
 				<!-- 판매자 신고하기 -->
-				&nbsp; <%@ include file="/WEB-INF/jsp/account/accuseFunction.jsp" %>
-   			</td>
+				&nbsp;
+			
+				<c:choose>
+	   				<c:when test="${! empty userSession.account.userId}">
+						<%@ include file="/WEB-INF/jsp/account/accuseFunction.jsp" %>
+					</c:when>
+					<c:otherwise>
+						<span>
+							<a href="<c:url value='/addAccuseNoLogin.do'>
+				                 <c:param name="itemId" value="${handMade.itemId}"/>
+				                 <c:param name="productId" value="${handMade.productId}"/></c:url>">
+				                         판매자 신고하기</a>
+			            </span>
+					</c:otherwise>
+				</c:choose>
+			</td>
    		</tr> <!-- userId = suppId -->
    		
    		<tr>
