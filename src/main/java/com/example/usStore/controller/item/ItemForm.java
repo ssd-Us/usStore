@@ -22,7 +22,7 @@ public class ItemForm {
 	  private int productId;      	 //(FK) �뜝�룞�삕�뜝�룞�삕�뜝�룞�삕�뜝�룞�삕/�뜝�뙥怨ㅼ삕�궧�뜝占�/�뜝�룞�삕�뜝占�/�뜝�룞�삕�뜝�룞�삕�뜝�룞�삕�뜝�떎紐뚯삕 �뜝�룞�삕�뜝�룞�삕  
 	  
 	  public ItemForm() {}
-	  
+
 	  public ItemForm(String title, String userId, int productId, String description, int unitCost, int qty, String tag1, String tag2, String tag3,
 			String tag4, String tag5) {
 		super();
