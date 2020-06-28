@@ -39,17 +39,33 @@ public class SignonController {
 			Model model) throws Exception {
 		Account account = usStore.getAccountByUserIdAndPassword(userId, password);
 		if (account == null) {
+			// return "redirect:shop/signonForm.do";
 			return new ModelAndView("Error", "message", 
 					"Invalid username or password.  Signon failed.");
 		}
 		else {
 			UserSession userSession = new UserSession(account);
 			HttpSession session = request.getSession();
-			session.setAttribute("userSession", userSession);
+			session.setAttribute("userSession", userSession);	
 			
 			if (forwardAction != null) {
 				return new ModelAndView("redirect:" + forwardAction);
-			} else {
+			} else { //신고기능 로그인 안되어있을 때 여기로 들어옴 
+				int itemId = (int)session.getAttribute("accuseItemId");
+				int productId = (int)session.getAttribute("accuseProductId");
+				
+				session.removeAttribute("accuseItemId");
+				session.removeAttribute("accuseProductId");
+				
+				if(productId == 0)
+			           	return new ModelAndView("redirect:" + "/shop/groupBuying/viewItem.do?itemId=" + itemId + "&productId=" + productId);
+			        else if(productId ==1)
+			        	return new ModelAndView("redirect:" + "/shop/auction/viewItem.do?itemId=" + itemId + "&productId=" + productId);  
+			        else if(productId ==2)
+			        	return new ModelAndView("redirect:" + "/shop/secondHand/viewItem.do?itemId=" + itemId + "&productId=" + productId);  
+			        else if(productId ==3)
+			        	return new ModelAndView("redirect:" + "/shop/handMade/viewItem.do?itemId=" + itemId + "&productId=" + productId);  
+
 				return new ModelAndView("index");
 			}
 		}
