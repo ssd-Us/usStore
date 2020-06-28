@@ -52,8 +52,9 @@
 									<td>${item.listPrice}원</td>
 									<td>${item.userId}</td>
 									<td><a href='<c:url value="/shop/addItemToCart.do">
-					            				<c:param name="workingItemId" value="${item.itemId}"/></c:url>'>
-					              		<img border="0" src="../../images/button_add_to_cart.gif" alt="" /></a></td>
+					            				<c:param name="workingItemId" value="${item.itemId}"/>
+					            				<c:param name="productId" value="${item.productId}"/></c:url>'>
+					              		<img width="40" height="40" src="${pageContext.request.contextPath}/images/cart_img.png" alt="" /></a></td>
 								</tr>
 							</c:forEach>
 						</tbody>
