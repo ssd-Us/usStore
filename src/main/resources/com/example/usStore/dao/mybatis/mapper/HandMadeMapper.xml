@@ -49,14 +49,14 @@
   	WHERE ITEMID = #{itemId}
   </delete>
   
-  <update id="updateHandMade" parameterType="HandMade">
+  <update id="updateHandMade">
   	UPDATE HANDMADE SET
 	  	ITEMID = #{itemId},
 	  	LISTPRICE = #{listPrice}
   	WHERE ITEMID = #{itemId}
   </update>
   
-  <insert id="insertHandMade" parameterType="HandMade">
+  <insert id="insertHandMade">
    	INSERT INTO HANDMADE
       (ITEMID, LISTPRICE)
     VALUES

@@ -6,6 +6,7 @@ import java.io.Serializable;
 public class HandMadeForm implements Serializable  {
 
 	/* Private Fields */
+	/* item */
 	private int itemId; // (PK) String- > int
 	private int unitCost;
 	private String title;
@@ -15,7 +16,11 @@ public class HandMadeForm implements Serializable  {
 	private String userId; // (FK)
 	private int productId; // (FK)
 
+	/* handMade */
 	private int listPrice;
+	
+	/* Constructor */
+	public HandMadeForm() {  }
 	
 	/* JavaBeans Properties */
 	public int getItemId() {

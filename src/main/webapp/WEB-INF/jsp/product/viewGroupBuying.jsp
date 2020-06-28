@@ -81,14 +81,18 @@
 					">팔로잉</a>
 				</span>
 				&nbsp;
-				<c:choose>
-	   				<c:when test="${! empty userSession.account.userId}">
-						<%@ include file="/WEB-INF/jsp/account/accuseFunction.jsp" %>
-					</c:when>
-					<c:otherwise>
-						<a href="<c:url value='/addAccuseNoLogin.do'/>">판매자 신고하기</a>
-					</c:otherwise>
-			</c:choose>
+				
+					<c:choose>
+		   				<c:when test="${! empty userSession.account.userId}">
+							<%@ include file="/WEB-INF/jsp/account/accuseFunction.jsp" %>
+						</c:when>
+						<c:otherwise>
+						<span>
+							<a href="<c:url value='/addAccuseNoLogin.do'/>">판매자 신고하기</a>
+						</span>
+						</c:otherwise>
+					</c:choose>
+				
    			</td>
    		</tr>
    		
@@ -138,6 +142,7 @@
 					<a href="
 							<c:url value='/shop/groupBuying/joint.do'>
 								<c:param name="itemId" value="${gb.itemId}" />
+								<c:param name="productId" value="${gb.productId}" />
 							</c:url>
 					">공동구매 참여하기</a>
 				</span>
