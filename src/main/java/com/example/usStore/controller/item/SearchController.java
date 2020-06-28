@@ -54,11 +54,14 @@ public class SearchController {
 	@RequestMapping("/shop/search/selectItem.do") 
 	public String selectItem(@RequestParam("itemId") int itemId, ModelMap model) {
 		System.out.println("** 검색 페이지에서 아이템 아이디 선택 **");
+		System.out.println(itemId);
 		
-		Item item = new Item();
-		item = itemFacade.getItem(itemId);
+		Item item = this.itemFacade.getItem(itemId);
+		System.out.println(item.toString());
 		
 		int productId = item.getProductId();
+		
+		System.out.println("productId : " + productId);
 		
 		String url = null;
 		switch(productId) {

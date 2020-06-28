@@ -33,16 +33,16 @@
 		WHERE ITEMID = #{itemId} 
 	</delete>
 
-	<select id="getItem" parameterType="int" resultType="Item">
+	<select id="getItem" resultType="Item">
 		SELECT
-			ITEMID,
-			UNITCOST,
-			TITLE,
-			DESCRIPTION,
-			VIEWCOUNT,
-			QTY,
-			USERID,
-			PRODUCTID
+			ITEMID AS itemId,
+			UNITCOST AS unitCost,
+			TITLE AS title,
+			DESCRIPTION AS description,
+			VIEWCOUNT AS viewCount,
+			QTY AS qty,
+			USERID AS userId,
+			PRODUCTID AS productId
 		FROM ITEM
 		WHERE ITEMID = #{itemId}
 	</select>
