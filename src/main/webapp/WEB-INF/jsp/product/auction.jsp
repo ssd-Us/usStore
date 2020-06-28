@@ -58,7 +58,13 @@
                    		<!-- 경매 종료시 낙찰가 보여주기, 경매 진행중일땐 현재 최고 가격 보여주기 -->
                    		<c:set var="state" value="${al.auctionState}"/>
                        	<c:if test="${state eq 0}">
-                       		현재 최고가 : <c:out value="${al.unitCost}"/>
+                       		<c:set var="uc" value="${al.unitCost}" />
+                       		<c:if test="${uc eq 1}">
+                       			--미참여--
+                       		</c:if>
+                       		<c:if test="${uc ne 1}">
+                       			현재 최고가 : <c:out value="${uc}"/>
+                       		</c:if>
                        	</c:if>	
                    		<c:if test="${state eq 1}">
                        		낙찰가 : <c:out value="${al.bidPrice}"/>
