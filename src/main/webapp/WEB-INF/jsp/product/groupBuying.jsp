@@ -86,7 +86,7 @@
                                 </a>
                 
                    </td>
-                   <td><del>정가 &nbsp;&nbsp;${gb.unitCost}원</del><br>할인가 &nbsp;${gb.listPrice}원</td>
+                   <td><del>정가 &nbsp;&nbsp;${gb.listPrice}원</del><br>할인가 &nbsp;${gb.unitCost}원</td>
                    <td>${gb.discount}%</td>
                    <td>${gb.qty}</td>
                    <td>${gb.deadLine}<br></td>

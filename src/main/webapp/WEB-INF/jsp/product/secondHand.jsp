@@ -69,8 +69,8 @@
 							 		<td style="padding-left:120px"> <c:out value="에눌 불가능" /></td> 
 						    </c:otherwise>
 						</c:choose>
-				 		<td><fmt:formatNumber value="${item.unitCost}" pattern="###,###원" /></td>              
-						<td><fmt:formatNumber value="${item.listPrice}" pattern="###,###원" /></td>
+				 		<td><fmt:formatNumber value="${item.listPrice}" pattern="###,###원" /></td>              
+						<td><fmt:formatNumber value="${item.unitCost}" pattern="###,###원" /></td>
 		      			<td><a href='<c:url value="/shop/addItemToCart.do">
 					            				<c:param name="workingItemId" value="${item.itemId}"/>
 					            				<c:param name="productId" value="${item.productId}"/></c:url>'>
