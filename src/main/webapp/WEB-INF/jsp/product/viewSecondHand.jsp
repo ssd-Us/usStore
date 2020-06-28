@@ -105,7 +105,10 @@ function getSellerInfo(userId) {
 						<%@ include file="/WEB-INF/jsp/account/accuseFunction.jsp" %>
 					</c:when>
 					<c:otherwise>
-						<a href="<c:url value='/addAccuseNoLogin.do'/>">판매자 신고하기1</a>
+					<span><a href="<c:url value='/addAccuseNoLogin.do'>
+					  <c:param name="itemId" value="${sh.itemId}"/>
+                         <c:param name="productId" value="${sh.productId}"/></c:url>">
+             				판매자 신고하기</a></span>
 					</c:otherwise>
 			</c:choose>
    		</td>

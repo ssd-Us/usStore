@@ -37,7 +37,12 @@
   
   <update id="updateAuction">
      UPDATE AUCTION 
-     SET ITEMID = #{itemID}, AUCTIONSTATE = #{auctionState}, DEADLINE = #{deadLine}, STARTPRICE = #{startPrice}, BIDPRICE = #{bidPrice}
+     SET 
+     	AUCTIONSTATE = #{auctionState}, 
+     	DEADLINE = TO_DATE(#{deadLine}, 'yyyy-mm-dd hh24:mi:ss'), 
+     	STARTPRICE = #{startPrice}, 
+     	BIDPRICE = #{bidPrice}
+     WHERE ITEMID = #{itemId}
   </update>
   
   

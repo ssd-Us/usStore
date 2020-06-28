@@ -9,22 +9,24 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import com.example.usStore.domain.Cart;
 import com.example.usStore.domain.Item;
+import com.example.usStore.service.facade.ItemFacade;
 import com.example.usStore.service.facade.UsStoreFacade;
 
 /**
  * @author Juergen Hoeller
  * @since 30.11.2003
  * @modified-by Changsup Park
+ * @modified-by Jieun Lee
  */
 @Controller
 @SessionAttributes("sessionCart")
 public class AddItemToCartController { 
 
-	private UsStoreFacade usStore;
-
+	private ItemFacade itemFacade;
+	
 	@Autowired
-	public void setusStore(UsStoreFacade usStore) {
-		this.usStore = usStore;
+	public void setItemFacade(ItemFacade itemFacade) {
+		this.itemFacade = itemFacade;
 	}
 
 	@ModelAttribute("sessionCart")
@@ -35,21 +37,38 @@ public class AddItemToCartController {
 	@RequestMapping("/shop/addItemToCart.do")
 	public ModelAndView handleRequest(
 			@RequestParam("workingItemId") int workingItemId,
+			@RequestParam("productId") int productId,
 			@ModelAttribute("sessionCart") Cart cart 
 			) throws Exception {
-//		if (cart.containsItemId(workingItemId)) {
-//			cart.incrementQuantityByItemId(workingItemId);
-//		}
-//		else {
+		if (cart.containsItemId(workingItemId)) {
+			cart.incrementQuantityByItemId(workingItemId);
+		}
+		else {
 			// isInStock is a "real-time" property that must be updated
 			// every time an item is added to the cart, even if other
 			// item details are cached.
+			System.out.println("workingItemId : " + workingItemId);
+			System.out.println("productId : " + productId);
 			
-			// 없는 함수라 필요하다면 만들어야함
-//			boolean isInStock = this.usStore.isItemInStock(workingItemId);
-//			Item item = this.usStore.getItem(workingItemId);
-//			cart.addItem(item, isInStock);
-//		}
+			Item item = null;
+			switch(productId) {
+				case 0:
+					item = this.itemFacade.getGroupBuyingItem(workingItemId);
+					break;
+				case 1:
+					item = this.itemFacade.getAuctionById(workingItemId);
+					break;
+				case 2:
+					item = this.itemFacade.getSecondHandItem(workingItemId);
+					break;
+				case 3:
+					item = this.itemFacade.getHandMadeById(workingItemId);
+					break;
+			}
+			
+			boolean isInStock = this.itemFacade.isItemInStock(workingItemId, item.getProductId());
+			cart.addItem(item, isInStock);
+		}
 		return new ModelAndView("order/Cart", "cart", cart);
 	}
 }

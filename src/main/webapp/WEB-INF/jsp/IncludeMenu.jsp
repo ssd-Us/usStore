@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
   <div class="d-flex" id="wrapper">
 
@@ -12,11 +11,10 @@
         </c:if>
       </div>
       <div class="list-group list-group-flush">
-        <a href="<c:url value="/shop/handMade/listItem.do?productId=3"/>" class="list-group-item list-group-item-action bg-light">수공예</a>
-        <a href="<c:url value="/shop/secondHand/listItem.do?productId=2"/>" class="list-group-item list-group-item-action bg-light">중고거래</a>
-        <a href="<c:url value="/shop/auction/listItem.do?productId=1"/>" class="list-group-item list-group-item-action bg-light">경매</a>
-        <a href="<c:url value="/shop/groupBuying/listItem.do?productId=0"/>" class="list-group-item list-group-item-action bg-light">공동구매</a>
-        <a href="<c:url value="/shop/rank.do"/>" class="list-group-item list-group-item-action bg-light">랭킹</a>
+        <a href="<c:url value="/shop/handMade/listItem.do?productId=3"/>" class="list-group-item list-group-item-action bg-light">HandMade</a>
+        <a href="<c:url value="/shop/secondHand/listItem.do?productId=2"/>" class="list-group-item list-group-item-action bg-light">SecondHand</a>
+        <a href="<c:url value="/shop/auction/listItem.do?productId=1"/>" class="list-group-item list-group-item-action bg-light">Auction</a>
+        <a href="<c:url value="/shop/groupBuying/listItem.do?productId=0"/>" class="list-group-item list-group-item-action bg-light">GroupBuying</a>
 		<ul class="navbar-nav ml-auto mt-2 mt-lg-0 list-group-item list-group-item-action bg-light">
 		<li class="nav-item dropdown">
 			<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -56,3 +54,26 @@
       $("#wrapper").toggleClass("toggled");
     });
   </script>
+
+<!-- 토글 바 레이아웃 -->
+<!--         <div class="collapse navbar-collapse" id="navbarSupportedContent"> -->
+<!--           <ul class="navbar-nav ml-auto mt-2 mt-lg-0"> -->
+<!--             <li class="nav-item active"> -->
+<!--               <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a> -->
+<!--             </li> -->
+<!--             <li class="nav-item"> -->
+<!--               <a class="nav-link" href="#">Link</a> -->
+<!--             </li> -->
+<!--             <li class="nav-item dropdown"> -->
+<!--               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> -->
+<!--                 Dropdown -->
+<!--               </a> -->
+<!--               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown"> -->
+<!--                 <a class="dropdown-item" href="#">Action</a> -->
+<!--                 <a class="dropdown-item" href="#">Another action</a> -->
+<!--                 <div class="dropdown-divider"></div> -->
+<!--                 <a class="dropdown-item" href="#">Something else here</a> -->
+<!--               </div> -->
+<!--             </li> -->
+<!--           </ul> -->
+<!--         </div> -->

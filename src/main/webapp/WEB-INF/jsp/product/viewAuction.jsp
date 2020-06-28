@@ -98,13 +98,17 @@ function participation(price, unitCost) {
 					">팔로잉</a>
 				</span>
 				&nbsp;
-		<% 
-
-		if(session.getAttribute("userSession") != null){
-		%> <%@ include file="/WEB-INF/jsp/account/accuseFunction.jsp" %>
-   		<% }else {%>
-   			<a href="<c:url value='/addAccuseNoLogin.do'/>">판매자 신고하기</a>
-   		<% }%>
+				<c:choose>
+	   				<c:when test="${! empty userSession.account.userId}">
+						<%@ include file="/WEB-INF/jsp/account/accuseFunction.jsp" %>
+					</c:when>
+					<c:otherwise>
+					<span><a href="<c:url value='/addAccuseNoLogin.do'>
+					  <c:param name="itemId" value="${auction.itemId}"/>
+                         <c:param name="productId" value="${auction.productId}"/></c:url>">
+             				판매자 신고하기</a></span>
+					</c:otherwise>
+			</c:choose>
    			</td>
    		</tr> <!-- userId = suppId -->
    		
@@ -133,7 +137,13 @@ function participation(price, unitCost) {
    				시작 가격 : ${auction.startPrice}원<br>
    				<c:set var="state" value="${auction.auctionState}"/>
    				<c:if test="${state eq 0}">
+   					<c:set var="uc" value="${auction.unitCost}" />
+   					<c:if test="${uc eq 1}">
+   					--미참여--<br>
+   					</c:if>
+   					<c:if test="${uc ne 1}">
    					현재 최대 금액 : ${auction.unitCost}원<br>
+   					</c:if>
    					<br><font color=blue>(경매 진행중)</font>
    				</c:if>
    				<c:if test="${state eq 1}">
@@ -167,19 +177,21 @@ function participation(price, unitCost) {
 				</form>
 				</c:if>
 				<c:if test="${state eq 1}">
-					<c:set var="id" value="${suppId}"/>
+					<c:set var="id" value="${userSession.account.userId}"/>
 					<c:set var="bidder" value="${bidder}"/>
 					<c:if test="${id eq bidder}">
 						<br><span>
 						<!-- 로그인 여부 따지기 -->
-						<a href="#">Insert to Cart</a>
+						<a href='<c:url value="/shop/addItemToCart.do">
+					            				<c:param name="workingItemId" value="${auction.itemId}"/></c:url>'>
+					              		Insert to Cart</a>
 						</span>
 					</c:if>
 				</c:if>
    			</td>
    		</tr>
    		
-   		<c:if test="${sh.suppId==session.userId}"> <!-- 로그인시 실행 -->
+   		<c:if test="${auction.userId eq userSession.account.userId}"> <!-- 로그인시 실행 -->
    		<tr>
    		<td colspan="2" style="text-align: right; padding: 0px; font-size: small; border-bottom: none; border-top: 1px solid black;">
 		   <a href="<c:url value='/shop/auction/updateItem.do?itemId=${auction.itemId}'/>">[게시물 수정하기]</a>
