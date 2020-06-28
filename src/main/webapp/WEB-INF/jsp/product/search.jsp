@@ -43,7 +43,11 @@
                   
                   <!-- product id에 따라서 viewItem 페이지로 넘어가게 수정해야 한다. -->
 				  <td style="padding-left:80px">
-					<c:out value="${tl.itemId}"/>
+					<a href="<c:url value='/shop/search/selectItem.do'>
+                    <c:param name="itemId" value="${tl.itemId}"/>
+                    </c:url>">
+                    	<font><c:out value="${tl.itemId}"/></font>
+                    </a>
 				  </td>   
                   </tr>
                   </c:forEach>

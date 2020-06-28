@@ -51,20 +51,31 @@ public class SearchController {
 		return "product/search";
 	}
 	
-//	@RequestMapping("/shop/search/selectItem.do") 
-//	public String selectItem(@RequestParam("itemId") int itemId, ModelMap model) {
-//		System.out.println("** 검색 페이지에서 아이템 아이디 선택 **");
-//		
-//		Item item = new Item();
-//		item = itemFacade.getItem(itemId);
-//		
-//		int productId = item.getProductId();
-//		
-//		switch(productId) {
-//		case 0:
-//		case 1 :
-//		case 2:
-//		case 3:
-//		}
-//	}
+	@RequestMapping("/shop/search/selectItem.do") 
+	public String selectItem(@RequestParam("itemId") int itemId, ModelMap model) {
+		System.out.println("** 검색 페이지에서 아이템 아이디 선택 **");
+		
+		Item item = new Item();
+		item = itemFacade.getItem(itemId);
+		
+		int productId = item.getProductId();
+		
+		String url = null;
+		switch(productId) {
+		case 0: 
+			url = "redirect:/shop/groupBuying/viewItem.do?itemId=" + itemId + "&productId=" + productId;
+			break;
+		case 1: 
+			url = "redirect:/shop/auction/viewItem.do?itemId=" + itemId + "&productId=" + productId;
+			break;
+		case 2:
+			url = "redirect:/shop/secondHand/viewItem.do?itemId=" + itemId + "&productId=" + productId;
+			break;
+		case 3:
+			url = "redirect:/shop/handMade/viewItem.do?itemId=" + itemId + "&productId=" + productId;
+			break;
+		}
+		
+		return url;
+	}
 }
