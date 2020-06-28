@@ -54,17 +54,10 @@
 	재고 : <form:input type="text" path="qty" value="${qty}"/>
 	<form:errors path="qty"/> <br><br>
 	
-	태그 : 
-	<form:input path="tag1" placeholder="#tag" value="${tag1}"/>
-	<form:errors path="tag1"/>&nbsp;
-	<form:input path="tag2" placeholder="#tag" value="${tag2}"/>
-	<form:errors path="tag2"/>&nbsp;
-	<form:input path="tag3" placeholder="#tag" value="${tag3}"/>
-	<form:errors path="tag3"/>&nbsp;
-	<form:input path="tag4" placeholder="#tag" value="${tag4}"/>
-	<form:errors path="tag4"/>&nbsp;
-	<form:input path="tag5" placeholder="#tag" value="${tag5}"/>
-	<form:errors path="tag5"/> <br><br><br>
+	태그 : <c:forEach var="i" begin="0" end="4" step="1">
+				<form:input path="tags[${i}].tagName" placeholder="#tag"/>&nbsp;
+		</c:forEach>
+	<br><br><br>
 	
 	<input type="submit" value="다음 단계로" />
 	
