@@ -116,14 +116,9 @@ public interface ItemFacade {
 	
 	List<Tag> getTagByItemId(int itemId);	
 	
-	Tag getTagByTagName(String tagName);	
+	List<Tag> getTagByTagName(String tagName);	
 	
 	void insertTag(Tag tag);	
 	
 	void deleteTag(int itemId);
-	/////////////////////////////////////////////////////////////////////////
-	/* Tag */
-	/////////////////////////////////////////////////////////////////////////
-	List<Item> searchItemList(String keywords);
-
 }

@@ -44,21 +44,6 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <button class="btn btn-light" id="menu-toggle">Menu</button>
-       
-        
-        <div class="nav-item dropdown">
-			<a class="nav-link dropdown-toggle js-scroll-trigger" href="#" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-			  	<button class="btn btn-light">Search</button>
-			</a>
-      	  	<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-      	  		<form name="searchForm" action="<c:url value='/shop/searchItem.do'/>">
-   					<input type="text" id="word" name="word" placeholder="태그 검색"/>
-   					<button class="btn btn-light dropdown-item" onclick="search(word.value)">
-   						Click To Search!
-   					</button>
-   				</form>
-			</div>	
-			</div>
   </nav>
 
 
@@ -73,6 +58,21 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
+         
+        <li class="nav-item dropdown">
+			<a class="nav-link dropdown-toggle js-scroll-trigger" href="#" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			  	<font color="black"> SEARCH &nbsp; ▼</font>
+			</a>
+      	  	<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+      	  		<form name="searchForm" action="<c:url value='/shop/search/viewItem.do'/>">
+   					<input type="text" id="word" name="word" placeholder="태그 검색"/>
+   					<button class="btn btn-light dropdown-item" onclick="search(word.value)">
+   						Click To Search!
+   					</button>
+   				</form>
+			</div>	
+			</li>
+	
           <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="../help.html"><font color="black">HELP</font></a>
           </li>
@@ -117,7 +117,6 @@
   </nav>
   <script>
 function search(word) {
-	
 	alert("검색어 : " + word);
 
 	searchForm.submit();	

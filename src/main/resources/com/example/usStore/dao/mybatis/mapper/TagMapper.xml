@@ -22,4 +22,10 @@
      DELETE FROM TAG
      WHERE ITEMID = #{itemId}
   </delete>
+  
+  <select id="getTagByTagName" parameterType="String" resultType="Tag">
+  SELECT TAGID, TAGNAME, ITEMID
+  FROM TAG
+  WHERE lower(tagName) like #{tagName}
+  </select>
 </mapper>

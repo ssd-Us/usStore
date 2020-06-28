@@ -291,7 +291,7 @@ public class ItemImpl implements ItemFacade {
 	}
 
 	@Override
-	public Tag getTagByTagName(String tagName) {
+	public List<Tag> getTagByTagName(String tagName) {
 		// TODO Auto-generated method stub
 		return tagDao.getTagByTagName(tagName);
 	}
@@ -329,12 +329,6 @@ public class ItemImpl implements ItemFacade {
 	@Override
 	public String getUserIdByItemId(int itemId) {
 		return itemDao.getUserIdByItemId(itemId);
-	}
-
-	@Override
-	public List<Item> searchItemList(String keywords) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override
