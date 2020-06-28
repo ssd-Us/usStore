@@ -86,10 +86,11 @@ public class AuctionFormController {
       Bidder noBidder = new Bidder();
       noBidder.setItemId(-1);
       noBidder.setBidder("<no Bidder>");
-      
+       
       for(int i = 0; i < al.size(); i++) {
     	  bl.add(i, noBidder);
       }
+      
       
       for(int i = 0; i < al.size(); i++) {
     	  for(int j = 0; j < bidderList.size(); j++) {
@@ -99,14 +100,13 @@ public class AuctionFormController {
     	  }
       }
       
-      PagedListHolder<Bidder> resultBidder = new PagedListHolder<Bidder>(bidderList);
-      resultBidder.setPageSize(4);
+      PagedListHolder<Bidder> resultBidder = new PagedListHolder<Bidder>(bl);
+      resultBidder.setPageSize(4);    
       
       model.addAttribute("productId", productId);
       model.addAttribute("auctionList", auctionList);
       model.addAttribute("resultBidder", resultBidder);
-//      model.addAttribute("resultBidder", bl);
-      
+
       return "product/auction";
    }
    
