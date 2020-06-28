@@ -25,7 +25,7 @@
 	
 	<mvc:default-servlet-handler /> <!-- 로그인 구현 관련  -->
 	
-	<mvc:resources location="/resources/" mapping="/resources/**"></mvc:resources>
+	<mvc:resources mapping="/**" location="/" />
 	
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">

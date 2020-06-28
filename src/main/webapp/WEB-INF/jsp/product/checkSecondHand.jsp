@@ -68,9 +68,8 @@ div#addItemForm {
 <br>
 <label>접수 일시</label> : ${sf} <br><br>
 
-      <a href="<c:url value='/shop/secondHand/gobackAddSh.do'>
+      <a href="<c:url value='/shop/secondHand/addItem2.do'>
          <c:param name="productId" value="${itemForm.productId}"/></c:url>">[이전 단계로]&nbsp;&nbsp;</a> 
-     
       <input type="submit" value="[확인]" /> 
 </form:form>
 

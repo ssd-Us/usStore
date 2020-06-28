@@ -14,27 +14,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="2020-01 소프트웨어 시스템 개발 ">
   <meta name="author" content="愛+">
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/usstore.css" type="text/css" />
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/account.css" type="text/css" />
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/usstore.css" type="text/css" />
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/account.css" type="text/css" />
   
     <!-- Bootstrap core JavaScript -->
-  <script src="${pageContext.request.contextPath}/resources/vendor/jquery/jquery.min.js"></script>
-  <script src="${pageContext.request.contextPath}/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="${pageContext.request.contextPath}/vendor/jquery/jquery.min.js"></script>
+  <script src="${pageContext.request.contextPath}/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
   <!-- Plugin JavaScript -->
-  <script src="${pageContext.request.contextPath}/resources/vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script src="${pageContext.request.contextPath}/vendor/jquery-easing/jquery.easing.min.js"></script>
 
   <!-- Custom JavaScript for this theme -->
-  <script src="${pageContext.request.contextPath}/resources/js/scrolling-nav.js"></script>
+  <script src="${pageContext.request.contextPath}/js/scrolling-nav.js"></script>
 
   <!-- Bootstrap core CSS -->
-  <link href="${pageContext.request.contextPath}/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="${pageContext.request.contextPath}/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
   <!-- Custom styles for this template -->
-  <link href="${pageContext.request.contextPath}/resources/css/scrolling-nav.css" rel="stylesheet">
+  <link href="${pageContext.request.contextPath}/css/scrolling-nav.css" rel="stylesheet">
   
   <!-- Custom styles for this template -->
-  <link href="${pageContext.request.contextPath}/resources/css/simple-sidebar.css" rel="stylesheet">
+  <link href="${pageContext.request.contextPath}/css/simple-sidebar.css" rel="stylesheet">
 </head>
 
   <!-- Navigation -->

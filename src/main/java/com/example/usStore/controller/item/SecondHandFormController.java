@@ -1,6 +1,5 @@
 package com.example.usStore.controller.item;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,10 +18,10 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import com.example.usStore.controller.mypage.UserSession;
-import com.example.usStore.domain.GroupBuying;
 import com.example.usStore.domain.Item;
 import com.example.usStore.domain.SecondHand;
 import com.example.usStore.domain.Tag;
+import com.example.usStore.service.SecondHandFormValidator;
 import com.example.usStore.service.facade.ItemFacade;
 
 @Controller /* SecondHandForm 커맨드 객체를 관리하는 컨트롤러 */
@@ -72,23 +71,30 @@ public class SecondHandFormController {
    }
    
    @PostMapping("/shop/secondHand/step3.do")      // step2 -> step3
-   public String goCheck(@ModelAttribute("secondHandForm") SecondHandForm secondHandForm,
-		   Model model) {   
-      return "product/checkSecondHand";      // step3(CHECK_FORM3)
+   public String goCheck(
+		   @ModelAttribute("secondHandForm") SecondHandForm secondHandForm, BindingResult result,
+		   Model model, HttpServletRequest rq) {   
+	   
+	    HttpSession session = rq.getSession(false);
+	    new SecondHandFormValidator().validate(secondHandForm, result);
+	    ItemForm itemForm = (ItemForm)session.getAttribute("itemForm");
+	    
+		if(secondHandForm.getListPrice() >= itemForm.getUnitCost()) {
+			result.rejectValue("listPrice", "mustDiscount");
+		}
+		
+		if (result.hasErrors()) {	//유효성 검증 에러 발생시
+			model.addAttribute("productId", itemForm.getProductId());
+			return "product/addSecondHand";
+		}
+	   
+	   return "product/checkSecondHand";      // step3(CHECK_FORM3)
    }
    
    @GetMapping("/shop/secondHand/gobackItem.do")      // item.jsp
    public String backToStep1(@ModelAttribute("secondHandForm") SecondHandForm secondHandForm, 
 			@RequestParam("productId") int productId) {
-      return "redirect:/shop/item/addItem.do?productId=";   // step1 form view(item.jsp)
-   }
-   
-   @GetMapping("/shop/secondHand/gobackAddSh.do")     // step3 -> step2
-   public String backToStep2(
-		 @ModelAttribute("secondHandForm") SecondHandForm secondHandForm, 
-         @RequestParam("productId") int productId, Model model){
-      model.addAttribute("productId", productId);
-      return "prodect/addSecondHand";   // check.jsp -> addGroupBuying.jsp
+      return "redirect:/shop/item/addItem.do?productId="+productId; // step1 form view(item.jsp)
    }
    
 	@PostMapping("/shop/secondHand/done.do")		// step3 -> done
