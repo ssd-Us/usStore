@@ -67,6 +67,7 @@ public class SecondHandController {
 	  
 	  PagedListHolder<SecondHand> secondHandList = new PagedListHolder<SecondHand>(
             this.itemFacade.getSecondHandList(university));
+  
       secondHandList.setPageSize(4);
 
       model.addAttribute("secondHandList", secondHandList);
