@@ -19,4 +19,9 @@ public class Bidder {
 	public void setBidder(String bidder) {
 		this.bidder = bidder;
 	}
+	
+	@Override
+	public String toString() {
+		return "Bidder [itemId=" + itemId + ", bidder=" + bidder + "]";
+	}
 }

@@ -87,10 +87,16 @@ public class SecondHandController {
 		 */
 		String victim = null;
 		String isAccuse = "false";
+<<<<<<< HEAD
+		HttpSession session = request.getSession(false);
+		if (session.getAttribute("userSession") != null) {
+			UserSession userSession = (UserSession)session.getAttribute("userSession") ;
+=======
 		if (request.getSession(false) != null) {
 			HttpSession session = request.getSession(false);
 			UserSession userSession = (UserSession) session.getAttribute("userSession");
 		
+>>>>>>> develop
 			if (userSession != null) {// attacker = 판매자 아이디, victim = 세션 유저 아이디
 				victim = userSession.getAccount().getUserId();
 				String attacker = this.itemFacade.getUserIdByItemId(itemId);
@@ -100,7 +106,10 @@ public class SecondHandController {
 
 		// sh가 아이템 상속받으니까 여기서 테그 꺼내쓰기
 		List<Tag> tags = itemFacade.getTagByItemId(itemId);
+<<<<<<< HEAD
+=======
 		
+>>>>>>> develop
 		SecondHand sh = this.itemFacade.getSecondHandItem(itemId);
 		this.itemFacade.updateViewCount(sh.getViewCount() + 1, itemId); //조회수 1증가
 		

@@ -86,10 +86,11 @@ public class AuctionFormController {
       Bidder noBidder = new Bidder();
       noBidder.setItemId(-1);
       noBidder.setBidder("<no Bidder>");
-      
+       
       for(int i = 0; i < al.size(); i++) {
     	  bl.add(i, noBidder);
       }
+      
       
       for(int i = 0; i < al.size(); i++) {
     	  for(int j = 0; j < bidderList.size(); j++) {
@@ -99,14 +100,13 @@ public class AuctionFormController {
     	  }
       }
       
-      PagedListHolder<Bidder> resultBidder = new PagedListHolder<Bidder>(bidderList);
-      resultBidder.setPageSize(4);
+      PagedListHolder<Bidder> resultBidder = new PagedListHolder<Bidder>(bl);
+      resultBidder.setPageSize(4);    
       
       model.addAttribute("productId", productId);
       model.addAttribute("auctionList", auctionList);
       model.addAttribute("resultBidder", resultBidder);
-//      model.addAttribute("resultBidder", bl);
-      
+
       return "product/auction";
    }
    
@@ -137,19 +137,14 @@ public class AuctionFormController {
 	  
 	   String victim = null;
 	   String isAccuse = "false";
-	   
 	   HttpSession session = rq.getSession(false);
-		
 	   if(session.getAttribute("userSession") != null) {
 		   UserSession userSession = (UserSession) session.getAttribute("userSession");
-		   String suppId = userSession.getAccount().getUserId();
-			
-		   victim = userSession.getAccount().getUserId();
-		   String attacker = this.itemFacade.getUserIdByItemId(itemId);
-		   isAccuse = this.myPageFacade.isAccuseAlready(attacker, victim);
-			
-		   System.out.println("suppId: " + suppId);
-		   model.addAttribute("suppId", suppId);
+		   if (userSession != null) {// attacker = 판매자 아이디, victim = 세션 유저 아이디
+				victim = userSession.getAccount().getUserId();
+				String attacker = this.itemFacade.getUserIdByItemId(itemId);
+				isAccuse = this.myPageFacade.isAccuseAlready(attacker, victim);
+			}
 	   }
 		
 	  System.out.println("<경매 상세 페이지>"); 
