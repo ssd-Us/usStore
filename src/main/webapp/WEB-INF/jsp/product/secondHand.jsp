@@ -38,16 +38,17 @@
                   </h2>
                    <p style="text-align:right;">
                    	<a href="<c:url value='/shop/item/addItem.do'>
-                           <c:param name="productId" value="${productId}"/></c:url>">공동구매 물품 판매하기
+                           <c:param name="productId" value="${productId}"/></c:url>">중고거래 물품 판매하기
                   	</a>
 					</p>
                   <hr>                                
 				<table>
-   					<tr>
+   				<tr>
    					<th>TITLE</th>
    					<th>DISCOUNT</th>
    					<th>정가</th>
    					<th>판매가</th>
+   					<th>&nbsp;</th>
    				</tr>
   				<tbody> 
 	    			<c:forEach var="item" items="${secondHandList.pageList}">
@@ -68,9 +69,13 @@
 							 		<td style="padding-left:120px"> <c:out value="에눌 불가능" /></td> 
 						    </c:otherwise>
 						</c:choose>
-				 		<td><fmt:formatNumber value="${item.unitCost}" pattern="###,###원" /></td>              
-						<td><fmt:formatNumber value="${item.listPrice}" pattern="###,###원" /></td>
-		      			</tr>
+				 		<td><fmt:formatNumber value="${item.listPrice}" pattern="###,###원" /></td>              
+						<td><fmt:formatNumber value="${item.unitCost}" pattern="###,###원" /></td>
+		      			<td><a href='<c:url value="/shop/addItemToCart.do">
+					            				<c:param name="workingItemId" value="${item.itemId}"/>
+					            				<c:param name="productId" value="${item.productId}"/></c:url>'>
+					              		<img width="40" height="40" src="${pageContext.request.contextPath}/images/cart_img.png" alt="" /></a></td>
+						</tr>
 	     			</c:forEach></tbody>
 	     			
 	     			 <tr>

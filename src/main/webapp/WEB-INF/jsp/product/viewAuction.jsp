@@ -182,9 +182,10 @@ function participation(price, unitCost) {
 					<c:if test="${id eq bidder}">
 						<br><span>
 						<!-- 로그인 여부 따지기 -->
-						<a href='<c:url value="/shop/addItemToCart.do">
-					            				<c:param name="workingItemId" value="${auction.itemId}"/></c:url>'>
-					              		Insert to Cart</a>
+			   				<a href="<c:url value="/shop/addItemToCart.do">
+								     <c:param name="workingItemId" value="${auction.itemId}"/>
+								     <c:param name="productId" value="${auction.productId}"/></c:url>">
+								 장바구니 추가</a>
 						</span>
 					</c:if>
 				</c:if>

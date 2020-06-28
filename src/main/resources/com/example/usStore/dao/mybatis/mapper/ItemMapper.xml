@@ -48,9 +48,9 @@
 	</select>
 
 	<select id="getQuantity" resultType="int">
-		SELECT QTY AS value
+		SELECT QTY
 		FROM ITEM
-		WHERE ITEMID = #{itemId}
+		WHERE ITEMID = #{param1} AND PRODUCTID = #{param2}
 	</select>
 
 	<update id="updateQuantity">

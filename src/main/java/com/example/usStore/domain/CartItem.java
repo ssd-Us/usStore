@@ -14,7 +14,7 @@ public class CartItem implements Serializable {
 	private int quantity;
 	private boolean inStock;
 	private int orderId;
-
+	
 	/* JavaBeans Properties */
 
 	public boolean isInStock() {
@@ -62,5 +62,4 @@ public class CartItem implements Serializable {
 	public void incrementQuantity() {
 		quantity++;
 	}
-
 }

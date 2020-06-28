@@ -1,5 +1,6 @@
 package com.example.usStore.dao.mybatis;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -46,7 +47,7 @@ public class MybatisGroupBuyingDao implements GroupBuyingDao {
    @Override
    public boolean isItemInStock(int itemId, int productId) throws DataAccessException {
       // TODO Auto-generated method stub
-      return groupBuyingMapper.isItemInStock(itemId, productId);
+      return (groupBuyingMapper.getQuantity(itemId, productId) > 0);
    }
 
    @Override
@@ -88,19 +89,11 @@ public class MybatisGroupBuyingDao implements GroupBuyingDao {
       // TODO Auto-generated method stub
       return groupBuyingMapper.getGroupBuyingItem(itemId);
    }
-
-   @Override
-   public void joinGroupBuying(GroupBuying GroupBuying) throws DataAccessException {
-      // TODO Auto-generated method stub
-      groupBuyingMapper.joinGroupBuying(GroupBuying);
+   
+   public void closeGroupBuying(Date curTime) {
+      groupBuyingMapper.closeGroupBuying(curTime);
    }
-
-   @Override
-   public void calculateDiscount(GroupBuying GroupBuying) throws DataAccessException {
-      // TODO Auto-generated method stub
-      groupBuyingMapper.calculateDiscount(GroupBuying);
-   }
-
+   
    @Override
    public void insertItem(Item item) {
       // TODO Auto-generated method stub
@@ -128,7 +121,5 @@ public class MybatisGroupBuyingDao implements GroupBuyingDao {
       // TODO Auto-generated method stub
       groupBuyingMapper.updateViewCount(viewCount, itemId);
    }
-
-   
 
 }

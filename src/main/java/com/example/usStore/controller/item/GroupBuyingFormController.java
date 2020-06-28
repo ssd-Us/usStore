@@ -2,7 +2,10 @@ package com.example.usStore.controller.item;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -155,7 +158,7 @@ public class GroupBuyingFormController {
    @PostMapping("/shop/groupBuying/detailItem.do")      // step3 -> done
    public String done(@ModelAttribute("GroupBuying") GroupBuyingForm groupBuyingform, 
          ItemForm itemformSession, BindingResult result, Model model, HttpServletRequest rq, 
-         SessionStatus sessionStatus, ModelMap modelMap) {
+         SessionStatus sessionStatus, ModelMap modelMap) throws ParseException {
       int status = 0;
       System.out.println("detailItem.do");
       
@@ -210,12 +213,8 @@ public class GroupBuyingFormController {
       System.out.println("deadLine : " + groupBuyingform.getDeadLine());
       GroupBuying gb = new GroupBuying(item, groupBuyingform.getDiscount(), groupBuyingform.getListPrice(), groupBuyingform.getDeadLine());
       
-      if(status != 0) {
-         itemFacade.updateGroupBuying(gb);   //update DB
-      }
-      else {
-         itemFacade.insertGroupBuying(gb);   // insert DB
-      }
+      if(status != 0) { itemFacade.updateGroupBuying(gb); }  //update DB
+      else {   itemFacade.insertGroupBuying(gb); }  // insert DB
       
       System.out.println(gb);
       
@@ -223,15 +222,22 @@ public class GroupBuyingFormController {
       session.removeAttribute("itemForm");   //itemForm session close
       session.removeAttribute("status");
       
+      SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss"); 
+      Date date = dt.parse(groupBuyingform.getDeadLine()); 
+      
+      itemFacade.groupBuyingScheduler(date);
+      
+      GroupBuying g = itemFacade.getGroupBuyingItem(gb.getItemId());
+      System.out.println("확인: " + g);
+      
       return "redirect:/shop/groupBuying/viewItem.do?itemId=" + gb.getItemId() + "&productId=" + item.getProductId();
    }
    
-   @RequestMapping("/shop/groupBuying/viewItem.do") //click title -> detail Page(viewCount++)
+   @RequestMapping("/shop/groupBuying/viewItem.do") //detail Page(조회수++)
    public String viewGroupBuying(@RequestParam("itemId") int itemId, 
          HttpServletRequest rq, @RequestParam("productId") int productId, Model model, Model modelMap)
    {
       System.out.println("viewItem.do");
-      System.out.println("itemId:" + itemId);
       
       String victim = null;
       String isAccuse = "false";
@@ -239,6 +245,7 @@ public class GroupBuyingFormController {
       HttpSession session = rq.getSession(false);
       
       if(session.getAttribute("userSession") != null) {
+         
          UserSession userSession = (UserSession) session.getAttribute("userSession");
          victim = userSession.getAccount().getUserId();
          String attacker = this.itemFacade.getUserIdByItemId(itemId);
@@ -246,11 +253,7 @@ public class GroupBuyingFormController {
       }
       
       GroupBuying groupBuying = itemFacade.getGroupBuyingItem(itemId);
-      System.out.println("viewCount : " + groupBuying.getViewCount());
       itemFacade.updateViewCount(groupBuying.getViewCount() + 1, itemId);
-      System.out.println("object's viewcount ++ ? : " + groupBuying);
-      
-      System.out.println(groupBuying);
       
       List<Tag> tags = new ArrayList<Tag>();
       tags = itemFacade.getTagByItemId(groupBuying.getItemId());
@@ -260,6 +263,10 @@ public class GroupBuyingFormController {
       model.addAttribute("isAccuse", isAccuse);
       modelMap.addAttribute("tags", tags);
    
+      System.out.println("스케쥴러확인해보기:" + groupBuying);
+      GroupBuying g = itemFacade.getGroupBuyingItem(itemId);
+      System.out.println("확인: " + g);
+      
       return DetailPage;
    }
    
@@ -312,7 +319,7 @@ public class GroupBuyingFormController {
    
    @RequestMapping("/shop/groupBuying/joint.do") //joint GroupBuying
    public void jointGroupBuying(@RequestParam("itemId") int itemId, @RequestParam("productId") int productId, 
-		   HttpServletResponse response) throws IOException
+         HttpServletResponse response) throws IOException
    {
       System.out.println("jointGroupBuying");
       
@@ -320,8 +327,8 @@ public class GroupBuyingFormController {
       
       out.println("<script>");
       out.print("if (confirm('Do you want to participate in GroupBuying?') == true){");
-      out.print("alert('Go Participate in GroupBuying :)'); location.href='index.do';}");	//공동구매 진행
-      out.print("else{location.href='viewItem.do?itemId=" + itemId + "&productId=" + productId + "';}");	//공동구매 진행 취소
+      out.print("alert('Go Participate in GroupBuying :)'); location.href='index.do';}");   //공동구매 진행
+      out.print("else{location.href='viewItem.do?itemId=" + itemId + "&productId=" + productId + "';}");   //공동구매 진행 취소
       out.println("</script>");
       out.flush();
       out.close();

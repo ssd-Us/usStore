@@ -115,7 +115,6 @@ public class MyPageImpl implements MyPageFacade {
 
 	@Override
 	public int countAccuseById(String accountId) {
-		// TODO Auto-generated method stub
 		return accuseDao.countAccuseById(accountId);
 	}
 
@@ -123,6 +122,11 @@ public class MyPageImpl implements MyPageFacade {
 	public String isAccuseAlready(String attacker, String victim) {
 		return accuseDao.isAccuseAlready(attacker, victim);
 		
+	}
+
+	@Override
+	public List<Accuse> selectAccuseList(String victim) {
+		return accuseDao.selectAccuseList(victim);
 	}
 
 }

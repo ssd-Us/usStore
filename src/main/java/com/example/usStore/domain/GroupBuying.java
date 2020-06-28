@@ -11,7 +11,7 @@ public class GroupBuying extends Item implements Serializable {
    private int discount;
    private int listPrice;
    private String deadLine;
-   
+   private int state;  
    
    public GroupBuying() {
       super();
@@ -46,10 +46,18 @@ public class GroupBuying extends Item implements Serializable {
       this.deadLine = deadLine;
    }
    
+   public int getState() {
+      return state;
+   }
+
+   public void setState(int state) {
+      this.state = state;
+   }
+	
    @Override
    public String toString() {
-      return "GroupBuying "+ "super.itemid= " + super.getItemId() + "super.title" + super.getTitle() + ", discount=" + discount + ", listPrice=" + listPrice + ", deadLine="
-            + deadLine + "]";
+      return "GroupBuying [discount=" + discount + ", listPrice=" + listPrice + ", deadLine=" + deadLine + ", state="
+            + state + "]";
    }
-   
+
 }

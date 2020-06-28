@@ -54,7 +54,7 @@ public class MybatisSecondHandDao implements SecondHandDao {
 	
 	@Override
 	public boolean isItemInStock(int itemId, int productId) throws DataAccessException {
-		return secondHandMapper.isItemInStock(itemId, productId);
+		return (secondHandMapper.getQuantity(itemId, productId) > 0);
 	}
 	
 	@Override
@@ -62,11 +62,11 @@ public class MybatisSecondHandDao implements SecondHandDao {
 		secondHandMapper.deleteItem(itemId);
 	}
 	
+
 	@Override
-	public List<SecondHand> getSecondHandList() throws DataAccessException {
-		return secondHandMapper.getSecondHandList();
+	public List<SecondHand> getSecondHandList(String university) throws DataAccessException {
+		return secondHandMapper.getSecondHandList(university);
 	}
-	
 	
 	@Override
 	public void updateSecondHand(SecondHand secondHand) throws DataAccessException {
@@ -110,6 +110,7 @@ public class MybatisSecondHandDao implements SecondHandDao {
 	public void updateViewCount(int viewCount, int itemId) {
 		secondHandMapper.updateViewCount(viewCount, itemId);
 	}
+
 
 	
 
