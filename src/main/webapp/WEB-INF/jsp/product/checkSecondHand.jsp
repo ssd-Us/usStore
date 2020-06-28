@@ -4,10 +4,6 @@
 
 <%@ page import="java.util.Date"%>
 <%@ page import="java.text.SimpleDateFormat"%>
-<%
-   Date nowTime = new Date();
-   SimpleDateFormat sf = new SimpleDateFormat("yyyy년 MM월 dd일 a hh:mm:ss");
-%>
 
 <title>중고거래 입력 최종 확인 step3</title>
 <style>
@@ -53,10 +49,7 @@ div#addItemForm {
                   <c:if test="${not empty tag.tagName}">
                      <font color="blue">#</font>${tag.tagName}
                   </c:if>
-               </c:forEach>
-
-<br>
-<label>접수 일시</label> : ${sf} <br><br>
+               </c:forEach><br>
 
       <a href="<c:url value='/shop/secondHand/addItem2.do'>
          <c:param name="productId" value="${itemForm.productId}"/></c:url>">[이전 단계로]&nbsp;&nbsp;</a> 
