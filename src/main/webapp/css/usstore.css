@@ -1,8 +1,28 @@
 @charset "UTF-8";
+
+@font-face { 
+	font-family: 'BBTreeGR'; 
+	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_nine_@1.1/BBTreeGR.woff') format('woff'); 
+	font-weight: normal;
+	font-style: normal; 
+}
+
+@font-face { 
+	font-family: 'BBTreeGB'; 
+	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_nine_@1.1/BBTreeGB.woff') format('woff'); 
+	font-weight: normal; 
+	font-style: normal;
+}
+
+* {
+	font-family: 'BBTreeGB'; 
+}
+
 .error {
 	color: red;
 	font-weight: bold;
 }
+
 table#main-menu {
 	background-color: #c0c0c0;
     border: none;

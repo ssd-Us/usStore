@@ -54,19 +54,19 @@
                   name='<c:out value="${cartItem.item.itemId}"/>'
                   value='<c:out value="${cartItem.quantity}"/>' /></td>
               <td style="text-align:right"><fmt:formatNumber
-                  value="${cartItem.item.listPrice}" pattern="###,###,###원" /></td>
+                  value="${cartItem.item.unitCost}" pattern="###,###,###원" /></td>
               <td style="text-align:right"><fmt:formatNumber
                   value="${cartItem.totalPrice}" pattern="###,###,###원" /></td>
               <td><a href='<c:url value="/shop/removeItemFromCart.do">
                     <c:param name="workingItemId" value="${cartItem.item.itemId}"/></c:url>'>
-                    <img border="0" src="../images/button_remove.gif" alt="" /></a>
+                    <img width="40" height="40" src="${pageContext.request.contextPath}/images/delete.png" alt="" /></a>
               </td>
             </tr>
           </c:forEach>
           <tr bgcolor="#FFFFFF">
             <td colspan="7" align="right">
-              <b>Sub Total: <fmt:formatNumber value="${cart.subTotal}" pattern="$#,##0.00" /></b><br><br> 
-              <input type="image" src="../images/button_update_cart.gif" name="update" />
+              <b>Sub Total: <fmt:formatNumber value="${cart.subTotal}" pattern="###,###,###원" /></b><br><br> 
+              <input type="image" src="${pageContext.request.contextPath}/images/loop.png" name="update" width="40" height="40" />
             </td>
             <td>&nbsp;</td>
           </tr>
@@ -87,17 +87,9 @@
         <br />
         <div style="text-align:center">
           <a href='<c:url value="/shop/checkout.do"/>'>
-            <img border="0" src="../images/button_checkout.gif" alt=""/></a>
+            Go to CheckOut</a>
         </div>
-      </c:if>
-    </td>
-    <td style="text-align:right;width:20%;">
-      <c:if test="${!empty userSession.account.username}">
-        <c:if test="${userSession.account.listOption}">
-          <%@ include file="../IncludeMyList.jsp"%>
-        </c:if>
       </c:if>
     </td>
   </tr>
 </table>
-<%@ include file="../IncludeBottom.jsp"%>

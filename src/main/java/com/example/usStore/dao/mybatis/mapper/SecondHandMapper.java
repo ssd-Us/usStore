@@ -6,7 +6,7 @@ import com.example.usStore.domain.SecondHand;
 
 public interface SecondHandMapper extends ItemMapper {
 
-	List<SecondHand> getSecondHandList();
+	List<SecondHand> getSecondHandList(String university);
 
 	SecondHand getSecondHandItem(int itemId);
 	

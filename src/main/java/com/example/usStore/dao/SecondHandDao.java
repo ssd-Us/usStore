@@ -4,15 +4,13 @@ import java.util.List;
 
 import org.springframework.dao.DataAccessException;
 
-import com.example.usStore.domain.Item;
 import com.example.usStore.domain.SecondHand;
-import com.example.usStore.domain.Tag;
 
 
 public interface SecondHandDao extends ItemDao {
 	
 	// ��ü SecondHandList �޾ƿ���
-	List<SecondHand> getSecondHandList() throws DataAccessException;
+	List<SecondHand> getSecondHandList(String university) throws DataAccessException;
 	
 	// itemId �Ű������� �޾� SecondHand ��ü ��ȯ
 	SecondHand getSecondHandItem(int itemId) throws DataAccessException;

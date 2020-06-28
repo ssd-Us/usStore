@@ -46,7 +46,7 @@ public class MybatisAuctionDao implements AuctionDao {
    @Override
    public boolean isItemInStock(int itemId, int productId) throws DataAccessException {
       // TODO Auto-generated method stub
-      return auctionMapper.isItemInStock(itemId, productId);
+      return (auctionMapper.getQuantity(itemId, productId) > 0 );
    }
 
    @Override

@@ -123,6 +123,7 @@ public class SecondHandFormController {
 		
 		UserSession userSession = (UserSession)session.getAttribute("userSession");
 		String suppId = userSession.getAccount().getUserId();
+		String university = userSession.getAccount().getUniversity();
 		System.out.println("done-suppId : " + suppId );	
 	
 		//put itemform to item domain 세션에 저장된 커맨드객체를 도메인에 저장하기 
@@ -152,9 +153,9 @@ public class SecondHandFormController {
 		SecondHand secondHand = null;
 		System.out.println("세컨핸드컨트롤러에서 디스카운트 출력값: " + discount);
 		if(discount.equals("Yes")) {
-			secondHand = new SecondHand(item, 1 ,secondHandForm.getListPrice());
+			secondHand = new SecondHand(item, 1 ,secondHandForm.getListPrice(), university);
 		}else if(discount.equals("No")){
-			secondHand = new SecondHand(item, 0 ,secondHandForm.getListPrice());
+			secondHand = new SecondHand(item, 0 ,secondHandForm.getListPrice(), university);
 		}else {
 			System.out.println("아무것도 선택안하면 검증에서 잡아주도록 수정하기");
 		}
