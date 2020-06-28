@@ -52,9 +52,17 @@
 					<form:input path="account.country" id="inputCountry" class="form-control" disabled="true"/>
 					<B><form:errors path="account.country" cssClass="error" /></B> <label for="inputCountry">Country</label>
 				</div>
-			  <hr class="my-4">
+				
               <button class="btn btn-lg btn-light btn-block text-uppercase" type="submit">Edit Account</button>
              </form:form>
+            
+             <!-- 내가 신고한 사람들 보여주기  -->
+				<hr class="my-4">
+					<h5 class="card-title text-center">${userSession.account.userId}님의 신고 리스트</h5><br>
+					<c:forEach var="accuse" items="${accuseList}">
+						[신고 대상]&nbsp;&nbsp;${accuse.attacker}님&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						[신고 이유]&nbsp;&nbsp;" ${accuse.reason} "<br>
+					</c:forEach>
           </div>
         </div>
       </div>

@@ -21,4 +21,9 @@
   		WHERE ATTACKER = #{attacker} AND VICTIM = #{victim} 		
   	</select>
   	
+  	<select id="selectAccuseList" parameterType="String" resultType="Accuse">
+  		SELECT ATTACKER, REASON
+		FROM ACCUSE
+		WHERE VICTIM = #{victim}
+  	</select>
  </mapper>

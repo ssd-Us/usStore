@@ -1,5 +1,7 @@
 package com.example.usStore.dao.mybatis;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
@@ -28,4 +30,10 @@ public class MybatisAccuseDao implements AccuseDao {
 	public String isAccuseAlready(String attacker, String victim) throws DataAccessException {
 		return accuseMapper.isAccuseAlready(attacker, victim);
 	}
+
+	@Override
+	public List<Accuse> selectAccuseList(String victim) throws DataAccessException {
+		return accuseMapper.selectAccuseList(victim);
+	}
+	
 }
