@@ -94,15 +94,7 @@ public class SecondHandFormController {
    @GetMapping("/shop/secondHand/gobackItem.do")      // item.jsp
    public String backToStep1(@ModelAttribute("secondHandForm") SecondHandForm secondHandForm, 
 			@RequestParam("productId") int productId) {
-      return "redirect:/shop/item/addItem.do?productId=";   // step1 form view(item.jsp)
-   }
-   
-   @GetMapping("/shop/secondHand/gobackAddSh.do")     // step3 -> step2
-   public String backToStep2(
-		 @ModelAttribute("secondHandForm") SecondHandForm secondHandForm, 
-         @RequestParam("productId") int productId, Model model){
-      model.addAttribute("productId", productId);
-      return "prodect/addSecondHand";   // check.jsp -> addGroupBuying.jsp
+      return "redirect:/shop/item/addItem.do?productId="+productId; // step1 form view(item.jsp)
    }
    
 	@PostMapping("/shop/secondHand/done.do")		// step3 -> done

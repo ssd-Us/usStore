@@ -32,8 +32,9 @@ div#addItemForm {
 		<br>
 		<br>
 	
-	에누리 가능여부: 
-	<form:input type="text" path="discount" value="${discount}" />
+	가격 흥정 여부: 
+		  Yes&nbsp;<form:radiobutton items="${discount}" path="discount" checked="checked"/>&nbsp;&nbsp;
+		  No&nbsp;<form:radiobutton items="${discount}" path="discount"/>
 		<form:errors path="discount" />
 		<br>
 		<br>
