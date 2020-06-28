@@ -83,7 +83,7 @@ public interface ItemFacade {
    /////////////////////////////////////////////////////////////////////////
    /* Auction */
    /////////////////////////////////////////////////////////////////////////
-   List<Auction> getAuctionList();
+   List<Auction> getAuctionList(Account account);
    
    public void insertAuction(Auction auction);
     

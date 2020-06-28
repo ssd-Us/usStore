@@ -16,8 +16,11 @@
       A.DEADLINE,
       A.STARTPRICE,
       A.BIDPRICE
-    FROM AUCTION A, ITEM I
-    WHERE A.ITEMID = I.ITEMID
+    FROM AUCTION A, ITEM I, ACCOUNT AC
+	    WHERE AC.USERID = I.USERID AND S.ITEMID = I.ITEMID
+	    <if test="university != null">
+	    	ORDER BY DECODE ( UNIVERSITY, #{university}, 1)
+	    </if>
   </select>
   
   <insert id="insertAuction" parameterType="Auction">

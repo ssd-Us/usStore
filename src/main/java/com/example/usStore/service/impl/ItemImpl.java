@@ -207,9 +207,9 @@ public class ItemImpl implements ItemFacade {
    }
 
    @Override
-   public List<Auction> getAuctionList() {
+   public List<Auction> getAuctionList(Account account) {
       // TODO Auto-generated method stub
-      return auctionDao.getAuctionList();
+      return auctionDao.getAuctionList(account);
    }
 
    @Override
@@ -238,7 +238,7 @@ public class ItemImpl implements ItemFacade {
             Date curTime = new Date();
             auctionDao.closeAuction(curTime);
             
-            List<Auction> auctionList = auctionDao.getAuctionList();
+            List<Auction> auctionList = auctionDao.getAuctionList(null);
             for(int i = 0; i < auctionList.size(); i++) {
                if (auctionList.get(i).getAuctionState() == 1) {
                   int unitCost = auctionList.get(i).getUnitCost();
