@@ -54,7 +54,7 @@
                   name='<c:out value="${cartItem.item.itemId}"/>'
                   value='<c:out value="${cartItem.quantity}"/>' /></td>
               <td style="text-align:right"><fmt:formatNumber
-                  value="${cartItem.item.listPrice}" pattern="###,###,###원" /></td>
+                  value="${cartItem.item.unitCost}" pattern="###,###,###원" /></td>
               <td style="text-align:right"><fmt:formatNumber
                   value="${cartItem.totalPrice}" pattern="###,###,###원" /></td>
               <td><a href='<c:url value="/shop/removeItemFromCart.do">

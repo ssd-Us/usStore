@@ -47,7 +47,7 @@ public class MybatisGroupBuyingDao implements GroupBuyingDao {
    @Override
    public boolean isItemInStock(int itemId, int productId) throws DataAccessException {
       // TODO Auto-generated method stub
-      return groupBuyingMapper.isItemInStock(itemId, productId);
+      return (groupBuyingMapper.getQuantity(itemId, productId) > 0);
    }
 
    @Override

@@ -55,7 +55,7 @@ public class MybatisSecondHandDao implements SecondHandDao {
 	
 	@Override
 	public boolean isItemInStock(int itemId, int productId) throws DataAccessException {
-		return secondHandMapper.isItemInStock(itemId, productId);
+		return (secondHandMapper.getQuantity(itemId, productId) > 0);
 	}
 	
 	@Override

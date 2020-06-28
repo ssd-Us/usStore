@@ -131,8 +131,8 @@ function getSellerInfo(userId) {
    	<tr>
    			<th style="border-right: 1px solid black;">가격</th>
    			<td>
-   				 인터넷 정가  : ${sh.unitCost}원<br>
-   				 중고거래 판매가 : ${sh.listPrice}원 
+   				 인터넷 정가  : ${sh.listPrice}원<br>
+   				 중고거래 판매가 : ${sh.unitCost}원 
    			</td>
    	</tr>
    	<tr>
