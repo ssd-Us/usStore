@@ -7,36 +7,29 @@ import java.io.Serializable;
  * */
 @SuppressWarnings("serial")
 public class Tag  implements Serializable {
-	/* Private Fields */
-	private int tagId; 			// Sequence
-	private int itemId; 		// (FK) itemId
-	private String tagName;
+   /* Private Fields */
+   private int tagId;          // Sequence
+   private int itemId;       // (FK) itemId
+   private String tagName;
  
-	public Tag() {}
-	
-	public Tag(int itemId, String tagName) {
-		this.itemId = itemId;	
-		this.tagName = tagName;
-	}
-	
-	public Tag(int tagId, int itemId, String tagName) {
-		this.tagId = tagId;
-		this.itemId = itemId;	
-		this.tagName = tagName;
-	}
-		
-	/* JavaBeans Properties */
-	public int getTagId() { return tagId; }
-	public void setTagId(int tagId) {	this.tagId = tagId; }
-	
-	public int getItemId() { return itemId; }
-	public void setItemId(int itemId) { this.itemId = itemId; }
-	
-	public String getTagName() { return tagName; }
-	public void setTagName(String tagName) { this.tagName = tagName; }
-	
-	/* Public Methods */
-	public String toString() {
-		return "�±� : " + getTagId() +  " - " + getTagName();
-	}
+   public Tag() {}
+   
+   public Tag(String tagName) {
+      this.tagName = tagName;
+   }
+      
+   /* JavaBeans Properties */
+   public int getTagId() { return tagId; }
+   public void setTagId(int tagId) {   this.tagId = tagId; }
+   
+   public int getItemId() { return itemId; }
+   public void setItemId(int itemId) { this.itemId = itemId; }
+   
+   public String getTagName() { return tagName; }
+   public void setTagName(String tagName) { this.tagName = tagName; }
+
+   @Override
+   public String toString() {
+      return "Tag [tagId=" + tagId + ", itemId=" + itemId + ", tagName=" + tagName + "]";
+   }
 }
