@@ -43,11 +43,12 @@
 					</p>
                   <hr>                                
 				<table>
-   					<tr>
+   				<tr>
    					<th>TITLE</th>
    					<th>DISCOUNT</th>
    					<th>정가</th>
    					<th>판매가</th>
+   					<th>&nbsp;</th>
    				</tr>
   				<tbody> 
 	    			<c:forEach var="item" items="${secondHandList.pageList}">
@@ -70,6 +71,9 @@
 						</c:choose>
 				 		<td><fmt:formatNumber value="${item.unitCost}" pattern="###,###원" /></td>              
 						<td><fmt:formatNumber value="${item.listPrice}" pattern="###,###원" /></td>
+		      			<td><a href='<c:url value="/shop/addItemToCart.do">
+					            	<c:param name="workingItemId" value="${item.itemId}"/></c:url>'>
+					              	<img border="0" src="../../images/button_add_to_cart.gif" alt="" /></a></td>
 		      			</tr>
 	     			</c:forEach></tbody>
 	     			
