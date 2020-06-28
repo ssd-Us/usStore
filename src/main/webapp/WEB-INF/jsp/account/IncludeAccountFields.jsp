@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
-<h5 class="card-title text-center">Account Information</h5>
+<h5 class="card-title text-center"> Account Information </h5>
 
 <div class="form-label-group">
 	<form:input path="account.username" id="inputName" class="form-control" />
