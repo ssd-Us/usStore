@@ -24,25 +24,18 @@ public class MybatisOrderDao implements OrderDao {
 	protected LineItemMapper lineItemMapper;
 	@Autowired
 	private SequenceDao sequenceDao;
-
-	public List<Orders> getOrdersByUsername(String username) throws DataAccessException {
-	    return orderMapper.getOrdersByUsername(username);
-	}
 	
 	@Transactional
 	public Orders getOrder(int orderId) throws DataAccessException {
-		Orders order = orderMapper.getOrder(orderId);
-		if (order != null) {
-			order.setLineItems(lineItemMapper.getLineItemsByOrderId(orderId));
-		}
-	    return order;
+		 Orders order = orderMapper.getOrderAndLineitems(orderId);
+		 System.out.println(order.getLineItems().size());   // LineItem 객체들이 같이 생성되었는지 갯수 확인
+		 return order;
 	}
 	
 	@Transactional
 	public void insertOrder(Orders order) throws DataAccessException {  
     	order.setOrderId(sequenceDao.getSequence("ordernum"));
     	orderMapper.insertOrder(order);
-//    	orderMapper.insertOrderStatus(order);
     	for (int i = 0; i < order.getLineItems().size(); i++) {
     		LineItem lineItem = (LineItem) order.getLineItems().get(i);
     		lineItem.setOrderId(order.getOrderId());

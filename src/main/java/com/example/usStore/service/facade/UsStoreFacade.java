@@ -36,8 +36,6 @@ public interface UsStoreFacade {
 	/* Orders */
 	/////////////////////////////////////////////////////////////////////////
 	List<Orders> getOrdersByUserId(String userId);
-	
-	List<Orders> getOrdersByUsername(String username);
 
 	Orders getOrder(int orderId);
 	
