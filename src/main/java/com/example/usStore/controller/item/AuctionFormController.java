@@ -35,6 +35,8 @@ import com.example.usStore.domain.Bidder;
 import com.example.usStore.domain.GroupBuying;
 import com.example.usStore.domain.Item;
 import com.example.usStore.domain.Tag;
+import com.example.usStore.service.AuctionFormValidator;
+import com.example.usStore.service.GroupBuyingFormValidator;
 import com.example.usStore.service.facade.ItemFacade;
 import com.example.usStore.service.facade.MyPageFacade;
 
@@ -244,16 +246,23 @@ public class AuctionFormController {
    
 	
 	@PostMapping("/shop/auction/step3.do")		// step2 -> step3
-	public String goCheck(@ModelAttribute("Auction") AuctionForm auctionForm, 
+	public String goCheck(@ModelAttribute("Auction") AuctionForm auctionForm, BindingResult result,
 			HttpServletRequest rq, ItemForm itemForm, Model model) {	
 		System.out.println("step3.do(before check form)");
 		HttpSession session = rq.getSession(false);
+		
+		new AuctionFormValidator().validate(auctionForm, result);
 		
 		itemForm = (ItemForm) session.getAttribute("itemForm");
 		if(session.getAttribute("itemForm") != null) {
 			System.out.println("itemformSession: " + itemForm);	//print itemformSession toString
 		}
 
+		if (result.hasErrors()) {	//유효성 검증 에러 발생시
+			model.addAttribute("productId", itemForm.getProductId());
+			return ADD_Auction_FORM;
+		}
+		
 		System.out.println(auctionForm);
 		
 		System.out.println("deadLine still null," + auctionForm);	//print command toString
