@@ -1,7 +1,6 @@
 package com.example.usStore.controller.item;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -32,11 +31,9 @@ import org.springframework.web.servlet.ModelAndView;
 import com.example.usStore.controller.mypage.UserSession;
 import com.example.usStore.domain.Auction;
 import com.example.usStore.domain.Bidder;
-import com.example.usStore.domain.GroupBuying;
 import com.example.usStore.domain.Item;
 import com.example.usStore.domain.Tag;
 import com.example.usStore.service.AuctionFormValidator;
-import com.example.usStore.service.GroupBuyingFormValidator;
 import com.example.usStore.service.facade.ItemFacade;
 import com.example.usStore.service.facade.MyPageFacade;
 
@@ -136,36 +133,42 @@ public class AuctionFormController {
 	
    @RequestMapping("/shop/auction/viewItem.do") 
    public String auctionView(@RequestParam("itemId") int itemId, 
-		   @RequestParam("productId") int productId, 
-		   Model model, Model modelMap, 
-		   HttpServletRequest request) {
+		   @RequestParam("productId") int productId, HttpServletRequest rq,
+		   Model model, Model modelMap) {
+	  
+	   String victim = null;
+	   String isAccuse = "false";
 	   
+	   HttpSession session = rq.getSession(false);
+		
+	   if(session.getAttribute("userSession") != null) {
+		   UserSession userSession = (UserSession) session.getAttribute("userSession");
+		   String suppId = userSession.getAccount().getUserId();
+			
+		   victim = userSession.getAccount().getUserId();
+		   String attacker = this.itemFacade.getUserIdByItemId(itemId);
+		   isAccuse = this.myPageFacade.isAccuseAlready(attacker, victim);
+			
+		   System.out.println("suppId: " + suppId);
+		   model.addAttribute("suppId", suppId);
+	   }
+		
 	  System.out.println("<경매 상세 페이지>"); 
 	  
-	  Item item = itemFacade.getItem(itemId);
-	  item.setViewCount(item.getViewCount() + 1);
-	        
-	  itemFacade.updateItem(item);   // update : viewCount++
+	  Auction auction = this.itemFacade.getAuctionById(itemId);
+	  System.out.println("viewCount : " + auction.getViewCount());
+	  itemFacade.updateViewCount(auction.getViewCount() + 1, itemId);
+	  System.out.println("this auction's viewCount ++ ? : " + auction);
 	  
 	  myItemId = itemId;
 	  
-	  Auction auction = this.itemFacade.getAuctionById(myItemId);
-
 	  List<Tag> tags = new ArrayList<Tag>();
 	  tags = itemFacade.getTagByItemId(auction.getItemId());
 	  
-	  String isAccuse = "false";
-	   if(request.getSession(false) != null) {
-		   HttpSession session = request.getSession(false);
-		   UserSession userSession = (UserSession) session.getAttribute("userSession");
-		   
-		   if(userSession != null) {//attacker = 판매자 아이디, victim = 세션 유저 아이디 
-			   String victim = userSession.getAccount().getUserId();
-			   String attacker = this.itemFacade.getUserIdByItemId(itemId); 
-			   isAccuse = this.myPageFacade.isAccuseAlready(attacker, victim); 
-		   }
-	   }
-	   
+	  if (auction.getAuctionState() == 1) {//낙찰되었으면 낙찰자 보내기
+		  String bidder = itemFacade.isBidderExist(itemId);
+		  model.addAttribute("bidder", bidder);
+	  }
 	  model.addAttribute("productId", productId);
       model.addAttribute("auction", auction);
       modelMap.addAttribute("tags", tags);
@@ -239,11 +242,6 @@ public class AuctionFormController {
 		return GoAddItemFORM + productId;	// step1(item.jsp) form step2(addAuction.jsp)
 	}
 	
-	@GetMapping("/addStep2")		// step3 -> step2
-	public String addAuctionFromCheck() {
-		return ADD_Auction_FORM;	// step2 form view
-	}
-   
 	
 	@PostMapping("/shop/auction/step3.do")		// step2 -> step3
 	public String goCheck(@ModelAttribute("Auction") AuctionForm auctionForm, BindingResult result,
@@ -281,11 +279,26 @@ public class AuctionFormController {
 	@PostMapping("/shop/auction/detailItem.do")		// step3 -> done
 	public String done(@ModelAttribute("Auction") AuctionForm auctionForm,
 			ItemForm itemformSession, BindingResult result, Model model, HttpServletRequest rq, 
-			SessionStatus sessionStatus, Auction auction, ModelMap modelMap) throws ParseException {
+			SessionStatus sessionStatus, ModelMap modelMap) throws ParseException {
+		
+		int status = 0;
 		System.out.println("detailItem.do");
 		
 		HttpSession session = rq.getSession(false);
 		itemformSession = (ItemForm) session.getAttribute("itemForm");
+		if(session.getAttribute("status") != null) {
+			status = (int) session.getAttribute("status");
+			System.out.println("status" + status);
+		}
+		if(session.getAttribute("userSession") != null) {
+			UserSession userSession = (UserSession) session.getAttribute("userSession");
+			System.out.println(userSession);
+		}
+		
+		UserSession userSession = (UserSession) session.getAttribute("userSession");
+		String suppId = userSession.getAccount().getUserId();
+		System.out.println("suppId: " + suppId);
+				
 		if(session.getAttribute("itemForm") != null) {
 			System.out.println("itemformSession: " + itemformSession);	//print itemformSession toString
 		}
@@ -293,36 +306,53 @@ public class AuctionFormController {
 	
 		//put itemformSession to item
 		Item item = new Item(itemformSession.getUnitCost(), itemformSession.getTitle(), 
-				itemformSession.getDescription(), itemformSession.getQty(), "A", 	//must change userId -> loginCommand.getUserId()
+				itemformSession.getDescription(), itemformSession.getQty(), suppId, 	//�씤�꽣�뀎�꽣 ��怨� �삤�땲源� suppId 臾댁“嫄� �엳�쓬
 				itemformSession.getProductId());
 		
-		itemFacade.insertItem(item);	// -> generate itemId, insert DB
+		if(status != 0) {
+			item.setItemId(status);
+			item.setViewCount(itemformSession.getViewCount());
+			System.out.println("Update id, viewCount" + item);
+		}
+		System.out.println("조회수:" + itemformSession.getViewCount());
 		
 		System.out.println("itemId: " + item.getItemId());	//print itemformSession toString
 		
-		//generate tags(only have tagName)
-		item.makeTags(item.getItemId(), itemformSession.getTag1());	//if(tag != null && "") then addTags
-		item.makeTags(item.getItemId(), itemformSession.getTag2());
-		item.makeTags(item.getItemId(), itemformSession.getTag3());
-		item.makeTags(item.getItemId(), itemformSession.getTag4());
-		item.makeTags(item.getItemId(), itemformSession.getTag5());
-			
-		List<Tag> tags = new ArrayList<Tag>();
-		tags = item.getTags();
-		
-		System.out.println("tags: " + tags);
-		
-		for(Tag t : tags) {
-				itemFacade.insertTag(t);	//matching tag - item (via itemId) , insert DB
+		if(status != 0) {
+			List<Tag> tags = itemFacade.getTagByItemId(status);
+			System.out.println("tag size : " + tags.size());	//0
+			if(tags.size() > 0) {
+				itemFacade.deleteTag(status);
+				tags.removeAll(tags);	//기존의 태그 전부 삭제
+				
+				System.out.println("removed tags, tag size : " + tags.size());
+				List<Tag> t = itemFacade.getTagByItemId(status);
+				System.out.println("deleted, tag size : " + t.size());
+			}
 		}
+		//generate tags(only have tagName)
+		item.makeTags(itemformSession.getTag1());	//if(tag != null && "") then addTags
+		item.makeTags(itemformSession.getTag2());	//if(tag != null && "") then addTags
+		item.makeTags(itemformSession.getTag3());	//if(tag != null && "") then addTags
+		item.makeTags(itemformSession.getTag4());	//if(tag != null && "") then addTags
+		item.makeTags(itemformSession.getTag5());	//if(tag != null && "") then addTags
+				
 		
 		System.out.println("deadLine : " + auctionForm.getDeadLine());
+		Auction auction = new Auction(item, 0, auctionForm.getDeadLine(), auctionForm.getStartPrice(), 0);
 		
 		auction.setItemId(item.getItemId());
 		auction.setStartPrice(auctionForm.getStartPrice());
 		auction.setDeadLine(auctionForm.getDeadLine());
 	
-		itemFacade.insertAuction(auction);	// insert DB
+		if(status != 0) {
+			itemFacade.updateAuction(auction);
+		}
+		else {
+			itemFacade.insertAuction(auction);	// insert DB
+		}
+		
+		System.out.println(auction);
 		
 		sessionStatus.setComplete();	// Auction session close
 		session.removeAttribute("itemForm");	//itemForm session close
@@ -343,15 +373,7 @@ public class AuctionFormController {
 
   
    @RequestMapping("/shop/auction/deleteItem.do") 
-   public String auctionDelete(@ModelAttribute("userSession") UserSession userSession, @RequestParam("itemId") int itemId, ModelMap model, HttpServletResponse response) throws IOException { 
-	   String userId = userSession.getAccount().getUserId();
-	   String supplier = itemFacade.getAuctionById(myItemId).getUserId();
-	   
-	   if (!userId.equals(supplier)) {
-		   System.out.println("삭제할 수 없습니다.");
-		   return "redirect:/shop/auction/viewItem.do?itemId=" + itemId + "&productId=1";
-	   }
-	   
+   public String auctionDelete(@RequestParam("itemId") int itemId, ModelMap model, HttpServletResponse response) throws IOException {  
 	   this.itemFacade.deleteItem(itemId);
 	   
 	   return "redirect:/shop/auction/listItem.do?productId=" + myProductId;
