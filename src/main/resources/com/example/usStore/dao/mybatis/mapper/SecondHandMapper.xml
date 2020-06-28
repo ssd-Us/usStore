@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.usStore.dao.mybatis.mapper.SecondHandMapper">
   <cache />
-  
- 	<select id="getSecondHandList" resultType="SecondHand">
+
+ 	<select id="getSecondHandList"  resultType="SecondHand">
 	    SELECT 
 	     	  I.ITEMID,
 		      I.UNITCOST,
@@ -15,8 +15,11 @@
 		      I.PRODUCTID,
 	    	  S.DISCOUNT,
 	    	  S.LISTPRICE 
-	    FROM SECONDHAND S, ITEM I
-	    WHERE S.ITEMID = I.ITEMID
+	    FROM SECONDHAND S, ITEM I, ACCOUNT A
+	    WHERE A.USERID = I.USERID AND S.ITEMID = I.ITEMID
+	    <if test="university != null">
+	    	ORDER BY DECODE ( UNIVERSITY, ${university}, 1)
+	    </if>
 	</select>
 	
 

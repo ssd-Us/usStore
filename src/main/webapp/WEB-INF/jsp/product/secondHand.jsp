@@ -38,7 +38,7 @@
                   </h2>
                    <p style="text-align:right;">
                    	<a href="<c:url value='/shop/item/addItem.do'>
-                           <c:param name="productId" value="${productId}"/></c:url>">공동구매 물품 판매하기
+                           <c:param name="productId" value="${productId}"/></c:url>">중고거래 물품 판매하기
                   	</a>
 					</p>
                   <hr>                                

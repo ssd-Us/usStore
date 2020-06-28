@@ -185,8 +185,8 @@ public class ItemImpl implements ItemFacade {
    }
 
    @Override
-   public List<SecondHand> getSecondHandList() {
-      return secondHandDao.getSecondHandList();
+   public List<SecondHand> getSecondHandList(String university) {
+   	return secondHandDao.getSecondHandList(university);
    }
 
    @Override
@@ -347,6 +347,8 @@ public class ItemImpl implements ItemFacade {
       // TODO Auto-generated method stub
       itemDao.updateViewCount(viewCount, itemId);
    }
+
+
 
    
 
