@@ -69,6 +69,7 @@ public class MybatisHandMadeDao implements HandMadeDao {
 		handMadeMapper.updateHandMade(handMade);
 		
 		for(Tag tag : handMade.getTags()) {
+			tag.setItemId(handMade.getItemId());
 			tagMapper.insertTag(tag);
 		}
 	}

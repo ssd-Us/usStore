@@ -20,8 +20,8 @@
 <div id="addHandMadeForm">
 <h2>ADD HANDMADE</h2>
 <hr width = "927px" align="left"><br><br>
-	<spring:hasBindErrors name="HandMade" />
-    <form:form modelAttribute="HandMade" method="post" action="step3.do">
+	<spring:hasBindErrors name="handMadeForm" />
+    <form:form modelAttribute="handMadeForm" method="post" action="step3.do">
 	   판매가: <form:input type="text" path="listPrice" value="${listPrice}"/>
 	   <form:errors path="listPrice"/> <br>
 	   

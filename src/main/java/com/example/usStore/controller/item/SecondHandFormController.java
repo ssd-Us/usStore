@@ -42,6 +42,11 @@ public class SecondHandFormController {
 	   return secondHandForm;
    }
    
+   @ModelAttribute("radioKind")
+   public String[] referenceData() {
+	   return new String[] {"Yes", "No"};
+   }
+   
    //여기부터 수정  이컨트롤러 공통사항으로 뺴도 되지아나유? 
    @RequestMapping("/shop/secondHand/index.do") //go index(remove sessions)
    public String goIndex(SessionStatus sessionStatus, HttpServletRequest rq)
@@ -64,7 +69,10 @@ public class SecondHandFormController {
 			int status = (int) session.getAttribute("status");
 			SecondHand sh = itemFacade.getSecondHandItem(status);
 			secondHandForm.setListPrice(sh.getListPrice());
-			secondHandForm.setDiscount(sh.getDiscount());
+		
+			if(sh.getDiscount() == 0) { //흥정 불가능 
+				secondHandForm.setDiscount("No"); //여기  무슨값 넣어야하는지 모르게따고ㅜㅜ
+			}
 		}
         model.addAttribute("productId", productId);
         return  "product/addSecondHand";  
@@ -88,6 +96,7 @@ public class SecondHandFormController {
 			return "product/addSecondHand";
 		}
 	   
+	   model.addAttribute("tags", itemForm.getTags());
 	   return "product/checkSecondHand";      // step3(CHECK_FORM3)
    }
    
@@ -115,7 +124,7 @@ public class SecondHandFormController {
 		UserSession userSession = (UserSession)session.getAttribute("userSession");
 		String suppId = userSession.getAccount().getUserId();
 		System.out.println("done-suppId : " + suppId );	
-		
+	
 		//put itemform to item domain 세션에 저장된 커맨드객체를 도메인에 저장하기 
 		Item item = new Item(itemform.getUnitCost(), itemform.getTitle(), 
 				itemform.getDescription(), itemform.getQty(), suppId, itemform.getProductId());
@@ -133,18 +142,22 @@ public class SecondHandFormController {
 				tags.removeAll(tags);
 			}
 		}
-		
-		//generate tags(only have tagName)
-		item.makeTags(itemform.getTag1());	//if(tag != null && "") then addTags
-		item.makeTags(itemform.getTag2());	//if(tag != null && "") then addTags
-		item.makeTags(itemform.getTag3());	//if(tag != null && "") then addTags
-		item.makeTags(itemform.getTag4());	//if(tag != null && "") then addTags
-		item.makeTags(itemform.getTag5());	//if(tag != null && "") then addTags
-		
-		System.out.println("태그 아이디" + item.getItemId() + item.getTags().get(0));
-		
+		//generate tags(only have tagName)      
+	    for(int i = 0; i < itemform.getTags().size(); i++) {
+	         item.makeTags(itemform.getTags().get(i));   //if(tag != null && "") then addTags
+	    }
+	    
 		//put secondHandForm to SecondHand domain 세션에 있는거 도메인에 저장 
-		SecondHand secondHand = new SecondHand(item,secondHandForm.getDiscount(),secondHandForm.getListPrice());
+		String discount = secondHandForm.getDiscount();
+		SecondHand secondHand = null;
+		System.out.println("세컨핸드컨트롤러에서 디스카운트 출력값: " + discount);
+		if(discount.equals("Yes")) {
+			secondHand = new SecondHand(item, 1 ,secondHandForm.getListPrice());
+		}else if(discount.equals("No")){
+			secondHand = new SecondHand(item, 0 ,secondHandForm.getListPrice());
+		}else {
+			System.out.println("아무것도 선택안하면 검증에서 잡아주도록 수정하기");
+		}
 		
 		if(status != 0) { //수정일 때 
 			itemFacade.updateSecondHand(secondHand);
@@ -165,12 +178,9 @@ public class SecondHandFormController {
 		HttpSession session = rq.getSession(true);
 	
 		//itemId로 디비에서 세컨핸드와 태그 가져와서 도메인에 저장함 
-		List<Tag> tags = itemFacade.getTagByItemId(itemId);
 		SecondHand sh = itemFacade.getSecondHandItem(itemId);
 		//List<Tag> tags = sh.getTags(); 나중에 resultMap써서 이렇게 가져올 수 있도록 바꾸고 싶어염 하뚜 
-		System.out.println("프로덕트 " + sh);
-		System.out.println("프로덕트 아이디" + sh.getProductId());
-		
+	
 		ItemForm itemForm = new ItemForm();
 		itemForm.setItemId(itemId);
 		itemForm.setUnitCost(sh.getUnitCost());
@@ -180,36 +190,11 @@ public class SecondHandFormController {
 		itemForm.setQty(sh.getQty());
 		itemForm.setUserId(sh.getUserId());
 		itemForm.setProductId(sh.getProductId());
-		
+		itemForm.setTags(sh.getTags());
+		  
 		session.setAttribute("status", itemId); //세션 종료 어디서 해주는지 다시 확인하기 
 		session.setAttribute("itemForm", itemForm); //왜 세션에 아이템폼을 유지? 어디서 세션 종료해주는지 다시 파악하기 
 		
-		switch(tags.size()) {
-		case 1: itemForm.setTag1(tags.get(0).getTagName());
-				break;
-				
-		case 2: itemForm.setTag1(tags.get(0).getTagName());
-				itemForm.setTag2(tags.get(1).getTagName());
-				break;
-				
-		case 3: itemForm.setTag1(tags.get(0).getTagName());
-				itemForm.setTag2(tags.get(1).getTagName());
-				itemForm.setTag3(tags.get(2).getTagName());
-				break;
-		
-		case 4: itemForm.setTag1(tags.get(0).getTagName());
-				itemForm.setTag2(tags.get(1).getTagName());
-				itemForm.setTag3(tags.get(2).getTagName());
-				itemForm.setTag4(tags.get(3).getTagName());
-				break;
-		
-		case 5: itemForm.setTag1(tags.get(0).getTagName());
-				itemForm.setTag2(tags.get(1).getTagName());
-				itemForm.setTag3(tags.get(2).getTagName());
-				itemForm.setTag4(tags.get(3).getTagName());
-				itemForm.setTag5(tags.get(4).getTagName());
-				break;
-		}
 		return "redirect:/shop/item/addItem.do?productId=" + sh.getProductId();
 	}
 	

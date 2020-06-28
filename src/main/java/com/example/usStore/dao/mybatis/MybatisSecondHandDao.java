@@ -73,6 +73,7 @@ public class MybatisSecondHandDao implements SecondHandDao {
 		itemMapper.updateItem(secondHand);
 		secondHandMapper.updateSecondHand(secondHand);
 		for(Tag t : secondHand.getTags()) {
+			t.setItemId(secondHand.getItemId());
 			tagMapper.insertTag(t);
 		}
 	}
