@@ -89,39 +89,34 @@ public interface ItemFacade {
     
    public void updateAuction(Auction auction);
 
-   public Auction getAuctionById(int itemId);
-   
-   public void testScheduler(Date deadLine);
-   
-   public void updateAuctionUnitCost(int unitCost, int itemId);
-   
-   public void updateBidder(String bidder, int itemId);
-   
-   public void insertBidder(Bidder bidder);
-   
-   public String isBidderExist(int itemId);
-   
-   public void updateBidPrice(int unitCost, int itemId);
-   
-   public List<Bidder> getBidderList();
-   
-   /////////////////////////////////////////////////////////////////////////
-   /* Tag */
-   /////////////////////////////////////////////////////////////////////////
-   List<Tag> getTagList ();
-   
-   List<Tag> getTagByTagId(int tagId);
-   
-   List<Tag> getTagByItemId(int itemId);   
-   
-   Tag getTagByTagName(String tagName);   
-   
-   void insertTag(Tag tag);   
-   
-   void deleteTag(int itemId);
-   /////////////////////////////////////////////////////////////////////////
-   /* Tag */
-   /////////////////////////////////////////////////////////////////////////
-   List<Item> searchItemList(String keywords);
-
+	public Auction getAuctionById(int itemId);
+	
+	public void testScheduler(Date deadLine);
+	
+	public void updateAuctionUnitCost(int unitCost, int itemId);
+	
+	public void updateBidder(String bidder, int itemId);
+	
+	public void insertBidder(Bidder bidder);
+	
+	public String isBidderExist(int itemId);
+	
+	public void updateBidPrice(int unitCost, int itemId);
+	
+	public List<Bidder> getBidderList();
+	
+	/////////////////////////////////////////////////////////////////////////
+	/* Tag */
+	/////////////////////////////////////////////////////////////////////////
+	List<Tag> getTagList ();
+	
+	List<Tag> getTagByTagId(int tagId);
+	
+	List<Tag> getTagByItemId(int itemId);	
+	
+	List<Tag> getTagByTagName(String tagName);	
+	
+	void insertTag(Tag tag);	
+	
+	void deleteTag(int itemId);
 }

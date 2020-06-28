@@ -296,11 +296,11 @@ public class ItemImpl implements ItemFacade {
       return tagDao.getTagByItemId(itemId);
    }
 
-   @Override
-   public Tag getTagByTagName(String tagName) {
-      // TODO Auto-generated method stub
-      return tagDao.getTagByTagName(tagName);
-   }
+	@Override
+	public List<Tag> getTagByTagName(String tagName) {
+		// TODO Auto-generated method stub
+		return tagDao.getTagByTagName(tagName);
+	}
 
    @Override
    public void insertTag(Tag tag) {
@@ -337,17 +337,11 @@ public class ItemImpl implements ItemFacade {
       return itemDao.getUserIdByItemId(itemId);
    }
 
-   @Override
-   public List<Item> searchItemList(String keywords) {
-      // TODO Auto-generated method stub
-      return null;
-   }
-
-   @Override
-   public void updateViewCount(int viewCount, int itemId) {
-      // TODO Auto-generated method stub
-      itemDao.updateViewCount(viewCount, itemId);
-   }
+	@Override
+	public void updateViewCount(int viewCount, int itemId) {
+		// TODO Auto-generated method stub
+		itemDao.updateViewCount(viewCount, itemId);
+	}
 
 
 
