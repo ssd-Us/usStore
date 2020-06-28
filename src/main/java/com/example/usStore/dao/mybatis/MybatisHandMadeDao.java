@@ -1,5 +1,6 @@
 package com.example.usStore.dao.mybatis;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -34,7 +35,16 @@ public class MybatisHandMadeDao implements HandMadeDao {
 	@Override
 	public void updateQuantity(int qty, int itemId, int productId) throws DataAccessException {
 		// TODO Auto-generated method stub
-		handMadeMapper.updateQuantity(qty, itemId, productId);
+//		for (int i = 0; i < order.getLineItems().size(); i++) {
+//			LineItem lineItem = (LineItem) order.getLineItems().get(i);
+//			String itemId = lineItem.getItemId();
+//			Integer increment = new Integer(lineItem.getQuantity());
+//			Map<String, Object> param = new HashMap<String, Object>(2);
+//			param.put("itemId", itemId);
+//			param.put("increment", increment);
+//			itemMapper.updateInventoryQuantity(param);
+			handMadeMapper.updateQuantity(qty, itemId, productId);
+//		}
 	}
 
 	@Override
@@ -46,9 +56,9 @@ public class MybatisHandMadeDao implements HandMadeDao {
 	@Override
 	public boolean isItemInStock(int itemId, int productId) throws DataAccessException {
 		// TODO Auto-generated method stub
-		return handMadeMapper.isItemInStock(itemId, productId);
+		return (handMadeMapper.getQuantity(itemId, productId) > 0);
 	}
-
+	
 	@Override
 	// transaction 구현
 	public void insertHandMade(HandMade handMade) throws DataAccessException {

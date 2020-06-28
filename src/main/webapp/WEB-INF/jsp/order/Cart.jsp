@@ -41,27 +41,22 @@
 
           <c:forEach var="cartItem" items="${cart.cartItemList.pageList}">
             <tr bgcolor="#FFFFFF">
-              <th scope="row"><b>
+              <th scope="row">
                 <a href='<c:url value="/shop/viewItem.do">
                   <c:param name="itemId" value="${cartItem.item.itemId}"/></c:url>'>
                   <c:out value="${cartItem.item.itemId}" />
-                </a></b></th>
+                </a></th>
               <td><c:out value="${cartItem.item.productId}" /></td>
-              <td><c:out value="${cartItem.item.attribute1}" /> 
-                <c:out value="${cartItem.item.attribute2}" /> 
-                <c:out value="${cartItem.item.attribute3}" />
-                <c:out value="${cartItem.item.attribute4}" />
-                <c:out value="${cartItem.item.attribute5}" />
-                <c:out value="${cartItem.item.product.name}" /></td>
+              <td><c:out value="${cartItem.item.description}" /></td>
               <td style="text-align:center"><c:out value="${cartItem.inStock}" /></td>
               <td style="text-align:center">
                 <input type="text" size="3"
                   name='<c:out value="${cartItem.item.itemId}"/>'
                   value='<c:out value="${cartItem.quantity}"/>' /></td>
               <td style="text-align:right"><fmt:formatNumber
-                  value="${cartItem.item.listPrice}" pattern="$#,##0.00" /></td>
+                  value="${cartItem.item.listPrice}" pattern="###,###,###원" /></td>
               <td style="text-align:right"><fmt:formatNumber
-                  value="${cartItem.totalPrice}" pattern="$#,##0.00" /></td>
+                  value="${cartItem.totalPrice}" pattern="###,###,###원" /></td>
               <td><a href='<c:url value="/shop/removeItemFromCart.do">
                     <c:param name="workingItemId" value="${cartItem.item.itemId}"/></c:url>'>
                     <img border="0" src="../images/button_remove.gif" alt="" /></a>
