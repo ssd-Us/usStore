@@ -292,14 +292,14 @@ public class AuctionFormController {
 		System.out.println("itemId: " + item.getItemId());	//print itemformSession toString
 		
 		//generate tags(only have tagName)
-		itemformSession.makeTags(item.getItemId(), itemformSession.getTag1());	//if(tag != null && "") then addTags
-		itemformSession.makeTags(item.getItemId(), itemformSession.getTag2());
-		itemformSession.makeTags(item.getItemId(), itemformSession.getTag3());
-		itemformSession.makeTags(item.getItemId(), itemformSession.getTag4());
-		itemformSession.makeTags(item.getItemId(), itemformSession.getTag5());
+		item.makeTags(item.getItemId(), itemformSession.getTag1());	//if(tag != null && "") then addTags
+		item.makeTags(item.getItemId(), itemformSession.getTag2());
+		item.makeTags(item.getItemId(), itemformSession.getTag3());
+		item.makeTags(item.getItemId(), itemformSession.getTag4());
+		item.makeTags(item.getItemId(), itemformSession.getTag5());
 			
 		List<Tag> tags = new ArrayList<Tag>();
-		tags = itemformSession.getTags();
+		tags = item.getTags();
 		
 		System.out.println("tags: " + tags);
 		
