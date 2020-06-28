@@ -22,13 +22,13 @@
         <table id="cart" class="table table-hover">
           <thead>
           <tr bgcolor="#FFFFFF">
-            <th scope="col"><b>Item ID</b></th>
-            <th scope="col"><b>Product ID</b></th>
-            <th scope="col"><b>Description</b></th>
-            <th scope="col"><b>In Stock?</b></th>
-            <th scope="col"><b>Quantity</b></th>
-            <th scope="col"><b>List Price</b></th>
-            <th scope="col"><b>Total Cost</b></th>
+            <th scope="col"><b>제품 코드</b></th>
+            <th scope="col"><b>제품명</b></th>
+            <th scope="col"><b>설명</b></th>
+            <th scope="col"><b>재고여부</b></th>
+            <th scope="col"><b>개수</b></th>
+            <th scope="col"><b>가격</b></th>
+            <th scope="col"><b>총액</b></th>
             <th scope="col">&nbsp;</th>
           </tr>
           </thead>
@@ -46,7 +46,7 @@
                   <c:param name="itemId" value="${cartItem.item.itemId}"/></c:url>'>
                   <c:out value="${cartItem.item.itemId}" />
                 </a></th>
-              <td><c:out value="${cartItem.item.productId}" /></td>
+              <td><c:out value="${cartItem.item.title}" /></td>
               <td><c:out value="${cartItem.item.description}" /></td>
               <td style="text-align:center"><c:out value="${cartItem.inStock}" /></td>
               <td style="text-align:center">
