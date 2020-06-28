@@ -54,20 +54,20 @@ public class SecondHandController {
 
    @RequestMapping("/shop/secondHand/listItem.do")
    public String secondHandList(@RequestParam("productId") int productId, Model model, HttpServletRequest rq) throws Exception {
-	   /*현재 로그인한 유저가 있다면 그 유저의 대학 필드를 우선적으로 보여주고 
-	   	만약 로그인이 안된 상태에서는 대학 필터링 없이 보여준다.*/
-	  HttpSession session = rq.getSession(false);
-	  String university = null; 
-	  if (session.getAttribute("userSession") != null) {
-	         UserSession userSession = (UserSession)session.getAttribute("userSession") ;
-	         if (userSession != null) {  //로그인상태이면 대학정보 가져온다 
-	        	 university = userSession.getAccount().getUniversity();
-	         }
-	  }
-	  
-	  PagedListHolder<SecondHand> secondHandList = new PagedListHolder<SecondHand>(
-            this.itemFacade.getSecondHandList(university));
-  
+      /*현재 로그인한 유저가 있다면 그 유저의 대학 필드를 우선적으로 보여주고 
+         만약 로그인이 안된 상태에서는 대학 필터링 없이 보여준다.*/
+     HttpSession session = rq.getSession(false);
+   
+     Account account = null;
+     if (session.getAttribute("userSession") != null) {
+            UserSession userSession = (UserSession)session.getAttribute("userSession") ;
+            if (userSession != null) {  //로그인상태이면 대학정보 가져온다 
+               account = userSession.getAccount();
+            }
+     }
+     
+     PagedListHolder<SecondHand> secondHandList = new PagedListHolder<SecondHand>(
+            this.itemFacade.getSecondHandList(account));
       secondHandList.setPageSize(4);
 
       model.addAttribute("secondHandList", secondHandList);
