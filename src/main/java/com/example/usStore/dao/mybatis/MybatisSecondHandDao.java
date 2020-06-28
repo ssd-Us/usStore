@@ -13,6 +13,7 @@ import com.example.usStore.dao.SecondHandDao;
 import com.example.usStore.dao.mybatis.mapper.ItemMapper;
 import com.example.usStore.dao.mybatis.mapper.SecondHandMapper;
 import com.example.usStore.dao.mybatis.mapper.TagMapper;
+import com.example.usStore.domain.Account;
 import com.example.usStore.domain.Item;
 import com.example.usStore.domain.SecondHand;
 import com.example.usStore.domain.Tag;
@@ -64,8 +65,8 @@ public class MybatisSecondHandDao implements SecondHandDao {
 	
 
 	@Override
-	public List<SecondHand> getSecondHandList(String university) throws DataAccessException {
-		return secondHandMapper.getSecondHandList(university);
+	public List<SecondHand> getSecondHandList(Account account) throws DataAccessException {
+		return secondHandMapper.getSecondHandList(account);
 	}
 	
 	@Override

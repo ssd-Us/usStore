@@ -72,7 +72,7 @@ public interface ItemFacade {
    /////////////////////////////////////////////////////////////////////////
    /* SecondHand */
    /////////////////////////////////////////////////////////////////////////   
-   List<SecondHand> getSecondHandList(String university);
+   List<SecondHand> getSecondHandList(Account account);
    
    SecondHand getSecondHandItem(int itemId);
    

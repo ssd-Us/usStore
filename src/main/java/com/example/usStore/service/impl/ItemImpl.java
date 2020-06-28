@@ -18,6 +18,7 @@ import com.example.usStore.dao.HandMadeDao;
 import com.example.usStore.dao.ItemDao;
 import com.example.usStore.dao.SecondHandDao;
 import com.example.usStore.dao.TagDao;
+import com.example.usStore.domain.Account;
 import com.example.usStore.domain.Auction;
 import com.example.usStore.domain.Bidder;
 import com.example.usStore.domain.GroupBuying;
@@ -185,8 +186,8 @@ public class ItemImpl implements ItemFacade {
    }
 
    @Override
-   public List<SecondHand> getSecondHandList(String university) {
-   	return secondHandDao.getSecondHandList(university);
+   public List<SecondHand> getSecondHandList(Account account) {
+   	return secondHandDao.getSecondHandList(account);
    }
 
    @Override
