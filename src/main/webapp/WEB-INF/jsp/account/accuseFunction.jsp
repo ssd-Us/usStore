@@ -17,7 +17,7 @@ function accuse(a){  //a랑 href   //여기는 로그인이 되었을 때 보내
 
       <c:choose>
                <c:when test="${isAccuse}">
-                  		신고한 판매자입니다
+                        신고한 판매자입니다
                </c:when>
                <c:otherwise>
                   <c:choose> 
