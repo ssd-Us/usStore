@@ -28,7 +28,7 @@
                    <p style="text-align:right;">
 		                <a href="<c:url value='/shop/item/addItem.do'>
                            <c:param name="productId" value="${productId}"/></c:url>
-                  ">[경매 참여]
+                  ">경매 추가
                         </a>
 					</p>
                   <hr>

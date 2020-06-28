@@ -8,20 +8,28 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.usStore.dao.AuctionDao;
 import com.example.usStore.dao.mybatis.mapper.AuctionMapper;
 import com.example.usStore.dao.mybatis.mapper.ItemMapper;
+import com.example.usStore.dao.mybatis.mapper.TagMapper;
 import com.example.usStore.domain.Auction;
 import com.example.usStore.domain.Bidder;
 import com.example.usStore.domain.Item;
+import com.example.usStore.domain.Tag;
 
+@Transactional
 @Qualifier("mybatisAuctionDao")
 @Repository
 public class MybatisAuctionDao implements AuctionDao {
 
    @Autowired
    private AuctionMapper auctionMapper;
+   @Autowired
+	private ItemMapper itemMapper;
+   @Autowired
+   private TagMapper tagMapper;
 
    @Override
    public void updateQuantity(int qty, int itemId, int productId) throws DataAccessException {
@@ -62,13 +70,23 @@ public class MybatisAuctionDao implements AuctionDao {
    @Override
    public void insertAuction(Auction auction) throws DataAccessException {
       // TODO Auto-generated method stub
-      auctionMapper.insertAuction(auction);
+	  itemMapper.insertItem(auction);
+	  auctionMapper.insertAuction(auction);
+	  for(Tag t : auction.getTags()) {
+		  t.setItemId(auction.getItemId());
+		  tagMapper.insertTag(t);
+	  }
    }
 
    @Override
    public void updateAuction(Auction auction) throws DataAccessException {
       // TODO Auto-generated method stub
-      auctionMapper.updateAuction(auction);
+	   itemMapper.updateItem((Item)auction);
+	   auctionMapper.updateAuction(auction);
+	   
+	   for(Tag t : auction.getTags()) {
+		   tagMapper.insertTag(t);
+	   }
    }
 
    @Override
