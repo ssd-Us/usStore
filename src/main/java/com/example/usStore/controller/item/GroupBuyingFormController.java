@@ -60,7 +60,8 @@ public class GroupBuyingFormController {
    
    @RequestMapping("/shop/groupBuying/listItem.do") 
     public String groupBuyingList(@RequestParam("productId") int productId, ModelMap modelMap, Model model,  HttpServletRequest rq) {
-      
+     
+
 	  HttpSession session = rq.getSession(false);
 	   
 	  Account account = null;

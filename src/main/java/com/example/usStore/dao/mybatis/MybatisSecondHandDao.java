@@ -112,7 +112,9 @@ public class MybatisSecondHandDao implements SecondHandDao {
 		secondHandMapper.updateViewCount(viewCount, itemId);
 	}
 
-
-	
+	@Override
+	public List<Item> getItemByPId(int productId){
+	   return secondHandMapper.getItemByPId(productId);
+	}
 
 }

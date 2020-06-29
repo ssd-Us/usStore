@@ -34,4 +34,6 @@ public interface ItemDao {
 
 	// ViewCount + 1
 	void updateViewCount(int viewCount, int itemId);
+	
+	List<Item> getItemByPId(int productId); 
 }

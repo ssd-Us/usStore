@@ -43,6 +43,10 @@ public interface ItemFacade {
    String getUserIdByItemId(int itemId);
    
    void updateViewCount(int viewCount, int itemId);
+   
+   List<Item> getItemByPId(int productId);
+   
+   
    /////////////////////////////////////////////////////////////////////////
    /* HandMade */
    /////////////////////////////////////////////////////////////////////////
@@ -69,6 +73,7 @@ public interface ItemFacade {
    GroupBuying getGroupBuyingItem(int itemId);
    
    public void groupBuyingScheduler(Date deadLine);
+   
    /////////////////////////////////////////////////////////////////////////
    /* SecondHand */
    /////////////////////////////////////////////////////////////////////////   

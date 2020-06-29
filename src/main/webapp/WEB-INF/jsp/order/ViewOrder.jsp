@@ -43,28 +43,20 @@
       <td colspan="2"><font color="green" size="4"><b>Billing Address</b></font></td>
     </tr>
     <tr>
-      <td>First name:</td>
-      <td><c:out value="${order.billToFirstName}" /></td>
-    </tr>
-    <tr>
-      <td>Last name:</td>
-      <td><c:out value="${order.billToLastName}" /></td>
+      <td>name:</td>
+      <td><c:out value="${order.billToUsername}" /></td>
     </tr>
     <tr>
       <td>Address 1:</td>
-      <td><c:out value="${order.billAddress1}" /></td>
+      <td><c:out value="${order.billAddr1}" /></td>
     </tr>
     <tr>
       <td>Address 2:</td>
-      <td><c:out value="${order.billAddress2}" /></td>
+      <td><c:out value="${order.billAddr2}" /></td>
     </tr>
     <tr>
       <td>City:</td>
       <td><c:out value="${order.billCity}" /></td>
-    </tr>
-    <tr>
-      <td>State:</td>
-      <td><c:out value="${order.billState}" /></td>
     </tr>
     <tr>
       <td>Zip:</td>
@@ -78,28 +70,20 @@
       <td colspan="2"><font color="green" size="4"><b>Shipping Address</b></font></td>
     </tr>
     <tr>
-      <td>First name:</td>
-      <td><c:out value="${order.shipToFirstName}" /></td>
-    </tr>
-    <tr>
-      <td>Last name:</td>
-      <td><c:out value="${order.shipToLastName}" /></td>
+      <td>name:</td>
+      <td><c:out value="${order.shipToUsername}" /></td>
     </tr>
     <tr>
       <td>Address 1:</td>
-      <td><c:out value="${order.shipAddress1}" /></td>
+      <td><c:out value="${order.shipAddr1}" /></td>
     </tr>
     <tr>
       <td>Address 2:</td>
-      <td><c:out value="${order.shipAddress2}" /></td>
+      <td><c:out value="${order.shipAddr2}" /></td>
     </tr>
     <tr>
       <td>City:</td>
       <td><c:out value="${order.shipCity}" /></td>
-    </tr>
-    <tr>
-      <td>State:</td>
-      <td><c:out value="${order.shipState}" /></td>
     </tr>
     <tr>
       <td>Zip:</td>
@@ -135,28 +119,22 @@
                     <font color="black"><c:out value="${lineItem.itemId}" /></font>
                 </a></b></td>
               <td>
-                <c:out value="${lineItem.item.attribute1}" />
-                <c:out value="${lineItem.item.attribute2}" /> 
-                <c:out value="${lineItem.item.attribute3}" />
-                <c:out value="${lineItem.item.attribute4}" /> 
-                <c:out value="${lineItem.item.attribute5}" />
-                <c:out value="${lineItem.item.product.name}" />                 
+                <c:out value="${lineItem.item.title}" />
+                <c:out value="${lineItem.item.description}" />                 
               </td>
               <td><c:out value="${lineItem.quantity}" /></td>
               <td align="right"><fmt:formatNumber
-                  value="${lineItem.unitPrice}" pattern="$#,##0.00" /></td>
+                  value="${lineItem.unitPrice}" pattern="###,###,###원" /></td>
               <td align="right"><fmt:formatNumber
-                  value="${lineItem.totalPrice}" pattern="$#,##0.00" /></td>
+                  value="${lineItem.totalPrice}" pattern="###,###,###원" /></td>
             </tr>
           </c:forEach>
           <tr>
             <td colspan="5" align="right"><b>Total: <fmt:formatNumber
-               value="${order.totalPrice}" pattern="$#,##0.00" /></b></td>
+               value="${order.totalPrice}" pattern="###,###,###원" /></b></td>
           </tr>
         </table>
       </td>
     </tr>
   </table>
 </div>
-
-<%@ include file="../IncludeBottom.jsp"%>
