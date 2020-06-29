@@ -34,11 +34,6 @@
             </td>
             <td><c:out value="${cartItem.item.productId}" /></td>
             <td>
-              <c:out value="${cartItem.item.attribute1}" /> 
-              <c:out value="${cartItem.item.attribute2}" /> 
-              <c:out value="${cartItem.item.attribute3}" /> 
-              <c:out value="${cartItem.item.attribute4}" /> 
-              <c:out value="${cartItem.item.attribute5}" /> 
               <c:out value="${cartItem.item.product.name}" />
             </td>
             <td align="center"><c:out value="${cartItem.inStock}" /></td>
