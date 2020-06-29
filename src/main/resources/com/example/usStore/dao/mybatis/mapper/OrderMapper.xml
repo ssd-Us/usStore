@@ -69,7 +69,7 @@
 		<result column="ORDERDATE" property="orderDate" />
 		<collection property="lineItems" ofType="LineItem">
 			<id column="ORDERID" property="orderId" />
-			<id column="LINENUM" property="lineNumber" />
+			<id column="LINENUM" property="lineNum" />
 			<result column="ITEMID" property="itemId" />
 			<result column="QUANTITY" property="quantity" />
 			<result column="UNITPRICE" property="unitPrice" />
@@ -90,6 +90,9 @@
 	</select>
 
 	<insert id="insertOrder">
+		<selectKey keyProperty="orderId" resultType="int" order="BEFORE">
+			SELECT ORDERID_seq.nextval AS orderId FROM DUAL
+		</selectKey> 
 		INSERT INTO ORDERS (ORDERID, USERID, ORDERDATE, SHIPADDR1, SHIPADDR2,
 				SHIPCITY,
 				SHIPZIP, SHIPCOUNTRY, BILLADDR1, BILLADDR2, BILLCITY, BILLZIP, BILLCOUNTRY,

@@ -13,6 +13,7 @@ public class LineItem implements Serializable {
   private int lineNum;
   private int itemId;
   private int quantity;
+  private Item item;
 
   /* Constructors */
 
@@ -23,6 +24,7 @@ public class LineItem implements Serializable {
 	this.lineNum = lineNum;
     this.itemId = cartItem.getItem().getItemId();
     this.quantity = cartItem.getQuantity();
+    this.item = cartItem.getItem();
   }
 
   /* JavaBeans Properties */
@@ -59,5 +61,15 @@ public class LineItem implements Serializable {
 		this.quantity = quantity;
 	}
 
-  
+	public Item getItem() {
+		return item;
+	}
+	
+	public void setItem(Item item) {
+		this.item = item;
+	}
+	
+	public int getTotalPrice() {
+		return item.getUnitCost() * this.quantity;
+	}
 }
