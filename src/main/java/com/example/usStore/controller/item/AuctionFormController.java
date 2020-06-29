@@ -280,6 +280,7 @@ public class AuctionFormController {
 		itemForm = (ItemForm) session.getAttribute("itemForm");
 		if(session.getAttribute("itemForm") != null) {
 			System.out.println("itemformSession: " + itemForm);	//print itemformSession toString
+			System.out.println(itemForm.getTags());
 		}
 
 		if (result.hasErrors()) {	//유효성 검증 에러 발생시
@@ -294,6 +295,7 @@ public class AuctionFormController {
 		String deadLine = auctionForm.getDate() + " " + auctionForm.getTime() + ":00";
 		auctionForm.setDeadLine(deadLine);
 		
+		model.addAttribute("tags", itemForm.getTags());
 		model.addAttribute(itemForm);
 		
 		Date date = new Date();

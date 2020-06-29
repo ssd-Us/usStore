@@ -22,7 +22,7 @@
             <div style="display:inline;float:left;width:800px">
                <div style="font-size:15px">
                   <h2>
-                     Search Tag <font color=blue>#<c:out value="${searchWord}"/></font>
+                     Search Tag <font color=#008080>#<c:out value="${searchWord}"/></font>
                   </h2>
                   <hr>
                   <table>
@@ -32,7 +32,7 @@
                         <th style="padding-left:130px">분류</th>
                      </tr>
                   <tbody>   
-                  <c:forEach var="item" items="${itemList.pageList}" varStatus="status">         
+                  <c:forEach var="item" items="${resultList.pageList}" varStatus="status">         
                   <tr style="height:70px;">
                   <td style="padding-left:40px">
 				  	<a href="<c:url value='/shop/search/selectItem.do'>
@@ -63,13 +63,13 @@
                   </c:forEach>
                   </tbody>
                   </table>
-                  <c:if test="${!tagList.firstPage}">
+                  <c:if test="${!resultList.firstPage}">
 									<a href='<c:url value="/shop/search/viewItem2.do">
 	           								<c:param name="pageName" value="previous"/></c:url>'>
 										<font color="black"><B>&lt;&lt; Prev</B></font>
 									</a>
 								</c:if>
-								<c:if test="${!tagList.lastPage}">
+								<c:if test="${!resultList.lastPage}">
 									<a href='<c:url value="/shop/search/viewItem2.do">/>
 	            							 <c:param name="pageName" value="next"/></c:url>'>
 										<font color="black"><B>Next &gt;&gt;</B></font>

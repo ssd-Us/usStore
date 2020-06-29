@@ -38,7 +38,7 @@
 			    font-size: medium;
 			    padding: 15px;
 	}
-	
+
 </style>
 <script>
 function getSellerInfo(userId) {
@@ -117,17 +117,16 @@ function getSellerInfo(userId) {
    		<td colspan="2" style="padding: 15px;">${sh.description}<br></td>
    	</tr>
    	<tr>
-   		<th style="border-right: 1px solid black;"><font color=blue>#</font>관련태그</th>
-   		<td>
-   			 <c:forEach var="tag" items="${tags}">	<!-- tag 테이블 이용 -> 해당 itemId를 어떻게 연결하지? -->
-   				<a href="
-					<c:url value='/searchTag'>	<!-- tag검색 결과 페이지로 이동 -->
-					  <c:param name="tagName" value="${tag.tagName}"/>
-				  	</c:url>
-				">#${tag.tagName}</a>&nbsp
-   			</c:forEach> 
-   		</td>
-   	</tr>
+   			<th style="border-right: 1px solid black;"><font color=blue>#</font>관련 태그</th>
+   			<td>
+   			<c:forEach var="tag" items="${tags}">        
+	   			<a href='<c:url value="/shop/search/viewItem.do">
+	   			<c:param name="tagName" value="${tag.tagName}"/></c:url>'>
+	   			#${tag.tagName}
+				</a>&nbsp;
+			</c:forEach>
+   			</td>
+   		</tr>
    	<tr>
    			<th style="border-right: 1px solid black;">가격</th>
    			<td>
@@ -151,6 +150,12 @@ function getSellerInfo(userId) {
    		<td>${sh.qty}</td>
    	</tr>	
    	<tr>
+   		<th style="border-right: 1px solid black;">판매자 대학교</th> <!-- 판매자의 대학교는 판매자 userId로 getAccountByUserId().getUniversity() -->
+   		<td>
+   			<%@ include file="/WEB-INF/jsp/account/viewMap.jsp" %>
+   		</td>
+   	</tr>
+   	<tr>
    			<td colspan="2" style="border-bottom: none;">
    			<span>
    				<a href="<c:url value="/shop/addItemToCart.do">
@@ -165,8 +170,7 @@ function getSellerInfo(userId) {
 				">쪽지 보내기</a>
 			</span>
    			</td>
-   	</tr>
-   		
+   	</tr> 	
    	<c:if test="${sh.userId eq userSession.account.userId}"> <!-- 로그인시 실행 -->
 		   		<td colspan="2" style="text-align: right; padding: 0px; font-size: small; border-bottom: none; border-top: 1px solid black;">
 				   <a href="<c:url value='/shop/secondHand/edit.do'>
@@ -178,10 +182,8 @@ function getSellerInfo(userId) {
 				   				<c:param name="productId" value="${sh.productId}" />
 				   			</c:url>
 				   			"> [게시물 삭제하기]</a>
-				</td>
-			 </tr>
+				</td>		
 	</c:if>
-</table>
-
-</body>   
+</table>				
+</body>
 </html>
