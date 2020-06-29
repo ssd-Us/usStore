@@ -113,8 +113,11 @@ public class MybatisSecondHandDao implements SecondHandDao {
 	}
 
 	@Override
-	public List<Item> getItemByPId(int productId){
-	   return secondHandMapper.getItemByPId(productId);
+	public List<Item> getItemByPId(int productId) {
+		return secondHandMapper.getItemByPId(productId);
 	}
+
+
+	
 
 }
