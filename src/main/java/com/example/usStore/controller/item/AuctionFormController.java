@@ -238,6 +238,12 @@ public class AuctionFormController {
 	   return "redirect:/shop/auction/viewItem.do?itemId=" + myItemId + "&productId=" + myProductId;
    }
    
+
+	/*
+	 * @RequestMapping("/shop/auction/addItem.do") public String
+	 * goItem(@RequestParam("productId") int productId) { return
+	 * "redirect:/shop/item/addItem.do?productId=" + productId; }
+	 */
    
    @RequestMapping(value="/shop/auction/addItem2.do", method = RequestMethod.GET)
    public String step2(
@@ -265,7 +271,7 @@ public class AuctionFormController {
 	
 	@PostMapping("/shop/auction/step3.do")		// step2 -> step3
 	public String goCheck(@ModelAttribute("Auction") AuctionForm auctionForm, BindingResult result,
-			HttpServletRequest rq, ItemForm itemForm, Model model) throws ParseException {	
+			HttpServletRequest rq, ItemForm itemForm, Model model) {	
 		System.out.println("step3.do(before check form)");
 		HttpSession session = rq.getSession(false);
 		
@@ -276,13 +282,18 @@ public class AuctionFormController {
 			System.out.println("itemformSession: " + itemForm);	//print itemformSession toString
 			System.out.println(itemForm.getTags());
 		}
-		
-		System.out.println(auctionForm);
-		
+
 		if (result.hasErrors()) {	//유효성 검증 에러 발생시
 			model.addAttribute("productId", itemForm.getProductId());
 			return ADD_Auction_FORM;
 		}
+		
+		System.out.println(auctionForm);
+		
+		System.out.println("deadLine still null," + auctionForm);	//print command toString
+		
+		String deadLine = auctionForm.getDate() + " " + auctionForm.getTime() + ":00";
+		auctionForm.setDeadLine(deadLine);
 		
 		model.addAttribute("tags", itemForm.getTags());
 		model.addAttribute(itemForm);
@@ -414,7 +425,7 @@ public class AuctionFormController {
 		return new ModelAndView("Scheduled", "deadLine", deadLine);	
 	}
    
-   @RequestMapping("/shop/auction/index.do") //go index(remove sessions)
+   @RequestMapping("/shop/product/index.do") //go index(remove sessions)
    public String goIndex(SessionStatus sessionStatus, HttpServletRequest rq)
    {
       System.out.println("go back index.do From [add / edit product]");

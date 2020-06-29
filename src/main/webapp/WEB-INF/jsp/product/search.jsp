@@ -25,11 +25,6 @@
                      Search Tag <font color=#008080>#<c:out value="${searchWord}"/></font>
                   </h2>
                   <hr>
-                  <c:set var="no" value="${noResult}"/>
-                  <c:if test="${no == 1}">
-                  	<c:out value="검색 결과가 없습니다."/>
-                  </c:if>
-                  <c:if test="${empty no}">
                   <table>
                      <tr>
                         <th style="padding-left:40px">제목</th>
@@ -68,7 +63,6 @@
                   </c:forEach>
                   </tbody>
                   </table>
-                  </c:if>
                   <c:if test="${!resultList.firstPage}">
 									<a href='<c:url value="/shop/search/viewItem2.do">
 	           								<c:param name="pageName" value="previous"/></c:url>'>
