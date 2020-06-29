@@ -123,4 +123,8 @@ public class MybatisGroupBuyingDao implements GroupBuyingDao {
       groupBuyingMapper.updateViewCount(viewCount, itemId);
    }
 
+   @Override
+   public List<Item> getItemByPId(int productId) throws DataAccessException {
+      return groupBuyingMapper.getItemByPId(productId);
+   }
 }
