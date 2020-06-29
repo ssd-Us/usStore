@@ -6,18 +6,24 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.support.PagedListHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.example.usStore.domain.Item;
 import com.example.usStore.domain.Tag;
 import com.example.usStore.service.facade.ItemFacade;
 
 @Controller
+@SessionAttributes({"tagList", "resultList"})
 public class SearchController {
 	private ItemFacade itemFacade;
+	String searchWord;
 	
 	@Autowired
 	public void setItemFacade(ItemFacade itemFacade) {
@@ -25,46 +31,98 @@ public class SearchController {
 	}
 	 
 	@RequestMapping("/shop/search/viewItem.do") 
-	public String search(HttpServletRequest rq, ModelMap model) {
+	public String searchList(@RequestParam(value="tagName", required=false) String tagName, HttpServletRequest rq, ModelMap model) {
 		System.out.println("** Search Controller **");
 		
-		String searchWord = rq.getParameter("word");
-		System.out.println("검색어 : " + searchWord);
+		if (tagName != null) {
+			searchWord = tagName.replaceAll(" ", "");
+		}
+		else {
+			searchWord = rq.getParameter("word").replaceAll(" ", "");
+		}
+		
+		
+		if (searchWord != null) {
+			if (!StringUtils.hasLength(searchWord)) {
+				model.addAttribute("message", "태그 검색어를 입력해주세요.");
+				return "error";
+			}
+		}
 		
 		//검색어와 일치하는 태그 리스트 가져오기
 		List<Tag> tagList = new ArrayList<Tag>();
 		tagList = this.itemFacade.getTagByTagName(searchWord);
 		
-		System.out.println("-태그 검색 결과-");
-		for(int i = 0; i < tagList.size(); i++) {
-			System.out.println(tagList.get(i).toString());
-		}
-		
+	    //태그 리스트랑 같은 크기의 item 배열 생성
+	    List<Item> resultList = new ArrayList<Item>();
+	    
+	    for(int i = 0; i < tagList.size(); i++) {
+	    	Item item = itemFacade.getItem(tagList.get(i).getItemId());
+	    	resultList.add(i, item); 
+	    }
+	    
+	    PagedListHolder<Item> rl = new PagedListHolder<Item>(resultList);
+	    rl.setPageSize(4);
+	    
+	    System.out.println("검색 결과 아이템 길이는 : " + resultList.size());
+	    
+	    if (resultList.size() == 0) {
+	    	model.addAttribute("noResult", 1);
+	    }
+	    
 		model.addAttribute("searchWord", searchWord);
-		model.addAttribute("tagList", tagList);
-		
-		/*
-		 	태그 검색 결과로 보여줄 것
-		 	1. 
-		*/
+		model.addAttribute("resultList", rl);
 		
 		return "product/search";
 	}
 	
-//	@RequestMapping("/shop/search/selectItem.do") 
-//	public String selectItem(@RequestParam("itemId") int itemId, ModelMap model) {
-//		System.out.println("** 검색 페이지에서 아이템 아이디 선택 **");
-//		
-//		Item item = new Item();
-//		item = itemFacade.getItem(itemId);
-//		
-//		int productId = item.getProductId();
-//		
-//		switch(productId) {
-//		case 0:
-//		case 1 :
-//		case 2:
-//		case 3:
-//		}
-//	}
+	@RequestMapping("/shop/search/viewItem2.do") 
+	public String searchList2(
+			@ModelAttribute("resultList") PagedListHolder<Item> resultList,
+			@RequestParam("pageName") String page,
+			ModelMap model) {
+		if ("next".equals(page)) {
+			resultList.nextPage();
+		}
+		else if ("previous".equals(page)) {
+			resultList.previousPage();
+		}
+		
+		model.addAttribute("searchWord", searchWord);
+		model.addAttribute("resultList", resultList);
+		
+		return "product/search";
+	}
+	
+	
+	@RequestMapping("/shop/search/selectItem.do") 
+	public String selectItem(@RequestParam("itemId") int itemId, ModelMap model) {
+		System.out.println("** 검색 페이지에서 아이템 아이디 선택 **");
+		System.out.println(itemId);
+		
+		Item item = this.itemFacade.getItem(itemId);
+		System.out.println(item.toString());
+		
+		int productId = item.getProductId();
+		
+		System.out.println("productId : " + productId);
+		
+		String url = null;
+		switch(productId) {
+		case 0: 
+			url = "redirect:/shop/groupBuying/viewItem.do?itemId=" + itemId + "&productId=" + productId;
+			break;
+		case 1: 
+			url = "redirect:/shop/auction/viewItem.do?itemId=" + itemId + "&productId=" + productId;
+			break;
+		case 2:
+			url = "redirect:/shop/secondHand/viewItem.do?itemId=" + itemId + "&productId=" + productId;
+			break;
+		case 3:
+			url = "redirect:/shop/handMade/viewItem.do?itemId=" + itemId + "&productId=" + productId;
+			break;
+		}
+		
+		return url;
+	}
 }

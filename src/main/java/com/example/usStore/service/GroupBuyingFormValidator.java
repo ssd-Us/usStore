@@ -1,5 +1,8 @@
 package com.example.usStore.service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
@@ -31,6 +34,22 @@ public class GroupBuyingFormValidator implements Validator {
 		
 		if(date == null || time == null || date.trim().isEmpty() || time.trim().isEmpty()) {
 			errors.rejectValue("deadLine", "required");
+		}
+		
+		String deadLine = groupBuyingForm.getDate() + " " + groupBuyingForm.getTime() + ":00";
+		groupBuyingForm.setDeadLine(deadLine);
+		
+		Date curTime = new Date();
+		SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String present = transFormat.format(curTime);
+		
+		int compare = -1;
+		compare = present.compareTo(deadLine);
+		
+		if(groupBuyingForm.getDate() != null && groupBuyingForm.getTime() != null && !groupBuyingForm.getDate().trim().isEmpty() && !groupBuyingForm.getTime().trim().isEmpty()) {
+			if(compare >= 0) {
+				errors.rejectValue("deadLine", "lastDate");
+			}
 		}
 	}
 

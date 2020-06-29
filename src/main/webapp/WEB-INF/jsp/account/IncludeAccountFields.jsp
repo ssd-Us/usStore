@@ -24,13 +24,13 @@
 </div>
 
 <div class="form-label-group">
-	<form:input path="account.address1" id="inputAddress1" class="form-control" />
-	<B><form:errors path="account.address1" cssClass="error" /></B> <label for="inputAddress1">Address1</label>
+	<form:input path="account.addr1" id="inputAddress1" class="form-control" />
+	<B><form:errors path="account.addr1" cssClass="error" /></B> <label for="inputAddress1">Address1</label>
 </div>
 
 <div class="form-label-group">
-	<form:input path="account.address2" id="inputAddress2" class="form-control" />
-	<B><form:errors path="account.address2" cssClass="error" /></B> <label for="inputAddress2">Address2</label>
+	<form:input path="account.addr2" id="inputAddress2" class="form-control" />
+	<B><form:errors path="account.addr2" cssClass="error" /></B> <label for="inputAddress2">Address2</label>
 </div>
 
 <div class="form-label-group">

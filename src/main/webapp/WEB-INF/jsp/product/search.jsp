@@ -16,39 +16,71 @@
     </td>
   </tr>
 </table>
-<form name = "form" action="" style="position:absolute; left:50%; margin:0 0 0 -500px;">
+<form name = "form" action="" style="position:absolute; left:50%; margin:0 0 0 -430px;">
       <div class="container" >
          <div class="row"  style="display:inline">
-            <div style="display:inline;float:left;width:1000px">
+            <div style="display:inline;float:left;width:800px">
                <div style="font-size:15px">
                   <h2>
-                     Search Results By '<c:out value="${searchWord}"/>'
+                     Search Tag <font color=#008080>#<c:out value="${searchWord}"/></font>
                   </h2>
                   <hr>
+                  <c:set var="no" value="${noResult}"/>
+                  <c:if test="${no == 1}">
+                  	<c:out value="검색 결과가 없습니다."/>
+                  </c:if>
+                  <c:if test="${empty no}">
                   <table>
                      <tr>
-                        <th>tagId</th>
-                        <th style="padding-left:120px">tagName</th>
-                        <th style="padding-left:80px">itemId</th>
+                        <th style="padding-left:40px">제목</th>
+                        <th style="padding-left:90px">내용</th>
+                        <th style="padding-left:130px">분류</th>
                      </tr>
                   <tbody>   
-                  <c:forEach var="tl" items="${tagList}" varStatus="status">         
+                  <c:forEach var="item" items="${resultList.pageList}" varStatus="status">         
                   <tr style="height:70px;">
-                  <td style="padding-left:20px">
-				  	<c:out value="${tl.tagId}"/>
+                  <td style="padding-left:40px">
+				  	<a href="<c:url value='/shop/search/selectItem.do'>
+                    <c:param name="itemId" value="${item.itemId}"/>
+                    </c:url>">
+                    	<font><c:out value="${item.title}"/></font>
+                    </a>
                   </td>
-                  <td style="padding-left:120px">
-                   	<c:out value="${tl.tagName}"/><br>
+                  <td style="padding-left:90px">
+                   	<c:out value="${item.description}"/><br>
                   </td>
-                  
-                  <!-- product id에 따라서 viewItem 페이지로 넘어가게 수정해야 한다. -->
-				  <td style="padding-left:80px">
-					<c:out value="${tl.itemId}"/>
+				  <td style="padding-left:120px">
+				  <c:set var="productId" value="${item.productId}"/>
+				  <c:if test="${productId eq 0}">
+					<c:out value="(공동구매)"/>
+				  </c:if>
+				  <c:if test="${productId eq 1}">
+					<c:out value="(경매)"/>
+				  </c:if>
+				  <c:if test="${productId eq 2}">
+					<c:out value="(중고거래)"/>
+				  </c:if>
+				  <c:if test="${productId eq 3}">
+					<c:out value="(수공예)"/>
+				  </c:if>
 				  </td>   
                   </tr>
                   </c:forEach>
                   </tbody>
                   </table>
+                  </c:if>
+                  <c:if test="${!resultList.firstPage}">
+									<a href='<c:url value="/shop/search/viewItem2.do">
+	           								<c:param name="pageName" value="previous"/></c:url>'>
+										<font color="black"><B>&lt;&lt; Prev</B></font>
+									</a>
+								</c:if>
+								<c:if test="${!resultList.lastPage}">
+									<a href='<c:url value="/shop/search/viewItem2.do">/>
+	            							 <c:param name="pageName" value="next"/></c:url>'>
+										<font color="black"><B>Next &gt;&gt;</B></font>
+									</a>
+								</c:if>
                </div>
             </div>
          </div>

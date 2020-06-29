@@ -230,15 +230,15 @@ public class Orders implements Serializable {
 	    orderDate = new Date();
 	
 	    shipToUsername = account.getUsername();
-	    shipAddr1 = account.getAddress1();
-	    shipAddr2 = account.getAddress2();
+	    shipAddr1 = account.getAddr1();
+	    shipAddr2 = account.getAddr2();
 	    shipCity = account.getCity();
 	    shipZip = account.getZip();
 	    shipCountry = account.getCountry();
 	
 	    billToUsername = account.getUsername();
-	    billAddr1 = account.getAddress1();
-	    billAddr2 = account.getAddress2();
+	    billAddr1 = account.getAddr1();
+	    billAddr2 = account.getAddr2();
 	    billCity = account.getCity();
 	    billZip = account.getZip();
 	    billCountry = account.getCountry();
