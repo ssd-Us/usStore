@@ -92,7 +92,7 @@ public class ViewRankingController {
       session.setAttribute("shList", secondHandList);
       session.setAttribute("hmList", handMadeList);
       
-      return "product/viewRank";
+      return "viewRank";
    }
    
    @GetMapping(value="/shop/rank/HmToJson.do")
