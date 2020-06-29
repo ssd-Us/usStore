@@ -1,4 +1,4 @@
-package com.example.usStore.controller.rest;
+package com.example.usStore.controller.item;
 
 import java.io.IOException;
 import java.util.List;
