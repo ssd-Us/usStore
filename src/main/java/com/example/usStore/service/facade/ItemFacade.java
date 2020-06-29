@@ -43,6 +43,8 @@ public interface ItemFacade {
    String getUserIdByItemId(int itemId);
    
    void updateViewCount(int viewCount, int itemId);
+   
+   List<Item> getItemByPId(int productId);
    /////////////////////////////////////////////////////////////////////////
    /* HandMade */
    /////////////////////////////////////////////////////////////////////////

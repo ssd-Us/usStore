@@ -73,5 +73,8 @@ public class MybatisItemDao implements ItemDao {
 		itemMapper.updateViewCount(viewCount, itemId);
 	}
 
-	
+	@Override
+	public List<Item> getItemByPId(int productId) throws DataAccessException {
+		return itemMapper.getItemByPId(productId);
+	}
 }

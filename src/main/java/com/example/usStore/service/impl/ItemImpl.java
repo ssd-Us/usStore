@@ -342,7 +342,11 @@ public class ItemImpl implements ItemFacade {
 		itemDao.updateViewCount(viewCount, itemId);
 	}
 
-
+	@Override
+	public List<Item> getItemByPId(int productId) {
+		// TODO Auto-generated method stub
+		return itemDao.getItemByPId(productId);
+	}
 
    
 

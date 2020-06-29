@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.support.SessionStatus;
 
 import com.example.usStore.service.ItemFormValidator;
 
@@ -20,21 +21,21 @@ public class ItemFormController {
 	@ModelAttribute("item")		  
 	public ItemForm formBacking(HttpServletRequest rq, @RequestParam("productId") int productId) {  // accessor method 
 		System.out.println("item controller formBacking");
-		HttpSession session = rq.getSession(false);
-		ItemForm itemForm;
-		if((ItemForm) session.getAttribute("itemForm") != null) {
-			System.out.println("session alive");
-			ItemForm itemFormSession = (ItemForm) session.getAttribute("itemForm");
-			System.out.println(itemFormSession);
-			
-			return itemFormSession;
-		}
-		else {
-			System.out.println("session null");
-			itemForm = new ItemForm();
-			itemForm.setProductId(autoDetectPid(rq.getRemoteAddr(), productId));	// itemForm.productId initializable
-			return itemForm;
-		}
+	      HttpSession session = rq.getSession(false);
+	      ItemForm itemForm;
+	      if((ItemForm) session.getAttribute("itemForm") != null) {
+	         System.out.println("session alive");
+	         ItemForm itemFormSession = (ItemForm) session.getAttribute("itemForm");
+	         System.out.println(itemFormSession);
+	         
+	         return itemFormSession;
+	      }
+	      else {
+	         System.out.println("session null");
+	         itemForm = new ItemForm();
+	         itemForm.setProductId(autoDetectPid(rq.getRemoteAddr(), productId));   // itemForm.productId initializable
+	         return itemForm;
+	      }
 	}
 	
 	private int autoDetectPid(String remoteAddr, int productId) {	// itemForm.productId initialize
@@ -109,4 +110,6 @@ public class ItemFormController {
 		
 		return url;
 	}
+	
+
 }
