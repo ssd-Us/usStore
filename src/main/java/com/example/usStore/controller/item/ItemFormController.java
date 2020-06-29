@@ -17,25 +17,23 @@ import com.example.usStore.service.ItemFormValidator;
 @Controller
 public class ItemFormController {
 	
-	@ModelAttribute("item")		  
-	public ItemForm formBacking(HttpServletRequest rq, @RequestParam("productId") int productId) {  // accessor method 
-		System.out.println("item controller formBacking");
-		HttpSession session = rq.getSession(false);
-		ItemForm itemForm;
-		if((ItemForm) session.getAttribute("itemForm") != null) {
-			System.out.println("session alive");
-			ItemForm itemFormSession = (ItemForm) session.getAttribute("itemForm");
-			System.out.println(itemFormSession);
-			
-			return itemFormSession;
-		}
-		else {
-			System.out.println("session null");
-			itemForm = new ItemForm();
-			itemForm.setProductId(autoDetectPid(rq.getRemoteAddr(), productId));	// itemForm.productId initializable
-			return itemForm;
-		}
-	}
+	   @ModelAttribute("item")        
+	   public ItemForm formBacking(HttpServletRequest rq, @RequestParam("productId") int productId) {  // accessor method 
+	      System.out.println("item controller formBacking");
+	      HttpSession session = rq.getSession(false);
+	      ItemForm itemForm;
+	      if((ItemForm) session.getAttribute("itemForm") != null) {   //ITEM세션이 존재하는 경우
+	         itemForm = (ItemForm) session.getAttribute("itemForm");
+	         if(itemForm.getProductId() == productId) {   //수정 또는 입력 1,2단계 이동중인 경우
+	            return itemForm;
+	         }
+	         else
+	            session.removeAttribute("itemForm");   //도중에 나가서 다른 판매 입력폼으로 들어간 경우
+	      }
+	       itemForm = new ItemForm();
+	         itemForm.setProductId(autoDetectPid(rq.getRemoteAddr(), productId));   // itemForm.productId initializable
+	         return itemForm;
+	   }
 	
 	private int autoDetectPid(String remoteAddr, int productId) {	// itemForm.productId initialize
 		return productId;

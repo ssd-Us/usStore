@@ -94,7 +94,7 @@ public class ItemForm {
      @Override
      public String toString() {
       return "ItemForm [itemId=" + itemId + ", unitCost=" + unitCost + ", title=" + title + ", description="
-            + description + ", viewCount=" + viewCount + ", qty=" + qty + "tags = " + tags + ", userId=" + userId
+            + description + ", viewCount=" + viewCount + ", qty=" + qty + ",tags = " + tags + ", userId=" + userId
             + ", productId=" + productId + "]";
      }
 }

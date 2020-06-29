@@ -9,18 +9,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.support.PagedListHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import com.example.usStore.domain.Auction;
 import com.example.usStore.domain.Item;
 import com.example.usStore.domain.Tag;
 import com.example.usStore.service.facade.ItemFacade;
 
 @Controller
-@SessionAttributes({"tagList", "itemList"})
+@SessionAttributes({"tagList", "resultList"})
 public class SearchController {
 	private ItemFacade itemFacade;
 	String searchWord;
@@ -31,56 +31,60 @@ public class SearchController {
 	}
 	 
 	@RequestMapping("/shop/search/viewItem.do") 
-	public String searchList(HttpServletRequest rq, ModelMap model) {
+	public String searchList(@RequestParam(value="tagName", required=false) String tagName, HttpServletRequest rq, ModelMap model) {
 		System.out.println("** Search Controller **");
 		
-		searchWord = rq.getParameter("word");
-		System.out.println("검색어 : " + searchWord);
+		if (tagName != null) {
+			searchWord = tagName.replaceAll(" ", "");
+		}
+		else {
+			searchWord = rq.getParameter("word").replaceAll(" ", "");
+		}
+		
+		
+		if (searchWord != null) {
+			if (!StringUtils.hasLength(searchWord)) {
+				model.addAttribute("message", "태그 검색어를 입력해주세요.");
+				return "error";
+			}
+		}
 		
 		//검색어와 일치하는 태그 리스트 가져오기
 		List<Tag> tagList = new ArrayList<Tag>();
 		tagList = this.itemFacade.getTagByTagName(searchWord);
 		
-//		PagedListHolder<Tag> tl = new PagedListHolder<Tag>(tagList);
-//	    tl.setPageSize(4);
-		
 	    //태그 리스트랑 같은 크기의 item 배열 생성
-	    List<Item> itemList = new ArrayList<Item>();
+	    List<Item> resultList = new ArrayList<Item>();
 	    
 	    for(int i = 0; i < tagList.size(); i++) {
 	    	Item item = itemFacade.getItem(tagList.get(i).getItemId());
-	    	itemList.add(i, item); 
+	    	resultList.add(i, item); 
 	    }
 	    
-	    PagedListHolder<Item> il = new PagedListHolder<Item>(itemList);
-	    il.setPageSize(4);
+	    PagedListHolder<Item> rl = new PagedListHolder<Item>(resultList);
+	    rl.setPageSize(4);
 	    
 	
 		model.addAttribute("searchWord", searchWord);
-//		model.addAttribute("tagList", tl);
-		model.addAttribute("itemList", il);
+		model.addAttribute("resultList", rl);
 		
 		return "product/search";
 	}
 	
 	@RequestMapping("/shop/search/viewItem2.do") 
 	public String searchList2(
-			/* @ModelAttribute("tagList") PagedListHolder<Tag> tagList, */ 
-			@ModelAttribute("itemList") PagedListHolder<Item> itemList,
+			@ModelAttribute("resultList") PagedListHolder<Item> resultList,
 			@RequestParam("pageName") String page,
 			ModelMap model) {
 		if ("next".equals(page)) {
-//			tagList.nextPage();
-			itemList.nextPage();
+			resultList.nextPage();
 		}
 		else if ("previous".equals(page)) {
-//			tagList.previousPage();
-			itemList.previousPage();
+			resultList.previousPage();
 		}
 		
 		model.addAttribute("searchWord", searchWord);
-//		model.addAttribute("tagList", tagList);
-		model.addAttribute("itemList", itemList);
+		model.addAttribute("resultList", resultList);
 		
 		return "product/search";
 	}

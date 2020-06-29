@@ -98,17 +98,16 @@
    		<td colspan="2" style="padding: 15px;">${sh.description}<br></td>
    	</tr>
    	<tr>
-   		<th style="border-right: 1px solid black;"><font color=blue>#</font>관련태그</th>
-   		<td>
-   			 <c:forEach var="tag" items="${tags}">	<!-- tag 테이블 이용 -> 해당 itemId를 어떻게 연결하지? -->
-   				<a href="
-					<c:url value='/searchTag'>	<!-- tag검색 결과 페이지로 이동 -->
-					  <c:param name="tagName" value="${tag.tagName}"/>
-				  	</c:url>
-				">#${tag.tagName}</a>&nbsp
-   			</c:forEach> 
-   		</td>
-   	</tr>
+   			<th style="border-right: 1px solid black;"><font color=blue>#</font>관련 태그</th>
+   			<td>
+   			<c:forEach var="tag" items="${tags}">        
+	   			<a href='<c:url value="/shop/search/viewItem.do">
+	   			<c:param name="tagName" value="${tag.tagName}"/></c:url>'>
+	   			#${tag.tagName}
+				</a>&nbsp;
+			</c:forEach>
+   			</td>
+   		</tr>
    	<tr>
    			<th style="border-right: 1px solid black;">가격</th>
    			<td>
