@@ -113,11 +113,11 @@ public class ViewRankingController {
       return hmRankList; // new MessageList2(messages);
    }
    
-   @PostMapping(value = "/post.json")
-	@ResponseBody
-	public List<Rank> hmPostJson(@RequestBody List<Rank> hmRankList) {
-		System.out.println(hmRankList.toString());
-		hmRankList.get(0).setContent("수정된 메시지1");
-		return hmRankList;
-	}
+//   @PostMapping(value = "/post.json")
+//	@ResponseBody
+//	public List<Rank> hmPostJson(@RequestBody List<Rank> hmRankList) {
+//		System.out.println(hmRankList.toString());
+//		hmRankList.get(0).setContent("수정된 메시지1");
+//		return hmRankList;
+//	}
 }
