@@ -11,13 +11,14 @@
       LINENUM,
       ITEMID,
       QUANTITY,
+      UNITPRICE
     FROM LINEITEM
     WHERE ORDERID = #{orderId}
   </select>
 
   <insert id="insertLineItem">
-    INSERT INTO LINEITEM (ORDERID, LINENUM, ITEMID, QUANTITY)
-    VALUES (#{orderId}, #{lineNum}, #{itemId}, #{quantity})
+    INSERT INTO LINEITEM (ORDERID, LINENUM, ITEMID, QUANTITY, UNITPRICE)
+    VALUES (#{orderId}, #{lineNum}, #{itemId}, #{quantity}, #{unitPrice})
   </insert>
 
 </mapper>
