@@ -52,7 +52,6 @@ public class MybatisItemDao implements ItemDao {
 
 	@Override
 	public Item getItem(int itemId) {
-		// TODO Auto-generated method stub
 		return itemMapper.getItem(itemId);
 	}
 

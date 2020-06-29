@@ -104,7 +104,7 @@ public class MybatisSecondHandDao implements SecondHandDao {
 	@Override
 	public Item getItem(int itemId) {
 		// TODO Auto-generated method stub
-		return null;
+		return secondHandMapper.getItem(itemId);
 	}
 
 	@Override
