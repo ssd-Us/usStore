@@ -5,12 +5,9 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
 
-import com.example.usStore.domain.Item;
 import com.example.usStore.service.facade.UsStoreFacade;
 
 /**
@@ -27,7 +24,6 @@ public class RemoveItemSessionController {
    public void setusStore(UsStoreFacade usStore) {
       this.usStore = usStore;
    }
-
    
    @RequestMapping("/shop/item/indexFromLogo.do") //go index(remove sessions)
    public String Index(SessionStatus sessionStatus, HttpServletRequest rq)
