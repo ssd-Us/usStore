@@ -118,9 +118,9 @@ function participation(price, unitCost) {
    			<th style="border-right: 1px solid black;"><font color=blue>#</font>관련 태그</th>
    			<td>
    			<c:forEach var="tag" items="${tags}">        
-	   			<a href="
-						<c:url value='/searchTag/${gb.itemId}'/>	
-					">#${tag.tagName}
+	   			<a href='<c:url value="/shop/search/viewItem.do">
+	   			<c:param name="tagName" value="${tag.tagName}"/></c:url>'>
+	   			#${tag.tagName}
 				</a>&nbsp;
 			</c:forEach>
    			</td>
