@@ -40,25 +40,6 @@
 	}
 
 </style>
-<script>
-function getSellerInfo(userId) {
-	var reqUrl = "/rest/user/" + userId;
-	$.ajax({
-		type: "get",
-		url: reqUrl,
-		processData: false,
-		success: function(responseJson){
-			$("#detail").html("<ul></ul>");
-			$("#detail > ul").append("<li>User ID: " + responseJson.userId + "</li>");
-			$("#detail > ul").append("<li>User Email: " + responseJson.email + "</li>");
-		},
-		error: function(){
-			alert("ERROR", arguments);
-
-		}
-});
-};
-</script>
 <body>
 <!-- 여기서 secondHand는 컨트롤러에서 보내준 모델 객체(db에서 select 결과 ) -->
 
