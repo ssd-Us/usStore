@@ -36,7 +36,7 @@
 							<th>제목</th>
 							<th>가격</th>
 							<th>판매자</th>
-							<th>&nbsp;</th>
+							<th> &nbsp; </th>
 						</tr>
 						<tbody>
 							<c:forEach var="item" items="${handMadeList.pageList}">
