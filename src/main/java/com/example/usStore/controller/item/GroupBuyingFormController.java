@@ -305,15 +305,22 @@ public class GroupBuyingFormController {
       itemFormSession.setViewCount(gb.getViewCount());
       itemFormSession.setTags(gb.getTags());
    
-      return "redirect:/shop/item/addItem.do?productId=" + item.getProductId();
+      return "redirect:/shop/item/addItem.do?productId=" + itemFormSession.getProductId();
    }
    
    @RequestMapping("/shop/groupBuying/delete.do") //edit Item
-   public String deleteItem(@RequestParam("itemId") int itemId, @RequestParam("productId") int productId)
+   public void deleteItem(@RequestParam("itemId") int itemId, @RequestParam("productId") int productId, 
+		   HttpServletResponse response) throws IOException
    {
-      itemFacade.deleteItem(itemId);
-      
-      return "redirect:/shop/groupBuying/listItem.do?productId=" + productId;
+	   itemFacade.deleteItem(itemId);//상품 삭제
+	   PrintWriter out = response.getWriter();
+
+	   out.println("<script>");
+	   out.print("alert('DELETED !');");
+	   out.print("location.href='listItem.do?itemId=" + itemId + "&productId=" + productId + "';");	
+	   out.println("</script>");
+	   out.flush();
+	   out.close();
    }
    
    @RequestMapping("/shop/groupBuying/index.do") //go index(remove sessions)
