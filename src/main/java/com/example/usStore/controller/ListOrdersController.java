@@ -31,7 +31,7 @@ public class ListOrdersController {
 		@ModelAttribute("userSession") UserSession userSession
 		) throws Exception {
 		String userId = userSession.getAccount().getUserId();
-		return new ModelAndView("ListOrders", "orderList", 
+		return new ModelAndView("order/ListOrders", "orderList", 
 				usStoreFacade.getOrdersByUserId(userId));
 	}
 

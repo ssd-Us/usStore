@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper
-	namespace="com.example.usStore.dao.mybatis.mapper.OrderMapper">
+<mapper namespace="com.example.usStore.dao.mybatis.mapper.OrderMapper">
 
 	<cache />
 
@@ -65,7 +64,12 @@
 
 	<resultMap id="OrderAndLineitemMap" type="Orders">
 		<id column="ORDERID" property="orderId" />
-		<result column="USERNAME" property="username" />
+		<result column="USERID" property="userId" />
+		<result column="USERNAME" property="username"/>
+		<result column="BILLTOUSERNAME" property="billToUsername"/>
+		<result column="SHIPTOUSERNAME" property="shipToUsername"/>
+		<result column="TOTALPRICE" property="totalPrice"/>
+		<result column="UNITCOST" property="unitCost"/>
 		<result column="ORDERDATE" property="orderDate" />
 		<collection property="lineItems" ofType="LineItem">
 			<id column="ORDERID" property="orderId" />
@@ -84,7 +88,7 @@
 			CREDITCARD, EXPRDATE AS expiryDate, LOCALE, ORDERDATE, ORDERS.ORDERID,
 			TOTALPRICE, USERID, STATUS,
 			LINEITEM.LINENUM, LINEITEM.ITEMID, LINEITEM.QUANTITY, LINEITEM.UNITPRICE
-		FROM ORDERS, ORDERSTATUS, LINEITEM
+		FROM ORDERS, LINEITEM
 		WHERE ORDERS.ORDERID = #{value}
 				AND ORDERS.ORDERID = LINEITEM.ORDERID
 	</select>

@@ -22,13 +22,12 @@ public class MybatisOrderDao implements OrderDao {
 	protected OrderMapper orderMapper;
 	@Autowired
 	protected LineItemMapper lineItemMapper;
-	@Autowired
-	private SequenceDao sequenceDao;
-	
+
 	@Transactional
 	public Orders getOrder(int orderId) throws DataAccessException {
 		 Orders order = orderMapper.getOrderAndLineitems(orderId);
-		 System.out.println(order.getLineItems().size());   // LineItem 객체들이 같이 생성되었는지 갯수 확인
+		 System.out.println(order.toString());
+		 System.out.println("lineItem size : " + order.getLineItems().size());   // LineItem 객체들이 같이 생성되었는지 갯수 확인
 		 return order;
 	}
 	
