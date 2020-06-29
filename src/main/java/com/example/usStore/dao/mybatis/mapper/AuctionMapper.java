@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.springframework.dao.DataAccessException;
 
+import com.example.usStore.domain.Account;
 import com.example.usStore.domain.Auction;
 import com.example.usStore.domain.Bidder;
 import com.example.usStore.domain.Item;
@@ -14,7 +15,7 @@ import com.example.usStore.domain.Item;
 public interface AuctionMapper extends ItemMapper {
 	
 	// select Auction
-	List<Auction> getAuctionList();
+	List<Auction> getAuctionList(Account account);
 
 	// insert Auction
 	public void insertAuction(Auction auction);

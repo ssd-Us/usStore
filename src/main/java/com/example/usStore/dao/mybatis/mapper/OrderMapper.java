@@ -22,4 +22,6 @@ public interface OrderMapper {
 
 	// Order 추가
 	void insertOrder(Orders order);
+	
+	Orders getOrderAndLineitems(int orderId);
 }

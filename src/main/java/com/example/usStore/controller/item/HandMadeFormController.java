@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import com.example.usStore.controller.mypage.UserSession;
+import com.example.usStore.domain.Account;
 import com.example.usStore.domain.GroupBuying;
 import com.example.usStore.domain.HandMade;
 import com.example.usStore.domain.Item;
@@ -62,14 +63,24 @@ public class HandMadeFormController {
    // HandMade 리스트 초기 화면 출력시 실행되는 Controller
    @RequestMapping("/shop/handMade/listItem.do")
    public String listHandMade (
-         @RequestParam("productId") int productId, ModelMap model) throws Exception {
-  
-      PagedListHolder<HandMade> handMadeList = new PagedListHolder<HandMade>(this.itemFacade.getHandMadeList());
-      handMadeList.setPageSize(4);
-      
-      model.put("handMadeList", handMadeList);
-      model.put("productId", productId);
-      return HANDMADE_LIST;
+         @RequestParam("productId") int productId, ModelMap model, HttpServletRequest rq) throws Exception {
+	   
+		HttpSession session = rq.getSession(false);
+		Account account = null;
+		if (session.getAttribute("userSession") != null) {
+			UserSession userSession = (UserSession) session.getAttribute("userSession");
+			if (userSession != null) { // 로그인상태이면 대학정보 가져온다
+				account = userSession.getAccount();
+			}
+		}
+
+		PagedListHolder<HandMade> handMadeList = new PagedListHolder<HandMade>(
+				this.itemFacade.getHandMadeList(account));
+		handMadeList.setPageSize(4);
+
+		model.put("handMadeList", handMadeList);
+		model.put("productId", productId);
+		return HANDMADE_LIST;
    }
    
    // 아이템 4개마다 페이지 구분, 다음 페이지나 이전 페이지로 전환하도록 해주는 Controller

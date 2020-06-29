@@ -59,7 +59,7 @@ public class MybatisAuctionDao implements AuctionDao {
    @Override
    public List<Auction> getAuctionList(Account account) throws DataAccessException {
       // TODO Auto-generated method stub
-      return auctionMapper.getAuctionList();
+      return auctionMapper.getAuctionList(account);
    }
 
    @Override

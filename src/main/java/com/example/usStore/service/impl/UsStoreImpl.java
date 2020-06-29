@@ -72,13 +72,7 @@ public class UsStoreImpl implements UsStoreFacade {
 		// TODO Auto-generated method stub
 		return orderDao.getOrdersByUserId(userId);
 	}
-
-	@Override
-	public List<Orders> getOrdersByUsername(String username) {
-		// TODO Auto-generated method stub
-		return orderDao.getOrdersByUsername(username);
-	}
-
+	
 	@Override
 	public Orders getOrder(int orderId) {
 		// TODO Auto-generated method stub
@@ -89,6 +83,12 @@ public class UsStoreImpl implements UsStoreFacade {
 	public void insertOrder(Orders order) {
 		//itemDao.updateQuantity(order);	    
 		orderDao.insertOrder(order);
+	}
+
+	@Override
+	public List<Orders> getOrdersByUsername(String username) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	 
 }

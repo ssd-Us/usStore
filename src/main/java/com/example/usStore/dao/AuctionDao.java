@@ -6,13 +6,14 @@ import java.util.List;
 
 import org.springframework.dao.DataAccessException;
 
+import com.example.usStore.domain.Account;
 import com.example.usStore.domain.Auction;
 import com.example.usStore.domain.Bidder;
 
 public interface AuctionDao extends ItemDao {
 
 	// select Auction
-	List<Auction> getAuctionList() throws DataAccessException;
+	List<Auction> getAuctionList(Account account) throws DataAccessException;
 
 	// insert Auction
 	public void insertAuction(Auction auction) throws DataAccessException;
