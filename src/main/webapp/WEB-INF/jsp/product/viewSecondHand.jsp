@@ -133,6 +133,7 @@
    	<tr>
    		<th style="border-right: 1px solid black;">판매자 대학교</th> <!-- 판매자의 대학교는 판매자 userId로 getAccountByUserId().getUniversity() -->
    		<td>
+   			<input type="text" id="searchLoc"><buttion onclick="searchLocation();">검색</buttion>
    			<%@ include file="/WEB-INF/jsp/account/viewMap.jsp" %>
    		</td>
    	</tr>
