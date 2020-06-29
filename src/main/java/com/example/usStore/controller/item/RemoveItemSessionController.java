@@ -28,6 +28,7 @@ public class RemoveItemSessionController {
       this.usStore = usStore;
    }
 
+   
    @RequestMapping("/shop/item/indexFromLogo.do") //go index(remove sessions)
    public String Index(SessionStatus sessionStatus, HttpServletRequest rq)
    {
