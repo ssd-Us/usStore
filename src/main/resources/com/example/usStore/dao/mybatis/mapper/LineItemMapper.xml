@@ -8,7 +8,7 @@
   <select id="getLineItemsByOrderId" resultType="LineItem">
     SELECT
       ORDERID,
-      LINENUM AS lineNumber,
+      LINENUM,
       ITEMID,
       QUANTITY,
       UNITPRICE
@@ -18,7 +18,7 @@
 
   <insert id="insertLineItem">
     INSERT INTO LINEITEM (ORDERID, LINENUM, ITEMID, QUANTITY, UNITPRICE)
-    VALUES (#{orderId}, #{lineNumber}, #{itemId}, #{quantity}, #{unitPrice})
+    VALUES (#{orderId}, #{lineNum}, #{itemId}, #{quantity}, #{unitPrice})
   </insert>
 
 </mapper>

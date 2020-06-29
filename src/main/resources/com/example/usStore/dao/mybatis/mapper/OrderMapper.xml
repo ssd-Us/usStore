@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper
-	namespace="com.example.usStore.dao.mybatis.mapper.OrderMapper">
+<mapper namespace="com.example.usStore.dao.mybatis.mapper.OrderMapper">
 
 	<cache />
 
@@ -65,11 +64,32 @@
 
 	<resultMap id="OrderAndLineitemMap" type="Orders">
 		<id column="ORDERID" property="orderId" />
-		<result column="USERNAME" property="username" />
+		<result column="USERID" property="userId" />
+		<result column="USERNAME" property="username"/>
+		<result column="BILLADDR1" property="billAddr1"/>
+		<result column="BILLADDR2" property="billAddr2"/>
+		<result column="BILLCITY" property="billCity"/>
+		<result column="BILLCOUNTRY" property="billCountry"/>
+		<result column="BILLTOUSERNAME" property="billToUsername"/>
+		<result column="BILLZIP" property="billZip" />
+		<result column="SHIPTOUSERNAME" property="shipToUsername"/>
+		<result column="SHIPADDR1" property="shipAddr1"/>
+		<result column="SHIPADDR2" property="shipAddr2"/>
+		<result column="SHIPCITY" property="shipCity"/>
+		<result column="SHIPCOUNTRY" property="shipCountry"/>
+		<result column="SHIPZIP" property="shipZip" />
+		<result column="TOTALPRICE" property="totalPrice"/>
+		<result column="UNITCOST" property="unitCost"/>
 		<result column="ORDERDATE" property="orderDate" />
+		<result column="CARDTYPE" property="cardType" />
+		<result column="COURIER" property="courier" />
+		<result column="CREDITCARD" property="creditCard" />
+		<result column="EXPRDATE" property="exprDate" />
+		<result column="LOCALE" property="locale" />
+		<result column="STATUS" property="status" />
 		<collection property="lineItems" ofType="LineItem">
 			<id column="ORDERID" property="orderId" />
-			<id column="LINENUM" property="lineNumber" />
+			<id column="LINENUM" property="lineNum" />
 			<result column="ITEMID" property="itemId" />
 			<result column="QUANTITY" property="quantity" />
 			<result column="UNITPRICE" property="unitPrice" />
@@ -84,12 +104,15 @@
 			CREDITCARD, EXPRDATE AS expiryDate, LOCALE, ORDERDATE, ORDERS.ORDERID,
 			TOTALPRICE, USERID, STATUS,
 			LINEITEM.LINENUM, LINEITEM.ITEMID, LINEITEM.QUANTITY, LINEITEM.UNITPRICE
-		FROM ORDERS, ORDERSTATUS, LINEITEM
+		FROM ORDERS, LINEITEM
 		WHERE ORDERS.ORDERID = #{value}
 				AND ORDERS.ORDERID = LINEITEM.ORDERID
 	</select>
 
 	<insert id="insertOrder">
+		<selectKey keyProperty="orderId" resultType="int" order="BEFORE">
+			SELECT ORDERID_seq.nextval AS orderId FROM DUAL
+		</selectKey> 
 		INSERT INTO ORDERS (ORDERID, USERID, ORDERDATE, SHIPADDR1, SHIPADDR2,
 				SHIPCITY,
 				SHIPZIP, SHIPCOUNTRY, BILLADDR1, BILLADDR2, BILLCITY, BILLZIP, BILLCOUNTRY,

@@ -31,7 +31,7 @@
 
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-white" id="mainNav">
-     <a class="navbar-brand js-scroll-trigger" href="<c:url value="/shop/index.do"/>">
+     <a class="navbar-brand js-scroll-trigger" href="<c:url value="/shop/item/indexFromLogo.do"/>">
      	<img border="0" src="${pageContext.request.contextPath}/images/usStore3.png" style="float:left;width:80;height:60;border:0;"/>
      	<img border="0" src="${pageContext.request.contextPath}/images/logo.png" style="float:left;width:120;height:60;border:0;" />
      </a>

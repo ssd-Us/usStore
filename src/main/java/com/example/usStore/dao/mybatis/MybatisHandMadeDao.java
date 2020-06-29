@@ -136,4 +136,9 @@ public class MybatisHandMadeDao implements HandMadeDao {
 		// TODO Auto-generated method stub
 		handMadeMapper.updateViewCount(viewCount, itemId);
 	}
+
+	@Override
+	public List<Item> getItemByPId(int productId) throws DataAccessException {
+	   return handMadeMapper.getItemByPId(productId);
+	}	
 }

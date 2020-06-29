@@ -147,4 +147,9 @@ public class MybatisAuctionDao implements AuctionDao {
 		// TODO Auto-generated method stub
 		auctionMapper.updateViewCount(viewCount, itemId);
 	}
+	
+	@Override
+	public List<Item> getItemByPId(int productId) throws DataAccessException {
+	    return auctionMapper.getItemByPId(productId);
+	}
 }
