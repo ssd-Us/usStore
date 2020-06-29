@@ -53,7 +53,7 @@ public class SendOrderConfirmationEmailAdvice implements AfterReturningAdvice, I
 
 	public void afterReturning(Object returnValue, Method m, Object[] args, Object target) throws Throwable {
 		Orders order = (Orders) args[0];
-		Account account = ((UsStoreFacade) target).getAccountByUsername(order.getShipToUsername());
+		Account account = ((UsStoreFacade) target).getAccountByUsername(order.getshipToUsername());
 
 		// don't do anything if email address is not set
 		if (account.getEmail() == null || account.getEmail().length() == 0) {

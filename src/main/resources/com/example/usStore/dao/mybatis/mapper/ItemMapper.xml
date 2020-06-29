@@ -28,20 +28,6 @@
 		WHERE itemId = #{param2}		
 	</update>
 	
-	<select id="getItemByPId" resultType="Item">
-      SELECT
-         I.ITEMID,
-         I.UNITCOST,
-         I.TITLE,
-         I.DESCRIPTION,
-         I.VIEWCOUNT,
-         I.QTY,
-         I.USERID,
-         I.PRODUCTID
-      FROM ITEM I
-      WHERE I.PRODUCTID = #{productId}
-   </select>
-   	
 	<delete id="deleteItem">
 		DELETE FROM ITEM
 		WHERE ITEMID = #{itemId} 
@@ -77,19 +63,5 @@
 		SELECT USERID AS "userId"
 		FROM ITEM
 		WHERE ITEMID = #{itemId}
-	</select>
-	
-	<select id="getItemByPId" resultType="Item">
-		SELECT
-			I.ITEMID,
-			I.UNITCOST,
-			I.TITLE,
-			I.DESCRIPTION,
-			I.VIEWCOUNT,
-			I.QTY,
-			I.USERID,
-			I.PRODUCTID
-		FROM ITEM I
-		WHERE I.PRODUCTID = #{productId}
 	</select>
 </mapper>

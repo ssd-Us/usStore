@@ -19,7 +19,6 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 
 import com.example.usStore.controller.mypage.UserSession;
-import com.example.usStore.domain.Account;
 import com.example.usStore.domain.GroupBuying;
 import com.example.usStore.domain.Item;
 import com.example.usStore.domain.Tag;
@@ -59,20 +58,9 @@ public class GroupBuyingFormController {
    }
    
    @RequestMapping("/shop/groupBuying/listItem.do") 
-    public String groupBuyingList(@RequestParam("productId") int productId, ModelMap modelMap, Model model,  HttpServletRequest rq) {
-     
-
-	  HttpSession session = rq.getSession(false);
-	   
-	  Account account = null;
-	  if (session.getAttribute("userSession") != null) {
-	       UserSession userSession = (UserSession)session.getAttribute("userSession") ;
-	       if (userSession != null) {  //로그인상태이면 대학정보 가져온다 
-	               account = userSession.getAccount();
-	       }
-	  }
-	  
-      PagedListHolder<GroupBuying> groupBuyingList = new PagedListHolder<GroupBuying>(this.itemFacade.getGroupBuyingList(account));
+    public String groupBuyingList(@RequestParam("productId") int productId, ModelMap modelMap, Model model) {
+      
+      PagedListHolder<GroupBuying> groupBuyingList = new PagedListHolder<GroupBuying>(this.itemFacade.getGroupBuyingList());
       groupBuyingList.setPageSize(4);
       
       model.addAttribute("productId", productId);

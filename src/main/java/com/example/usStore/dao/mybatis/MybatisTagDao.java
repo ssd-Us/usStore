@@ -25,9 +25,9 @@ public class MybatisTagDao implements TagDao {
 	}
 
 	@Override
-	public List<Tag> getTagByTagName(String tagName) throws DataAccessException {
+	public Tag getTagByTagName(String tagName) throws DataAccessException {
 		// TODO Auto-generated method stub
-		return tagMapper.getTagByTagName("%" + tagName.toLowerCase() + "%");
+		return tagMapper.getTagByTagName(tagName);
 	}
 
 	@Override
@@ -60,4 +60,5 @@ public class MybatisTagDao implements TagDao {
 			tagMapper.insertTag(t);
 		}
 	}
+
 }

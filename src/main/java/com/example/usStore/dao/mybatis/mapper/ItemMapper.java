@@ -1,8 +1,6 @@
 
 package com.example.usStore.dao.mybatis.mapper;
 
-import java.util.List;
-
 import com.example.usStore.domain.Item;
 
 public interface ItemMapper {
@@ -24,7 +22,5 @@ public interface ItemMapper {
 	String getUserIdByItemId(int itemId);
 	
 	void updateViewCount(int viewCount, int itemId);
-	
-	List<Item> getItemByPId(int productId);
 }
 

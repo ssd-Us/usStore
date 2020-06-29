@@ -10,7 +10,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.example.usStore.controller.mypage.UserSession;
 import com.example.usStore.domain.Orders;
-import com.example.usStore.service.OrderService;
 import com.example.usStore.service.facade.UsStoreFacade;
 
 /**
@@ -22,11 +21,11 @@ import com.example.usStore.service.facade.UsStoreFacade;
 @SessionAttributes("userSession")
 public class ViewOrderController {
 
-	private UsStoreFacade usStoreFacade;
-	
+	private UsStoreFacade usStore;
+
 	@Autowired
-	public void setusStore(UsStoreFacade usStoreFacade) {
-		this.usStoreFacade = usStoreFacade;
+	public void setusStore(UsStoreFacade usStore) {
+		this.usStore = usStore;
 	}
 
 	@RequestMapping("/shop/viewOrder.do")
@@ -34,17 +33,11 @@ public class ViewOrderController {
 			@ModelAttribute("userSession") UserSession userSession,
 			@RequestParam("orderId") int orderId
 			) throws Exception {
-		
-		Orders order = usStoreFacade.getOrder(orderId);
-		if (userSession.getAccount().getUsername().equals(order.getShipToUsername())) {
-			System.out.println("account username : " + userSession.getAccount().getUsername());
-			System.out.println("order shipToUsername : " + order.getShipToUsername());
-			return new ModelAndView("order/ViewOrder", "order", order);
+		Orders order = this.usStore.getOrder(orderId);
+		if (userSession.getAccount().getUsername().equals(order.getshipToUsername())) {
+			return new ModelAndView("ViewOrder", "order", order);
 		}
 		else {
-			System.out.println("account username : " + userSession.getAccount().getUsername());
-			System.out.println("Order : " + order.toString());
-			System.out.println("order shipToUsername : " + order.getShipToUsername());
 			return new ModelAndView("Error", "message", "You may only view your own orders.");
 		}
 	}

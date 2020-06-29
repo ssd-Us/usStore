@@ -14,7 +14,6 @@ import com.example.usStore.dao.HandMadeDao;
 import com.example.usStore.dao.mybatis.mapper.HandMadeMapper;
 import com.example.usStore.dao.mybatis.mapper.ItemMapper;
 import com.example.usStore.dao.mybatis.mapper.TagMapper;
-import com.example.usStore.domain.Account;
 import com.example.usStore.domain.HandMade;
 import com.example.usStore.domain.Item;
 import com.example.usStore.domain.Tag;
@@ -86,9 +85,9 @@ public class MybatisHandMadeDao implements HandMadeDao {
 	}
 
 	@Override
-	public List<HandMade> getHandMadeList(Account account) throws DataAccessException {
+	public List<HandMade> getHandMadeList() throws DataAccessException {
 		// TODO Auto-generated method stub
-		return handMadeMapper.getHandMadeList(account);
+		return handMadeMapper.getHandMadeList();
 	}
 
 	@Override
@@ -136,9 +135,4 @@ public class MybatisHandMadeDao implements HandMadeDao {
 		// TODO Auto-generated method stub
 		handMadeMapper.updateViewCount(viewCount, itemId);
 	}
-
-	@Override
-	public List<Item> getItemByPId(int productId) throws DataAccessException {
-	   return handMadeMapper.getItemByPId(productId);
-	}	
 }

@@ -44,16 +44,6 @@
 				</div>
 				
 				<div class="form-label-group">
-					<form:input path="account.addr1" id="inputaddr1" class="form-control" disabled="true"/>
-					<B><form:errors path="account.addr1" cssClass="error" /></B> <label for="inputaddr1">Address 1</label>
-				</div>
-				
-				<div class="form-label-group">
-					<form:input path="account.addr2" id="inputaddr2" class="form-control" disabled="true"/>
-					<B><form:errors path="account.addr2" cssClass="error" /></B> <label for="inputaddr2">Address 2</label>
-				</div>
-				
-				<div class="form-label-group">
 					<form:input path="account.zip" id="inputzip" class="form-control" disabled="true"/>
 					<B><form:errors path="account.zip" cssClass="error" /></B> <label for="inputzip">Zipcode</label>
 				</div>

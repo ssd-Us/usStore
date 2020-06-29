@@ -28,7 +28,6 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.usStore.controller.mypage.UserSession;
-import com.example.usStore.domain.Account;
 import com.example.usStore.domain.Auction;
 import com.example.usStore.domain.Bidder;
 import com.example.usStore.domain.Item;
@@ -68,20 +67,12 @@ public class AuctionFormController {
 	}
    
    @RequestMapping("/shop/auction/listItem.do") 
-   public String auctionList(@RequestParam("productId") int productId, ModelMap model,HttpServletRequest rq) {
+   public String auctionList(@RequestParam("productId") int productId, ModelMap model) {
       myProductId = productId;
-      HttpSession session = rq.getSession(false);
       
-      Account account = null;
-      if (session.getAttribute("userSession") != null) {
-             UserSession userSession = (UserSession)session.getAttribute("userSession") ;
-             if (userSession != null) {  //로그인상태이면 대학정보 가져온다 
-                account = userSession.getAccount();
-             }
-      }
       
       List<Auction> al = new ArrayList<Auction>();
-      al = this.itemFacade.getAuctionList(account);
+      al = this.itemFacade.getAuctionList();
       
       PagedListHolder<Auction> auctionList = new PagedListHolder<Auction>(al);
       auctionList.setPageSize(4);
@@ -238,6 +229,12 @@ public class AuctionFormController {
 	   return "redirect:/shop/auction/viewItem.do?itemId=" + myItemId + "&productId=" + myProductId;
    }
    
+
+	/*
+	 * @RequestMapping("/shop/auction/addItem.do") public String
+	 * goItem(@RequestParam("productId") int productId) { return
+	 * "redirect:/shop/item/addItem.do?productId=" + productId; }
+	 */
    
    @RequestMapping(value="/shop/auction/addItem2.do", method = RequestMethod.GET)
    public String step2(
@@ -265,7 +262,7 @@ public class AuctionFormController {
 	
 	@PostMapping("/shop/auction/step3.do")		// step2 -> step3
 	public String goCheck(@ModelAttribute("Auction") AuctionForm auctionForm, BindingResult result,
-			HttpServletRequest rq, ItemForm itemForm, Model model) throws ParseException {	
+			HttpServletRequest rq, ItemForm itemForm, Model model) {	
 		System.out.println("step3.do(before check form)");
 		HttpSession session = rq.getSession(false);
 		
@@ -274,17 +271,20 @@ public class AuctionFormController {
 		itemForm = (ItemForm) session.getAttribute("itemForm");
 		if(session.getAttribute("itemForm") != null) {
 			System.out.println("itemformSession: " + itemForm);	//print itemformSession toString
-			System.out.println(itemForm.getTags());
 		}
-		
-		System.out.println(auctionForm);
-		
+
 		if (result.hasErrors()) {	//유효성 검증 에러 발생시
 			model.addAttribute("productId", itemForm.getProductId());
 			return ADD_Auction_FORM;
 		}
 		
-		model.addAttribute("tags", itemForm.getTags());
+		System.out.println(auctionForm);
+		
+		System.out.println("deadLine still null," + auctionForm);	//print command toString
+		
+		String deadLine = auctionForm.getDate() + " " + auctionForm.getTime() + ":00";
+		auctionForm.setDeadLine(deadLine);
+		
 		model.addAttribute(itemForm);
 		
 		Date date = new Date();
@@ -414,7 +414,7 @@ public class AuctionFormController {
 		return new ModelAndView("Scheduled", "deadLine", deadLine);	
 	}
    
-   @RequestMapping("/shop/auction/index.do") //go index(remove sessions)
+   @RequestMapping("/shop/product/index.do") //go index(remove sessions)
    public String goIndex(SessionStatus sessionStatus, HttpServletRequest rq)
    {
       System.out.println("go back index.do From [add / edit product]");

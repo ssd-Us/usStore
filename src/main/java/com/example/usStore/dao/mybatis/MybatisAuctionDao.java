@@ -14,7 +14,6 @@ import com.example.usStore.dao.AuctionDao;
 import com.example.usStore.dao.mybatis.mapper.AuctionMapper;
 import com.example.usStore.dao.mybatis.mapper.ItemMapper;
 import com.example.usStore.dao.mybatis.mapper.TagMapper;
-import com.example.usStore.domain.Account;
 import com.example.usStore.domain.Auction;
 import com.example.usStore.domain.Bidder;
 import com.example.usStore.domain.Item;
@@ -57,7 +56,7 @@ public class MybatisAuctionDao implements AuctionDao {
    }
 
    @Override
-   public List<Auction> getAuctionList(Account account) throws DataAccessException {
+   public List<Auction> getAuctionList() throws DataAccessException {
       // TODO Auto-generated method stub
       return auctionMapper.getAuctionList();
    }
@@ -146,10 +145,5 @@ public class MybatisAuctionDao implements AuctionDao {
 	public void updateViewCount(int viewCount, int itemId) {
 		// TODO Auto-generated method stub
 		auctionMapper.updateViewCount(viewCount, itemId);
-	}
-	
-	@Override
-	public List<Item> getItemByPId(int productId) throws DataAccessException {
-	    return auctionMapper.getItemByPId(productId);
 	}
 }

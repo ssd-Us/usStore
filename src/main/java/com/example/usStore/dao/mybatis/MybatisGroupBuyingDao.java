@@ -14,7 +14,6 @@ import com.example.usStore.dao.GroupBuyingDao;
 import com.example.usStore.dao.mybatis.mapper.GroupBuyingMapper;
 import com.example.usStore.dao.mybatis.mapper.ItemMapper;
 import com.example.usStore.dao.mybatis.mapper.TagMapper;
-import com.example.usStore.domain.Account;
 import com.example.usStore.domain.GroupBuying;
 import com.example.usStore.domain.Item;
 import com.example.usStore.domain.Tag;
@@ -80,9 +79,9 @@ public class MybatisGroupBuyingDao implements GroupBuyingDao {
    }
    
    @Override
-   public List<GroupBuying> getGroupBuyingList(Account account) throws DataAccessException {
+   public List<GroupBuying> getGroupBuyingList() throws DataAccessException {
       // TODO Auto-generated method stub
-      return groupBuyingMapper.getGroupBuyingList(account);
+      return groupBuyingMapper.getGroupBuyingList();
    }
 
    @Override
@@ -123,8 +122,4 @@ public class MybatisGroupBuyingDao implements GroupBuyingDao {
       groupBuyingMapper.updateViewCount(viewCount, itemId);
    }
 
-   @Override
-   public List<Item> getItemByPId(int productId) throws DataAccessException {
-      return groupBuyingMapper.getItemByPId(productId);
-   }
 }

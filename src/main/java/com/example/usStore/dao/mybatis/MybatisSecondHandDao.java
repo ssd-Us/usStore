@@ -13,7 +13,6 @@ import com.example.usStore.dao.SecondHandDao;
 import com.example.usStore.dao.mybatis.mapper.ItemMapper;
 import com.example.usStore.dao.mybatis.mapper.SecondHandMapper;
 import com.example.usStore.dao.mybatis.mapper.TagMapper;
-import com.example.usStore.domain.Account;
 import com.example.usStore.domain.Item;
 import com.example.usStore.domain.SecondHand;
 import com.example.usStore.domain.Tag;
@@ -65,8 +64,8 @@ public class MybatisSecondHandDao implements SecondHandDao {
 	
 
 	@Override
-	public List<SecondHand> getSecondHandList(Account account) throws DataAccessException {
-		return secondHandMapper.getSecondHandList(account);
+	public List<SecondHand> getSecondHandList(String university) throws DataAccessException {
+		return secondHandMapper.getSecondHandList(university);
 	}
 	
 	@Override
@@ -104,7 +103,7 @@ public class MybatisSecondHandDao implements SecondHandDao {
 	@Override
 	public Item getItem(int itemId) {
 		// TODO Auto-generated method stub
-		return secondHandMapper.getItem(itemId);
+		return null;
 	}
 
 	@Override
@@ -112,9 +111,7 @@ public class MybatisSecondHandDao implements SecondHandDao {
 		secondHandMapper.updateViewCount(viewCount, itemId);
 	}
 
-	@Override
-	public List<Item> getItemByPId(int productId){
-	   return secondHandMapper.getItemByPId(productId);
-	}
+
+	
 
 }

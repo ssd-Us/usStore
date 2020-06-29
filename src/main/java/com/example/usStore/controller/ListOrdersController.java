@@ -19,20 +19,20 @@ import com.example.usStore.service.facade.UsStoreFacade;
 @SessionAttributes("userSession")
 public class ListOrdersController {
 
-	private UsStoreFacade usStoreFacade;
+	private UsStoreFacade petStore;
 
 	@Autowired
-	public void setPetStore(UsStoreFacade usStoreFacade) {
-		this.usStoreFacade = usStoreFacade;
+	public void setPetStore(UsStoreFacade petStore) {
+		this.petStore = petStore;
 	}
 
 	@RequestMapping("/shop/listOrders.do")
 	public ModelAndView handleRequest(
 		@ModelAttribute("userSession") UserSession userSession
 		) throws Exception {
-		String userId = userSession.getAccount().getUserId();
-		return new ModelAndView("order/ListOrders", "orderList", 
-				usStoreFacade.getOrdersByUserId(userId));
+		String username = userSession.getAccount().getUsername();
+		return new ModelAndView("ListOrders", "orderList", 
+				petStore.getOrdersByUsername(username));
 	}
 
 }
