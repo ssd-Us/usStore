@@ -38,7 +38,7 @@
 			    font-size: medium;
 			    padding: 15px;
 	}
-	
+
 </style>
 <script>
 function getSellerInfo(userId) {
@@ -151,6 +151,12 @@ function getSellerInfo(userId) {
    		<td>${sh.qty}</td>
    	</tr>	
    	<tr>
+   		<th style="border-right: 1px solid black;">판매자 대학교</th> <!-- 판매자의 대학교는 판매자 userId로 getAccountByUserId().getUniversity() -->
+   		<td>
+   			<%@ include file="/WEB-INF/jsp/account/viewMap.jsp" %>
+   		</td>
+   	</tr>
+   	<tr>
    			<td colspan="2" style="border-bottom: none;">
    			<span>
    				<a href="<c:url value="/shop/addItemToCart.do">
@@ -165,8 +171,7 @@ function getSellerInfo(userId) {
 				">쪽지 보내기</a>
 			</span>
    			</td>
-   	</tr>
-   		
+   	</tr> 	
    	<c:if test="${sh.userId eq userSession.account.userId}"> <!-- 로그인시 실행 -->
 		   		<td colspan="2" style="text-align: right; padding: 0px; font-size: small; border-bottom: none; border-top: 1px solid black;">
 				   <a href="<c:url value='/shop/secondHand/edit.do'>
@@ -178,10 +183,8 @@ function getSellerInfo(userId) {
 				   				<c:param name="productId" value="${sh.productId}" />
 				   			</c:url>
 				   			"> [게시물 삭제하기]</a>
-				</td>
-			 </tr>
+				</td>		
 	</c:if>
-</table>
-
-</body>   
+</table>				
+</body>
 </html>
