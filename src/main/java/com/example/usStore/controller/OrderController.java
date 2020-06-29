@@ -97,6 +97,7 @@ public class OrderController {
 	protected ModelAndView confirmOrder(
 			@ModelAttribute("orderForm") OrderForm orderForm, 
 			SessionStatus status) {
+		System.out.println("confirmOrder.do : " + orderForm.getOrder().getLineItems().size());
 		usStore.insertOrder(orderForm.getOrder());
 		ModelAndView mav = new ModelAndView("ViewOrder");
 		mav.addObject("order", orderForm.getOrder());

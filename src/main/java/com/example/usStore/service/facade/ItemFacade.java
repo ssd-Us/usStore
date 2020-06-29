@@ -45,6 +45,8 @@ public interface ItemFacade {
    void updateViewCount(int viewCount, int itemId);
    
    List<Item> getItemByPId(int productId);
+   
+   
    /////////////////////////////////////////////////////////////////////////
    /* HandMade */
    /////////////////////////////////////////////////////////////////////////
@@ -53,7 +55,7 @@ public interface ItemFacade {
    
    public void updateHandMade(HandMade handmade);
    
-   List<HandMade> getHandMadeList();
+   List<HandMade> getHandMadeList(Account account);
    
    HandMade getHandMadeById(int itemId);
    
@@ -66,15 +68,16 @@ public interface ItemFacade {
    
    public void updateGroupBuying(GroupBuying GroupBuying);
    
-   List<GroupBuying> getGroupBuyingList();
+   List<GroupBuying> getGroupBuyingList(Account account);
    
    GroupBuying getGroupBuyingItem(int itemId);
    
    public void groupBuyingScheduler(Date deadLine);
+   
    /////////////////////////////////////////////////////////////////////////
    /* SecondHand */
    /////////////////////////////////////////////////////////////////////////   
-   List<SecondHand> getSecondHandList(String university);
+   List<SecondHand> getSecondHandList(Account account);
    
    SecondHand getSecondHandItem(int itemId);
    
@@ -85,7 +88,7 @@ public interface ItemFacade {
    /////////////////////////////////////////////////////////////////////////
    /* Auction */
    /////////////////////////////////////////////////////////////////////////
-   List<Auction> getAuctionList();
+   List<Auction> getAuctionList(Account account);
    
    public void insertAuction(Auction auction);
     

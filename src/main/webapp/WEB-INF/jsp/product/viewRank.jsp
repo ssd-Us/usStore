@@ -9,7 +9,7 @@
 <head>
 <title>랭킹 페이지</title>
 <style>
-	th, td {
+   th, td {
       text-align: center;
       height:70px;
       padding-left:43px;
@@ -35,9 +35,9 @@
                   
                    <a href="
                      <c:url value='/shop/rank/HmToJson.do'/>   
-          		  	">수공예 판매</a><br>
+                     ">수공예 판매</a><br>
                   
-					<a href="javascript:showSH();">중고거래</a><br>
+               <a href="javascript:showSH();">중고거래</a><br>
                   
                   <a href="javascript:showAT();">경매</a><br>
                   

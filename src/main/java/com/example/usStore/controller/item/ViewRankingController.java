@@ -98,9 +98,9 @@ public class ViewRankingController {
    @GetMapping(value="/shop/rank/HmToJson.do")
    @ResponseBody
    public List<Rank> hmJson(HttpServletRequest rq) {   //객체 타입 리스트
-	  HttpSession session = rq.getSession(true);
-	  @SuppressWarnings("unchecked")
-	  List<Item> hmList = (List<Item>) session.getAttribute("hmList");
+     HttpSession session = rq.getSession(true);
+     @SuppressWarnings("unchecked")
+     List<Item> hmList = (List<Item>) session.getAttribute("hmList");
       List<Rank> hmRankList = new ArrayList<Rank>();
       
       int index = 0;
@@ -114,11 +114,11 @@ public class ViewRankingController {
    }
    
 //   @PostMapping(value = "/post.json")
-//	@ResponseBody
-//	public List<Rank> hmPostJson(@RequestBody List<Rank> hmRankList) {
-//		System.out.println(hmRankList.toString());
-//		hmRankList.get(0).setContent("수정된 메시지1");
-//		return hmRankList;
-//	}
+//   @ResponseBody
+//   public List<Rank> hmPostJson(@RequestBody List<Rank> hmRankList) {
+//      System.out.println(hmRankList.toString());
+//      hmRankList.get(0).setContent("수정된 메시지1");
+//      return hmRankList;
+//   }
    
 }
