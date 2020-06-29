@@ -23,6 +23,9 @@
 			  	Event
 			</a>
 			<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+				<a class="dropdown-item" href="<c:url value='/shop/event/viewEvent.do'>
+                    <c:param name="catId" value="4"/>
+                    </c:url>">룰렛</a>
 				<a class="dropdown-item" href="<c:url value="/shop/viewEvent.do?catId=2"/>">퀴즈</a>
 				<a class="dropdown-item" href="<c:url value="/shop/viewEvent.do?catId=3"/>">출석체크</a>
 				<div class="dropdown-divider"></div>
