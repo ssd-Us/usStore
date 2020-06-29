@@ -27,28 +27,20 @@
         <font color="GREEN" size="4"><b>Billing Address</b></font></td>
     </tr>
     <tr>
-      <td>First name:</td>
-      <td>${orderForm.order.billToFirstName}</td>
-    </tr>
-    <tr>
-      <td>Last name:</td>
-      <td>${orderForm.order.billToLastName}</td>
+      <td>name:</td>
+      <td>${orderForm.order.billToUsername}</td>
     </tr>
     <tr>
       <td>Address 1:</td>
-      <td>${orderForm.order.billAddress1}</td>
+      <td>${orderForm.order.billAddr1}</td>
     </tr>
     <tr>
       <td>Address 2:</td>
-      <td>${orderForm.order.billAddress2}</td>
+      <td>${orderForm.order.billAddr2}</td>
     </tr>
     <tr>
       <td>City:</td>
       <td>${orderForm.order.billCity}</td>
-    </tr>
-    <tr>
-      <td>State:</td>
-      <td>${orderForm.order.billState}</td>
     </tr>
     <tr>
       <td>Zip:</td>
@@ -64,27 +56,19 @@
     </tr>
     <tr>
       <td>First name:</td>
-      <td>${orderForm.order.shipToFirstName}</td>
-    </tr>
-    <tr>
-      <td>Last name:</td>
-      <td>${orderForm.order.shipToLastName}</td>
+      <td>${orderForm.order.shipToUsername}</td>
     </tr>
     <tr>
       <td>Address 1:</td>
-      <td>${orderForm.order.shipAddress1}</td>
+      <td>${orderForm.order.shipAddr1}</td>
     </tr>
     <tr>
       <td>Address 2:</td>
-      <td>${orderForm.order.shipAddress2}</td>
+      <td>${orderForm.order.shipAddr2}</td>
     </tr>
     <tr>
       <td>City:</td>
       <td>${orderForm.order.shipCity}</td>
-    </tr>
-    <tr>
-      <td>State:</td>
-      <td>${orderForm.order.shipState}</td>
     </tr>
     <tr>
       <td>Zip:</td>
@@ -97,7 +81,7 @@
   </table>
   <p>
     <a href='<c:url value="/shop/confirmOrder.do"/>'>
-      <img border="0" src="../images/button_continue.gif" alt="" /></a>
+      <img border="0" src="${pageContext.request.contextPath}/images/button_continue.gif" alt="" /></a>
   </p>
 </div>
 
