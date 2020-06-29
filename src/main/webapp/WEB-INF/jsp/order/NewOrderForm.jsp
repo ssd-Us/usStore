@@ -35,34 +35,24 @@
         <font color="green" size="4"><b>Billing Address</b></font></td>
     </tr>
     <tr>
-      <td>First name:</td>
-      <td><form:input path="order.billToFirstName" /> 
-        <form:errors path="order.billToFirstName" /></td>
-    </tr>
-    <tr>
-      <td>Last name:</td>
-      <td><form:input path="order.billToLastName" />
-        <form:errors path="order.billToLastName" /></td>
+      <td>name:</td>
+      <td><form:input path="order.billToUsername" /> 
+        <form:errors path="order.billToUsername" /></td>
     </tr>
     <tr>
       <td>Address 1:</td>
-      <td><form:input path="order.billAddress1" />
-        <form:errors path="order.billAddress1" /></td>
+      <td><form:input path="order.billAddr1" />
+        <form:errors path="order.billAddr1" /></td>
     </tr>
     <tr>
       <td>Address 2:</td>
-      <td><form:input path="order.billAddress2" />
-        <form:errors path="order.billAddress2" /></td>
+      <td><form:input path="order.billAddr2" />
+        <form:errors path="order.billAddr2" /></td>
     </tr>
     <tr>
       <td>City:</td>
       <td><form:input path="order.billCity" /> 
         <form:errors path="order.billCity" /></td>
-    </tr>
-    <tr>
-      <td>State:</td>
-      <td><form:input path="order.billState" />
-        <form:errors path="order.billState" /></td>
     </tr>
     <tr>
       <td>Zip:</td>
@@ -81,7 +71,7 @@
     </tr>
   </table>
   <p>
-    <input type="image" src="../images/button_submit.gif">
+    <input type="image" src="${pageContext.request.contextPath}/images/button_submit.gif">
   </p>
 </form:form>
 </div>
