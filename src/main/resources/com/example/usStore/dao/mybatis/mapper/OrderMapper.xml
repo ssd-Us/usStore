@@ -84,7 +84,7 @@
 		<result column="CARDTYPE" property="cardType" />
 		<result column="COURIER" property="courier" />
 		<result column="CREDITCARD" property="creditCard" />
-		<result column="EXPRDATE" property="exprDate" />
+		<result column="EXPIRYDATE" property="expiryDate" />
 		<result column="LOCALE" property="locale" />
 		<result column="STATUS" property="status" />
 		<collection property="lineItems" ofType="LineItem">

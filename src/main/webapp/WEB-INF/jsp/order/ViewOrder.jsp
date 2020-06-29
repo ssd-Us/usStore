@@ -124,7 +124,7 @@
               </td>
               <td><c:out value="${lineItem.quantity}" /></td>
               <td align="right"><fmt:formatNumber
-                  value="${lineItem.item.unitCost}" pattern="###,###,###원" /></td>
+                  value="${lineItem.unitPrice}" pattern="###,###,###원" /></td>
               <td align="right"><fmt:formatNumber
                   value="${lineItem.totalPrice}" pattern="###,###,###원" /></td>
             </tr>
