@@ -120,4 +120,5 @@ public class ViewRankingController {
 //		hmRankList.get(0).setContent("수정된 메시지1");
 //		return hmRankList;
 //	}
+   
 }
