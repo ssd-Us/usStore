@@ -64,7 +64,12 @@ public class SearchController {
 	    PagedListHolder<Item> rl = new PagedListHolder<Item>(resultList);
 	    rl.setPageSize(4);
 	    
-	
+	    System.out.println("검색 결과 아이템 길이는 : " + resultList.size());
+	    
+	    if (resultList.size() == 0) {
+	    	model.addAttribute("noResult", 1);
+	    }
+	    
 		model.addAttribute("searchWord", searchWord);
 		model.addAttribute("resultList", rl);
 		

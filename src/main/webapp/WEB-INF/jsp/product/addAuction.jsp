@@ -19,7 +19,7 @@
 <body>
 <table id="main-menu">
   <tr>
-    <td><a href='<c:url value="/shop/product/index.do"/>'>
+    <td><a href='<c:url value="/shop/auction/index.do"/>'>
         <b><font color="black" size="2">
           &lt;&lt; Go to Index</font></b></a>
     </td>
