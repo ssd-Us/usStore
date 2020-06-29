@@ -45,8 +45,8 @@
         </button>
         <button class="btn btn-light" id="menu-toggle">Menu</button>
   </nav>
-  	
-  </nav>
+
+
   <nav class="navbar navbar-expand-lg navbar-dark bg-white" id="mainNav">
      <a class="navbar-brand js-scroll-trigger" href="<c:url value="/shop/index.do"/>">
      	<img border="0" src="${pageContext.request.contextPath}/images/usStore3.png" style="float:left;width:80;height:60;border:0;"/>
@@ -58,6 +58,21 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
+         
+        <li class="nav-item dropdown">
+			<a class="nav-link dropdown-toggle js-scroll-trigger" href="#" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			  	<font color="black"> SEARCH &nbsp; ▼</font>
+			</a>
+      	  	<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+      	  		<form name="searchForm" action="<c:url value='/shop/search/viewItem.do'/>">
+   					<input type="text" id="word" name="word" placeholder="태그 검색"/>
+   					<button class="btn btn-light dropdown-item" onclick="search(word.value)">
+   						Click To Search!
+   					</button>
+   				</form>
+			</div>	
+			</li>
+	
           <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="../help.html"><font color="black">HELP</font></a>
           </li>
@@ -82,7 +97,7 @@
       	  		<a class="dropdown-item" href="<c:url value="/shop/viewAccount.do"/>">My Account</a>
 				<a class="dropdown-item" href="<c:url value="/shop/editAccount.do"/>">Edit Account</a>
 				<div class="dropdown-divider"></div>
-<%-- 				<a class="dropdown-item" href="<c:url value="/shop/listOrders.do"/>">My Orders</a> --%>
+					<a class="dropdown-item" href="<c:url value="/shop/listOrders.do"/>">My Orders</a>
 <%-- 				<a class="dropdown-item" href="<c:url value="/shop/viewCoupon.do"/>">My Coupon</a> --%>
 <%-- 				<a class="dropdown-item" href="<c:url value="/shop/viewBookMark.do"/>">My StarList</a> --%>
 				<a class="dropdown-item" href="#">My Coupon</a>
@@ -100,3 +115,10 @@
       </div>
     </div>
   </nav>
+  <script>
+function search(word) {
+	alert("검색어 : " + word);
+
+	searchForm.submit();	
+}
+</script>

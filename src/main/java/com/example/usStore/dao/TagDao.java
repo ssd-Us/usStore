@@ -19,7 +19,7 @@ public interface TagDao {
 	List<Tag> getTagByItemId(int itemId) throws DataAccessException;	
 
 	// tagName�쑝濡� �깭洹� 媛앹껜 李얘린
-	Tag getTagByTagName(String tagName) throws DataAccessException;	
+	List<Tag> getTagByTagName(String tagName) throws DataAccessException;	
 
 	//�깭洹� 媛앹껜 �궫�엯
 	void insertTag(Tag tag) throws DataAccessException;
@@ -28,5 +28,4 @@ public interface TagDao {
 	
 	//�깭洹� 媛앹껜 �궘�젣	
 	void deleteTag(int itemId) throws DataAccessException;
-
 }

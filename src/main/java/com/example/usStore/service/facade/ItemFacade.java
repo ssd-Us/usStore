@@ -43,6 +43,10 @@ public interface ItemFacade {
    String getUserIdByItemId(int itemId);
    
    void updateViewCount(int viewCount, int itemId);
+   
+   List<Item> getItemByPId(int productId);
+   
+   
    /////////////////////////////////////////////////////////////////////////
    /* HandMade */
    /////////////////////////////////////////////////////////////////////////
@@ -51,7 +55,7 @@ public interface ItemFacade {
    
    public void updateHandMade(HandMade handmade);
    
-   List<HandMade> getHandMadeList();
+   List<HandMade> getHandMadeList(Account account);
    
    HandMade getHandMadeById(int itemId);
    
@@ -64,15 +68,16 @@ public interface ItemFacade {
    
    public void updateGroupBuying(GroupBuying GroupBuying);
    
-   List<GroupBuying> getGroupBuyingList();
+   List<GroupBuying> getGroupBuyingList(Account account);
    
    GroupBuying getGroupBuyingItem(int itemId);
    
    public void groupBuyingScheduler(Date deadLine);
+   
    /////////////////////////////////////////////////////////////////////////
    /* SecondHand */
    /////////////////////////////////////////////////////////////////////////   
-   List<SecondHand> getSecondHandList(String university);
+   List<SecondHand> getSecondHandList(Account account);
    
    SecondHand getSecondHandItem(int itemId);
    
@@ -83,45 +88,40 @@ public interface ItemFacade {
    /////////////////////////////////////////////////////////////////////////
    /* Auction */
    /////////////////////////////////////////////////////////////////////////
-   List<Auction> getAuctionList();
+   List<Auction> getAuctionList(Account account);
    
    public void insertAuction(Auction auction);
     
    public void updateAuction(Auction auction);
 
-   public Auction getAuctionById(int itemId);
-   
-   public void testScheduler(Date deadLine);
-   
-   public void updateAuctionUnitCost(int unitCost, int itemId);
-   
-   public void updateBidder(String bidder, int itemId);
-   
-   public void insertBidder(Bidder bidder);
-   
-   public String isBidderExist(int itemId);
-   
-   public void updateBidPrice(int unitCost, int itemId);
-   
-   public List<Bidder> getBidderList();
-   
-   /////////////////////////////////////////////////////////////////////////
-   /* Tag */
-   /////////////////////////////////////////////////////////////////////////
-   List<Tag> getTagList ();
-   
-   List<Tag> getTagByTagId(int tagId);
-   
-   List<Tag> getTagByItemId(int itemId);   
-   
-   Tag getTagByTagName(String tagName);   
-   
-   void insertTag(Tag tag);   
-   
-   void deleteTag(int itemId);
-   /////////////////////////////////////////////////////////////////////////
-   /* Tag */
-   /////////////////////////////////////////////////////////////////////////
-   List<Item> searchItemList(String keywords);
-
+	public Auction getAuctionById(int itemId);
+	
+	public void testScheduler(Date deadLine);
+	
+	public void updateAuctionUnitCost(int unitCost, int itemId);
+	
+	public void updateBidder(String bidder, int itemId);
+	
+	public void insertBidder(Bidder bidder);
+	
+	public String isBidderExist(int itemId);
+	
+	public void updateBidPrice(int unitCost, int itemId);
+	
+	public List<Bidder> getBidderList();
+	
+	/////////////////////////////////////////////////////////////////////////
+	/* Tag */
+	/////////////////////////////////////////////////////////////////////////
+	List<Tag> getTagList ();
+	
+	List<Tag> getTagByTagId(int tagId);
+	
+	List<Tag> getTagByItemId(int itemId);	
+	
+	List<Tag> getTagByTagName(String tagName);	
+	
+	void insertTag(Tag tag);	
+	
+	void deleteTag(int itemId);
 }

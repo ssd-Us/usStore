@@ -18,7 +18,7 @@ public interface TagMapper {
 	List<Tag> getTagByItemId(int itemId);	
 
 	// tagName�쑝濡� �깭洹� 媛앹껜 李얘린
-	Tag getTagByTagName(String tagName);	
+	List<Tag> getTagByTagName(String tagName);	
 
 	//�깭洹� 媛앹껜 �궫�엯
 	void insertTag(Tag tag);

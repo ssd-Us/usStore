@@ -23,6 +23,7 @@ import com.example.usStore.service.impl.UsStoreImpl;
 public interface OrderService {
 
 	Orders getOrder(int orderId);
-	public List<Orders> getOrdersByUsername(String username);
+	
+	public List<Orders> getOrdersByUserId(String userId);
 
 }
