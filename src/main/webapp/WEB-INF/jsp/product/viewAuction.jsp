@@ -39,13 +39,14 @@
 	
 </style>
 <script>
-function participation(price, unitCost) {
+function participation(price, unitCost, startPrice) {
 	var p = parseInt(price);
 	var u = parseInt(unitCost);
+	var s = parseInt(startPrice);
 	
-	alert("입력 가격 : " + p + "\n최댓값 : " + u);
+	alert("입력 가격 : " + p);
 
-	if (p > u) {
+	if ((p > s) && (p > u)) {
 		var c = confirm("경매에 참여하시겠습니까?");
 
 		if (c) {
@@ -54,6 +55,8 @@ function participation(price, unitCost) {
 		else {
 			alert("참여 취소");
 		}
+	} else {
+		alert("참여 금액이 적습니다.");
 	}
 }
 </script>
@@ -170,7 +173,7 @@ function participation(price, unitCost) {
    				<br><form name="form" action="<c:url value='/shop/auction/participateItem.do'/>">
    					<input type="text" id="price" name="price" placeholder="참여 가격을 입력하세요."/>
 				&nbsp;
-				<span onclick="participation(price.value, ${auction.unitCost})">
+				<span onclick="participation(price.value, ${auction.unitCost}, ${auction.startPrice})">
 					<!-- 로그인 여부 따지기 -->
 					<a href="#">경매 참여</a>
 				</span>
