@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  - Application context definition for JPetStore's data access layer.
+  - Application context definition for usStore's data access layer.
   - Accessed by business layer objects defined in "applicationContext.xml"
   - (see web.xml's "contextConfigLocation").
   - This version of the data access layer works on a combined database,
@@ -24,11 +24,11 @@
 	     http://mybatis.org/schema/mybatis-spring 
 	     http://mybatis.org/schema/mybatis-spring.xsd">
 
-	<context:component-scan base-package="com.example.jpetstore.dao" />
+	<context:component-scan base-package="com.example.usStore.dao" />
 		
 	<!-- Configurer that replaces ${...} placeholders with values from properties files -->
 	<!-- (in this case, mail and JDBC related properties) -->
-	<context:property-placeholder location="classpath:jdbc.hsqldb.properties" />
+	<context:property-placeholder location="classpath:jdbc.oracle.properties" />
 	<!-- 
 	<bean id="propertyConfigurer" 
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
@@ -64,14 +64,15 @@
     <!-- define the SqlSessionFactory -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource" />
-        <property name="typeAliasesPackage" value="com.example.jpetstore.domain" />
+        <property name="typeAliasesPackage" value="com.example.usStore.domain" />
+        <property name="configLocation" value="classpath:/mybatis-config.xml" />
     </bean>
 
     <!-- scan for mappers and let them be autowired -->
-    <mybatis:scan base-package="com.example.jpetstore.dao.mybatis.mapper" />
+    <mybatis:scan base-package="com.example.usStore.dao.mybatis.mapper" />
     <!-- 
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.jpetstore.dao.mybatis.mapper" />
+        <property name="basePackage" value="com.usStore.dao.mybatis.mapper" />
     </bean> 
     -->
 </beans>

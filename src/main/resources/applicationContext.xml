@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  - Application context definition for JPetStore's business layer.
+  - Application context definition for usStore's business layer.
   - Contains bean references to the transaction manager and to the DAOs in
   - dataAccessContext-local/jta.xml (see web.xml's "contextConfigLocation").
   -->
@@ -9,6 +9,7 @@
 	xmlns:context="http://www.springframework.org/schema/context" 
 	xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:task="http://www.springframework.org/schema/task"
 	xsi:schemaLocation="
 		http://www.springframework.org/schema/beans 
 		http://www.springframework.org/schema/beans/spring-beans.xsd
@@ -17,19 +18,22 @@
      	http://www.springframework.org/schema/aop 
       	http://www.springframework.org/schema/aop/spring-aop.xsd
 		http://www.springframework.org/schema/tx 
-		http://www.springframework.org/schema/tx/spring-tx.xsd">
+		http://www.springframework.org/schema/tx/spring-tx.xsd
+		http://www.springframework.org/schema/task
+		http://www.springframework.org/schema/task/spring-task.xsd">
 
-	<context:component-scan base-package="com.example.jpetstore.service" /> 
+	<context:component-scan base-package="com.example.usStore.service.*" />  
+	<context:component-scan base-package="com.example.usStore.service" />  
 
 	<!-- Generic validator for Account objects, to be used for example by the Spring web tier -->
-<!-- <bean id="accountValidator" class="com.example.jpetstore.service.AccountFormValidator"/> -->
+<!-- <bean id="accountValidator" class="com.example.usStore.service.AccountFormValidator"/> -->
 
 	<!-- Generic validator for Order objects, to be used for example by the Spring web tier -->
-<!-- <bean id="orderValidator" class="com.example.jpetstore.service.OrderValidator"/> -->
+<!-- <bean id="orderValidator" class="com.example.usStore.service.OrderValidator"/> -->
 
-	<!-- JPetStore primary business object: default implementation -->
+	<!-- usStore primary business object: default implementation -->
 <!--
-	<bean id="petStore" class="com.example.jpetstore.service.PetStoreImpl">
+	<bean id="petStore" class="com.example.usStore.service.PetStoreImpl">
 		<property name="accountDao" ref="accountDao"/>
 		<property name="categoryDao" ref="categoryDao"/>
 		<property name="productDao" ref="productDao"/>
@@ -44,7 +48,7 @@
 
 	<!-- AOP advice used to send confirmation email after order has been submitted -->
 <!--
-	<bean id="emailAdvice" class="com.example.jpetstore.service.SendOrderConfirmationEmailAdvice">
+	<bean id="emailAdvice" class="com.example.usStore.service.SendOrderConfirmationEmailAdvice">
 		<property name="mailSender" ref="mailSender"/>
 	</bean>	
 	<aop:config>
@@ -54,4 +58,6 @@
 		<aop:advisor pointcut="execution(* *..PetStoreFacade.insertOrder(*..Order))" advice-ref="emailAdvice"/>
 	</aop:config>
 -->
+
+	<task:scheduler id="scheduler" pool-size="10" />
 </beans>
