@@ -225,8 +225,8 @@ public class GroupBuyingFormController {
       System.out.println("deadLine : " + groupBuyingform.getDeadLine());
       GroupBuying gb = new GroupBuying(item, groupBuyingform.getDiscount(), groupBuyingform.getListPrice(), groupBuyingform.getDeadLine());
       
-      if(status != 0) { itemFacade.updateGroupBuying(gb); }  //update DB
-      else {   itemFacade.insertGroupBuying(gb); }  // insert DB
+      if(status != 0) { itemFacade.updateGroupBuying(gb); }  //update DB- transaction
+      else {   itemFacade.insertGroupBuying(gb); }  // insert DB - transaction
       
       System.out.println(gb);
       
@@ -305,15 +305,22 @@ public class GroupBuyingFormController {
       itemFormSession.setViewCount(gb.getViewCount());
       itemFormSession.setTags(gb.getTags());
    
-      return "redirect:/shop/item/addItem.do?productId=" + item.getProductId();
+      return "redirect:/shop/item/addItem.do?productId=" + itemFormSession.getProductId();
    }
    
    @RequestMapping("/shop/groupBuying/delete.do") //edit Item
-   public String deleteItem(@RequestParam("itemId") int itemId, @RequestParam("productId") int productId)
+   public void deleteItem(@RequestParam("itemId") int itemId, @RequestParam("productId") int productId, 
+		   HttpServletResponse response) throws IOException
    {
-      itemFacade.deleteItem(itemId);
-      
-      return "redirect:/shop/groupBuying/listItem.do?productId=" + productId;
+	   itemFacade.deleteItem(itemId);//상품 삭제
+	   PrintWriter out = response.getWriter();
+
+	   out.println("<script>");
+	   out.print("alert('DELETED !');");
+	   out.print("location.href='listItem.do?itemId=" + itemId + "&productId=" + productId + "';");	
+	   out.println("</script>");
+	   out.flush();
+	   out.close();
    }
    
    @RequestMapping("/shop/groupBuying/index.do") //go index(remove sessions)
@@ -339,7 +346,7 @@ public class GroupBuyingFormController {
       
       out.println("<script>");
       out.print("if (confirm('Do you want to participate in GroupBuying?') == true){");
-      out.print("alert('Go Participate in GroupBuying :)'); location.href='index.do';}");   //공동구매 진행
+      out.print("alert('Go Participate in GroupBuying :)'); location.href='index.do';}");   //공동구매 진행 (나중에 uri 수정 - 주문)
       out.print("else{location.href='viewItem.do?itemId=" + itemId + "&productId=" + productId + "';}");   //공동구매 진행 취소
       out.println("</script>");
       out.flush();
