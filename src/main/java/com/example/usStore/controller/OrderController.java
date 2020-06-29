@@ -59,7 +59,7 @@ public class OrderController {
 			Account account = usStore.getAccountByUserId(userSession.getAccount().getUserId());
 			
 			orderForm.getOrder().initOrder(account, cart, "OK");
-			return "NewOrderForm";	
+			return "order/NewOrderForm";	
 		}
 		else {
 			ModelAndView modelAndView = new ModelAndView("Error");
@@ -76,20 +76,20 @@ public class OrderController {
 			// from NewOrderForm
 			orderValidator.validateCreditCard(orderForm.getOrder(), result);
 			orderValidator.validateBillingAddress(orderForm.getOrder(), result);
-			if (result.hasErrors()) return "NewOrderForm";
+			if (result.hasErrors()) return "order/NewOrderForm";
 			
 			if (orderForm.isShippingAddressRequired() == true) {
 				orderForm.setShippingAddressProvided(true);
-				return "ShippingForm";
+				return "order/ShippingForm";
 			}
 			else {			
-				return "ConfirmOrder";
+				return "order/ConfirmOrder";
 			}
 		}
 		else {		// from ShippingForm
 			orderValidator.validateShippingAddress(orderForm.getOrder(), result);
-			if (result.hasErrors()) return "ShippingForm";
-			return "ConfirmOrder";
+			if (result.hasErrors()) return "order/ShippingForm";
+			return "order/ConfirmOrder";
 		}
 	}
 	
@@ -99,7 +99,7 @@ public class OrderController {
 			SessionStatus status) {
 		System.out.println("confirmOrder.do : " + orderForm.getOrder().getLineItems().size());
 		usStore.insertOrder(orderForm.getOrder());
-		ModelAndView mav = new ModelAndView("ViewOrder");
+		ModelAndView mav = new ModelAndView("order/ViewOrder");
 		mav.addObject("order", orderForm.getOrder());
 		mav.addObject("message", "Thank you, your order has been submitted.");
 		status.setComplete();  // remove sessionCart and orderForm from session
