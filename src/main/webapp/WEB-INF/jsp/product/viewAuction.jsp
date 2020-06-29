@@ -139,16 +139,16 @@ function participation(price, unitCost) {
    				<c:if test="${state eq 0}">
    					<c:set var="uc" value="${auction.unitCost}" />
    					<c:if test="${uc eq 1}">
-   					--미참여--<br>
+   					▷미참여◁<br>
    					</c:if>
    					<c:if test="${uc ne 1}">
    					현재 최대 금액 : ${auction.unitCost}원<br>
    					</c:if>
-   					<br><font color=blue>(경매 진행중)</font>
+   					<br><font color=#6495ED>(경매 진행중)</font>
    				</c:if>
    				<c:if test="${state eq 1}">
    					낙찰 가격 : <ins></ins> ${auction.bidPrice}원<br>
-   					<br><font color=red>(경매 종료)</font>
+   					<br><font color=#FF4500>(경매 종료)</font>
    				</c:if>
    			</td>
    		</tr>
