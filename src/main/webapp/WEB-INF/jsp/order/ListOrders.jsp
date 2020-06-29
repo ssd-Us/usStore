@@ -3,31 +3,31 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 <script>
 	function getOrder(orderId) {
-	   var reqUrl = "../rest/order/" + orderId;
-	
-	   $.ajax({
-	       ...
-	
-	       // RestServiceExample 프로젝트의 js/example.js의 예제와 유사하게 작성
-	
-	       ...
-	
-	   });
-	
+		var reqUrl = "../rest/order/" + orderId;
+		$.ajax({
+			type: "get",
+			url: reqUrl,
+			processData: false,
+			success: function(responseJson){	// object parsed from JSON text	
+				$("#detail").html("<ul></ul>");
+				$("#detail > ul").append("<li>Order ID: " + responseJson.orderId + "</li>");
+				$("#detail > ul").append("<li>Order Date: " + new Date(responseJson.orderDate) + "</li>");
+				$("#detail > ul").append("<li>User name: " + responseJson.userId + "</li>");
+				$("#detail > ul").append("<li>Shipping address: " + responseJson.shipAddr1 + ", " + 
+					responseJson.shipAddr2 + ", " + responseJson.shipCity + "</li>");
+				var content = "";
+				$(responseJson.lineItems).each(function(i, lineItem){	        	
+			       	content += "LineItem " + lineItem.lineNumber + ": " + lineItem.quantity +
+							" piece(s) of item " + lineItem.itemId + "<br>";
+				});
+				$("#detail > ul").append ("<li>" + content + "</li>");
+				$("#detail > ul").append("<li>Total prices: " + responseJson.totalPrice + "</li>");
+			},
+			error: function(){
+				alert("ERROR", arguments);
+			}
+		});
 	};
-
-	function(responseJson){ // object parsed from JSON text 
-	   $("#detail").html("<ul></ul>");
-	   $("#detail > ul").append("<li>Order ID: " + responseJson.orderId + "</li>");
-	   ...  
-
-	   var content = "";
-	   $(responseJson.lineItems).each(function(i, lineItem){          
-	          content += "LineItem " + lineItem.lineNumber + ": " + ...
-	   });
-	   $("#detail > ul").append ("<li>" + content + "</li>");
-	   ...
-	}
 </script>
 <div align="center">
   <p>
