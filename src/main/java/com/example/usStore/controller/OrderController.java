@@ -59,10 +59,10 @@ public class OrderController {
 			Account account = usStore.getAccountByUserId(userSession.getAccount().getUserId());
 			
 			orderForm.getOrder().initOrder(account, cart, "OK");
-			return "order/NewOrderForm";	
+			return "NewOrderForm";	
 		}
 		else {
-			ModelAndView modelAndView = new ModelAndView("error");
+			ModelAndView modelAndView = new ModelAndView("Error");
 			modelAndView.addObject("message", "An order could not be created because a cart could not be found.");
 			throw new ModelAndViewDefiningException(modelAndView);
 		}
@@ -76,20 +76,20 @@ public class OrderController {
 			// from NewOrderForm
 			orderValidator.validateCreditCard(orderForm.getOrder(), result);
 			orderValidator.validateBillingAddress(orderForm.getOrder(), result);
-			if (result.hasErrors()) return "order/NewOrderForm";
+			if (result.hasErrors()) return "NewOrderForm";
 			
 			if (orderForm.isShippingAddressRequired() == true) {
 				orderForm.setShippingAddressProvided(true);
-				return "order/ShippingForm";
+				return "ShippingForm";
 			}
 			else {			
-				return "order/ConfirmOrder";
+				return "ConfirmOrder";
 			}
 		}
 		else {		// from ShippingForm
 			orderValidator.validateShippingAddress(orderForm.getOrder(), result);
-			if (result.hasErrors()) return "order/ShippingForm";
-			return "order/ConfirmOrder";
+			if (result.hasErrors()) return "ShippingForm";
+			return "ConfirmOrder";
 		}
 	}
 	
@@ -99,7 +99,7 @@ public class OrderController {
 			SessionStatus status) {
 		System.out.println("confirmOrder.do : " + orderForm.getOrder().getLineItems().size());
 		usStore.insertOrder(orderForm.getOrder());
-		ModelAndView mav = new ModelAndView("order/ViewOrder");
+		ModelAndView mav = new ModelAndView("ViewOrder");
 		mav.addObject("order", orderForm.getOrder());
 		mav.addObject("message", "Thank you, your order has been submitted.");
 		status.setComplete();  // remove sessionCart and orderForm from session

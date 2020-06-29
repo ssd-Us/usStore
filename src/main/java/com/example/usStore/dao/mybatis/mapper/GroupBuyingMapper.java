@@ -3,7 +3,6 @@ package com.example.usStore.dao.mybatis.mapper;
 import java.util.Date;
 import java.util.List;
 
-import com.example.usStore.domain.Account;
 import com.example.usStore.domain.GroupBuying;
 
 public interface GroupBuyingMapper extends ItemMapper {
@@ -14,7 +13,7 @@ public interface GroupBuyingMapper extends ItemMapper {
    public void updateGroupBuying(GroupBuying GroupBuying);
 
    // 모든 공동구매 리스트 가져오는 메소드
-   List<GroupBuying> getGroupBuyingList(Account account);
+   List<GroupBuying> getGroupBuyingList();
 
    // itemId를 받아 해당하는 groupBuying 객체를 가져오는 메소드
    GroupBuying getGroupBuyingItem(int itemId);

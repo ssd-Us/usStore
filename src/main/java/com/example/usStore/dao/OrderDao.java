@@ -9,6 +9,9 @@ public interface OrderDao {
 	// 해당 사용자의 주문 목록 가져오기 (userId)
 	List<Orders> getOrdersByUserId(String userId) throws DataAccessException;
 	
+	// 해당 사용자의 주문 목록 가져오기 (username)
+	List<Orders> getOrdersByUsername(String username) throws DataAccessException;
+	
 	// orderId 를 매개변수로 받아 해당하는 Order 객체 반환하기
 	Orders getOrder(int orderId) throws DataAccessException;
 	

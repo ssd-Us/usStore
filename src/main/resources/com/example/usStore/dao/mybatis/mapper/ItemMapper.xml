@@ -47,16 +47,16 @@
 		WHERE ITEMID = #{itemId} 
 	</delete>
 
-	<select id="getItem" resultType="Item">
+	<select id="getItem" parameterType="int" resultType="Item">
 		SELECT
-			ITEMID AS itemId,
-			UNITCOST AS unitCost,
-			TITLE AS title,
-			DESCRIPTION AS description,
-			VIEWCOUNT AS viewCount,
-			QTY AS qty,
-			USERID AS userId,
-			PRODUCTID AS productId
+			ITEMID,
+			UNITCOST,
+			TITLE,
+			DESCRIPTION,
+			VIEWCOUNT,
+			QTY,
+			USERID,
+			PRODUCTID
 		FROM ITEM
 		WHERE ITEMID = #{itemId}
 	</select>
@@ -77,5 +77,19 @@
 		SELECT USERID AS "userId"
 		FROM ITEM
 		WHERE ITEMID = #{itemId}
+	</select>
+	
+	<select id="getItemByPId" resultType="Item">
+		SELECT
+			I.ITEMID,
+			I.UNITCOST,
+			I.TITLE,
+			I.DESCRIPTION,
+			I.VIEWCOUNT,
+			I.QTY,
+			I.USERID,
+			I.PRODUCTID
+		FROM ITEM I
+		WHERE I.PRODUCTID = #{productId}
 	</select>
 </mapper>

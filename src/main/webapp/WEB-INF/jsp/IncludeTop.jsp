@@ -117,7 +117,6 @@
   </nav>
   <script>
 function search(word) {
-	//검색어 중간에 공백 있으면 공백 제거
 	alert("검색어 : " + word);
 
 	searchForm.submit();	

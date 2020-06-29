@@ -74,6 +74,12 @@ public class UsStoreImpl implements UsStoreFacade {
 	}
 
 	@Override
+	public List<Orders> getOrdersByUsername(String username) {
+		// TODO Auto-generated method stub
+		return orderDao.getOrdersByUsername(username);
+	}
+
+	@Override
 	public Orders getOrder(int orderId) {
 		// TODO Auto-generated method stub
 		return orderDao.getOrder(orderId);
