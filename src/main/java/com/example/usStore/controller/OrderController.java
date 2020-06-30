@@ -102,6 +102,8 @@ public class OrderController {
 		ModelAndView mav = new ModelAndView("order/ViewOrder");
 		mav.addObject("order", orderForm.getOrder());
 		mav.addObject("message", "Thank you, your order has been submitted.");
+		
+		// 여기서 updateQuantity 해야할듯
 		status.setComplete();  // remove sessionCart and orderForm from session
 		return mav;
 	}

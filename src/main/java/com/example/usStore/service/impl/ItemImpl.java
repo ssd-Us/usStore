@@ -24,6 +24,7 @@ import com.example.usStore.domain.Bidder;
 import com.example.usStore.domain.GroupBuying;
 import com.example.usStore.domain.HandMade;
 import com.example.usStore.domain.Item;
+import com.example.usStore.domain.Orders;
 import com.example.usStore.domain.SecondHand;
 import com.example.usStore.domain.Tag;
 import com.example.usStore.service.facade.ItemFacade;
@@ -54,20 +55,20 @@ public class ItemImpl implements ItemFacade {
 	private ThreadPoolTaskScheduler scheduler;
 
 	@Override
-	public void updateQuantity(int qty, int itemId, int productId) {
+	public void updateQuantity(Orders order, int productId) {
 		// TODO Auto-generated method stub
 		switch (productId) {
 		case 0:
-			groupBuyingDao.updateQuantity(qty, itemId, productId);
+			groupBuyingDao.updateQuantity(order);
 			break;
 		case 1:
-			auctionDao.updateQuantity(qty, itemId, productId);
+			auctionDao.updateQuantity(order);
 			break;
 		case 2:
-			secondHandDao.updateQuantity(qty, itemId, productId);
+			secondHandDao.updateQuantity(order);
 			break;
 		case 3:
-			handMadeDao.updateQuantity(qty, itemId, productId);
+			handMadeDao.updateQuantity(order);
 			break;
 		default:
 			System.err.println("updateQuantity Error !!");

@@ -2,6 +2,7 @@
 package com.example.usStore.dao.mybatis.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import com.example.usStore.domain.Item;
 
@@ -15,7 +16,7 @@ public interface ItemMapper {
 	
 	Item getItem(int itemId);
 	
-	void updateQuantity(int qty, int itemId, int productId);
+	void updateInventoryQuantity(Map<String, Object> param);
 	
 	int getQuantity(int itemId, int productId);
 

@@ -27,8 +27,8 @@ public class AccountFormValidator implements Validator {
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "account.email", "EMAIL_REQUIRED", "Email address is required.");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "account.university", "UNIVERSITY_REQUIRED", "university is required.");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "account.phone", "PHONE_REQUIRED", "Phone number is required.");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "account.address1", "ADDRESS_REQUIRED", "Address (1) is required.");
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "account.address2", "ADDRESS_REQUIRED", "Address (2) is required.");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "account.addr1", "ADDRESS_REQUIRED", "Address (1) is required.");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "account.addr2", "ADDRESS_REQUIRED", "Address (2) is required.");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "account.city", "CITY_REQUIRED", "City is required.");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "account.zip", "ZIP_REQUIRED", "ZIP is required.");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "account.country", "COUNTRY_REQUIRED", "Country is required.");
