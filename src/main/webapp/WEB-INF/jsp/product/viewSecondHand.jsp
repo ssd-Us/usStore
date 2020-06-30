@@ -152,4 +152,3 @@
 	</c:if>
 </table>				
 </body>
-<%@ include file="itemBottom.jsp" %>
