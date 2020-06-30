@@ -42,7 +42,6 @@
 </style>
 <body>
 <!-- 여기서 secondHand는 컨트롤러에서 보내준 모델 객체(db에서 select 결과 ) -->
-
 <table id="main-menu">
   <tr>
     <td>
@@ -70,17 +69,21 @@
    	<tr>
    		<th style="border-right: 1px solid black;">판매자</th>
    		<td>${sh.userId}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<c:choose>
-	   				<c:when test="${! empty userSession.account.userId}">
-						<%@ include file="/WEB-INF/jsp/account/accuseFunction.jsp" %>
-					</c:when>
-					<c:otherwise>
-					<span><a href="<c:url value='/addAccuseNoLogin.do'>
-					  <c:param name="itemId" value="${sh.itemId}"/>
-                         <c:param name="productId" value="${sh.productId}"/></c:url>">
-             				판매자 신고하기</a></span>
-					</c:otherwise>
-			</c:choose>
+			<c:if test="${sh.userId ne userSession.account.userId}">	
+				<c:choose>
+		   				<c:when test="${! empty userSession.account.userId}">
+							<%@ include file="/WEB-INF/jsp/account/accuseFunction.jsp" %>
+						</c:when>
+						<c:otherwise>
+						<span>
+							<a href="<c:url value='/addAccuseNoLogin.do'>
+						  			<c:param name="itemId" value="${sh.itemId}"/>
+	                         		<c:param name="productId" value="${sh.productId}"/></c:url>">
+	                         		판매자 신고하기</a>
+	             		</span>
+						</c:otherwise>
+				</c:choose>
+			</c:if>
    		</td>
    	</tr> 
    	<tr>
@@ -117,7 +120,14 @@
    	</tr>
    	<tr>
    		<th style="border-right: 1px solid black;">수량 </th> 
-   		<td>${sh.qty}</td>
+   		<td>
+	   			<c:if test="${sh.qty <= 0}">
+			        <button type="button" class="btn btn-outline-danger">품절</button>	
+			    </c:if> 
+			    <c:if test="${sh.qty > 0}">
+			        <font size="2"><fmt:formatNumber value="${sh.qty}" /> 개 남았습니다.</font>
+			    </c:if>
+	   </td>
    	</tr>	
    	<tr>
    		<th style="border-right: 1px solid black;">판매자 대학교</th> 
@@ -125,16 +135,18 @@
    			<%@ include file="/WEB-INF/jsp/account/viewMap.jsp" %>
    		</td>
    	</tr>
-   	<tr>
-   			<td colspan="2" style="border-bottom: none;">
-   			<span>
-   				<a href="<c:url value="/shop/addItemToCart.do">
-					     <c:param name="workingItemId" value="${sh.itemId}"/>
-					     <c:param name="productId" value="${sh.productId}"/></c:url>">
-					 장바구니 추가</a>
-			</span>			
-   			</td>
-   	</tr> 	
+   	<c:if test="${sh.qty <= 0}">
+   			<tr>
+   				<td colspan="2" style="border-bottom: none;">
+   					<span>	
+   						<a href="<c:url value="/shop/addItemToCart.do">
+					     	<c:param name="workingItemId" value="${sh.itemId}"/>
+					     	<c:param name="productId" value="${sh.productId}"/></c:url>">
+					 			장바구니 추가</a>
+					</span>	
+				</td>	
+			</tr>
+	</c:if>	
    	<c:if test="${sh.userId eq userSession.account.userId}"> <!-- 로그인시 실행 -->
 		<tr>   		
 				<td colspan="2" style="text-align: right; padding: 0px; font-size: small; border-bottom: none; border-top: 1px solid black;">

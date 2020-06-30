@@ -77,20 +77,21 @@
    				<c:out value="${handMade.userId}" />
    				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<!-- 판매자 신고하기 -->
-				<c:choose>
-	   				<c:when test="${! empty userSession.account.userId}">
-						<%@ include file="/WEB-INF/jsp/account/accuseFunction.jsp" %>
-					</c:when>
-					<c:otherwise>
-						<span>
-							<a href="<c:url value='/addAccuseNoLogin.do'>
-				                 <c:param name="itemId" value="${handMade.itemId}"/>
-				                 <c:param name="productId" value="${handMade.productId}"/></c:url>">
-				                         판매자 신고하기</a>
-			            </span>
-					</c:otherwise>
-				</c:choose>
-				
+				<c:if test="${handMade.userId ne userSession.account.userId}">
+					<c:choose>
+		   				<c:when test="${! empty userSession.account.userId}">
+							<%@ include file="/WEB-INF/jsp/account/accuseFunction.jsp" %>
+						</c:when>
+						<c:otherwise>
+							<span>
+								<a href="<c:url value='/addAccuseNoLogin.do'>
+					                 <c:param name="itemId" value="${handMade.itemId}"/>
+					                 <c:param name="productId" value="${handMade.productId}"/></c:url>">
+					                         판매자 신고하기</a>
+				            </span>
+						</c:otherwise>
+					</c:choose>
+				</c:if>
 			</td>
    		</tr> <!-- userId = suppId -->
    		
@@ -129,20 +130,18 @@
 			    </c:if>
 	   		</td>
    		</tr>
-   		
-   		<tr>
-   			<td colspan="2" style="border-bottom: none;">
-   			<span>
-   				<c:if test="${handMade.qty ne 0}">
-	   				<a href="<c:url value="/shop/addItemToCart.do">
-						     <c:param name="workingItemId" value="${handMade.itemId}"/>
-						     <c:param name="productId" value="${handMade.productId}"/></c:url>">
-						 장바구니 추가</a>
-				</c:if>
-			</span>
-   			</td>
-   		</tr>
-   		
+   		<c:if test="${handMade.qty <= 0}">	
+	   		<tr>
+	   			<td colspan="2" style="border-bottom: none;">
+	   			<span> 				
+		   				<a href="<c:url value="/shop/addItemToCart.do">
+							     <c:param name="workingItemId" value="${handMade.itemId}"/>
+							     <c:param name="productId" value="${handMade.productId}"/></c:url>">
+							 장바구니 추가</a>		
+				</span>
+	   			</td>
+	   		</tr>
+   		</c:if>
    		<c:if test="${userSession.account.userId eq handMade.userId}">
 	   		<tr>
 		   		<td colspan="2" style="text-align: right; padding: 0px; font-size: small; border-bottom: none; border-top: 1px solid black;">
