@@ -50,3 +50,4 @@
   </p>
 </form:form>
 </div>
+<%@ include file="../IncludeBottom.jsp" %>

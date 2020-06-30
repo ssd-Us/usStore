@@ -1,6 +1,17 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
+
+<h6 class="card-title text-center"> University </h6>
+<div class="form-label-group">
+	<B><form:errors path="account.university" cssClass="error" /></B>
+	<form:select path="account.university"  class="form-control">
+		<option value=""></option>
+		<form:options items="${universityKinds}" />
+	</form:select>
+</div>
+<hr class="my-4">
+
 <h5 class="card-title text-center"> Account Information </h5>
 
 <div class="form-label-group">
@@ -16,11 +27,6 @@
 <div class="form-label-group">
 	<form:input path="account.phone" id="inputPhone" class="form-control" />
 	<B><form:errors path="account.phone" cssClass="error" /></B> <label for="inputPhone">Phone</label>
-</div>
-
-<div class="form-label-group">
-	<form:input path="account.university" id="inputUniversity" class="form-control" />
-	<B><form:errors path="account.university" cssClass="error" /></B> <label for="inputUniversity">University</label>
 </div>
 
 <div class="form-label-group">

@@ -1,9 +1,10 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="../IncludeTop.jsp"%>
 <c:if test="${!empty message}">
-  <b><font color="red"><c:url value="${message}" /></font></b>
+	<div class="alert alert-success" role="alert">
+	  <font color="#FF4500"><c:url value="${message}" /></font>
+  	</div>
 </c:if>
-
   <div class="container">
     <div class="row">
       <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">

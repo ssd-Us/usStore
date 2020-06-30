@@ -74,3 +74,4 @@
     <td style="text-align: right; vertical-align: top; width: 20%">&nbsp;</td>
   </tr>
 </table>
+<%@ include file="../IncludeBottom.jsp" %>

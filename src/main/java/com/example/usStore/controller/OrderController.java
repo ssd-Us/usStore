@@ -19,6 +19,7 @@ import com.example.usStore.controller.mypage.UserSession;
 import com.example.usStore.domain.Account;
 import com.example.usStore.domain.Cart;
 import com.example.usStore.service.OrderValidator;
+import com.example.usStore.service.facade.ItemFacade;
 import com.example.usStore.service.facade.UsStoreFacade;
 
 /**
@@ -29,6 +30,10 @@ import com.example.usStore.service.facade.UsStoreFacade;
 @Controller
 @SessionAttributes({"sessionCart", "orderForm"})
 public class OrderController {
+	
+	@Autowired
+	private ItemFacade itemFacade;
+	
 	@Autowired
 	private UsStoreFacade usStore;
 	@Autowired
@@ -76,19 +81,22 @@ public class OrderController {
 			// from NewOrderForm
 			orderValidator.validateCreditCard(orderForm.getOrder(), result);
 			orderValidator.validateBillingAddress(orderForm.getOrder(), result);
-			if (result.hasErrors()) return "order/NewOrderForm";
 			
+			if (result.hasErrors()) {
+				return "order/NewOrderForm";
+			}
 			if (orderForm.isShippingAddressRequired() == true) {
 				orderForm.setShippingAddressProvided(true);
 				return "order/ShippingForm";
-			}
-			else {			
+			} else {
 				return "order/ConfirmOrder";
 			}
 		}
 		else {		// from ShippingForm
 			orderValidator.validateShippingAddress(orderForm.getOrder(), result);
-			if (result.hasErrors()) return "order/ShippingForm";
+			if (result.hasErrors()) {
+				return "order/ShippingForm";
+			}
 			return "order/ConfirmOrder";
 		}
 	}
@@ -104,6 +112,7 @@ public class OrderController {
 		mav.addObject("message", "Thank you, your order has been submitted.");
 		
 		// 여기서 updateQuantity 해야할듯
+		itemFacade.updateQuantity(orderForm.getOrder());
 		status.setComplete();  // remove sessionCart and orderForm from session
 		return mav;
 	}

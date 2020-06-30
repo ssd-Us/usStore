@@ -35,7 +35,7 @@ public interface ItemFacade {
    
    public void deleteItem(int itemId);
    
-   void updateQuantity(Orders order, int productId);
+   void updateQuantity(Orders order);
    
    int getQuantity(int itemId, int productId);
 

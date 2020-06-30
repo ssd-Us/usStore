@@ -65,7 +65,7 @@ public class SecondHandController {
                account = userSession.getAccount();
             }
      }
-     
+    
      PagedListHolder<SecondHand> secondHandList = new PagedListHolder<SecondHand>(
             this.itemFacade.getSecondHandList(account));
       secondHandList.setPageSize(4);
@@ -98,16 +98,19 @@ public class SecondHandController {
        */
       String victim = null;
       String isAccuse = "false";
+      String attacker = this.itemFacade.getUserIdByItemId(itemId);
       HttpSession session = request.getSession(false);
       if (session.getAttribute("userSession") != null) {
          UserSession userSession = (UserSession)session.getAttribute("userSession") ;
          if (userSession != null) {// attacker = 판매자 아이디, victim = 세션 유저 아이디
             victim = userSession.getAccount().getUserId();
-            String attacker = this.itemFacade.getUserIdByItemId(itemId);
             isAccuse = this.myPageFacade.isAccuseAlready(attacker, victim);
          }
       }
-
+      
+      //판매자 대학교 도로명 주소 
+      String university = this.usStoreFacade.getAccountByUserId(attacker).getUniversity();
+    		  
       // sh가 아이템 상속받으니까 여기서 테그 꺼내쓰기
       List<Tag> tags = itemFacade.getTagByItemId(itemId);
       SecondHand sh = this.itemFacade.getSecondHandItem(itemId);
@@ -116,6 +119,7 @@ public class SecondHandController {
       model.addAttribute("sh", sh);
       model.addAttribute("isAccuse", isAccuse);
       model.addAttribute("tags", tags);
+      model.addAttribute("university", university);
       return "product/viewSecondHand";
    }
    
