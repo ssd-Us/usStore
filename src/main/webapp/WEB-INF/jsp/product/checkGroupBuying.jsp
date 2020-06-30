@@ -31,8 +31,8 @@
 <form:form modelAttribute="GroupBuying" action="detailItem.do">
 <label>제목</label>: ${itemForm.title} <br> 
 <label>내용</label>: ${itemForm.description} <br> 
-<label>정가</label>: ${itemForm.listPrice}원 <br> 
-<label>판매가</label>: ${GroupBuying.unitCost}원 <br> 
+<label>정가</label>: ${GroupBuying.listPrice}원 <br> 
+<label>판매가</label>: ${itemForm.unitCost}원 <br> 
 <label>할인율</label>: ${GroupBuying.discount}% <br> 
 <label>수량</label>: ${itemForm.qty} <br> 
 <label>태그</label>: <c:forEach var="tag" items="${tags}"> 
