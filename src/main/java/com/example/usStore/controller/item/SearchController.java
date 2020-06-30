@@ -23,8 +23,8 @@ import com.example.usStore.service.facade.ItemFacade;
 @SessionAttributes({"tagList", "resultList"})
 public class SearchController {
 	private ItemFacade itemFacade;
-	String searchWord;
-	String sKind;
+	String searchWord; //검색어
+	String sKind; 	   //검색 종류
 	
 	@Autowired
 	public void setItemFacade(ItemFacade itemFacade) {
@@ -40,19 +40,19 @@ public class SearchController {
 		if (rq.getParameter("sKind") != null) {
 			sKind = rq.getParameter("sKind");
 		}
-		else if (rq.getParameter("sKind") == null) {
+		else if (rq.getParameter("sKind") == null) {//검색 종류가 없으면(제목/태그 검색한게 아니면) 게시물에서 태그 클릭해서 검색한 것
 			sKind = "tag";
 		}
 		
-		if (sKind.equals("tag")) {
-			if (itemTag != null) {
+		if (sKind.equals("tag")) {//태그 검색일 때 
+			if (itemTag != null) {//빈칸 삭제
 				searchWord = itemTag.replaceAll(" ", "");
 			}
 			else {
 				searchWord = rq.getParameter("word").replaceAll(" ", "");
 			}
 			
-			if (searchWord != null) {
+			if (searchWord != null) {//검색어가 없을 때
 				if (!StringUtils.hasLength(searchWord)) {
 					model.addAttribute("message", "검색어를 입력해주세요.");
 					return "error";
@@ -74,14 +74,12 @@ public class SearchController {
 		    PagedListHolder<Item> rl = new PagedListHolder<Item>(resultList);
 		    rl.setPageSize(4);
 		    
-		    System.out.println("검색 결과 아이템 길이는 : " + resultList.size());
-		    
 		    if (resultList.size() == 0) {
 		    	model.addAttribute("noResult", 1);
 		    }
 
 			model.addAttribute("resultList", rl);
-		} else if (sKind.equals("title")) {
+		} else if (sKind.equals("title")) {//제목 검색일 때
 			searchWord = rq.getParameter("word");
 			
 			if (searchWord != null) {
@@ -147,7 +145,7 @@ public class SearchController {
 		System.out.println("productId : " + productId);
 		
 		String url = null;
-		switch(productId) {
+		switch(productId) {//productId 에 따라 다른 url로 보내기
 		case 0: 
 			url = "redirect:/shop/groupBuying/viewItem.do?itemId=" + itemId + "&productId=" + productId;
 			break;

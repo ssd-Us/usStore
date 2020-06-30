@@ -67,6 +67,7 @@ public class AuctionFormController {
 		return new AuctionForm();
 	}
    
+   //경매 리스트 보여주기
    @RequestMapping("/shop/auction/listItem.do") 
    public String auctionList(@RequestParam("productId") int productId, ModelMap model,HttpServletRequest rq) {
       myProductId = productId;
@@ -96,11 +97,12 @@ public class AuctionFormController {
       noBidder.setItemId(-1);
       noBidder.setBidder("<no Bidder>");
        
+      //경매 리스트 사이즈와 같은 크기의 낙찰자 리스트 생성
       for(int i = 0; i < al.size(); i++) {
     	  bl.add(i, noBidder);
       }
       
-      
+      //낙찰자가 있으면 삽입
       for(int i = 0; i < al.size(); i++) {
     	  for(int j = 0; j < bidderList.size(); j++) {
     		  if (al.get(i).getItemId() == bidderList.get(j).getItemId()) {
@@ -203,6 +205,7 @@ public class AuctionFormController {
 			System.out.println("itemformSession: " + itemformSession);	//print itemformSession toString
 		}  
 	   
+		//폼에서 입력 가격 받아오기 
 	   int price = Integer.parseInt(rq.getParameter("price"));
 	   
 	   String rslt = itemFacade.isBidderExist(myItemId);
@@ -345,6 +348,7 @@ public class AuctionFormController {
 		return "redirect:/shop/auction/viewItem.do?itemId=" + auction.getItemId() + "&productId=" + item.getProductId();
 	}
 	
+	//경매 수정
    @RequestMapping("/shop/auction/updateItem.do") 
    public String auctionUpdate(ItemForm itemForm, Item item, @RequestParam("itemId") int itemId, HttpServletRequest rq) {
 	   HttpSession session = rq.getSession(true);
@@ -367,6 +371,7 @@ public class AuctionFormController {
    }
 
   
+   //경매 삭제
    @RequestMapping("/shop/auction/deleteItem.do") 
    public String auctionDelete(@RequestParam("itemId") int itemId, ModelMap model, HttpServletResponse response) throws IOException {  
 	   this.itemFacade.deleteItem(itemId);
