@@ -96,23 +96,23 @@
             <th style="border-right: 1px solid black;">판매자</th>
             <td>${gb.userId}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             &nbsp;
-            	<c:if test="${gb.userId ne userSession.account.userId}">
-		            <span id="blue">
-		               <c:choose>
-		                     <c:when test="${! empty userSession.account.userId}">
-		                     <%@ include file="/WEB-INF/jsp/account/accuseFunction.jsp" %>
-		                  </c:when>
-		                  <c:otherwise>           
-		                     <a href="<c:url value='/addAccuseNoLogin.do'>
-		                             <c:param name="itemId" value="${gb.itemId}"/>
-		                               <c:param name="productId" value="${gb.productId}"/></c:url>">
-		                              	 판매자 신고하기
-		                     </a>
-		                  </c:otherwise>
-		               </c:choose>
-		            </span>
-	           </c:if>
-           	</td>  	
+            <c:if test="${gb.userId ne userSession.account.userId}">
+                  <span id="blue">
+                     <c:choose>
+                           <c:when test="${! empty userSession.account.userId}">
+                           <%@ include file="/WEB-INF/jsp/account/accuseFunction.jsp" %>
+                        </c:when>
+                        <c:otherwise>           
+                           <a href="<c:url value='/addAccuseNoLogin.do'>
+                                   <c:param name="itemId" value="${gb.itemId}"/>
+                                     <c:param name="productId" value="${gb.productId}"/></c:url>">
+                                       	판매자 신고하기
+                           </a>
+                        </c:otherwise>
+                     </c:choose>
+                  </span>
+              </c:if>
+            </td>
          </tr>
          
          <tr><td colspan="2" style="padding: 15px;">${gb.description}<br></td></tr>
@@ -139,8 +139,8 @@
          <tr>
          <th style="border-right: 1px solid black;">할인율</th>
             <td>
-               <p><del>정가 : ${gb.listPrice}원</del></p>
-               할인가 : ${gb.unitCost}원&nbsp;<font color=red>-${gb.discount}%</font> <br>
+               <p><del>정가 : ${gb.unitCost}원</del></p>
+              		 할인가 : ${gb.listPrice}원&nbsp;<font color=red>-${gb.discount}%</font> <br>
             </td>
          </tr>
          
@@ -148,6 +148,8 @@
          <th style="border-right: 1px solid black;">수량 </th> 
          <td>${gb.qty}</td>
          </tr>
+         
+         
             
 			<c:if test="${gb.state == 0 && gb.userId ne userSession.account.userId}"> <!-- 공동구매 진행중 이면서 작성자와 본인 아이디가 다르면 공동구매 참여 가능 -->
 	            <tr>
@@ -159,12 +161,13 @@
 	                        <c:param name="productId" value="${gb.productId}" />
 	                     </c:url>
 	               ">공동구매 참여하기</a>
+	              
 	            </span>
 	             </td>
        		  </tr>
             </c:if>
             
-         <c:if test="${gb.userId eq userSession.account.userId}"> 
+         <c:if test="${gb.userId eq userSession.account.userId}"> <!-- ë¡ ê·¸ì ¸ì   ì ¤í   -->
             <tr>
                <td colspan="2" style="text-align: right; padding: 0px; font-size: small; border-bottom: none; border-top: 1px solid black;">
                <a href="<c:url value='/shop/groupBuying/edit.do'>
@@ -179,6 +182,10 @@
             </td>
           </tr>
       </c:if>
+<!--* 현재 로그인 user가 글 작성자 일때만 수정/삭제 버튼이 보임 
+   * 작성자 정보는 controller에서 model(db에서 suppId찾아옴)로 넘겨줌
+   * model로 넘어온 suppId와 세션의 로그인Id를 비교함 
+   * 세션에 로그인 정보가 없으면, 즉 null이어도 수정/삭제 안보여줌-->
       </table>
       <br><br>
    
