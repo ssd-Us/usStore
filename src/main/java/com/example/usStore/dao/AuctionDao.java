@@ -1,7 +1,6 @@
 package com.example.usStore.dao;
 
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.dao.DataAccessException;

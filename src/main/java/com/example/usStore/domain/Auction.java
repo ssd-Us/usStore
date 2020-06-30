@@ -1,7 +1,6 @@
 package com.example.usStore.domain;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /*
  * UsStore - Item(Auction) Domain Class

@@ -167,10 +167,16 @@ function participation(price, unitCost, startPrice) {
 					<c:if test="${id eq bidder}">
 						<br><span>
 						<!-- 로그인 여부 따지기 -->
-			   				<a href="<c:url value="/shop/addItemToCart.do">
+						<c:set var="qty" value="${auction.qty}"/>
+						<c:if test="${qty eq 0}">
+							수량이 없습니다
+						</c:if>
+						<c:if test="${qty ne 0}">
+							<a href="<c:url value="/shop/addItemToCart.do">
 								     <c:param name="workingItemId" value="${auction.itemId}"/>
 								     <c:param name="productId" value="${auction.productId}"/></c:url>">
 								 장바구니 추가</a>
+						</c:if>
 						</span>
 					</c:if>
 				</c:if>
