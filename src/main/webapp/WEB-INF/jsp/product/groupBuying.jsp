@@ -12,8 +12,8 @@
    th, td {
       text-align: center;
       height:70px;
-      padding-left:43px;
-      padding-right:43px;
+      padding-left:30px;
+      padding-right:30px;
    }
          
    span#black {
@@ -46,7 +46,7 @@
     </td>
   </tr>
 </table> 
-   <form name = "pform" action="" style="position:absolute; left:42%; margin:0 0 0 -420px;">
+   <form name = "pform" action="" style="position:absolute; left:42%; margin:0 0 0 -400px;">
       <div class="container" >
          <div class="row"  style="display:inline">
             <div style="display:inline;float:left;">
