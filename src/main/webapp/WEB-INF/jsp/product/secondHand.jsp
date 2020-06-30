@@ -44,8 +44,8 @@
                   <hr>                                
 				<table>
    				<tr>
-   					<th>TITLE</th>
-   					<th>DISCOUNT</th>
+   					<th>제목</th>
+   					<th>흥정 가능 여부</th>
    					<th>정가</th>
    					<th>판매가</th>
    					<th>&nbsp;</th>
