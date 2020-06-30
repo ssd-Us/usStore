@@ -15,7 +15,7 @@
             $("#result").html("<div><div>");
                var index = 1;
                var obj = responseJson;
-              $("#result > div").append("<table'>");
+              $("#result > div").append("<table><tr><center>[ " + obj[0].category + " ]</center></tr><br><br>");
               for (var i in obj) { 
                   $("#result > div").append("<tr><th>" + index + "위 </th><th><a href='<c:url value='/shop/rank/viewItem.do?itemId=" + obj[i].itemId + 
                           "&productId=" + productId + "'/>'>" + obj[i].title + "</a></th><th>누적 조회수   ( " + obj[i].viewCount + " 회 )</th></tr>"); 
