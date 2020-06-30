@@ -62,11 +62,6 @@
 		<td style="text-align: left; padding: 0px; font-size: small; border-bottom: none;">
 		${sh.viewCount}<font color=gray>view</font>
 		</td>
-		<td style="text-align: right; padding: 0px; font-size: small; border-bottom: none;">
-		<a href="
-							<c:url value='/addBookmark/${sh.userId}/${sh.itemId}'/>	<!-- 로그인 여부 따지기 -->
-					">[북마크 추가]</a>
-		</td>
 	</tr>
    	<tr>
 	   	<th style="border-right: 1px solid black; border-top: 1px solid black;">제목</th>
@@ -74,13 +69,7 @@
    	</tr>	
    	<tr>
    		<th style="border-right: 1px solid black;">판매자</th>
-   		<td>${sh.userId}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	   	<span>
-		   	<a href="
-					<c:url value='/addFollow/${sh.userId}'/>	<!-- 로그인 여부 따지기 -->
-			">팔로잉</a>
-		</span>
-		&nbsp;
+   		<td>${sh.userId}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			<c:choose>
 	   				<c:when test="${! empty userSession.account.userId}">
 						<%@ include file="/WEB-INF/jsp/account/accuseFunction.jsp" %>
