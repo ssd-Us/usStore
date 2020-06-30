@@ -27,5 +27,7 @@ public interface ItemMapper {
 	void updateViewCount(int viewCount, int itemId);
 	
 	List<Item> getItemByPId(int productId);
+	
+	List<Item> getItemByTitle(String title);
 }
 

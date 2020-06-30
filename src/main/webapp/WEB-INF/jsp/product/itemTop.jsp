@@ -45,15 +45,17 @@
 			<a class="nav-link dropdown-toggle js-scroll-trigger" href="#" id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 			  	<font color="black"> SEARCH &nbsp; ▼</font>
 			</a>
-      	  	<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-      	  		<form name="searchForm" action="<c:url value='/shop/search/viewItem.do'/>">
-   					<input type="text" id="word" name="word" placeholder="태그 검색"/>
-   					<button class="btn btn-light dropdown-item" onclick="search(word.value)">
-   						Click To Search!
-   					</button>
-   				</form>
-			</div>	
-			</li>
+      	  	<div class="dropdown-menu dropdown-menu-right"
+						aria-labelledby="navbarDropdown">
+						<form name="searchForm"
+							action="<c:url value='/shop/search/viewItem.do'/>">
+							<input type="radio" name="sKind" value="title">제목&nbsp; 
+							<input type="radio" name="sKind" value="tag">태그 <br> 
+							<input type="text" id="word" name="word" placeholder="검색어" />
+							<button class="btn btn-light dropdown-item"
+								onclick="search(word.value)">Click To Search!</button>
+						</form>
+					</div></li>
 			
           <li class="nav-item">
             <a class="nav-link js-scroll-trigger" href="<c:url value="/shop/viewCart.do"/>"><font color="black">CART</font></a>

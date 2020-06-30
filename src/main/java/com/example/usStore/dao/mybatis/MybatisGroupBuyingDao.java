@@ -138,4 +138,8 @@ public class MybatisGroupBuyingDao implements GroupBuyingDao {
    public List<Item> getItemByPId(int productId) throws DataAccessException {
       return groupBuyingMapper.getItemByPId(productId);
    }
+   
+   public List<Item> getItemByTitle(String title) {
+		return groupBuyingMapper.getItemByTitle("%" + title.toLowerCase() + "%");
+	}
 }

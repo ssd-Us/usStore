@@ -163,4 +163,8 @@ public class MybatisAuctionDao implements AuctionDao {
 	public List<Item> getItemByPId(int productId) throws DataAccessException {
 	    return auctionMapper.getItemByPId(productId);
 	}
+	
+	public List<Item> getItemByTitle(String title) {
+		return auctionMapper.getItemByTitle("%" + title.toLowerCase() + "%");
+	}
 }
