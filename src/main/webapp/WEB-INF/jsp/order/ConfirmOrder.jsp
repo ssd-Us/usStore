@@ -84,3 +84,4 @@
       <img border="0" src="${pageContext.request.contextPath}/images/button_continue.gif" alt="" /></a>
   </p>
 </div>
+<%@ include file="../IncludeBottom.jsp" %>
