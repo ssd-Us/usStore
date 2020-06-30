@@ -17,7 +17,7 @@
 					responseJson.shipAddr2 + ", " + responseJson.shipCity + "</li>");
 				var content = "";
 				$(responseJson.lineItems).each(function(i, lineItem){	        	
-			       	content += "LineItem " + lineItem.lineNumber + ": " + lineItem.quantity +
+			       	content += "LineItem " + lineItem.lineNum + ": " + lineItem.quantity +
 							" piece(s) of item " + lineItem.itemId + "<br>";
 				});
 				$("#detail > ul").append ("<li>" + content + "</li>");
@@ -29,7 +29,7 @@
 		});
 	};
 </script>
-<div align="center">
+<div align="center" width="500">
   <p>
     <h2>My Order</h2>
   </p>
@@ -43,20 +43,22 @@
 	</tr>
   </table>
 
-  <table class="n23">
+  <table class="table table-hover">
     <tr bgcolor="#CCCCCC">
-      <td><b>Order ID</b></td> <td><b>Date</b></td> <td><b>Total Price</b></td>
+      <th scope="col">Order ID</th> 
+      <th scope="col">Date</th> 
+      <th scope="col">Total Price</th>
     </tr>
     <c:forEach var="order" items="${orderList}">
-      <tr bgcolor="#FFFF88">
-        <td>
+      <tr bgcolor="#FFFFFF">
+        <td scope="row">
           <b><a href='<c:url value="/shop/viewOrder.do">
               <c:param name="orderId" value="${order.orderId}"/></c:url>'>
               <font color="black"><c:out value="${order.orderId}" /></font>
             </a></b></td>
-        <td><fmt:formatDate value="${order.orderDate}"
+        <td scope="row"><fmt:formatDate value="${order.orderDate}"
             pattern="yyyy/MM/dd hh:mm:ss" /></td>
-        <td onClick="getOrder(${order.orderId});"><fmt:formatNumber value="${order.totalPrice}"
+        <td scope="row" onClick="getOrder(${order.orderId});"><fmt:formatNumber value="${order.totalPrice}"
             pattern="###,###,###원" /></td>
       </tr>
     </c:forEach>
