@@ -80,12 +80,6 @@ function participation(price, unitCost, startPrice) {
 		<td style="text-align: left; padding: 0px; font-size: small; border-bottom: none;">
 		${auction.viewCount}<font color=gray>view</font>
 		</td>
-		<td style="text-align: right; padding: 0px; font-size: small; border-bottom: none;">
-		<a href="
-							<c:url value='/addBookmark/${auction.userId}/${auction.itemId}'/>	<!-- 로그인 여부 따지기 -->
-					">[북마크 추가]</a>
-		</td>
-	
 	</tr>
    		<tr>
 	   		<th style="border-right: 1px solid black; border-top: 1px solid black;">제목</th>
@@ -95,12 +89,6 @@ function participation(price, unitCost, startPrice) {
    		<tr>
    			<th style="border-right: 1px solid black;">판매자</th>
    			<td>${auction.userId}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	   			<span>
-		   			<a href="
-							<c:url value='/addFollow/${auction.userId}'/>	<!-- 로그인 여부 따지기 -->
-					">팔로잉</a>
-				</span>
-				&nbsp;
 				<c:choose>
 	   				<c:when test="${! empty userSession.account.userId}">
 						<%@ include file="/WEB-INF/jsp/account/accuseFunction.jsp" %>
@@ -163,12 +151,6 @@ function participation(price, unitCost, startPrice) {
    		
    		<tr>
    			<td colspan="2" style="border-bottom: none;">
-   				<span>
-   				<a href="
-							<c:url value='/note/${auction.userId}'/>	<!-- 로그인 여부 따지기 -->
-				">쪽지 보내기</a>
-				</span><br>
-				
 				<c:if test="${state eq 0}">
    				<br><form name="form" action="<c:url value='/shop/auction/participateItem.do'/>">
    					<input type="text" id="price" name="price" placeholder="참여 가격을 입력하세요."/>
