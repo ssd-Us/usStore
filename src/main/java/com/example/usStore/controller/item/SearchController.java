@@ -24,55 +24,92 @@ import com.example.usStore.service.facade.ItemFacade;
 public class SearchController {
 	private ItemFacade itemFacade;
 	String searchWord;
-	
+
 	@Autowired
 	public void setItemFacade(ItemFacade itemFacade) {
 		this.itemFacade = itemFacade;
 	}
 	 
 	@RequestMapping("/shop/search/viewItem.do") 
-	public String searchList(@RequestParam(value="tagName", required=false) String tagName, HttpServletRequest rq, ModelMap model) {
+	public String searchList(@RequestParam(value="tagName", required=false) String itemTag, HttpServletRequest rq, ModelMap model) {
 		System.out.println("** Search Controller **");
 		
-		if (tagName != null) {
-			searchWord = tagName.replaceAll(" ", "");
+		String sKind = null;
+		
+		if (rq.getParameter("sKind") != null) {
+			sKind = rq.getParameter("sKind");
 		}
-		else {
-			searchWord = rq.getParameter("word").replaceAll(" ", "");
+		else if (rq.getParameter("sKind") == null) {
+			sKind = "tag";
 		}
 		
-		
-		if (searchWord != null) {
-			if (!StringUtils.hasLength(searchWord)) {
-				model.addAttribute("message", "태그 검색어를 입력해주세요.");
-				return "error";
+		if (sKind.equals("tag")) {
+			if (itemTag != null) {
+				searchWord = itemTag.replaceAll(" ", "");
 			}
+			else {
+				searchWord = rq.getParameter("word").replaceAll(" ", "");
+			}
+			
+			if (searchWord != null) {
+				if (!StringUtils.hasLength(searchWord)) {
+					model.addAttribute("message", "검색어를 입력해주세요.");
+					return "error";
+				}
+			}
+			
+			//검색어와 일치하는 태그 리스트 가져오기
+			List<Tag> tagList = new ArrayList<Tag>();
+			tagList = this.itemFacade.getTagByTagName(searchWord);
+			
+		    //태그 리스트랑 같은 크기의 item 배열 생성
+		    List<Item> resultList = new ArrayList<Item>();
+		    
+		    for(int i = 0; i < tagList.size(); i++) {
+		    	Item item = itemFacade.getItem(tagList.get(i).getItemId());
+		    	resultList.add(i, item); 
+		    }
+		    
+		    PagedListHolder<Item> rl = new PagedListHolder<Item>(resultList);
+		    rl.setPageSize(4);
+		    
+		    System.out.println("검색 결과 아이템 길이는 : " + resultList.size());
+		    
+		    if (resultList.size() == 0) {
+		    	model.addAttribute("noResult", 1);
+		    }
+
+			model.addAttribute("resultList", rl);
+		} else if (sKind.equals("title")) {
+			searchWord = rq.getParameter("word");
+			
+			if (searchWord != null) {
+				if (!StringUtils.hasLength(searchWord)) {
+					model.addAttribute("message", "검색어를 입력해주세요.");
+					return "error";
+				}
+			}
+			
+			List<Item> titleList = new ArrayList<Item>();
+			titleList = this.itemFacade.getItemByTitle(searchWord);
+			
+			System.out.println("타이틀 검색 결과");
+			for(int i = 0; i < titleList.size(); i++) {
+				System.out.println(titleList.get(i).toString());
+			}
+			
+			PagedListHolder<Item> rl = new PagedListHolder<Item>(titleList);
+			rl.setPageSize(4);
+			
+			if (titleList.size() == 0) {
+		    	model.addAttribute("noResult", 1);
+		    }
+			
+			model.addAttribute("resultList", rl);
 		}
 		
-		//검색어와 일치하는 태그 리스트 가져오기
-		List<Tag> tagList = new ArrayList<Tag>();
-		tagList = this.itemFacade.getTagByTagName(searchWord);
-		
-	    //태그 리스트랑 같은 크기의 item 배열 생성
-	    List<Item> resultList = new ArrayList<Item>();
-	    
-	    for(int i = 0; i < tagList.size(); i++) {
-	    	Item item = itemFacade.getItem(tagList.get(i).getItemId());
-	    	resultList.add(i, item); 
-	    }
-	    
-	    PagedListHolder<Item> rl = new PagedListHolder<Item>(resultList);
-	    rl.setPageSize(4);
-	    
-	    System.out.println("검색 결과 아이템 길이는 : " + resultList.size());
-	    
-	    if (resultList.size() == 0) {
-	    	model.addAttribute("noResult", 1);
-	    }
-	    
+		model.addAttribute("sKind", sKind);
 		model.addAttribute("searchWord", searchWord);
-		model.addAttribute("resultList", rl);
-		
 		return "product/search";
 	}
 	

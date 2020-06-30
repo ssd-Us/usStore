@@ -47,6 +47,7 @@ public interface ItemFacade {
    
    List<Item> getItemByPId(int productId);
    
+   List<Item> getItemByTitle(String title);
    
    /////////////////////////////////////////////////////////////////////////
    /* HandMade */

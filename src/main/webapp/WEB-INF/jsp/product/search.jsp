@@ -21,9 +21,17 @@
          <div class="row"  style="display:inline">
             <div style="display:inline;float:left;width:800px">
                <div style="font-size:15px">
-                  <h2>
+               	  <c:set var="kind" value="${sKind}"/>
+               	  <c:if test="${'title' eq kind}">
+					<h2>
+                     Search Title <font color=#008080>'<c:out value="${searchWord}"/>'</font>
+                  </h2>
+				  </c:if>
+                  <c:if test="${'tag' eq kind}">
+					<h2>
                      Search Tag <font color=#008080>#<c:out value="${searchWord}"/></font>
                   </h2>
+				  </c:if>
                   <hr>
                   <c:set var="no" value="${noResult}"/>
                   <c:if test="${no == 1}">

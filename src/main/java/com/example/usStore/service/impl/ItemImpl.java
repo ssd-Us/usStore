@@ -103,6 +103,10 @@ public class ItemImpl implements ItemFacade {
 		}
 	}
 
+	public List<Item> getItemByTitle(String title) {
+		return itemDao.getItemByTitle(title);
+	}
+	
 	@Override
 	public void insertHandMade(HandMade handmade) {
 		// TODO Auto-generated method stub

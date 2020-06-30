@@ -78,4 +78,18 @@
 		FROM ITEM
 		WHERE ITEMID = #{itemId}
 	</select>
+	
+	<select id="getItemByTitle" parameterType="String" resultType="Item">
+		SELECT
+			ITEMID,
+			UNITCOST,
+			TITLE,
+			DESCRIPTION,
+			VIEWCOUNT,
+			QTY,
+			USERID,
+			PRODUCTID
+		FROM ITEM
+		WHERE lower(title) like #{title}
+	</select>
 </mapper>

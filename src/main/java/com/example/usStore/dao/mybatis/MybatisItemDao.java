@@ -87,4 +87,8 @@ public class MybatisItemDao implements ItemDao {
 	public List<Item> getItemByPId(int productId) throws DataAccessException {
 	   return itemMapper.getItemByPId(productId);
 	}	
+	
+	public List<Item> getItemByTitle(String title) {
+		return itemMapper.getItemByTitle("%" + title.toLowerCase() + "%");
+	}
 }

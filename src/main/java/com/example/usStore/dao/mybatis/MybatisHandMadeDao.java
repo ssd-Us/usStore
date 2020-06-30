@@ -142,4 +142,8 @@ public class MybatisHandMadeDao implements HandMadeDao {
 	public List<Item> getItemByPId(int productId) throws DataAccessException {
 	   return handMadeMapper.getItemByPId(productId);
 	}	
+	
+	public List<Item> getItemByTitle(String title) {
+		return handMadeMapper.getItemByTitle("%" + title.toLowerCase() + "%");
+	}
 }

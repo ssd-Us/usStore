@@ -130,7 +130,9 @@ public class MybatisSecondHandDao implements SecondHandDao {
 		return secondHandMapper.getItemByPId(productId);
 	}
 
-
+	public List<Item> getItemByTitle(String title) {
+		return secondHandMapper.getItemByTitle("%" + title.toLowerCase() + "%");
+	}
 	
 
 }
