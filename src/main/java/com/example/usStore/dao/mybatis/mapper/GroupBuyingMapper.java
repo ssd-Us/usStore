@@ -21,4 +21,8 @@ public interface GroupBuyingMapper extends ItemMapper {
 
    //기한 마감시 삭제
    public void closeGroupBuying(Date curTime);
+   
+   //품절시 삭제
+   public void soldOutGroupBuying(int itemId);
+   
 }

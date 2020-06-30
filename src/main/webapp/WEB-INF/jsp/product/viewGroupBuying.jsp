@@ -78,13 +78,6 @@
       ${gb.viewCount}<font color=gray>view</font>
       </td>
       <td style="text-align: right; padding: 0px; font-size: small; border-bottom: none;">
-      <a href="
-                     <c:url value='/shop/groupBuying/addBookmark'>   <!-- 로그인 여부 따지기 -->
-                        <c:param name="userId" value="${gb.userId}" />
-                        <c:param name="itemId" value="${gb.itemId}" />
-                     </c:url>
-               ">[북마크 추가]</a>
-      </td>
    
    </tr>
          <tr>
@@ -102,11 +95,6 @@
          <tr>
             <th style="border-right: 1px solid black;">판매자</th>
             <td>${gb.userId}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-               <span id="blue">
-                  <a href="
-                     <c:url value='/addFollow/${gb.userId}'/>   <!-- 로그인 여부 따지기 -->
-               ">팔로잉</a>
-            </span>
             &nbsp;
             <span id="blue">
                <c:choose>
@@ -118,8 +106,8 @@
                      <a href="<c:url value='/addAccuseNoLogin.do'>
                              <c:param name="itemId" value="${gb.itemId}"/>
                                <c:param name="productId" value="${gb.productId}"/></c:url>">
-                               판매자 신고하기
-                            </a>
+                              	 판매자 신고하기
+                     </a>
                   
                   </c:otherwise>
                </c:choose>
@@ -161,32 +149,24 @@
          <td>${gb.qty}</td>
          </tr>
          
-         <tr>
-            <td colspan="2" style="border-bottom: none;">
-               <span id="blue">
-   				<a href="<c:url value="/shop/addItemToCart.do">
-					     <c:param name="workingItemId" value="${gb.itemId}"/>
-					     <c:param name="productId" value="${gb.productId}"/></c:url>">
-					 장바구니 추가</a>
-            </span>
-            &nbsp;&nbsp;&nbsp;
-            <span id="blue">
-               <a href="
-                     <c:url value='/shop/groupBuying/joint.do'>
-                        <c:param name="workingItemId" value="${gb.itemId}" />
-                        <c:param name="productId" value="${gb.productId}" />
-                     </c:url>
-               ">공동구매 참여하기</a>
-            </span>
-            &nbsp;&nbsp;&nbsp;
-            <span id="blue">
-               <a href="
-                     <c:url value='/note/${gb.itemId}'/>   
-            ">쪽지 보내기</a>
-            </span>
+         
             
-            </td>
-         </tr>
+			<c:if test="${gb.state == 0 && gb.userId ne userSession.account.userId}"> <!-- 공동구매 진행중 이면서 작성자와 본인 아이디가 다르면 공동구매 참여 가능 -->
+	            <tr>
+          		  <td colspan="2" style="border-bottom: none;">
+	            <span id="blue">
+	               <a href="
+	                     <c:url value='/shop/groupBuying/joint.do'>
+	                        <c:param name="workingItemId" value="${gb.itemId}" />
+	                        <c:param name="productId" value="${gb.productId}" />
+	                     </c:url>
+	               ">공동구매 참여하기</a>
+	              
+	            </span>
+	             </td>
+       		  </tr>
+            </c:if>
+            
          <c:if test="${gb.userId eq userSession.account.userId}"> <!-- ë¡ ê·¸ì ¸ì   ì ¤í   -->
             <tr>
                <td colspan="2" style="text-align: right; padding: 0px; font-size: small; border-bottom: none; border-top: 1px solid black;">

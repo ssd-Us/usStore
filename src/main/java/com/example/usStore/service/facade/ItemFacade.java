@@ -76,6 +76,11 @@ public interface ItemFacade {
    
    public void groupBuyingScheduler(Date deadLine);
    
+   public void closeGroupBuying(Date curTime);
+   
+ //품절시 삭제
+   public void soldOutGroupBuying(int itemId);
+   
    /////////////////////////////////////////////////////////////////////////
    /* SecondHand */
    /////////////////////////////////////////////////////////////////////////   
