@@ -8,7 +8,7 @@ import java.util.List;
  * Item Domain Class
  * */
 @SuppressWarnings("serial")
-public class Item implements Serializable {
+public class Item implements Serializable, Comparable<Item> {
    /* Private Fields */
    private int itemId; // (PK) String- > int
    private int unitCost;
@@ -130,6 +130,14 @@ public class Item implements Serializable {
             + productId + "]";
    }
 
-   
+   @Override
+   public int compareTo(Item i) {			//조회수 기준으로 내림차순 정렬
+       if (this.viewCount < i.getViewCount()) {
+           return 1;
+       } else if (this.viewCount > i.getViewCount()) {
+           return -1;
+       }
+       return 0;
+   }
 
 }
