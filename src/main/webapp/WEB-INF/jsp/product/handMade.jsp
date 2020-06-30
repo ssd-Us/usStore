@@ -36,6 +36,7 @@
 							<th>제목</th>
 							<th>가격</th>
 							<th>판매자</th>
+							<th>구매 가능 여부</th>
 							<th>&nbsp;</th>
 						</tr>
 						<tbody>
@@ -51,22 +52,30 @@
 									</td>
 									<td>${item.listPrice}원</td>
 									<td>${item.userId}</td>
-									<td><a href='<c:url value="/shop/addItemToCart.do">
+									<c:if test="${item.qty ne 0}">
+										<td>${item.qty}</td>
+										<td><a href='<c:url value="/shop/addItemToCart.do">
 					            				<c:param name="workingItemId" value="${item.itemId}"/>
 					            				<c:param name="productId" value="${item.productId}"/></c:url>'>
-					              		<img width="40" height="40" src="${pageContext.request.contextPath}/images/cart_img.png" alt="" /></a></td>
+					              		<img width="40" height="40" src="${pageContext.request.contextPath}/images/cart_img.png" alt="" /></a></td> 
+									</c:if>
+									<c:if test="${item.qty eq 0}">
+										<td><button type="button" class="btn btn-outline-danger">품절</button></td>
+									</c:if>
 								</tr>
 							</c:forEach>
 						</tbody>
 						<!-- 페이지 구분  -->
 						<tr>
-							<td>
+							<td colspan="3">
 								<c:if test="${!itemList.firstPage}">
 									<a href='<c:url value="/shop/handMade/listItem2.do">
 	           								<c:param name="pageName" value="previous"/></c:url>'>
 										<font color="black"><B>&lt;&lt; Prev</B></font>
 									</a>
 								</c:if>
+							</td>
+							<td colspan="3">
 								<c:if test="${!itemList.lastPage}">
 									<a href='<c:url value="/shop/handMade/listItem2.do">/>
 	            							 <c:param name="pageName" value="next"/></c:url>'>
