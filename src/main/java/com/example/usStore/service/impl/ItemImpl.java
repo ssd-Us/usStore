@@ -55,24 +55,9 @@ public class ItemImpl implements ItemFacade {
 	private ThreadPoolTaskScheduler scheduler;
 
 	@Override
-	public void updateQuantity(Orders order, int productId) {
+	public void updateQuantity(Orders order) {
 		// TODO Auto-generated method stub
-		switch (productId) {
-		case 0:
-			groupBuyingDao.updateQuantity(order);
-			break;
-		case 1:
-			auctionDao.updateQuantity(order);
-			break;
-		case 2:
-			secondHandDao.updateQuantity(order);
-			break;
-		case 3:
-			handMadeDao.updateQuantity(order);
-			break;
-		default:
-			System.err.println("updateQuantity Error !!");
-		}
+		itemDao.updateQuantity(order);
 	}
 
 	@Override

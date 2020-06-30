@@ -58,12 +58,6 @@
 		<td style="text-align: left; padding: 0px; font-size: small; border-bottom: none;">
 		 <c:out value="${handMade.viewCount}" /><font color=gray>view</font>
 		</td>
-		<td style="text-align: right; padding: 0px; font-size: small; border-bottom: none;">
-		<a href="
-							<c:url value='/addBookmark/${gb.suppId}/${gb.itemId}'/>	<!-- 로그인 여부 따지기 -->
-					">[북마크 추가]</a>
-		</td>
-	
 	</tr>
 		<!-- ItemId -->
 	   	<tr>
@@ -79,16 +73,10 @@
    		<tr>
    			<!-- UserId -->
    			<th style="border-right: 1px solid black;">판매자</th>
-   			<td><c:out value="${handMade.userId}" />
-   				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	   			<span>
-		   			<a href="
-							<c:url value='/addFollow/${gb.suppId}'/>	<!-- 로그인 여부 따지기 -->
-					">팔로잉</a>
-				</span>
+   			<td>
+   				<c:out value="${handMade.userId}" />
+   				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<!-- 판매자 신고하기 -->
-				&nbsp;
-			
 				<c:choose>
 	   				<c:when test="${! empty userSession.account.userId}">
 						<%@ include file="/WEB-INF/jsp/account/accuseFunction.jsp" %>
@@ -102,6 +90,7 @@
 			            </span>
 					</c:otherwise>
 				</c:choose>
+				
 			</td>
    		</tr> <!-- userId = suppId -->
    		
@@ -132,30 +121,25 @@
    			<!-- Quantity -->
    			<th style="border-right: 1px solid black;">수량 </th> 
 	   		<td>
-	   		<c:if test="${handMade.qty <= 0}">
-			        <font color="red" size="2"><i>품절</i></font>
-			      </c:if> 
-			      <c:if test="${handMade.qty > 0}">
+	   			<c:if test="${handMade.qty eq 0}">
+			        <button type="button" class="btn btn-outline-danger">품절</button>	
+			    </c:if> 
+			    <c:if test="${handMade.qty ne 0}">
 			        <font size="2"><fmt:formatNumber value="${handMade.qty}" /> 개 남았습니다.</font>
-			      </c:if>
+			    </c:if>
 	   		</td>
    		</tr>
    		
    		<tr>
    			<td colspan="2" style="border-bottom: none;">
    			<span>
-   				<a href="<c:url value="/shop/addItemToCart.do">
-					     <c:param name="workingItemId" value="${handMade.itemId}"/>
-					     <c:param name="productId" value="${handMade.productId}"/></c:url>">
-					 장바구니 추가</a>
+   				<c:if test="${handMade.qty ne 0}">
+	   				<a href="<c:url value="/shop/addItemToCart.do">
+						     <c:param name="workingItemId" value="${handMade.itemId}"/>
+						     <c:param name="productId" value="${handMade.productId}"/></c:url>">
+						 장바구니 추가</a>
+				</c:if>
 			</span>
-				&nbsp;&nbsp;&nbsp;
-				<span>
-   				<a href="
-							<c:url value='/note/${handMade.itemId}'/>	<!-- 로그인 여부 따지기 -->
-				">쪽지 보내기</a>
-				</span>
-   			
    			</td>
    		</tr>
    		<c:if test="${handMade.userId eq suppId}"> <!-- ë¡ê·¸ì¸ì ì¤í -->
