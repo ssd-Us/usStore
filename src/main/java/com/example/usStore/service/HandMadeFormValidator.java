@@ -25,7 +25,7 @@ public class HandMadeFormValidator implements Validator {
 		}
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "listPrice", "required");
 		if(handMadeForm.getListPrice() <= 0) {
-			errors.rejectValue("listPrice", "tooSmall");
+			errors.rejectValue("listPrice", "isSmall");
 		}
 	}
 }

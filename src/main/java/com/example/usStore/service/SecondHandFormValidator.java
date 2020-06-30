@@ -23,9 +23,8 @@ public class SecondHandFormValidator implements Validator  {
 			System.out.println(secondHandForm.toString());
 		}
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "listPrice", "required");
-		if(secondHandForm.getListPrice() <= 0) {
+		if(secondHandForm.getListPrice() >= 0) {
 			errors.rejectValue("listPrice", "tooSmall");
 		}
 	}
-
 }
