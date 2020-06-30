@@ -175,7 +175,17 @@ public class ItemImpl implements ItemFacade {
 
 		System.out.println("GB updateTableRunner has been scheduled to execute at " + deadLine);
 	}
+	
+	//기한 마감시 삭제
+	public void closeGroupBuying(Date curTime) {
+		groupBuyingDao.closeGroupBuying(curTime);
+	}
 
+	//품절시 삭제
+	public void soldOutGroupBuying(int itemId) {
+		groupBuyingDao.soldOutGroupBuying(itemId);
+	}
+	
 	@Override
 	public List<SecondHand> getSecondHandList(Account account) {
 		return secondHandDao.getSecondHandList(account);

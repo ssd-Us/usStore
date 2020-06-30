@@ -18,14 +18,10 @@ public class HandMadeFormValidator implements Validator {
 	public void validate(Object target, Errors errors) {
 		System.out.println("validator");
 		HandMadeForm handMadeForm = (HandMadeForm)target; 
-		if(handMadeForm == null) {
-			System.out.println("thisisfuckingnull!!!");
-		} else {
-			System.out.println(handMadeForm.toString());
-		}
+		
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "listPrice", "required");
 		if(handMadeForm.getListPrice() <= 0) {
-			errors.rejectValue("listPrice", "tooSmall");
+			errors.rejectValue("listPrice", "isSmall");
 		}
 	}
 }

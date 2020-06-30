@@ -27,7 +27,7 @@ div#addItemForm {
 
 	<form:form modelAttribute="secondHandForm"  method="post" action="step3.do">
 		
-	판매가(중고가): <form:input type="text" path="listPrice" value="${listPrice}" />
+	정가: <form:input type="text" path="listPrice" value="${listPrice}" />
 		<form:errors path="listPrice" />
 		<br>
 		<br>

@@ -16,7 +16,7 @@
   <table class="n13">
     <tr>
       <td align="center" colspan="2">
-        <font size="4"><b>Order</b></font><br />
+      	<h2>Order Infomation</h2>
         <font size="3">
           <b><fmt:formatDate value="${orderForm.order.orderDate}" 
             pattern="yyyy/MM/dd hh:mm:ss" /></b></font>
@@ -79,6 +79,7 @@
       <td>${orderForm.order.shipCountry}</td>
     </tr>
   </table>
+  <br><br>
   <p>
     <a href='<c:url value="/shop/confirmOrder.do"/>'>
       <img border="0" src="${pageContext.request.contextPath}/images/button_continue.gif" alt="" /></a>

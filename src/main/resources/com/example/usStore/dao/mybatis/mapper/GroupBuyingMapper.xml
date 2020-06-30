@@ -57,4 +57,12 @@
         WHERE DEADLINE <= #{curTime}
        ]]>
      </update>
+     
+     <update id="soldOutGroupBuying">
+       <![CDATA[
+        UPDATE GROUPBUYING
+		SET STATE = 1
+		WHERE ITEMID = #{itemId}
+       ]]>
+     </update>
 </mapper>
