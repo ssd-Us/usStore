@@ -22,7 +22,7 @@
 <hr width = "927px" align="left"><br><br>
 	<spring:hasBindErrors name="handMadeForm" />
     <form:form modelAttribute="handMadeForm" method="post" action="step3.do">
-	   판매가: <form:input type="text" path="listPrice" value="${listPrice}"/>
+	  원가: <form:input type="text" path="listPrice" value="${listPrice}"/>
 	   <form:errors path="listPrice"/> <br>
 	   
 	   	<a href="<c:url value='/shop/handMade/gobackItem.do'>

@@ -3,9 +3,6 @@ package com.example.usStore.dao.mybatis.mapper;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-import org.springframework.dao.DataAccessException;
 
 import com.example.usStore.domain.Account;
 import com.example.usStore.domain.Auction;
