@@ -41,7 +41,7 @@ public class ViewRankingController {
    
    @RequestMapping(value = "/shop/getData.do/{productId}", method = RequestMethod.GET, produces = "application/json")
    @ResponseBody
-   public List<Rank> getJson(@PathVariable("productId") int productId, HttpServletResponse response) throws IOException {   //객체 타입 리스트
+   public List<Rank> getJson(@PathVariable("productId") int productId, HttpServletResponse response) throws IOException {   
 	   System.out.println("getJson들어옴");
 	   List<Rank> RankList = new ArrayList<Rank>();
 	   int index = 0;
@@ -114,6 +114,29 @@ public class ViewRankingController {
 		   }
 	   }
 	   return RankList;
+   }
+   
+   @RequestMapping("/shop/rank/viewItem.do") //go index(remove sessions)
+   public String goIndex(@RequestParam("itemId") int itemId, @RequestParam("productId") int productId)
+   {
+      String viewItem = "";
+      
+      switch(productId) {
+         case 0 : 
+        	 viewItem = "redirect:/shop/groupBuying/viewItem.do";
+               break;
+         case 1 :
+        	 viewItem = "redirect:/shop/auction/viewItem.do";
+               break;
+         case 2 : 
+        	 viewItem = "redirect:/shop/secondHand/viewItem.do";
+               break;
+         case 3 : 
+        	 viewItem = "redirect:/shop/handMade/viewItem.do";
+               break;
+      }
+      
+      return viewItem + "?itemId=" + itemId + "&productId=" + productId;
    }
    
 }
