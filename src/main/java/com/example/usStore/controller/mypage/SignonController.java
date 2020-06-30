@@ -39,8 +39,8 @@ public class SignonController {
 			Model model) throws Exception {
 		Account account = usStore.getAccountByUserIdAndPassword(userId, password);
 		if (account == null) {
-			// return "redirect:shop/signonForm.do";
-			return new ModelAndView("Error", "message", 
+			// return ;
+			return new ModelAndView("account/SignonForm", "message", 
 					"Invalid username or password.  Signon failed.");
 		}
 		else {
