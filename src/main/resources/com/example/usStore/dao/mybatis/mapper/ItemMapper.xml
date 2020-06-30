@@ -67,7 +67,7 @@
 		WHERE ITEMID = #{param1} AND PRODUCTID = #{param2}
 	</select>
 
-	<update id="updateQuantity">
+	<update id="updateInventoryQuantity">
 		UPDATE ITEM
 		SET QTY = QTY - #{increment}
 		WHERE ITEMID = #{itemId}

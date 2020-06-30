@@ -12,6 +12,7 @@ import com.example.usStore.domain.Bidder;
 import com.example.usStore.domain.GroupBuying;
 import com.example.usStore.domain.HandMade;
 import com.example.usStore.domain.Item;
+import com.example.usStore.domain.Orders;
 import com.example.usStore.domain.SecondHand;
 import com.example.usStore.domain.Tag;
 
@@ -34,7 +35,7 @@ public interface ItemFacade {
    
    public void deleteItem(int itemId);
    
-   void updateQuantity(int qty, int itemId, int productId);
+   void updateQuantity(Orders order, int productId);
    
    int getQuantity(int itemId, int productId);
 
