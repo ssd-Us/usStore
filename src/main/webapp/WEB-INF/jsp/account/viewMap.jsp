@@ -22,7 +22,7 @@
 		//애초에 회원가입할 때 대학에 도로명 주소를 입력하면..된다..? 
 		//var uni = '성내로80'; 
 		var uni = "${university}"; //실제 판매자 대학교의 도로명 주소 
-		alert(test);
+		alert(uni);
 		// 주소로 좌표를 검색합니다
 		geocoder.addressSearch(uni, function(result, status) {
 
