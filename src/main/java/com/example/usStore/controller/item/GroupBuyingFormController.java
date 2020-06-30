@@ -134,7 +134,7 @@ public class GroupBuyingFormController {
       }
       
       if(itemForm.getUnitCost() >= groupBuyingForm.getListPrice()) {   //판매가는 정가보다 낮은 가격이어야 함
-         result.rejectValue("listPrice", "mustDiscount");
+         result.rejectValue("listPrice", "isSmall");
       }
       
       if (result.hasErrors()) {   //유효성 검증 에러 발생시
