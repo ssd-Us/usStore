@@ -22,7 +22,10 @@ public interface GroupBuyingDao extends ItemDao {
    // itemId를 받아 해당하는 groupBuying 객체를 가져오는 메소드
    GroupBuying getGroupBuyingItem(int itemId) throws DataAccessException;
    
-   //경매 종료 (scheduler)
+   //공동구매 종료 (scheduler)
    public void closeGroupBuying(Date curTime);
+   
+   //품절시 공동구매 종료
+   public void soldOutGroupBuying(int itemId);
    
 }
