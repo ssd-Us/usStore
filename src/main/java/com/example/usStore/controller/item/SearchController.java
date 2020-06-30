@@ -24,7 +24,8 @@ import com.example.usStore.service.facade.ItemFacade;
 public class SearchController {
 	private ItemFacade itemFacade;
 	String searchWord;
-
+	String sKind;
+	
 	@Autowired
 	public void setItemFacade(ItemFacade itemFacade) {
 		this.itemFacade = itemFacade;
@@ -34,7 +35,7 @@ public class SearchController {
 	public String searchList(@RequestParam(value="tagName", required=false) String itemTag, HttpServletRequest rq, ModelMap model) {
 		System.out.println("** Search Controller **");
 		
-		String sKind = null;
+		sKind = null;
 		
 		if (rq.getParameter("sKind") != null) {
 			sKind = rq.getParameter("sKind");
@@ -125,6 +126,7 @@ public class SearchController {
 			resultList.previousPage();
 		}
 		
+		model.addAttribute("sKind", sKind);
 		model.addAttribute("searchWord", searchWord);
 		model.addAttribute("resultList", resultList);
 		
