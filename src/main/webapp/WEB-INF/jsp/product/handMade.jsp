@@ -50,14 +50,14 @@
 									</td>
 									<td>${item.unitCost}원</td>
 									<td>${item.userId}</td>
-									<c:if test="${item.qty ne 0}">
+									<c:if test="${item.qty > 0}">
 										<td>${item.qty}</td>
 										<td><a href='<c:url value="/shop/addItemToCart.do">
 					            				<c:param name="workingItemId" value="${item.itemId}"/>
 					            				<c:param name="productId" value="${item.productId}"/></c:url>'>
 					              		<img width="40" height="40" src="${pageContext.request.contextPath}/images/cart_img.png" alt="" /></a></td> 
 									</c:if>
-									<c:if test="${item.qty eq 0}">
+									<c:if test="${item.qty <= 0}">
 										<td><button type="button" class="btn btn-outline-danger">품절</button></td>
 									</c:if>
 								</tr>

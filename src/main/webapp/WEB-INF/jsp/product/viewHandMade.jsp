@@ -121,10 +121,10 @@
    			<!-- Quantity -->
    			<th style="border-right: 1px solid black;">수량 </th> 
 	   		<td>
-	   			<c:if test="${handMade.qty eq 0}">
+	   			<c:if test="${handMade.qty <= 0}">
 			        <button type="button" class="btn btn-outline-danger">품절</button>	
 			    </c:if> 
-			    <c:if test="${handMade.qty ne 0}">
+			    <c:if test="${handMade.qty > 0}">
 			        <font size="2"><fmt:formatNumber value="${handMade.qty}" /> 개 남았습니다.</font>
 			    </c:if>
 	   		</td>
