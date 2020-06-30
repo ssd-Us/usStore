@@ -18,17 +18,6 @@
         <a href="<c:url value="/shop/groupBuying/listItem.do?productId=0"/>" class="list-group-item list-group-item-action bg-light">공동구매</a>
         <a href="<c:url value="/shop/rank/rank.do"/>" class="list-group-item list-group-item-action bg-light">랭킹</a>
 		<ul class="navbar-nav ml-auto mt-2 mt-lg-0 list-group-item list-group-item-action bg-light">
-		<li class="nav-item dropdown">
-			<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-			  	Event
-			</a>
-			<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-				<a class="dropdown-item" href="<c:url value="/shop/viewEvent.do?catId=2"/>">퀴즈</a>
-				<a class="dropdown-item" href="<c:url value="/shop/viewEvent.do?catId=3"/>">출석체크</a>
-				<div class="dropdown-divider"></div>
-				<a class="dropdown-item" href="#">My Coupon</a>
-			</div>
-		</li>
 		</ul>
       </div>
     </div>

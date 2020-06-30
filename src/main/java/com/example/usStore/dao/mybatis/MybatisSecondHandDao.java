@@ -1,6 +1,8 @@
 package com.example.usStore.dao.mybatis;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -15,6 +17,8 @@ import com.example.usStore.dao.mybatis.mapper.SecondHandMapper;
 import com.example.usStore.dao.mybatis.mapper.TagMapper;
 import com.example.usStore.domain.Account;
 import com.example.usStore.domain.Item;
+import com.example.usStore.domain.LineItem;
+import com.example.usStore.domain.Orders;
 import com.example.usStore.domain.SecondHand;
 import com.example.usStore.domain.Tag;
 
@@ -44,8 +48,17 @@ public class MybatisSecondHandDao implements SecondHandDao {
 	}
 	
 	@Override
-	public void updateQuantity(int qty, int itemId, int productId) throws DataAccessException {
-		secondHandMapper.updateQuantity(qty, itemId, productId);
+	public void updateQuantity(Orders order) throws DataAccessException {
+		for (int i = 0; i < order.getLineItems().size(); i++) {
+			System.out.println("MybatisItemDao");
+			LineItem lineItem = (LineItem) order.getLineItems().get(i);
+			int itemId = lineItem.getItemId();
+			Integer increment = new Integer(lineItem.getQuantity());
+			Map<String, Object> param = new HashMap<String, Object>(2);
+			param.put("itemId", itemId);
+			param.put("increment", increment);
+			secondHandMapper.updateInventoryQuantity(param);
+		}
 	}
 	
 	@Override

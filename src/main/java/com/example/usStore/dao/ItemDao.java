@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.dao.DataAccessException;
 
 import com.example.usStore.domain.Item;
+import com.example.usStore.domain.Orders;
 
 public interface ItemDao {
 
@@ -18,16 +19,16 @@ public interface ItemDao {
 	// getItem
 	Item getItem(int itemId);
 	
-	// �븘�씠�뀥 �궘�젣 硫붿냼�뱶
+	// delete Item
 	public void deleteItem(int itemId) throws DataAccessException;
 	
-	// 援щℓ 媛쒖닔 �닔�젙
-	void updateQuantity(int qty, int itemId, int productId) throws DataAccessException;
+	// update Quantity
+	void updateQuantity(Orders order) throws DataAccessException;
 	
-	// 援щℓ 媛쒖닔 諛쏆븘�삤湲�
+	// get Quantity
 	int getQuantity(int itemId, int productId) throws DataAccessException;
 
-	// �븘�씠�뀥 �븘�씠�뵒濡� �빐�떦 �닔怨듭삁�뭹�쓽 �옱怨좉� �엳�뒗吏� �솗�씤�븯�뒗 硫붿냼�뱶
+	// check Item in Stock
 	boolean isItemInStock(int itemId, int productId) throws DataAccessException;
 
 	String getUserIdByItemId(int itemId) throws DataAccessException;
