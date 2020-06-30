@@ -119,7 +119,7 @@ public class SecondHandController {
       model.addAttribute("sh", sh);
       model.addAttribute("isAccuse", isAccuse);
       model.addAttribute("tags", tags);
-      model.addAttribute("university", "올림픽로43길 34");
+      model.addAttribute("university", university);
       return "product/viewSecondHand";
    }
    
