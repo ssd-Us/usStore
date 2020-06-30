@@ -131,7 +131,7 @@
    		<td>${sh.qty}</td>
    	</tr>	
    	<tr>
-   		<th style="border-right: 1px solid black;">판매자 대학교</th> <!-- 판매자의 대학교는 판매자 userId로 getAccountByUserId().getUniversity() -->
+   		<th style="border-right: 1px solid black;">판매자 대학교</th> 
    		<td>
    			<%@ include file="/WEB-INF/jsp/account/viewMap.jsp" %>
    		</td>

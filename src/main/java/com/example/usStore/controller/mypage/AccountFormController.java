@@ -1,5 +1,8 @@
 package com.example.usStore.controller.mypage;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +45,16 @@ public class AccountFormController {
 	public void setValidator(AccountFormValidator validator) {
 		this.validator = validator;
 	}
-		
+	
+	@ModelAttribute("universityKinds")
+	public List<String> referenceData() throws Exception {
+		List<String> universityKinds = new ArrayList<String>();
+		universityKinds.add("동덕여자대학교");
+		universityKinds.add("성신여자대학교");
+		universityKinds.add("카이스트");
+		return universityKinds;	
+	}
+
 	@ModelAttribute("accountForm")
 	public AccountForm formBackingObject(HttpServletRequest request) 
 			throws Exception {

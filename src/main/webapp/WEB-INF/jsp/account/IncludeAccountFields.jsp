@@ -19,8 +19,10 @@
 </div>
 
 <div class="form-label-group">
-	<form:input path="account.university" id="inputUniversity" class="form-control" />
-	<B><form:errors path="account.university" cssClass="error" /></B> <label for="inputUniversity">University</label>
+	<form:select path="account.university"  class="form-control">
+		<option value="">---Select University---</option>
+		<form:options items="${universityKinds}" />
+	</form:select>
 </div>
 
 <div class="form-label-group">
