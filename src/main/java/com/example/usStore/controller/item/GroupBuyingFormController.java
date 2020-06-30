@@ -337,7 +337,7 @@ public class GroupBuyingFormController {
    }
    
    @RequestMapping("/shop/groupBuying/joint.do") //joint GroupBuying
-   public void jointGroupBuying(@RequestParam("itemId") int itemId, @RequestParam("productId") int productId, 
+   public void jointGroupBuying(@RequestParam("workingItemId") int workingItemId, @RequestParam("productId") int productId, 
          HttpServletResponse response) throws IOException
    {
       System.out.println("jointGroupBuying");
@@ -346,8 +346,8 @@ public class GroupBuyingFormController {
       
       out.println("<script>");
       out.print("if (confirm('Do you want to participate in GroupBuying?') == true){");
-      out.print("alert('Go Participate in GroupBuying :)'); location.href='index.do';}");   //공동구매 진행 (나중에 uri 수정 - 주문)
-      out.print("else{location.href='viewItem.do?itemId=" + itemId + "&productId=" + productId + "';}");   //공동구매 진행 취소
+      out.print("alert('Go Participate in GroupBuying :)'); location.href='redirect:/shop/addItemToCart.do?workingItemId=" + workingItemId + "&productId=" + productId + "';}");   //공동구매 진행 (나중에 uri 수정 - 주문)
+      out.print("else{location.href='viewItem.do?itemId=" + workingItemId + "&productId=" + productId + "';}");   //공동구매 진행 취소
       out.println("</script>");
       out.flush();
       out.close();
