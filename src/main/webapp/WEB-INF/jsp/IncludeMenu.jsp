@@ -8,7 +8,7 @@
     <div class="bg-white border-light" id="sidebar-wrapper">
       <div class="sidebar-heading">
       	<c:if test="${!empty userSession.account}">
-		<b><i><font size="4" color="RED">Welcome ${userSession.account.userId}!</font></i></b>
+		<b><i><font size="4" color="RED">Welcome ${userSession.account.username}!</font></i></b>
         </c:if>
       </div>
       <div class="list-group list-group-flush">
