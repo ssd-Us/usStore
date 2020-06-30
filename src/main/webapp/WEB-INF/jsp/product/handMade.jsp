@@ -33,7 +33,6 @@
 					<table>
 						<tr>
 							<th>제품명</th>
-							<th>제목</th>
 							<th>가격</th>
 							<th>판매자</th>
 							<th>구매 가능 여부</th>
@@ -42,7 +41,6 @@
 						<tbody>
 							<c:forEach var="item" items="${handMadeList.pageList}">
 								<tr style="height: 70px;">
-									<td>${item.itemId}</td>
 									<td>
 										<a href="<c:url value='/shop/handMade/viewItem.do'>
 			                               			<c:param name="productId" value="${item.productId}"/>
@@ -67,7 +65,7 @@
 						</tbody>
 						<!-- 페이지 구분  -->
 						<tr>
-							<td colspan="3">
+							<td colspan="2">
 								<c:if test="${!itemList.firstPage}">
 									<a href='<c:url value="/shop/handMade/listItem2.do">
 	           								<c:param name="pageName" value="previous"/></c:url>'>
@@ -75,7 +73,7 @@
 									</a>
 								</c:if>
 							</td>
-							<td colspan="3">
+							<td colspan="2">
 								<c:if test="${!itemList.lastPage}">
 									<a href='<c:url value="/shop/handMade/listItem2.do">/>
 	            							 <c:param name="pageName" value="next"/></c:url>'>
@@ -84,7 +82,6 @@
 								</c:if>
 							</td>
 						</tr>
-
 					</table>
 				</div>
 			</div>
