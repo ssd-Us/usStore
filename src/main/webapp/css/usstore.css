@@ -85,6 +85,7 @@ table.t1 {
 table.n25 {
 	background-color: #c0c0c0;
     border: none;
+    width : 50%;
     border-spacing: 2px;
 }
 table.n25 tr td {
@@ -94,6 +95,7 @@ table.n23 {
 	background-color: #c0c0c0;
     border: none;
     border-spacing: 2px;
+    width : 50%;
 }
 table.n23 tr td {
     padding: 3px;
@@ -106,7 +108,8 @@ table.n13 {
 }
 table.n13 tr {
     background-color: #c0c0c0;
+    width : 50%;
 }
 table.n13 tr td {
-    padding: 3px;
+    padding: 10px;
 }

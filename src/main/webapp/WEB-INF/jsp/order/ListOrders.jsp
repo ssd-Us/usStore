@@ -31,7 +31,7 @@
 </script>
 <div align="center">
   <p>
-    <font size="4"><b>My Orders</b></font>
+    <h2>My Order</h2>
   </p>
  
   <!-- REST API 내용 부분 -->
@@ -42,7 +42,7 @@
 		</td>
 	</tr>
   </table>
-	
+
   <table class="n23">
     <tr bgcolor="#CCCCCC">
       <td><b>Order ID</b></td> <td><b>Date</b></td> <td><b>Total Price</b></td>
@@ -62,5 +62,5 @@
     </c:forEach>
   </table>
 </div>
-
+<br><br>
 <%@ include file="../IncludeBottom.jsp"%>

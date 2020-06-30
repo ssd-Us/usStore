@@ -8,7 +8,7 @@
 <div align="center">
 <form:form modelAttribute="orderForm" action="${targetUrl}" method="post">
   <form:errors cssClass="error" /><br><br>
-
+	<h2>Order Infomation</h2>
   <table class="n13">
     <tr>
       <td colspan="2">
@@ -45,6 +45,7 @@
         <form:errors path="order.shipCountry" /></td>
     </tr>
   </table>
+  <br><br>
   <p>
     <input type="image" src="${pageContext.request.contextPath}/images/button_submit.gif">
   </p>
