@@ -6,15 +6,15 @@ import com.example.usStore.domain.Tag;
 
 public class ItemForm {
    /* Private Fields */
-     private int itemId;          //(PK) String- > int
-     private int unitCost;        // 뜝 뙟怨ㅼ삕( 뜝 룞 삕 뜝 룞 삕)
-     private String title;        // 뜝 룞 삕 뜝 룞 삕
-     private String description;     // 뜝 룞 삕 뜝 룞 삕
-     private int viewCount;        // 뜝 룞 삕 쉶 뜝 룞 삕
-     private int qty;          // 뜝 룞 삕 뜝占 
-     private List<Tag> tags;
-     private String userId;       //(FK)  뜝 룞 삕 뜝 룞 삕 뜝 룞 삕  뜝 룞 삕 뜝 떛 벝 삕
-     private int productId;          //(FK)  뜝 룞 삕 뜝 룞 삕 뜝 룞 삕 뜝 룞 삕/ 뜝 뙥怨ㅼ삕 궧 뜝占 / 뜝 룞 삕 뜝占 / 뜝 룞 삕 뜝 룞 삕 뜝 룞 삕 뜝 떎紐뚯삕  뜝 룞 삕 뜝 룞 삕  
+     private int itemId;   
+     private int unitCost;       //정가
+     private String title;    //제목
+     private String description;   //내용
+     private int viewCount;        //조회수
+     private int qty;      //재고
+     private List<Tag> tags;	//태그 리스트
+     private String userId;       //작성자
+     private int productId;        //판매 카테고리
      
      public ItemForm() {}
 

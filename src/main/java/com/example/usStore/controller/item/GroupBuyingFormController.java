@@ -52,33 +52,29 @@ public class GroupBuyingFormController {
    private MyPageFacade myPageFacade;
    
    @ModelAttribute("GroupBuying")        
-   public GroupBuyingForm formBacking() {  // accessor method 
-      System.out.println("formBacking");
-      
+   public GroupBuyingForm formBacking() {  // accessor method 기본값들로 폼 초기화
       return new GroupBuyingForm();
    }
    
    @RequestMapping("/shop/groupBuying/listItem.do") 
-    public String groupBuyingList(@RequestParam("productId") int productId, ModelMap modelMap, Model model,  HttpServletRequest rq) throws ParseException {
+    public String groupBuyingList(@RequestParam("productId") int productId, ModelMap modelMap, 
+    		Model model,  HttpServletRequest rq) throws ParseException {
      
-
 	  HttpSession session = rq.getSession(false);
 	   
 	  Account account = null;
 	  if (session.getAttribute("userSession") != null) {
-	       UserSession userSession = (UserSession)session.getAttribute("userSession") ;
-	       if (userSession != null) {  //로그인상태이면 대학정보 가져온다 
+	       UserSession userSession = (UserSession)session.getAttribute("userSession") ; //로그인상태이면 대학정보 가져온다 
+	       if (userSession != null) { 
 	               account = userSession.getAccount();
 	       }
 	  }
 	  
       PagedListHolder<GroupBuying> groupBuyingList = new PagedListHolder<GroupBuying>(this.itemFacade.getGroupBuyingList(account));
-      groupBuyingList.setPageSize(4);
+      groupBuyingList.setPageSize(4);	//페이지 넘김 처리
       
-      for(GroupBuying groupBuying : itemFacade.getGroupBuyingList(account)) {	//만일 재고가 0인 상품이 있을경우, 공동구매 진행 마감으로 변경
-	      if(groupBuying.getQty() == 0) {
-	    	  itemFacade.soldOutGroupBuying(groupBuying.getItemId());
-    	  }
+      for(GroupBuying groupBuying : itemFacade.getGroupBuyingList(account)) {	//만일 재고가 0인 상품이 있을경우, 공동구매 진행 마감
+	      if(groupBuying.getQty() == 0) { itemFacade.soldOutGroupBuying(groupBuying.getItemId());  }
       }
       
       model.addAttribute("productId", productId);
@@ -87,15 +83,13 @@ public class GroupBuyingFormController {
    }   
    
    @RequestMapping("/shop/groupBuying/listItem2.do")
-   public String groupBuyingList2 (
-         @ModelAttribute("groupBuyingList") PagedListHolder<GroupBuying> groupBuyingList,
-         @RequestParam("pageName") String page, @RequestParam("productId") int productId, 
-         ModelMap modelMap, Model model) throws Exception {
-      System.out.println(groupBuyingList);
-      if ("next".equals(page)) {
+   public String groupBuyingList2 (@ModelAttribute("groupBuyingList") PagedListHolder<GroupBuying> groupBuyingList, 
+		   @RequestParam("pageName") String page, @RequestParam("productId") int productId, ModelMap modelMap, Model model) throws Exception {
+	   
+      if ("next".equals(page)) {	//공동구매 목록에서  next 클릭시 다음 목록 페이지로 이동
          groupBuyingList.nextPage();
       }
-      else if ("previous".equals(page)) {
+      else if ("previous".equals(page)) {	//공동구매 목록에서  previous 클릭시 이전 목록 페이지로 이동
          groupBuyingList.previousPage();
       }
       
@@ -105,19 +99,16 @@ public class GroupBuyingFormController {
    }
    
    @RequestMapping(value="/shop/groupBuying/addItem2.do", method = RequestMethod.GET)
-   public String step2(@ModelAttribute("GroupBuying") GroupBuyingForm groupBuyingForm, 
-         @RequestParam("productId") int productId, Model model, HttpServletRequest rq) {
-      System.out.println("groupBuyingForm controller");   //print toString
-      
+   public String step2(@ModelAttribute("GroupBuying") GroupBuyingForm groupBuyingForm, @RequestParam("productId") int productId, 
+		   Model model, HttpServletRequest rq) {
+	   
       HttpSession session = rq.getSession(false);
       if(session.getAttribute("status") != null) {   //수정일 경우
          int status = (int) session.getAttribute("status");
          int itemId = status;
          
-         System.out.println("from edit - addItem2.do");
          GroupBuying gb = itemFacade.getGroupBuyingItem(itemId);
          groupBuyingForm.setListPrice(gb.getListPrice());   //할인가 기존값으로 초기화
-         System.out.println(groupBuyingForm);
       }
       
       model.addAttribute("productId", productId);
@@ -127,24 +118,23 @@ public class GroupBuyingFormController {
    @RequestMapping(value="/shop/groupBuying/gobackItem.do", method = RequestMethod.GET)      // go back to item.jsp
    public String backToItem(@ModelAttribute("GroupBuying") GroupBuyingForm groupBuyingForm, 
          @RequestParam("productId") int productId) {
-      System.out.println("go back to item.jsp");
-      return "redirect:/shop/item/addItem.do?productId="+productId;   // step1(item.jsp) form step2(addGroupBuying.jsp)
+	   
+      return "redirect:/shop/item/addItem.do?productId=" + productId;   // step1(item.jsp) form step2(addGroupBuying.jsp)
    }
    
    @PostMapping("/shop/groupBuying/step3.do")      // go checkGroupBuying.jsp
    public String goCheck(@ModelAttribute("GroupBuying") GroupBuyingForm groupBuyingForm, BindingResult result,
          HttpServletRequest rq, ItemForm itemForm, Model model, ModelMap modelMap) {   
-      System.out.println("step3.do(before check form)");
+	   
       HttpSession session = rq.getSession(false);
       new GroupBuyingFormValidator().validate(groupBuyingForm, result);
       
       if(session.getAttribute("itemForm") != null) {
          itemForm = (ItemForm) session.getAttribute("itemForm");
-         System.out.println("itemformSession: " + itemForm);   //print itemformSession toString
       }
       
-      if(groupBuyingForm.getListPrice() >= itemForm.getUnitCost()) {   //할인가는 정가보다 낮은 가격이어야 함
-         result.rejectValue("listPrice", "mustDiscount");
+      if(itemForm.getUnitCost() >= groupBuyingForm.getListPrice()) {   //판매가는 정가보다 낮은 가격이어야 함
+         result.rejectValue("listPrice", "isSmall");
       }
       
       if (result.hasErrors()) {   //유효성 검증 에러 발생시
@@ -156,17 +146,12 @@ public class GroupBuyingFormController {
       double listPrice = groupBuyingForm.getListPrice();
       double unitCost = itemForm.getUnitCost();
       
-      calDiscount = (int) ((unitCost - listPrice) / unitCost * 100);   //할인율 계산
-      System.out.println("calDiscount: " + calDiscount);
-      
+      calDiscount = (int) ((listPrice - unitCost) / listPrice * 100);   //할인율 계산
+
       groupBuyingForm.setDiscount(calDiscount);
        
-      String date = groupBuyingForm.getDate();
-      String time = groupBuyingForm.getTime();
-      String deadLine = date + " " + time + ":00";
+      String deadLine = groupBuyingForm.getDate() + " " + groupBuyingForm.getTime() + ":00";
       groupBuyingForm.setDeadLine(deadLine);
-      
-      System.out.println(groupBuyingForm);
       
       model.addAttribute(itemForm);
       modelMap.addAttribute("tags", itemForm.getTags());
@@ -178,7 +163,6 @@ public class GroupBuyingFormController {
          ItemForm itemformSession, BindingResult result, Model model, HttpServletRequest rq, 
          SessionStatus sessionStatus, ModelMap modelMap) throws ParseException {
       int status = 0;
-      System.out.println("detailItem.do");
       
       HttpSession session = rq.getSession(false);
       itemformSession = (ItemForm) session.getAttribute("itemForm");
@@ -187,31 +171,16 @@ public class GroupBuyingFormController {
          status = (int) session.getAttribute("status");
       }
       
-      if(session.getAttribute("userSession") != null) {
-         UserSession userSession = (UserSession) session.getAttribute("userSession");
-         System.out.println(userSession);
-      }
-      
       UserSession userSession = (UserSession) session.getAttribute("userSession");
       String suppId = userSession.getAccount().getUserId();
-      System.out.println("suppId: " + suppId);
-            
-      if(session.getAttribute("itemForm") != null) {
-         System.out.println("itemformSession: " + itemformSession);   //print itemformSession toString
-      }
-      System.out.println(groupBuyingform);
-   
+          
       //put itemformSession to item
-      Item item = new Item(itemformSession.getUnitCost(), itemformSession.getTitle(), 
-            itemformSession.getDescription(), itemformSession.getQty(), suppId,    
-            itemformSession.getProductId());
+      Item item = new Item(itemformSession.getUnitCost(), itemformSession.getTitle(), itemformSession.getDescription(), 
+    		  itemformSession.getQty(), suppId, itemformSession.getProductId());
       
       if(status != 0) {   //수정인 경우
          item.setItemId(status);   //status == itemId
          item.setViewCount(itemformSession.getViewCount());   //기존의 조회수 그대로 적용
-      
-         System.out.println("조회수:" + itemformSession.getViewCount());
-         System.out.println("itemId: " + item.getItemId());   //print itemformSession toString
       
          List<Tag> tags = itemFacade.getTagByItemId(status);   //기존 태그 호출
          System.out.println("tag size : " + tags.size());   //0
@@ -222,19 +191,15 @@ public class GroupBuyingFormController {
          }
       }
       
-      //generate tags(only have tagName)      
+      //generate tags(only have tagName) if(tag != null && "") then addTags
       for(int i = 0; i < itemformSession.getTags().size(); i++) {
-         item.makeTags(itemformSession.getTags().get(i));   //if(tag != null && "") then addTags
+         item.makeTags(itemformSession.getTags().get(i));  
       }
-      System.out.println("최종 태그:" + item.getTags());
-   
-      System.out.println("deadLine : " + groupBuyingform.getDeadLine());
+      
       GroupBuying gb = new GroupBuying(item, groupBuyingform.getDiscount(), groupBuyingform.getListPrice(), groupBuyingform.getDeadLine());
       
       if(status != 0) { itemFacade.updateGroupBuying(gb); }  //update DB- transaction
-      else {   itemFacade.insertGroupBuying(gb); }  // insert DB - transaction
-      
-      System.out.println(gb);
+      else { itemFacade.insertGroupBuying(gb); }  // insert DB - transaction
       
       sessionStatus.setComplete();   // groupBuying, editStatus session close
       session.removeAttribute("itemForm");   //itemForm session close
@@ -244,19 +209,14 @@ public class GroupBuyingFormController {
       Date date = dt.parse(groupBuyingform.getDeadLine()); 
       
       itemFacade.groupBuyingScheduler(date);
-      
-      GroupBuying g = itemFacade.getGroupBuyingItem(gb.getItemId());
-      System.out.println("확인: " + g);
-      
+     
       return "redirect:/shop/groupBuying/viewItem.do?itemId=" + gb.getItemId() + "&productId=" + item.getProductId();
    }
    
    @RequestMapping("/shop/groupBuying/viewItem.do") //detail Page(조회수++)
-   public String viewGroupBuying(@RequestParam("itemId") int itemId, 
-         HttpServletRequest rq, @RequestParam("productId") int productId, Model model, Model modelMap) throws ParseException
+   public String viewGroupBuying(@RequestParam("itemId") int itemId, HttpServletRequest rq,
+		   @RequestParam("productId") int productId, Model model, Model modelMap) throws ParseException
    {
-      System.out.println("viewItem.do");
-      
       String victim = null;
       String isAccuse = "false";
       
@@ -284,17 +244,12 @@ public class GroupBuyingFormController {
    }
    
    @RequestMapping("/shop/groupBuying/edit.do") //edit Item
-   public String editItem(ItemForm itemForm, 
-               Item item,   @RequestParam("itemId") int itemId, HttpServletRequest rq)
+   public String editItem(@RequestParam("itemId") int itemId, ItemForm itemForm, Item item, HttpServletRequest rq)
    {
       HttpSession session = rq.getSession(true);
       session.setAttribute("itemForm", itemForm);
       session.setAttribute("status", itemId);
 
-      int status = (int) session.getAttribute("status");
-      System.out.println("edit.do");
-      System.out.println("itemId(status) : " + status);
-      
       GroupBuying gb = itemFacade.getGroupBuyingItem(itemId);
       
       ItemForm itemFormSession = (ItemForm) session.getAttribute("itemForm");
@@ -327,7 +282,6 @@ public class GroupBuyingFormController {
    @RequestMapping("/shop/groupBuying/index.do") //go index(remove sessions)
    public String goIndex(SessionStatus sessionStatus, HttpServletRequest rq)
    {
-      System.out.println("go back index.do From [add / edit product]");
       HttpSession session = rq.getSession(false);
       
       sessionStatus.setComplete();// groupBuying session close
@@ -339,21 +293,17 @@ public class GroupBuyingFormController {
    
    @RequestMapping("/shop/groupBuying/goCart.do") //go index(remove sessions)
    public String goIndex(@RequestParam("workingItemId") int workingItemId, @RequestParam("productId") int productId)
-   {
-      return "redirect:/shop/addItemToCart.do?workingItemId=" + workingItemId + "&productId=" + productId;
-   }
+   { return "redirect:/shop/addItemToCart.do?workingItemId=" + workingItemId + "&productId=" + productId; }
    
    @RequestMapping("/shop/groupBuying/joint.do") //joint GroupBuying
    public void jointGroupBuying(@RequestParam("workingItemId") int workingItemId, @RequestParam("productId") int productId, 
          HttpServletResponse response) throws IOException
    {
-      System.out.println("jointGroupBuying");
-      
       PrintWriter out=response.getWriter();
       
       out.println("<script>");
       out.print("if (confirm('Do you want to participate in GroupBuying?') == true){");
-      out.print("alert('Go Participate in GroupBuying :)'); location.href='goCart.do?workingItemId=" + workingItemId + "&productId=" + productId + "';}");
+      out.print("location.href='goCart.do?workingItemId=" + workingItemId + "&productId=" + productId + "';}");
       out.print("else{location.href='viewItem.do?itemId=" + workingItemId + "&productId=" + productId + "';}");   //공동구매 진행 취소
       out.println("</script>");
       out.flush();

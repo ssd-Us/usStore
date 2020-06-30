@@ -3,11 +3,11 @@ package com.example.usStore.controller.item;
 public class GroupBuyingForm {
 	/* Private Fields */
 	private int itemId;
-	private int discount;	//calculate at controller
-	private int listPrice;
-	private String date;
-	private String time;
-	private String deadLine;
+	private int discount;	//할인율
+	private int listPrice;	//할인가
+	private String date;	//날짜
+	private String time;	//시간
+	private String deadLine;	//마감기한
 	  
 	  /* JavaBeans Properties */
 	  public int getItemId() {

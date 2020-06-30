@@ -12,8 +12,8 @@
    th, td {
       text-align: center;
       height:70px;
-      padding-left:43px;
-      padding-right:43px;
+      padding-left:30px;
+      padding-right:30px;
    }
          
    span#black {
@@ -46,7 +46,7 @@
     </td>
   </tr>
 </table> 
-   <form name = "pform" action="" style="position:absolute; left:42%; margin:0 0 0 -420px;">
+   <form name = "pform" action="" style="position:absolute; left:42%; margin:0 0 0 -400px;">
       <div class="container" >
          <div class="row"  style="display:inline">
             <div style="display:inline;float:left;">
@@ -86,7 +86,7 @@
                                 </a>
                 
                    </td>
-                   <td><del>정가 &nbsp;&nbsp;${gb.listPrice}원</del><br>할인가 &nbsp;${gb.unitCost}원</td>
+                   <td><del>정가 &nbsp;&nbsp;${gb.unitCost}원</del><br>할인가 &nbsp;${gb.listPrice}원</td>
                    <td>${gb.discount}%</td>
                    <td>${gb.qty}</td>
                    <td>${gb.deadLine}<br></td>
@@ -98,6 +98,10 @@
                   &nbsp;&nbsp;
                    </td>
                        
+                       <td><a href='<c:url value="/shop/groupBuying/joint.do">
+					            				<c:param name="workingItemId" value="${gb.itemId}"/>
+					            				<c:param name="productId" value="${productId}"/></c:url>'>
+					              		<img width="40" height="40" src="${pageContext.request.contextPath}/images/cart_img.png" alt="" /></a></td>
                   </tr>
                   </c:forEach>
                   </tbody>
@@ -112,7 +116,7 @@
                               <font color="black"><B>&lt;&lt; Prev</B></font>
                            </a>
                         </c:if>
-                     </td><td/><td/><td/><td/>
+                     </td><td/><td/><td/><td/><td/>
                      <td style="text-align: right;">
                         <c:if test="${!groupBuyingList.lastPage}">
                            <a href='<c:url value="/shop/groupBuying/listItem2.do">/>
