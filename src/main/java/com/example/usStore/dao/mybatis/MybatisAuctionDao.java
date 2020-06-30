@@ -1,6 +1,7 @@
 package com.example.usStore.dao.mybatis;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,6 +19,8 @@ import com.example.usStore.domain.Account;
 import com.example.usStore.domain.Auction;
 import com.example.usStore.domain.Bidder;
 import com.example.usStore.domain.Item;
+import com.example.usStore.domain.LineItem;
+import com.example.usStore.domain.Orders;
 import com.example.usStore.domain.Tag;
 
 @Transactional
@@ -28,14 +31,22 @@ public class MybatisAuctionDao implements AuctionDao {
    @Autowired
    private AuctionMapper auctionMapper;
    @Autowired
-	private ItemMapper itemMapper;
+   private ItemMapper itemMapper;
    @Autowired
    private TagMapper tagMapper;
 
    @Override
-   public void updateQuantity(int qty, int itemId, int productId) throws DataAccessException {
-      // TODO Auto-generated method stub
-      auctionMapper.updateQuantity(qty, itemId, productId);
+   public void updateQuantity(Orders order) throws DataAccessException {
+		for (int i = 0; i < order.getLineItems().size(); i++) {
+			System.out.println("MybatisItemDao");
+			LineItem lineItem = (LineItem) order.getLineItems().get(i);
+			int itemId = lineItem.getItemId();
+			Integer increment = new Integer(lineItem.getQuantity());
+			Map<String, Object> param = new HashMap<String, Object>(2);
+			param.put("itemId", itemId);
+			param.put("increment", increment);
+			auctionMapper.updateInventoryQuantity(param);
+		}
    }
 
    @Override

@@ -17,6 +17,8 @@ import com.example.usStore.dao.mybatis.mapper.TagMapper;
 import com.example.usStore.domain.Account;
 import com.example.usStore.domain.HandMade;
 import com.example.usStore.domain.Item;
+import com.example.usStore.domain.LineItem;
+import com.example.usStore.domain.Orders;
 import com.example.usStore.domain.Tag;
 
 @Transactional
@@ -34,18 +36,17 @@ public class MybatisHandMadeDao implements HandMadeDao {
 	private TagMapper tagMapper;
 	
 	@Override
-	public void updateQuantity(int qty, int itemId, int productId) throws DataAccessException {
-		// TODO Auto-generated method stub
-//		for (int i = 0; i < order.getLineItems().size(); i++) {
-//			LineItem lineItem = (LineItem) order.getLineItems().get(i);
-//			String itemId = lineItem.getItemId();
-//			Integer increment = new Integer(lineItem.getQuantity());
-//			Map<String, Object> param = new HashMap<String, Object>(2);
-//			param.put("itemId", itemId);
-//			param.put("increment", increment);
-//			itemMapper.updateInventoryQuantity(param);
-			handMadeMapper.updateQuantity(qty, itemId, productId);
-//		}
+	public void updateQuantity(Orders order) throws DataAccessException {
+		for (int i = 0; i < order.getLineItems().size(); i++) {
+			System.out.println("MybatisItemDao");
+			LineItem lineItem = (LineItem) order.getLineItems().get(i);
+			int itemId = lineItem.getItemId();
+			Integer increment = new Integer(lineItem.getQuantity());
+			Map<String, Object> param = new HashMap<String, Object>(2);
+			param.put("itemId", itemId);
+			param.put("increment", increment);
+			handMadeMapper.updateInventoryQuantity(param);
+		}
 	}
 
 	@Override
