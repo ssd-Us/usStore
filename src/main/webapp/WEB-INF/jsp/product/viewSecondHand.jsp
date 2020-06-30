@@ -133,16 +133,11 @@
 					     <c:param name="productId" value="${sh.productId}"/></c:url>">
 					 장바구니 추가</a>
 			</span>			
-				&nbsp;&nbsp;&nbsp;
-			<span>
-   				<a href="
-						<c:url value='/note/${sh.itemId}'/>	<!-- 로그인 여부 따지기 -->
-				">쪽지 보내기</a>
-			</span>
    			</td>
    	</tr> 	
    	<c:if test="${sh.userId eq userSession.account.userId}"> <!-- 로그인시 실행 -->
-		   		<td colspan="2" style="text-align: right; padding: 0px; font-size: small; border-bottom: none; border-top: 1px solid black;">
+		<tr>   		
+				<td colspan="2" style="text-align: right; padding: 0px; font-size: small; border-bottom: none; border-top: 1px solid black;">
 				   <a href="<c:url value='/shop/secondHand/edit.do'>
 				   				<c:param name="itemId" value="${sh.itemId}" />
 				   			</c:url>
@@ -153,7 +148,8 @@
 				   			</c:url>
 				   			"> [게시물 삭제하기]</a>
 				</td>		
+		</tr>
 	</c:if>
 </table>				
 </body>
-</html>
+<%@ include file="itemBottom.jsp" %>
