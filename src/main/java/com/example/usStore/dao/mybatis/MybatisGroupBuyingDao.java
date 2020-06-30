@@ -102,8 +102,15 @@ public class MybatisGroupBuyingDao implements GroupBuyingDao {
       return groupBuyingMapper.getGroupBuyingItem(itemId);
    }
    
+   @Override
    public void closeGroupBuying(Date curTime) {
       groupBuyingMapper.closeGroupBuying(curTime);
+   }
+   
+   //품절시 공동구매 종료 
+   @Override
+   public void soldOutGroupBuying(int itemId)  {
+	   groupBuyingMapper.soldOutGroupBuying(itemId);
    }
    
    @Override
