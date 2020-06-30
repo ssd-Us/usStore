@@ -3,20 +3,15 @@ package com.example.usStore.controller.item;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -58,13 +53,12 @@ public class ViewRankingController {
 		   
 		   for(Item item : groupBuyingList) {
 			   if(index == 10) break;
-			   RankList.add(index, new Rank(item.getItemId(), item.getTitle(), item.getViewCount()));
+			   RankList.add(index, new Rank(item.getItemId(), item.getTitle(), item.getViewCount(), "공동구매"));
 			   index++;
 		   }
 		   System.out.println("리스트:" + RankList);
 	   }
 	   else if(productId == 1) {
-		   System.out.println("중고거래");
 		   List<Item> auctionList = new ArrayList<Item>();
 		   auctionList = itemFacade.getItemByPId(productId);
 		   Collections.sort(auctionList);	//조회수 기준으로 내림차순 정렬
@@ -77,7 +71,7 @@ public class ViewRankingController {
 		   
 		   for(Item item : auctionList) {
 			   if(index == 10) break;
-			   RankList.add(index, new Rank(item.getItemId(), item.getTitle(), item.getViewCount()));
+			   RankList.add(index, new Rank(item.getItemId(), item.getTitle(), item.getViewCount(), "경매"));
 			   index++;
 		   }
 	   }
@@ -93,7 +87,7 @@ public class ViewRankingController {
 		   
 		   for(Item item : secondHandList) {
 			   if(index == 10) break;
-			   RankList.add(index, new Rank(item.getItemId(), item.getTitle(), item.getViewCount()));
+			   RankList.add(index, new Rank(item.getItemId(), item.getTitle(), item.getViewCount(), "중고거래"));
 			   index++;
 		   }
 	   }
@@ -109,7 +103,7 @@ public class ViewRankingController {
 		   
 		   for(Item item : handMadeList) {
 			   if(index == 10) break;
-			   RankList.add(index, new Rank(item.getItemId(), item.getTitle(), item.getViewCount()));
+			   RankList.add(index, new Rank(item.getItemId(), item.getTitle(), item.getViewCount(), "수공예 판매"));
 			   index++;
 		   }
 	   }
