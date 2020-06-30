@@ -66,7 +66,7 @@ public class SecondHandController {
             }
      }
     
-     PagedListHolder<SecondHand> secondHandList = new PagedListHolder<SecondHand>(
+      PagedListHolder<SecondHand> secondHandList = new PagedListHolder<SecondHand>(
             this.itemFacade.getSecondHandList(account));
       secondHandList.setPageSize(4);
 
@@ -93,9 +93,6 @@ public class SecondHandController {
    @RequestMapping("/shop/secondHand/viewItem.do")
    public String viewSecondHand(@RequestParam("itemId") int itemId, @RequestParam("productId") int productId,
          Model model, HttpServletRequest request) {
-      /*
-       * 뷰를 띄어줄때는 인터셉터를 걸면 안되는게..무조건 컨트롤러 보내줘야하니까,, 그대신 신고기능을 로그인이 안되있으면 못하도록..
-       */
       String victim = null;
       String isAccuse = "false";
       String attacker = this.itemFacade.getUserIdByItemId(itemId);
@@ -111,7 +108,6 @@ public class SecondHandController {
       //판매자 대학교 도로명 주소 
       String university = this.usStoreFacade.getAccountByUserId(attacker).getUniversity();
     		  
-      // sh가 아이템 상속받으니까 여기서 테그 꺼내쓰기
       List<Tag> tags = itemFacade.getTagByItemId(itemId);
       SecondHand sh = this.itemFacade.getSecondHandItem(itemId);
       this.itemFacade.updateViewCount(sh.getViewCount() + 1, itemId); //조회수 1증가
@@ -137,13 +133,11 @@ public class SecondHandController {
      public Account getSellerInfo(@PathVariable("userId") String userId, 
          HttpServletResponse response) throws IOException {
       
-           Account result = this.usStoreFacade.getAccountByUserId(userId);
+         Account result = this.usStoreFacade.getAccountByUserId(userId);
          if (result == null) {
             response.sendError(HttpServletResponse.SC_NOT_FOUND);
             return null;
-         }
-         
-                        
+         }          
          return result;
       }
 

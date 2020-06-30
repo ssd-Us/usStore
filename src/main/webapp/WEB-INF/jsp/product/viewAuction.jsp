@@ -89,17 +89,19 @@ function participation(price, unitCost, startPrice) {
    		<tr>
    			<th style="border-right: 1px solid black;">판매자</th>
    			<td>${auction.userId}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<c:choose>
-	   				<c:when test="${! empty userSession.account.userId}">
-						<%@ include file="/WEB-INF/jsp/account/accuseFunction.jsp" %>
-					</c:when>
-					<c:otherwise>
-					<span><a href="<c:url value='/addAccuseNoLogin.do'>
-					  <c:param name="itemId" value="${auction.itemId}"/>
-                         <c:param name="productId" value="${auction.productId}"/></c:url>">
-             				판매자 신고하기</a></span>
-					</c:otherwise>
-			</c:choose>
+   			<c:if test="${auction.userId ne userSession.account.userId}">
+					<c:choose>
+		   				<c:when test="${! empty userSession.account.userId}">
+							<%@ include file="/WEB-INF/jsp/account/accuseFunction.jsp" %>
+						</c:when>
+						<c:otherwise>
+						<span><a href="<c:url value='/addAccuseNoLogin.do'>
+						  <c:param name="itemId" value="${auction.itemId}"/>
+	                         <c:param name="productId" value="${auction.productId}"/></c:url>">
+	             				판매자 신고하기</a></span>
+						</c:otherwise>
+					</c:choose>
+			</c:if>
    			</td>
    		</tr> <!-- userId = suppId -->
    		

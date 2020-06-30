@@ -47,7 +47,7 @@ public class SecondHandFormController {
 	   return new String[] {"Yes", "No"};
    }
    
-   //여기부터 수정  이컨트롤러 공통사항으로 뺴도 되지아나유? 
+
    @RequestMapping("/shop/secondHand/index.do") //go index(remove sessions)
    public String goIndex(SessionStatus sessionStatus, HttpServletRequest rq)
    {
@@ -71,7 +71,7 @@ public class SecondHandFormController {
 			secondHandForm.setListPrice(sh.getListPrice());
 		
 			if(sh.getDiscount() == 0) { //흥정 불가능 
-				secondHandForm.setDiscount("No"); //여기  무슨값 넣어야하는지 모르게따고ㅜㅜ
+				secondHandForm.setDiscount("No");
 			}
 		}
         model.addAttribute("productId", productId);
@@ -118,7 +118,7 @@ public class SecondHandFormController {
 		if(session.getAttribute("status") != null) {
 			status = (int) session.getAttribute("status");
 		}else {
-			System.out.println("status 가 널이다아아아");
+			System.out.println("status가 null일 때 ");
 		}
 		
 		UserSession userSession = (UserSession)session.getAttribute("userSession");
@@ -150,18 +150,15 @@ public class SecondHandFormController {
 		//put secondHandForm to SecondHand domain 세션에 있는거 도메인에 저장 
 		String discount = secondHandForm.getDiscount();
 		SecondHand secondHand = null;
-		System.out.println("세컨핸드컨트롤러에서 디스카운트 출력값: " + discount);
 		if(discount.equals("Yes")) {
 			secondHand = new SecondHand(item, 1 ,secondHandForm.getListPrice());
 		}else if(discount.equals("No")){
 			secondHand = new SecondHand(item, 0 ,secondHandForm.getListPrice());
-		}else {
-			System.out.println("아무것도 선택안하면 검증에서 잡아주도록 수정하기");
 		}
 		
 		if(status != 0) { //수정일 때 
 			itemFacade.updateSecondHand(secondHand);
-		}else {  // 처음 디비에 저장할 떄 ,, 트랜젝션으로 묶기 
+		}else {  // 처음 디비에 저장할 떄 ,, 트랜젝션으로 묶음
 			itemFacade.insertSecondHand(secondHand);	// insert DB 세개의 다른 도메인들을 가져옴 근데 아이템은 세컨핸드가 상속해서 따로 안가져와도댐 
 		}
 	
@@ -179,7 +176,6 @@ public class SecondHandFormController {
 	
 		//itemId로 디비에서 세컨핸드와 태그 가져와서 도메인에 저장함 
 		SecondHand sh = itemFacade.getSecondHandItem(itemId);
-		//List<Tag> tags = sh.getTags(); 나중에 resultMap써서 이렇게 가져올 수 있도록 바꾸고 싶어염 하뚜 
 	
 		ItemForm itemForm = new ItemForm();
 		itemForm.setItemId(itemId);
@@ -192,8 +188,8 @@ public class SecondHandFormController {
 		itemForm.setProductId(sh.getProductId());
 		itemForm.setTags(sh.getTags());
 		  
-		session.setAttribute("status", itemId); //세션 종료 어디서 해주는지 다시 확인하기 
-		session.setAttribute("itemForm", itemForm); //왜 세션에 아이템폼을 유지? 어디서 세션 종료해주는지 다시 파악하기 
+		session.setAttribute("status", itemId); 
+		session.setAttribute("itemForm", itemForm); 
 		
 		return "redirect:/shop/item/addItem.do?productId=" + sh.getProductId();
 	}
