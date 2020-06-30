@@ -1,11 +1,5 @@
 package com.example.usStore.controller.item;
 
-import java.util.Date;
-import java.util.List;
-
-import com.example.usStore.domain.Auction;
-import com.example.usStore.domain.Tag;
-
 public class AuctionForm {
 	/* Private Fields */
 	private int itemId;

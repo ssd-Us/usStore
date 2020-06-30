@@ -159,9 +159,8 @@ public class AuctionFormController {
 	  System.out.println("<경매 상세 페이지>"); 
 	  
 	  Auction auction = this.itemFacade.getAuctionById(itemId);
-	  System.out.println("viewCount : " + auction.getViewCount());
+
 	  itemFacade.updateViewCount(auction.getViewCount() + 1, itemId);
-	  System.out.println("this auction's viewCount ++ ? : " + auction);
 	  
 	  myItemId = itemId;
 	  
@@ -186,10 +185,6 @@ public class AuctionFormController {
    public String auctionParticipate(HttpServletRequest rq, ModelMap model, ItemForm itemformSession) {
 	   int status = 0;
 	   
-	   System.out.println("<경매 참여>");
-	   
-	   
-	   
 	   HttpSession session = rq.getSession(false);
 	   itemformSession = (ItemForm) session.getAttribute("itemForm");
 		if(session.getAttribute("status") != null) {
@@ -203,37 +198,28 @@ public class AuctionFormController {
 		
 		UserSession userSession = (UserSession) session.getAttribute("userSession");
 		String suppId = userSession.getAccount().getUserId();
-		System.out.println("suppId: " + suppId);
 	   
 		if(session.getAttribute("itemForm") != null) {
 			System.out.println("itemformSession: " + itemformSession);	//print itemformSession toString
 		}  
 	   
-	   
 	   int price = Integer.parseInt(rq.getParameter("price"));
-	   System.out.println("입력 가격 : " + price);
 	   
 	   String rslt = itemFacade.isBidderExist(myItemId);
-	   System.out.println("낙찰자 검색 결과 : " + rslt);
 
-	   if (rslt == null) {//낙찰자가 없으면 낙찰자 테이블에 itemId, bidder 넣어주기
-		   System.out.println("낙찰자 테이블에 이 아이템이 없었음");
-		   
+	   if (rslt == null) {//낙찰자가 없으면 낙찰자 테이블에 itemId, bidder 넣어주기		   
 		   Bidder bidder = new Bidder();
 		   bidder.setItemId(myItemId);
-		   bidder.setBidder(suppId); //로그인이 구현 안되어서 일단 임의로 admin 넣어줌
+		   bidder.setBidder(suppId); 
 		   
 		   itemFacade.insertBidder(bidder);
 	   }
-	   else {//이미 낙찰자가 있으면 낙찰자 테이블에 bidder 수정
-		   System.out.println("낙찰자 테이블에 이 아이템이 있음");
-		   
-		   itemFacade.updateBidder(suppId, myItemId); //여기도 로그인 구현이 안되어서 임의로 admin 넣어줌
+	   else {//이미 낙찰자가 있으면 낙찰자 테이블에 bidder 수정		   
+		   itemFacade.updateBidder(suppId, myItemId); 
 	   }
 	   
 	   //파라미터로 받아온 입력 가격(price)을 item 테이블의 unitCost 필드에 update 해주기
 	   itemFacade.updateAuctionUnitCost(price, myItemId);
-	   System.out.println("Auction UnitCost 수정 완료");
 	   
 	   return "redirect:/shop/auction/viewItem.do?itemId=" + myItemId + "&productId=" + myProductId;
    }
@@ -243,8 +229,6 @@ public class AuctionFormController {
    public String step2(
          @ModelAttribute("Auction") AuctionForm auctionForm, 
          @RequestParam("productId") int productId, Model model, HttpServletRequest rq) {
-      
-      System.out.println("경매 추가 컨트롤러 들어왔음");   //print toString
       
       HttpSession session = rq.getSession(false);
 		if(session.getAttribute("status") != null) {
@@ -258,7 +242,7 @@ public class AuctionFormController {
    @RequestMapping(value="/shop/auction/gobackItem.do", method = RequestMethod.GET)		// go back to item.jsp
 	public String backToItem(@ModelAttribute("Auction") AuctionForm auctionForm, 
 			@RequestParam("productId") int productId) {
-		System.out.println("go back to item.jsp");
+		
 		return GoAddItemFORM + productId;	// step1(item.jsp) form step2(addAuction.jsp)
 	}
 	
@@ -276,8 +260,6 @@ public class AuctionFormController {
 			System.out.println("itemformSession: " + itemForm);	//print itemformSession toString
 			System.out.println(itemForm.getTags());
 		}
-		
-		System.out.println(auctionForm);
 		
 		if (result.hasErrors()) {	//유효성 검증 에러 발생시
 			model.addAttribute("productId", itemForm.getProductId());
@@ -299,7 +281,6 @@ public class AuctionFormController {
 			SessionStatus sessionStatus, ModelMap modelMap) throws ParseException {
 		
 		int status = 0;
-		System.out.println("detailItem.do");
 		
 		HttpSession session = rq.getSession(false);
 		itemformSession = (ItemForm) session.getAttribute("itemForm");
@@ -314,7 +295,6 @@ public class AuctionFormController {
 		
 		UserSession userSession = (UserSession) session.getAttribute("userSession");
 		String suppId = userSession.getAccount().getUserId();
-		System.out.println("suppId: " + suppId);
 				
 		if(session.getAttribute("itemForm") != null) {
 			System.out.println("itemformSession: " + itemformSession);	//print itemformSession toString
@@ -331,9 +311,6 @@ public class AuctionFormController {
 			item.setItemId(status);   //status == itemId
 	         item.setViewCount(itemformSession.getViewCount());   //기존의 조회수 그대로 적용
 	      
-	         System.out.println("조회수:" + itemformSession.getViewCount());
-	         System.out.println("itemId: " + item.getItemId());   //print itemformSession toString
-	      
 	         List<Tag> tags = itemFacade.getTagByItemId(status);   //기존 태그 호출
 	         System.out.println("tag size : " + tags.size());   //0
 	         
@@ -342,13 +319,12 @@ public class AuctionFormController {
 	            tags.removeAll(tags);   
 	         }
 		}
+		
 		//generate tags(only have tagName)      
 	    for(int i = 0; i < itemformSession.getTags().size(); i++) {
 	    	item.makeTags(itemformSession.getTags().get(i));   //if(tag != null && "") then addTags
 	    }
-	    System.out.println("최종 태그:" + item.getTags());
-		
-		System.out.println("deadLine : " + auctionForm.getDeadLine());
+	    
 		Auction auction = new Auction(item, 0, auctionForm.getDeadLine(), auctionForm.getStartPrice(), 0);
 	
 		if(status != 0) {
@@ -357,8 +333,6 @@ public class AuctionFormController {
 		else {
 			itemFacade.insertAuction(auction);	// insert DB
 		}
-		
-		System.out.println(auction);
 		
 		sessionStatus.setComplete();	// Auction session close
 		session.removeAttribute("itemForm");	//itemForm session close
@@ -376,10 +350,6 @@ public class AuctionFormController {
 	   HttpSession session = rq.getSession(true);
 	   session.setAttribute("itemForm", itemForm);
 	   session.setAttribute("status", itemId);
-
-	   int status = (int) session.getAttribute("status");
-	   System.out.println("edit.do");
-	   System.out.println("itemId(status) : " + status);
 
 	   Auction auction = itemFacade.getAuctionById(itemId);
 	   
@@ -409,7 +379,6 @@ public class AuctionFormController {
 	public ModelAndView handleRequest(HttpServletRequest request,
 			@RequestParam("keyword")
 			@DateTimeFormat(pattern="yyyy-MM-dd HH:mm") Date deadLine) throws Exception {
-		System.out.println(deadLine);
 		itemFacade.testScheduler(deadLine);
 		return new ModelAndView("Scheduled", "deadLine", deadLine);	
 	}
@@ -417,7 +386,6 @@ public class AuctionFormController {
    @RequestMapping("/shop/auction/index.do") //go index(remove sessions)
    public String goIndex(SessionStatus sessionStatus, HttpServletRequest rq)
    {
-      System.out.println("go back index.do From [add / edit product]");
       HttpSession session = rq.getSession(false);
       
       sessionStatus.setComplete();// auction session close

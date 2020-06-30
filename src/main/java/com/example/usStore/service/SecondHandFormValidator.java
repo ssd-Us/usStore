@@ -27,5 +27,4 @@ public class SecondHandFormValidator implements Validator  {
 			errors.rejectValue("listPrice", "tooSmall");
 		}
 	}
-
 }

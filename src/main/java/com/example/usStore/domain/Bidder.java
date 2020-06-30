@@ -1,7 +1,9 @@
 package com.example.usStore.domain;
 
+import java.io.Serializable;
+
 @SuppressWarnings("serial")
-public class Bidder {
+public class Bidder implements Serializable {
 	/* Private Fields */
 	private int itemId;
 	private String bidder;

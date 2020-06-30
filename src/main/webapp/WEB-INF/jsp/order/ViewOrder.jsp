@@ -13,7 +13,7 @@
   <c:if test="${!empty message}">
     <b><c:out value="${message}" /></b>
   </c:if>
-  
+  <h2>Order Infomation</h2>
   <p></p>
   <table class="n13">
     <tr>
@@ -138,4 +138,5 @@
     </tr>
   </table>
 </div>
+<br><br>
 <%@ include file="../IncludeBottom.jsp" %>

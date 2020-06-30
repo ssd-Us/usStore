@@ -48,4 +48,26 @@ public class ViewOrderController {
 			return new ModelAndView("Error", "message", "You may only view your own orders.");
 		}
 	}
+	
+	@RequestMapping("/shop/order/viewItem.do") // go index(remove sessions)
+	public String goIndex(@RequestParam("itemId") int itemId, @RequestParam("productId") int productId) {
+		String viewItem = "";
+
+		switch (productId) {
+		case 0:
+			viewItem = "redirect:/shop/groupBuying/viewItem.do";
+			break;
+		case 1:
+			viewItem = "redirect:/shop/auction/viewItem.do";
+			break;
+		case 2:
+			viewItem = "redirect:/shop/secondHand/viewItem.do";
+			break;
+		case 3:
+			viewItem = "redirect:/shop/handMade/viewItem.do";
+			break;
+		}
+
+		return viewItem + "?itemId=" + itemId + "&productId=" + productId;
+	}
 }

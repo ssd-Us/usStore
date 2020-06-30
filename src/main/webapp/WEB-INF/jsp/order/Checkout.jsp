@@ -18,47 +18,44 @@
   <tr>
     <td style="text-align: center; vertical-align: top">
       <h2>Checkout Summary</h2>
-      <table class="table table-hover">
+      <table class="table table-hover" style="text-align:center">
       	<thead>
         <tr bgcolor="#FFFFFF">
-            <th scope="col"><b>제품 코드</b></th>
             <th scope="col"><b>제품명</b></th>
             <th scope="col"><b>설명</b></th>
             <th scope="col"><b>재고여부</b></th>
             <th scope="col"><b>개수</b></th>
             <th scope="col"><b>가격</b></th>
             <th scope="col"><b>총액</b></th>
-            <th scope="col">&nbsp;</th>
         </tr>
         </thead>
         <tbody>
         <c:forEach var="cartItem" items="${cart.cartItemList.pageList}">
           <tr bgcolor="#FFFFFF">
-            <th scope="row"> 
-              <a href='<c:url value="/shop/viewItem.do">
-                <c:param name="itemId" value="${cartItem.item.itemId}"/></c:url>'>
-                  <c:out value="${cartItem.item.itemId}" />
-              </a>
-            </th>
-            <td><c:out value="${cartItem.item.title}" /></td>
-            <td>
+            <td scope="row">
+               	<a href='<c:url value="/shop/order/viewItem.do">
+                  <c:param name="itemId" value="${cartItem.item.itemId}"/>
+                  <c:param name="productId" value="${cartItem.item.productId}"/></c:url>'>
+                  <c:out value="${cartItem.item.title}" />
+                </a>
+            </td>
+            <td scope="row">
               <c:out value="${cartItem.item.description}" />
             </td>
-            <td align="center"><c:out value="${cartItem.inStock}" /></td>
-            <td align="center"><c:out value="${cartItem.quantity}" /></td>
-            <td align="right"><fmt:formatNumber
+            <td scope="row" align="center"><c:out value="${cartItem.inStock}" /></td>
+            <td scope="row" align="center"><c:out value="${cartItem.quantity}" /></td>
+            <td scope="row" align="right"><fmt:formatNumber
                 value="${cartItem.item.unitCost}" pattern="###,###,###원" /></td>
-            <td align="right"><fmt:formatNumber
+            <td scope="row" align="right"><fmt:formatNumber
                 value="${cartItem.totalPrice}" pattern="###,###,###원" /></td>
           </tr>
         </c:forEach>
         <tr bgcolor="#FFFFFF">
-          <td colspan="7" align="right"><b>Sub Total: <fmt:formatNumber
+          <td scope="row" colspan="7" align="right"><b>Sub Total: <fmt:formatNumber
                 value="${cart.subTotal}" pattern="###,###,###원" /></b><br /></td>
         </tr>
         </tbody>
       </table>
-
       <c:if test="${!cart.cartItemList.firstPage}">
         <a href="checkout.do?page=previousCart"><font color="green">
           <B>&lt;&lt; Prev</B></font></a>

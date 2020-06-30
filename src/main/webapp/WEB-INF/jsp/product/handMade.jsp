@@ -48,16 +48,16 @@
 	                                			</c:url>"> <font>${item.title}</font>
 										</a>
 									</td>
-									<td>${item.listPrice}원</td>
+									<td>${item.unitCost}원</td>
 									<td>${item.userId}</td>
-									<c:if test="${item.qty ne 0}">
+									<c:if test="${item.qty > 0}">
 										<td>${item.qty}</td>
 										<td><a href='<c:url value="/shop/addItemToCart.do">
 					            				<c:param name="workingItemId" value="${item.itemId}"/>
 					            				<c:param name="productId" value="${item.productId}"/></c:url>'>
 					              		<img width="40" height="40" src="${pageContext.request.contextPath}/images/cart_img.png" alt="" /></a></td> 
 									</c:if>
-									<c:if test="${item.qty eq 0}">
+									<c:if test="${item.qty <= 0}">
 										<td><button type="button" class="btn btn-outline-danger">품절</button></td>
 									</c:if>
 								</tr>
@@ -66,16 +66,18 @@
 						<!-- 페이지 구분  -->
 						<tr>
 							<td colspan="2">
-								<c:if test="${!itemList.firstPage}">
+								<c:if test="${!handMadeList.firstPage}">
 									<a href='<c:url value="/shop/handMade/listItem2.do">
+											<c:param name="productId" value="${productId}"/>
 	           								<c:param name="pageName" value="previous"/></c:url>'>
 										<font color="black"><B>&lt;&lt; Prev</B></font>
 									</a>
 								</c:if>
 							</td>
 							<td colspan="2">
-								<c:if test="${!itemList.lastPage}">
+								<c:if test="${!handMadeList.lastPage}">
 									<a href='<c:url value="/shop/handMade/listItem2.do">/>
+											 <c:param name="productId" value="${productId}"/>
 	            							 <c:param name="pageName" value="next"/></c:url>'>
 										<font color="black"><B>Next &gt;&gt;</B></font>
 									</a>
@@ -87,8 +89,6 @@
 			</div>
 		</div>
 	</div>
-<br>
-<br>
+	<br>
+	<br>
 </form>
-
-<%@ include file="itemBottom.jsp"%>

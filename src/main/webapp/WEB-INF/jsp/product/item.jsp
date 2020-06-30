@@ -47,7 +47,7 @@
 	<form:errors path="unitCost"/> <br><br>
 	</c:if>
 	<c:if test="${pId != 1}">
-	정가 : <form:input type="text" path="unitCost" value="${unitCost}"/>
+	판매가 : <form:input type="text" path="unitCost" value="${unitCost}"/>
 	<form:errors path="unitCost"/> <br><br>
 	</c:if>
 	

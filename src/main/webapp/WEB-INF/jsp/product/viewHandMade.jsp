@@ -113,7 +113,7 @@
    		<tr>
    		<th style="border-right: 1px solid black;">판매가</th>
    			<td>
-   				<c:out value="${handMade.listPrice}" /> 원
+   				<c:out value="${handMade.unitCost}" /> 원
    			</td>
    		</tr>
    		
@@ -121,10 +121,10 @@
    			<!-- Quantity -->
    			<th style="border-right: 1px solid black;">수량 </th> 
 	   		<td>
-	   			<c:if test="${handMade.qty eq 0}">
+	   			<c:if test="${handMade.qty <= 0}">
 			        <button type="button" class="btn btn-outline-danger">품절</button>	
 			    </c:if> 
-			    <c:if test="${handMade.qty ne 0}">
+			    <c:if test="${handMade.qty > 0}">
 			        <font size="2"><fmt:formatNumber value="${handMade.qty}" /> 개 남았습니다.</font>
 			    </c:if>
 	   		</td>
@@ -142,7 +142,8 @@
 			</span>
    			</td>
    		</tr>
-   		<c:if test="${handMade.userId eq suppId}"> <!-- ë¡ê·¸ì¸ì ì¤í -->
+   		
+   		<c:if test="${userSession.account.userId eq handMade.userId}">
 	   		<tr>
 		   		<td colspan="2" style="text-align: right; padding: 0px; font-size: small; border-bottom: none; border-top: 1px solid black;">
 				   <a href="<c:url value='/shop/handMade/edit.do'>
@@ -158,6 +159,4 @@
 			 </tr>
 		</c:if>
    	</table>
-   	<br><br>
 </body>
-<%@ include file="itemBottom.jsp" %>

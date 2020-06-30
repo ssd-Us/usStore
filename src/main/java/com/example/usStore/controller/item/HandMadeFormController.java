@@ -86,6 +86,7 @@ public class HandMadeFormController {
    // 아이템 4개마다 페이지 구분, 다음 페이지나 이전 페이지로 전환하도록 해주는 Controller
    @RequestMapping("shop/handMade/listItem2.do")
    public String listHandMade2 (
+		 @RequestParam("productId") int productId, 
          @ModelAttribute("handMadeList") PagedListHolder<HandMade> handMadeList,
          @RequestParam("pageName") String page,
          ModelMap model) throws Exception {
@@ -96,6 +97,7 @@ public class HandMadeFormController {
          handMadeList.previousPage();
       }
       model.put("handMadeList", handMadeList);
+      model.put("productId", productId);
       return HANDMADE_LIST;
    }
    
@@ -163,7 +165,7 @@ public class HandMadeFormController {
          System.out.println("itemformSession: " + itemForm);   //print itemformSession toString
       }
       if(handMadeForm.getListPrice() >= itemForm.getUnitCost()) {
-         bindingResult.rejectValue("listPrice", "mustDiscount");
+         bindingResult.rejectValue("listPrice", "isSmall");
       }
       
       if (bindingResult.hasErrors()) {   //유효성 검증 에러 발생시
