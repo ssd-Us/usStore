@@ -33,7 +33,7 @@
 
 	<form:form modelAttribute="GroupBuying" method="post" action="step3.do">
 		
-	할인가 : <form:input type="text" path="listPrice" value="${listPrice}" />
+	정가 : <form:input type="text" path="listPrice" value="${listPrice}" />
 	<form:errors path="listPrice"/> <br><br>
 	
 	마감 날짜 : 

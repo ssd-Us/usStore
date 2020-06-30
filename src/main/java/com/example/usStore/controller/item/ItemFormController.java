@@ -19,49 +19,42 @@ public class ItemFormController {
    
    @ModelAttribute("item")        
       public ItemForm formBacking(HttpServletRequest rq, @RequestParam("productId") int productId) {  // accessor method 
-         System.out.println("item controller formBacking");
             HttpSession session = rq.getSession(false);
             ItemForm itemForm;
-            if((ItemForm) session.getAttribute("itemForm") != null) {
-               System.out.println("session alive");
+            if((ItemForm) session.getAttribute("itemForm") != null) {	//수정을 통해서 addItem폼에 들어온 경우
                ItemForm itemFormSession = (ItemForm) session.getAttribute("itemForm");
                System.out.println(itemFormSession);
                
-               return itemFormSession;
+               return itemFormSession;	//기존의 값으로 초기화
             }
             else {
-               System.out.println("session null");
                itemForm = new ItemForm();
-               itemForm.setProductId(autoDetectPid(rq.getRemoteAddr(), productId));   // itemForm.productId initializable
+               itemForm.setProductId(autoDetectPid(rq.getRemoteAddr(), productId));   // itemForm.productId 초기화
                return itemForm;
             }
       }
    
-   private int autoDetectPid(String remoteAddr, int productId) {   // itemForm.productId initialize
+   private int autoDetectPid(String remoteAddr, int productId) {   // itemForm.productId 초기화
       return productId;
    }
    
-   @RequestMapping(value="/shop/item/addItem.do", method = RequestMethod.GET)      // go to item.jsp
-   public String step1(@ModelAttribute("item") ItemForm itemForm, 
-         @RequestParam("productId") int productId, Model model) {
-      System.out.println("item controller");
-      
-      model.addAttribute("productId", productId);      // deliver [productId] to item.jsp
-      return "product/item";   //form view(item.jsp)
+   @RequestMapping(value="/shop/item/addItem.do", method = RequestMethod.GET)      //item.jsp 이동
+   public String step1(@ModelAttribute("item") ItemForm itemForm, @RequestParam("productId") int productId, 
+		   Model model) {
+    
+	   model.addAttribute("productId", productId);      // [productId] to item.jsp 전달
+	   return "product/item";   //form view(item.jsp)
    }
    
-   @RequestMapping(value="/shop/item/addItem2.do", method = RequestMethod.POST)   // addGb.jsp 
+   @RequestMapping(value="/shop/item/addItem2.do", method = RequestMethod.POST)   // 각 판매에서 상품 추가 두번째 폼으로 이동
    public String submit(@ModelAttribute("item") ItemForm itemForm, BindingResult bindingResult, 
          @RequestParam("productId") int productId, HttpServletRequest rq, Model model) {
-      System.out.println("item.addItem2.do");
       
       new ItemFormValidator().validate(itemForm, bindingResult);
       
       String itemController = "";
       HttpSession httpSession = rq.getSession(true); 
             
-      System.out.println("itemForm : " + itemForm);
-      
       httpSession.setAttribute("itemForm", itemForm);   //generate item session
       
       if (bindingResult.hasErrors()) {   //유효성 검증 에러 발생시
@@ -109,4 +102,5 @@ public class ItemFormController {
       
       return url;
    }
+   
 }
