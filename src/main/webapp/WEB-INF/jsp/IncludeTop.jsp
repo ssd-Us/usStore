@@ -90,7 +90,7 @@
 						<form name="searchForm"
 							action="<c:url value='/shop/search/viewItem.do'/>">
 							<input type="radio" name="sKind" value="title">제목&nbsp; 
-							<input type="radio" name="sKind" value="tag">태그 <br> 
+							<input type="radio" name="sKind" value="tag" checked="checked">태그 <br> 
 							<input type="text" id="word" name="word" placeholder="검색어" />
 							<button class="btn btn-light dropdown-item"
 								onclick="search(word.value)">Click To Search!</button>

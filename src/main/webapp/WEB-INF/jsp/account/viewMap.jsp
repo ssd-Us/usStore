@@ -2,8 +2,6 @@
 
 <div id="map" style="width:500px;height:400px;"></div>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=	16f579279a1287e67ce21e5500798017&libraries=services,clusterer,drawing"></script>
-
-<!-- 판매자의 대학교는 판매자 userId로 getAccountByUserId().getUniversity() -->
 <script>
 		var x1 = 127.0428;
 		var y1 = 37.6065;
@@ -19,10 +17,7 @@
 		// 주소-좌표 변환 객체를 생성합니다
 		var geocoder = new kakao.maps.services.Geocoder();
 
-		//애초에 회원가입할 때 대학에 도로명 주소를 입력하면..된다..? 
-		//var uni = '성내로80'; 
 		var uni = "${university}"; //실제 판매자 대학교의 도로명 주소 
-		alert(uni);
 		// 주소로 좌표를 검색합니다
 		geocoder.addressSearch(uni, function(result, status) {
 
@@ -47,23 +42,4 @@
 		        map.setCenter(coords);
 		    } 
 		});    
-		
-/* 		// 마커가 표시될 위치입니다 -판매자의 마커와 유저의 마커 두개 만들기 
-		var markerPosition1  = new kakao.maps.LatLng(y1, x1); 
-		var markerPosition2  = new kakao.maps.LatLng(y2, x2); 
-		
-		// 마커를 생성합니다
-		var marker1 = new kakao.maps.Marker({
-		    position: markerPosition1
-		});
-
-		var marker2 = new kakao.maps.Marker({
-		    position: markerPosition2
-		});
-
-		// 마커가 지도 위에 표시되도록 설정합니다
-		marker1.setMap(map);
-		marker2.setMap(map); */
-		
-
 </script>
