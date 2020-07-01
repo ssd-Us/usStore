@@ -36,7 +36,8 @@
 			    font-size: medium;
 			    padding: 15px;
 	}
-	
+}
+
 </style>
 <script>
 function participation(price, unitCost, startPrice) {
@@ -59,6 +60,37 @@ function participation(price, unitCost, startPrice) {
 		alert("참여 금액이 적습니다.");
 	}
 }
+
+
+function getTime() { 
+	var time = "${auction.deadLine}";
+
+	var year = time.substring(0, 4);
+	var month = time.substring(5, 7) - 1;
+	var day = time.substring(8, 10);
+	var hour = time.substring(11, 13);
+	var minute = time.substring(14, 16);
+	var second = time.substring(17);
+
+	
+now = new Date(); 
+dday = new Date(year, month, day, hour, minute, second); 
+// 원하는 날짜, 시간 정확하게 초단위까지 기입.
+days = (dday - now) / 1000 / 60 / 60 / 24; 
+daysRound = Math.floor(days); 
+hours = (dday - now) / 1000 / 60 / 60 - (24 * daysRound); 
+hoursRound = Math.floor(hours); 
+minutes = (dday - now) / 1000 /60 - (24 * 60 * daysRound) - (60 * hoursRound); 
+minutesRound = Math.floor(minutes); 
+seconds = (dday - now) / 1000 - (24 * 60 * 60 * daysRound) - (60 * 60 * hoursRound) - (60 * minutesRound); 
+secondsRound = Math.round(seconds); 
+
+document.getElementById("counter0").innerHTML = daysRound; 
+document.getElementById("counter1").innerHTML = hoursRound; 
+document.getElementById("counter2").innerHTML = minutesRound; 
+document.getElementById("counter3").innerHTML = secondsRound; 
+newtime = window.setTimeout("getTime();", 1000); 
+} 
 </script>
 <body>
 <table id="main-menu">
@@ -121,8 +153,19 @@ function participation(price, unitCost, startPrice) {
    		
    		<tr>
    			<th style="border-right: 1px solid black;"><font color=red>마감 날짜</font></th>
-   			<td><font color=red>${auction.deadLine}</font></td>
+   			<td width="400">
+   				<font color=red>${auction.deadLine}</font>
+   				<c:set var="state" value="${auction.auctionState}"/>
+   				<c:if test="${state eq 0}">
+   				<br><br>경매 종료까지 "<font id=counter0></font>일 <font id=counter1></font>시간 <font id=counter2></font>분 <font id=counter3></font>초" 남았습니다
+   				</c:if>
+   			</td>
+   			
    		</tr>
+   		
+   		<c:if test="${state eq 0}">
+   		<script>getTime()</script>
+   		</c:if>
    		
    		<tr>
    		<th style="border-right: 1px solid black;">가격</th>
@@ -184,6 +227,7 @@ function participation(price, unitCost, startPrice) {
 				</c:if>
    			</td>
    		</tr>
+   		
    		
    		<c:if test="${auction.userId eq userSession.account.userId}"> <!-- 로그인시 실행 -->
    		<tr>
