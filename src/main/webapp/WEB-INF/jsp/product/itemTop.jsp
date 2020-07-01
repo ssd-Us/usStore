@@ -73,9 +73,6 @@
             <a class="nav-link js-scroll-trigger" href="<c:url value="/shop/signoff.do"/>"><font color="black">LOGOUT</font></a>
           </li>
           </c:if>
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="../help.html"><font color="black">HELP</font></a>
-          </li>
 <!--           <li> -->
 <%--               <form action="<c:url value="/shop/searchProducts.do"/>" method="post"> --%>
 <!-- 			    <input type="hidden" name="search" value="true"/> -->
