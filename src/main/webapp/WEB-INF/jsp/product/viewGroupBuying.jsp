@@ -179,14 +179,14 @@ newtime = window.setTimeout("getTime();", 1000);
          <tr>
          <th style="border-right: 1px solid black;">할인율</th>
             <td>
-               <p><del>정가 : ${gb.unitCost}원</del></p>
-              		 할인가 : ${gb.listPrice}원&nbsp;<font color=red>-${gb.discount}%</font> <br>
+               <p><del>정가 : ${gb.listPrice}원</del></p>
+              		 할인가 : ${gb.unitCost}원&nbsp;<font color=red>-${gb.discount}%</font> <br>
             </td>
          </tr>
          
          <tr>
          <th style="border-right: 1px solid black;">수량 </th> 
-         <td>${gb.qty}</td>
+         <td>${gb.qty} 개 남았습니다.</td>
          </tr>
          
          
