@@ -1,11 +1,5 @@
 package com.example.usStore.domain;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlType;
-
-@XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(propOrder = { "itemId", "title", "viewCount", "category" })
 public class Rank {
    private int itemId;
    private String title;
