@@ -1,4 +1,19 @@
-# usStore
-2020-01 소프트웨어시스템개발 팀프로젝트
+![0001](https://user-images.githubusercontent.com/48404998/91474300-018e4300-e8d5-11ea-98f3-cacec5744225.jpg)
+![0002](https://user-images.githubusercontent.com/48404998/91474312-0652f700-e8d5-11ea-8782-61abe74466cf.jpg)
+![0003](https://user-images.githubusercontent.com/48404998/91474317-07842400-e8d5-11ea-8873-73a57bef6841.jpg)
+![0004](https://user-images.githubusercontent.com/48404998/91474322-094de780-e8d5-11ea-9c61-d11f2d07b16a.jpg)
+![0005](https://user-images.githubusercontent.com/48404998/91474327-0b17ab00-e8d5-11ea-814a-a7468411c8c8.jpg)
+![0006](https://user-images.githubusercontent.com/48404998/91474332-0c48d800-e8d5-11ea-99ea-4a941a979d9e.jpg)
+![0007](https://user-images.githubusercontent.com/48404998/91474334-0ce16e80-e8d5-11ea-94d6-e77927dddf06.jpg)
+![0008](https://user-images.githubusercontent.com/48404998/91474335-0d7a0500-e8d5-11ea-85b3-a23b82abd136.jpg)
+![0009](https://user-images.githubusercontent.com/48404998/91474337-0e129b80-e8d5-11ea-89b2-fd37105dc628.jpg)
+![0010](https://user-images.githubusercontent.com/48404998/91474338-0eab3200-e8d5-11ea-9fa6-fca782a8e9bb.jpg)
+![0011](https://user-images.githubusercontent.com/48404998/91474340-0f43c880-e8d5-11ea-8689-87926c61bce7.jpg)
+![0012](https://user-images.githubusercontent.com/48404998/91474342-0fdc5f00-e8d5-11ea-8194-89db16491373.jpg)
+![0013](https://user-images.githubusercontent.com/48404998/91474343-1074f580-e8d5-11ea-9f99-3374c23382ad.jpg)
+![0014](https://user-images.githubusercontent.com/48404998/91474348-1074f580-e8d5-11ea-8aed-9387395fd0f0.jpg)
+![0015](https://user-images.githubusercontent.com/48404998/91474350-110d8c00-e8d5-11ea-9fc8-a5400b86a238.jpg)
+![0016](https://user-images.githubusercontent.com/48404998/91474351-11a62280-e8d5-11ea-8685-83b81101c427.jpg)
+![0018](https://user-images.githubusercontent.com/48404998/91474355-123eb900-e8d5-11ea-93fb-ffb3acc4e360.jpg)
 
 
