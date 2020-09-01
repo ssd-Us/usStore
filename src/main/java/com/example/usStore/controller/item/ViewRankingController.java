@@ -31,7 +31,7 @@ public class ViewRankingController {
     public String viewRank(ModelMap modelMap, HttpServletRequest rq) {
       System.out.println("rank");
       
-      return "viewRank";
+      return "product/viewRank";
    }
    
    @RequestMapping(value = "/shop/getData.do/{productId}", method = RequestMethod.GET, produces = "application/json")
