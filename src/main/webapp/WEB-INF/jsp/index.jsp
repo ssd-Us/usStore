@@ -1,4 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%-- <%@ include file="IncludeTop.jsp" %>
 <%@ include file="IncludeMenu.jsp" %>
 <%@ include file="IncludeBottom.jsp" %>
@@ -6,74 +9,87 @@
 <html lang="en-US">
 
 <head>
-
 	<meta charset="UTF-8">
-
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<title>UsStore</title>
-
+	<title>UsStore</title>	
 	<!-- Latest compiled and minified CSS -->
-
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
 	<!-- Google Font -->
-
 	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700|Raleway:400,300,500,700,600' rel='stylesheet' type='text/css'>
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css" type="text/css">
 
     <!-- Theme Stylesheet -->
-
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
-
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/responsive.css">
 
 </head>
 
+<!-- 맨 위의 nav bar  -->
 <body>
-
     <div class="top-bar">
-
+    
         <div class="container">
-
+        
             <div class="row">
 
-                <div class="col-md-6">
-
-                    <div class="social pull-left">
-
-                        <ul>
-
-                            <li><a href=""><i class="fa fa-facebook"></i></a></li>
-
-                            <li><a href=""><i class="fa fa-twitter"></i></a></li>
-
-                            <li><a href=""><i class="fa fa-google-plus"></i></a></li>
-
-                            <li><a href=""><i class="fa fa-linkedin"></i></a></li>
-
-                        </ul>
-
-                    </div>
-
-                </div>
+                <div class="col-md-6"> &nbsp; </div>
 
                 <div class="col-md-6">
-
+                
                     <div class="action pull-right">
 
-                        <ul>
+						<ul>
+							<c:if test="${empty userSession.account}">
+								<li><a href="<c:url value="/shop/signonForm.do"/>">
+									<i class="fa fa-user"></i> Login</a></li>
+							</c:if>
+							<c:if test="${!empty userSession.account}">
+								<li><a href="<c:url value="/shop/signoff.do"/>"><i
+										class="fa fa-lock"></i> LOGOUT</a></li>
 
-                            <li><a href=""><i class="fa fa-user"></i> Login</a></li>
-
-                            <li><a href=""><i class="fa fa-lock"></i> Register</a></li>
-
-                        </ul>
-
-                    </div>
+								<li class="nav-item dropdown"><a
+									class="nav-link dropdown-toggle js-scroll-trigger" href="#"
+									id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true"
+									aria-expanded="false"> MYPAGE &nbsp; ▼</font>
+								</a>
+									<div class="dropdown-menu dropdown-menu-right"
+										aria-labelledby="navbarDropdown">
+										<a class="dropdown-item"
+											href="<c:url value="/shop/viewAccount.do"/>">My Account</a> <a
+											class="dropdown-item"
+											href="<c:url value="/shop/editAccount.do"/>">Edit Account</a>
+										<div class="dropdown-divider"></div>
+										<a class="dropdown-item"
+											href="<c:url value="/shop/listOrders.do"/>">My Orders</a>
+									</div>
+								</li>
+								<li>
+									<div class="shop-category nav navbar-nav navbar-right btn-group">
+						                  <button type="button" class="btn btn-shop-category dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						
+						                    Shop By Category <span class="caret"></span>
+						
+						                  </button>
+						
+						                  <ul class="dropdown-menu">
+						
+						                    <li><a href="<c:url value="/shop/viewAccount.do"/>">My Account</a></li>
+						
+						                    <li><a href="<c:url value="/shop/editAccount.do"/>">Edit Account</a></li>
+						
+						                    <li role="separator" class="divider"></li>
+						
+						                    <li><a href="<c:url value="/shop/listOrders.do"/>">My Orders</a></li>
+						
+						                  </ul>
+						              </div>
+						           </li>
+							</c:if>
+						</ul>
+					</div>
 
                 </div>
 
