@@ -25,80 +25,97 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/responsive.css">
 
+	<script>
+		function search(word) {
+			alert("검색어 : " + word);
+	
+			searchForm.submit();
+		}
+	</script>
+
 </head>
 
 <!-- 맨 위의 nav bar  -->
+<!-- IncludeTopBar -->
+
 <body>
     <div class="top-bar">
-    
+
         <div class="container">
         
             <div class="row">
 
-                <div class="col-md-6"> &nbsp; </div>
+                <div class="col-md-6"></div>
 
-                <div class="col-md-6">
-                
-                    <div class="action pull-right">
+				<div class="action pull-right">
 
-						<ul>
-							<c:if test="${empty userSession.account}">
-								<li><a href="<c:url value="/shop/signonForm.do"/>">
-									<i class="fa fa-user"></i> Login</a></li>
-							</c:if>
-							<c:if test="${!empty userSession.account}">
-								<li><a href="<c:url value="/shop/signoff.do"/>"><i
-										class="fa fa-lock"></i> LOGOUT</a></li>
+					<ul>
+						<c:if test="${empty userSession.account}">
+							<li>
+								<div class="shop-top btn-group">
+									<button type="button" class="btn dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+										<a href="<c:url value="/shop/signonForm.do"/>">
+											<i class="fa fa-user"></i> LOGIN </a>
+									</button>
+								</div>
+							</li>
+						</c:if>
 
-								<li class="nav-item dropdown"><a
-									class="nav-link dropdown-toggle js-scroll-trigger" href="#"
-									id="navbarDropdown" data-toggle="dropdown" aria-haspopup="true"
-									aria-expanded="false"> MYPAGE &nbsp; ▼</font>
-								</a>
-									<div class="dropdown-menu dropdown-menu-right"
-										aria-labelledby="navbarDropdown">
-										<a class="dropdown-item"
-											href="<c:url value="/shop/viewAccount.do"/>">My Account</a> <a
-											class="dropdown-item"
-											href="<c:url value="/shop/editAccount.do"/>">Edit Account</a>
-										<div class="dropdown-divider"></div>
-										<a class="dropdown-item"
-											href="<c:url value="/shop/listOrders.do"/>">My Orders</a>
-									</div>
-								</li>
-								<li>
-									<div class="shop-category nav navbar-nav navbar-right btn-group">
-						                  <button type="button" class="btn btn-shop-category dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						
-						                    Shop By Category <span class="caret"></span>
-						
-						                  </button>
-						
-						                  <ul class="dropdown-menu">
-						
-						                    <li><a href="<c:url value="/shop/viewAccount.do"/>">My Account</a></li>
-						
-						                    <li><a href="<c:url value="/shop/editAccount.do"/>">Edit Account</a></li>
-						
-						                    <li role="separator" class="divider"></li>
-						
-						                    <li><a href="<c:url value="/shop/listOrders.do"/>">My Orders</a></li>
-						
-						                  </ul>
-						              </div>
-						           </li>
-							</c:if>
-						</ul>
-					</div>
+						<c:if test="${!empty userSession.account}">
 
-                </div>
+							<li>
 
-            </div>
+								<div class="shop-top btn-group">
+									<button type="button" class="btn dropdown-toggle"
+										data-toggle="dropdown" aria-haspopup="true"
+										aria-expanded="false">
+										MYPAGE <span class="caret"></span>
+									</button>
+
+									<ul class="dropdown-menu">
+										<li><a href="<c:url value="/shop/viewAccount.do"/>">
+											My Account</a></li>
+										<li><a href="<c:url value="/shop/editAccount.do"/>">
+											Edit Account</a></li>
+										<li><a href="<c:url value="/shop/listOrders.do"/>">
+											My Orders</a></li>
+									</ul>
+								</div>
+								
+							</li>
+							
+							<li>
+								<div class="shop-top btn-group">
+									<button type="button" class="btn dropdown-toggle" aria-haspopup="true"
+										aria-expanded="false">
+										<a href="<c:url value="/shop/viewCart.do"/>">
+										<i class="fa fa-shopping-cart"></i> CART </a></button>
+								</div>
+							</li>
+							
+							<li>							
+								<div class="shop-top btn-group">
+									<button type="button" class="btn dropdown-toggle" aria-haspopup="true"
+										aria-expanded="false">
+										<a href="<c:url value="/shop/signoff.do"/>">
+										<i class="fa fa-lock"></i> LOGOUT </a></button>
+								</div>
+							</li>
+
+						</c:if>
+
+					</ul>
+
+				</div>
+
+			</div>
 
         </div>
 
     </div>
+<!-- IncludeTopBar -->
 
+<!-- IncludeHeader -->
     <div class="header">
 
         <div class="container">
@@ -109,29 +126,37 @@
 
                     <div class="logo">
 
-                        <a href="index.html">
-
-                            <img src="${pageContext.request.contextPath}/images/logo.png" alt="Orani E-shop">
-
+                        <a href="<c:url value="/shop/index.do"/>">
+                            <img src="${pageContext.request.contextPath}/images/logo.png" alt="UsStore">
                         </a>
 
                     </div>
 
                 </div>
 
+				
+				<!-- ----------- -->
+				<!-- search bar -->
                 <div class="col-md-7 col-sm-5">
 
                     <div class="search-form">
+                        <form class="navbar-form" name="searchForm"
+                        		action="<c:url value='/shop/search/viewItem.do'/>" role="search">
 
-                        <form class="navbar-form" role="search">
-
+							<div class="form-group">
+								<span>
+									<input type="radio" name="sKind" value="title"> 제목
+								</span>
+								<span>
+									<input type="radio" name="sKind" value="tag" checked="checked">태그 
+								</span>	
+							</div>
+							
                             <div class="form-group">
-
-                              <input type="text" class="form-control" placeholder="What do you need...">
-
+                                <input type="text" id="word" name="word" class="form-control" placeholder="검색어를 입력해주세요.">
                             </div>
 
-                            <button type="submit" class="btn"><i class="fa fa-search"></i></button>
+                            <button class="btn" onclick="search(word.value)"><i class="fa fa-search"></i></button>
 
                         </form>
 
@@ -139,27 +164,11 @@
 
                 </div>
 
-                <div class="col-md-2 col-sm-3">
+				<!-- ----------- -->
+				
+                 <div class="col-md-2 col-sm-3">
 
-                    <div class="cart">
 
-                        <div class="cart-icon">
-
-                            <a href=""><i class="fa fa-shopping-cart"></i></a>
-
-                        </div>
-
-                        <div class="cart-text">
-
-                            SHOPPING CART
-
-                            <br>
-
-                            0 items - $0.00
-
-                        </div>
-
-                    </div>
 
                 </div>
 
@@ -207,11 +216,11 @@
 
                   <ul class="dropdown-menu">
 
-                    <li><a href="">Men</a></li>
+                    <li><a href="">HandMade</a></li>
 
-                    <li><a href="">Women</a></li>
+                    <li><a href="">GroupBuying</a></li>
 
-                    <li><a href="">Kids</a></li>
+                    <li><a href="">Auction</a></li>
 
                     <li role="separator" class="divider"></li>
 
