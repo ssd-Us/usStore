@@ -1,5 +1,5 @@
 body {
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'BBTreeGB'; 
 }
 a {
     text-decoration: none;
@@ -10,12 +10,6 @@ a:hover {
 }
 img {
     width: 100%;
-}
-.raleway {
-    font-family: 'raleway', sans-serif;
-}
-.raleway span {
-    font-family: 'Open Sans', sans-serif;
 }
 .btn-theme {
     background: #40bea7;
@@ -248,7 +242,6 @@ ol.carousel-indicators li.active {
     position: relative;
 }
 .banner-caption h3 {
-    font-family: 'raleway', sans-serif;
     text-transform: uppercase;
     font-weight: 400;
     font-size: 16pt;
@@ -263,7 +256,6 @@ ol.carousel-indicators li.active {
     padding: 65px 0px;
 }
 .single-process h3 {
-    font-family: 'raleway', sans-serif;
     text-transform: uppercase;
     font-weight: 400;
     font-size: 15pt;
@@ -289,7 +281,6 @@ ol.carousel-indicators li.active {
     text-transform: uppercase;  
     margin: 0px 15px 30px;
     overflow: hidden;
-    font-family: 'raleway', sans-serif;
 }
 .nav.nav-tabs li.active a {
     background: #3aa28f;
@@ -384,7 +375,6 @@ ol.carousel-indicators li.active {
     height: 45px;
     margin: 0px 15px 30px;
     padding: 2px 15px;
-    font-family: 'raleway', sans-serif;
 }
 .blog-title h2, .blog-title a {
     color: #fff;
@@ -437,7 +427,6 @@ ol.carousel-indicators li.active {
 }
 .single-post h4.post-title {
     font-weight: 600;
-    font-family: 'raleway', sans-serif;
 }
 .footer {
     background: #191919;
@@ -467,7 +456,6 @@ ol.carousel-indicators li.active {
     text-transform: uppercase;
     font-weight: 600;
     padding-bottom: 10px;
-    font-family: 'raleway', sans-serif;
 }
 .widget-inner, .widget-inner a {
     color: #d5d5d5;

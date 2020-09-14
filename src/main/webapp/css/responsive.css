@@ -104,9 +104,6 @@
     .shop-category button.btn {
         padding: 6px 20px;
     }
-    form.navbar-form input {
-        width: 165px;
-    }
     .slider {
         margin-bottom: 20px;
     }
@@ -193,9 +190,6 @@
         padding: 10px;
         width: 35px;
         font-size: 10pt;
-    }
-    form.navbar-form input {
-        min-width: auto;
     }
     .big-slider .carousel-caption {
         top: 5%;

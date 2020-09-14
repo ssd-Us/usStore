@@ -11,7 +11,7 @@
 	<!-- Bootstrap core JavaScript -->
 	<script src="${pageContext.request.contextPath}/vendor/jquery/jquery.min.js"></script>
 	<script src="${pageContext.request.contextPath}/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-	
+
 	<!-- Plugin JavaScript -->
 	<script src="${pageContext.request.contextPath}/vendor/jquery-easing/jquery.easing.min.js"></script>
 	<!-- Custom JavaScript for this theme -->

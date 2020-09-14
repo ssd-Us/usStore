@@ -5,39 +5,27 @@
     <div class="header">
 
         <div class="container">
-
-            <div class="row">
-
-                <div class="col-md-3 col-sm-4">
-
-                    <div class="logo">
-
-                        <a href="<c:url value="/shop/index.do"/>">
-                            <img src="${pageContext.request.contextPath}/images/logo.png" alt="UsStore">
-                        </a>
-
-                    </div>
-
-                </div>
-
-
-                <div class="col-md-7 col-sm-5">
-
+              
+			<div class="row">	
+				<div class="col-md-3 col-sm-3 col-xs-3 col-lg-3">
+					<div class="logo">
+						<a href="<c:url value="/shop/index.do"/>">
+		            		<img src="${pageContext.request.contextPath}/images/logo.png" alt="UsStore">
+		        		</a>  
+	        		</div>
+				</div>
+				
+                <div class="col-md-9 col-sm-9 col-xs-9 col-lg-9">
                     <div class="search-form">
                         <form class="navbar-form" name="searchForm"
                         		action="<c:url value='/shop/search/viewItem.do'/>" role="search">
-                            <div class="form-group">
-	                            <span>
-	                            	<input type="radio" name="sKind" value="title"> 제목
-									<input type="radio" name="sKind" value="tag" checked="checked">태그 
-	                            </span>
-                                <input type="text" id="word" name="word" class="form-control" placeholder="검색어를 입력해주세요.">
-                            </div>
-
-                            <button class="btn" onclick="search(word.value)"><i class="fa fa-search"></i></button>
-
-                        </form>
-
+	                        	<p>
+		                        	<input type="radio" name="sKind" value="title"> 제목입니당
+		                        	<input type="radio" name="sKind" value="tag" checked="checked"> 태그입니당
+                       			</p>
+                       			<input type="text" id="word" name="word" class="form-control" placeholder="검색어를 입력해주세요.">
+                       			<button class="btn" onclick="search(word.value)"><i class="fa fa-search"></i></button>	
+	                   </form>
                     </div>
                 
                 </div>
@@ -104,7 +92,9 @@
 
                     <li role="separator" class="divider"></li>
 
-                    <li><a href="<c:url value="/shop/rank.do"/>">Ranking</a></li>
+                    <li>
+                    	<a href="<c:url value="/shop/rank.do"/>">Ranking</a>
+                    </li>
 
                   </ul>
                 </div>

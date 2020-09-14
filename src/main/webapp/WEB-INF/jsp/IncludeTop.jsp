@@ -29,8 +29,17 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.css" type="text/css">
 
     <!-- Theme Stylesheet -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/responsive.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css?after">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/responsive.css?after">
+    
+    <!-- jQuery Library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+	<!-- Script -->
+	<script src="${pageContext.request.contextPath}/js/script.js"></script>
 
 	<script>
 		function search(word) {
