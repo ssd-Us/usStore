@@ -2,8 +2,10 @@
 <%@ include file="itemTop.jsp" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-
+<html>
+<head>
 <title>중고거래 상세페이지</title>
+</head>
 <style type="text/css"> 
 	a { text-decoration:none } 
 </style> 
@@ -99,7 +101,7 @@
 				</a>&nbsp;
 			</c:forEach>
    			</td>
-   		</tr>
+   	</tr>
    	<tr>
    			<th style="border-right: 1px solid black;">가격</th>
    			<td>
@@ -162,6 +164,12 @@
 				</td>		
 		</tr>
 	</c:if>
-</table>				
+	
+	<tr>
+		<td colspan="2"> 
+			<a href='<c:url value="/chatting.do"/>'>판매자와 채팅하기 </a>
+		</td>
+	</tr>
+</table>
 </body>
 </html>
