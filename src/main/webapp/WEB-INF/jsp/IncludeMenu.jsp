@@ -14,21 +14,18 @@
 		        		</a>  
 	        		</div>
 				</div>
-				<div class="col-md-2 col-sm-2 col-xs-2 col-lg-2">
-				</div>
-                <div class="col-md-7 col-sm-7 col-xs-7 col-lg-7">
-                    <div class="search-form">
+				<div class="search-form">
+                	<div class="col-md col-sm-9 col-xs-9 col-lg-9">
                         <form class="navbar-form" name="searchForm"
                         		action="<c:url value='/shop/search/viewItem.do'/>" role="search">
-			           			<input type="radio" name="sKind" id="skind1" value="title"/>
-			                    <label for="skind1">제목</label>
-			                   	<input type="radio" name="sKind" id="skind2" value="tag" checked="checked"/>
-			                   	<label for="skind2">태그</label>
-		                        <input type="text" id="word" name="word" class="form-control" size="10" placeholder="검색어를 입력해주세요.">
-                       			<button class="btn" onclick="search(word.value)"><i class="fa fa-search"></i></button>	
-	                   </form>
+                        		<input type="radio" name="sKind" id="skind1" value="title"/>
+					            <label for="skind1">제목</label> &nbsp; &nbsp; &nbsp;
+								<input type="radio" name="sKind" id="skind2" value="tag" checked="checked"/>
+					            <label for="skind2">태그</label> <br>
+                       			<input type="text" id="word" name="word" class="form-control" size="35" placeholder="검색어를 입력해주세요.">
+                   				<button class="btn" onclick="search(word.value)"><i class="fa fa-search"></i></button>	
+		                 </form>
                     </div>
-                
                 </div>
                 
             </div>
