@@ -1,5 +1,32 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ include file="../IncludeTop.jsp"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<html>
+<head>
+	<title>UsStore Login</title>
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/usstore.css?after" type="text/css" />
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/account.css?after" type="text/css" />
+
+	<!-- Bootstrap core JavaScript -->
+	<script src="${pageContext.request.contextPath}/vendor/jquery/jquery.min.js"></script>
+	<script src="${pageContext.request.contextPath}/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+	<!-- Plugin JavaScript -->
+	<script src="${pageContext.request.contextPath}/vendor/jquery-easing/jquery.easing.min.js"></script>
+	<!-- Custom JavaScript for this theme -->
+	<script src="${pageContext.request.contextPath}/js/scrolling-nav.js"></script>
+	
+	<!-- Bootstrap core CSS -->
+	<link href="${pageContext.request.contextPath}/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	
+	<!-- Custom styles for this template -->
+	<link href="${pageContext.request.contextPath}/css/scrolling-nav.css" rel="stylesheet">
+	
+	<!-- Custom styles for this template -->
+	<link href="${pageContext.request.contextPath}/css/simple-sidebar.css" rel="stylesheet">
+</head>
+	
 <c:if test="${!empty message}">
 	<div class="alert alert-success" role="alert">
 	  <font color="#FF4500"><c:url value="${message}" /></font>
@@ -25,11 +52,11 @@
 	                <label for="inputPassword">Your Password</label>
 	              </div>
 	              <div class="form-label-group">
-	                <button class="btn btn-lg btn-warning btn-block text-uppercase" type="submit">Sign in</button>
+	                <button class="btn btn-lg btn-block btn-info text-uppercase" type="submit">Sign in</button>
 	              </div>
 	              <hr class="my-4">
 	              <div class="form-label-group">
-	              	<a href='<c:url value="/shop/newAccount.do"/>' class="btn btn-lg btn-warning btn-block text-uppercase">
+	              	<a href='<c:url value="/shop/newAccount.do"/>' class="btn btn-lg btn-info btn-block text-uppercase">
 		              		New Account
 	              	</a>
 	              </div>

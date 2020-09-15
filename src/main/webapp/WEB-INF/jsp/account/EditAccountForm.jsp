@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ include file="../IncludeTop.jsp"%>
+<%@ include file="IncludeAccount.jsp" %>
 
   <div class="container">
     <div class="row">
@@ -48,5 +48,4 @@
       </div>
     </div>
   </div>
-  <%@ include file="../IncludeBottom.jsp" %>
 </body>
