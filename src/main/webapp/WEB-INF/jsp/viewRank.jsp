@@ -3,10 +3,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js">
+</script>
 <script>
    function getJson(productId) {   //매개변수 전달 시도 
       var reqUrl = "../rest/shop/getData.do/" + productId;
+      //var reqUrl = "/shop/getData.do/" + productId;
        $.ajax({         /* Ajax 호출을 위해  JQuery 이용 */
          type: "get",
          url: reqUrl,
@@ -29,9 +31,6 @@
       });
    };
 </script>
-<!DOCTYPE html>
-<html>
-<head>
 <title>랭킹 페이지</title>
 <style>
    th, td {
