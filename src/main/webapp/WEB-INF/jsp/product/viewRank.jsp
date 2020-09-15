@@ -21,7 +21,7 @@
               for (var i in obj) { 
                   $("#result > div").append("<tr><th>" + index + "위 </th><th><a href='<c:url value='/shop/rank/viewItem.do?itemId=" + obj[i].itemId + 
                           "&productId=" + productId + "'/>'>" + obj[i].title + "</a></th><th>누적 조회수   ( " + obj[i].viewCount + " 회 )</th></tr>"); 
-					index++;
+               index++;
               }
               $("#result > div").append("</table><br>");   
           },
