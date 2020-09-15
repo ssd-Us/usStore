@@ -180,7 +180,7 @@ newtime = window.setTimeout("getTime();", 1000);
          <th style="border-right: 1px solid black;">할인율</th>
             <td>
                <p><del>정가 : ${gb.listPrice}원</del></p>
-              		 할인가 : ${gb.unitCost}원&nbsp;<font color=red>-${gb.discount}%</font> <br>
+              		 할인가 : ${gb.unitCost}원&nbsp;<font color=red>&nbsp;&nbsp;&nbsp;${gb.discount}% 할인</font> <br>
             </td>
          </tr>
          
