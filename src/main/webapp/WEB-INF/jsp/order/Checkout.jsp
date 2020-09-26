@@ -1,11 +1,12 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="../account/IncludeAccount.jsp" %>
  
+<br><br>
 <table align="center">
-  <tr>
-    <td style="text-align: center; vertical-align: top">
+  <tr style="vertical-align:top">
+    <td style="text-align: center">
       <h2>Checkout Summary</h2>
-      <table class="table table-hover" style="text-align:center">
+      <table id="cart" class="table table-hover" style="text-align:center">
       	<thead>
         <tr bgcolor="#FFFFFF">
             <th scope="col"><b>제품명</b></th>
@@ -52,10 +53,10 @@
           <B>Next &gt;&gt;</B></font></a>
       </c:if>
       <br> 
-      <a href='<c:url value="/shop/newOrder.do"/>'>
+      <a href='<c:url value="/shop/newOrder.do"/>' class="badge badge-pill badge-light"
+      	style="font-size: 30px">
         	주문하기</a>
     </td>
     <td style="text-align: right; vertical-align: top; width: 20%">&nbsp;</td>
   </tr>
 </table>
-<%@ include file="../IncludeBottom.jsp" %>

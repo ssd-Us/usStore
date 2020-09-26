@@ -1,4 +1,4 @@
-<%@ include file="../IncludeTop.jsp"%>
+<%@ include file="../account/IncludeAccount.jsp" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 <div align="center">
@@ -130,5 +130,3 @@
     </tr>
   </table>
 </div>
-<br><br>
-<%@ include file="../IncludeBottom.jsp" %>

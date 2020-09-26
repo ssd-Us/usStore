@@ -72,7 +72,8 @@
       <c:if test="${cart.numberOfItems > 0}">
         <br />
         <div style="text-align:center">
-          <a href='<c:url value="/shop/checkout.do"/>'>
+          <a href='<c:url value="/shop/checkout.do"/>' class="badge badge-pill badge-light"
+          	style="font-size: 30px">
             Go to CheckOut</a>
         </div>
       </c:if>
