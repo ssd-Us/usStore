@@ -89,8 +89,10 @@
 									<ul class="dropdown-menu">
 										<li><a href="<c:url value="/shop/viewAccount.do"/>">
 											My Account</a></li>
+											
 										<li><a href="<c:url value="/shop/editAccount.do"/>">
 											Edit Account</a></li>
+											
 										<li><a href="<c:url value="/shop/listOrders.do"/>">
 											My Orders</a></li>
 									</ul>
