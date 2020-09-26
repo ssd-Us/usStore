@@ -1,19 +1,7 @@
-<%@ include file="../IncludeTop.jsp"%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ include file="../account/IncludeAccount.jsp" %>
 
-<table>
-  <tr style="vertical-align:top">
-    <td style="text-align:left;width:20%;">
-      <table id="main-menu">
-        <tr>
-          <td><a href='<c:url value="/shop/index.do"/>'>
-            <b><font color="black" size="2">&lt;&lt; Main Menu</font></b></a></td>
-        </tr>
-      </table>
-    </td>
-   </tr>
-</table>
-
+<br><br>
 <table align="center">
   <tr style="vertical-align:top">
     <td style="text-align:center">
@@ -91,4 +79,3 @@
     </td>
   </tr>
 </table>
-<%@ include file="../IncludeBottom.jsp" %>
