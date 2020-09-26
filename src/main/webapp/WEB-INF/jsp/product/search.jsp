@@ -8,14 +8,6 @@
 <title>검색 결과 페이지</title>
 </head>
 <body>
-<table id="main-menu">
-  <tr>
-    <td><a href='<c:url value="/shop/index.do"/>'>
-        <b><font color="black" size="2">
-          &lt;&lt; Go to Index</font></b></a>
-    </td>
-  </tr>
-</table>
 <form name = "form" action="" style="position:absolute; left:50%; margin:0 0 0 -430px;">
       <div class="container" >
          <div class="row"  style="display:inline">

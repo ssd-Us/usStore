@@ -93,20 +93,6 @@ newtime = window.setTimeout("getTime();", 1000);
 } 
 </script>
 <body>
-<table id="main-menu">
-  <tr>
-    <td>
-	    <a href='<c:url value="/shop/index.do"/>'>
-	        <b><font color="black" size="2">&lt;&lt; Go to Index</font></b>
-	    </a><br><br>
-	    <a href='<c:url value="/shop/auction/listItem.do">
-    				<c:param name="productId" value="${auction.productId}" />
-    			</c:url>'>
-	        <b><font color="black" size="2">&lt;&lt; Go to List</font></b>
-	    </a><br>
-    </td>
-  </tr>
-</table> 
 	<table style="margin-left: auto; margin-right: auto;">
 	<tr>
 		<td style="text-align: left; padding: 0px; font-size: small; border-bottom: none;">
