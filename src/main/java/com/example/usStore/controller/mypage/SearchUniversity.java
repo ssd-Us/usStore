@@ -3,7 +3,7 @@ package com.example.usStore.controller.mypage;
 import java.io.Serializable;
 
 @SuppressWarnings("serial")
-public class SearchUniversity implements Serializable{
+public class SearchUniversity implements Serializable{ //open api를 이용하여 데이터 입력받는 커맨드 객체 
 
 	private String region;
 	private String univName; // 대학 이름 일부도 가능 
