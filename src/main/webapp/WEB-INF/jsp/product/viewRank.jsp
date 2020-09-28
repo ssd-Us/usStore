@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ include file="itemTop.jsp" %>
+<%@ include file="IncludeTop.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
@@ -21,7 +21,7 @@
               for (var i in obj) { 
                   $("#result > div").append("<tr><th>" + index + "위 </th><th><a href='<c:url value='/shop/rank/viewItem.do?itemId=" + obj[i].itemId + 
                           "&productId=" + productId + "'/>'>" + obj[i].title + "</a></th><th>누적 조회수   ( " + obj[i].viewCount + " 회 )</th></tr>"); 
-               index++;
+					index++;
               }
               $("#result > div").append("</table><br>");   
           },
@@ -42,7 +42,6 @@
 </style>
 </head>
 <body>    
-
    <form name = "pform" action="" style="position:absolute; left:53%; margin:0 0 0 -420px;">
       <div class="container" >
          <div class="row"  style="display:inline">
