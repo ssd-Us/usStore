@@ -1,4 +1,4 @@
-<%@ include file="../IncludeTop.jsp"%>
+<%@ include file="../account/IncludeAccount.jsp" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
  
 <table id="main-menu">
@@ -85,4 +85,3 @@
       <img border="0" src="${pageContext.request.contextPath}/images/button_continue.gif" alt="" /></a>
   </p>
 </div>
-<%@ include file="../IncludeBottom.jsp" %>

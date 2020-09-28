@@ -15,15 +15,6 @@ div#addItemForm {
 }
 </style>
 
-<table id="main-menu">
-  <tr>
-    <td><a href='<c:url value="/shop/secondHand/index.do"/>'>
-        <b><font color="black" size="2">
-          &lt;&lt; Go to Index</font></b></a>
-    </td>
-  </tr>
-</table>
-
 <h1>중고거래 최종 확인</h1>
 <h2>다음 정보로 판매하시겠습니까?</h2><br><br>
 

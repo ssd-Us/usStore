@@ -22,29 +22,23 @@
 	href="${pageContext.request.contextPath}/css/account.css?after"
 	type="text/css" />
 
-<!-- Bootstrap core JavaScript -->
-<script
-	src="${pageContext.request.contextPath}/vendor/jquery/jquery.min.js"></script>
-<script
-	src="${pageContext.request.contextPath}/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-<!-- Plugin JavaScript -->
-<script
-	src="${pageContext.request.contextPath}/vendor/jquery-easing/jquery.easing.min.js"></script>
-
-<!-- Custom JavaScript for this theme -->
-<script src="${pageContext.request.contextPath}/js/scrolling-nav.js"></script>
-
-<!-- Bootstrap core CSS -->
-<link
-	href="${pageContext.request.contextPath}/vendor/bootstrap/css/bootstrap.min.css"
-	rel="stylesheet">
-
-<!-- Custom styles for this template -->
-<link href="${pageContext.request.contextPath}/css/scrolling-nav.css"
-	rel="stylesheet">
-
-<!-- Custom styles for this template -->
-<link href="${pageContext.request.contextPath}/css/simple-sidebar.css"
-	rel="stylesheet">
 </head>
+<script>
+	function goClick() {
+		history.go(-1);
+	}
+</script>
+<body>
+
+ <nav class="navbar navbar-light" style="background-color: #000000; height: 74px; font-size: 20px;">
+	<ul class="navbar-nav">
+		<li class="nav-item active">
+			<a class="nav-link" href="#" onclick="goClick();">
+				<img border="0" src="${pageContext.request.contextPath}/images/back.png"
+					style="float: left; width: 30; height: 30; border: 0;" /> &nbsp;
+				<font color="white" font-size="10px"> BACK </font>
+			</a>
+		</li>
+	</ul>
+</nav>
+<br>

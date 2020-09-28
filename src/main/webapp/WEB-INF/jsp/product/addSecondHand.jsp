@@ -9,16 +9,6 @@ div#addItemForm {
 	padding: 20px;
 }
 </style>
-
-<table id="main-menu">
-  <tr>
-    <td><a href='<c:url value="/shop/secondHand/index.do"/>'>
-        <b><font color="black" size="2">
-          &lt;&lt; Go to Index</font></b></a>
-    </td>
-  </tr>
-</table>
-
 <div id="addItemForm">
 	<h2>ADD ITEM</h2>
 	<hr width="927px" align="left">

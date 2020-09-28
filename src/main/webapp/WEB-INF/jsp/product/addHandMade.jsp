@@ -9,14 +9,6 @@
 		padding: 20px;
 	}
 </style>
-<table id="main-menu">
-  <tr>
-    <td><a href='<c:url value="/shop/handMade/index.do"/>'>
-        <b><font color="black" size="2">
-          &lt;&lt; Go to Index</font></b></a>
-    </td>
-  </tr>
-</table>
 <div id="addHandMadeForm">
 <h2>ADD HANDMADE</h2>
 <hr width = "927px" align="left"><br><br>

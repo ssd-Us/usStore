@@ -44,20 +44,7 @@
 </style>
 <body>
 <!-- 여기서 secondHand는 컨트롤러에서 보내준 모델 객체(db에서 select 결과 ) -->
-<table id="main-menu">
-  <tr>
-    <td>
-	    <a href='<c:url value="/shop/index.do"/>'>
-	        <b><font color="black" size="2">&lt;&lt; Go to Index</font></b>
-	    </a><br><br>
-	    <a href='<c:url value="/shop/secondHand/listItem.do">
-    				<c:param name="productId" value="${sh.productId}" />
-    			</c:url>'>
-	        <b><font color="black" size="2">&lt;&lt; Go to List</font></b>
-	    </a><br>
-    </td>
-  </tr>
-</table> 
+
 <table style="margin-left: auto; margin-right: auto;">
 	<tr>
 		<td style="text-align: left; padding: 0px; font-size: small; border-bottom: none;">

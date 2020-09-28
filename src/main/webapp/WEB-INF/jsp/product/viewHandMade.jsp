@@ -36,21 +36,6 @@
 	}
 </style>
 
-<table id="main-menu">
-  <tr>
-    <td>
-	    <a href='<c:url value="/shop/index.do"/>'>
-	        <b><font color="black" size="2">&lt;&lt; Go to Index</font></b>
-	    </a><br><br>
-	    <a href='<c:url value="/shop/handMade/listItem.do">
-    				<c:param name="productId" value="${handMade.productId}" />
-    			</c:url>'>
-	        <b><font color="black" size="2">&lt;&lt; Go to List</font></b>
-	    </a><br>
-    </td>
-  </tr>
-</table> 
-
 <body>
 	<table id="item-detail" style="margin-left: auto; margin-right: auto;">
 	<tr>

@@ -16,14 +16,6 @@
 		padding: 20px;
 	}
 </style>
-<table id="main-menu">
-  <tr>
-    <td><a href='<c:url value="/shop/handMade/index.do"/>'>
-        <b><font color="black" size="2">
-          &lt;&lt; Go to Index</font></b></a>
-    </td>
-  </tr>
-</table>
 <body>
 <h1>공동구매 최종 확인</h1>
 다음 정보로 판매하시겠습니까?<br><br>
