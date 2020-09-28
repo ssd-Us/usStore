@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,7 +37,20 @@
 	    </div>
 	     <div>
 	      <label>찾기 결과</label>
-	      <input name="result" type="text" value="${result}"/>
+			 <table>
+			 <tr>
+                  <th style="padding-left:20px">학교</th>
+             </tr>
+             <tbody>   
+                  <c:forEach var="result" items="${results}">         
+	                  <tr style="height:20px;">
+		                  <td style="padding-left:20px">
+		                        ${result}  <!-- 학교이름 옆에 라디오버튼하나 만들어서 하나 체크또는 다시 검색할 수 있도록 로직 구성  -->
+		                   </td>
+	                  </tr>
+                  </c:forEach>
+            </tbody>
+        	</table>
 	    </div>
 	    
 	    <button type="submit">찾기</button>

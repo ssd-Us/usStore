@@ -1,24 +1,33 @@
 package com.example.usStore.controller.mypage;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class DataSearch implements Serializable {
 
-    private Content content;
+	private static final long serialVersionUID = 1L;
+	private List<Content> dataSearch;
 
     public DataSearch() {
     }
 
-    public DataSearch(Content content) {
-        this.content = content;
-    }
+	public List<Content> getDataSearch() {
+		return dataSearch;
+	}
 
-    public Content getContent() {
-        return content;
-    }
+	public void setDataSearch(List<Content> dataSearch) {
+		this.dataSearch = dataSearch;
+	}
 
-    public void setContent(Content content) {
-        this.content = content;
-    }
+	public DataSearch(List<Content> dataSearch) {
+		super();
+		this.dataSearch = dataSearch;
+	}
 
+	@Override
+	public String toString() {
+		return "DataSearch [dataSearch=" + dataSearch + "]";
+	}
+
+    
 }
