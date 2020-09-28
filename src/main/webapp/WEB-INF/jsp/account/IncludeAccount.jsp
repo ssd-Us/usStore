@@ -44,17 +44,16 @@
 	}
 </script>
 <body>
-	<nav class="navbar navbar-light bg-light">
-	
-	  <a class="navbar-brand" href="<c:url value="/shop/index.do"/>">
-	  	<img src="${pageContext.request.contextPath}/images/logo.png" width="200" height="100" alt="UsStore">
-	  </a>
-	  
-	  <ul class="navbar-nav">
-	  	<li class="nav-item active">
-	    	<a class="nav-link" href="#" onclick="goClick();">
-	    		Previous Page
-	    	</a>
-	    </li>
-	  </ul>
-	</nav>
+
+ <nav class="navbar navbar-light" style="background-color: #000000; height: 74px; font-size: 20px;">
+	<ul class="navbar-nav">
+		<li class="nav-item active">
+			<a class="nav-link" href="#" onclick="goClick();">
+				<img border="0" src="${pageContext.request.contextPath}/images/back.png"
+					style="float: left; width: 30; height: 30; border: 0;" /> &nbsp;
+				<font color="white" font-size="10px"> BACK </font>
+			</a>
+		</li>
+	</ul>
+</nav>
+<br>

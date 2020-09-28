@@ -52,8 +52,8 @@
 		</li>
 	</ul>
 </nav>
-
-<!-- Navigation -->
+<br><br>
+<%-- <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-white" id="mainNav">
 	<a class="navbar-brand js-scroll-trigger" href="<c:url value="/shop/item/indexFromLogo.do"/>">
 		<img border="0" src="${pageContext.request.contextPath}/images/usStore3.png"
@@ -115,4 +115,4 @@
 			</ul>
 		</div>
 	</div>
-</nav>
+</nav> --%>
