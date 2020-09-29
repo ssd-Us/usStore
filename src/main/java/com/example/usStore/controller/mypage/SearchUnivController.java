@@ -23,53 +23,56 @@ public class SearchUnivController {
 
 	@RequestMapping("/searchUniv.do")
 	public String handleRequest() throws Exception {
-		
 		return "account/searchUniv";  //외부 api 쓰는 팝업창 보여주기 
 	}
 	
 	@RequestMapping("/api/university.do")
-	//@ResponseBody
 	public String findUniversity(@ModelAttribute SearchUniv searchUniv,
 			Model model) throws Exception {
 
 		String region = searchUniv.getRegion();
 		String searchSchulNm = searchUniv.getUnivName();
-
 		int regionCode = UnivRegionEnum.getCode(region);
-		System.out.println(regionCode + " : " + searchSchulNm);
+	
+		System.out.print("sss: " + searchSchulNm);
+		if(searchSchulNm == "") {
+			return "redirect:/searchUniv.do";
+		}
 		
 		String uri = "http://www.career.go.kr/cnet/openapi/getOpenApi?"
 				+ "apiKey=64d783f84c56facec82aef2ec57357ee&svcType=api&svcCode=SCHOOL&contentType=json&gubun=univ_list"
 				+ "&searchSchulNm="+searchSchulNm;
 		
-		if (regionCode != -1) { //선택하세요 아닐 때 
+		if (regionCode != -1) { // 지역 선택했을 때,, 
 			uri += "&region="+regionCode;
-			return "redirect:/searchUniv.do";
 		}
 		
 		//open api 요청
 		String body = restTemplate.getForObject(uri, String.class);
-		System.out.println("body : " + body);
+	//	System.out.println("body : " + body);
 		
 		parsing(body);
 		if (schNameList != null) {  //null이면 result란 객체가 없는거????? 다시 생각하기 
 			model.addAttribute("results", schNameList);
+			return "account/searchUniv";
 		}else {
 			System.out.println("결과가 없다...");
+			return "redirect:/searchUniv.do";
 		}
 
-		DataSearch data = restTemplate.getForObject(uri, DataSearch.class);
-		System.out.println(data.toString()); //리스트를 아예 못읽어옴 
+//		DataSearch data = restTemplate.getForObject(uri, DataSearch.class);
+//		System.out.println(data.toString()); //리스트를 아예 못읽어옴 
 //		System.out.println(dataSearch.getContents());
-
-
-		//model로 가는 결과가 여러개인것을 주의하자
-		// list로 결과 보내서 select로?? 선택할수 있게 결과 띄어주기 
 		
-		return "account/searchUniv";  //외부 api 쓰는 팝업창 (대학교 이름 결과 보내주기)
 	}
 
-	//public String 
+	@RequestMapping("/confirmUnivName.do")
+	public String handleRequest2() throws Exception {
+		
+		
+		return "account/searchUniv";  // 수정하기 : 에딧 인지 회원가입인지 구분해서 그 페이지에 대학교이름 완전 박아두기 
+		// 나중에 REGISTER 버튼 누르면 그때 실질적으로 디비에 대학교 도메인객체가 들어가게된다. 
+	}
 	
 	
 	
@@ -81,13 +84,13 @@ public class SearchUnivController {
 
 			JSONParser jsonparser = new JSONParser();
 	        JSONObject jsonobject = (JSONObject)jsonparser.parse(result); // Json 객체로 만들어줌
-	        System.out.println("jsonobject : " + jsonobject.toJSONString());
+	       // System.out.println("jsonobject : " + jsonobject.toJSONString());
 
 	        JSONObject dataSearch =  (JSONObject) jsonobject.get("dataSearch");
-	        System.out.println("dataSearch : "  + dataSearch.toJSONString());
+	       // System.out.println("dataSearch : "  + dataSearch.toJSONString());
 
 	        JSONArray content = (JSONArray)dataSearch.get("content");
-	        System.out.println("content : " + content.toJSONString());
+	      //  System.out.println("content : " + content.toJSONString());
 
 	        schNameList = new ArrayList<String>();
 	        
