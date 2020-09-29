@@ -1,37 +1,34 @@
 package com.example.usStore.controller.mypage;
 
-import java.io.Serializable;
 import java.util.List;
 
-public class Content implements Serializable{
-	
-	private static final long serialVersionUID = 1L;
-	private UnivInfo content;
+public class Content {
 
-    public Content() {
-    }
+	private List<UnivInfo> univs;
 
-    
-	public Content(UnivInfo content) {
+	public Content() {
 		super();
-		this.content = content;
 	}
 
-
-	public UnivInfo getContent() {
-		return content;
+	public Content(List<UnivInfo> univs) {
+		super();
+		this.univs = univs;
 	}
 
-	public void setContent(UnivInfo content) {
-		this.content = content;
+	public List<UnivInfo> getUnivs() {
+		return univs;
 	}
 
+	public void setUnivs(List<UnivInfo> univs) {
+		this.univs = univs;
+	}
 
 	@Override
 	public String toString() {
-		return "Content [content=" + content + "]";
+		return "Content [univs=" + univs + "]";
 	}
 
+	
     
 
 }

@@ -6,6 +6,21 @@
 <head>
 <meta charset="UTF-8">
 <title>대학교 찾기</title>
+<script>
+	function buttonClick(){
+		alert(" 대학교 선택함 ");
+		var radio_count = document.getElementsByName("univName").length;
+
+		for(var i = 0; i < radio_check; i++){
+			if(document.getElementsByName("fruit")[i].checked == true)
+		}
+		
+		
+		alert(check)
+		
+	}
+	
+</script>
 </head>
 <body>
 	<form action="api/university.do" method="post">
@@ -45,7 +60,8 @@
                   <c:forEach var="result" items="${results}">         
 	                  <tr style="height:20px;">
 		                  <td style="padding-left:20px">
-		                        ${result}  <!-- 학교이름 옆에 라디오버튼하나 만들어서 하나 체크또는 다시 검색할 수 있도록 로직 구성  -->
+		                      ${result}&nbsp; <input type="radio" name="univName" value=${result}>
+		                        <!-- 학교이름 옆에 라디오버튼하나 만들어서 하나 체크또는 다시 검색할 수 있도록 로직 구성  -->
 		                   </td>
 	                  </tr>
                   </c:forEach>
@@ -55,7 +71,11 @@
 	    
 	    <button type="submit">찾기</button>
 	    
-	    <input type="button" name="confirm" value="확인"/> 
+	    <!--라디오버튼 선택을 해서 확인버튼을 누르면 대학교확정해서 칸에 이름 넣어주기  -->
+	    <input type="button" name="confirm" onclick="buttonClick();" value="확인"/> 
+	    
+	    <input type="button" name="exit" value="닫기"/>
+	     
 	    <!-- 
 	    	univName으로 컨트롤러에서 대학교를 찾아준 다음에 그 결과를 
 	    	다시 result 박스안에다가  보여주고 제대로 result값이 들어올 때만 확인 버튼을누를수있게 보여준다. 

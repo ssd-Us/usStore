@@ -37,16 +37,17 @@ public class SearchUnivController {
 
 		int regionCode = UnivRegionEnum.getCode(region);
 		System.out.println(regionCode + " : " + searchSchulNm);
-		if (regionCode == -1) { //선택하세요 클릭 시에 리다이렉트 해주기 
+		
+		String uri = "http://www.career.go.kr/cnet/openapi/getOpenApi?"
+				+ "apiKey=64d783f84c56facec82aef2ec57357ee&svcType=api&svcCode=SCHOOL&contentType=json&gubun=univ_list"
+				+ "&searchSchulNm="+searchSchulNm;
+		
+		if (regionCode != -1) { //선택하세요 아닐 때 
+			uri += "&region="+regionCode;
 			return "redirect:/searchUniv.do";
 		}
 		
 		//open api 요청
-		String uri = "http://www.career.go.kr/cnet/openapi/getOpenApi?"
-				+ "apiKey=64d783f84c56facec82aef2ec57357ee&svcType=api&svcCode=SCHOOL&contentType=json&gubun=univ_list"
-				+ "&region="+regionCode
-				+ "&searchSchulNm="+searchSchulNm;
-		System.out.println("uri : " + uri);
 		String body = restTemplate.getForObject(uri, String.class);
 		System.out.println("body : " + body);
 		
@@ -57,8 +58,8 @@ public class SearchUnivController {
 			System.out.println("결과가 없다...");
 		}
 
-//		DataSearch data = restTemplate.getForObject(uri, DataSearch.class);
-//		System.out.println(data.toString());
+		DataSearch data = restTemplate.getForObject(uri, DataSearch.class);
+		System.out.println(data.toString()); //리스트를 아예 못읽어옴 
 //		System.out.println(dataSearch.getContents());
 
 
@@ -68,7 +69,13 @@ public class SearchUnivController {
 		return "account/searchUniv";  //외부 api 쓰는 팝업창 (대학교 이름 결과 보내주기)
 	}
 
-		private static void parsing(String result) throws ParseException, Exception {
+	//public String 
+	
+	
+	
+	
+	
+	private static void parsing(String result) throws ParseException, Exception {
 
 			System.out.println("parsing 메소드 진입");
 
